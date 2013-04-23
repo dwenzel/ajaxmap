@@ -1,0 +1,64 @@
+plugin.tx_ajaxmap {
+	view {
+		templateRootPath = {$plugin.tx_ajaxmap.view.templateRootPath}
+		partialRootPath = {$plugin.tx_ajaxmap.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_ajaxmap.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_ajaxmap.persistence.storagePid}
+#		classes {
+#			Tx_Ajaxmap_Domain_Model_Content{
+#				mapping {
+#					tableName = tt_content
+#					recordType = Tx_Ajaxmap_Domain_Model_Content
+#				}//mapping
+#			}//Tx_Ajaxmap_Domain_Model_Content
+#		}//classes
+	}
+}
+
+plugin.tx_ajaxmap._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-ajaxmap table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-ajaxmap table th {
+		font-weight:bold;
+	}
+
+	.tx-ajaxmap table td {
+		vertical-align:top;
+	}
+)
+
+# ==============================================
+# Mapping of tt_content and its properties
+# ==============================================
+config.tx_extbase.persistence.classes {
+	Tx_Ajaxmap_Domain_Model_Content {
+		mapping {
+			tableName = tt_content
+#			recordType = Tx_Ajaxmap_Domain_Model_Content
+			columns {
+				altText.mapOnProperty = altText
+				titleText.mapOnProperty = titleText
+			}
+		}
+	}
+	Tx_Ajaxmap_Domain_Model_Address {
+		mapping {
+			tableName = tt_address
+#			recordType = Tx_Ajaxmap_Domain_Model_Content
+			columns {
+				altText.mapOnProperty = altText
+				titleText.mapOnProperty = titleText
+			}
+		}
+	}
+}

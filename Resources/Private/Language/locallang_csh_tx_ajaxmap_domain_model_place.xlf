@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-07-08T09:19:08Z" product-name="ajaxmap">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>Title</source>
+			</trans-unit>
+			<trans-unit id="geo_coordinates.description">
+				<source>Geographic location - defined by its latitude and longitude</source>
+			</trans-unit>
+			<trans-unit id="description.description">
+				<source>Enter a short description - displayed in tooltips</source>
+			</trans-unit>
+			<trans-unit id="info.description">
+				<source>Additional info - displayed in info window</source>
+			</trans-unit>
+			<trans-unit id="category.description">
+				<source>Select one or more categories</source>
+			</trans-unit>
+			<trans-unit id="type.description">
+				<source>Select a type</source>
+			</trans-unit>
+			<trans-unit id="regions.description">
+				<source>Select Regions</source>
+			</trans-unit>
+			<trans-unit id="content.description">
+				<source>Add content elements</source>
+			</trans-unit>
+			<trans-unit id="address.description">
+				<source>Add address</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

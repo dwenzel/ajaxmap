@@ -1,0 +1,60 @@
+<T3DataStructure>
+	<meta type="array">
+		<langChildren>0</langChildren>
+	    <langDisable>1</langDisable>
+	</meta>
+ <sheets>
+  <sDEF>
+   <ROOT>
+     <TCEforms>
+      <sheetTitle>Funktion</sheetTitle>
+     </TCEforms>
+     <type>array</type>
+     <el>
+      <switchableControllerActions>
+       <TCEforms>
+         <label>Select function</label>
+         <config>
+          <type>select</type>
+          <items>
+            
+            <numIndex index="0">
+             <numIndex index="0">Map</numIndex>
+             <numIndex index="1">Map->show;Map->item</numIndex>
+            </numIndex>
+            
+           </items>
+         </config>
+       </TCEforms>
+      </switchableControllerActions>
+      <settings.map>
+	   	<TCEforms>
+	   		<label>Map</label>
+			<config>
+		  		<type>group</type>
+				<internal_type>db</internal_type>
+				<allowed>tx_ajaxmap_domain_model_map</allowed>
+				<size>1</size>
+				<minitems>1</minitems>
+				<maxitems>1</maxitems>
+			</config>
+	  	</TCEforms>
+	  </settings.map>
+      <settings.types>
+	   	<TCEforms>
+	   		<label>Types</label>
+			<config>
+		  		<type>group</type>
+				<internal_type>db</internal_type>
+				<allowed>tx_ajaxmap_domain_model_locationtype</allowed>
+				<size>10</size>
+				<minitems>0</minitems>
+				<maxitems>9999</maxitems>
+			</config>
+	  	</TCEforms>
+	  </settings.types>
+	 </el>
+   </ROOT>
+  </sDEF>
+ </sheets>
+</T3DataStructure>

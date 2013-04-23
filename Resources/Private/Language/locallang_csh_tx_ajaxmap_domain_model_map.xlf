@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-07-08T09:19:08Z" product-name="ajaxmap">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="type.description">
+				<source>type</source>
+			</trans-unit>
+			<trans-unit id="width.description">
+				<source>width</source>
+			</trans-unit>
+			<trans-unit id="height.description">
+				<source>height</source>
+			</trans-unit>
+			<trans-unit id="map_center.description">
+				<source>Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)</source>
+			</trans-unit>
+			<trans-unit id="initial_zoom.description">
+				<source>initialZoom</source>
+			</trans-unit>
+			<trans-unit id="map_style.description">
+				<source>optional Style (json Array)</source>
+			</trans-unit>
+			<trans-unit id="disable_default_ui.description">
+				<source>disable default UI</source>
+			</trans-unit>
+			<trans-unit id="categories.description">
+				<source>Select items for display by category.</source>
+			</trans-unit>
+			<trans-unit id="regions.description">
+				<source>regions</source>
+			</trans-unit>
+			<trans-unit id="places.description">
+				<source>Display selected places as markers.</source>
+			</trans-unit>
+			<trans-unit id="location_types.description">
+				<source>Selected places by location type.</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

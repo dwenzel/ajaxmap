@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2012-07-08T09:19:08Z" product-name="ajaxmap">
+		<header/>
+		<body>
+
+			<trans-unit id="title.description">
+				<source>title</source>
+			</trans-unit>
+			<trans-unit id="file.description">
+				<source>Select KML files</source>
+			</trans-unit>
+			<trans-unit id="clickable.description">
+				<source>clickable</source>
+			</trans-unit>
+			<trans-unit id="suppress_info_windows.description">
+				<source>suppressInfoWindows</source>
+			</trans-unit>
+			<trans-unit id="preserve_viewport.description">
+				<source>preserveViewport</source>
+			</trans-unit>
+		</body>
+	</file>
+</xliff>

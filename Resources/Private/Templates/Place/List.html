@@ -1,0 +1,42 @@
+<f:layout name="Default" />
+
+This Template is responsible for creating a table of domain objects.
+
+If you modify this template, do not forget to change the overwrite settings
+in /Configuration/ExtensionBuilder/settings.yaml:
+  Resources:
+    Private:
+      Templates:
+        List.html: keep
+
+Otherwise your changes will be overwritten the next time you save the extension in the extension builder
+
+<f:section name="main">
+<h1>Listing for Place</h1>
+
+<f:flashMessages />
+
+<table  class="tx_ajaxmap" >
+	<tr>
+		<th><f:translate key="tx_ajaxmap_domain_model_place.title" /></th>
+		<th><f:translate key="tx_ajaxmap_domain_model_place.geo_coordinates" /></th>
+		<th><f:translate key="tx_ajaxmap_domain_model_place.description" /></th>
+		<th><f:translate key="tx_ajaxmap_domain_model_place.info" /></th>
+		<th> </th>
+		<th> </th>
+	</tr>
+
+	<f:for each="{places}" as="place">
+		<tr>
+			<td><f:link.action action="show" arguments="{place : place}"> {place.title}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{place : place}"> {place.geoCoordinates}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{place : place}"> {place.description}</f:link.action></td>
+			<td><f:link.action action="show" arguments="{place : place}"> {place.info}</f:link.action></td>
+			<td><f:link.action action="edit" arguments="{place : place}">Edit</f:link.action></td>
+			<td><f:link.action action="delete" arguments="{place : place}">Delete</f:link.action></td>
+		</tr>
+	</f:for>
+</table>
+
+<f:link.action action="new">New Place</f:link.action>
+</f:section>

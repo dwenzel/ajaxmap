@@ -1,0 +1,27 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+	<f:flashMessages />
+	<f:comment>
+		<f:render partial="Map/Properties" arguments="{map:map}" />
+	</f:comment>
+	<div class="mapWrap">
+		<div id="ajaxMapContainer_Map{map.uid}"></div>
+	</div>
+	<div class="regionsSelectorWrap">
+		<f:form name="ajaxMapRegionsSelectForm{map.uid}">
+			<f:form.select id="ajaxMapRegionsSelector{map.uid}"
+				name="regionsSelect" class="select region" options="{}" />
+		</f:form>
+	</div>
+	<div class="typeSelectorWrap">
+		<f:form name="ajaxMapLocationTypesSelectForm{map.uid}">
+			<f:form.select id="ajaxMapLocationTypesSelector{map.uid}"
+				name="typeSelect" class="select type" options="{0: 'Alle Standorte'}" />
+		</f:form>
+	</div>
+	<f:form name="txAjaxmapStore">
+		<f:form.hidden property="mapId" value="{map.uid}" />
+	</f:form>
+	<div id="ajaxMapCategoryTree{map.uid}" class="dynaTree"></div>
+</f:section>

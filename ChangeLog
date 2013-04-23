@@ -1,0 +1,7 @@
+2012-06-27 version 0.0.3 Dirk Wenzel wenzel@webfox01.de
+	- test implementation of ajax controller class
+2012-06-27 version 0.0.2 Dirk Wenzel wenzel@webfox01.de
+	- data base model and frontend plugin 
+	- some labels for backend
+2012-06-20 version 0.0.1 Dirk Wenzel wenzel@webfox01.de
+	- extension initially build with extension builder
