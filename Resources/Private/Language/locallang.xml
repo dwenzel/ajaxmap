@@ -1,12 +1,50 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <T3locallang>
-  <meta type="array">
-    <type>database</type>
-    <description>Language labels for extension ajaxmap</description>
-  </meta>
-  <data type="array">
-    <languageKey index="default" type="array">
-    	<label index="map.show.allLocationsLabel">All Locations</label>
-    </languageKey>
-  </data>
-  
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_ajaxmap_domain_model_category">Category</label>
+			<label index="tx_ajaxmap_domain_model_category.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_category.description">description</label>
+			<label index="tx_ajaxmap_domain_model_category.icon">icon</label>
+			<label index="tx_ajaxmap_domain_model_category.child_categories">childCategories</label>
+			<label index="tx_ajaxmap_domain_model_place">Place</label>
+			<label index="tx_ajaxmap_domain_model_place.title">Geographic location - defined by its latitude and longitude</label>
+			<label index="tx_ajaxmap_domain_model_place.geo_coordinates">Enter  geo coordinates (latitude,longitude - 10.99999,51.8888)</label>
+			<label index="tx_ajaxmap_domain_model_place.description">description</label>
+			<label index="tx_ajaxmap_domain_model_place.info">Additional info. Can be shown in info window.</label>
+			<label index="tx_ajaxmap_domain_model_place.category">category</label>
+			<label index="tx_ajaxmap_domain_model_place.type">type</label>
+			<label index="tx_ajaxmap_domain_model_place.regions">regions</label>
+			<label index="tx_ajaxmap_domain_model_place.content">Add content.</label>
+			<label index="tx_ajaxmap_domain_model_place.address">Add address</label>
+			<label index="tx_ajaxmap_domain_model_map">Map</label>
+			<label index="tx_ajaxmap_domain_model_map.title">title</label>
+			<label index="tx_ajaxmap_domain_model_map.type">type</label>
+			<label index="tx_ajaxmap_domain_model_map.width">width</label>
+			<label index="tx_ajaxmap_domain_model_map.height">height</label>
+			<label index="tx_ajaxmap_domain_model_map.map_center">Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)</label>
+			<label index="tx_ajaxmap_domain_model_map.initial_zoom">initialZoom</label>
+			<label index="tx_ajaxmap_domain_model_map.map_style">optional Style (json Array)</label>
+			<label index="tx_ajaxmap_domain_model_map.disable_default_ui">disable default UI</label>
+			<label index="tx_ajaxmap_domain_model_map.categories">Select items for display by category.</label>
+			<label index="tx_ajaxmap_domain_model_map.regions">regions</label>
+			<label index="tx_ajaxmap_domain_model_map.places">Display selected places as markers.</label>
+			<label index="tx_ajaxmap_domain_model_region">Region</label>
+			<label index="tx_ajaxmap_domain_model_region.title">title</label>
+			<label index="tx_ajaxmap_domain_model_region.file">Select KML files</label>
+			<label index="tx_ajaxmap_domain_model_region.clickable">clickable</label>
+			<label index="tx_ajaxmap_domain_model_region.suppress_info_windows">suppressInfoWindows</label>
+			<label index="tx_ajaxmap_domain_model_region.preserve_viewport">preserveViewport</label>
+			<label index="tx_ajaxmap_domain_model_locationtype">LocationType</label>
+			<label index="tx_ajaxmap_domain_model_locationtype.title">title</label>
+			<label index="tx_ajaxmap_domain_model_locationtype.description">description</label>
+			<label index="tx_ajaxmap_domain_model_content">Content</label>
+			<label index="tx_ajaxmap_domain_model_address">Address</label>
+			<label index="allLocationsLabel">All Locations</label>
+		</languageKey>
+	</data>
+</T3locallang>
