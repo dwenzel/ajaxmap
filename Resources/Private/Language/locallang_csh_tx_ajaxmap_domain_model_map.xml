@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title.description">title</label>
+			<label index="type.description">type</label>
+			<label index="width.description">width</label>
+			<label index="height.description">height</label>
+			<label index="map_center.description">Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)</label>
+			<label index="initial_zoom.description">initialZoom</label>
+			<label index="map_style.description">optional Style (json Array)</label>
+			<label index="disable_default_ui.description">disable default UI</label>
+			<label index="categories.description">Select items for display by category.</label>
+			<label index="regions.description">regions</label>
+			<label index="places.description">Display selected places as markers.</label>
+			<label index="location_types.description">Selected places by location type.</label>
+		</languageKey>
+	</data>
+</T3locallang>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title.description">Geographic location - defined by its latitude and longitude</label>
+			<label index="latitude.description">latitude</label>
+			<label index="longitude.description">longitude</label>
+			<label index="description.description">description</label>
+			<label index="region.description">region</label>
+			<label index="category.description">category</label>
+			<label index="location_type.description">locationType</label>
+		</languageKey>
+	</data>
+</T3locallang>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title.description">Title</label>
+			<label index="geo_coordinates.description">Geographic location - defined by its latitude and longitude</label>
+			<label index="description.description">Enter a short description - displayed in tooltips</label>
+			<label index="info.description">Additional info - displayed in info window</label>
+			<label index="category.description">Select one or more categories</label>
+			<label index="type.description">Select a type</label>
+			<label index="regions.description">Select Regions</label>
+			<label index="content.description">Add content elements</label>
+			<label index="address.description">Add address</label>
+		</languageKey>
+	</data>
+</T3locallang>
