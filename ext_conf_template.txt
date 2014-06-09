@@ -1,0 +1,10 @@
+# cat=basic/enable/101; type=boolean; label=Include jQuery:If set jQuery is automatically included.
+includeJQuery = 1
+
+# cat=basic/enable/101; type=boolean; label=Include Google Maps:If set Google Maps is automatically included.
+includeGoogleMaps = 1
+
+# cat=basic/enable/101; type=boolean; label=Include extension JavaScript:If set extension javascript is automatically included.
+includeJavaScript = 1
+
+
