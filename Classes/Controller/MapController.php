@@ -192,14 +192,9 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	    // - make empty list of places
 	    $places = array();
 	    
-	    // build a unique list of categories from array of nested categories
-	    $categoriesFlatArray = $map->getCategoriesFlatArray();
-	
 	    //@todo - add all manually selected places (from map - field is currently hidden in backend) 
 	    
 	    // - add all places of selected location types (from map)
-	    // -- build a list of location types
-        //$locationTypesArr= $map->getLocationTypesArray();
         $locationsArr = array();
         foreach ($map->getLocationTypesArray() as $location) {
          	   array_push($locationsArr, $location['key']);
@@ -217,20 +212,8 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 			       $categories = $this->placeRepository->findCategoriesForPlace($place[uid]);
 			       $place['category'] = $categories;
 			   }
-			  // if($place['address']){
-			  //     $place['address'] = $this->placeRepository->findAddressForPlace($place[uid]);
-			  // }
 		   }  
-	    // - add all places belonging to at least one selected category 
-	    // -- build a list of all categories (they are nested - avoid multiple occurences!)
-	    // -- for each category in list: get places with this category
-	    // -- add them to list of places 
-	    //var_dump($GLOBALS['TYPO3_DB']);
-	    //var_dump('catArr', $map->getCategoriesArray(), 'flatArr',$map->getCategoriesFlatArray($map->getCategoriesArray()));
-	    //var_dump($this->placeRepository->findRawWhere($where));
-	//var_dump($places);
 	return $places;
-	//return $places;
 	}
 	
 	private function getAddressForPlace($placeId){
