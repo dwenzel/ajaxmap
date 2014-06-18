@@ -3,7 +3,7 @@ var regionsSelectorsStore = []; // contains region selectors - each belonging to
 var categoryTreeStore =[]; // contains trees - each belonging to one map
 var locationTypesSelectorsStore = []; // contains location types - each belonging to one map
 var basePath; // base path for resources like icons and kml files
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 	if (!window.location.origin){
 		basePath = window.location.protocol+"//"+window.location.host +"/";
 	}
