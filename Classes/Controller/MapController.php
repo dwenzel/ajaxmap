@@ -203,7 +203,10 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
         $locations = implode(',',$locationsArr);
         $select = 'uid, title, type, description, icon, category, geo_coordinates';
         //@todo respect storage page
-	    $where = 'deleted = 0 AND hidden = 0 AND type IN (' .$locations .')'; 
+	    $where = 'deleted = 0 AND hidden = 0';
+			if($locations != ''){ 
+	    	$where .= ' AND type IN (' .$locations .')';
+			}
         $places = $this->placeRepository->findRawSelectWhere($select, $where);
        	
        	// replace category count by array of categories

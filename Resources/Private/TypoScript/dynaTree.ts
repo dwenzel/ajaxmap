@@ -11,4 +11,3 @@ page {
 		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.6/skin/ui.dynatree.css
 	}
 }
-
