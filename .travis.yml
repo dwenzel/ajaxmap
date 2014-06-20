@@ -55,6 +55,7 @@ script:
   - if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
   - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
   - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=coverage.clover -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
+  - if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v fi
  # - if [[ "$COVERAGE" == "1" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
  # - if [[ "$COVERAGE" == "1" ]]; then cp -R typo3conf/ext/ajaxmap/.git .; fi
  # - if [[ "$COVERAGE" == "1" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
