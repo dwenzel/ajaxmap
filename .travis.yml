@@ -4,14 +4,14 @@ php:
   - 5.4
 
 env:
-  - DB=mysql TYPO3=master INTEGRATION=master COVERAGE=0
-#  - DB=mysql TYPO3=TYPO3_6-1 INTEGRATION=master COVERAGE=0
-#  - DB=mysql TYPO3=TYPO3_6-0 INTEGRATION=master COVERAGE=0
+  - DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=0
+#  - DB=mysql TYPO3=TYPO3_6-1 INTEGRATION=master-ajaxmap COVERAGE=0
+#  - DB=mysql TYPO3=TYPO3_6-0 INTEGRATION=master-ajaxmap COVERAGE=0
 
 matrix:
   include:
     - php: 5.5
-      env: DB=mysql TYPO3=master INTEGRATION=master COVERAGE=1
+      env: DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=1
 
 services:
   - memcached
