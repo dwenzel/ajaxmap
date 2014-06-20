@@ -16,9 +16,9 @@ matrix:
 services:
   - memcached
 
-notifications:
-  email:
-    - der-wenzel@gmx.de
+#notifications:
+#  email:
+#    - der-wenzel@gmx.de
 
 before_script:
   # Get latest git version cause of travis issues (https://github.com/travis-ci/travis-ci/issues/1710)
