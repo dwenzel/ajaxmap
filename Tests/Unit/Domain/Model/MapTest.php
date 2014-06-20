@@ -70,9 +70,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getTypeReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getTypeReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getType()
 		);
 	}
@@ -92,9 +91,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getWidthReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getWidthReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getWidth()
 		);
 	}
@@ -114,9 +112,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getHeightReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getHeightReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getHeight()
 		);
 	}
@@ -136,7 +133,11 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getMapCenterReturnsInitialValueForString() { }
+	public function getMapCenterReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getMapCenter()
+		);
+	}
 
 	/**
 	 * @test
@@ -154,8 +155,7 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	 * @test
 	 */
 	public function getInitialZoomReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+		$this->assertNull(
 			$this->fixture->getInitialZoom()
 		);
 	}
@@ -175,7 +175,11 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getMapStyleReturnsInitialValueForString() { }
+	public function getMapStyleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getMapStyle()
+		);
+	}
 
 	/**
 	 * @test
@@ -194,7 +198,7 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	 */
 	public function getDisableDefaultUiReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getDisableDefaultUi()
 		);
 	}

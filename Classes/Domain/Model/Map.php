@@ -360,7 +360,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
 	 */
 	public function addCategory(Tx_Ajaxmap_Domain_Model_Category $category) {
-		$this->categories->attach($categories);
+		$this->categories->attach($category);
 	}
 
 	/**
