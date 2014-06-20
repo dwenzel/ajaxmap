@@ -35,6 +35,7 @@ before_script:
   - mv build-environment/composer.json ./ 
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
+  - php composer.phar update satooshi/php-coveralls --dev
 
 # Install rudimentary TYPO3
   - git clone --single-branch --branch $TYPO3 --depth 1 git://git.typo3.org/TYPO3CMS/Distributions/Introduction.git build-environment/Introduction
