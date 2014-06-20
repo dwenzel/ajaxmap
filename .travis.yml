@@ -32,7 +32,7 @@ before_script:
   - installPhpModule -y memcache
   - installPhpModule redis
   - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
-	- mv build-environment/composer.json ./ 
+  - mv build-environment/composer.json ./ 
   - curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
 
