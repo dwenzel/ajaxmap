@@ -1,2 +1,3 @@
 service_name: travis-pro
 repo_token: zcIVyyQZsubAEbWAUxm0m0loaMvdJUPZ0
+src_dir: .
