@@ -2,4 +2,4 @@ service_name: travis-pro
 repo_token: zcIVyyQZsubAEbWAUxm0m0loaMvdJUPZ0
 src_dir: typo3conf/ext/ajaxmap
 coverage_clover: build/artifacts/coverage/clover.xml
-json_path: build/artifacts/logs
+json_path: build/artifacts/logs/coveralls-upload.json
