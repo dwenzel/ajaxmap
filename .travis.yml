@@ -43,7 +43,7 @@ before_script:
   - php composer.phar install --dev --no-interaction
 # prepare coveralls
   - export COVERALLS_SERVICE_NAME=travis-ci
-  - export COVERALLS_REPO_TOKEN=p7zWhntZXnzvYTYwSkLaDwTT5QOYUQnNt
+#  - export COVERALLS_REPO_TOKEN=p7zWhntZXnzvYTYwSkLaDwTT5QOYUQnNt
   - cp -R ajaxmap/.git .
   - mv ajaxmap/.coveralls.yml ./
   - php composer.phar update satooshi/php-coveralls --dev
