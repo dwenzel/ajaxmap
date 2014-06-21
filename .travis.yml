@@ -38,15 +38,15 @@ before_script:
   - installPhpModule redis
   - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
 # prepare composer
-  - mv build-environment/composer.json ./ 
-  - curl -s http://getcomposer.org/installer | php
-  - php composer.phar install --dev --no-interaction
+  - if [[ "$COVERAGE" == "1" ]]; then mv build-environment/composer.json ./; fi
+  - if [[ "$COVERAGE" == "1" ]]; then curl -s http://getcomposer.org/installer | php; fi
+  - if [[ "$COVERAGE" == "1" ]]; then php composer.phar install --dev --no-interaction; fi
 # prepare coveralls
-  - export COVERALLS_SERVICE_NAME=travis-ci
+  - if [[ "$COVERAGE" == "1" ]]; then export COVERALLS_SERVICE_NAME=travis-ci; fi
 #  - export COVERALLS_REPO_TOKEN=p7zWhntZXnzvYTYwSkLaDwTT5QOYUQnNt
-  - cp -R ajaxmap/.git .
-  - mv ajaxmap/.coveralls.yml ./
-  - php composer.phar update satooshi/php-coveralls --dev
+  - if [[ "$COVERAGE" == "1" ]]; then cp -R ajaxmap/.git .; fi
+  - if [[ "$COVERAGE" == "1" ]]; then mv ajaxmap/.coveralls.yml ./; fi
+  - if [[ "$COVERAGE" == "1" ]]; then php composer.phar update satooshi/php-coveralls --dev; fi
 
 # Install rudimentary TYPO3
   - git clone --single-branch --branch $TYPO3 --depth 1 git://git.typo3.org/TYPO3CMS/Distributions/Introduction.git build-environment/Introduction
@@ -72,6 +72,3 @@ script:
   - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=build/artifacts/coverage/clover.xml -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
   - if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v; fi
   - if [[ "$COVERAGE" == "1" ]]; then cat $PWD/build/artifacts/logs/coveralls-upload.json; fi
- # - if [[ "$COVERAGE" == "1" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
- # - if [[ "$COVERAGE" == "1" ]]; then cp -R typo3conf/ext/ajaxmap/.git .; fi
- # - if [[ "$COVERAGE" == "1" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
