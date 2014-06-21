@@ -105,7 +105,26 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 			$this->fixture->getClickable()
 		);
 	}
-	
+
+	/**
+	* @test
+	*/
+	public function isClickableForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isClickable()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isClickableForBooleanReturnsIsClickable() {
+		$this->fixture->setClickable(TRUE);
+		$this->assertTrue(
+				$this->fixture->isClickable()
+		);
+	}
+
 	/**
 	 * @test
 	 */
@@ -129,6 +148,25 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	}
 	
 	/**
+	* @test
+	*/
+	public function isSuppressInfoWindowsForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isSuppressInfoWindows()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isSuppressInfoWindowsForBooleanReturnsIsSuppressInfoWindows() {
+		$this->fixture->setSuppressInfoWindows(TRUE);
+		$this->assertTrue(
+				$this->fixture->isSuppressInfoWindows()
+		);
+	}
+
+	/**
 	 * @test
 	 */
 	public function getPreserveViewportReturnsInitialValueForBoolean() { 
@@ -150,5 +188,24 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 		);
 	}
 	
+	/**
+	* @test
+	*/
+	public function isPreserveViewportForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isPreserveViewport()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPreserveViewportForBooleanReturnsIsPreserveViewport() {
+		$this->fixture->setPreserveViewport(TRUE);
+		$this->assertTrue(
+				$this->fixture->isPreserveViewport()
+		);
+	}
+
 }
 ?>
