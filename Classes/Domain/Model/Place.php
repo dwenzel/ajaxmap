@@ -193,14 +193,6 @@ class Tx_Ajaxmap_Domain_Model_Place extends Tx_Extbase_DomainObject_AbstractEnti
 	}
 
 	/**
-	* Return place's categories list
-	* @return array 
-	*/
-	public function getCategorieArray(){
-	        return $this->category->toArray();
-	    //(PlaceRepository)findCategoriesForPlace($placeId)
-	}
-	/**
 	 * Sets the category
 	 *
 	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $category
