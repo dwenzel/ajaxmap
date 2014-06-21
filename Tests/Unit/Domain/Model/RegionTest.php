@@ -89,7 +89,7 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	public function getClickableReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getClickable()
 		);
 	}
@@ -111,7 +111,7 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	public function getSuppressInfoWindowsReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getSuppressInfoWindows()
 		);
 	}
@@ -133,7 +133,7 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	public function getPreserveViewportReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getPreserveViewport()
 		);
 	}

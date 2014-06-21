@@ -94,15 +94,7 @@ class Tx_Ajaxmap_Domain_Repository_PlaceRepository extends Tx_Extbase_Persistenc
     }
     
     public function findAddressForPlace($placeId){
-        $statement = 'SELECT 
-            address.tx_kecontacts_function,
-            address.address, 
-            address.city,
-            address.zip, 
-            address.phone, 
-            address.mobile,
-            address.fax,
-            address.www
+        $statement = 'SELECT * 
              FROM tt_address AS address ' 
         .'LEFT JOIN tx_ajaxmap_domain_model_place AS place '
         .'ON (place.address= address.uid) ' 
