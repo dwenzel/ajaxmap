@@ -23,8 +23,13 @@ services:
 before_script:
   # Get latest git version cause of travis issues (https://github.com/travis-ci/travis-ci/issues/1710)
   - sudo apt-get update && sudo apt-get install git
-# Install build dependencies
+# prepare build
   - cd ..
+  - mkdir build
+  - mkdir build/artifacts
+  - mkdir build/artifacts/coverage
+  - mkdir build/artifacts/logs
+# Install build dependencies
   - git clone --single-branch --branch $INTEGRATION --depth 1 git://github.com/dwenzel/TYPO3-Travis-Integration.git build-environment
   - git clone --single-branch --branch $TYPO3 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git core
   - source build-environment/install-helper.sh
@@ -32,9 +37,13 @@ before_script:
   - installPhpModule -y memcache
   - installPhpModule redis
   - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
+# prepare composer
   - mv build-environment/composer.json ./ 
-  - curl -s http://getcomposer.org/installer | php
+	- curl -s http://getcomposer.org/installer | php
   - php composer.phar install --dev --no-interaction
+# prepare coveralls
+  - cp -R ajaxmap/.git .
+  - mv ajaxmap/.coveralls.yml ./
   - php composer.phar update satooshi/php-coveralls --dev
 
 # Install rudimentary TYPO3
@@ -58,7 +67,7 @@ script:
 #  - phpLint all
   - if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
   - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=coverage.clover -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
+  - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=build/artifacts/coverage/clover.xml -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
   - if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v; fi
  # - if [[ "$COVERAGE" == "1" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
  # - if [[ "$COVERAGE" == "1" ]]; then cp -R typo3conf/ext/ajaxmap/.git .; fi
