@@ -192,6 +192,27 @@ class Tx_Ajaxmap_Domain_Model_ContentTest extends Tx_Extbase_Tests_Unit_BaseTest
 		);
 	}
 
+
+	/**
+	 * @test
+	 */
+	public function getImagewidthForStringReturnsInitialNull() {
+		$this->assertNull(
+				$this->fixture->getImagewidth()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setImagewidthForStringSetsImagewidth() {
+		$this->fixture->setImagewidth('aloha');
+		$this->assertSame(
+				$this->fixture->getImagewidth(),
+				'aloha'
+		);
+	}
+
 	/**
 	 * @test
 	 */
