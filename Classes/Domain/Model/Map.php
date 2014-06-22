@@ -508,15 +508,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
         return $locationTypes;
     }
     
-    /**
-     * Returns the location types as JSON data.
-     *
-     * @return json data
-     */
-    public function getLocationTypesJson() {
-        return json_encode($this->getLocationTypesArray());
-    }
-    
 	/**
 	 * Sets the locationTypes
 	 *
