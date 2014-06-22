@@ -106,9 +106,10 @@ class Tx_Ajaxmap_Domain_Model_LocationType extends Tx_Extbase_DomainObject_Abstr
      /**
      * Sets the icon
      *
+		 * @param string $icon
      * @return void
      */
-    public function setIcon() {
+    public function setIcon($icon) {
         $this->icon =$icon;
     }
 }

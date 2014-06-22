@@ -214,7 +214,26 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getDisableDefaultUi()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsIsDefaultUi() {
+		$this->fixture->setDisableDefaultUi(TRUE);
+		$this->assertTrue(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
 	/**
 	 * @test
 	 */
@@ -272,7 +291,59 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getCategories()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function getCategoriesArrayReturnsInitialEmptyArray() {
+		$emptyArray = array();
+		$this->assertSame(
+				$this->fixture->getCategoriesArray(),
+				$emptyArray
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCategoriesArrayReturnsNestedArrayForNestedCategories() {
+		$categoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
+		$categoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$categoryWithOneChild->addChildCategory($secondLevelCategory);
+		$this->fixture->addCategory($categoryWithoutChildren);
+		$this->fixture->addCategory($categoryWithOneChild);
+
+		$result = array(
+				0 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array()
+				),
+				1 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array(
+						0 => array (
+							'key' => null,
+							'title' => null,
+							'icon' => null,
+							'tooltip' => null,
+							'children' => array()
+						),
+					)
+				)
+			);
+		$this->assertSame(
+				$this->fixture->getCategoriesArray(),
+				$result
+		);
+	}
+
 	/**
 	 * @test
 	 */
@@ -446,6 +517,47 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getLocationTypes()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function getLocationTypesArrayReturnsInitialEmptyArray() {
+		$emptyArray = array();
+		$this->assertSame(
+				$this->fixture->getLocationTypesArray(),
+				$emptyArray
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLocationTypesArrayReturnsArrayOfLocationTypes() {
+		$firstLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
+		$secondLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
+
+		$this->fixture->addLocationType($firstLocationType);
+		$this->fixture->addLocationType($secondLocationType);
+
+		$result = array(
+				0 => array(
+					'key' => null,
+					'title' => null,
+					'description' => null,
+					'markerIcon' => null,
+				),
+				1 => array(
+					'key' => null,
+					'title' => null,
+					'description' => null,
+					'markerIcon' => null,
+				),
+		);
+
+		$this->assertSame(
+				$this->fixture->getLocationTypesArray(),
+				$result
+		);
+	}
 }
 ?>
