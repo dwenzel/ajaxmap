@@ -214,7 +214,26 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getDisableDefaultUi()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsIsDefaultUi() {
+		$this->fixture->setDisableDefaultUi(TRUE);
+		$this->assertTrue(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
 	/**
 	 * @test
 	 */
