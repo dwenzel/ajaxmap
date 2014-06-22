@@ -458,17 +458,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Returns the categories as JSON data.
-	 * Child categories will be included as nested objects until three depth.
-	 *
-	 * @param int> $treeDepth
-	 * @return json data
-	 */
-	public function getCategoriesJson($treeDepth = 5) {
-		return json_encode($this->getCategoriesArray($treeDepth));
-	}
-
-	/**
 	 * Adds a LocationType
 	 *
 	 * @param Tx_Ajaxmap_Domain_Model_LocationType $locationType
