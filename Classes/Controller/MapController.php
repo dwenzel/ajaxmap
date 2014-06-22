@@ -142,7 +142,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
                     $response = $map->getCategoriesArray();
                     break;
                 case 'loadLocationTypes':
-                    $response = $map->getLocationTypesJson();    
+                    $response = $map->getLocationTypesArray();    
                    break;
                 case 'loadPlaces':
                     $response = $this->getPlaces($map);
