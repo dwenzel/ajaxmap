@@ -456,32 +456,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
 		}		
 		return $categories;
 	}
-	
-	/**
-	 * 
-	 * Returns the categories as flat 
-	 */
-	 public function getCategoriesFlatArray($array) {
-	   //return Tx_Ajaxmap_Utility_Div::array_flatten($this->getCategoriesArray());
-	   if (!is_array($array)) {
-        return FALSE;
-       }
-       $result = array();
-       foreach ($array as $category) {
-           foreach ($category as $key=>$value) {
-               if (is_array($value['children'])) {
-                   $result = array_merge($result, $this->getCategoriesFlatArray($value['children']));
-               }
-               else {
-                   $cat = array(
-                    $key => $value);
-                   array_push($result, $cat);
-               }               
-           }
-
-       }
-       return $result; 
-	 }
 
 	/**
 	 * Returns the categories as JSON data.
