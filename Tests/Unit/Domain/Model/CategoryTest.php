@@ -186,7 +186,40 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function getChildCategoriesArrayReturnsNestedArrayForNestedCategories() {
-		// @todo
+		$childCategoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
+		$childCategoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$childCategoryWithOneChild->addChildCategory($secondLevelCategory);
+		$this->fixture->addChildCategory($childCategoryWithoutChildren);
+		$this->fixture->addChildCategory($childCategoryWithOneChild);
+		$result = array(
+				0 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array()
+				),
+				1 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array(
+						0 => array (
+							'key' => null,
+							'title' => null,
+							'icon' => null,
+							'tooltip' => null,
+							'children' => array()
+						),
+					)
+				)
+			);
+		$this->assertSame(
+				$this->fixture->getChildCategoriesArray(),
+				$result
+		);
 	}
 }
 ?>
