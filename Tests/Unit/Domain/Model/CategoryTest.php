@@ -53,7 +53,11 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getTitle()
+		);
+	}
 
 	/**
 	 * @test
@@ -70,7 +74,11 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+	public function getDescriptionReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getDescription()
+		);
+	}
 
 	/**
 	 * @test
@@ -87,7 +95,11 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getIconReturnsInitialValueForString() { }
+	public function getIconReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getIcon()
+		);
+	}
 
 	/**
 	 * @test
@@ -158,6 +170,56 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 			$this->fixture->getChildCategories()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function getChildCategoriesArrayReturnsInitialEmptyArray() {
+		$array = array();
+		$this->assertSame(
+				$this->fixture->getChildCategoriesArray(),
+				$array
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getChildCategoriesArrayReturnsNestedArrayForNestedCategories() {
+		$childCategoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
+		$childCategoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$childCategoryWithOneChild->addChildCategory($secondLevelCategory);
+		$this->fixture->addChildCategory($childCategoryWithoutChildren);
+		$this->fixture->addChildCategory($childCategoryWithOneChild);
+		$result = array(
+				0 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array()
+				),
+				1 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array(
+						0 => array (
+							'key' => null,
+							'title' => null,
+							'icon' => null,
+							'tooltip' => null,
+							'children' => array()
+						),
+					)
+				)
+			);
+		$this->assertSame(
+				$this->fixture->getChildCategoriesArray(),
+				$result
+		);
+	}
 }
 ?>

@@ -3,7 +3,7 @@ var regionsSelectorsStore = []; // contains region selectors - each belonging to
 var categoryTreeStore =[]; // contains trees - each belonging to one map
 var locationTypesSelectorsStore = []; // contains location types - each belonging to one map
 var basePath; // base path for resources like icons and kml files
-$(document).ready(function() {
+jQuery(document).ready(function($) {
 	if (!window.location.origin){
 		basePath = window.location.protocol+"//"+window.location.host +"/";
 	}
@@ -148,7 +148,7 @@ function initMap(mapNumber){
 		    	
 		    	// category tree
 		    	renderDynaTree(mapEntry.id);
-		    	initPlaces(mapId);
+		    	initPlaces(ajaxMapsArray[mapNumber].id);
 		    	$('body').append('<div id="overlayDetailHelper"></div>');
 		    		
 	    },
@@ -379,17 +379,16 @@ function updatePlaces(mapNumber){
 			
 			if (!mapMarker[i]) {
 				currType = parseInt(mapPlaces[i].type);
-				if (currType){
-					currIcon = getLocationType(mapNumber, currType).markerIcon;					
-				}
 				tmpCenter = mapPlaces[i].geo_coordinates.split(",");
 				currLatlng = new google.maps.LatLng(parseFloat(tmpCenter[0]),parseFloat(tmpCenter[1]));
 				mapMarker[i] = new google.maps.Marker({
 					position: currLatlng,
 					map: map,
 					title: mapPlaces[i].title,
-					icon: currIcon
 				});
+				if (currType){
+					mapMarker[i].setIcon = getLocationType(mapNumber, currType).markerIcon;					
+				}
 				mapMarker[i].mapNumber = mapNumber;
 				mapMarker[i].place = mapPlaces[i];
 				// add click function 
@@ -519,7 +518,7 @@ function openDetailView(caller, placeId){
 	if(placeId){
 		url = basePath + "verband/unsere-mitglieder/?tx_browser_pi1%5BshowUid%5D=" + placeId;
 		var dataString = 'type=0&tx_browser_pi1[segment]=list';
-		$.ajax({
+		/*$.ajax({
 			url: url,
 		    type: "GET",
 		    //async: false,
@@ -536,7 +535,30 @@ function openDetailView(caller, placeId){
 					$('#detailView .inner').contents().remove();
 				});
 		    }
-		});		
+		});*/		
+		$.ajax({
+			url: "index.php",
+		    type: "GET",
+		    data: {
+					'eID': "ajaxMap",
+					'extensionName': "Map",
+					'controllerName': "Place",
+					'actionName': 'ajaxShow',
+					'arguments': {'uid': placeId}
+				},
+		    dataType: "json",
+		    success: function(result){
+		    		singleContent= result;
+		    		$('#detailView .inner').append(singleContent);
+		    		$('#detailView').fadeIn('400');
+		    		$('#overlayDetailHelper').height($(document).height()).fadeIn('400');
+		    		$('#overlay-close').click(function(){
+					$('#detailView').fadeOut('500');
+					$('#overlayDetailHelper').fadeOut('500');
+					$('#detailView .inner').contents().remove();
+				});
+		    }
+		});
 	}
 }
 

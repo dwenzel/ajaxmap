@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>module</type>
+		<description>Language labels for plugin belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="title.description">title</label>
+			<label index="file.description">Select KML files</label>
+			<label index="clickable.description">clickable</label>
+			<label index="suppress_info_windows.description">suppressInfoWindows</label>
+			<label index="preserve_viewport.description">preserveViewport</label>
+		</languageKey>
+	</data>
+</T3locallang>

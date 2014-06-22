@@ -53,7 +53,11 @@ class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_Bas
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getTitle()
+		);
+	}
 
 	/**
 	 * @test
@@ -70,7 +74,11 @@ class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_Bas
 	/**
 	 * @test
 	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+	public function getDescriptionReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getDescription()
+		);
+	}
 
 	/**
 	 * @test
@@ -81,6 +89,27 @@ class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_Bas
 		$this->assertSame(
 			'Conceived at T3CON10',
 			$this->fixture->getDescription()
+		);
+	}
+	
+	/**
+	 * @test
+	 */
+	public function getIconReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getIcon()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setIconForStringSetsIcon() { 
+		$this->fixture->setIcon('Conceived at T3CON10');
+
+		$this->assertSame(
+			'Conceived at T3CON10',
+			$this->fixture->getIcon()
 		);
 	}
 	

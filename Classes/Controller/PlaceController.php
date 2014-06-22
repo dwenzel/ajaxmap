@@ -71,5 +71,15 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 		$this->view->assign('place', $place);
 	}
 
+	/**
+	 * action ajax show
+	 *
+	 * @param $place
+	 * @return void
+	 */
+	public function showAction(Tx_Ajaxmap_Domain_Model_Place $place) {
+		return $place;
+	}
+
 }
 ?>

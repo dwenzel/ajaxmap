@@ -360,7 +360,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
 	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
 	 */
 	public function addCategory(Tx_Ajaxmap_Domain_Model_Category $category) {
-		$this->categories->attach($categories);
+		$this->categories->attach($category);
 	}
 
 	/**
@@ -456,43 +456,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
 		}		
 		return $categories;
 	}
-	
-	/**
-	 * 
-	 * Returns the categories as flat 
-	 */
-	 public function getCategoriesFlatArray($array) {
-	   //return Tx_Ajaxmap_Utility_Div::array_flatten($this->getCategoriesArray());
-	   if (!is_array($array)) {
-        return FALSE;
-       }
-       $result = array();
-       foreach ($array as $category) {
-           foreach ($category as $key=>$value) {
-               if (is_array($value['children'])) {
-                   $result = array_merge($result, $this->getCategoriesFlatArray($value['children']));
-               }
-               else {
-                   $cat = array(
-                    $key => $value);
-                   array_push($result, $cat);
-               }               
-           }
-
-       }
-       return $result; 
-	 }
-
-	/**
-	 * Returns the categories as JSON data.
-	 * Child categories will be included as nested objects until three depth.
-	 *
-	 * @param int> $treeDepth
-	 * @return json data
-	 */
-	public function getCategoriesJson($treeDepth = 5) {
-		return json_encode($this->getCategoriesArray($treeDepth));
-	}
 
 	/**
 	 * Adds a LocationType
@@ -543,15 +506,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Extbase_DomainObject_AbstractEntity
             }
         }       
         return $locationTypes;
-    }
-    
-    /**
-     * Returns the location types as JSON data.
-     *
-     * @return json data
-     */
-    public function getLocationTypesJson() {
-        return json_encode($this->getLocationTypesArray());
     }
     
 	/**

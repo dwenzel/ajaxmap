@@ -89,7 +89,7 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	 */
 	public function getClickableReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getClickable()
 		);
 	}
@@ -105,13 +105,32 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 			$this->fixture->getClickable()
 		);
 	}
-	
+
+	/**
+	* @test
+	*/
+	public function isClickableForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isClickable()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isClickableForBooleanReturnsIsClickable() {
+		$this->fixture->setClickable(TRUE);
+		$this->assertTrue(
+				$this->fixture->isClickable()
+		);
+	}
+
 	/**
 	 * @test
 	 */
 	public function getSuppressInfoWindowsReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getSuppressInfoWindows()
 		);
 	}
@@ -129,11 +148,30 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	}
 	
 	/**
+	* @test
+	*/
+	public function isSuppressInfoWindowsForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isSuppressInfoWindows()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isSuppressInfoWindowsForBooleanReturnsIsSuppressInfoWindows() {
+		$this->fixture->setSuppressInfoWindows(TRUE);
+		$this->assertTrue(
+				$this->fixture->isSuppressInfoWindows()
+		);
+	}
+
+	/**
 	 * @test
 	 */
 	public function getPreserveViewportReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getPreserveViewport()
 		);
 	}
@@ -150,5 +188,24 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 		);
 	}
 	
+	/**
+	* @test
+	*/
+	public function isPreserveViewportForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isPreserveViewport()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isPreserveViewportForBooleanReturnsIsPreserveViewport() {
+		$this->fixture->setPreserveViewport(TRUE);
+		$this->assertTrue(
+				$this->fixture->isPreserveViewport()
+		);
+	}
+
 }
 ?>

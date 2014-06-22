@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<T3locallang>
+	<meta type="array">
+		<type>database</type>
+		<description>Language labels for database tables/fields belonging to extension 'ajaxmap'</description>
+	</meta>
+	<data type="array">
+		<languageKey index="default" type="array">
+			<label index="tx_ajaxmap_domain_model_category">Category</label>
+			<label index="tx_ajaxmap_domain_model_category.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_category.description">Description</label>
+			<label index="tx_ajaxmap_domain_model_category.icon">Icon</label>
+			<label index="tx_ajaxmap_domain_model_category.child_categories">Child Categories</label>
+			<label index="tx_ajaxmap_domain_model_place">Place</label>
+			<label index="tx_ajaxmap_domain_model_place.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_place.geo_coordinates">Geo Coordinates</label>
+			<label index="tx_ajaxmap_domain_model_place.description">Description</label>
+			<label index="tx_ajaxmap_domain_model_place.info">Info</label>
+			<label index="tx_ajaxmap_domain_model_place.category">Category</label>
+			<label index="tx_ajaxmap_domain_model_place.type">Type</label>
+			<label index="tx_ajaxmap_domain_model_place.icon">Icon</label>
+			<label index="tx_ajaxmap_domain_model_place.regions">Regions</label>
+			<label index="tx_ajaxmap_domain_model_place.content">Content</label>
+			<label index="tx_ajaxmap_domain_model_place.address">Address</label>
+			<label index="tx_ajaxmap_domain_model_map">Map</label>
+			<label index="tx_ajaxmap_domain_model_map.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_map.type">Type</label>
+			<label index="tx_ajaxmap_domain_model_map.width">Width</label>
+			<label index="tx_ajaxmap_domain_model_map.height">Height</label>
+			<label index="tx_ajaxmap_domain_model_map.map_center">Map Center</label>
+			<label index="tx_ajaxmap_domain_model_map.initial_zoom">Initial Zoom</label>
+			<label index="tx_ajaxmap_domain_model_map.map_style">Map Style</label>
+			<label index="tx_ajaxmap_domain_model_map.disable_default_ui">Disable Default UI</label>
+			<label index="tx_ajaxmap_domain_model_map.categories">Categories</label>
+			<label index="tx_ajaxmap_domain_model_map.regions">Regions</label>
+			<label index="tx_ajaxmap_domain_model_map.markers">Markers</label>
+			<label index="tx_ajaxmap_domain_model_map.overlays">Overlays</label>
+			<label index="tx_ajaxmap_domain_model_map.appearance">Appearance</label>
+			<label index="tx_ajaxmap_domain_model_map.location_types">Location Types</label>
+			<label index="tx_ajaxmap_domain_model_region">Region</label>
+			<label index="tx_ajaxmap_domain_model_region.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_region.file">File</label>
+			<label index="tx_ajaxmap_domain_model_region.clickable">Clickable</label>
+			<label index="tx_ajaxmap_domain_model_region.suppress_info_windows">Suppress Info Windows</label>
+			<label index="tx_ajaxmap_domain_model_region.preserve_viewport">Preserve Viewport</label>
+			<label index="tx_ajaxmap_domain_model_locationtype">Location Type</label>
+			<label index="tx_ajaxmap_domain_model_locationtype.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_locationtype.icon">Icon</label>
+			<label index="tx_ajaxmap_domain_model_locationtype.description">Description</label>
+			<label index="tx_ajaxmap_domain_model_content">Content</label>
+			<label index="tt_content.tx_extbase_type.Tx_Ajaxmap_Content">Ajax Map Content</label>
+			<label index="tx_ajaxmap_domain_model_address">Address</label>
+			<label index="tt_address.tx_extbase_type.Tx_Ajaxmap_Address">Ajax Map Address</label>
+			<label index="tx_ajaxmap_domain_model_place.attribution">Attributes</label>
+		</languageKey>
+	</data>
+</T3locallang>

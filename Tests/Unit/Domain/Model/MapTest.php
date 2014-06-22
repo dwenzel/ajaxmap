@@ -70,9 +70,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getTypeReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getTypeReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getType()
 		);
 	}
@@ -92,9 +91,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getWidthReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getWidthReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getWidth()
 		);
 	}
@@ -114,9 +112,8 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getHeightReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+	public function getHeightReturnsInitialNull() { 
+		$this->assertNull(
 			$this->fixture->getHeight()
 		);
 	}
@@ -136,7 +133,11 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getMapCenterReturnsInitialValueForString() { }
+	public function getMapCenterReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getMapCenter()
+		);
+	}
 
 	/**
 	 * @test
@@ -154,8 +155,7 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	 * @test
 	 */
 	public function getInitialZoomReturnsInitialValueForInteger() { 
-		$this->assertSame(
-			0,
+		$this->assertNull(
 			$this->fixture->getInitialZoom()
 		);
 	}
@@ -175,7 +175,11 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getMapStyleReturnsInitialValueForString() { }
+	public function getMapStyleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getMapStyle()
+		);
+	}
 
 	/**
 	 * @test
@@ -194,7 +198,7 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	 */
 	public function getDisableDefaultUiReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			TRUE,
+			FALSE,
 			$this->fixture->getDisableDefaultUi()
 		);
 	}
@@ -210,7 +214,26 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getDisableDefaultUi()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsInitialFalse() {
+		$this->assertFalse(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function isDisableDefaultUiForBooleanReturnsIsDefaultUi() {
+		$this->fixture->setDisableDefaultUi(TRUE);
+		$this->assertTrue(
+				$this->fixture->isDisableDefaultUi()
+		);
+	}
+
 	/**
 	 * @test
 	 */
@@ -268,7 +291,59 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getCategories()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function getCategoriesArrayReturnsInitialEmptyArray() {
+		$emptyArray = array();
+		$this->assertSame(
+				$this->fixture->getCategoriesArray(),
+				$emptyArray
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCategoriesArrayReturnsNestedArrayForNestedCategories() {
+		$categoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
+		$categoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$categoryWithOneChild->addChildCategory($secondLevelCategory);
+		$this->fixture->addCategory($categoryWithoutChildren);
+		$this->fixture->addCategory($categoryWithOneChild);
+
+		$result = array(
+				0 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array()
+				),
+				1 => array (
+					'key' => null,
+					'title' => null,
+					'icon' => null,
+					'tooltip' => null,
+					'children' => array(
+						0 => array (
+							'key' => null,
+							'title' => null,
+							'icon' => null,
+							'tooltip' => null,
+							'children' => array()
+						),
+					)
+				)
+			);
+		$this->assertSame(
+				$this->fixture->getCategoriesArray(),
+				$result
+		);
+	}
+
 	/**
 	 * @test
 	 */
@@ -442,6 +517,47 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 			$this->fixture->getLocationTypes()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function getLocationTypesArrayReturnsInitialEmptyArray() {
+		$emptyArray = array();
+		$this->assertSame(
+				$this->fixture->getLocationTypesArray(),
+				$emptyArray
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getLocationTypesArrayReturnsArrayOfLocationTypes() {
+		$firstLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
+		$secondLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
+
+		$this->fixture->addLocationType($firstLocationType);
+		$this->fixture->addLocationType($secondLocationType);
+
+		$result = array(
+				0 => array(
+					'key' => null,
+					'title' => null,
+					'description' => null,
+					'markerIcon' => null,
+				),
+				1 => array(
+					'key' => null,
+					'title' => null,
+					'description' => null,
+					'markerIcon' => null,
+				),
+		);
+
+		$this->assertSame(
+				$this->fixture->getLocationTypesArray(),
+				$result
+		);
+	}
 }
 ?>

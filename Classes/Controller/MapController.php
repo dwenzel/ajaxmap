@@ -142,7 +142,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
                     $response = $map->getCategoriesArray();
                     break;
                 case 'loadLocationTypes':
-                    $response = $map->getLocationTypesJson();    
+                    $response = $map->getLocationTypesArray();    
                    break;
                 case 'loadPlaces':
                     $response = $this->getPlaces($map);
@@ -192,14 +192,9 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	    // - make empty list of places
 	    $places = array();
 	    
-	    // build a unique list of categories from array of nested categories
-	    $categoriesFlatArray = $map->getCategoriesFlatArray();
-	
 	    //@todo - add all manually selected places (from map - field is currently hidden in backend) 
 	    
 	    // - add all places of selected location types (from map)
-	    // -- build a list of location types
-        //$locationTypesArr= $map->getLocationTypesArray();
         $locationsArr = array();
         foreach ($map->getLocationTypesArray() as $location) {
          	   array_push($locationsArr, $location['key']);
@@ -208,7 +203,10 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
         $locations = implode(',',$locationsArr);
         $select = 'uid, title, type, description, icon, category, geo_coordinates';
         //@todo respect storage page
-	    $where = 'deleted = 0 AND hidden = 0 AND type IN (' .$locations .')'; 
+	    $where = 'deleted = 0 AND hidden = 0';
+			if($locations != ''){ 
+	    	$where .= ' AND type IN (' .$locations .')';
+			}
         $places = $this->placeRepository->findRawSelectWhere($select, $where);
        	
        	// replace category count by array of categories
@@ -217,20 +215,8 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 			       $categories = $this->placeRepository->findCategoriesForPlace($place[uid]);
 			       $place['category'] = $categories;
 			   }
-			  // if($place['address']){
-			  //     $place['address'] = $this->placeRepository->findAddressForPlace($place[uid]);
-			  // }
 		   }  
-	    // - add all places belonging to at least one selected category 
-	    // -- build a list of all categories (they are nested - avoid multiple occurences!)
-	    // -- for each category in list: get places with this category
-	    // -- add them to list of places 
-	    //var_dump($GLOBALS['TYPO3_DB']);
-	    //var_dump('catArr', $map->getCategoriesArray(), 'flatArr',$map->getCategoriesFlatArray($map->getCategoriesArray()));
-	    //var_dump($this->placeRepository->findRawWhere($where));
-	//var_dump($places);
 	return $places;
-	//return $places;
 	}
 	
 	private function getAddressForPlace($placeId){
