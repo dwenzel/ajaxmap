@@ -35,7 +35,7 @@ before_script:
   - source build-environment/install-helper.sh
   - if [[ "$TRAVIS_PHP_VERSION" != "5.5" ]]; then installPhpModule igbinary; fi
   - installPhpModule -y memcache
-  - installPhpModule redis
+#  - installPhpModule redis
   - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
 # prepare composer
   - if [[ "$COVERAGE" == "1" ]]; then mv build-environment/composer.json ./; fi
@@ -66,6 +66,7 @@ before_script:
 
 
 script:
+  - phpCodeSniff
 #  - phpLint all
   - if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
   - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
