@@ -8,18 +8,28 @@
 	if(typeof categoryTreeStore === "undefined") {
 		var categoryTreeStore = [];
 	}
-	if(typeof locationTypeStore === "undefined") {
-		var locationTypeStore = [];
-	}
 	currId = ]]>{settings.map}<![CDATA[;
-	markerArr = [];
+	locationTypes = [];
+	markerArr = [];]]>
+	<f:for each="{map.locationTypes}" as="locationType">
+		<![CDATA[
+			locationTypes.push(
+				{
+					"key":]]>{locationType.uid}<![CDATA[,
+					"title": ']]>{locationType.title}<![CDATA[',
+					"description": ']]>{locationType.description}<![CDATA[',
+					"icon": ']]>{locationType.icon}<![CDATA['
+				}
+			);
+		]]>
+	</f:for>
 	var mapSettings = {
 		"id": currId,
 		"map": "",
 		"regions": "",
 		"kmlLayer": "",
 		"categories": "",
-		"locationTypes": "",
+		"locationTypes": locationTypes,
 		"infoWindow": "",
 		"places": "",
 		"marker": markerArr,
@@ -27,6 +37,4 @@
 	mapStore.push(mapSettings);
 	regionStore.push({"id": currId}); 
 	categoryTreeStore.push({"id": currId})
-	locationTypeStore.push({"id": currId, "markerIcon": ""});
-	]]>
 </script>
