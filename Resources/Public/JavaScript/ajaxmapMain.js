@@ -88,10 +88,8 @@ function initMap(mapNumber){
 		    	mapStore[mapNumber].map = map;
 		    	// store regions
 		    	mapStore[mapNumber].regions = response.regions;
-		    	// store location types
-		    	mapStore[mapNumber].locationTypes = response.locationTypes;
+
 		    	// info window
-		    	
 		    	mapStore[mapNumber].infoWindow = new google.maps.InfoWindow({
 		    		maxWidth: 370,
 		    		 
@@ -141,8 +139,7 @@ function initRegionsSelector(mapNumber){
 
 function initLocationTypesSelector(mapNumber){
 	// find selector by map id	
-	mapId = locationTypeStore[mapNumber].id;
-	
+	mapId = mapStore[mapNumber].id
 	var currLocationTypes = mapStore[mapNumber].locationTypes;
 	//remove empty option (since fluid doesn't build a select without option)
 	for(type in currLocationTypes){
