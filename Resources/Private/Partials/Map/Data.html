@@ -1,0 +1,32 @@
+<script type="text/javascript"><![CDATA[
+	if(typeof mapStore === "undefined") {
+		var mapStore = [];	
+	}
+	if(typeof regionStore === "undefined") {
+		var regionStore = [];
+	}
+	if(typeof categoryTreeStore === "undefined") {
+		var categoryTreeStore = [];
+	}
+	if(typeof locationTypeStore === "undefined") {
+		var locationTypeStore = [];
+	}
+	currId = ]]>{settings.map}<![CDATA[;
+	markerArr = [];
+	var mapSettings = {
+		"id": currId,
+		"map": "",
+		"regions": "",
+		"kmlLayer": "",
+		"categories": "",
+		"locationTypes": "",
+		"infoWindow": "",
+		"places": "",
+		"marker": markerArr,
+	};
+	mapStore.push(mapSettings);
+	regionStore.push({"id": currId}); 
+	categoryTreeStore.push({"id": currId})
+	locationTypeStore.push({"id": currId, "markerIcon": ""});
+	]]>
+</script>

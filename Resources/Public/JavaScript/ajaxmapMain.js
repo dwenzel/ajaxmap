@@ -1,7 +1,3 @@
-var ajaxMapsArray = []; // contains all ajax maps 
-var regionsSelectorsStore = []; // contains region selectors - each belonging to one map
-var categoryTreeStore =[]; // contains trees - each belonging to one map
-var locationTypesSelectorsStore = []; // contains location types - each belonging to one map
 var basePath; // base path for resources like icons and kml files
 jQuery(document).ready(function($) {
 	if (!window.location.origin){
@@ -11,58 +7,26 @@ jQuery(document).ready(function($) {
 		// for webkit browsers
 		basePath = window.location.origin + "/";
 	}
-	//console.log('ajaxmap');
-	// init stores for maps, selectors and trees
-	initStores();
+
 	// initialize all maps
 	initAllMaps();
-	//redefineAjaxifySingleLinks();
 });
-
-function initStores(){
-	//search for and build an array with all map ids
-	$('[name="tx_ajaxmap_map[txAjaxmapStore][mapId]"]').each(function(){
-		
-		currId = $(this).attr('value');
-		markerArr = [];
-		//init map store
-		ajaxMapsArray.push({
-			"id":currId, "map":"", 
-			"regions": "", 
-			"kmlLayer": "", 
-			"categories" : "", 
-			"locationTypes": "",
-			"infoWindow": "",
-			"places": "",
-			"marker": markerArr
-		});
-		
-		//init region selector store
-		regionsSelectorsStore.push({"id" : currId});
-		
-		//init category tree store
-		categoryTreeStore.push({"id": currId})
-
-		// init location type selector store
-		locationTypesSelectorsStore.push({"id": currId, "markerIcon": ""});
-	})
-}
 
 function initAllMaps(){
 	// init all maps
-	for (mapNumber in ajaxMapsArray){
+	for (mapNumber in mapStore){
 		initMap(mapNumber);
 		//initRegionsSelector(mapNumber);
 	};
 }
 function initAllRegionsSelectors(){
-	for (selectorNumber in regionsSelectorsStore){
+	for (selectorNumber in regionStore){
 		initRegionsSelector(selectorNumber);
 	}
 }
 function initMap(mapNumber){
 	
-	mapEntry = ajaxMapsArray[mapNumber];
+	mapEntry = mapStore[mapNumber];
 	var map = '';
 	
 	//get map data
@@ -119,36 +83,36 @@ function initMap(mapNumber){
 		    				});
 		    	
 		    	// store map in array
-		    	ajaxMapsArray[mapNumber].map = map;
+		    	mapStore[mapNumber].map = map;
 		    	// store regions
-		    	ajaxMapsArray[mapNumber].regions = response.regions;
+		    	mapStore[mapNumber].regions = response.regions;
 		    	// store location types
-		    	ajaxMapsArray[mapNumber].locationTypes = response.locationTypes;
+		    	mapStore[mapNumber].locationTypes = response.locationTypes;
 		    	// info window
 		    	
-		    	ajaxMapsArray[mapNumber].infoWindow = new google.maps.InfoWindow({
+		    	mapStore[mapNumber].infoWindow = new google.maps.InfoWindow({
 		    		maxWidth: 370,
 		    		 
 		    	});
 		    	// regions selector
-		    	if (ajaxMapsArray[mapNumber].regions.length){
+		    	if (mapStore[mapNumber].regions.length){
 			    	initRegionsSelector(mapNumber);
 			    	
 			    	// display first region
-			    	updateLayer(mapNumber, ajaxMapsArray[mapNumber].regions[0].uid);
+			    	updateLayer(mapNumber, mapStore[mapNumber].regions[0].uid);
 			    	$('select#ajaxMapRegionsSelector' + mapId).change(function () {
 			    	    currMapId = this.id.split('ajaxMapRegionsSelector')[1];
 			    		updateLayer(getMapNumber(currMapId), parseInt($(this).val()));
 			    	  });
 		    	}
 		    	// location types Selector
-		    	if (ajaxMapsArray[mapNumber].locationTypes.length){
+		    	if (mapStore[mapNumber].locationTypes.length){
 		    		initLocationTypesSelector(mapNumber);
 		    	}
 		    	
 		    	// category tree
 		    	renderDynaTree(mapEntry.id);
-		    	initPlaces(ajaxMapsArray[mapNumber].id);
+		    	initPlaces(mapStore[mapNumber].id);
 		    	$('body').append('<div id="overlayDetailHelper"></div>');
 		    		
 	    },
@@ -162,10 +126,10 @@ function initMap(mapNumber){
 
 function initRegionsSelector(mapNumber){
 	// find selector by map id	
-	mapId = regionsSelectorsStore[mapNumber].id;
+	mapId = regionStore[mapNumber].id;
 
 	// get regions for map
-	var currRegions = ajaxMapsArray[mapNumber].regions;
+	var currRegions = mapStore[mapNumber].regions;
 	//remove empty option (since fluid is unable to build a select without option)
 	$('select#ajaxMapRegionsSelector' + mapId).children('option').remove();
 	for(region in currRegions){
@@ -175,9 +139,9 @@ function initRegionsSelector(mapNumber){
 
 function initLocationTypesSelector(mapNumber){
 	// find selector by map id	
-	mapId = locationTypesSelectorsStore[mapNumber].id;
+	mapId = locationTypeStore[mapNumber].id;
 	
-	var currLocationTypes = ajaxMapsArray[mapNumber].locationTypes;
+	var currLocationTypes = mapStore[mapNumber].locationTypes;
 	//remove empty option (since fluid doesn't build a select without option)
 	for(type in currLocationTypes){
 		$("<option/>").val(currLocationTypes[type].key).text(currLocationTypes[type].title).appendTo("#ajaxMapLocationTypesSelector" + mapId);
@@ -191,13 +155,13 @@ function initLocationTypesSelector(mapNumber){
 }
 
 function updateLayer(mapNumber, layerId){
-	if(ajaxMapsArray[mapNumber]){
+	if(mapStore[mapNumber]){
 		
 		//get map for current map number
-		map = ajaxMapsArray[mapNumber].map;
+		map = mapStore[mapNumber].map;
 		
 		// get layer for current map number
-		mapLayer = ajaxMapsArray[mapNumber].kmlLayer;
+		mapLayer = mapStore[mapNumber].kmlLayer;
 		
 		// get data for new layer
 		newLayerData = getLayer(mapNumber, layerId);
@@ -212,30 +176,30 @@ function updateLayer(mapNumber, layerId){
 		}
 		mapLayer = new google.maps.KmlLayer(layerUrl, layerOptions);
 		mapLayer.setMap(map);
-		ajaxMapsArray[mapNumber].kmlLayer = mapLayer;
+		mapStore[mapNumber].kmlLayer = mapLayer;
 		/*google.maps.event.addListener(mapLayer, "defaultviewport_changed", 
 		        function() {console.log('NE', this.getDefaultViewport().getNorthEast(), 'SW', this.getDefaultViewport().getSouthWest())}
 		);*/
 	}
 }
 function getLayer(mapNumber, layerId){
-	if(ajaxMapsArray[mapNumber] && ajaxMapsArray[mapNumber].regions.length){
-		regions = ajaxMapsArray[mapNumber].regions;
+	if(mapStore[mapNumber] && mapStore[mapNumber].regions.length){
+		regions = mapStore[mapNumber].regions;
 		return $.grep(regions, function(obj) { return obj.uid === layerId})[0];
 	}
 }
 function getMapNumber(mapId){
-	for (var i =0; i< ajaxMapsArray.length; i++){
-		if(ajaxMapsArray[i].id == mapId){
+	for (var i =0; i< mapStore.length; i++){
+		if(mapStore[i].id == mapId){
 			return i;
 		}
 	};
 }
 
 function getLocationType(mapNumber, typeId){
-	for (var i=0; i<ajaxMapsArray[mapNumber].locationTypes.length; i++){
-		if (ajaxMapsArray[mapNumber].locationTypes[i].key == typeId){
-			return ajaxMapsArray[mapNumber].locationTypes[i];
+	for (var i=0; i<mapStore[mapNumber].locationTypes.length; i++){
+		if (mapStore[mapNumber].locationTypes[i].key == typeId){
+			return mapStore[mapNumber].locationTypes[i];
 		}
 	}
 }
@@ -307,7 +271,7 @@ function initPlaces (mapId) {
 		    //	console.log(result);
 		    mapNumber = getMapNumber(mapId);
 	    		// store places
-		    	ajaxMapsArray[mapNumber].places = result;
+		    	mapStore[mapNumber].places = result;
 		    	
 		    	if(result.length){
 			    	//update places (set marker)
@@ -358,14 +322,14 @@ function getAddress(mapId, placeId) {
  */
 function updatePlaces(mapNumber){
 	//get map for current map number
-		map = ajaxMapsArray[mapNumber].map;
-		mapId = ajaxMapsArray[mapNumber].id;
+		map = mapStore[mapNumber].map;
+		mapId = mapStore[mapNumber].id;
 		
 		// get layer for current map number
-		mapPlaces = ajaxMapsArray[mapNumber].places;
+		mapPlaces = mapStore[mapNumber].places;
 		//console.log(mapPlaces);
 		//get marker for map
-		mapMarker = ajaxMapsArray[mapNumber].marker;
+		mapMarker = mapStore[mapNumber].marker;
 		locationSelectorSelected = 'select#ajaxMapLocationTypesSelector' + mapId + ' option:selected';
 		actLocationType = $(locationSelectorSelected).val();
 		//console.log('activ LocationType ',actLocationType);
@@ -375,7 +339,7 @@ function updatePlaces(mapNumber){
             return node.data.key;
         });
 		// add markers for all places
-		for(var i=0,j=ajaxMapsArray[mapNumber].places.length; i<j; i++){
+		for(var i=0,j=mapStore[mapNumber].places.length; i<j; i++){
 			
 			if (!mapMarker[i]) {
 				currType = parseInt(mapPlaces[i].type);
@@ -394,7 +358,7 @@ function updatePlaces(mapNumber){
 				// add click function 
 				google.maps.event.addListener(mapMarker[i], 'click', function() {
 					map = this.getMap();
-					infoWindow =ajaxMapsArray[this.mapNumber].infoWindow;
+					infoWindow =mapStore[this.mapNumber].infoWindow;
 										 
 					/*
 					 * @todo move content setup to function and make it configurable
@@ -422,7 +386,7 @@ function updatePlaces(mapNumber){
 					}
 					else {
 						// fetch address data from server
-						addressJson = getAddress(ajaxMapsArray[mapNumber].id, this.place.uid);
+						addressJson = getAddress(mapStore[mapNumber].id, this.place.uid);
 					}
 					if (addressJson){
 						var address = '';
@@ -500,7 +464,7 @@ function updatePlaces(mapNumber){
 			
 		};
 		//set marker for map
-		ajaxMapsArray[mapNumber].marker = mapMarker;
+		mapStore[mapNumber].marker = mapMarker;
 }
 
 function openDetailView(caller, placeId){
