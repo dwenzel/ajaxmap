@@ -84,6 +84,17 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	}
 
 	/**
+	 * Sets the view
+	 *
+	 * This method should only be used for unit testing purposes.
+	 * @param Tx_Fluid_View_TemplateView $view The new view
+	 * @return void
+	 */
+	public function setView($view) {
+		$this->view = $view;
+	}
+
+	/**
 	 * action item - get map attributes
 	 *
 	 * @return json data
@@ -177,10 +188,14 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	public function showAction(Tx_Ajaxmap_Domain_Model_Map $map = NULL) {
 		if ($map===NULL) {
 			$mapId = $this->settings['map'];
-			$map = $this->mapRepository->findByUid($mapId);
-			
+			$map = $this->mapRepository->findOneByUid($mapId);
 		}
-		$this->view->assign('map', $this->mapRepository->findByUid($mapId));
+		$this->view->assignMultiple(
+				array(
+					'map' => $this->mapRepository->findByUid($mapId),
+					'settings' => $this->settings
+				)
+		);
 	}
 	
 	/**
