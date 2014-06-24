@@ -38,12 +38,43 @@
  */
 class Tx_Ajaxmap_Controller_MapControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Map
+	 * @var Tx_Ajaxmap_Controller_MapController
 	 */
 	protected $fixture;
 
+	/**
+	 * Map Repository
+	 *
+	 * @var Tx_Ajaxmap_Domain_Repository_MapRepository
+	 */
+	private $mapRepository;
+
+	/**
+	 * 
+	 * @var Tx_Ajaxmap_Domain_Repository_PlaceRepository
+	 */
+	private $placeRepository;
+
+	/**
+	 *
+	 * @var Tx_Ajaxmap_Domain_Repository_RegionRepository
+	 */
+	private $regionRepository;
+
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Map();
+		$this->fixture = new Tx_Ajaxmap_Controller_MapController();
+		$this->mapRepository = $this->getMock(
+				'Tx_Ajaxmap_Domain_Repository_MapRepository', array(), array(), '', FALSE
+		);
+		$this->regionRepository = $this->getMock(
+				'Tx_Ajaxmap_Domain_Repository_RegionRepository', array(), array(), '', FALSE
+		);
+		$this->placeRepository = $this->getMock(
+				'Tx_Ajaxmap_Domain_Repository_PlaceRepository', array(), array(), '', FALSE
+		);
+		$this->fixture->injectMapRepository($this->mapRepository);
+		$this->fixture->injectRegionRepository($this->regionRepository);
+		$this->fixture->injectPlaceRepository($this->placeRepository);
 	}
 
 	public function tearDown() {
@@ -53,8 +84,21 @@ class Tx_Ajaxmap_Controller_MapControllerTest extends Tx_Extbase_Tests_Unit_Base
 	/**
 	 * @test
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
+	public function showActionReturnsEmptyJsonWhenMapIsNotSet() {
+		$settings = array();
+		$configurationManager = $this->getMock(
+				'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
+		);
+
+		$fixture = $this->getAccessibleMock(
+				'Tx_Ajaxmap_Controller_MapController',
+				array('showAction'));
+		//$fixture->injectConfigurationManager($configurationManager);
+		$fixture->setView($this->getMock('Tx_Fluid_View_TemplateView', array(), array(), '', FALSE));
+
+		$fixture->expects($this->once())->method('showAction')
+			->will($this->returnValue('{}'));
+		$fixture->showAction();
 	}
 
 }
