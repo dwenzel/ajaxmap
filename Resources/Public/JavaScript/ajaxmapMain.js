@@ -9,7 +9,9 @@ jQuery(document).ready(function($) {
 	}
 
 	// initialize all maps
-	initAllMaps();
+	if(typeof mapStore !== "undefined" && mapStore instanceof Array) {
+		initAllMaps();
+	}
 });
 
 function initAllMaps(){
