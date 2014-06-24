@@ -6,7 +6,7 @@ script:
 - if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v; fi
 language: php
 before_script: 
-- sudo apt-get update && sudo apt-get install git
+#- sudo apt-get update && sudo apt-get install git
 - cd ..
 - mkdir build
 - mkdir build/artifacts
