@@ -1,5 +1,5 @@
 script: 
-- phpCodeSniff
+#- phpCodeSniff
 - if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
 - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
 - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=build/artifacts/coverage/clover.xml -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
@@ -15,7 +15,7 @@ before_script:
 - git clone --single-branch --branch $INTEGRATION --depth 1 git://github.com/dwenzel/TYPO3-Travis-Integration.git build-environment
 - git clone --single-branch --branch $TYPO3 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git core
 - source build-environment/install-helper.sh
-- phpenv config-add build-environment/php_custom.ini
+#- phpenv config-add build-environment/php_custom.ini
 - if [[ "$TRAVIS_PHP_VERSION" != "5.5" ]]; then installPhpModule igbinary; fi
 - installPhpModule -y memcache
 - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
@@ -41,7 +41,7 @@ before_script:
 - if [[ "$DB" == "mysql" && -f  build-environment/dbimport/cli_users.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/cli_users.sql; fi
 - if [[ "$DB" == "mysql" && -f  build-environment/dbimport/ajaxmap.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/ajaxmap.sql; fi
 after_script:
-- source build-environment/update-gh-pages.sh
+#- source build-environment/update-gh-pages.sh
 matrix: 
   include: 
   - env: DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=1
