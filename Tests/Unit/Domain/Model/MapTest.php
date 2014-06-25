@@ -670,13 +670,21 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 		public function toArrayReturnsCorrectValueForRegions() {
 			$region = new Tx_Ajaxmap_Domain_Model_Region();
 			$this->fixture->addRegion($region);
-
+			$result = array(
+				0 => array (
+					'clickable' => false,
+					'file' => null,
+					'pid' => null,
+					'preserveViewport' => false,
+					'suppressInfoWindows' => false,
+					'title' => null,
+					'uid' => null,
+				)
+			);
 			$valueArray = $this->fixture->toArray();
 			$this->assertSame(
 					$valueArray['regions'],
-					array(
-						0 => 'not implemented yet'
-					)
+					$result
 			);
 		}
 }
