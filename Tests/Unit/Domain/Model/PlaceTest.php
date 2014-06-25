@@ -53,7 +53,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getTitle()
+		);
+	}
 
 	/**
 	 * @test
@@ -70,7 +74,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getGeoCoordinatesReturnsInitialValueForString() { }
+	public function getGeoCoordinatesReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getGeoCoordinates()
+		);
+	}
 
 	/**
 	 * @test
@@ -87,7 +95,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+	public function getDescriptionReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getDescription()
+		);
+	}
 
 	/**
 	 * @test
@@ -104,7 +116,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getInfoReturnsInitialValueForString() { }
+	public function getInfoReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getInfo()
+		);
+	}
 
 	/**
 	 * @test
@@ -337,6 +353,28 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 			$this->fixture->getAddress()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsInitialValueForArray() {
+		$result = array(
+			'address' => null,
+			'category' => Array (),
+			'content' => Array (),
+			'description' => null,
+			'geoCoordinates' => null,
+			'info' => null,
+			'pid' => null,
+			'regions' => Array (),
+			'title' => null,
+			'type' => null,
+			'uid' => null,
+		);
+		$this->assertSame(
+				$this->fixture->toArray(),
+				$result
+		);
+	}
 }
 ?>
