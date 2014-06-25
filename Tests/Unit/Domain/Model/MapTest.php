@@ -295,58 +295,6 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getCategoriesArrayReturnsInitialEmptyArray() {
-		$emptyArray = array();
-		$this->assertSame(
-				$this->fixture->getCategoriesArray(),
-				$emptyArray
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getCategoriesArrayReturnsNestedArrayForNestedCategories() {
-		$categoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
-		$categoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
-		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$categoryWithOneChild->addChildCategory($secondLevelCategory);
-		$this->fixture->addCategory($categoryWithoutChildren);
-		$this->fixture->addCategory($categoryWithOneChild);
-
-		$result = array(
-				0 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array()
-				),
-				1 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array(
-						0 => array (
-							'key' => null,
-							'title' => null,
-							'icon' => null,
-							'tooltip' => null,
-							'children' => array()
-						),
-					)
-				)
-			);
-		$this->assertSame(
-				$this->fixture->getCategoriesArray(),
-				$result
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function getRegionsReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Region() { 
 		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->assertEquals(
@@ -563,7 +511,7 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function toArrayReturnsInitialValues() {
+	public function toArrayReturnsInitialValueForArray() {
 		$result = array (
 				'categories' => array(),
 				'categoriesArray' => array(),
@@ -616,76 +564,5 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 
 		}
 
-		/**
-		 * @test
-		 */
-		public function toArrayReturnsCorrectValueForCategories() {
-			$category = new Tx_Ajaxmap_Domain_Model_Category();
-			$this->fixture->addCategory($category);
-			
-			$valueArray = $this->fixture->toArray();
-			$this->assertSame(
-					$valueArray['categories'],
-					array(
-						0 => 'not implemented yet'
-						)
-					);
-		}
-
-		/**
-		 * @test
-		 */
-		public function toArrayReturnsCorrectValueForLocationTypes() {
-			$locationType = new Tx_Ajaxmap_Domain_Model_LocationType();
-			$this->fixture->addLocationType($locationType);
-
-			$valueArray = $this->fixture->toArray();
-			$this->assertSame(
-					$valueArray['locationTypes'],
-					array(
-						0 => 'not implemented yet'
-					)
-			);
-		}
-
-		/**
-		 * @test
-		 */
-		public function toArrayReturnsCorrectValueForPlaces() {
-			$place = new Tx_Ajaxmap_Domain_Model_Place();
-			$this->fixture->addPlace($place);
-
-			$valueArray = $this->fixture->toArray();
-			$this->assertSame(
-					$valueArray['places'],
-					array(
-						0 => 'not implemented yet'
-					)
-			);
-		}
-
-		/**
-		 * @test
-		 */
-		public function toArrayReturnsCorrectValueForRegions() {
-			$region = new Tx_Ajaxmap_Domain_Model_Region();
-			$this->fixture->addRegion($region);
-			$result = array(
-				0 => array (
-					'clickable' => false,
-					'file' => null,
-					'pid' => null,
-					'preserveViewport' => false,
-					'suppressInfoWindows' => false,
-					'title' => null,
-					'uid' => null,
-				)
-			);
-			$valueArray = $this->fixture->toArray();
-			$this->assertSame(
-					$valueArray['regions'],
-					$result
-			);
-		}
 }
 ?>
