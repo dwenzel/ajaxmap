@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_Place extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Ajaxmap_Domain_Model_Place extends Tx_Ajaxmap_DomainObject_AbstractEntity {
 
 	/**
 	 * Geographic location - defined by its latitude and longitude
