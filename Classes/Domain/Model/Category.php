@@ -182,31 +182,5 @@ class Tx_Ajaxmap_Domain_Model_Category extends Tx_Ajaxmap_DomainObject_AbstractE
 		$this->childCategories = $childCategories;
 	}
 
-	/**
-	 * Returns the childCategories as array
-	 *
-	 * @param int> $treeDepth
-	 * @return array
-	 */
-	public function getChildCategoriesArray($treeDepth = 10) {
-		$childCategories = array();
-		if ($this->getChildCategories() && $treeDepth>0){
-			$treeDepth = $treeDepth-1;
-			
-			$childrenObjArray = $this->getChildCategories()->toArray();
-			foreach ($childrenObjArray as $childCategory){
-				$category = array(
-					'key' => $childCategory->getUid(),
-					'title' => $childCategory->getTitle(),
-					'icon' => $childCategory->getIcon(),
-					'tooltip' => $childCategory->getDescription(),
-					'children' => $childCategory->getChildCategoriesArray($treeDepth),
-				);
-			array_push($childCategories, $category);
-			}				
-		}
-		return $childCategories;
-	}
-
 }
 ?>
