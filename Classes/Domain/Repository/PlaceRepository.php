@@ -33,42 +33,6 @@
  */
 class Tx_Ajaxmap_Domain_Repository_PlaceRepository extends Tx_Extbase_Persistence_Repository {
     /**
-     * 
-     * Returns all objects of this repository with matching location type
-     * 
-     * @param Tx_Ajaxmap_Domain_Model_LocationType $locationType
-     * 
-     * @return Tx_Extbase_Persistence_QueryResult
-     */
-    public function findByType(Tx_Ajaxmap_Domain_Model_LocationType $locationType) {
-        $typeId = $locationType->getUid();
-/*    	$query = $this->createQuery();
-        $query->getQuerySettings()->setRespectStoragePage(FALSE);
-        $query->matching($query->equals('type', $locationType));
-        $result = $query->execute();*/
-        
-        $fields = '*';
-        $table = 'tx_ajaxmap_domain_model_place';
-        $where = 'deleted = 0 AND hidden = 0'; 
-        $groupBy='';
-        $orderBy='';
-        $limit='';
-        $result = $GLOBALS['TYPO3_DB']->exec_SELECTquery($fields,$table,$where,$groupBy,$orderBy,$limit);
-        
-        return $result;
-    }
-    
-    /**
-    *
-    * Returns an array with all rows in repository
-    */
-    public function findRaw(){
-    	$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
-		$query->statement('SELECT * from tx_ajaxmap_domain_model_place');
-		return $query->execute();
-    }
-    /**
     *@param string $where
     */
     public function findRawSelectWhere($select, $where){
