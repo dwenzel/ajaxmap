@@ -174,17 +174,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getChildCategoriesArrayReturnsInitialEmptyArray() {
-		$array = array();
-		$this->assertSame(
-				$this->fixture->getChildCategoriesArray(),
-				$array
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function toArrayReturnsInitialValue() {
 		$result = array(
 			'childCategories' => Array (),
