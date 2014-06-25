@@ -61,7 +61,7 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 					&& method_exists($propertyValue, 'toArray')
 				) {
 					$result[propertyName] = $propertyValue->toArray();
-					} else {
+			} else {
 				$result[$propertyName] = $propertyValue;
 			}
 		}
