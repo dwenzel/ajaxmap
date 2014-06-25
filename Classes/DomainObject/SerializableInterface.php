@@ -31,7 +31,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-interface Tx_Ajaxmap_Domain_Model_SerializableInterface {
+interface Tx_Ajaxmap_DomainObject_SerializableInterface {
 
 	/**
 	 * Return the object as array

@@ -31,9 +31,9 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_AbstractEntity 
+class Tx_Ajaxmap_DomainObject_AbstractEntity 
 	extends Tx_Extbase_DomainObject_AbstractEntity 
-	implements Tx_Ajaxmap_Domain_Model_SerializableInterface {
+	implements Tx_Ajaxmap_DomainObject_SerializableInterface {
 
 	/**
 	 * Return the object as array
