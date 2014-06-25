@@ -38,32 +38,16 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Return the object as array
 	 *
+	 * @param integer $treeDepth maximum tree depth
 	 * @return array
 	 */
-	public function toArray() {
+	public function toArray($treeDepth = 100) {
+		$treeDepth = $treeDepth - 1;
 		$properties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($this);
 		\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('get props', 'ajaxmap', 1, $properties);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
-			if(is_a($propertyValue, 'TYPO3\CMS\Extbase\Persistence\ObjectStorage')) {
-				$objectArray = $propertyValue->toArray();
-				$children = array();
-				foreach($objectArray as $object) {
-					if(method_exists($object, 'toArray')) {
-						$children[] = $object->toArray();
-					} else {
-						$children[] = 'not implemented yet';
-					}
-				}
-				$result[$propertyName] = $children;
-			} elseif (
-					is_object($propertyValue) 
-					&& method_exists($propertyValue, 'toArray')
-				) {
-					$result[propertyName] = $propertyValue->toArray();
-			} else {
-				$result[$propertyName] = $propertyValue;
-			}
+			$result[$propertyName] = $this->convertValueToArray($propertyValue);
 		}
 		\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('toArray', 'ajaxmap', 1, $result);
 		return $result;
@@ -76,6 +60,34 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 	 */
 	public function toJson() {
 		return json_encode($this->toArray());
+	}
+
+	/**
+	 * Convert a property value to an array
+	 *
+	 * @var mixed $value Value of the property
+	 * @var integer $treeDepth maximum tree depth
+	 * return mixed 
+	 */
+	protected function convertValueToArray($value, $treeDepth = 100) {
+		$treeDepth = $treeDepth - 1;
+		if(is_a($value, 'TYPO3\CMS\Extbase\Persistence\ObjectStorage')) {
+			$objectArray = $value->toArray();
+			$children = array();
+			foreach($objectArray as $object) {
+				if(method_exists($object, 'toArray')) {
+					$children[] = $object->toArray($treeDepth);
+				} else {
+					$children[] = 'not implemented yet';
+				}
+			}
+			$result = $children;
+		} elseif (is_object($value) && method_exists($value, 'toArray')) {
+				$result = $value->toArray($treeDepth);
+		} else {
+			$result = $value;
+		}
+		return $result;
 	}
 }
 ?>
