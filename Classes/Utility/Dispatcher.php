@@ -25,31 +25,14 @@
  ***************************************************************/
 
 /**
+ * Dispatcher
  *
+ * Works with AJAX-Dispatcher from extension pt_extbase
  *
  * @package ajaxmap
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-//Inkludieren eines AJAX-Dispatchers aus der Extension pt_extbase aus dem TER
-//Der Quellcode dieses AJAX.Dispatchers steht auch auf dem Blog von Daniel Lienert
-require_once t3lib_extMgm::extPath('pt_extbase') . 'Classes/Utility/AjaxDispatcher.php';
-//Connect to database
-tslib_eidtools::connectDB();
- 
-// Init TSFE for database access
-$GLOBALS['TSFE'] = t3lib_div::makeInstance('tslib_fe', $TYPO3_CONF_VARS, 0, 0, true);
-//var_dump($GLOBALS['TSFE']);
-
-$GLOBALS['TSFE']->sys_page = t3lib_div::makeInstance('t3lib_pageSelect');
-//var_dump($GLOBALS['TSFE']->sys_page);
-$GLOBALS['TSFE']->initFEuser();
-$dispatcher = t3lib_div::makeInstance('Tx_PtExtbase_Utility_AjaxDispatcher'); /** @var $dispatcher Tx_PtExtbase_Utility_AjaxDispatcher */
-//echo "instance of dispatcher";
-//var_dump($dispatcher);
-
-// Die folgende Zeile arbeitet mit den im AJAX-Request übergebenen Parametern und ruft eine ControllerAction auf.
-// Das echo zeigt/impliziert, dass der Rückgabewert der Action den Inhalt der Response auf unseren AJAX-Requests darstellt.
-echo $dispatcher->initCallArguments()->dispatch();
-//echo "hello";
+$dispatcher = t3lib_div::makeInstance('Tx_PtExtbase_Utility_AjaxDispatcher');
+echo $dispatcher->initAndDispatch();
 ?>
