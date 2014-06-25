@@ -32,15 +32,5 @@
  *
  */
 class Tx_Ajaxmap_Domain_Repository_MapRepository extends Tx_Extbase_Persistence_Repository {
-
-	/**
-	 * findRegionsByMap
-	 *
-	 * @return
-	 */
-	public function findRegionsByMap() {
-		//
-	}
-
 }
 ?>
