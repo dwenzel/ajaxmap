@@ -559,5 +559,125 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 				$result
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsInitialValues() {
+		$result = array (
+				'categories' => array(),
+				'categoriesArray' => array(),
+				'disableDefaultUi' => FALSE,
+				'height' => null,
+				'initialZoom' => null,
+				'locationTypes' => array(),
+				'locationTypesArray' => array(),
+				'mapCenter' => null,
+				'mapStyle' => null,
+				'pid' => null,
+				'places' => array(),
+				'regions' => array(),
+				'title' => null,
+				'type' => null,
+				'uid' => null,
+				'width' => null,
+		);
+
+		$this->assertSame(
+				$this->fixture->toArray(),
+				$result
+		);
+	}
+
+		/**
+		 * @test
+		 */
+		public function toArrayReturnsCorrectValuesForSimpleProperties() {
+			$this->fixture->setDisableDefaultUi(TRUE);
+			$this->fixture->setHeight(123);
+			$this->fixture->setInitialZoom(12);
+			
+			$valueArray = $this->fixture->toArray();
+
+			$this->assertSame(
+					$valueArray['disableDefaultUi'],
+					TRUE
+			);
+
+			$this->assertSame(
+					$valueArray['height'],
+					123
+			);
+
+			$this->assertSame(
+					$valueArray['initialZoom'],
+					12
+			);
+
+		}
+
+		/**
+		 * @test
+		 */
+		public function toArrayReturnsCorrectValueForCategories() {
+			$category = new Tx_Ajaxmap_Domain_Model_Category();
+			$this->fixture->addCategory($category);
+			
+			$valueArray = $this->fixture->toArray();
+			$this->assertSame(
+					$valueArray['categories'],
+					array(
+						0 => 'not implemented yet'
+						)
+					);
+		}
+
+		/**
+		 * @test
+		 */
+		public function toArrayReturnsCorrectValueForLocationTypes() {
+			$locationType = new Tx_Ajaxmap_Domain_Model_LocationType();
+			$this->fixture->addLocationType($locationType);
+
+			$valueArray = $this->fixture->toArray();
+			$this->assertSame(
+					$valueArray['locationTypes'],
+					array(
+						0 => 'not implemented yet'
+					)
+			);
+		}
+
+		/**
+		 * @test
+		 */
+		public function toArrayReturnsCorrectValueForPlaces() {
+			$place = new Tx_Ajaxmap_Domain_Model_Place();
+			$this->fixture->addPlace($place);
+
+			$valueArray = $this->fixture->toArray();
+			$this->assertSame(
+					$valueArray['places'],
+					array(
+						0 => 'not implemented yet'
+					)
+			);
+		}
+
+		/**
+		 * @test
+		 */
+		public function toArrayReturnsCorrectValueForRegions() {
+			$region = new Tx_Ajaxmap_Domain_Model_Region();
+			$this->fixture->addRegion($region);
+
+			$valueArray = $this->fixture->toArray();
+			$this->assertSame(
+					$valueArray['regions'],
+					array(
+						0 => 'not implemented yet'
+					)
+			);
+		}
 }
 ?>
