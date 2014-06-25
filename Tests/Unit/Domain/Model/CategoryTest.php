@@ -185,41 +185,142 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getChildCategoriesArrayReturnsNestedArrayForNestedCategories() {
-		$childCategoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
-		$childCategoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
-		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$childCategoryWithOneChild->addChildCategory($secondLevelCategory);
-		$this->fixture->addChildCategory($childCategoryWithoutChildren);
-		$this->fixture->addChildCategory($childCategoryWithOneChild);
+	public function toArrayReturnsInitialValue() {
 		$result = array(
-				0 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array()
-				),
-				1 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array(
-						0 => array (
-							'key' => null,
-							'title' => null,
-							'icon' => null,
-							'tooltip' => null,
-							'children' => array()
-						),
-					)
-				)
-			);
+			'childCategories' => Array (),
+			'childCategoriesArray' => Array (),
+			'description' => null,
+			'icon' => null,
+			'pid' => null,
+			'title' => null,
+			'uid' => null
+		);
 		$this->assertSame(
-				$this->fixture->getChildCategoriesArray(),
-				$result
+			$this->fixture->toArray(),
+			$result
 		);
 	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsArrayWithCorrectValues() {
+		$category = new Tx_Ajaxmap_Domain_Model_Category();
+		$this->fixture->addChildCategory($category);
+		$this->fixture->setDescription('foo');
+		$this->fixture->setIcon('bar');
+		$this->fixture->setPid(1);
+		$this->fixture->setTitle('foobar');
+		$this->fixture->_setProperty('uid', 2);
+		$result = array(
+			'childCategories' => array (
+					0 => array(
+						'childCategories' => array(),
+						'childCategoriesArray' => array(),
+						'description' => null,
+						'icon' => null,
+						'pid' => null,
+						'title' => null,
+						'uid' => null
+					)
+				),
+			'childCategoriesArray' => Array (),
+			'description' => 'foo',
+			'icon' => 'bar',
+			'pid' => 1,
+			'title' => 'foobar',
+			'uid' => 2
+		);
+		$this->assertSame(
+			$this->fixture->toArray(),
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayForCategoryWithTwoChildrenReturnsCorrectArray() {
+		$firstCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$this->fixture->addChildCategory($firstCategory);
+		$this->fixture->addChildCategory($secondCategory);
+		$result = array(
+				'childCategories' => Array (
+					0 => array(
+						'childCategories' => Array (),
+						'childCategoriesArray' => Array (),
+						'description' => null,
+						'icon' => null,
+						'pid' => null,
+						'title' => null,
+						'uid' => null,
+					),
+					1 => array(
+						'childCategories' => Array (),
+						'childCategoriesArray' => Array (),
+						'description' => null,
+						'icon' => null,
+						'pid' => null,
+						'title' => null,
+						'uid' => null,
+					),
+				),
+				'childCategoriesArray' => Array (),
+				'description' => null,
+				'icon' => null,
+				'pid' => null,
+				'title' => null,
+				'uid' => null
+		);
+		$this->assertSame(
+			$this->fixture->toArray(),
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayForCategoryWithNestedChildCategoryReturnsCorrectArray() {
+		$firstCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$secondCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$firstCategory->addChildCategory($secondCategory);
+		$this->fixture->addChildCategory($firstCategory);
+		$result = array(
+				'childCategories' => Array (
+					0 => array(
+						'childCategories' => Array (
+							0 => array(
+								'childCategories' => Array (),
+								'childCategoriesArray' => Array (),
+								'description' => null,
+								'icon' => null,
+								'pid' => null,
+								'title' => null,
+								'uid' => null,
+							),
+						),
+						'childCategoriesArray' => Array (),
+						'description' => null,
+						'icon' => null,
+						'pid' => null,
+						'title' => null,
+						'uid' => null,
+					),
+				),
+				'childCategoriesArray' => Array (),
+				'description' => null,
+				'icon' => null,
+				'pid' => null,
+				'title' => null,
+				'uid' => null
+		);
+		$this->assertSame(
+			$this->fixture->toArray(),
+			$result
+		);
+	}
+
 }
 ?>
