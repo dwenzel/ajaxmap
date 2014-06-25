@@ -177,7 +177,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	public function toArrayReturnsInitialValue() {
 		$result = array(
 			'childCategories' => Array (),
-			'childCategoriesArray' => Array (),
 			'description' => null,
 			'icon' => null,
 			'pid' => null,
@@ -205,7 +204,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 			'childCategories' => array (
 					0 => array(
 						'childCategories' => array(),
-						'childCategoriesArray' => array(),
 						'description' => null,
 						'icon' => null,
 						'pid' => null,
@@ -213,7 +211,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 						'uid' => null
 					)
 				),
-			'childCategoriesArray' => Array (),
 			'description' => 'foo',
 			'icon' => 'bar',
 			'pid' => 1,
@@ -238,7 +235,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 				'childCategories' => Array (
 					0 => array(
 						'childCategories' => Array (),
-						'childCategoriesArray' => Array (),
 						'description' => null,
 						'icon' => null,
 						'pid' => null,
@@ -247,7 +243,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 					),
 					1 => array(
 						'childCategories' => Array (),
-						'childCategoriesArray' => Array (),
 						'description' => null,
 						'icon' => null,
 						'pid' => null,
@@ -255,7 +250,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 						'uid' => null,
 					),
 				),
-				'childCategoriesArray' => Array (),
 				'description' => null,
 				'icon' => null,
 				'pid' => null,
@@ -282,7 +276,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 						'childCategories' => Array (
 							0 => array(
 								'childCategories' => Array (),
-								'childCategoriesArray' => Array (),
 								'description' => null,
 								'icon' => null,
 								'pid' => null,
@@ -290,7 +283,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 								'uid' => null,
 							),
 						),
-						'childCategoriesArray' => Array (),
 						'description' => null,
 						'icon' => null,
 						'pid' => null,
@@ -298,7 +290,6 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 						'uid' => null,
 					),
 				),
-				'childCategoriesArray' => Array (),
 				'description' => null,
 				'icon' => null,
 				'pid' => null,
