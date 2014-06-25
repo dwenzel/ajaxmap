@@ -37,39 +37,13 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 	),
 	// non-cacheable actions
 	array(
-		'Category' => '',
-		'Place' => '',
 		'Map' => 'item',
-		'Region' => '',
-		'LocationType' => '',
-		'Content' => '',
-		'Address' => '',
-		
 	)
 );
 
 
-/*if(TYPO3_MODE == 'FE') {
- // For FE usage via eID
-$TYPO3_CONF_VARS['FE']['eID_include']['ajaxMap'] =
-t3lib_extMgm::extPath('ajaxmap').'Classes/Utility/Dispatcher.php';
-}*/
 // For FE usage via eID
 $TYPO3_CONF_VARS['FE']['eID_include']['ajaxMap'] ='EXT:ajaxmap/Classes/Utility/Dispatcher.php';
-
+// configure allowed actions for ajax dispatcher
 $GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pt_extbase']['ajaxDispatcher']['allowedControllerActions']['Ajaxmap']['Map']['item'] = TRUE;
-/*
- if(TYPO3_MODE == 'FE') {
-// For FE usage via eID
-$TYPO3_CONF_VARS['FE']['eID_include']['ptxAjax'] =
-t3lib_extMgm::extPath('pt_extbase').'Classes/Utility/eIDDispatcher.php';
-}
-
-if(TYPO3_MODE == 'BE') {
-// For BE usage via ajax
-$TYPO3_CONF_VARS['BE']['AJAX']['ptxAjax'] =
-t3lib_extMgm::extPath('pt_extbase').'Classes/Utility/AjaxDispatcher.php:' .
-'Tx_PtExtbase_Utility_AjaxDispatcher->initAndEchoDispatch';
-}
-*/
 ?>
