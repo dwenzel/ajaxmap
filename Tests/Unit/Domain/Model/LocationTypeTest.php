@@ -112,6 +112,23 @@ class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_Bas
 			$this->fixture->getIcon()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsInitialValueForArray() {
+		$result = array(
+				'description' => null,
+				'icon' => null,
+				'pid' => null,
+				'title' => null,
+				'uid' => null,
+		);
+		$this->assertSame(
+				$this->fixture->toArray(),
+				$result
+		);
+	}
+
 }
 ?>
