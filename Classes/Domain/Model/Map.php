@@ -284,7 +284,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	 * @return void
 	 */
 	public function setMapStyle($mapStyle) {
-		$this->mapStyle = $mapStyle;
+		$this->mapStyle = preg_replace('/(?:\s\s+|\n|\t)/', '', $mapStyle);
 	}
 
 	/**
