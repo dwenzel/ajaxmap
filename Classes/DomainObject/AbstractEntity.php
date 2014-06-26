@@ -42,14 +42,15 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 	 * @return array
 	 */
 	public function toArray($treeDepth = 100) {
+		if($treeDepth < 1) {
+			return 'maximum tree depth reached!';
+		}
 		$treeDepth = $treeDepth - 1;
 		$properties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($this);
-		\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('get props', 'ajaxmap', 1, $properties);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
 			$result[$propertyName] = $this->convertValueToArray($propertyValue);
 		}
-		\TYPO3\CMS\Core\Utility\GeneralUtility::devLog('toArray', 'ajaxmap', 1, $result);
 		return $result;
 	}
 
@@ -66,11 +67,9 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 	 * Convert a property value to an array
 	 *
 	 * @var mixed $value Value of the property
-	 * @var integer $treeDepth maximum tree depth
 	 * return mixed 
 	 */
-	protected function convertValueToArray($value, $treeDepth = 100) {
-		$treeDepth = $treeDepth - 1;
+	protected function convertValueToArray($value) {
 		if(is_a($value, 'TYPO3\CMS\Extbase\Persistence\ObjectStorage')) {
 			$objectArray = $value->toArray();
 			$children = array();
