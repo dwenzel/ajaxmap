@@ -51,7 +51,7 @@ function initMap(mapNumber){
 		    	// prepare data
 		    	mapContainer = document.getElementById('ajaxMapContainer_Map' + mapEntry.id);
 		    	$(mapContainer).height(response.height).width(response.width);
-		    	tmpCenter = (response.center).split(",");
+		    	tmpCenter = (response.mapCenter).split(",");
 		    	mapCenter = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
 		    	
 		    	switch(response.type){
@@ -70,14 +70,16 @@ function initMap(mapNumber){
 	    			break;
 		    	}
 		    	
-		    	if(response.type = "0"){
-		    		mapStyle = $.parseJSON('[' + response.style + ']');
-		    	}
+		    	if(response.type = "0" && response.mapStyle){
+		    		mapStyle = $.parseJSON('[' + response.mapStyle + ']');
+		    	} else {
+						mapStyle = '';
+					}
 		    	
 		    	//build map
 		    	map = new google.maps.Map(
 		    			mapContainer, {
-		    				zoom: response.zoom,
+		    				zoom: response.initialZoom,
 		    				center: mapCenter,
 		    				mapTypeId: mapType,
 		    				styles: mapStyle,
