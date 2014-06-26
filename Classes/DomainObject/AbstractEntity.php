@@ -49,7 +49,7 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 		$properties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($this);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
-			$result[$propertyName] = $this->convertValueToArray($propertyValue);
+			$result[$propertyName] = $this->convertValueToArray($propertyValue, $treeDepth);
 		}
 		return $result;
 	}
@@ -66,10 +66,11 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Convert a property value to an array
 	 *
+	 * @var integer $treeDepth maximum tree depth, default 100
 	 * @var mixed $value Value of the property
 	 * return mixed 
 	 */
-	protected function convertValueToArray($value) {
+	protected function convertValueToArray($value, $treeDepth = 100) {
 		if(is_a($value, 'TYPO3\CMS\Extbase\Persistence\ObjectStorage')) {
 			$objectArray = $value->toArray();
 			$children = array();
