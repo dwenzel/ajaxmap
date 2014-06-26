@@ -118,33 +118,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 			
 			switch ($task) {
                 case 'buildMap':
-                // get data for building a map and its user interface
-                    // get style and remove whitespace, new lines, tabs
-                    $style = preg_replace('/(?:\s\s+|\n|\t)/', '', $map->getMapStyle());
-                    
-                    //get common map values
-                    $response = array(
-                            'title' => $map->getTitle(),
-                            'type' => $map->getType(),
-                            'zoom' => $map->getInitialZoom(),
-                            'width' => $map->getWidth(),
-                            'height' => $map->getHeight(),
-                            'center' => $map->getMapCenter(),
-                            'style' => $style,
-                            'disableDefaultUI' => $map->getDisableDefaultUi()
-                            );
-                    // get regions
-                    if ($map -> getRegions()) {
-                        $regionsObjArray = $map -> getRegions() -> toArray();
-                        $regions = array();
-                        foreach ($regionsObjArray as $region) {
-                            $currRegion = array('uid' => $region -> getUid(), 'title' => $region -> getTitle(), 'file' => $region -> getFile(), 'clickable' => $region -> getClickable(), 'suppressInfoWindows' => $region -> getSuppressInfoWindows(), 'preserveViewport' => $region -> getPreserveViewport(), );
-                            array_push($regions, $currRegion);
-                        }
-                        $response['regions'] = $regions;
-                        // $response['categories'] = $map->getCategoriesArray();
-                    }
-                    
+										$response = $map->toArray();
                     break;
                 case'loadCategories':
                     $response = $map->getCategoriesArray();
