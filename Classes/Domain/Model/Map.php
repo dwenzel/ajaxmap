@@ -449,7 +449,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 					'title' => $category->getTitle(),
 					'icon' => $category->getIcon(),
 					'tooltip' => $category->getDescription(),
-					'children' => $category->getChildCategoriesArray($treeDepth),
+					//'children' => $category->getChildCategoriesArray($treeDepth),
 				);
 				array_push($categories, $currCategory);
 			}
