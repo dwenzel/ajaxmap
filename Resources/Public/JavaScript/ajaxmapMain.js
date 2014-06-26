@@ -220,30 +220,27 @@ function renderDynaTree(mapId){
 		onSelect: function(flag, node) {
 			var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynatree')[1]);
 			var selectedNodes = node.tree.getSelectedNodes();
-            var selectedKeys = $.map(selectedNodes, function(node){
-                return node.data.key;
-            });
-            updatePlaces(mapNumber);
-            //debugger;
-            //window.console.log("Selected keys: " + selectedKeys);
-            
-        },
+			var selectedKeys = $.map(selectedNodes, function(node){
+					return node.data.key;
+				});
+			updatePlaces(mapNumber);
+		},
 		initAjax: {
 			url: "index.php",
-		    type: "GET",
-		    dataType: "json",
-		    data: {
-		    		'eID': "ajaxMap", 
-			    'extensionName': "Ajaxmap",
-		        'pluginName': "Map",
-		        'controllerName': "Map",
-		        'actionName': "item",
-		        'arguments': {
-		        	'task': 'loadCategories',
-		        	'mapId': mapId
-		        }
-		    }
-        }
+			type: "GET",
+			dataType: "json",
+			data: {
+				'eID': "ajaxMap", 
+				'extensionName': "Ajaxmap",
+				'pluginName': "Map",
+				'controllerName': "Map",
+				'actionName': "item",
+				'arguments': {
+					'task': 'loadCategories',
+					'mapId': mapId
+				}
+			}
+		}
 	}).data('mapId', mapId);
 	
 }
