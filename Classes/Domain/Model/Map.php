@@ -444,14 +444,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 		if ($this->getCategories()){
 			$categoriesObjArray = $this->getCategories()->toArray();
 			foreach ($categoriesObjArray as $category){
-				$currCategory = array(
-					'key' => $category->getUid(),
-					'title' => $category->getTitle(),
-					'icon' => $category->getIcon(),
-					'tooltip' => $category->getDescription(),
-					//'children' => $category->getChildCategoriesArray($treeDepth),
-				);
-				array_push($categories, $currCategory);
+				array_push($categories, $category->toArray());
 			}
 		}		
 		return $categories;
