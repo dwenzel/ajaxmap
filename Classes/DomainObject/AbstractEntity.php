@@ -77,10 +77,7 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 			foreach($objectArray as $object) {
 				if(method_exists($object, 'toArray')) {
 					$children[] = $object->toArray($treeDepth);
-				} else {
-					$children[] = 'not implemented yet';
-				}
-			}
+				} 			}
 			$result = $children;
 		} elseif (is_object($value) && method_exists($value, 'toArray')) {
 				$result = $value->toArray($treeDepth);
