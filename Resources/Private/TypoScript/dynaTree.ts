@@ -11,3 +11,10 @@ page {
 		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.6/skin/ui.dynatree.css
 	}
 }
+
+plugin.tx_ajaxmap.settings {
+	mapping {
+		tx_ajaxmap_domain_model_category {
+			description = tooltip
+		}
+}
