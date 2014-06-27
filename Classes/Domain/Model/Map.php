@@ -432,25 +432,6 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Returns the categories as multidimensional array.
-	 * Child categories will be included as nested array until three depth.
-	 *
-	 * @param int> $treeDepth
-	 * @return array
-	 * @todo read tree depth from typoScript
-	 */
-	public function getCategoriesArray($treeDepth = 5) {
-		$categories = array();
-		if ($this->getCategories()){
-			$categoriesObjArray = $this->getCategories()->toArray();
-			foreach ($categoriesObjArray as $category){
-				array_push($categories, $category->toArray());
-			}
-		}		
-		return $categories;
-	}
-
-	/**
 	 * Adds a LocationType
 	 *
 	 * @param Tx_Ajaxmap_Domain_Model_LocationType $locationType
@@ -478,29 +459,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	public function getLocationTypes() {
 		return $this->locationTypes;
 	}
-    
-    /**
-     * Returns the location types as array.
-     *
-     * @return array
-     */
-    public function getLocationTypesArray() {
-        $locationTypes = array();
-        if ($this->getLocationTypes()){
-            $locationTypesObjArray = $this->getLocationTypes()->toArray();
-            foreach ($locationTypesObjArray as $location){
-                $currLocation = array(
-                    'key' => $location->getUid(),
-                    'title' => $location->getTitle(),
-                    'description' => $location->getDescription(),
-                    'markerIcon' => $location->getIcon()
-                );
-                array_push($locationTypes, $currLocation);
-            }
-        }       
-        return $locationTypes;
-    }
-    
+
 	/**
 	 * Sets the locationTypes
 	 *
