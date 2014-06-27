@@ -51,11 +51,14 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 		$properties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($this);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
-			$className = strtolower(get_class($this));
-			if(count($mapping) && array_key_exists($propertyName, $mapping[$className])) {
+			if($mapping && count($mapping)) {
+				$className = strtolower(get_class($this));
+				$hasMapping = isset($mapping[$className]);
+			}
+			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {
 				$propertyName = $mapping[$className][$propertyName];
 			}
-			$result[$propertyName] = $this->convertValueToArray($propertyValue, $treeDepth);
+			$result[$propertyName] = $this->convertValueToArray($propertyValue, $treeDepth, $mapping);
 		}
 		return $result;
 	}
