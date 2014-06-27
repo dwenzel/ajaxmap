@@ -77,5 +77,25 @@ class Tx_Ajaxmap_DomainObject_AbstractEntityTest extends Tx_Extbase_Tests_Unit_B
 		);
 	}
 
+	/**
+	 * @test
+	 */
+	public function toArrayDoesMappingForFieldNames() {
+		$mapping = array(
+				tx_ajaxmap_domainobject_abstractentity => array(
+					"pid" => "key",
+					"uid" => "page"
+				)
+		);
+		$result = array(
+				"key" => null,
+				"page" => null
+		);
+		
+		$this->assertSame(
+				$this->fixture->toArray(10, $mapping),
+				$result
+		);
+	}
 }
 ?>
