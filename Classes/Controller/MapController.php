@@ -178,7 +178,8 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 		$this->view->assignMultiple(
 				array(
 					'map' => $this->mapRepository->findByUid($mapId),
-					'settings' => $this->settings
+					'settings' => $this->settings,
+					'pid' => $GLOBALS['TSFE']->id
 				)
 		);
 	}
@@ -195,17 +196,17 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	    //@todo - add all manually selected places (from map - field is currently hidden in backend) 
 	    
 	    // - add all places of selected location types (from map)
-        $locationsArr = array();
-        foreach ($map->getLocationTypesArray() as $location) {
-         	   array_push($locationsArr, $location['key']);
+        $typesArr = array();
+        foreach ($map->getLocationTypes()->toArray() as $type) {
+					array_push($typesArr, $type->getUid());
         }
-        // convert locations array to string for query
-        $locations = implode(',',$locationsArr);
+        // convert types array to string for query
+        $types = implode(',',$typesArr);
         $select = 'uid, title, type, description, icon, category, geo_coordinates';
         //@todo respect storage page
 	    $where = 'deleted = 0 AND hidden = 0';
-			if($locations != ''){ 
-	    	$where .= ' AND type IN (' .$locations .')';
+			if($types != ''){ 
+	    	$where .= ' AND type IN (' .$types .')';
 			}
         $places = $this->placeRepository->findRawSelectWhere($select, $where);
        	
