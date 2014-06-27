@@ -15,6 +15,12 @@ page {
 plugin.tx_ajaxmap.settings {
 	mapping {
 		tx_ajaxmap_domain_model_category {
+			uid = key
+			childCategories = children
 			description = tooltip
+		}
+		tx_ajaxmap_domain_model_locationtype {
+			uid = key
+			icon = markerIcon 
 		}
 }
