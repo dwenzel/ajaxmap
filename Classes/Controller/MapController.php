@@ -115,10 +115,9 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 		
 		if ($mapId){
 			$map = $this->mapRepository->findByUid($mapId);
-			
 			switch ($task) {
                 case 'buildMap':
-										$response = $map->toArray();
+										$response = $map->toArray(100, $this->settings['mapping']);
                     break;
                 case'loadCategories':
                     $response = $map->getCategoriesArray();
