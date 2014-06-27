@@ -173,26 +173,6 @@ class Tx_Ajaxmap_Domain_Model_Category extends Tx_Ajaxmap_DomainObject_AbstractE
 	}
 
 	/**
-	 * Returns the childCategories
-	 * 
-	 * Wrapper for method getChildCategories
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $childCategories
-	 */
-	public function getChildren() {
-		return $this->childCategories;
-	}
-
-	/**
-	 * Returns the key
-	 * 
-	 * Wrapper for method getUid
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $childCategories
-	 */
-	public function getKey() {
-		return $this->uid;
-	}
-
-	/**
 	 * Sets the childCategories
 	 *
 	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $childCategories
