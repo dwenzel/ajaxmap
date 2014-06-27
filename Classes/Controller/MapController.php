@@ -120,11 +120,26 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 										$response = $map->toArray(100, $this->settings['mapping']);
                     break;
                 case'loadCategories':
-                    $response = $map->getCategoriesArray();
-                    break;
+										if ($map->getCategories()){
+											$categoriesObjArray = $map->getCategories()->toArray();
+											foreach ($categoriesObjArray as $category){
+												array_push(
+														$response, 
+														$category->toArray(10, $this->settings['mapping'])
+												);
+											}
+										}
+										break;
                 case 'loadLocationTypes':
-                    $response = $map->getLocationTypesArray();    
-                   break;
+										if ($map->getLocationTypes()){
+											$locationTypesObjArray = $map->getLocationTypes()->toArray();
+											foreach ($locationTypesObjArray as $location){
+												array_push(
+														$response, 
+														$location->toArray(10, $this->settings['mapping']));
+											}
+										}
+										break;
                 case 'loadPlaces':
                     $response = $this->getPlaces($map);
                     break;
