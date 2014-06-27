@@ -469,57 +469,13 @@ class Tx_Ajaxmap_Domain_Model_MapTest extends Tx_Extbase_Tests_Unit_BaseTestCase
 	/**
 	 * @test
 	 */
-	public function getLocationTypesArrayReturnsInitialEmptyArray() {
-		$emptyArray = array();
-		$this->assertSame(
-				$this->fixture->getLocationTypesArray(),
-				$emptyArray
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getLocationTypesArrayReturnsArrayOfLocationTypes() {
-		$firstLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
-		$secondLocationType = new Tx_Ajaxmap_Domain_Model_LocationType();
-
-		$this->fixture->addLocationType($firstLocationType);
-		$this->fixture->addLocationType($secondLocationType);
-
-		$result = array(
-				0 => array(
-					'key' => null,
-					'title' => null,
-					'description' => null,
-					'markerIcon' => null,
-				),
-				1 => array(
-					'key' => null,
-					'title' => null,
-					'description' => null,
-					'markerIcon' => null,
-				),
-		);
-
-		$this->assertSame(
-				$this->fixture->getLocationTypesArray(),
-				$result
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function toArrayReturnsInitialValueForArray() {
 		$result = array (
 				'categories' => array(),
-				'categoriesArray' => array(),
 				'disableDefaultUi' => FALSE,
 				'height' => null,
 				'initialZoom' => null,
 				'locationTypes' => array(),
-				'locationTypesArray' => array(),
 				'mapCenter' => null,
 				'mapStyle' => null,
 				'pid' => null,
