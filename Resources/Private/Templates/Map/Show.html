@@ -5,7 +5,7 @@
 	<f:debug title="map">{map}</f:debug>
 	<f:flashMessages />
 	<f:if condition="{map}">
-		<f:render partial="Map/Data" arguments="{settings: settings, map: map}"/>
+		<f:render partial="Map/Data" arguments="{settings: settings, map: map, pid: pid}"/>
 	</f:if>
 	<div class="mapWrap">
 		<div id="ajaxMapContainer_Map{map.uid}"></div>
