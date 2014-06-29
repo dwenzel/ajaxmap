@@ -42,8 +42,6 @@ Tx_Extbase_Utility_Extension::configurePlugin(
 );
 
 
-// For FE usage via eID
-$TYPO3_CONF_VARS['FE']['eID_include']['ajaxMap'] ='EXT:ajaxmap/Classes/Utility/Dispatcher.php';
-// configure allowed actions for ajax dispatcher
-$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['pt_extbase']['ajaxDispatcher']['allowedControllerActions']['Ajaxmap']['Map']['item'] = TRUE;
+# include eid dispatcher
+$TYPO3_CONF_VARS['FE']['eID_include']['ajaxMap'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY).'Classes/Utility/EidDispatcher.php';
 ?>

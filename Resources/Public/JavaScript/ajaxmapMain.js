@@ -37,14 +37,16 @@ function initMap(mapNumber){
 	    type: "GET",   
 	    data: {
 	    	'eID': "ajaxMap", 
-		    'extensionName': "Ajaxmap",
-	        'pluginName': "Map",
-	        'controllerName': "Map",
-	        'actionName': "item",
+	      request: {
+					'pluginName': "Map",
+	        'controller': "Map",
+	        'action': "item",
 	        'arguments': {
 	        	'task': 'buildMap',
-	        	'mapId': mapEntry.id
-	        	} 
+	        	'mapId': mapEntry.id,
+						'pageId': pageId
+	        }
+				}
 	    },
 	    dataType: "json",
 	    success: function(response) {
@@ -230,14 +232,16 @@ function renderDynaTree(mapId){
 			type: "GET",
 			dataType: "json",
 			data: {
-				'eID': "ajaxMap", 
-				'extensionName': "Ajaxmap",
-				'pluginName': "Map",
-				'controllerName': "Map",
-				'actionName': "item",
-				'arguments': {
-					'task': 'loadCategories',
-					'mapId': mapId
+				'eID': "ajaxMap",
+				request: {
+					'pluginName': "Map",
+					'controller': "Map",
+					'action': "item",
+					'arguments': {
+						'task': 'loadCategories',
+						'mapId': mapId,
+						'pid': pageId
+					}
 				}
 			}
 		}
@@ -255,14 +259,15 @@ function initPlaces (mapId) {
 	    type: "GET",   
 	    data: {
 	    	'eID': "ajaxMap", 
-		    'extensionName': "Ajaxmap",
+				request: {
 	        'pluginName': "Map",
-	        'controllerName': "Map",
-	        'actionName': "item",
+	        'controller': "Map",
+	        'action': "item",
 	        'arguments': {
 	        	'task': 'loadPlaces',
 	        	'mapId': mapEntry.id
-	        	} 
+	        }
+				}
 	    },
 	    dataType: "json",
 	    success: function(result){
@@ -290,18 +295,20 @@ function getAddress(mapId, placeId) {
 	$.ajax({
 		url: "index.php",
 	    type: "GET",
-	    async: false,
+	    //async: false,
 	    data: {
 	    	'eID': "ajaxMap", 
-		    'extensionName': "Ajaxmap",
+		    request: {
+					'extensionName': "Ajaxmap",
 	        'pluginName': "Map",
-	        'controllerName': "Map",
-	        'actionName': "item",
+	        'controller': "Map",
+	        'action': "item",
 	        'arguments': {
 	        	'task': 'getAddress',
 	        	'mapId': mapEntry.id,
 	        	'placeId': placeId
-	        	} 
+	        }
+				}
 	    },
 	    dataType: "json",
 	    success: function(result){
@@ -503,10 +510,11 @@ function openDetailView(caller, placeId){
 		    type: "GET",
 		    data: {
 					'eID': "ajaxMap",
-					'extensionName': "Map",
-					'controllerName': "Place",
-					'actionName': 'ajaxShow',
-					'arguments': {'uid': placeId}
+					request: {
+						'controller': "Place",
+						'action': 'ajaxShow',
+						'arguments': {'uid': placeId}
+					}
 				},
 		    dataType: "json",
 		    success: function(result){
