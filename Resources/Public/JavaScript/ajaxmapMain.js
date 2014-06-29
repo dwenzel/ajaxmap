@@ -152,7 +152,6 @@ function initLocationTypesSelector(mapNumber){
 	// set on change function for location types selector
 	$("#ajaxMapLocationTypesSelector" + mapId).change(function(mapNumber){
 		mapNumber = getMapNumber(this.id.split("ajaxMapLocationTypesSelector")[1]);
-		//console.log('change location type', mapNumber);
 		updatePlaces(mapNumber);
 	})
 }
@@ -180,9 +179,6 @@ function updateLayer(mapNumber, layerId){
 		mapLayer = new google.maps.KmlLayer(layerUrl, layerOptions);
 		mapLayer.setMap(map);
 		mapStore[mapNumber].kmlLayer = mapLayer;
-		/*google.maps.event.addListener(mapLayer, "defaultviewport_changed", 
-		        function() {console.log('NE', this.getDefaultViewport().getNorthEast(), 'SW', this.getDefaultViewport().getSouthWest())}
-		);*/
 	}
 }
 function getLayer(mapNumber, layerId){
@@ -271,7 +267,6 @@ function initPlaces (mapId) {
 	    },
 	    dataType: "json",
 	    success: function(result){
-		    //	console.log(result);
 		    mapNumber = getMapNumber(mapId);
 	    		// store places
 		    	mapStore[mapNumber].places = result;
@@ -332,12 +327,10 @@ function updatePlaces(mapNumber){
 		
 		// get layer for current map number
 		mapPlaces = mapStore[mapNumber].places;
-		//console.log(mapPlaces);
 		//get marker for map
 		mapMarker = mapStore[mapNumber].marker;
 		locationSelectorSelected = 'select#ajaxMapLocationTypesSelector' + mapId + ' option:selected';
 		actLocationType = $(locationSelectorSelected).val();
-		//console.log('activ LocationType ',actLocationType);
 		treeSelect = "#ajaxMapCategoryTree" + mapId;
         var selectedNodes = $(treeSelect).dynatree("getSelectedNodes");
         var selectedKeys = $.map(selectedNodes, function(node){
@@ -464,7 +457,6 @@ function updatePlaces(mapNumber){
 				else {
 					mapMarker[i].setMap(null);
 				}
-			 console.log('hat marker', mapPlaces[i].type);	
 			}
 			
 		};
@@ -532,24 +524,3 @@ function openDetailView(caller, placeId){
 	}
 }
 
-/*
- * redefine function from extension browser
- * 
- */
-/*function redefineAjaxifySingleLinks () {
-	if (window['ajaxifySingleLinks']){
-		window['ajaxifySingleLinks']= function  () {
-		  //alert('redefined!');
-		  console.log('redefined');
-		}
-	}
-}
-function split_querystring_to_object(query) {  
-	var queryString = {};  
-	query.split("?").pop().split("&").forEach(function (prop) {  
-		var item = prop.split("=");  
-		queryString[item.shift()] = item.shift();                                                                                                                                                                                                                                              
-	});  
-	return queryString;  
-}
-*/
