@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Repository_PlaceRepository extends Tx_Extbase_Persistence_Repository {
+class PlaceRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
     /**
     *@param string $where
     */

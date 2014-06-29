@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\DomainObject;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,9 +32,9 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_DomainObject_AbstractEntity 
-	extends Tx_Extbase_DomainObject_AbstractEntity 
-	implements Tx_Ajaxmap_DomainObject_SerializableInterface {
+class AbstractEntity 
+	extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
+	implements SerializableInterface {
 
 	/**
 	 * Return the object as array
@@ -52,7 +53,7 @@ class Tx_Ajaxmap_DomainObject_AbstractEntity
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
 			if($mapping && count($mapping)) {
-				$className = strtolower(get_class($this));
+				$className = get_class($this);
 				$hasMapping = isset($mapping[$className]);
 			}
 			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {

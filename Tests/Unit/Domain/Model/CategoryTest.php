@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Category.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Category.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,14 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class CategoryTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Category
+	 * @var Webfox\Ajaxmap\Domain\Model\Category
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Category();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Category();
 	}
 
 	public function tearDown() {
@@ -116,8 +117,8 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getChildCategoriesReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Category() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+	public function getChildCategoriesReturnsInitialValueForObjectStorageContainingCategory() { 
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getChildCategories()
@@ -127,9 +128,9 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function setChildCategoriesForObjectStorageContainingTx_Ajaxmap_Domain_Model_CategorySetsChildCategories() { 
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneChildCategories = new Tx_Extbase_Persistence_ObjectStorage();
+	public function setChildCategoriesForObjectStorageContainingCategorySetsChildCategories() { 
+		$childCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$objectStorageHoldingExactlyOneChildCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneChildCategories->attach($childCategory);
 		$this->fixture->setChildCategories($objectStorageHoldingExactlyOneChildCategories);
 
@@ -143,8 +144,8 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function addChildCategoryToObjectStorageHoldingChildCategories() {
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneChildCategory = new Tx_Extbase_Persistence_ObjectStorage();
+		$childCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$objectStorageHoldingExactlyOneChildCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneChildCategory->attach($childCategory);
 		$this->fixture->addChildCategory($childCategory);
 
@@ -158,8 +159,8 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function removeChildCategoryFromObjectStorageHoldingChildCategories() {
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+		$childCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($childCategory);
 		$localObjectStorage->detach($childCategory);
 		$this->fixture->addChildCategory($childCategory);
@@ -193,7 +194,7 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$category = new Tx_Ajaxmap_Domain_Model_Category();
+		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
 		$this->fixture->addChildCategory($category);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setIcon('bar');
@@ -227,8 +228,8 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function toArrayForCategoryWithTwoChildrenReturnsCorrectArray() {
-		$firstCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$secondCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$firstCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$secondCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
 		$this->fixture->addChildCategory($firstCategory);
 		$this->fixture->addChildCategory($secondCategory);
 		$result = array(
@@ -266,8 +267,8 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	 * @test
 	 */
 	public function toArrayForCategoryWithNestedChildCategoryReturnsCorrectArray() {
-		$firstCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$secondCategory = new Tx_Ajaxmap_Domain_Model_Category();
+		$firstCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$secondCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
 		$firstCategory->addChildCategory($secondCategory);
 		$this->fixture->addChildCategory($firstCategory);
 		$result = array(

@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Controller_ContentController.
+ * Test case for class Webfox\Ajaxmap\Controller\ContentController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,14 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Controller_ContentControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class ContentControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Content
+	 * @var \Webfox\Ajaxmap\Domain\Model\Content
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Content();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Content();
 	}
 
 	public function tearDown() {

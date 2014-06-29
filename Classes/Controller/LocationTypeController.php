@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_LocationTypeController extends Tx_Extbase_MVC_Controller_ActionController {
+class LocationTypeController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * action item

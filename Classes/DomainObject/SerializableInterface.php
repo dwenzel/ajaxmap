@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\DomainObject;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-interface Tx_Ajaxmap_DomainObject_SerializableInterface {
+interface SerializableInterface {
 
 	/**
 	 * Return the object as array

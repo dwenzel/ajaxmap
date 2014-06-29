@@ -21,9 +21,8 @@ if (!empty($settings['includeDynatree'])) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
 		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:'. $_EXTKEY . '/Resources/Private/TypoScript/dynaTree.ts">');
 }
-
-Tx_Extbase_Utility_Extension::configurePlugin(
-	$_EXTKEY,
+TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
+	'Webfox.' . $_EXTKEY,
 	'Map',
 	array(
 		'Category' => 'list, show',

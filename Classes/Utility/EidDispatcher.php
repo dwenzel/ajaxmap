@@ -90,7 +90,7 @@ $ajax['extensionName'] = 'Ajaxmap';
 /**
  * @var $objectManager \TYPO3\CMS\Extbase\Object\ObjectManager
  */
-$objectManager = new TYPO3\CMS\Extbase\Object\ObjectManager;
+$objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager;
  
 /**
  * @var $TSFE \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
@@ -125,7 +125,7 @@ $TSFE->settingLocale();
 $bootstrapConf['extensionName'] = $ajax['extensionName'];
 $bootstrapConf['pluginName'] = $ajax['pluginName'];
  
-$bootstrap = new TYPO3\CMS\Extbase\Core\Bootstrap();
+$bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 $bootstrap->initialize($bootstrapConf);
  
 $bootstrap->cObj = $objectManager->get('tslib_cObj');

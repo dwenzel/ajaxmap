@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,55 +32,55 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_ActionController {
+class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * mapRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_MapRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\MapRepository
 	 */
 	protected $mapRepository;
 
 	/**
 	 * regionRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_RegionRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\RegionRepository
 	 */
 	protected $regionRepository;
     
     /**
      * placeRepository
      *
-     * @var Tx_Ajaxmap_Domain_Repository_PlaceRepository
+     * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
      */	
 	protected $placeRepository;
 
 	/**
 	 * injectMapRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_MapRepository $mapRepository
+	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
 	 * @return void
 	 */
-	public function injectMapRepository(Tx_Ajaxmap_Domain_Repository_MapRepository $mapRepository) {
+	public function injectMapRepository(\Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository) {
 		$this->mapRepository = $mapRepository;
 	}
     /**
      * inject place repository
      *
-     * @param Tx_Ajaxmap_Domain_Repository_PlaceRepository $placeRepository
+     * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
      * @return void
      */
-    public function injectPlaceRepository(Tx_Ajaxmap_Domain_Repository_PlaceRepository $placeRepository) {
+    public function injectPlaceRepository(\Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
         $this->placeRepository = $placeRepository;
     }
 	
 	/**
 	 * injectRegionRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_RegionRepository $regionRepository
+	 * @param \Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
 	 * @return void
 	 */
-	public function injectRegionRepository(Tx_Ajaxmap_Domain_Repository_RegionRepository $regionRepository) {
+	public function injectRegionRepository(\Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository) {
 		$this->regionRepository = $regionRepository;
 	}
 
@@ -102,7 +103,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	 */
 	public function itemAction() {
 		// get arguments of request
-		$arguments =  t3lib_div::_GET('arguments');
+		$arguments = $this->request->getArguments();
 		$response = array();
 		// get map ID
 		$mapId = $arguments['mapId'];
@@ -170,7 +171,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	 * @param $map
 	 * @return void
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Map $map = NULL) {
+	public function showAction(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL) {
 		if ($map===NULL) {
 			$mapId = $this->settings['map'];
 			$map = $this->mapRepository->findOneByUid($mapId);
@@ -189,7 +190,7 @@ class Tx_Ajaxmap_Controller_MapController extends Tx_Extbase_MVC_Controller_Acti
 	 * @param $map > 
 	 * @return array
 	 */
-	private function getPlaces(Tx_Ajaxmap_Domain_Model_Map $map = NULL){
+	private function getPlaces(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL){
 	    // - make empty list of places
 	    $places = array();
 	    

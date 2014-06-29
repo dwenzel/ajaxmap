@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Utility;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Utility_Div {
+class Div {
 	/**
 	 * 
 	 * Helper function to flatten an array
@@ -45,7 +46,7 @@ class Tx_Ajaxmap_Utility_Div {
   $result = array();
   foreach ($array as $key => $value) {
     if (is_array($value)) {
-      $result = array_merge($result, Tx_Ajaxmap_Utility_Div::array_flatten($value));
+      $result = array_merge($result, $this->array_flatten($value));
     }
     else {
       $result[$key] = $value;
