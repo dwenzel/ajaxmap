@@ -1,5 +1,7 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,12 +33,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_RegionController extends Tx_Extbase_MVC_Controller_ActionController {
+class Webfox\Ajaxmap\Controller\RegionController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * regionRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_RegionRepository
+	 * @var Webfox\Ajaxmap\Domain\Repository\RegionRepository
 	 */
 	protected $regionRepository;
 
@@ -49,10 +51,10 @@ class Tx_Ajaxmap_Controller_RegionController extends Tx_Extbase_MVC_Controller_A
 	/**
 	 * injectRegionRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_RegionRepository $regionRepository
+	 * @param Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
 	 * @return void
 	 */
-	public function injectRegionRepository(Tx_Ajaxmap_Domain_Repository_RegionRepository $regionRepository) {
+	public function injectRegionRepository(Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository) {
 		$this->regionRepository = $regionRepository;
 	}
 

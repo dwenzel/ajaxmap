@@ -1,6 +1,6 @@
 <?php
 
-
+namespace Webfox\Ajaxmap\Utility;
 /***************************************************************
  *  Copyright notice
  *
@@ -32,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Utility_MappingUtility {
+class MappingUtility {
 
 	/**
 	 * Return a new array mapped according settings

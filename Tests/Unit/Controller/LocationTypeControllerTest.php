@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Controller_LocationTypeController.
+ * Test case for class Webfox\Ajaxmap\Controller\LocationTypeController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,14 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Controller_LocationTypeControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class LocationTypeControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_LocationType
+	 * @var \Webfox\Ajaxmap\Domain\Model\LocationType
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_LocationType();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\LocationType();
 	}
 
 	public function tearDown() {

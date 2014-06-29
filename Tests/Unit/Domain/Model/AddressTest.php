@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Address.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Address.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,14 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_AddressTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class AddressTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Address
+	 * @var Webfox\Ajaxmap\Domain\Model\Address
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Address();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Address();
 	}
 
 	public function tearDown() {
