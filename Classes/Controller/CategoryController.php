@@ -1,5 +1,7 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -31,22 +33,22 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_CategoryController extends Tx_Extbase_MVC_Controller_ActionController {
+class CategoryController extends \TYPO3\CMS\Extbase\MVC\Controller\ActionController {
 
 	/**
 	 * categoryRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_CategoryRepository
+	 * @var Webfox\Ajaxmap\Domain\Repository\CategoryRepository
 	 */
 	protected $categoryRepository;
 
 	/**
 	 * injectCategoryRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_CategoryRepository $categoryRepository
+	 * @param Webfox\Ajaxmap\Domain\Repository\CategoryRepository $categoryRepository
 	 * @return void
 	 */
-	public function injectCategoryRepository(Tx_Ajaxmap_Domain_Repository_CategoryRepository $categoryRepository) {
+	public function injectCategoryRepository(Webfox\Ajaxmap\Domain\Repository\CategoryRepository $categoryRepository) {
 		$this->categoryRepository = $categoryRepository;
 	}
 
@@ -66,7 +68,7 @@ class Tx_Ajaxmap_Controller_CategoryController extends Tx_Extbase_MVC_Controller
 	 * @param $category
 	 * @return void
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Category $category) {
+	public function showAction(Webfox\Ajaxmap\Domain\Model\Category $category) {
 		$this->view->assign('category', $category);
 	}
 

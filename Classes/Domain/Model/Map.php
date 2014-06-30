@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity {
+class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 
 	/**
 	 * title
@@ -98,28 +99,28 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Select items for display by category.
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
 	 */
 	protected $categories;
 
 	/**
 	 * regions
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Region>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
 	 */
 	protected $regions;
 
 	/**
 	 * Display selected places as markers.
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Place>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place>
 	 */
 	protected $places;
 
 	/**
 	 * Selected places by location type.
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_LocationType>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType>
 	 */
 	protected $locationTypes;
 
@@ -191,7 +192,7 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	}
 
 	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
 	 *
 	 * @return void
 	 */
@@ -201,39 +202,39 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 		 * It will be rewritten on each save in the extension builder
 		 * You may modify the constructor of this class instead
 		 */
-		$this->categories = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		
-		$this->regions = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->regions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		
-		$this->places = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->places = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		
-		$this->locationTypes = new Tx_Extbase_Persistence_ObjectStorage();
+		$this->locationTypes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 	}
 
 	/**
 	 * Adds a Region
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Region $region
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $region
 	 * @return void
 	 */
-	public function addRegion(Tx_Ajaxmap_Domain_Model_Region $region) {
+	public function addRegion(\Webfox\Ajaxmap\Domain\Model\Region $region) {
 		$this->regions->attach($region);
 	}
 
 	/**
 	 * Removes a Region
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Region $regionToRemove The Region to be removed
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
 	 * @return void
 	 */
-	public function removeRegion(Tx_Ajaxmap_Domain_Model_Region $regionToRemove) {
+	public function removeRegion(\Webfox\Ajaxmap\Domain\Model\Region $regionToRemove) {
 		$this->regions->detach($regionToRemove);
 	}
 
 	/**
 	 * Returns the regions
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Region> $regions
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
 	 */
 	public function getRegions() {
 		return $this->regions;
@@ -242,10 +243,10 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Sets the regions
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Region> $regions
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
 	 * @return void
 	 */
-	public function setRegions(Tx_Extbase_Persistence_ObjectStorage $regions) {
+	public function setRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $regions) {
 		$this->regions = $regions;
 	}
 
@@ -356,27 +357,27 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Adds a Category
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Category $category
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
+	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
 	 */
-	public function addCategory(Tx_Ajaxmap_Domain_Model_Category $category) {
+	public function addCategory(\Webfox\Ajaxmap\Domain\Model\Category $category) {
 		$this->categories->attach($category);
 	}
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Category $categoryToRemove The Category to be removed
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
+	 * @param \Webfox\Ajaxmap\Domain\Model\Category $categoryToRemove The Category to be removed
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
 	 */
-	public function removeCategory(Tx_Ajaxmap_Domain_Model_Category $categoryToRemove) {
+	public function removeCategory(\Webfox\Ajaxmap\Domain\Model\Category $categoryToRemove) {
 		$this->categories->detach($categoryToRemove);
 	}
 
 	/**
 	 * Returns the categories
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
 	 */
 	public function getCategories() {
 		return $this->categories;
@@ -385,37 +386,37 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Sets the categories
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $categories
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> categories
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
 	 */
-	public function setCategories(Tx_Extbase_Persistence_ObjectStorage $categories) {
+	public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
 		$this->categories = $categories;
 	}
 
 	/**
 	 * Adds a Place
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Place $place
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
 	 * @return void
 	 */
-	public function addPlace(Tx_Ajaxmap_Domain_Model_Place $place) {
+	public function addPlace(\Webfox\Ajaxmap\Domain\Model\Place $place) {
 		$this->places->attach($place);
 	}
 
 	/**
 	 * Removes a Place
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Place $placeToRemove The Place to be removed
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place $placeToRemove The Place to be removed
 	 * @return void
 	 */
-	public function removePlace(Tx_Ajaxmap_Domain_Model_Place $placeToRemove) {
+	public function removePlace(\Webfox\Ajaxmap\Domain\Model\Place $placeToRemove) {
 		$this->places->detach($placeToRemove);
 	}
 
 	/**
 	 * Returns the places
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Place> $places
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place> $places
 	 */
 	public function getPlaces() {
 		return $this->places;
@@ -424,37 +425,37 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Sets the places
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Place> $places
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place> $places
 	 * @return void
 	 */
-	public function setPlaces(Tx_Extbase_Persistence_ObjectStorage $places) {
+	public function setPlaces(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $places) {
 		$this->places = $places;
 	}
 
 	/**
 	 * Adds a LocationType
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_LocationType $locationType
+	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $locationType
 	 * @return void
 	 */
-	public function addLocationType(Tx_Ajaxmap_Domain_Model_LocationType $locationType) {
+	public function addLocationType(\Webfox\Ajaxmap\Domain\Model\LocationType $locationType) {
 		$this->locationTypes->attach($locationType);
 	}
 
 	/**
 	 * Removes a LocationType
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_LocationType $locationTypeToRemove The LocationType to be removed
+	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove The LocationType to be removed
 	 * @return void
 	 */
-	public function removeLocationType(Tx_Ajaxmap_Domain_Model_LocationType $locationTypeToRemove) {
+	public function removeLocationType(\Webfox\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove) {
 		$this->locationTypes->detach($locationTypeToRemove);
 	}
 
 	/**
 	 * Returns the locationTypes
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_LocationType> $locationTypes
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType> $locationTypes
 	 */
 	public function getLocationTypes() {
 		return $this->locationTypes;
@@ -463,10 +464,10 @@ class Tx_Ajaxmap_Domain_Model_Map extends Tx_Ajaxmap_DomainObject_AbstractEntity
 	/**
 	 * Sets the locationTypes
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_LocationType> $locationTypes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType> $locationTypes
 	 * @return void
 	 */
-	public function setLocationTypes(Tx_Extbase_Persistence_ObjectStorage $locationTypes) {
+	public function setLocationTypes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $locationTypes) {
 		$this->locationTypes = $locationTypes;
 	}
 

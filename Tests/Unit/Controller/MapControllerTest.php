@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Controller_MapController.
+ * Test case for class \Webfox\Ajaxmap\Controller\MapController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,41 +37,41 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Controller_MapControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Controller_MapController
+	 * @var \Webfox\Ajaxmap\Controller\MapController
 	 */
 	protected $fixture;
 
 	/**
 	 * Map Repository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_MapRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\MapRepository
 	 */
 	private $mapRepository;
 
 	/**
 	 * 
-	 * @var Tx_Ajaxmap_Domain_Repository_PlaceRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	private $placeRepository;
 
 	/**
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_RegionRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\RegionRepository
 	 */
 	private $regionRepository;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Controller_MapController();
+		$this->fixture = new \Webfox\Ajaxmap\Controller\MapController();
 		$this->mapRepository = $this->getMock(
-				'Tx_Ajaxmap_Domain_Repository_MapRepository', array(), array(), '', FALSE
+				'\\Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
 		);
 		$this->regionRepository = $this->getMock(
-				'Tx_Ajaxmap_Domain_Repository_RegionRepository', array(), array(), '', FALSE
+				'\\Webfox\\Ajaxmap\\Domain\\Repository\\RegionRepository', array(), array(), '', FALSE
 		);
 		$this->placeRepository = $this->getMock(
-				'Tx_Ajaxmap_Domain_Repository_PlaceRepository', array(), array(), '', FALSE
+				'\\Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
 		);
 		$this->fixture->injectMapRepository($this->mapRepository);
 		$this->fixture->injectRegionRepository($this->regionRepository);
@@ -87,14 +88,14 @@ class Tx_Ajaxmap_Controller_MapControllerTest extends Tx_Extbase_Tests_Unit_Base
 	public function showActionReturnsEmptyJsonWhenMapIsNotSet() {
 		$settings = array();
 		$configurationManager = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
+				'\\TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
 		);
 
 		$fixture = $this->getAccessibleMock(
-				'Tx_Ajaxmap_Controller_MapController',
+				'\\Webfox\\Ajaxmap\\Controller\\MapController',
 				array('showAction'));
 		//$fixture->injectConfigurationManager($configurationManager);
-		$fixture->setView($this->getMock('Tx_Fluid_View_TemplateView', array(), array(), '', FALSE));
+		$fixture->setView($this->getMock('TYPO3CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
 
 		$fixture->expects($this->once())->method('showAction')
 			->will($this->returnValue('{}'));

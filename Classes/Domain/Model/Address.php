@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_Address extends Tx_Ajaxmap_DomainObject_AbstractEntity {
+class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 
 }
 ?>

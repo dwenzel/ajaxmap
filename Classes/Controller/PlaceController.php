@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,12 +32,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_ActionController {
+class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * placeRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_PlaceRepository
+	 * @var Webfox\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	protected $placeRepository;
 
@@ -44,7 +45,7 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 	 * action list
 	 *
 	 * @return void
-	 * @param Tx_Ajaxmap_Domain_Model_Place
+	 * @param Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	public function listAction() {
 		$places = $this->placeRepository->findAll();
@@ -54,10 +55,10 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 	/**
 	 * injectLocationRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_PlaceRepository $PlaceRepository
+	 * @param Webfox\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
 	 * @return void
 	 */
-	public function injectPlaceRepository(Tx_Ajaxmap_Domain_Repository_PlaceRepository $placeRepository) {
+	public function injectPlaceRepository(Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
 		$this->placeRepository = $placeRepository;
 	}
 
@@ -67,7 +68,7 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 	 * @param $place
 	 * @return void
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Place $place) {
+	public function showAction(Webfox\Ajaxmap\Domain\Model\Place $place) {
 		$this->view->assign('place', $place);
 	}
 
@@ -77,7 +78,7 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 	 * @param $place
 	 * @return void
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Place $place) {
+	public function showAction(Webfox\Ajaxmap\Domain\Model\Place $place) {
 		return $place;
 	}
 

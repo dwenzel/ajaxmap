@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Controller_PlaceController.
+ * Test case for class Webfox\Ajaxmap\Controller\PlaceController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,14 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Controller_PlaceControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Place
+	 * @var \Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Place();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Place();
 	}
 
 	public function tearDown() {

@@ -14,12 +14,12 @@ page {
 
 plugin.tx_ajaxmap.settings {
 	mapping {
-		tx_ajaxmap_domain_model_category {
+		Webfox\Ajaxmap\Domain\Model\Category {
 			uid = key
 			childCategories = children
 			description = tooltip
 		}
-		tx_ajaxmap_domain_model_locationtype {
+		Webfox\Ajaxmap\Domain\Model\Locationtype {
 			uid = key
 			icon = markerIcon 
 		}
