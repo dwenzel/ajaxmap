@@ -258,10 +258,10 @@ function initPlaces (mapId) {
 				request: {
 	        'pluginName': "Map",
 	        'controller': "Map",
-	        'action': "item",
+	        'action': "ajaxListPlaces",
 	        'arguments': {
-	        	'task': 'loadPlaces',
-	        	'mapId': mapEntry.id
+						'mapId': mapEntry.id,
+						'pageId': pageId
 	        }
 				}
 	    },
