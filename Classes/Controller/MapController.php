@@ -166,6 +166,33 @@ class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	}
 
 	/**
+	 * Ajax list place action
+	 *
+	 * @param \integer $mapId
+	 * @param \integer $pageId
+	 * @return json
+	 */
+	public function ajaxListPlacesAction($mapId = NULL, $pageId = NULL) {
+		$places = array();
+		if($mapId) {
+			// places from map
+			$map = $this->mapRepository->findByUid($mapId);
+			if($map) {
+				if($map->getPlaces()) {
+					// map got places
+					$places = $map->getPlaces()->toArray();
+				} elseif ($map->getLocationTypes()) {
+					// get places by location type
+					$places = $this->getPlaces($map);
+				}
+			}
+		} else {
+			// get all places
+			$places = $this->placeRepository->findAll()->toArray();
+		}
+		return json_encode($places);
+	}
+	/**
 	 * action show
 	 *
 	 * @param $map
