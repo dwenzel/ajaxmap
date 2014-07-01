@@ -37,7 +37,7 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * placeRepository
 	 *
-	 * @var Webfox\Ajaxmap\Domain\Repository\PlaceRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	protected $placeRepository;
 
@@ -45,7 +45,7 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * action list
 	 *
 	 * @return void
-	 * @param Webfox\Ajaxmap\Domain\Model\Place
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	public function listAction() {
 		$places = $this->placeRepository->findAll();
@@ -55,10 +55,10 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * injectLocationRepository
 	 *
-	 * @param Webfox\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
+	 * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
 	 * @return void
 	 */
-	public function injectPlaceRepository(Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
+	public function injectPlaceRepository(\Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
 		$this->placeRepository = $placeRepository;
 	}
 
@@ -68,7 +68,7 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * @param $place
 	 * @return void
 	 */
-	public function showAction(Webfox\Ajaxmap\Domain\Model\Place $place) {
+	public function showAction(\Webfox\Ajaxmap\Domain\Model\Place $place) {
 		$this->view->assign('place', $place);
 	}
 
