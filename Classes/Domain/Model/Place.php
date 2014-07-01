@@ -71,11 +71,11 @@ class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	protected $category;
 
 	/**
-	 * type
+	 * Location Type
 	 *
 	 * @var \Webfox\Ajaxmap\Domain\Model\LocationType
 	 */
-	protected $type;
+	protected $locationType;
 
 	/**
 	 * regions
@@ -204,22 +204,22 @@ class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Returns the type
+	 * Returns the Location Type
 	 *
 	 * @return \Webfox\Ajaxmap\Domain\Model\LocationType $type
 	 */
-	public function getType() {
-		return $this->type;
+	public function getLocationType() {
+		return $this->locationType;
 	}
 
 	/**
-	 * Sets the type
+	 * Sets the Location Type
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $type
+	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $locationType
 	 * @return void
 	 */
-	public function setType(\Webfox\Ajaxmap\Domain\Model\LocationType $type) {
-		$this->type = $type;
+	public function setLocationType(\Webfox\Ajaxmap\Domain\Model\LocationType $locationType) {
+		$this->locationType = $locationType;
 	}
 
 	/**
