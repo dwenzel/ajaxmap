@@ -48,7 +48,8 @@ class PlaceController extends AbstractController {
 	 * @param \array $overwriteDemand
 	 */
 	public function listAction($overwriteDemand = NULL) {
-		$places = $this->placeRepository->findAll();
+		$demand = $this->createDemandFromSettings($this->settings);
+		$places = $this->placeRepository->findDemanded($demand);
 		$this->view->assignMultiple(
 			array(
 				'places' => $places,
