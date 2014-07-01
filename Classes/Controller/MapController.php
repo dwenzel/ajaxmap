@@ -32,7 +32,7 @@ namespace Webfox\Ajaxmap\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class MapController extends AbstractController {
 
 	/**
 	 * mapRepository
@@ -82,17 +82,6 @@ class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 	 */
 	public function injectRegionRepository(\Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository) {
 		$this->regionRepository = $regionRepository;
-	}
-
-	/**
-	 * Sets the view
-	 *
-	 * This method should only be used for unit testing purposes.
-	 * @param Tx_Fluid_View_TemplateView $view The new view
-	 * @return void
-	 */
-	public function setView($view) {
-		$this->view = $view;
 	}
 
 	/**
