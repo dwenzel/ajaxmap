@@ -70,5 +70,149 @@ class PlaceRepository extends AbstractDemandedRepository {
         $result = $query->execute();
         return $result[0];
     }
+
+	/**
+	 * Returns an array of query constraints from a given demand object
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query A query object
+	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand A demand object
+	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
+	 */
+	protected function createConstraintsFromDemand (\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+		$constraints = array();
+		$categories = $demand->getCategories();
+		$categoryConjunction = $demand->getCategoryConjunction();
+	
+		// Category constraints
+		if ($categories && !empty($categoryConjunction)) {
+			
+			// @todo get subcategories ($demand->getIncludeSubCategories())
+			$constraints[] = $this->createCategoryConstraint(
+				$query,
+				$categories,
+				$categoryConjunction,
+				FALSE
+			);
+		}
+		$constraintsConjunction = $demand->getConstraintsConjunction();
+		// Location type constraints
+		if ($demand->getLocationTypes()) {
+			$locationTypes = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $demand->getLocationTypes());
+			$locationConstraints = array();
+			foreach ($locationTypes as $locationType) {
+				$locationConstraints[] = $query->equals('type.uid', $locationType);
+			}
+			if (count($locationConstraints)) {
+				switch ($constraintsConjunction) {
+					case 'or':
+						$constraints[] = $query->logicalOr($locationConstraints);
+						break;
+					case 'and':
+					default:
+						$constraints[] = $query->logicalAnd($locationConstraints);
+				}
+			}
+		}
+
+		// Search constraints
+		if ($demand->getSearch()) {
+			$searchConstraints = array();
+			$locationConstraints = array();
+			$search = $demand->getSearch();
+			$subject = $search->getSubject();
+
+			if(!empty($subject)) {
+				// search text in specified search fields
+				$searchFields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $search->getFields(), TRUE);
+				if (count($searchFields) === 0) {
+					throw new \UnexpectedValueException('No search fields given', 1382608407);
+				}
+				foreach($searchFields as $field) {
+					$searchConstraints[] = $query->like($field, '%' . $subject . '%');
+				}
+			}
+
+			// search by bounding box
+			$bounds = $search->getBounds();
+			$location = $search->getLocation();
+			$radius = $search->getRadius();
+
+			if(!empty($location)
+					AND !empty($radius)
+					AND empty($bounds)) {
+					$geoCoder = new \Webfox\Ajaxmap\Utility\Geocoder;
+					$geoLocation = $geoCoder::getLocation($location);
+					if ($geoLocation) {
+						$bounds = $geoCoder::getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius/1000);
+					}
+			}
+			if($bounds AND
+					!empty($bounds['N']) AND
+					!empty($bounds['S']) AND
+					!empty($bounds['W']) AND
+					!empty($bounds['E'])) {
+						$locationConstraints[] = $query->greaterThan('latitude', $bounds['S']['lat']);
+						$locationConstraints[] = $query->lessThan('latitude', $bounds['N']['lat']);
+						$locationConstraints[] = $query->greaterThan('longitude', $bounds['W']['lng']);
+						$locationConstraints[] = $query->lessThan('longitude', $bounds['E']['lng']);
+			}
+					
+			if(count($searchConstraints)) {
+				$constraints[] = $query->logicalOr($searchConstraints);
+			}
+			if(count($locationConstraints)) {
+				$constraints[] = $query->logicalAnd($locationConstraints);
+			}
+		}
+
+		// Clients constraints
+		if ($demand->getClients()) {
+				$clientConstraints = array();
+				$clients = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',',$demand->getClients());
+				foreach($clients as $client) {
+					$clientConstraints[] = $query->equals('client.uid', $client);
+				}
+				if(count($clientConstraints)) {
+					$constraints[] = $query->logicalOr($clientConstraints);
+				}
+		}
+
+				
+
+		return $constraints;
+	}
+
+	/**
+	 * Returns an array of orderings created from a given demand object.
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
+	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
+	 */
+	protected function createOrderingsFromDemand(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+		$orderings = array();
+
+		//@todo validate order (orderAllowed)
+		if ($demand->getOrder()) {
+			$orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), TRUE);
+
+			if (!empty($orderList)) {
+				// go through every order statement
+				foreach ($orderList as $orderItem) {
+					list($orderField, $ascDesc) = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('|', $orderItem, TRUE);
+					// count == 1 means that no direction is given
+					if ($ascDesc) {
+						$orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+							\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
+							\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+					} else {
+						$orderings[$orderField] = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+					}
+				}
+			}
+		}
+
+		return $orderings;
+	}
+
 }
 ?>
