@@ -39,12 +39,27 @@ namespace Webfox\Ajaxmap\Tests;
  */
 class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Place
+	 * @var \Webfox\Ajaxmap\Controller\PlaceController
 	 */
 	protected $fixture;
 
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+//	protected $objectManager;
+
+	/**
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
+	 */
+	protected $placeRepository;
+
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Place();
+		$objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager();
+			$this->fixture = $objectManager->get('Webfox\Ajaxmap\Controller\PlaceController');
+		$this->placeRepository = $this->getMock(
+			'\Webfox\Ajaxmap\Domain\Repository\PlaceRepository', array(), array(), '', FALSE
+		);
+		$this->fixture->injectPlaceRepository($this->placeRepository);
 	}
 
 	public function tearDown() {
@@ -54,8 +69,43 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
+	public function createDemandFromSettingsCreatesEmptyDemandFromInvalidSettings() {
+		$settings = array(
+			'foo' => 'bar'
+		);
+		$demand = new \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand();
+		
+		$this->assertEquals(
+			$this->fixture->createDemandFromSettings($settings),
+			$demand
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function createDemandFromSettingsCreatesDemandFromValidSettings() {
+		$settings = array(
+			'map' => 1,
+			'locationTypes' => '3,5,7',
+			'orderBy' => 'bar',
+			'orderDirection' => 'foo',
+			'constraintsConjunction' => 'AND',
+			'categoryConjunction' => 'NOR',
+			'limit' => 5
+		);
+		$demand = new \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand();
+		$demand->setMap(1);
+		$demand->setOrder('bar|foo');
+		$demand->setLocationTypes('3,5,7');
+		$demand->setConstraintsConjunction('AND');
+		$demand->setCategoryConjunction('NOR');
+		$demand->setLimit(5);
+
+		$this->assertEquals(
+			$this->fixture->createDemandFromSettings($settings),
+			$demand
+		);
 	}
 
 }
