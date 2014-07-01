@@ -45,11 +45,17 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	 * action list
 	 *
 	 * @return void
-	 * @param \Webfox\Ajaxmap\Domain\Model\Place
+	 * @param \array $overwriteDemand
 	 */
-	public function listAction() {
+	public function listAction($overwriteDemand = NULL) {
 		$places = $this->placeRepository->findAll();
-		$this->view->assign('places', $places);
+		$this->view->assignMultiple(
+			array(
+				'places' => $places,
+				'settings' => $this->settings,
+				'overwriteDemand' => $overwriteDemand
+			)
+		);
 	}
 
 	/**
@@ -87,9 +93,33 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 		$result = '';
 		$place = $this->placeRepository->findByUid($placeId);
 		if($place) {
-			$result = json_encode($place->toArray());
+			$result = json_encode($place->toArray(10, $this->settings['mapping']));
 		}
 		return $result;
+	}
+
+	/**
+	 * Create demand from settings
+	 *
+	 * @param \array $settings
+	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PositionDemand
+	 */
+	public function createDemandFromSettings ($settings) {
+		$demand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
+		if ($settings['orderBy']) {
+			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
+		}
+		$demand->setMap($settings['map']);
+		$demand->setLocationTypes($settings['locationTypes']);
+		$demand->setCategories($settings['categories']);
+		if($settings['constraintsConjunction'] !== '') {
+			$demand->setConstraintsConjunction($settings['constraintsConjunction']);
+		}
+		if($settings['categoryConjunction'] !== '') {
+			$demand->setCategoryConjunction($settings['categoryConjunction']);
+		}
+		$demand->setLimit($settings['limit']);
+		return $demand;
 	}
 
 }
