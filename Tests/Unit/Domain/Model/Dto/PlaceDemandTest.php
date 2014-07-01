@@ -122,6 +122,28 @@ class PlaceDemandTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 				$this->fixture->getCategoryConjunction()
 		);
 	}
+	
+	/**
+	 * @test
+	 */
+	public function getMapReturnsInitialValueForInteger() {
+		$this->assertNull(
+				$this->fixture->getMap()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setMapForIntegerSetsMap() { 
+		$this->fixture->setMap(99);
+
+		$this->assertSame(
+			99,
+			$this->fixture->getMap()
+		);
+	}
+	
 
 	/**
 	 * @test
