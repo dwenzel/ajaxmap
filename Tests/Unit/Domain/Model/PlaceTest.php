@@ -196,23 +196,23 @@ class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getTypeReturnsInitialValueForLocationType() { 
+	public function getLocationTypeReturnsInitialValueForLocationLocationType() { 
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getType()
+			$this->fixture->getLocationType()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setTypeForLocationTypeSetsType() { 
+	public function setLocationTypeForLocationLocationTypeSetsLocationType() { 
 		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\LocationType();
-		$this->fixture->setType($dummyObject);
+		$this->fixture->setLocationType($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getType()
+			$this->fixture->getLocationType()
 		);
 	}
 	
@@ -366,10 +366,10 @@ class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			'description' => null,
 			'geoCoordinates' => null,
 			'info' => null,
+			'locationType' => null,
 			'pid' => null,
 			'regions' => Array (),
 			'title' => null,
-			'type' => null,
 			'uid' => null,
 		);
 		$this->assertSame(
