@@ -17,12 +17,14 @@
          <config>
           <type>select</type>
           <items>
-            
             <numIndex index="0">
              <numIndex index="0">Map</numIndex>
              <numIndex index="1">Map->show;Map->item</numIndex>
             </numIndex>
-            
+            <numIndex index="1">
+             <numIndex index="0">Places</numIndex>
+             <numIndex index="1">Place->list;Place->show</numIndex>
+            </numIndex>
            </items>
          </config>
        </TCEforms>
