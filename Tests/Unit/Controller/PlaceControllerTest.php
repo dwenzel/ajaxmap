@@ -107,6 +107,39 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$demand
 		);
 	}
+	 /**
+	 * Test for creating correct demand call
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function listActionFindsDemandedPlacesByDemandFromSettings() {
+		$demand = new \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand();
+		$settings = array('list' => 'foo', 'orderBy' => 'datetime');
 
+		$configurationManager = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
+		);
+
+		$fixture = $this->getAccessibleMock(
+			'Webfox\\Ajaxmap\\Controller\\PlaceController',
+			array('createDemandFromSettings')
+		);
+		$fixture->injectPlaceRepository($this->placeRepository);
+		$fixture->injectConfigurationManager($configurationManager);
+		$fixture->setView($this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
+		$fixture->_set('settings', $settings);
+
+		$fixture->expects($this->once())->method('createDemandFromSettings')
+			->will($this->returnValue($demand));
+
+		$this->placeRepository->expects($this->once())->method('findDemanded')
+			->with($demand);
+
+		$fixture->listAction();
+
+		// datetime must be removed
+		//$this->assertEquals($fixture->_get('settings'), array('list' => 'foo'));
+	}
 }
 ?>
