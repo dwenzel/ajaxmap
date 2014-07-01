@@ -354,6 +354,14 @@ class AddressTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
+	public function setTwitterThrowsInvalidArgumentExceptionForString() {
+		$this->setExpectedException('InvalidArgumentException');
+		$this->fixture->setTwitter('ping');
+	}
+	
+	/**
+	 * @test
+	 */
 	public function getFacebookForStringReturnsInitiallyNull() {
 		$this->assertNull(
 				$this->fixture->getFacebook()
@@ -371,6 +379,14 @@ class AddressTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		);
 	}
 	
+	/**
+	 * @test
+	 */
+	public function setFacebookThrowsInvalidArgumentExceptionForString() {
+		$this->setExpectedException('InvalidArgumentException');
+		$this->fixture->setFacebook('ping');
+	}
+
 	/**
 	 * @test
 	 */
