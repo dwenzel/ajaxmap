@@ -407,7 +407,7 @@ function updatePlaces(mapNumber){
 					}
 					content = '';
 					content +=(this.place.title)? '<h4 class="infoWindowTitle">' + this.place.title + '</h4>': "";
-					content +=(addressJson.tx_kecontacts_function)?'<div class="infoWindowType">' + addressJson.tx_kecontacts_function + '</div>': "";
+					//content +=(addressJson.tx_kecontacts_function)?'<div class="infoWindowType">' + addressJson.tx_kecontacts_function + '</div>': "";
 					content +=(this.place.icon)? '<img width="120px" class="infoWindowImage" src="' + this.place.icon + '"/>': ""; 
 							//'<p class="infoWindowDescription">' + this.place.description + '</p>';
 					//content += (list)? list:"";
@@ -505,7 +505,7 @@ function openDetailView(caller, placeId){
 					request: {
 						'controller': "Place",
 						'action': 'ajaxShow',
-						'arguments': {'uid': placeId}
+						'arguments': {'placeId': placeId}
 					}
 				},
 		    dataType: "json",
