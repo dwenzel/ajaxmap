@@ -97,23 +97,15 @@ class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 
 	/**
 	 * action item - get map attributes
-	 *
+	 * 
+	 * @param \string $task
+	 * @param \integer $mapId
+	 * @param \integer $pageId
+	 * @param \integer $placeId
 	 * @return json data
-	 * @todo vary result by task given as argument (i.e. buildMap, updateMap...)
 	 */
-	public function itemAction() {
-		// get arguments of request
-		$arguments = $this->request->getArguments();
+	public function itemAction($task, $mapId = NULL, $pageId = NULL, $placeId = NULL ) {
 		$response = array();
-		// get map ID
-		$mapId = $arguments['mapId'];
-		$placeId = $arguments['placeId'];
-		
-		/**
-		* @var string
-		*/
-		$task = $arguments['task'];
-		
 		if ($mapId){
 			$map = $this->mapRepository->findByUid($mapId);
 			switch ($task) {
@@ -141,9 +133,6 @@ class MapController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
 											}
 										}
 										break;
-                case 'loadPlaces':
-                    $response = $this->getPlaces($map);
-                    break;
                 case 'getAddress':
                     $response = $this->getAddressForPlace($placeId);
                     break;
