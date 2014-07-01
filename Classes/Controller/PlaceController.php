@@ -75,11 +75,12 @@ class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController
 	/**
 	 * action ajax show
 	 *
-	 * @param $place
+	 * @param \integer $placeId
 	 * @return void
 	 */
-	public function showAction(Webfox\Ajaxmap\Domain\Model\Place $place) {
-		return $place;
+	public function ajaxShowAction($placeId) {
+		return 'not implemented yet';
+		// place by uid to json
 	}
 
 }
