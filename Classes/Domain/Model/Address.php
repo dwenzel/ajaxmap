@@ -305,7 +305,7 @@ class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * sets the birthday attribute
 	 *
-	 * @param	DateTime	 $birthday
+	 * @param	\DateTime	 $birthday
 	 * @return	void
 	 */
 	public function setBirthday($birthday) {
@@ -315,7 +315,7 @@ class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * returns the birthday attribute
 	 *
-	 * @return	DateTime
+	 * @return	\DateTime
 	 */
 	public function getBirthday() {
 		return $this->birthday;
@@ -522,7 +522,7 @@ class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	 * @return	void
 	 */
 	public function setFacebook($facebook) {
-		if (substr($twitter, 0, 1) != '/') {
+		if (substr($facebook, 0, 1) != '/') {
 			throw new \InvalidArgumentException('Facebook name must start with /', 1357530471);
 		}
 
