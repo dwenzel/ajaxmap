@@ -504,12 +504,14 @@ function openDetailView(caller, placeId){
 					'eID': "ajaxMap",
 					request: {
 						'controller': "Place",
+						'pluginName': "Map",
 						'action': 'ajaxShow',
 						'arguments': {'placeId': placeId}
 					}
 				},
 		    dataType: "json",
 		    success: function(result){
+						//console.log('Place:ajaxShow ', result);
 		    		singleContent= result;
 		    		$('#detailView .inner').append(singleContent);
 		    		$('#detailView').fadeIn('400');
