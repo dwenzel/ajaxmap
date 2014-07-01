@@ -45,17 +45,12 @@ class AbstractDemand
 	/**
 	 * @var \string
 	 */
-	protected $orderBy;
+	protected $orderByAllowed;
 
 	/**
 	 * @var \string
 	 */
-	protected $orderByAllowed;
-
-	/**
-	 * @var \integer
-	 */
-	protected $storagePage;
+	protected $storagePages;
 
 	/**
 	 * @var integer
@@ -63,7 +58,7 @@ class AbstractDemand
 	protected $limit;
 
 	/**
-	 * @var integer
+	 * @var \integer
 	 */
 	protected $offset;
 
@@ -155,11 +150,11 @@ class AbstractDemand
 	/**
 	 * Set list of storage pages
 	 *
-	 * @param \string $storagePage storage page list
+	 * @param \string $storagePages storage page list
 	 * @return void
 	 */
-	public function setStoragePage($storagePage) {
-		$this->storagePage = $storagePage;
+	public function setStoragePages($storagePages) {
+		$this->storagePages = $storagePages;
 	}
 
 	/**
@@ -167,8 +162,8 @@ class AbstractDemand
 	 *
 	 * @return \string
 	 */
-	public function getStoragePage() {
-		return $this->storagePage;
+	public function getStoragePages() {
+		return $this->storagePages;
 	}
 
 	/**
