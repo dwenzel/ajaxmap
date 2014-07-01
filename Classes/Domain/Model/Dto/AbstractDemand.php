@@ -111,24 +111,6 @@ class AbstractDemand
 	}
 
 	/**
-	 * Set  Order by
-	 *
-	 * @param \string $orderBy Field name to order by
-	 * @return void
-	 */
-	public function setOrderBy($orderBy) {
-		$this->orderBy = $orderBy;
-	}
-
-	/**
-	 * Get order by
-	 * @return \string
-	 */
-	public function getOrderBy() {
-		return $this->orderBy;
-	}
-
-	/**
 	 * Set order allowed
 	 *
 	 * @param \string $orderByAllowed allowed fields for ordering
