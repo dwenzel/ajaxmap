@@ -35,7 +35,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
 class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 
 	/**
-	 * Geographic location - defined by its latitude and longitude
+	 * Title
 	 *
 	 * @var string
 	 * @validate NotEmpty
