@@ -100,7 +100,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 			$locationTypes = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $demand->getLocationTypes());
 			$locationConstraints = array();
 			foreach ($locationTypes as $locationType) {
-				$locationConstraints[] = $query->equals('type.uid', $locationType);
+				$locationConstraints[] = $query->equals('locationType.uid', $locationType);
 			}
 			if (count($locationConstraints)) {
 				switch ($constraintsConjunction) {
@@ -164,20 +164,6 @@ class PlaceRepository extends AbstractDemandedRepository {
 				$constraints[] = $query->logicalAnd($locationConstraints);
 			}
 		}
-
-		// Clients constraints
-		if ($demand->getClients()) {
-				$clientConstraints = array();
-				$clients = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',',$demand->getClients());
-				foreach($clients as $client) {
-					$clientConstraints[] = $query->equals('client.uid', $client);
-				}
-				if(count($clientConstraints)) {
-					$constraints[] = $query->logicalOr($clientConstraints);
-				}
-		}
-
-				
 
 		return $constraints;
 	}
