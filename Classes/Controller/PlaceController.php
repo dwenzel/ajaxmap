@@ -32,7 +32,7 @@ namespace Webfox\Ajaxmap\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PlaceController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class PlaceController extends AbstractController {
 
 	/**
 	 * placeRepository
