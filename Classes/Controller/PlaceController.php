@@ -110,16 +110,16 @@ class PlaceController extends AbstractController {
 		if ($settings['orderBy']) {
 			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
 		}
-		$demand->setMap($settings['map']);
-		$demand->setLocationTypes($settings['locationTypes']);
-		$demand->setCategories($settings['categories']);
-		if($settings['constraintsConjunction'] !== '') {
+		(isset($settings['map']))? $demand->setMap($settings['map']) : NULL;
+		(isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
+		(isset($settings['categories'])) ? $demand->setCategories($settings['categories']) : NULL;
+		if(isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
 			$demand->setConstraintsConjunction($settings['constraintsConjunction']);
 		}
-		if($settings['categoryConjunction'] !== '') {
+		if(isset($settings['categoryConjunction']) AND $settings['categoryConjunction'] !== '') {
 			$demand->setCategoryConjunction($settings['categoryConjunction']);
 		}
-		$demand->setLimit($settings['limit']);
+		(isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
 		return $demand;
 	}
 
