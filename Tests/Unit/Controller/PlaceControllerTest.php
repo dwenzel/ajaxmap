@@ -181,14 +181,37 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			'TYPO3\\CMS\\Extbase\\Persistence\\QueryResult',
 			array(), array(), '', FALSE);
 		$mockPlace = $this->getMock(
-			'Webfox\\Domain\\Object\\Place',
-			array('toArray'), array(), '', FALSE);
+			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', FALSE);
 		$this->fixture->_get('placeRepository')->expects(
 			$this->once())
 			->method('findByUid')
 			->will($this->returnValue($mockPlace));
 
 		$this->fixture->ajaxShowAction($placeId);
+	}
+
+	 /**
+	 * Test for assigning variables to view
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function showActionAssignsVariables() {
+		$settings = array( 'foo' => 'bar');
+		$mockPlace = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', FALSE);
+		$this->fixture->_set('settings', $settings);
+		$this->fixture->_get('view')->expects($this->once())
+			->method('assignMultiple')
+			->with(
+				array(
+					'place' => $mockPlace,
+					'settings' => $settings
+				)
+		);
+		$this->fixture->showAction($mockPlace);
 	}
 }
 ?>
