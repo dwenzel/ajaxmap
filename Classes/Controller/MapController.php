@@ -100,16 +100,6 @@ class MapController extends AbstractController {
                 case 'buildMap':
 										$response = $map->toArray(100, $this->settings['mapping']);
                     break;
-                case 'loadLocationTypes':
-										if ($map->getLocationTypes()){
-											$locationTypesObjArray = $map->getLocationTypes()->toArray();
-											foreach ($locationTypesObjArray as $location){
-												array_push(
-														$response, 
-														$location->toArray(10, $this->settings['mapping']));
-											}
-										}
-										break;
                 case 'getAddress':
                     $response = $this->getAddressForPlace($placeId);
                     break;
@@ -170,6 +160,29 @@ class MapController extends AbstractController {
 			}
 		}
 		return json_encode($categories);
+	}
+
+	/**
+	 * Ajax list location types action
+	 *
+	 * @param \integer $mapId
+	 * @return json
+	 */
+	public function ajaxListLocationTypesAction($mapId = NULL) {
+		$locationTypes = array();
+		if($mapId) {
+			$map = $this->mapRepository->findByUid($mapId);
+			if ($map AND $map->getLocationTypes()){
+				$locationTypesObjArray = $map->getLocationTypes()->toArray();
+				foreach ($locationTypesObjArray as $locationType){
+					array_push(
+						$locationTypes,
+						$locationType->toArray(10, $this->settings['mapping'])
+					);
+				}
+			}
+		}
+		return json_encode($locationTypes);
 	}
 
 	/**
