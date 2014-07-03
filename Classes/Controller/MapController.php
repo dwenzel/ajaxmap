@@ -169,9 +169,9 @@ class MapController extends AbstractController {
 		$categories = array();
 		if($mapId) {
 			$map = $this->mapRepository->findByUid($mapId);
-			if ($map->getCategories()){
-				$categoriesObjArray = $map->getCategories()->toArray();
-				foreach ($categoriesObjArray as $category){
+			if ($map AND $map->getCategories()){
+				$categoryObjArray = $map->getCategories()->toArray();
+				foreach ($categoryObjArray as $category){
 					array_push(
 						$categories,
 						$category->toArray(10, $this->settings['mapping'])
