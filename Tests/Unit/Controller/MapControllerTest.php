@@ -38,35 +38,16 @@ namespace Webfox\Ajaxmap\Tests;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
-	/**
-	 * @var \Webfox\Ajaxmap\Controller\MapController
-	 */
-	protected $fixture;
-
-	/**
-	 * Map Repository
-	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\MapRepository
-	 */
-	private $mapRepository;
-
-	/**
-	 * 
-	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
-	 */
-	private $placeRepository;
-
-	/**
-	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\RegionRepository
-	 */
-	private $regionRepository;
 
 	public function setUp() {
 		//$this->fixture = new \Webfox\Ajaxmap\Controller\MapController();
 		$this->fixture = $this->getAccessibleMock (
 			'Webfox\\Ajaxmap\\Controller\\MapController',
 			array('dummy'), array(), '', FALSE);
+		$this->mockObjectManager = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$this->fixture->_set('objectManager', $this->mockObjectManager);
 		$this->mapRepository = $this->getMock(
 				'\\Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
 		);
@@ -77,12 +58,15 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 				'\\Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
 		);
 		$this->fixture->injectMapRepository($this->mapRepository);
-		$this->fixture->injectRegionRepository($this->regionRepository);
-		$this->fixture->injectPlaceRepository($this->placeRepository);
+		$this->fixture->_set('view',
+				$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
+
 	}
 
 	public function tearDown() {
 		unset($this->fixture);
+		unset($this->mockObjectManager);
+		unset($this->mapRepository);
 	}
 
 	/**
@@ -97,9 +81,6 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$fixture = $this->getAccessibleMock(
 				'\\Webfox\\Ajaxmap\\Controller\\MapController',
 				array('showAction'));
-		//$fixture->injectConfigurationManager($configurationManager);
-		$fixture->setView($this->getMock('TYPO3CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
-
 		$fixture->expects($this->once())->method('showAction')
 			->will($this->returnValue('{}'));
 		$fixture->showAction();
@@ -149,6 +130,27 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 				$categoriesJson,
 				$this->fixture->ajaxListCategoriesAction($mapId)
 		);
+	}
+
+	 /**
+	 * Test for assigning variables to view
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function showActionAssignsVariables() {
+		$settings = array( 'foo' => 'bar');
+		$this->fixture->_set('settings', $settings);
+		$this->fixture->_get('view')->expects($this->once())
+			->method('assignMultiple')
+			->with(
+				array(
+					'map' => NULL,
+					'settings' => $settings,
+					'pid' => NULL
+				)
+		);
+		$this->fixture->showAction($mockMap);
 	}
 }
 ?>
