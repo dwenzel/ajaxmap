@@ -63,7 +63,10 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	private $regionRepository;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Controller\MapController();
+		//$this->fixture = new \Webfox\Ajaxmap\Controller\MapController();
+		$this->fixture = $this->getAccessibleMock (
+			'Webfox\\Ajaxmap\\Controller\\MapController',
+			array('dummy'), array(), '', FALSE);
 		$this->mapRepository = $this->getMock(
 				'\\Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
 		);
@@ -102,5 +105,53 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$fixture->showAction();
 	}
 
+	/**
+	 * @test
+	 */
+	public function ajaxLoadCategoriesActionReturnsEmptyJsonWithEmptyMapId() {
+		$emptyJson = json_encode(array());
+		$this->assertEquals(
+			$emptyJson,
+			$this->fixture->ajaxListCategoriesAction()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function ajaxLoadCategoriesActionReturnsCategoriesForMapAsJson() {
+		$this->markTestIncomplete();
+		/*	$mapId = 1;
+		$mockMap = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
+			array(), array(), '', FALSE);
+		$mockCategory = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
+			array(), array(), '', FALSE);
+		$mockCategory->expects($this->any())
+			->method('toArray')
+			->will($this->returnValue(array( 'bar')));
+		$mockQueryResult = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\RepositoryResult',
+			array(), array(), '', FALSE);
+		$mockMap->expects($this->any())
+			->method('getCategories')
+			->will($this->returnValue(array($mockCategory)));
+		$this->fixture->_get('mapRepository')->expects($this->any())
+			->method('toArray')
+			->will($this->returnValue(
+						array($mockCategory)));
+		$this->fixture->_get('mapRepository')->expects($this->once())
+			->method('findByUid')
+			->with($mapId)
+			->will($this->returnValue($mockMap));
+		//$this->fixture->ajaxListCategoriesAction(1);
+		$categoriesJson = '{category: json}';
+		$this->assertEquals(
+				$categoriesJson,
+				$this->fixture->ajaxListCategoriesAction($mapId)
+		);
+		*/
+	}
 }
 ?>
