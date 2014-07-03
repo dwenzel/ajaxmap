@@ -232,11 +232,9 @@ function renderDynaTree(mapId){
 				request: {
 					'pluginName': "Map",
 					'controller': "Map",
-					'action': "item",
+					'action': "ajaxListCategories",
 					'arguments': {
-						'task': 'loadCategories',
 						'mapId': mapId,
-						'pid': pageId
 					}
 				}
 			}
