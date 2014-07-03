@@ -120,38 +120,35 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @test
 	 */
 	public function ajaxLoadCategoriesActionReturnsCategoriesForMapAsJson() {
-		$this->markTestIncomplete();
-		/*	$mapId = 1;
+		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
 			array(), array(), '', FALSE);
 		$mockCategory = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
 			array(), array(), '', FALSE);
-		$mockCategory->expects($this->any())
+		$mockObjectStorage = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+			array(), array(), '', FALSE);
+
+		$mockCategory->expects($this->exactly(2))
 			->method('toArray')
 			->will($this->returnValue(array( 'bar')));
-		$mockQueryResult = $this->getMock(
-			'TYPO3\\CMS\\Extbase\\Persistence\\RepositoryResult',
-			array(), array(), '', FALSE);
-		$mockMap->expects($this->any())
-			->method('getCategories')
-			->will($this->returnValue(array($mockCategory)));
-		$this->fixture->_get('mapRepository')->expects($this->any())
+		$mockObjectStorage->expects($this->once())
 			->method('toArray')
-			->will($this->returnValue(
-						array($mockCategory)));
+			->will($this->returnValue(array($mockCategory, $mockCategory)));
+		$mockMap->expects($this->exactly(2))
+			->method('getCategories')
+			->will($this->returnValue($mockObjectStorage));
 		$this->fixture->_get('mapRepository')->expects($this->once())
 			->method('findByUid')
 			->with($mapId)
 			->will($this->returnValue($mockMap));
-		//$this->fixture->ajaxListCategoriesAction(1);
-		$categoriesJson = '{category: json}';
+		$categoriesJson = '[["bar"],["bar"]]';
 		$this->assertEquals(
 				$categoriesJson,
 				$this->fixture->ajaxListCategoriesAction($mapId)
 		);
-		*/
 	}
 }
 ?>
