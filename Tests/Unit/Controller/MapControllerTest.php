@@ -40,7 +40,6 @@ namespace Webfox\Ajaxmap\Tests;
 class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 
 	public function setUp() {
-		//$this->fixture = new \Webfox\Ajaxmap\Controller\MapController();
 		$this->fixture = $this->getAccessibleMock (
 			'Webfox\\Ajaxmap\\Controller\\MapController',
 			array('dummy'), array(), '', FALSE);
@@ -89,7 +88,7 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function ajaxLoadCategoriesActionReturnsEmptyJsonWithEmptyMapId() {
+	public function ajaxListCategoriesActionReturnsEmptyJsonWithEmptyMapId() {
 		$emptyJson = json_encode(array());
 		$this->assertEquals(
 			$emptyJson,
@@ -100,7 +99,7 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function ajaxLoadCategoriesActionReturnsCategoriesForMapAsJson() {
+	public function ajaxListCategoriesActionReturnsCategoriesForMapAsJson() {
 		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
@@ -132,6 +131,53 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		);
 	}
 
+
+	/**
+	 * @test
+	 */
+	public function ajaxListLocationTypesActionReturnsEmptyJsonWithEmptyMapId() {
+		$emptyJson = json_encode(array());
+		$this->assertEquals(
+			$emptyJson,
+			$this->fixture->ajaxListLocationTypesAction()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function ajaxListLocationTypesActionReturnsLocationTypesForMapAsJson() {
+		$mapId = 1;
+		$mockMap = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
+			array(), array(), '', FALSE);
+		$mockLocationType = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\LocationType',
+			array(), array(), '', FALSE);
+		$mockObjectStorage = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+			array(), array(), '', FALSE);
+
+		$mockLocationType->expects($this->exactly(2))
+			->method('toArray')
+			->will($this->returnValue(array( 'bar')));
+		$mockObjectStorage->expects($this->once())
+			->method('toArray')
+			->will($this->returnValue(array($mockLocationType, $mockLocationType)));
+		$mockMap->expects($this->exactly(2))
+			->method('getLocationTypes')
+			->will($this->returnValue($mockObjectStorage));
+		$this->fixture->_get('mapRepository')->expects($this->once())
+			->method('findByUid')
+			->with($mapId)
+			->will($this->returnValue($mockMap));
+		$locationTypesJson = '[["bar"],["bar"]]';
+		$this->assertEquals(
+				$locationTypesJson,
+				$this->fixture->ajaxListLocationTypesAction($mapId)
+		);
+	}
+
 	 /**
 	 * Test for assigning variables to view
 	 *
@@ -154,3 +200,4 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 }
 ?>
+
