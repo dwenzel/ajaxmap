@@ -33,7 +33,6 @@ namespace Webfox\Ajaxmap\Controller;
  *
  */
 class MapController extends AbstractController {
-
 	/**
 	 * mapRepository
 	 *
@@ -101,17 +100,6 @@ class MapController extends AbstractController {
                 case 'buildMap':
 										$response = $map->toArray(100, $this->settings['mapping']);
                     break;
-                case'loadCategories':
-										if ($map->getCategories()){
-											$categoriesObjArray = $map->getCategories()->toArray();
-											foreach ($categoriesObjArray as $category){
-												array_push(
-														$response, 
-														$category->toArray(10, $this->settings['mapping'])
-												);
-											}
-										}
-										break;
                 case 'loadLocationTypes':
 										if ($map->getLocationTypes()){
 											$locationTypesObjArray = $map->getLocationTypes()->toArray();
@@ -170,6 +158,30 @@ class MapController extends AbstractController {
 		}
 		return json_encode($places);
 	}
+
+	/**
+	 * Ajax list categories action
+	 *
+	 * @param \integer $mapId
+	 * @return json
+	 */
+	public function ajaxListCategoriesAction($mapId = NULL) {
+		$categories = array();
+		if($mapId) {
+			$map = $this->mapRepository->findByUid($mapId);
+			if ($map->getCategories()){
+				$categoriesObjArray = $map->getCategories()->toArray();
+				foreach ($categoriesObjArray as $category){
+					array_push(
+						$categories,
+						$category->toArray(10, $this->settings['mapping'])
+					);
+				}
+			}
+		}
+		return json_encode($categories);
+	}
+
 	/**
 	 * action show
 	 *
