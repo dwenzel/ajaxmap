@@ -122,16 +122,6 @@ class MapController extends AbstractController {
 	}
 
 	/**
-	 * action list
-	 *
-	 * @return void
-	 */
-	public function listAction() {
-		$maps = $this->mapRepository->findAll();
-		$this->view->assign('maps', $maps);
-	}
-
-	/**
 	 * Ajax list place action
 	 *
 	 * @param \integer $mapId
@@ -185,17 +175,17 @@ class MapController extends AbstractController {
 	/**
 	 * action show
 	 *
-	 * @param $map
+	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
 	 * @return void
 	 */
 	public function showAction(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL) {
 		if ($map===NULL) {
 			$mapId = $this->settings['map'];
-			$map = $this->mapRepository->findOneByUid($mapId);
+			$map = $this->mapRepository->findByUid($mapId);
 		}
 		$this->view->assignMultiple(
 				array(
-					'map' => $this->mapRepository->findByUid($mapId),
+					'map' => $map,
 					'settings' => $this->settings,
 					'pid' => $GLOBALS['TSFE']->id
 				)
