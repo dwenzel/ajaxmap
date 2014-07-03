@@ -208,11 +208,11 @@ class MapController extends AbstractController {
         }
         // convert types array to string for query
         $types = implode(',',$typesArr);
-        $select = 'uid, title, type, description, icon, category, geo_coordinates';
+        $select = 'uid, title, location_type, description, icon, category, geo_coordinates';
         //@todo respect storage page
 	    $where = 'deleted = 0 AND hidden = 0';
 			if($types != ''){ 
-	    	$where .= ' AND type IN (' .$types .')';
+	    	$where .= ' AND location_type IN (' .$types .')';
 			}
         $places = $this->placeRepository->findRawSelectWhere($select, $where);
        	

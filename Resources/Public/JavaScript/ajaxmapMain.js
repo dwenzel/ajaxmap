@@ -340,7 +340,7 @@ function updatePlaces(mapNumber){
 		for(var i=0,j=mapStore[mapNumber].places.length; i<j; i++){
 			
 			if (!mapMarker[i]) {
-				currType = parseInt(mapPlaces[i].type);
+				currType = parseInt(mapPlaces[i].location_type);
 				tmpCenter = mapPlaces[i].geo_coordinates.split(",");
 				currLatlng = new google.maps.LatLng(parseFloat(tmpCenter[0]),parseFloat(tmpCenter[1]));
 				mapMarker[i] = new google.maps.Marker({
@@ -452,7 +452,7 @@ function updatePlaces(mapNumber){
 					});
 				}
 				
-				if ((mapPlaces[i].type == actLocationType || actLocationType==0) && hasSelectedKeys !=-1) {
+				if ((mapPlaces[i].location_type == actLocationType || actLocationType==0) && hasSelectedKeys !=-1) {
 					mapMarker[i].setMap(map);				}
 				else {
 					mapMarker[i].setMap(null);
