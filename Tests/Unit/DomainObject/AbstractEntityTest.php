@@ -58,8 +58,8 @@ class AbstractEntityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$result = '{"pid":null,"uid":null}';
 
 		$this->assertSame(
-				$this->fixture->toJson(),
-				$result
+			$this->fixture->toJson(),
+			$result
 		);
 	}
 
@@ -68,13 +68,13 @@ class AbstractEntityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function toArrayReturnsInitialValue() {
 		$result = array(
-				"pid" => null,
-				"uid" => null
+			"pid" => null,
+			"uid" => null
 		);
 
 		$this->assertSame(
-				$this->fixture->toArray(),
-				$result
+			$this->fixture->toArray(),
+			$result
 		);
 	}
 
@@ -83,20 +83,29 @@ class AbstractEntityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function toArrayDoesMappingForFieldNames() {
 		$mapping = array(
-				//tx_ajaxmap_domainobject_abstractentity => array(
-				'Webfox\Ajaxmap\DomainObject\AbstractEntity' => array(
-					"pid" => "key",
-					"uid" => "page"
-				)
+			'Webfox\Ajaxmap\DomainObject\AbstractEntity' => array(
+				"pid" => "key",
+				"uid" => "page"
+			)
 		);
 		$result = array(
-				"key" => null,
-				"page" => null
+			"key" => null,
+			"page" => null
 		);
 		
 		$this->assertSame(
-				$this->fixture->toArray(10, $mapping),
-				$result
+			$this->fixture->toArray(10, $mapping),
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsErrorMessageWhenMaximumTreedepthIsReached() {
+		$this->assertSame(
+			$this->fixture->toArray(0),
+			'maximum tree depth reached!'
 		);
 	}
 }
