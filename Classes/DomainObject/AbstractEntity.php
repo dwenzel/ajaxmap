@@ -81,7 +81,7 @@ class AbstractEntity
 	 * return mixed 
 	 */
 	protected function convertValueToArray($value, $treeDepth = 100, $mapping = NULL) {
-		if(is_a($value, 'TYPO3\CMS\Extbase\Persistence\ObjectStorage')) {
+		if($value instanceof TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
 			$objectArray = $value->toArray();
 			$children = array();
 			foreach($objectArray as $object) {
@@ -89,8 +89,6 @@ class AbstractEntity
 					$children[] = $object->toArray($treeDepth, $mapping);
 				} 			}
 			$result = $children;
-		} elseif (is_object($value) && method_exists($value, 'toArray')) {
-				$result = $value->toArray($treeDepth, $mapping);
 		} else {
 			$result = $value;
 		}
