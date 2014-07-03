@@ -27,7 +27,7 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	array(
 		'Category' => 'list, show',
 		'Place' => 'list, show',
-		'Map' => ' item, list, show,',
+		'Map' => ' item, show,',
 		'Region' => 'list',
 		'LocationType' => 'item',
 		'Content' => 'list, show',
