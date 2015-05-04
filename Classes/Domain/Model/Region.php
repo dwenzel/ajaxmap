@@ -25,6 +25,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use Webfox\Ajaxmap\DomainObject\AbstractEntity;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  *
  *
@@ -68,6 +70,30 @@ class Region extends AbstractEntity {
 	 * @var boolean
 	 */
 	protected $preserveViewport = FALSE;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 * @lazy
+	 */
+	protected $regions;
+
+	/**
+	 * __construct
+	 *
+	 * @return void
+	 */
+	public function __construct() {
+		$this->initStorageObjects();
+	}
+
+	/**
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
+	 *
+	 * @return void
+	 */
+	protected function initStorageObjects() {
+		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+	}
 
 	/**
 	 * Returns the title
@@ -191,5 +217,43 @@ class Region extends AbstractEntity {
 		return $this->getPreserveViewport();
 	}
 
+	/**
+	 * Removes a Region
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
+	 * @return void
+	 */
+	public function removeRegion(Region $regionToRemove) {
+		$this->regions->detach($regionToRemove);
+	}
+
+	/**
+	 * Returns the regions
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 */
+	public function getRegions() {
+		return $this->regions;
+	}
+
+	/**
+	 * Sets the regions
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @return void
+	 */
+	public function setRegions(ObjectStorage $regions) {
+		$this->regions = $regions;
+	}
+
+	/**
+	 * Adds a Region
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $region
+	 * @return void
+	 */
+	public function addRegion(Region $region) {
+		$this->regions->attach($region);
+	}
 }
 

@@ -1,157 +1,151 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" datatype="plaintext" original="messages" date="2012-07-08T09:19:08Z" product-name="ajaxmap">
-		<header/>
+	<file source-language="en" datatype="plaintext" original="messages" date="2015-05-04T12:18:42Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
 		<body>
-
-			<trans-unit id="tx_ajaxmap_domain_model_category">
-				<source>Category</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.icon">
-				<source>Icon</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.child_categories">
-				<source>Child Categories</source>
-			</trans-unit>
-
-			<trans-unit id="tx_ajaxmap_domain_model_place">
-				<source>Place</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.geo_coordinates">
-				<source>Geo Coordinates</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.description">
-				<source>Description</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.info">
-				<source>Info</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.category">
-				<source>Category</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.type">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.icon">
-				<source>Icon</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.regions">
-				<source>Regions</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.content">
-				<source>Content</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.address">
-				<source>Address</source>
-			</trans-unit>
-
-			<trans-unit id="tx_ajaxmap_domain_model_map">
-				<source>Map</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.type">
-				<source>Type</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.width">
-				<source>Width</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.height">
-				<source>Height</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.map_center">
-				<source>Map Center</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.initial_zoom">
-				<source>Initial Zoom</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.map_style">
-				<source>Map Style</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui">
-				<source>Disable Default UI</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.categories">
-				<source>Categories</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.regions">
-				<source>Regions</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.markers">
-				<source>Markers</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.overlays">
-				<source>Overlays</source>
-			</trans-unit>
-						<trans-unit id="tx_ajaxmap_domain_model_map.appearance">
-				<source>Appearance</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.location_types">
-				<source>Location Types</source>
-			</trans-unit>
-
-			<trans-unit id="tx_ajaxmap_domain_model_region">
-				<source>Region</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_region.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_region.file">
-				<source>File</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_region.clickable">
-				<source>Clickable</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_region.suppress_info_windows">
-				<source>Suppress Info Windows</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_region.preserve_viewport">
-				<source>Preserve Viewport</source>
-			</trans-unit>
-
-			<trans-unit id="tx_ajaxmap_domain_model_locationtype">
-				<source>Location Type</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_locationtype.title">
-				<source>Title</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon">
-				<source>Icon</source>
-			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_locationtype.description">
-				<source>Description</source>
-			</trans-unit>
-
-			<trans-unit id="tx_ajaxmap_domain_model_content">
-				<source>Content</source>
-			</trans-unit>
-			
-			<trans-unit id="tt_content.tx_extbase_type.Tx_Ajaxmap_Content">
-				<source>Ajax Map Content</source>
-			</trans-unit>
-			
-			<trans-unit id="tx_ajaxmap_domain_model_address">
-				<source>Address</source>
-			</trans-unit>
-			
-			<trans-unit id="tt_address.tx_extbase_type.Tx_Ajaxmap_Address">
-				<source>Ajax Map Address</source>
-			</trans-unit>
-			
-			<trans-unit id="tx_ajaxmap_domain_model_place.attribution">
-				<source>Attributes</source>
-			</trans-unit>
-			
+		<trans-unit id="tt_address.tx_extbase_type.Tx_Ajaxmap_Address" xml:space="preserve">
+			<source>Ajax Map Address</source>
+		</trans-unit>
+		<trans-unit id="tt_content.tx_extbase_type.Tx_Ajaxmap_Content" xml:space="preserve">
+			<source>Ajax Map Content</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_address" xml:space="preserve">
+			<source>Address</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_category" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_category.child_categories" xml:space="preserve">
+			<source>Child Categories</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_category.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_category.icon" xml:space="preserve">
+			<source>Icon</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_category.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_content" xml:space="preserve">
+			<source>Content</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_locationtype" xml:space="preserve">
+			<source>Location Type</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_locationtype.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon" xml:space="preserve">
+			<source>Icon</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_locationtype.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map" xml:space="preserve">
+			<source>Map</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.appearance" xml:space="preserve">
+			<source>Appearance</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.categories" xml:space="preserve">
+			<source>Categories</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui" xml:space="preserve">
+			<source>Disable Default UI</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.height" xml:space="preserve">
+			<source>Height</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.initial_zoom" xml:space="preserve">
+			<source>Initial Zoom</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.location_types" xml:space="preserve">
+			<source>Location Types</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.map_center" xml:space="preserve">
+			<source>Map Center</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.map_style" xml:space="preserve">
+			<source>Map Style</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.markers" xml:space="preserve">
+			<source>Markers</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.overlays" xml:space="preserve">
+			<source>Overlays</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.regions" xml:space="preserve">
+			<source>Regions</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.type" xml:space="preserve">
+			<source>Type</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.width" xml:space="preserve">
+			<source>Width</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place" xml:space="preserve">
+			<source>Place</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.address" xml:space="preserve">
+			<source>Address</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.attribution" xml:space="preserve">
+			<source>Attributes</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.category" xml:space="preserve">
+			<source>Category</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.content" xml:space="preserve">
+			<source>Content</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.description" xml:space="preserve">
+			<source>Description</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.geo_coordinates" xml:space="preserve">
+			<source>Geo Coordinates</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.icon" xml:space="preserve">
+			<source>Icon</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.info" xml:space="preserve">
+			<source>Info</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.regions" xml:space="preserve">
+			<source>Regions</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_place.type" xml:space="preserve">
+			<source>Type</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region" xml:space="preserve">
+			<source>Region</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.clickable" xml:space="preserve">
+			<source>Clickable</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.file" xml:space="preserve">
+			<source>File</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.preserve_viewport" xml:space="preserve">
+			<source>Preserve Viewport</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.regions" xml:space="preserve">
+			<source>Sub Regions</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.suppress_info_windows" xml:space="preserve">
+			<source>Suppress Info Windows</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
 		</body>
 	</file>
 </xliff>

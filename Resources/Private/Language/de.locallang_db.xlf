@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-05-04T12:18:42Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="tx_ajaxmap_domain_model_region.regions" approved="yes" xml:space="preserve">
+			<source>Sub Regions</source>
+			<target>Unterregionen</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>
