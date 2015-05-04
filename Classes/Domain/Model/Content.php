@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 
 /**
  * Model of tt_content
@@ -33,14 +34,14 @@ namespace Webfox\Ajaxmap\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Content extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
+class Content extends AbstractEntity {
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $crdate;
 
 	/**
-	 * @var DateTime
+	 * @var \DateTime
 	 */
 	protected $tstamp;
 
@@ -335,4 +336,4 @@ class Content extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 	
 }
-?>
+

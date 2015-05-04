@@ -90,15 +90,16 @@ class MapController extends AbstractController {
 	 * @param \integer $mapId
 	 * @param \integer $pageId
 	 * @param \integer $placeId
-	 * @return json data
+	 * @return string JSON data
 	 */
 	public function itemAction($task, $mapId = NULL, $pageId = NULL, $placeId = NULL ) {
 		$response = array();
 		if ($mapId){
+			/** @var \Webfox\Ajaxmap\Domain\Model\Map $map */
 			$map = $this->mapRepository->findByUid($mapId);
 			switch ($task) {
                 case 'buildMap':
-										$response = $map->toArray(100, $this->settings['mapping']);
+					$response = $map->toArray(100, $this->settings['mapping']);
                     break;
                 case 'getAddress':
                     $response = $this->getAddressForPlace($placeId);

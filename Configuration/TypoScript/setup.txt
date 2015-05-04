@@ -6,14 +6,6 @@ plugin.tx_ajaxmap {
 	}
 	persistence {
 		storagePid = {$plugin.tx_ajaxmap.persistence.storagePid}
-#		classes {
-#			Tx_Ajaxmap_Domain_Model_Content{
-#				mapping {
-#					tableName = tt_content
-#					recordType = Tx_Ajaxmap_Domain_Model_Content
-#				}//mapping
-#			}//Tx_Ajaxmap_Domain_Model_Content
-#		}//classes
 	}
 }
 
@@ -55,8 +47,6 @@ config.tx_extbase.persistence.classes {
 		mapping {
 			tableName = tt_address
 			columns {
-			#	altText.mapOnProperty = altText
-			#	titleText.mapOnProperty = titleText
 			}
 		}
 	}

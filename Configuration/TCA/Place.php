@@ -203,8 +203,6 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 				'disallowed' => '',
 			),
 		),
-		
-		
 		'regions' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.regions',

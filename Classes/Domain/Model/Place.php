@@ -358,4 +358,4 @@ class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 
 }
-?>
+

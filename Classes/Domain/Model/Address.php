@@ -32,7 +32,9 @@ namespace Webfox\Ajaxmap\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+
+class Address extends AbstractEntity {
 
 	/**
 	 * Gender
@@ -731,7 +733,7 @@ class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * sets the addressgroup attribute
 	 *
-	 * @param	TYPO3\CMS\Extbase\Persistence\ObjectStorage<TYPO3\TtAddress\Domain\Model\AddressGroup>	 $addressgroup
+	 * @param	\TYPO3\CMS\Extbase\Persistence\ObjectStorage<TYPO3\TtAddress\Domain\Model\AddressGroup>	 $addressgroup
 	 * @return	void
 	 */
 	//public function setAddressgroup($addressgroup) {
@@ -741,7 +743,7 @@ class Address extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * returns the addressgroup attribute
 	 *
-	 * @return	TYPO3\CMS\Extbase\Persistence\ObjectStorage<TYPO3\TtAddress\Domain\Model\AddressGroup>
+	 * @return	\TYPO3\CMS\Extbase\Persistence\ObjectStorage<TYPO3\TtAddress\Domain\Model\AddressGroup>
 	 */
 	//public function getAddressgroup() {
 	//	return $this->addressgroup;

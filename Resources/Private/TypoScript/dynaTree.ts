@@ -19,7 +19,7 @@ plugin.tx_ajaxmap.settings {
 			childCategories = children
 			description = tooltip
 		}
-		Webfox\Ajaxmap\Domain\Model\Locationtype {
+		Webfox\Ajaxmap\Domain\Model\LocationType {
 			uid = key
 			icon = markerIcon 
 		}

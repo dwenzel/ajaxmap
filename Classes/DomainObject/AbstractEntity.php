@@ -24,7 +24,8 @@ namespace Webfox\Ajaxmap\DomainObject;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 /**
  * Abstract Entity
  *
@@ -49,11 +50,12 @@ class AbstractEntity
 			return 'maximum tree depth reached!';
 		}
 		$treeDepth = $treeDepth - 1;
-		$properties = \TYPO3\CMS\Extbase\Reflection\ObjectAccess::getGettableProperties($this);
+		$properties = ObjectAccess::getGettableProperties($this);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
+			$hasMapping = FALSE;
+			$className = get_class($this);
 			if($mapping && count($mapping)) {
-				$className = get_class($this);
 				$hasMapping = isset($mapping[$className]);
 			}
 			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {
@@ -76,12 +78,16 @@ class AbstractEntity
 	/**
 	 * Convert a property value to an array
 	 *
-	 * @var integer $treeDepth maximum tree depth, default 100
-	 * @var mixed $value Value of the property
-	 * return mixed 
+	 * @param mixed $value
+	 * @param int $treeDepth
+	 * @param null $mapping
+	 * @return mixed
+	 * @internal param mixed $value Value of the property
+	 * @internal param int $treeDepth maximum tree depth, default 100
+	 * @var array $mapping An array with mapping rules
 	 */
 	protected function convertValueToArray($value, $treeDepth = 100, $mapping = NULL) {
-		if($value instanceof \TYPO3\CMS\Extbase\Persistence\ObjectStorage) {
+		if($value instanceof ObjectStorage) {
 			$objectArray = $value->toArray();
 			$children = array();
 			foreach($objectArray as $object) {
@@ -95,4 +101,4 @@ class AbstractEntity
 		return $result;
 	}
 }
-?>
+
