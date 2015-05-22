@@ -11,7 +11,7 @@
 			<label index="longitude.description">longitude</label>
 			<label index="description.description">description</label>
 			<label index="region.description">region</label>
-			<label index="category.description">category</label>
+			<label index="place_groups.description">Place Groups</label>
 			<label index="location_type.description">locationType</label>
 		</languageKey>
 	</data>

@@ -25,11 +25,11 @@ namespace Webfox\Ajaxmap\Tests;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use Webfox\Ajaxmap\Domain\Model\Category;
+use Webfox\Ajaxmap\Domain\Model\PlaceGroup;
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Category.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\PlaceGroup.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -38,16 +38,16 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * @package TYPO3
  * @subpackage Ajax Map
  *
- * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
+ * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class CategoryTest extends UnitTestCase {
+class PlaceGroupTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Category
+	 * @var \Webfox\Ajaxmap\Domain\Model\PlaceGroup
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
 	}
 
 	/**
@@ -126,7 +126,7 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setParentForPlaceGroupSetsParent() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 
 		$this->assertSame(
@@ -134,25 +134,7 @@ class CategoryTest extends UnitTestCase {
 			$this->fixture->getParent()
 		);
 	}
-
-	/**
-	 * @test
-	 * @covers ::getParent
-	 */
-	public function getParentLoadsRealInstanceForLazyLoadingProxy() {
-		$fixture = $this->getAccessibleMock(
-			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
-			array('dummy'), array(), '', FALSE
-		);
-		$mockParent = $this->getAccessibleMock(
-			'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyLoadingProxy',
-			array('_loadRealInstance'), array(), '', FALSE
-		);
-		$fixture->_set('parent', $mockParent);
-		$mockParent->expects($this->once())->method('_loadRealInstance');
-		$fixture->getParent();
-	}
-
+	
 	/**
 	 * @test
 	 */
@@ -175,7 +157,7 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setIcon('bar');

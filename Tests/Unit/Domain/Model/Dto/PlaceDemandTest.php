@@ -37,18 +37,16 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class PlaceDemandTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+class PlaceDemandTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\PlaceDemand
+	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
 	protected $fixture;
 
 	public function setUp() {
 		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
 	}
 
 	/**
@@ -96,30 +94,30 @@ class PlaceDemandTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getCategoriesReturnsInitialValueForString() {
+	public function getPlaceGroupsReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getCategories()
+				$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setCategoriesForStringSetsCategories() { 
-		$this->fixture->setCategories('Conceived at T3CON10');
+	public function setPlaceGroupsForStringSetsCategories() {
+		$this->fixture->setPlaceGroups('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getCategories()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function getCategoryConjunctionReturnsInitialValueForString() {
+	public function getPlaceGroupConjunctionReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getCategoryConjunction()
+				$this->fixture->getPlaceGroupConjunction()
 		);
 	}
 	
@@ -148,14 +146,14 @@ class PlaceDemandTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setCategoryConjunctionForStringSetsCategoryConjunction() { 
-		$this->fixture->setCategoryConjunction('Conceived at T3CON10');
+	public function setPlaceGroupConjunctionForStringSetsPlaceGroupConjunction() {
+		$this->fixture->setPlaceGroupConjunction('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getCategoryConjunction()
+			$this->fixture->getPlaceGroupConjunction()
 		);
 	}
 	
 }
-?>
+

@@ -238,65 +238,65 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getCategoriesReturnsInitialValueForObjectStorageContainingCategory() { 
+	public function getPlaceGroupsReturnsInitialValueForObjectStorageContainingPlaceGroups() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getCategories()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setCategoriesForObjectStorageContainingCategorySetsCategories() { 
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategories->attach($category);
-		$this->fixture->setCategories($objectStorageHoldingExactlyOneCategories);
+	public function setPlaceGroupsForObjectStorageContainingCategorySetsPlaceGroups() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($placeGroup);
+		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
 
 		$this->assertSame(
-			$objectStorageHoldingExactlyOneCategories,
-			$this->fixture->getCategories()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function addCategoryToObjectStorageHoldingCategories() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->addCategory($category);
+	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($placeGroup);
+		$this->fixture->addPlaceGroup($placeGroup);
 
 		$this->assertEquals(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategories()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function removeCategoryFromObjectStorageHoldingCategories() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
+	public function removePlaceGroupFromObjectStorageHoldingPlaceGroups() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$localObjectStorage->attach($category);
-		$localObjectStorage->detach($category);
-		$this->fixture->addCategory($category);
-		$this->fixture->removeCategory($category);
+		$localObjectStorage->attach($placeGroup);
+		$localObjectStorage->detach($placeGroup);
+		$this->fixture->addPlaceGroup($placeGroup);
+		$this->fixture->removePlaceGroup($placeGroup);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getCategories()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() { 
+	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -520,6 +520,18 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			);
 
 		}
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesPlaceGroupsWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			$this->fixture->getPlaceGroups()
+		);
+	}
+
 
 }
 ?>

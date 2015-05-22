@@ -1,7 +1,7 @@
 #
-# Table structure for table 'tx_ajaxmap_domain_model_category'
+# Table structure for table 'tx_ajaxmap_domain_model_placegroup'
 #
-CREATE TABLE tx_ajaxmap_domain_model_category (
+CREATE TABLE tx_ajaxmap_domain_model_placegroup (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -9,7 +9,7 @@ CREATE TABLE tx_ajaxmap_domain_model_category (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	icon text NOT NULL,
-	child_categories int(11) unsigned DEFAULT '0' NOT NULL,
+	parent int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -18,6 +18,7 @@ CREATE TABLE tx_ajaxmap_domain_model_category (
 	hidden tinyint(4) unsigned DEFAULT '0' NOT NULL,
 	starttime int(11) unsigned DEFAULT '0' NOT NULL,
 	endtime int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
 
 	t3ver_oid int(11) DEFAULT '0' NOT NULL,
 	t3ver_id int(11) DEFAULT '0' NOT NULL,
@@ -53,7 +54,8 @@ CREATE TABLE tx_ajaxmap_domain_model_place (
 	geo_coordinates varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	info text NOT NULL,
-	category int(11) unsigned DEFAULT '0' NOT NULL,
+	categories int(11) unsigned DEFAULT '0' NOT NULL,
+	place_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	location_type int(11) unsigned DEFAULT '0',
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
 	icon text NOT NULL,
@@ -106,7 +108,7 @@ CREATE TABLE tx_ajaxmap_domain_model_map (
 	initial_zoom int(11) DEFAULT '0' NOT NULL,
 	map_style text NOT NULL,
 	disable_default_ui tinyint(1) unsigned DEFAULT '0' NOT NULL,
-	categories int(11) unsigned DEFAULT '0' NOT NULL,
+	place_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
 	places int(11) unsigned DEFAULT '0' NOT NULL,
 	location_types int(11) unsigned DEFAULT '0' NOT NULL,
@@ -229,40 +231,10 @@ CREATE TABLE tx_ajaxmap_domain_model_locationtype (
 );
 
 #
-# Table structure for table 'tt_content'
+# Table structure for table 'tx_ajaxmap_placegroup_placegroup_mm'
+# @todo do we need this (parent field)
 #
-#CREATE TABLE tt_content (
-
-#	place int(11) unsigned DEFAULT '0' NOT NULL,
-
-#);
-
-#
-# Table structure for table 'tx_ajaxmap_category_category_mm'
-#
-CREATE TABLE tx_ajaxmap_category_category_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
-);
-
-#
-# Table structure for table 'tt_content'
-#
-#CREATE TABLE tt_content (
-
-#	place  int(11) unsigned DEFAULT '0' NOT NULL,
-
-#);
-
-#
-# Table structure for table 'tx_ajaxmap_place_category_mm'
-#
-CREATE TABLE tx_ajaxmap_place_category_mm (
+CREATE TABLE tx_ajaxmap_placegroup_placegroup_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
@@ -286,9 +258,22 @@ CREATE TABLE tx_ajaxmap_place_region_mm (
 );
 
 #
+# Table structure for table 'tx_ajaxmap_place_category_mm'
+#
+CREATE TABLE tx_ajaxmap_place_category_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
 # Table structure for table 'tx_ajaxmap_map_category_mm'
 #
-CREATE TABLE tx_ajaxmap_map_category_mm (
+CREATE TABLE tx_ajaxmap_map_placegroup_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,
@@ -336,4 +321,3 @@ CREATE TABLE tx_ajaxmap_map_locationtype_mm (
 	KEY uid_local (uid_local),
 	KEY uid_foreign (uid_foreign)
 );
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder

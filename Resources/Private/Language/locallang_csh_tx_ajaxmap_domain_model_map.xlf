@@ -28,8 +28,8 @@
 			<trans-unit id="disable_default_ui.description">
 				<source>disable default UI</source>
 			</trans-unit>
-			<trans-unit id="categories.description">
-				<source>Select items for display by category.</source>
+			<trans-unit id="placeGroups.description">
+				<source>Select items for display by place group.</source>
 			</trans-unit>
 			<trans-unit id="regions.description">
 				<source>regions</source>

@@ -23,6 +23,7 @@ namespace Webfox\Ajaxmap\Domain\Model\Dto;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\Domain\Model\Map;
 
 /**
  * Place Demand object which holds all information to get the correct
@@ -50,6 +51,16 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	 * @var \string
 	 */
 	protected $categoryConjunction;
+
+	/**
+	 * @var \string
+	 */
+	protected $placeGroups;
+
+	/**
+	 * @var \string
+	 */
+	protected $placeGroupConjunction;
 
 	/**
 	 * @var \integer
@@ -123,6 +134,40 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	}
 
 	/**
+	 * Gets the place groups
+	 * @return \string
+	 */
+	public function getPlaceGroups () {
+		return $this->placeGroups;
+	}
+
+	/**
+	 * Sets the place groups
+	 *
+	 * @param \string $placeGroups A comma separated list of placeGroups uids
+	 */
+	public function setPlaceGroups($placeGroups) {
+		$this->placeGroups = $placeGroups;
+	}
+
+	/**
+	 * Get PlaceGroup conjunction
+	 * @return \string
+	 */
+	public function getPlaceGroupConjunction () {
+		return $this->placeGroupConjunction;
+	}
+
+	/**
+	 * Set PlaceGroup conjunction
+	 *
+	 * @param \string $conjunction
+	 */
+	public function setPlaceGroupConjunction ($conjunction) {
+		$this->placeGroupConjunction = $conjunction;
+	}
+
+	/**
 	 * Get Map
 	 * @return \integer
 	 */
@@ -133,12 +178,11 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	/**
 	 * Set Map
 	 *
-	 * @param \map $map
+	 * @param Map $map
 	 */
 	public function setMap ($map) {
 		$this->map = $map;
 	}
 }
 
-?>
 

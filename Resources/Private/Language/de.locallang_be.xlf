@@ -9,33 +9,33 @@
 			<source>Back Page</source>
 			<target>Zurück-Seite</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categories" approved="yes" xml:space="preserve">
-			<source>Categories</source>
-			<target>Kategorien</target>
+		<trans-unit id="flexforms_general.placeGroups" approved="yes" xml:space="preserve">
+			<source>Place Groups</source>
+			<target>Gruppen (Orte)</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction" approved="yes" xml:space="preserve">
-			<source>Category Mode</source>
-			<target>Kategoriemodus</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction" approved="yes" xml:space="preserve">
+			<source>Place Group Conjunction</source>
+			<target>Gruppenverknüpfung</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.and" approved="yes" xml:space="preserve">
-			<source>Show items with selected categories (AND)</source>
-			<target>Zeige Datensätze mit gewählten Kategorien (AND)</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction.and" approved="yes" xml:space="preserve">
+			<source>Show items with selected place groups (AND)</source>
+			<target>Zeige Datensätze aus gewählten Gruppen (AND)</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.empty" approved="yes" xml:space="preserve">
-			<source>Ignore selected categories.</source>
-			<target>Ignoriere gewählte Kategorien</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction.empty" approved="yes" xml:space="preserve">
+			<source>Ignore selected place groups.</source>
+			<target>Ignoriere gewählte Gruppen</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.notand" approved="yes" xml:space="preserve">
-			<source>Do NOT show items with selected categories (AND)</source>
-			<target>Zeige Datensätze mit gewählten Kategorien NICHT (AND)</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notand" approved="yes" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (AND)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen NICHT (AND)</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.notor" approved="yes" xml:space="preserve">
-			<source>Do NOT show items with selected categories (OR)</source>
-			<target>Zeige Datensätze mit gewählten Kategorien NICHT (OR)</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notor" approved="yes" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (OR)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen NICHT (OR)</target>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.or" approved="yes" xml:space="preserve">
-			<source>Show items with selected categories (OR)</source>
-			<target>Zeige Datensätze mit gewählten Kategorien (OR)</target>
+		<trans-unit id="flexforms_general.placeGroupConjunction.or" approved="yes" xml:space="preserve">
+			<source>Show items with selected place groups (OR)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen (OR)</target>
 		</trans-unit>
 		<trans-unit id="flexforms_general.constraints" approved="yes" xml:space="preserve">
 			<source>Selection</source>
@@ -170,8 +170,8 @@
 			<target>Einstellungen</target>
 		</trans-unit>
 		<trans-unit id="flexforms_general.showCategorySelector" approved="yes" xml:space="preserve">
-			<source>Show Category Selector</source>
-			<target>Zeige Kategorieauswahl</target>
+			<source>Show Place Group Selector</source>
+			<target>Zeige Gruppenauswahl</target>
 		</trans-unit>
 		<trans-unit id="flexforms_general.showConjunctionSelector" approved="yes" xml:space="preserve">
 			<source>Show Conjunction Selector</source>

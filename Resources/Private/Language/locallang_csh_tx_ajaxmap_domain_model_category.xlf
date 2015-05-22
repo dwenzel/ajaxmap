@@ -13,8 +13,8 @@
 			<trans-unit id="icon.description">
 				<source>icon</source>
 			</trans-unit>
-			<trans-unit id="child_categories.description">
-				<source>childCategories</source>
+			<trans-unit id="place_groups.description">
+				<source>Place Groups</source>
 			</trans-unit>
 		</body>
 	</file>

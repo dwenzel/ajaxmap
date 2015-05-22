@@ -37,7 +37,29 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class PlaceControllerTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class PlaceControllerTest extends UnitTestCase {
+
+	/**
+	 * @var \Webfox\Ajaxmap\Controller\PlaceController
+	 */
+	protected $fixture;
+
+	/**
+	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 */
+	protected $mockDemand;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $mockObjectManager;
 
 	protected function setUp() {
 		$this->fixture = $this->getAccessibleMock (
@@ -47,22 +69,15 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array('get'), array(), '', FALSE);
 		$this->fixture->_set('objectManager', $this->mockObjectManager);
-		$this->mockDemand= $this->getMock(
-			'\Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand',
+		$this->mockDemand = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand',
 			array(), array(), '', FALSE);
-		$this->placeRepository = $this->getMock(
-			'\Webfox\Ajaxmap\Domain\Repository\PlaceRepository', array(), array(), '', FALSE
+		$placeRepository = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
 		);
-		$this->fixture->injectPlaceRepository($this->placeRepository);
+		$this->fixture->injectPlaceRepository($placeRepository);
 		$this->fixture->_set('view',
 			$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
-	}
-
-	protected function tearDown() {
-		unset($this->fixture);
-		unset($this->mockObjectManager);
-		unset($this->mockDemand);
-		unset($this->placeRepository);
 	}
 
 	/**
@@ -79,9 +94,9 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->mockDemand->expects($this->never())->method('setLocationTypes');
 		$this->mockDemand->expects($this->never())->method('setOrder');
 		$this->mockDemand->expects($this->never())->method('setConstraintsConjunction');
-		$this->mockDemand->expects($this->never())->method('setCategoryConjunction');
+		$this->mockDemand->expects($this->never())->method('setPlaceGroupConjunction');
 		$this->mockDemand->expects($this->never())->method('setLimit');
-		$this->mockDemand->expects($this->never())->method('setCategories');
+		$this->mockDemand->expects($this->never())->method('setPlaceGroups');
 		$this->fixture->createDemandFromSettings($settings);		
 	}
 
@@ -95,9 +110,9 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			'orderBy' => 'bar',
 			'orderDirection' => 'foo',
 			'constraintsConjunction' => 'AND',
-			'categoryConjunction' => 'NOR',
+			'placeGroupConjunction' => 'NOR',
 			'limit' => 5,
-			'categories' => 'baz'
+			'placeGroups' => 'baz'
 		);
 		$this->mockObjectManager->expects($this->any())->method('get')
 			->will($this->returnValue($this->mockDemand));
@@ -114,17 +129,17 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			->method('setConstraintsConjunction')
 			->with($this->equalTo('AND'));
 		$this->mockDemand->expects($this->once())
-			->method('setCategoryConjunction')
+			->method('setPlaceGroupConjunction')
 			->with($this->equalTo('NOR'));
 		$this->mockDemand->expects($this->once())
 			->method('setLimit')
 			->with($this->equalTo(5));
 		$this->mockDemand->expects($this->once())
-			->method('setCategories')
+			->method('setPlaceGroups')
 			->with($this->equalTo('baz'));
 		$this->fixture->expects($this->any())
 			->method('createDemandFromSettings')
-			->will($this->returnValue($mockDemand));
+			->will($this->returnValue($this->mockDemand));
 		$this->fixture->createDemandFromSettings($settings);
 	}
 
@@ -214,4 +229,3 @@ class PlaceControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->fixture->showAction($mockPlace);
 	}
 }
-?>

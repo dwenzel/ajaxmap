@@ -24,7 +24,8 @@ namespace Webfox\Ajaxmap\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 /**
  *
  *
@@ -43,22 +44,44 @@ class PlaceRepository extends AbstractDemandedRepository {
 		$query->statement($statement);
 		return $query->execute();
     }
-    
-    public function findCategoriesForPlace($placeId){
-        $statement = 'SELECT categories.uid, categories.title '
+
+	public function findCategoriesForPlace($placeId){
+		$statement = 'SELECT categories.uid, categories.title '
+			.' FROM tx_ajaxmap_domain_model_place AS places '
+			.'LEFT JOIN tx_ajaxmap_place_category_mm AS mm '
+			.'ON (places.uid = mm.uid_local) '
+			.'LEFT JOIN sys_category AS categories '
+			.'ON (mm.uid_foreign = categories.uid) '
+			.'WHERE places.categories AND categories.uid AND places.uid=' .$placeId;
+		$query = $this->createQuery();
+		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		$query->statement($statement);
+		return $query->execute();
+	}
+
+	/**
+	 * @param integer $placeId
+	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
+	 */
+    public function findPlaceGroupsForPlace($placeId){
+        $statement = 'SELECT placeGroups.uid, placeGroups.title '
         .' FROM tx_ajaxmap_domain_model_place AS places '
-        .'LEFT JOIN tx_ajaxmap_place_category_mm AS mm '
+        .'LEFT JOIN tx_ajaxmap_place_placegroup_mm AS mm '
         .'ON (places.uid = mm.uid_local) '
-        .'LEFT JOIN tx_ajaxmap_domain_model_category AS categories '
-        .'ON (mm.uid_foreign = categories.uid) '
-        .'WHERE places.category AND categories.uid AND places.uid=' .$placeId;
+        .'LEFT JOIN tx_ajaxmap_domain_model_placegroup AS placeGroups '
+        .'ON (mm.uid_foreign = placeGroups.uid) '
+        .'WHERE places.place_groups AND placeGroups.uid AND places.uid=' .$placeId;
         $query = $this->createQuery();
         $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
         $query->statement($statement);
         return $query->execute();
     }
-    
-    public function findAddressForPlace($placeId){
+
+	/**
+	 * @param integer $placeId
+	 * @return array | NULL
+	 */
+	public function findAddressForPlace($placeId){
         $statement = 'SELECT * 
              FROM tt_address AS address ' 
         .'LEFT JOIN tx_ajaxmap_domain_model_place AS place '
@@ -67,8 +90,10 @@ class PlaceRepository extends AbstractDemandedRepository {
         $query = $this->createQuery();
         $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
         $query->statement($statement);
-        $result = $query->execute();
-        return $result[0];
+        if ($result = $query->execute()) {
+			return $result[0];
+		}
+		return NULL;
     }
 
 	/**

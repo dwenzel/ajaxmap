@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace Webfox\Ajaxmap\Tests\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\Controller\MapController;
 
 /**
  * Test case for class \Webfox\Ajaxmap\Controller\MapController.
@@ -37,17 +38,29 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class MapControllerTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class MapControllerTest extends UnitTestCase {
+
+	/**
+	 * @var MapController
+	 */
+	protected $fixture;
 
 	public function setUp() {
 		$this->fixture = $this->getAccessibleMock (
 			'Webfox\\Ajaxmap\\Controller\\MapController',
 			array('dummy'), array(), '', FALSE);
-		$this->mockObjectManager = $this->getMock(
+		$mockObjectManager = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
 			array('get'), array(), '', FALSE);
-		$this->fixture->_set('objectManager', $this->mockObjectManager);
-		$this->mapRepository = $this->getMock(
+		$this->fixture->_set('objectManager', $mockObjectManager);
+		$mapRepository = $this->getMock(
 				'\\Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
 		);
 		$this->regionRepository = $this->getMock(
@@ -56,16 +69,10 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->placeRepository = $this->getMock(
 				'\\Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
 		);
-		$this->fixture->injectMapRepository($this->mapRepository);
+		$this->fixture->injectMapRepository($mapRepository);
 		$this->fixture->_set('view',
 				$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
 
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
-		unset($this->mockObjectManager);
-		unset($this->mapRepository);
 	}
 
 	/**
@@ -74,11 +81,11 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	public function showActionReturnsEmptyJsonWhenMapIsNotSet() {
 		$settings = array();
 		$configurationManager = $this->getMock(
-				'\\TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
+				'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
 		);
 
 		$fixture = $this->getAccessibleMock(
-				'\\Webfox\\Ajaxmap\\Controller\\MapController',
+				'Webfox\\Ajaxmap\\Controller\\MapController',
 				array('showAction'));
 		$fixture->expects($this->once())->method('showAction')
 			->will($this->returnValue('{}'));
@@ -95,7 +102,6 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->ajaxListCategoriesAction()
 		);
 	}
-
 	/**
 	 * @test
 	 */
@@ -110,7 +116,6 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$mockObjectStorage = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
 			array(), array(), '', FALSE);
-
 		$mockCategory->expects($this->exactly(2))
 			->method('toArray')
 			->will($this->returnValue(array( 'bar')));
@@ -126,8 +131,54 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			->will($this->returnValue($mockMap));
 		$categoriesJson = '[["bar"],["bar"]]';
 		$this->assertEquals(
+			$categoriesJson,
+			$this->fixture->ajaxListCategoriesAction($mapId)
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function ajaxListPlaceGroupsActionReturnsEmptyJsonWithEmptyMapId() {
+		$emptyJson = json_encode(array());
+		$this->assertEquals(
+			$emptyJson,
+			$this->fixture->ajaxListPlaceGroupsAction()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function ajaxListPlaceGroupsReturnsPlaceGroupsForMapAsJson() {
+		$mapId = 1;
+		$mockMap = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
+			array(), array(), '', FALSE);
+		$mockPlaceGroup = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\PlaceGroup',
+			array(), array(), '', FALSE);
+		$mockObjectStorage = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
+			array(), array(), '', FALSE);
+
+		$mockPlaceGroup->expects($this->exactly(2))
+			->method('toArray')
+			->will($this->returnValue(array( 'bar')));
+		$mockObjectStorage->expects($this->once())
+			->method('toArray')
+			->will($this->returnValue(array($mockPlaceGroup, $mockPlaceGroup)));
+		$mockMap->expects($this->exactly(2))
+			->method('getPlaceGroups')
+			->will($this->returnValue($mockObjectStorage));
+		$this->fixture->_get('mapRepository')->expects($this->once())
+			->method('findByUid')
+			->with($mapId)
+			->will($this->returnValue($mockMap));
+		$categoriesJson = '[["bar"],["bar"]]';
+		$this->assertEquals(
 				$categoriesJson,
-				$this->fixture->ajaxListCategoriesAction($mapId)
+				$this->fixture->ajaxListPlaceGroupsAction($mapId)
 		);
 	}
 
@@ -185,13 +236,17 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @return void
 	 */
 	public function showActionAssignsVariables() {
+		$mockMap = $this->getAccessibleMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
+			array(), array(), '', FALSE
+		);
 		$settings = array( 'foo' => 'bar');
 		$this->fixture->_set('settings', $settings);
 		$this->fixture->_get('view')->expects($this->once())
 			->method('assignMultiple')
 			->with(
 				array(
-					'map' => NULL,
+					'map' => $mockMap,
 					'settings' => $settings,
 					'pid' => NULL
 				)
@@ -199,5 +254,5 @@ class MapControllerTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->fixture->showAction($mockMap);
 	}
 }
-?>
+
 

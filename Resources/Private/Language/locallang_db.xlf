@@ -14,19 +14,19 @@
 		<trans-unit id="tx_ajaxmap_domain_model_address" xml:space="preserve">
 			<source>Address</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_category" xml:space="preserve">
-			<source>Category</source>
+		<trans-unit id="tx_ajaxmap_domain_model_placegroup" xml:space="preserve">
+			<source>Place Group</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_category.child_categories" xml:space="preserve">
-			<source>Child Categories</source>
+		<trans-unit id="tx_ajaxmap_domain_model_placegroup.parent" xml:space="preserve">
+			<source>Parent</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_category.description" xml:space="preserve">
+		<trans-unit id="tx_ajaxmap_domain_model_placegroup.description" xml:space="preserve">
 			<source>Description</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_category.icon" xml:space="preserve">
+		<trans-unit id="tx_ajaxmap_domain_model_placegroup.icon" xml:space="preserve">
 			<source>Icon</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_category.title" xml:space="preserve">
+		<trans-unit id="tx_ajaxmap_domain_model_placegroup.title" xml:space="preserve">
 			<source>Title</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_content" xml:space="preserve">
@@ -50,8 +50,8 @@
 		<trans-unit id="tx_ajaxmap_domain_model_map.appearance" xml:space="preserve">
 			<source>Appearance</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.categories" xml:space="preserve">
-			<source>Categories</source>
+		<trans-unit id="tx_ajaxmap_domain_model_map.placeGroups" xml:space="preserve">
+			<source>Place Groups</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui" xml:space="preserve">
 			<source>Disable Default UI</source>
@@ -98,8 +98,8 @@
 		<trans-unit id="tx_ajaxmap_domain_model_place.attribution" xml:space="preserve">
 			<source>Attributes</source>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.category" xml:space="preserve">
-			<source>Category</source>
+		<trans-unit id="tx_ajaxmap_domain_model_place.placeGroups" xml:space="preserve">
+			<source>Place Group</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_place.content" xml:space="preserve">
 			<source>Content</source>

@@ -8,26 +8,26 @@
 		<trans-unit id="flexforms_general.backPage" xml:space="preserve">
 			<source>Back Page</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categories" xml:space="preserve">
-			<source>Categories</source>
+		<trans-unit id="flexforms_general.placeGroups" xml:space="preserve">
+			<source>Place Groups</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction" xml:space="preserve">
-			<source>Category Mode</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction" xml:space="preserve">
+			<source>Place Group Mode</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.and" xml:space="preserve">
-			<source>Show items with selected categories (AND)</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction.and" xml:space="preserve">
+			<source>Show items with selected place groups (AND)</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.empty" xml:space="preserve">
-			<source>Ignore selected categories.</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction.empty" xml:space="preserve">
+			<source>Ignore selected place groups.</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.notand" xml:space="preserve">
-			<source>Do NOT show items with selected categories (AND)</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notand" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (AND)</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.notor" xml:space="preserve">
-			<source>Do NOT show items with selected categories (OR)</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notor" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (OR)</source>
 		</trans-unit>
-		<trans-unit id="flexforms_general.categoryConjunction.or" xml:space="preserve">
-			<source>Show items with selected categories (OR)</source>
+		<trans-unit id="flexforms_general.placeGroupConjunction.or" xml:space="preserve">
+			<source>Show items with selected place groups (OR)</source>
 		</trans-unit>
 		<trans-unit id="flexforms_general.constraints" xml:space="preserve">
 			<source>Selection</source>
@@ -132,7 +132,7 @@
 			<source>Settings</source>
 		</trans-unit>
 		<trans-unit id="flexforms_general.showCategorySelector" xml:space="preserve">
-			<source>Show Category Selector</source>
+			<source>Show Place Group Selector</source>
 		</trans-unit>
 		<trans-unit id="flexforms_general.showConjunctionSelector" xml:space="preserve">
 			<source>Show Conjunction Selector</source>

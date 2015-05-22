@@ -16,8 +16,8 @@
 			<trans-unit id="info.description">
 				<source>Additional info - displayed in info window</source>
 			</trans-unit>
-			<trans-unit id="category.description">
-				<source>Select one or more categories</source>
+			<trans-unit id="place_groups.description">
+				<source>Select one or more place groups</source>
 			</trans-unit>
 			<trans-unit id="type.description">
 				<source>Select a type</source>

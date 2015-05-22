@@ -37,18 +37,16 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+class PlaceTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\Place
+	 * @var \Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	protected $fixture;
 
 	public function setUp() {
 		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Place();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
 	}
 
 	/**
@@ -138,58 +136,58 @@ class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function getCategoryReturnsInitialValueForObjectStorageContainingCategory() { 
+	public function getPlaceGroupsReturnsInitialValueForObjectStorageContainingPlaceGroups() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getCategory()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setCategoryForObjectStorageContainingCategorySetsCategory() { 
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->setCategory($objectStorageHoldingExactlyOneCategory);
+	public function setPlaceGroupsForObjectStorageContainingPlaceGroupsSetsPlaceGroups() {
+		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
+		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
 
 		$this->assertSame(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategory()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function addCategoryToObjectStorageHoldingCategory() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->addCategory($category);
+	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
+		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
+		$this->fixture->addPlaceGroup($category);
 
 		$this->assertEquals(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategory()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function removeCategoryFromObjectStorageHoldingCategory() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
+	public function removePlaceGroupFromObjectStorageHoldingPlaceGroup() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$localObjectStorage->attach($category);
-		$localObjectStorage->detach($category);
-		$this->fixture->addCategory($category);
-		$this->fixture->removeCategory($category);
+		$localObjectStorage->attach($placeGroup);
+		$localObjectStorage->detach($placeGroup);
+		$this->fixture->addPlaceGroup($placeGroup);
+		$this->fixture->removePlaceGroup($placeGroup);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getCategory()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 	
@@ -361,13 +359,13 @@ class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	public function toArrayReturnsInitialValueForArray() {
 		$result = array(
 			'address' => null,
-			'category' => Array (),
 			'content' => Array (),
 			'description' => null,
 			'geoCoordinates' => null,
 			'info' => null,
 			'locationType' => null,
 			'pid' => null,
+			'placeGroups' => Array (),
 			'regions' => Array (),
 			'title' => null,
 			'uid' => null,
@@ -378,4 +376,4 @@ class PlaceTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		);
 	}
 }
-?>
+

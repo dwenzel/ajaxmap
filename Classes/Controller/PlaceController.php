@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 
 /**
  *
@@ -87,8 +88,8 @@ class PlaceController extends AbstractController {
 	/**
 	 * action ajax show
 	 *
-	 * @param \integer $placeId
-	 * @return void
+	 * @param integer $placeId
+	 * @return string
 	 */
 	public function ajaxShowAction($placeId) {
 		$result = '';
@@ -103,25 +104,26 @@ class PlaceController extends AbstractController {
 	 * Create demand from settings
 	 *
 	 * @param \array $settings
-	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PositionDemand
+	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
 	public function createDemandFromSettings ($settings) {
+		/** @var PlaceDemand $demand */
 		$demand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
 		if ($settings['orderBy']) {
 			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
 		}
 		(isset($settings['map']))? $demand->setMap($settings['map']) : NULL;
 		(isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
-		(isset($settings['categories'])) ? $demand->setCategories($settings['categories']) : NULL;
+		(isset($settings['placeGroups'])) ? $demand->setPlaceGroups($settings['placeGroups']) : NULL;
 		if(isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
 			$demand->setConstraintsConjunction($settings['constraintsConjunction']);
 		}
-		if(isset($settings['categoryConjunction']) AND $settings['categoryConjunction'] !== '') {
-			$demand->setCategoryConjunction($settings['categoryConjunction']);
+		if(isset($settings['placeGroupConjunction']) AND $settings['placeGroupConjunction'] !== '') {
+			$demand->setPlaceGroupConjunction($settings['placeGroupConjunction']);
 		}
 		(isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
 		return $demand;
 	}
 
 }
-?>
+
