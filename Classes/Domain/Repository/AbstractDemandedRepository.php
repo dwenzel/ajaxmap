@@ -243,6 +243,36 @@ abstract class AbstractDemandedRepository
 	}
 
 	protected function generateQuery(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand, $respectEnableFields = TRUE) {
+	/**
+	 * Finds children for a given list of uid.
+	 * The repository object must implement the TreeItemInterface.
+	 *
+	 * @param string $rootIdList Comma separated list of ids. By default this objects will be returned too.
+	 * @param bool $respectStoragePage
+	 * @param bool $removeGivenIdListFromResult
+	 * @return QueryResultInterface | NULL
+	 */
+	public function findChildren($rootIdList, $respectStoragePage = TRUE, $removeGivenIdListFromResult = FALSE) {
+		$objectClass = new \ReflectionClass($this->objectType);
+		if ($objectClass->implementsInterface('Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface')) {
+			$idList = ChildrenService::getChildren(
+				$this->getTableName(),
+				$rootIdList,
+				0,
+				'',
+				$removeGivenIdListFromResult
+			);
+
+			return $this->findMultipleByUid(
+				$idList,
+				'uid',
+				QueryInterface::ORDER_ASCENDING,
+				$respectStoragePage
+			);
+		}
+		return NULL;
+	}
+
 		$query = $this->createQuery();
 		$constraints = $this->createConstraintsFromDemand($query, $demand);
 
