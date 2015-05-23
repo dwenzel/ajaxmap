@@ -122,19 +122,20 @@ class PlaceRepository extends AbstractDemandedRepository {
 		$constraintsConjunction = $demand->getConstraintsConjunction();
 		// Location type constraints
 		if ($demand->getLocationTypes()) {
-			$locationTypes = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $demand->getLocationTypes());
-			$locationConstraints = array();
+			$locationTypes = GeneralUtility::intExplode(',', $demand->getLocationTypes());
+			$locationTypeConstraints = array();
 			foreach ($locationTypes as $locationType) {
-				$locationConstraints[] = $query->equals('locationType.uid', $locationType);
+				$locationTypeConstraints[] = $query->equals('locationType', $locationType);
 			}
-			if (count($locationConstraints)) {
+
+			if (count($locationTypeConstraints)) {
 				switch ($constraintsConjunction) {
 					case 'or':
-						$constraints[] = $query->logicalOr($locationConstraints);
+						$constraints[] = $query->logicalOr($locationTypeConstraints);
 						break;
 					case 'and':
 					default:
-						$constraints[] = $query->logicalAnd($locationConstraints);
+						$constraints[] = $query->logicalAnd($locationTypeConstraints);
 				}
 			}
 		}
@@ -148,7 +149,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 
 			if(!empty($subject)) {
 				// search text in specified search fields
-				$searchFields = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $search->getFields(), TRUE);
+				$searchFields = GeneralUtility::trimExplode(',', $search->getFields(), TRUE);
 				if (count($searchFields) === 0) {
 					throw new \UnexpectedValueException('No search fields given', 1382608407);
 				}
@@ -202,7 +203,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 	protected function createOrderingsFromDemand(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
 		$orderings = array();
 
-		//@todo validate order (orderAllowed)
+		//@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
 		if ($demand->getOrder()) {
 			$orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), TRUE);
 
@@ -226,4 +227,4 @@ class PlaceRepository extends AbstractDemandedRepository {
 	}
 
 }
-?>
+
