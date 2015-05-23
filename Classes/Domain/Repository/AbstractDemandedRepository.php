@@ -189,6 +189,17 @@ abstract class AbstractDemandedRepository
 	}
 
 	/**
+	 * Return the current tablename
+	 *
+	 * @return string
+	 */
+	protected function getTableName() {
+		/** @var DataMapper $dataMapper */
+		$dataMapper = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Mapper\\DataMapper');
+		return $dataMapper->convertClassNameToTableName($this->objectType);
+	}
+
+	/**
 	 * Returns multiple records by uid sorted by a given field and order.
 	 *
 	 * @param \string $recordList A comma separated list of uids
