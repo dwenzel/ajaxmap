@@ -96,8 +96,9 @@ $objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager;
  * @var $TSFE \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
  */
 $TSFE = $objectManager->get('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFrontendController', $TYPO3_CONF_VARS, 0, 0);
+\TYPO3\CMS\Frontend\Utility\EidUtility::initTCA();
 \TYPO3\CMS\Frontend\Utility\EidUtility::initLanguage();
- 
+
 // Get FE User Information
 $TSFE->initFEuser();
 // Important: no Cache for Ajax stuff
@@ -109,7 +110,7 @@ $TSFE->determineId();
 $TSFE->initTemplate();
 $TSFE->getConfigArray();
 \TYPO3\CMS\Core\Core\Bootstrap::getInstance();
- 
+
 $TSFE->cObj = $objectManager->get('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 $TSFE->settingLanguage();
 $TSFE->settingLocale();
