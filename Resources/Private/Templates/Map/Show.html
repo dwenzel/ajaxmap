@@ -12,18 +12,9 @@
 	<div class="mapWrap">
 		<div id="ajaxMapContainer_Map{map.uid}"></div>
 	</div>
-	<div class="regionsSelectorWrap">
-		<f:form name="ajaxMapRegionsSelectForm{map.uid}">
-			<f:form.select id="ajaxMapRegionsSelector{map.uid}"
-				name="regionsSelect" class="select region" options="{}" />
-		</f:form>
-	</div>
-	<div class="typeSelectorWrap">
-		<f:form name="ajaxMapLocationTypesSelectForm{map.uid}">
-			<f:form.select id="ajaxMapLocationTypesSelector{map.uid}"
-				name="typeSelect" class="select type" options="{0: 'Alle Standorte'}" />
-		</f:form>
-	</div>
+	<div id="ajaxMapPlacesTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapRegionsTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapLocationTypesTree{map.uid}" class="dynaTree"></div>
 	<f:form name="txAjaxmapStore">
 		<f:form.hidden property="mapId" value="{map.uid}" />
 	</f:form>
