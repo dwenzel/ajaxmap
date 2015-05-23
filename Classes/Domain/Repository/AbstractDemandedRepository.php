@@ -60,10 +60,32 @@ abstract class AbstractDemandedRepository
 	 * Returns an array of orderings created from a given demand object.
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
-	 * @return array<\TYPO3\CMS\Extbase\Persistence\QOM\Constraint>
-	 * @abstract
+	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
 	 */
-	abstract protected function createOrderingsFromDemand(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand);
+	protected function createOrderingsFromDemand(DemandInterface $demand) {
+		$orderings = array();
+
+		if ($demand->getOrderings()) {
+			$orderList = GeneralUtility::trimExplode(',', $demand->getOrderings(), TRUE);
+
+			if (!empty($orderList)) {
+				// go through every order statement
+				foreach ($orderList as $orderItem) {
+					list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, TRUE);
+					// count == 1 means that no direction is given
+					if ($ascDesc) {
+						$orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+							QueryInterface::ORDER_DESCENDING :
+							QueryInterface::ORDER_ASCENDING);
+					} else {
+						$orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
+					}
+				}
+			}
+		}
+
+		return $orderings;
+	}
 
 	/**
 	 * Returns the objects of this repository matching the demand.
