@@ -25,14 +25,48 @@ namespace Webfox\Ajaxmap\Utility;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 use Webfox\Ajaxmap\DomainObject\AbstractEntity;
-
+use Webfox\Ajaxmap\Domain\Model\TreeItemInterface;
 /**
  * Class TreeUtility
  *
  * @package Webfox\Ajaxmap\Utility
  */
 class TreeUtility {
+	/**
+	 * Builds a tree of objects.
+	 *
+	 * @param QueryResultInterface $objects
+	 * @return array
+	 */
+	static public function buildObjectTree(QueryResultInterface $objects) {
+		$tree = array();
+
+		$flatObjects = array();
+		/** @var TreeItemInterface $object */
+		foreach ($objects as $object) {
+			$flatObjects[$object->getUid()] = array(
+				'item' => $object,
+				'parent' => ($object->getParent()) ? $object->getParent()->getUid() : NULL
+			);
+		}
+		// If leaves are selected without its parents selected, those are shown as parent
+		foreach ($flatObjects as $id => &$flatCategory) {
+			if (!isset($flatObjects[$flatCategory['parent']])) {
+				$flatCategory['parent'] = NULL;
+			}
+		}
+		foreach ($flatObjects as $id => &$node) {
+			if ($node['parent'] === NULL) {
+				$tree[$id] = &$node;
+			} else {
+				$flatObjects[$node['parent']]['children'][$id] = &$node;
+			}
+		}
+
+		return $tree;
+	}
 
 	/**
 	 * @param array $objectTree
