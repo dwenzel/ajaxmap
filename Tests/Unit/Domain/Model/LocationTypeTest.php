@@ -37,18 +37,22 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class LocationTypeTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class LocationTypeTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class LocationTypeTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\LocationType
+	 * @var \Webfox\Ajaxmap\Domain\Model\LocationType
 	 */
 	protected $fixture;
 
 	public function setUp() {
 		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\LocationType();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
 	}
 
 	/**

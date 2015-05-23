@@ -37,7 +37,14 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class SearchTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class SearchTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class SearchTest extends UnitTestCase {
 	/**
 	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\Search
 	 */
@@ -161,4 +168,4 @@ class SearchTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 	
 }
-?>
+

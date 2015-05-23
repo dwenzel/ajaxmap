@@ -37,18 +37,16 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class RegionTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+class RegionTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\Region
+	 * @var \Webfox\Ajaxmap\Domain\Model\Region
 	 */
 	protected $fixture;
 
 	public function setUp() {
 		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Region();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
 	}
 
 	/**
@@ -209,4 +207,4 @@ class RegionTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	}
 
 }
-?>
+

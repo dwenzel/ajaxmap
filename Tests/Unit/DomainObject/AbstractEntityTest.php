@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
  * Test case for class Webfox\Ajaxmap\DomainObject\AbstractEntity.
@@ -37,9 +38,9 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class AbstractEntityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+class AbstractEntityTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\Place
+	 * @var \Webfox\Ajaxmap\DomainObject\AbstractEntity
 	 */
 	protected $fixture;
 
@@ -102,11 +103,11 @@ class AbstractEntityTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function toArrayReturnsErrorMessageWhenMaximumTreedepthIsReached() {
+	public function toArrayReturnsErrorMessageWhenMaximumTreeDepthIsReached() {
 		$this->assertSame(
 			$this->fixture->toArray(0),
 			'maximum tree depth reached!'
 		);
 	}
 }
-?>
+

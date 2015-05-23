@@ -37,9 +37,16 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class ContentTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class ContentTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class ContentTest extends UnitTestCase {
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\Content
+	 * @var \Webfox\Ajaxmap\Domain\Model\Content
 	 */
 	protected $fixture;
 

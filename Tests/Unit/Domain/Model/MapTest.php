@@ -1,29 +1,24 @@
 <?php
 
 namespace Webfox\Ajaxmap\Tests;
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 2 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
+
+	/***************************************************************
+	 *  Copyright notice
+	 *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
+	 *  All rights reserved
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
 
 /**
  * Test case for class Webfox\Ajaxmap\Domain\Model\Map.
@@ -31,15 +26,21 @@ namespace Webfox\Ajaxmap\Tests;
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  * @package TYPO3
  * @subpackage Ajax Map
- *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class MapTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class MapTest extends UnitTestCase {
+
 	/**
-	 * @var Webfox\Ajaxmap\Domain\Model\Map
+	 * @var \Webfox\Ajaxmap\Domain\Model\Map
 	 */
 	protected $fixture;
 
@@ -47,19 +48,16 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Map();
 	}
 
-	public function tearDown() {
-		unset($this->fixture);
+	/**
+	 * @test
+	 */
+	public function getTitleReturnsInitialValueForString() {
 	}
 
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() { 
+	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -67,11 +65,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getTitle()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getTypeReturnsInitialNull() { 
+	public function getTypeReturnsInitialNull() {
 		$this->assertNull(
 			$this->fixture->getType()
 		);
@@ -80,7 +78,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setTypeForIntegerSetsType() { 
+	public function setTypeForIntegerSetsType() {
 		$this->fixture->setType(12);
 
 		$this->assertSame(
@@ -88,11 +86,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getType()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getWidthReturnsInitialNull() { 
+	public function getWidthReturnsInitialNull() {
 		$this->assertNull(
 			$this->fixture->getWidth()
 		);
@@ -101,7 +99,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setWidthForIntegerSetsWidth() { 
+	public function setWidthForIntegerSetsWidth() {
 		$this->fixture->setWidth(12);
 
 		$this->assertSame(
@@ -109,11 +107,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getWidth()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getHeightReturnsInitialNull() { 
+	public function getHeightReturnsInitialNull() {
 		$this->assertNull(
 			$this->fixture->getHeight()
 		);
@@ -122,7 +120,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setHeightForIntegerSetsHeight() { 
+	public function setHeightForIntegerSetsHeight() {
 		$this->fixture->setHeight(12);
 
 		$this->assertSame(
@@ -130,20 +128,20 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getHeight()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
 	public function getMapCenterReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getMapCenter()
+			$this->fixture->getMapCenter()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setMapCenterForStringSetsMapCenter() { 
+	public function setMapCenterForStringSetsMapCenter() {
 		$this->fixture->setMapCenter('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -151,11 +149,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getMapCenter()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getInitialZoomReturnsInitialValueForInteger() { 
+	public function getInitialZoomReturnsInitialValueForInteger() {
 		$this->assertNull(
 			$this->fixture->getInitialZoom()
 		);
@@ -164,7 +162,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setInitialZoomForIntegerSetsInitialZoom() { 
+	public function setInitialZoomForIntegerSetsInitialZoom() {
 		$this->fixture->setInitialZoom(12);
 
 		$this->assertSame(
@@ -172,20 +170,20 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getInitialZoom()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
 	public function getMapStyleReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getMapStyle()
+			$this->fixture->getMapStyle()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setMapStyleForStringSetsMapStyle() { 
+	public function setMapStyleForStringSetsMapStyle() {
 		$this->fixture->setMapStyle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -193,11 +191,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getMapStyle()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getDisableDefaultUiReturnsInitialValueForBoolean() { 
+	public function getDisableDefaultUiReturnsInitialValueForBoolean() {
 		$this->assertSame(
 			FALSE,
 			$this->fixture->getDisableDefaultUi()
@@ -207,7 +205,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setDisableDefaultUiForBooleanSetsDisableDefaultUi() { 
+	public function setDisableDefaultUiForBooleanSetsDisableDefaultUi() {
 		$this->fixture->setDisableDefaultUi(TRUE);
 
 		$this->assertSame(
@@ -221,7 +219,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 */
 	public function isDisableDefaultUiForBooleanReturnsInitialFalse() {
 		$this->assertFalse(
-				$this->fixture->isDisableDefaultUi()
+			$this->fixture->isDisableDefaultUi()
 		);
 	}
 
@@ -231,7 +229,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	public function isDisableDefaultUiForBooleanReturnsIsDefaultUi() {
 		$this->fixture->setDisableDefaultUi(TRUE);
 		$this->assertTrue(
-				$this->fixture->isDisableDefaultUi()
+			$this->fixture->isDisableDefaultUi()
 		);
 	}
 
@@ -307,7 +305,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setRegionsForObjectStorageContainingRegionSetsRegions() { 
+	public function setRegionsForObjectStorageContainingRegionSetsRegions() {
 		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
 		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
@@ -318,7 +316,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getRegions()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -350,11 +348,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getRegions()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getPlacesReturnsInitialValueForObjectStorageContainingPlace() { 
+	public function getPlacesReturnsInitialValueForObjectStorageContainingPlace() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -365,7 +363,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setPlacesForObjectStorageContainingPlaceSetsPlaces() { 
+	public function setPlacesForObjectStorageContainingPlaceSetsPlaces() {
 		$place = new \Webfox\Ajaxmap\Domain\Model\Place();
 		$objectStorageHoldingExactlyOnePlaces = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaces->attach($place);
@@ -376,7 +374,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getPlaces()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -408,11 +406,11 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getPlaces()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getLocationTypesReturnsInitialValueForObjectStorageContainingLocationType() { 
+	public function getLocationTypesReturnsInitialValueForObjectStorageContainingLocationType() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -423,7 +421,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	/**
 	 * @test
 	 */
-	public function setLocationTypesForObjectStorageContainingLocationTypeSetsLocationTypes() { 
+	public function setLocationTypesForObjectStorageContainingLocationTypeSetsLocationTypes() {
 		$locationType = new \Webfox\Ajaxmap\Domain\Model\LocationType();
 		$objectStorageHoldingExactlyOneLocationTypes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneLocationTypes->attach($locationType);
@@ -434,7 +432,7 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 			$this->fixture->getLocationTypes()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -471,55 +469,57 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsInitialValueForArray() {
-		$result = array (
-				'categories' => array(),
-				'disableDefaultUi' => FALSE,
-				'height' => null,
-				'initialZoom' => null,
-				'locationTypes' => array(),
-				'mapCenter' => null,
-				'mapStyle' => null,
-				'pid' => null,
-				'places' => array(),
-				'regions' => array(),
-				'title' => null,
-				'type' => null,
-				'uid' => null,
-				'width' => null,
+		$result = array(
+			'categories' => array(),
+			'disableDefaultUi' => FALSE,
+			'height' => NULL,
+			'initialZoom' => NULL,
+			'locationTypes' => array(),
+			'mapCenter' => NULL,
+			'mapStyle' => NULL,
+			'pid' => NULL,
+			'placeGroups' => array(),
+			'places' => array(),
+			'regions' => array(),
+			'title' => NULL,
+			'type' => NULL,
+			'uid' => NULL,
+			'width' => NULL,
 		);
 
 		$this->assertSame(
-				$this->fixture->toArray(),
-				$result
+			$this->fixture->toArray(),
+			$result
 		);
 	}
 
-		/**
-		 * @test
-		 */
-		public function toArrayReturnsCorrectValuesForSimpleProperties() {
-			$this->fixture->setDisableDefaultUi(TRUE);
-			$this->fixture->setHeight(123);
-			$this->fixture->setInitialZoom(12);
-			
-			$valueArray = $this->fixture->toArray();
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsCorrectValuesForSimpleProperties() {
+		$this->fixture->setDisableDefaultUi(TRUE);
+		$this->fixture->setHeight(123);
+		$this->fixture->setInitialZoom(12);
 
-			$this->assertSame(
-					$valueArray['disableDefaultUi'],
-					TRUE
-			);
+		$valueArray = $this->fixture->toArray();
 
-			$this->assertSame(
-					$valueArray['height'],
-					123
-			);
+		$this->assertSame(
+			$valueArray['disableDefaultUi'],
+			TRUE
+		);
 
-			$this->assertSame(
-					$valueArray['initialZoom'],
-					12
-			);
+		$this->assertSame(
+			$valueArray['height'],
+			123
+		);
 
-		}
+		$this->assertSame(
+			$valueArray['initialZoom'],
+			12
+		);
+
+	}
+
 	/**
 	 * @test
 	 * @covers ::__construct
@@ -532,6 +532,38 @@ class MapTest extends \TYPO3\CMS\Extbase\Tests\Unit\BaseTestCase {
 		);
 	}
 
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesRegionsWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			$this->fixture->getRegions()
+		);
+	}
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesPlacesWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			$this->fixture->getPlaces()
+		);
+	}
 
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesLocationTypesWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			$this->fixture->getLocationTypes()
+		);
+	}
 }
-?>
