@@ -4,8 +4,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,15 +24,17 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 
 /**
- *
+ * Category
  *
  * @package ajaxmap
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
+class Category extends AbstractEntity
+ implements TreeItemInterface {
 
 	/**
 	 * Title
@@ -57,11 +59,12 @@ class Category extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	protected $icon;
 
 	/**
-	 * childCategories
+	 * Parent
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
+	 * @var \Webfox\Ajaxmap\Domain\Model\Category | NULL
+	 * @lazy
 	 */
-	protected $childCategories;
+	protected $parent = NULL;
 
 	/**
 	 * Returns the title
@@ -102,30 +105,6 @@ class Category extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		//Do not remove the next line: It would break the functionality
-		$this->initStorageObjects();
-	}
-
-	/**
-	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
-		$this->childCategories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-	}
-
-	/**
 	 * Returns the description
 	 *
 	 * @return string $description
@@ -145,43 +124,23 @@ class Category extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 
 	/**
-	 * Adds a Category
+	 * Gets the parent
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $childCategory
-	 * @return void
+	 * @return Category
 	 */
-	public function addChildCategory(\Webfox\Ajaxmap\Domain\Model\Category $childCategory) {
-		$this->childCategories->attach($childCategory);
+	public function getParent() {
+		if ($this->parent instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+			$this->parent->_loadRealInstance();
+		}
+		return $this->parent;
 	}
 
 	/**
-	 * Removes a Category
+	 * Sets the parent
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $childCategoryToRemove The Category to be removed
-	 * @return void
+	 * @param Category $category The parent category
 	 */
-	public function removeChildCategory(\Webfox\Ajaxmap\Domain\Model\Category $childCategoryToRemove) {
-		$this->childCategories->detach($childCategoryToRemove);
+	public function setParent(Category $category) {
+		$this->parent = $category;
 	}
-
-	/**
-	 * Returns the childCategories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $childCategories
-	 */
-	public function getChildCategories() {
-		return $this->childCategories;
-	}
-
-	/**
-	 * Sets the childCategories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $childCategories
-	 * @return void
-	 */
-	public function setChildCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $childCategories) {
-		$this->childCategories = $childCategories;
-	}
-
 }
-?>
