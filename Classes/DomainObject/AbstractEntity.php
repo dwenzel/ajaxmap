@@ -24,6 +24,8 @@ namespace Webfox\Ajaxmap\DomainObject;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 /**
@@ -46,6 +48,9 @@ class AbstractEntity
 	 * @return array
 	 */
 	public function toArray($treeDepth = 100, $mapping = NULL) {
+		if($this instanceof LazyLoadingProxy) {
+			$this->_loadRealInstance();
+		}
 		if($treeDepth < 1) {
 			return 'maximum tree depth reached!';
 		}
@@ -95,6 +100,8 @@ class AbstractEntity
 					$children[] = $object->toArray($treeDepth, $mapping);
 				} 			}
 			$result = $children;
+		} elseif (is_object($value) AND method_exists($value, 'toArray')){
+			$result = $value->toArray($treeDepth, $mapping);
 		} else {
 			$result = $value;
 		}
