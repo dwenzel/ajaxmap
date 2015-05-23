@@ -1,40 +1,44 @@
 <?php
 namespace Webfox\Ajaxmap\Domain\Repository;
 
-/***************************************************************
-*  Copyright notice
-*
-*  (c) 2010 Georg Ringer 
-*  (c) 2014 Dirk Wenzel <wenzel@webfox01.de>, Agentur Webfox
-*
-*  All rights reserved
-*
-*  This script is part of the TYPO3 project. The TYPO3 project is
-*  free software; you can redistribute it and/or modify
-*  it under the terms of the GNU General Public License as published by
-*  the Free Software Foundation; either version 2 of the License, or
-*  (at your option) any later version.
-*
-*  The GNU General Public License can be found at
-*  http://www.gnu.org/copyleft/gpl.html.
-*
-*  This script is distributed in the hope that it will be useful,
-*  but WITHOUT ANY WARRANTY; without even the implied warranty of
-*  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-*  GNU General Public License for more details.
-*
-*  This copyright notice MUST APPEAR in all copies of the script!
-***************************************************************/
+	/***************************************************************
+	 *  Copyright notice
+	 *  (c) 2010 Georg Ringer
+	 *  (c) 2014 Dirk Wenzel <wenzel@webfox01.de>, Agentur Webfox
+	 *  All rights reserved
+	 *  This script is part of the TYPO3 project. The TYPO3 project is
+	 *  free software; you can redistribute it and/or modify
+	 *  it under the terms of the GNU General Public License as published by
+	 *  the Free Software Foundation; either version 2 of the License, or
+	 *  (at your option) any later version.
+	 *  The GNU General Public License can be found at
+	 *  http://www.gnu.org/copyleft/gpl.html.
+	 *  This script is distributed in the hope that it will be useful,
+	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	 *  GNU General Public License for more details.
+	 *  This copyright notice MUST APPEAR in all copies of the script!
+	 ***************************************************************/
+
+use TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\Repository;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use Webfox\Ajaxmap\Service\ChildrenService;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
+
 /**
  * Abstract demanded repository
- * 
  * Implementation based on Georg Ringer's news Extension.
- * @package placements
  *
+ * @package placements
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 abstract class AbstractDemandedRepository
-	extends \TYPO3\CMS\Extbase\Persistence\Repository {
+	extends Repository {
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend
@@ -44,13 +48,13 @@ abstract class AbstractDemandedRepository
 
 	/**
 	 * Returns an array of constraints created from a given demand object.
-	 * 
+	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query
 	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
 	 * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
 	 * @abstract
 	 */
-	abstract protected function createConstraintsFromDemand(\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand);
+	abstract protected function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand);
 
 	/**
 	 * Returns an array of orderings created from a given demand object.
@@ -68,17 +72,19 @@ abstract class AbstractDemandedRepository
 	 * @param boolean $respectEnableFields
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findDemanded(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand, $respectEnableFields = TRUE) {
+	public function findDemanded(DemandInterface $demand, $respectEnableFields = TRUE) {
 		$query = $this->generateQuery($demand, $respectEnableFields);
 		$objects = $query->execute();
-		if ($objects->count() AND 
-				$demand->getRadius() AND 
-				$demand->getGeoLocation()) {
-			$objects = $this->filterByRadius($objects, 
-					$demand->getGeoLocation(), 
-					$demand->getRadius()/1000
-				);
+		if ($objects->count() AND
+			$demand->getRadius() AND
+			$demand->getGeoLocation()
+		) {
+			$objects = $this->filterByRadius($objects,
+				$demand->getGeoLocation(),
+				$demand->getRadius() / 1000
+			);
 		}
+
 		return $objects;
 	}
 
@@ -88,13 +94,13 @@ abstract class AbstractDemandedRepository
 	 * @param \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult A query result containing objects
 	 * @param \array $geoLocation An array describing a geolocation by lat and lng
 	 * @param \integer $distance Distance in meter
-	 * @return \TYPO3\CMS\Extbase\Persitence\Generic\QueryResult $queryResult A query result containing objects
+	 * @return \TYPO3\CMS\Extbase\Persistence\Generic\QueryResult $queryResult A query result containing objects
 	 */
 	public function filterByRadius($queryResult, $geoLocation, $distance) {
 		$objectUids = array();
-		foreach($queryResult as $object) {
+		foreach ($queryResult as $object) {
 			$currDist = \Webfox\Ajaxmap\Utility\Geocoder::distance(
-				$geoLocation['lat'], 
+				$geoLocation['lat'],
 				$geoLocation['lng'],
 				$object->getLatitude(),
 				$object->getLongitude()
@@ -109,6 +115,7 @@ abstract class AbstractDemandedRepository
 		$objects = self::findMultipleByUid(
 			implode(',', $objectUids), $sortField, $sortOrder
 		);
+
 		return $objects;
 	}
 
@@ -119,26 +126,26 @@ abstract class AbstractDemandedRepository
 	 * @param boolean $respectEnableFields
 	 * @return string
 	 */
-	public function findDemandedRaw(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand, $respectEnableFields = TRUE) {
+	public function findDemandedRaw(DemandInterface $demand, $respectEnableFields = TRUE) {
 		$query = $this->generateQuery($demand, $respectEnableFields);
 		$queryParser = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbQueryParser');
 		list($hash, $parameters) = $queryParser->preparseQuery($query);
 		$statementParts = $queryParser->parseQuery($query);
 
 		// Limit and offset are not cached to allow caching of pagebrowser queries.
-		$statementParts['limit'] = ((int)$query->getLimit() ?: NULL);
-		$statementParts['offset'] = ((int)$query->getOffset() ?: NULL);
+		$statementParts['limit'] = ((int) $query->getLimit() ?: NULL);
+		$statementParts['offset'] = ((int) $query->getOffset() ?: NULL);
 
 		$tableNameForEscape = (reset($statementParts['tables']) ?: 'foo');
 		foreach ($parameters as $parameterPlaceholder => $parameter) {
-			if ($parameter instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+			if ($parameter instanceof LazyLoadingProxy) {
 				$parameter = $parameter->_loadRealInstance();
 			}
 
 			if ($parameter instanceof \DateTime) {
 				$parameter = $parameter->format('U');
-			} elseif ($parameter instanceof \TYPO3\CMS\Extbase\DomainObject\DomainObjectInterface) {
-				$parameter = (int)$parameter->getUid();
+			} elseif ($parameter instanceof DomainObjectInterface) {
+				$parameter = (int) $parameter->getUid();
 			} elseif (is_array($parameter)) {
 				$subParameters = array();
 				foreach ($parameter as $subParameter) {
@@ -150,7 +157,7 @@ abstract class AbstractDemandedRepository
 			} elseif (is_bool($parameter)) {
 				return ($parameter === TRUE ? 1 : 0);
 			} else {
-				$parameter = $GLOBALS['TYPO3_DB']->fullQuoteStr((string)$parameter, $tableNameForEscape);
+				$parameter = $GLOBALS['TYPO3_DB']->fullQuoteStr((string) $parameter, $tableNameForEscape);
 			}
 
 			$statementParts['where'] = str_replace($parameterPlaceholder, $parameter, $statementParts['where']);
@@ -158,14 +165,14 @@ abstract class AbstractDemandedRepository
 
 		$statementParts = array(
 			'selectFields' => implode(' ', $statementParts['keywords']) . ' ' . implode(',', $statementParts['fields']),
-			'fromTable'    => implode(' ', $statementParts['tables']) . ' ' . implode(' ', $statementParts['unions']),
-			'whereClause'  => (!empty($statementParts['where']) ? implode('', $statementParts['where']) : '1')
+			'fromTable' => implode(' ', $statementParts['tables']) . ' ' . implode(' ', $statementParts['unions']),
+			'whereClause' => (!empty($statementParts['where']) ? implode('', $statementParts['where']) : '1')
 				. (!empty($statementParts['additionalWhereClause'])
 					? ' AND ' . implode(' AND ', $statementParts['additionalWhereClause'])
 					: ''
-			),
-			'orderBy'      => (!empty($statementParts['orderings']) ? implode(', ', $statementParts['orderings']) : ''),
-			'limit'        => ($statementParts['offset'] ? $statementParts['offset'] . ', ' : '')
+				),
+			'orderBy' => (!empty($statementParts['orderings']) ? implode(', ', $statementParts['orderings']) : ''),
+			'limit' => ($statementParts['offset'] ? $statementParts['offset'] . ', ' : '')
 				. ($statementParts['limit'] ? $statementParts['limit'] : '')
 		);
 

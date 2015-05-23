@@ -1,36 +1,36 @@
 <?php
-
 namespace Webfox\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
- *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
  *  All rights reserved
- *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
- *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
- *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use Webfox\Ajaxmap\Domain\Repository\MapRepository;
+use Webfox\Ajaxmap\Domain\Repository\PlaceRepository;
+use Webfox\Ajaxmap\Domain\Repository\RegionRepository;
+use Webfox\Ajaxmap\Domain\Model\Category;
+use Webfox\Ajaxmap\Domain\Model\LocationType;
+use Webfox\Ajaxmap\Domain\Model\Map;
+use Webfox\Ajaxmap\Domain\Model\PlaceGroup;
+use Webfox\Ajaxmap\Utility\TreeUtility;
 
 /**
- *
- *
  * @package ajaxmap
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
  */
 class MapController extends AbstractController {
 	/**
@@ -46,12 +46,12 @@ class MapController extends AbstractController {
 	 * @var \Webfox\Ajaxmap\Domain\Repository\RegionRepository
 	 */
 	protected $regionRepository;
-    
-    /**
-     * placeRepository
-     *
-     * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
-     */	
+
+	/**
+	 * Place Repository
+	 *
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
+	 */
 	protected $placeRepository;
 
 	/**
@@ -60,55 +60,55 @@ class MapController extends AbstractController {
 	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
 	 * @return void
 	 */
-	public function injectMapRepository(\Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository) {
+	public function injectMapRepository(MapRepository $mapRepository) {
 		$this->mapRepository = $mapRepository;
 	}
-    /**
-     * inject place repository
-     *
-     * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
-     * @return void
-     */
-    public function injectPlaceRepository(\Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
-        $this->placeRepository = $placeRepository;
-    }
-	
+
+	/**
+	 * inject place repository
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
+	 * @return void
+	 */
+	public function injectPlaceRepository(PlaceRepository $placeRepository) {
+		$this->placeRepository = $placeRepository;
+	}
+
 	/**
 	 * injectRegionRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
 	 * @return void
 	 */
-	public function injectRegionRepository(\Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository) {
+	public function injectRegionRepository(RegionRepository $regionRepository) {
 		$this->regionRepository = $regionRepository;
 	}
 
 	/**
 	 * action item - get map attributes
-	 * 
+	 *
 	 * @param \string $task
 	 * @param \integer $mapId
-	 * @param \integer $pageId
 	 * @param \integer $placeId
 	 * @return string JSON data
 	 */
-	public function itemAction($task, $mapId = NULL, $pageId = NULL, $placeId = NULL ) {
+	public function itemAction($task, $mapId = NULL, $placeId = NULL) {
 		$response = array();
-		if ($mapId){
+		if ($mapId) {
 			/** @var \Webfox\Ajaxmap\Domain\Model\Map $map */
 			$map = $this->mapRepository->findByUid($mapId);
 			switch ($task) {
-                case 'buildMap':
+				case 'buildMap':
 					$response = $map->toArray(100, $this->settings['mapping']);
-                    break;
-                case 'getAddress':
-                    $response = $this->getAddressForPlace($placeId);
-                    break;
-                default:
-                    
-            }	
+					break;
+				case 'getAddress':
+					$response = $this->getAddressForPlace($placeId);
+					break;
+				default:
+
+			}
 		}
-		
+
 		return json_encode($response);
 	}
 
@@ -116,20 +116,17 @@ class MapController extends AbstractController {
 	 * Ajax list place action
 	 *
 	 * @param \integer $mapId
-	 * @param \integer $pageId
-	 * @return json
+	 * @return string JSON encoded array of places
 	 */
-	public function ajaxListPlacesAction($mapId = NULL, $pageId = NULL) {
+	public function ajaxListPlacesAction($mapId = NULL) {
 		$places = array();
-		if($mapId) {
-			// places from map
+		if ($mapId) {
+			/** @var Map $map */
 			$map = $this->mapRepository->findByUid($mapId);
-			if($map) {
-				if($map->getPlaces()) {
-					// map got places
+			if ($map) {
+				if ($map->getPlaces()) {
 					$places = $map->getPlaces()->toArray();
 				} elseif ($map->getLocationTypes()) {
-					// get places by location type
 					$places = $this->getPlaces($map);
 				}
 			}
@@ -137,6 +134,7 @@ class MapController extends AbstractController {
 			// get all places
 			$places = $this->placeRepository->findAll()->toArray();
 		}
+
 		return json_encode($places);
 	}
 
@@ -144,13 +142,13 @@ class MapController extends AbstractController {
 	 * Ajax list categories action
 	 *
 	 * @param \integer $mapId
-	 * @return json
+	 * @return string JSON
 	 */
 	public function ajaxListCategoriesAction($mapId = NULL) {
 		$categories = array();
-		if($mapId) {
+		if ($mapId) {
 			$map = $this->mapRepository->findByUid($mapId);
-			if ($map AND $map->getCategories()){
+			if ($map AND $map->getCategories()) {
 				$categoryObjArray = $map->getCategories()->toArray();
 				foreach ($categoryObjArray as $category){
 					array_push(
@@ -167,22 +165,21 @@ class MapController extends AbstractController {
 	 * Ajax list location types action
 	 *
 	 * @param \integer $mapId
-	 * @return json
+	 * @return string json
 	 */
 	public function ajaxListLocationTypesAction($mapId = NULL) {
 		$locationTypes = array();
-		if($mapId) {
+		if ($mapId) {
 			$map = $this->mapRepository->findByUid($mapId);
-			if ($map AND $map->getLocationTypes()){
+			if ($map AND $map->getLocationTypes()) {
 				$locationTypesObjArray = $map->getLocationTypes()->toArray();
-				foreach ($locationTypesObjArray as $locationType){
-					array_push(
-						$locationTypes,
-						$locationType->toArray(10, $this->settings['mapping'])
-					);
+				foreach ($locationTypesObjArray as $locationType) {
+					/** @var LocationType $locationType */
+					$locationTypes[] = $locationType->toArray(10, $this->settings['mapping']);
 				}
 			}
 		}
+
 		return json_encode($locationTypes);
 	}
 
@@ -192,23 +189,24 @@ class MapController extends AbstractController {
 	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
 	 * @return void
 	 */
-	public function showAction(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL) {
-		if ($map===NULL) {
+	public function showAction(Map $map = NULL) {
+		if ($map === NULL) {
 			$mapId = $this->settings['map'];
 			$map = $this->mapRepository->findByUid($mapId);
 		}
 		$this->view->assignMultiple(
-				array(
-					'map' => $map,
-					'settings' => $this->settings,
-					'pid' => $GLOBALS['TSFE']->id
-				)
+			array(
+				'map' => $map,
+				'settings' => $this->settings,
+				'pid' => $GLOBALS['TSFE']->id
+			)
 		);
 	}
-	
+
 	/**
-	 * Get all places (defined by categories, location, manually selected in map)
-	 * @param $map > 
+	 * Get all places (defined by placeGroups, location, manually selected in map)
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
 	 * @return array
 	 */
 	private function getPlaces(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL){
@@ -241,13 +239,14 @@ class MapController extends AbstractController {
 		   }  
 	return $places;
 	}
-	
-	private function getAddressForPlace($placeId){
-	    if($placeId){
-            //@todo provide a label (set by TypoScript)
-	        return $this->placeRepository->findAddressForPlace($placeId);
-	    }
+
+	/**
+	 * @param integer $placeId
+	 * @return array|NULL
+	 */
+	private function getAddressForPlace($placeId) {
+		return $this->placeRepository->findAddressForPlace($placeId);
 	}
-	
+
 }
-?>
+

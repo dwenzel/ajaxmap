@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 
 /**
  *
@@ -32,7 +33,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class LocationType extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
+class LocationType extends AbstractEntity{
 
 	/**
 	 * title

@@ -23,14 +23,13 @@ namespace Webfox\Ajaxmap\Domain\Model\Dto;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 /**
  * Abstract Demand object which holds all common demand properties.
  *
  * @package ajaxmap
  */
-class AbstractDemand
-	extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity implements DemandInterface {
+class AbstractDemand extends AbstractEntity implements DemandInterface {
 
 	/**
 	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\Search
@@ -38,17 +37,17 @@ class AbstractDemand
 	protected $search;
 
 	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $order;
 
 	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $orderByAllowed;
 
 	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $storagePages;
 
@@ -63,12 +62,12 @@ class AbstractDemand
 	protected $offset;
 
 	/**
-	* @var \array
+	* @var array
 	*/
 	protected $geoLocation;
 
 	/**
-	 * @var \integer
+	 * @var integer
 	 */
 	protected $radius;
 
@@ -94,8 +93,9 @@ class AbstractDemand
 	/**
 	 * Set order
 	 *
-	 * @param \string $order
+	 * @param string $order
 	 * @return void
+	 * @deprecated Use setOrderings instead
 	 */
 	public function setOrder($order) {
 		$this->order = $order;
@@ -104,7 +104,8 @@ class AbstractDemand
 	/**
 	 * Get order
 	 *
-	 * @return \string
+	 * @return string
+	 * @deprecated Use getOrderings instead
 	 */
 	public function getOrder() {
 		return $this->order;
@@ -113,7 +114,7 @@ class AbstractDemand
 	/**
 	 * Set order allowed
 	 *
-	 * @param \string $orderByAllowed allowed fields for ordering
+	 * @param string $orderByAllowed allowed fields for ordering
 	 * @return void
 	 */
 	public function setOrderByAllowed($orderByAllowed) {
@@ -123,7 +124,7 @@ class AbstractDemand
 	/**
 	 * Get allowed order fields
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function getOrderByAllowed() {
 		return $this->orderByAllowed;
@@ -132,7 +133,7 @@ class AbstractDemand
 	/**
 	 * Set list of storage pages
 	 *
-	 * @param \string $storagePages storage page list
+	 * @param string $storagePages storage page list
 	 * @return void
 	 */
 	public function setStoragePages($storagePages) {
@@ -142,7 +143,7 @@ class AbstractDemand
 	/**
 	 * Get list of storage pages
 	 *
-	 * @return \string
+	 * @return string
 	 */
 	public function getStoragePages() {
 		return $this->storagePages;
@@ -151,7 +152,7 @@ class AbstractDemand
 	/**
 	 * Set limit
 	 *
-	 * @param \integer $limit limit
+	 * @param integer $limit limit
 	 * @return void
 	 */
 	public function setLimit($limit) {
@@ -161,7 +162,7 @@ class AbstractDemand
 	/**
 	 * Get limit
 	 *
-	 * @return \integer
+	 * @return integer
 	 */
 	public function getLimit() {
 		return $this->limit;
@@ -170,7 +171,7 @@ class AbstractDemand
 	/**
 	 * Set offset
 	 *
-	 * @param \integer $offset offset
+	 * @param integer $offset offset
 	 * @return void
 	 */
 	public function setOffset($offset) {
@@ -180,7 +181,7 @@ class AbstractDemand
 	/**
 	 * Get offset
 	 *
-	 * @return \integer
+	 * @return integer
 	 */
 	public function getOffset() {
 		return $this->offset;
@@ -189,7 +190,7 @@ class AbstractDemand
 	/**
 	 * Set geo location
 	 *
-	 * @param \array $geoLocation Geo location: center around which to search for
+	 * @param array $geoLocation Geo location: center around which to search for
 	 * @return void
 	 */
 	public function setGeoLocation($geoLocation) {
@@ -199,7 +200,7 @@ class AbstractDemand
 	/**
 	 * Get geo location
 	 *
-	 * @return \array
+	 * @return array
 	 */
 	public function getGeoLocation() {
 		return $this->geoLocation;
@@ -208,7 +209,7 @@ class AbstractDemand
 	/**
 	 * Set radius
 	 *
-	 * @param \integer $radius 
+	 * @param integer $radius
 	 * @return void
 	 */
 	public function setRadius($radius) {
@@ -218,7 +219,7 @@ class AbstractDemand
 	/**
 	 * Get radius
 	 *
-	 * @return \integer
+	 * @return integer
 	 */
 	public function getRadius() {
 		return $this->radius;
@@ -226,5 +227,4 @@ class AbstractDemand
 
 }
 
-?>
 

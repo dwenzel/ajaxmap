@@ -24,6 +24,10 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\Domain\Model\Category;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  *
@@ -32,7 +36,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
+class Map extends AbstractEntity {
 
 	/**
 	 * title
@@ -66,7 +70,7 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	protected $height;
 
 	/**
-	 * Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)
+	 * Center of Map (Geo location: latitude, longitude - 10.999999,51.777777)
 	 *
 	 * @var string
 	 * @validate NotEmpty
@@ -184,7 +188,6 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * __construct
 	 *
-	 * @return void
 	 */
 	public function __construct() {
 		//Do not remove the next line: It would break the functionality
@@ -197,18 +200,10 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
-		$this->categories = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		
-		$this->regions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		
-		$this->places = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		
-		$this->locationTypes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->categories = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->places = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->locationTypes = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 	}
 
 	/**
@@ -358,20 +353,17 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	 * Adds a Category
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
 	 */
-	public function addCategory(\Webfox\Ajaxmap\Domain\Model\Category $category) {
+	public function addCategory(Category $category) {
 		$this->categories->attach($category);
 	}
-
 	/**
 	 * Removes a Category
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $categoryToRemove The Category to be removed
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
+	 * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category The Category to be removed
 	 */
-	public function removeCategory(\Webfox\Ajaxmap\Domain\Model\Category $categoryToRemove) {
-		$this->categories->detach($categoryToRemove);
+	public function removeCategory(Category $category) {
+		$this->categories->detach($category);
 	}
 
 	/**
@@ -386,10 +378,9 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	/**
 	 * Sets the categories
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
 	 */
-	public function setCategories(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories) {
+	public function setCategories(ObjectStorage $categories) {
 		$this->categories = $categories;
 	}
 
@@ -472,4 +463,4 @@ class Map extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	}
 
 }
-?>
+
