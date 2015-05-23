@@ -226,14 +226,19 @@ abstract class AbstractDemandedRepository
 	 *
 	 * @param \string $recordList A comma separated list of uids
 	 * @param \string $sortField Field to sort by
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $sortOrder 
-	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResult
+	 * @param string|QueryInterface $sortOrder
+	 * @param bool $respectStoragePage
+	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findMultipleByUid ($recordList, $sortField = 'uid', $sortOrder = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING) {
-		$uids = \TYPO3\CMS\Core\Utility\GeneralUtility::intExplode(',', $recordList, TRUE);
+	public function findMultipleByUid($recordList, $sortField = 'uid', $sortOrder = QueryInterface::ORDER_ASCENDING, $respectStoragePage = TRUE) {
+		$uids = GeneralUtility::intExplode(',', $recordList, TRUE);
 		$query = $this->createQuery();
-		$query->matching($query->in('uid' , $uids));
+		if (!$respectStoragePage) {
+			$query->getQuerySettings()->setRespectStoragePage(FALSE);
+		}
+		$query->matching($query->in('uid', $uids));
 		$query->setOrderings(array($sortField => $sortOrder));
+
 		return $query->execute();
 	}
 
