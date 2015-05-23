@@ -55,6 +55,14 @@ class MapController extends AbstractController {
 	protected $placeRepository;
 
 	/**
+	 * Place Group Repository
+	 *
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceGroupRepository
+	 * @inject
+	 */
+	protected $placeGroupRepository;
+
+	/**
 	 * injectMapRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
@@ -159,6 +167,41 @@ class MapController extends AbstractController {
 			}
 		}
 		return json_encode($categories);
+	}
+
+	/**
+	 * Ajax list place groups action
+	 *
+	 * @param \integer $mapId
+	 * @return string JSON
+	 */
+	public function ajaxListPlaceGroupsAction($mapId = NULL) {
+		$placeGroups = array();
+		if ($mapId) {
+			/** @var Map $map */
+			$map = $this->mapRepository->findByUid($mapId);
+			if ($map AND $map->getPlaceGroups()) {
+				$placeGroupObjArray = $map->getPlaceGroups()->toArray();
+				if ((bool)$placeGroupObjArray) {
+					$rootIds = array();
+					foreach ($placeGroupObjArray as $placeGroup) {
+						/** @var PlaceGroup $placeGroup */
+						$rootIds[] = $placeGroup->getUid();
+					}
+					$rootIdList = implode(',', $rootIds);
+					if ($children = $this->placeGroupRepository->findChildren($rootIdList, FALSE)) {
+						$objectTree = TreeUtility::buildObjectTree($children);
+						$placeGroups = TreeUtility::convertObjectTreeToArray(
+							$objectTree,
+							'parent,pid',
+							$this->settings['mapping']
+						);
+					}
+				}
+			}
+		}
+
+		return json_encode($placeGroups);
 	}
 
 	/**
