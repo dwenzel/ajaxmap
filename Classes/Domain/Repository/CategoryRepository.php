@@ -24,6 +24,10 @@ namespace Webfox\Ajaxmap\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use Webfox\Ajaxmap\Domain\Model\Category;
+use Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface;
+use Webfox\Ajaxmap\Service\ChildrenService;
 
 /**
  *
@@ -32,7 +36,18 @@ namespace Webfox\Ajaxmap\Domain\Repository;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class CategoryRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
-
+class CategoryRepository extends AbstractDemandedRepository {
+	/**
+	 * Creates an array of query constraints from demand
+	 *
+	 * @param QueryInterface $query
+	 * @param DemandInterface $demandInterface
+	 * @return array
+	 */
+	public function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demandInterface) {
+		$constraints = array();
+		// @todo add constraints
+		return $constraints;
+	}
 }
-?>
+
