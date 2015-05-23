@@ -110,19 +110,19 @@ class MapController extends AbstractController {
 	 */
 	public function itemAction($task, $mapId = NULL, $placeId = NULL) {
 		$response = array();
-		if ($mapId) {
-			/** @var \Webfox\Ajaxmap\Domain\Model\Map $map */
-			$map = $this->mapRepository->findByUid($mapId);
-			switch ($task) {
-				case 'buildMap':
+		/** @var \Webfox\Ajaxmap\Domain\Model\Map $map */
+		$map = $this->mapRepository->findByUid($mapId);
+		switch ($task) {
+			case 'buildMap':
+				if ($mapId) {
 					$response = $map->toArray(100, $this->settings['mapping']);
-					break;
-				case 'getAddress':
-					$response = $this->getAddressForPlace($placeId);
-					break;
-				default:
+				}
+				break;
+			case 'getAddress':
+				$response = $this->getAddressForPlace($placeId);
+				break;
+			default:
 
-			}
 		}
 
 		return json_encode($response);
