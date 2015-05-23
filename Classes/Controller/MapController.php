@@ -271,35 +271,34 @@ class MapController extends AbstractController {
 	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
 	 * @return array
 	 */
-	private function getPlaces(\Webfox\Ajaxmap\Domain\Model\Map $map = NULL){
-	    // - make empty list of places
-	    $places = array();
-	    
-	    //@todo - add all manually selected places (from map - field is currently hidden in backend) 
-	    
-	    // - add all places of selected location types (from map)
-        $typesArr = array();
-        foreach ($map->getLocationTypes()->toArray() as $type) {
-					array_push($typesArr, $type->getUid());
-        }
-        // convert types array to string for query
-        $types = implode(',',$typesArr);
-        $select = 'uid, title, location_type, description, icon, category, geo_coordinates';
-        //@todo respect storage page
-	    $where = 'deleted = 0 AND hidden = 0';
-			if($types != ''){ 
-	    	$where .= ' AND location_type IN (' .$types .')';
-			}
-        $places = $this->placeRepository->findRawSelectWhere($select, $where);
-       	
-       	// replace category count by array of categories
-       	foreach ($places as &$place) {
-			   if($place['category']){
-			       $categories = $this->placeRepository->findCategoriesForPlace($place[uid]);
-			       $place['category'] = $categories;
-			   }
-		   }  
-	return $places;
+	private function getPlaces(Map $map) {
+		$placesArray = array();
+
+		/** @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand $placeDemand */
+		$placeDemand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
+		$placeDemand->setConstraintsConjunction('or');
+
+		$locationTypes = array();
+		/** @var LocationType $type */
+		foreach ($map->getLocationTypes()->toArray() as $type) {
+			$locationTypes[] = $type->getUid();
+		}
+		if ((bool) $locationTypes) {
+			$types = implode(',', $locationTypes);
+			$placeDemand->setLocationTypes($types);
+		}
+
+		/** @var QuerySettingsInterface $querySettings */
+		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface');
+		$querySettings->setRespectStoragePage(FALSE);
+		$this->placeRepository->setDefaultQuerySettings($querySettings);
+
+		/** @var QueryResult $places */
+		$places = $this->placeRepository->findDemanded($placeDemand);
+		foreach($places as $place) {
+			$placesArray[] = $place->toArray(10, $this->settings['mapping']);
+		}
+		return $placesArray;
 	}
 
 	/**
