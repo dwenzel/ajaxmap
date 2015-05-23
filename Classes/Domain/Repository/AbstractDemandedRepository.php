@@ -92,10 +92,12 @@ abstract class AbstractDemandedRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
 	 * @param boolean $respectEnableFields
+	 * @param array $enableFieldsToIgnore
+	 * @param bool $respectStoragePage
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function findDemanded(DemandInterface $demand, $respectEnableFields = TRUE) {
-		$query = $this->generateQuery($demand, $respectEnableFields);
+	public function findDemanded(DemandInterface $demand, $respectEnableFields = TRUE, $enableFieldsToIgnore = NULL, $respectStoragePage = TRUE) {
+		$query = $this->generateQuery($demand, $respectEnableFields, $enableFieldsToIgnore, $respectStoragePage);
 		$objects = $query->execute();
 		if ($objects->count() AND
 			$demand->getRadius() AND
@@ -146,10 +148,12 @@ abstract class AbstractDemandedRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
 	 * @param boolean $respectEnableFields
+	 * @param array $enableFieldsToIgnore
+	 * @param bool $respectStoragePage
 	 * @return string
 	 */
-	public function findDemandedRaw(DemandInterface $demand, $respectEnableFields = TRUE) {
-		$query = $this->generateQuery($demand, $respectEnableFields);
+	public function findDemandedRaw(DemandInterface $demand, $respectEnableFields = TRUE, $enableFieldsToIgnore = NULL, $respectStoragePage = TRUE) {
+		$query = $this->generateQuery($demand, $respectEnableFields, $enableFieldsToIgnore, $respectStoragePage);
 		$queryParser = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbQueryParser');
 		list($hash, $parameters) = $queryParser->preparseQuery($query);
 		$statementParts = $queryParser->parseQuery($query);
@@ -242,7 +246,6 @@ abstract class AbstractDemandedRepository
 		return $query->execute();
 	}
 
-	protected function generateQuery(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand, $respectEnableFields = TRUE) {
 	/**
 	 * Finds children for a given list of uid.
 	 * The repository object must implement the TreeItemInterface.
@@ -273,25 +276,31 @@ abstract class AbstractDemandedRepository
 		return NULL;
 	}
 
+	/**
+	 * Generates a query from a given demand
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
+	 * @param bool $respectEnableFields
+	 * @param array $enableFieldsToIgnore
+	 * @param $respectStoragePage
+	 * @return QueryInterface
+	 */
+	protected function generateQuery(DemandInterface $demand, $respectEnableFields = TRUE, $enableFieldsToIgnore = NULL, $respectStoragePage) {
 		$query = $this->createQuery();
 		$constraints = $this->createConstraintsFromDemand($query, $demand);
 
-		/**
-		 * We have to get the storage pages here and set the constraint by pid
-		 * in order to avoid records from wrong storage pages from being displayed. 
-		 * For some reasons the persistence manager does not respect the correct
-		 * storage page settings in our ajaxListAction from PositionController (but it
-		 * does for the plugin settings).
-		 */
-		$constraints[] = $query->in('pid', $query->getQuerySettings()->getStoragePageIds());
+		$query->getQuerySettings()->setRespectStoragePage($respectStoragePage);
 
-		if ($respectEnableFields === FALSE) {
-			$query->getQuerySettings()->setRespectEnableFields(FALSE);
+		if ($respectEnableFields === FALSE
+			AND $enableFieldsToIgnore !== NULL) {
+			$query->getQuerySettings()
+				->setIgnoreEnableFields(TRUE)
+				->setEnableFieldsToBeIgnored($enableFieldsToIgnore);
 		} else {
 			/**
-			 * @todo  we set deleted and hidden to 0 here 
+			 * @todo  we set deleted and hidden to 0 here
 			 * because otherwise our ajax action
-			 * will return those records too! 
+			 * will return those records too!
 			 * (Seems the enable fields are not
 			 * respected properly.)
 			 */
