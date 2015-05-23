@@ -326,7 +326,7 @@ abstract class AbstractDemandedRepository
 	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
 	 * @return \TYPO3\CMS\Extbase\Persistence\QueryResultInterface
 	 */
-	public function countDemanded(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+	public function countDemanded(DemandInterface $demand) {
 		$query = $this->createQuery();
 
 		if ($constraints = $this->createConstraintsFromDemand($query, $demand)) {
@@ -336,6 +336,7 @@ abstract class AbstractDemandedRepository
 		}
 
 		$result = $query->execute();
+
 		return $result->count();
 	}
 
@@ -347,7 +348,6 @@ abstract class AbstractDemandedRepository
 	 * @param string $sqlString The query part with placeholders
 	 * @param array $parameters The parameters
 	 * @param string $tableName
-	 *
 	 * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
 	 * @return void
 	 */
@@ -376,4 +376,3 @@ abstract class AbstractDemandedRepository
 		}
 	}
 }
-?>
