@@ -3,12 +3,12 @@
 
 page {
 	includeJSFooterlibs {
-		jQueryUi = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery/jquery-ui.custom.js
-		jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery/jquery.cookie.js
-		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.6/jquery.dynatree.js
+		jQueryUi = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery-1.10/jquery-ui.custom.js
+		jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery-1.10/jquery.cookie.js
+		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.7/jquery.dynatree.js
 	}
 	includeCSS {
-		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.6/skin/ui.dynatree.css
+		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.7/skin/ui.dynatree.css
 	}
 }
 
