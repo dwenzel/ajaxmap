@@ -63,6 +63,14 @@ class MapController extends AbstractController {
 	protected $placeGroupRepository;
 
 	/**
+	 * Category Repository
+	 *
+	 * @var \Webfox\Ajaxmap\Domain\Repository\CategoryRepository
+	 * @inject
+	 */
+	protected $categoryRepository;
+
+	/**
 	 * injectMapRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
@@ -158,14 +166,25 @@ class MapController extends AbstractController {
 			$map = $this->mapRepository->findByUid($mapId);
 			if ($map AND $map->getCategories()) {
 				$categoryObjArray = $map->getCategories()->toArray();
-				foreach ($categoryObjArray as $category){
-					array_push(
-						$categories,
-						$category->toArray(10, $this->settings['mapping'])
-					);
+				if ((bool) $categoryObjArray) {
+					$rootIds = array();
+					/** @var Category $category */
+					foreach ($categoryObjArray as $category) {
+						$rootIds[] = $category->getUid();
+					}
+					$rootIdList = implode(',', $rootIds);
+					if ($children = $this->categoryRepository->findChildren($rootIdList)) {
+						$objectTree = TreeUtility::buildObjectTree($children);
+						$categories = TreeUtility::convertObjectTreeToArray(
+							$objectTree,
+							'parent,pid',
+							$this->settings['mapping']
+						);
+					}
 				}
 			}
 		}
+
 		return json_encode($categories);
 	}
 
