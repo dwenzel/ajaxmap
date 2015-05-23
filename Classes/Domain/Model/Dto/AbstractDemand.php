@@ -30,6 +30,19 @@ use \TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
  * @package ajaxmap
  */
 class AbstractDemand extends AbstractEntity implements DemandInterface {
+	/**
+	 * Uid list
+	 *
+	 * @var string
+	 */
+	protected $uidList;
+
+	/**
+	 * Hidden
+	 *
+	 * @var boolean
+	 */
+	protected $hidden;
 
 	/**
 	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\Search
@@ -57,7 +70,14 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	protected $limit;
 
 	/**
-	 * @var \integer
+	 * Orderings
+	 *
+	 * @var array
+	 */
+	protected $orderings;
+
+	/**
+	 * @var integer
 	 */
 	protected $offset;
 
@@ -70,6 +90,43 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	 * @var integer
 	 */
 	protected $radius;
+
+
+	/**
+	 * Get a list of unique ids
+	 *
+	 * @return string
+	 */
+	public function getUidList() {
+		return $this->uidList;
+	}
+
+	/**
+	 * Sets a list of unique ids
+	 * @param string $uidList
+	 */
+	public function setUidList($uidList) {
+		$this->uidList = $uidList;
+	}
+
+	/**
+	 * Returns the hidden
+	 *
+	 * @return boolean
+	 */
+	public function getHidden() {
+		return $this->hidden;
+	}
+
+	/**
+	 * Sets the hidden
+	 *
+	 * @param boolean $hidden
+	 * @return void
+	 */
+	public function setHidden($hidden) {
+		$this->hidden = $hidden;
+	}
 
 	/**
 	 * Set search object
@@ -166,6 +223,25 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	 */
 	public function getLimit() {
 		return $this->limit;
+	}
+
+	/**
+	 * Returns the orderings
+	 *
+	 * @return string
+	 */
+	public function getOrderings() {
+		return $this->orderings;
+	}
+
+	/**
+	 * Sets the orderings
+	 *
+	 * @param array $orderings
+	 * @return array
+	 */
+	public function setOrderings(array $orderings) {
+		$this->orderings = $orderings;
 	}
 
 	/**

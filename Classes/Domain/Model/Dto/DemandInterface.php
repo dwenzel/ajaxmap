@@ -29,5 +29,38 @@ namespace Webfox\Ajaxmap\Domain\Model\Dto;
  * @package placements
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-interface DemandInterface {}
-?>
+interface DemandInterface {
+	public function getHidden();
+
+	/**
+	 * @param bool $hidden
+	 * @return mixed
+	 */
+	public function setHidden($hidden);
+
+	/**
+	 * @param int $limit
+	 * @return mixed
+	 */
+	public function setLimit($limit);
+	public function getLimit();
+	public function getOffset();
+
+	/**
+	 * @param int $offset
+	 * @return mixed
+	 */
+	public function setOffset($offset);
+
+	/**
+	 * @return array
+	 */
+	public function getOrderings();
+
+	/**
+	 * @param array $orderings
+	 * @return mixed
+	 */
+	public function setOrderings(array $orderings);
+}
+
