@@ -108,6 +108,13 @@ class Map extends AbstractEntity {
 	protected $categories;
 
 	/**
+	 * Select items for display by placeGroups.
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup>
+	 */
+	protected $placeGroups;
+
+	/**
 	 * regions
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
@@ -201,6 +208,7 @@ class Map extends AbstractEntity {
 	 */
 	protected function initStorageObjects() {
 		$this->categories = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->placeGroups = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->places = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->locationTypes = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
@@ -382,6 +390,45 @@ class Map extends AbstractEntity {
 	 */
 	public function setCategories(ObjectStorage $categories) {
 		$this->categories = $categories;
+	}
+
+	/**
+	 * Adds a PlaceGroup
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 */
+	public function addPlaceGroup(\Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
+		$this->placeGroups->attach($placeGroup);
+	}
+
+	/**
+	 * Removes a PlaceGroup
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup The PlaceGroup to be removed
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 */
+	public function removePlaceGroup(\Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
+		$this->placeGroups->detach($placeGroup);
+	}
+
+	/**
+	 * Returns the placeGroups
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 */
+	public function getPlaceGroups() {
+		return $this->placeGroups;
+	}
+
+	/**
+	 * Sets the placeGroups
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> $placeGroups
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 */
+	public function setPlaceGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $placeGroups) {
+		$this->placeGroups = $placeGroups;
 	}
 
 	/**
