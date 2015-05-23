@@ -26,10 +26,6 @@ namespace Webfox\Ajaxmap\Domain\Repository;
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface;
-use Webfox\Ajaxmap\Domain\Model\PlaceGroup;
-use Webfox\Ajaxmap\Domain\Model\TreeItemInterface;
-use Webfox\Ajaxmap\Service\ChildrenService;
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 /**
  *
  *
@@ -49,51 +45,6 @@ class PlaceGroupRepository extends AbstractDemandedRepository {
 		$constraints = array();
 		// @todo add constraints
 		return $constraints;
-	}
-
-	/**
-	 * Find tree
-	 *
-	 * @param array $rootIdList list of id s
-	 * @param bool $respectStoragePage
-	 * @return QueryInterface
-	 */
-	public function findTree(array $rootIdList, $respectStoragePage = TRUE) {
-		$subObjects = ChildrenService::getChildren(
-			$this->getTableName(),
-			implode(',', $rootIdList)
-		);
-
-		$objects = $this->findMultipleByUid(
-			$subObjects,
-			'uid',
-			QueryInterface::ORDER_ASCENDING,
-			$respectStoragePage
-		);
-
-		$flatObjects = array();
-		/** @var TreeItemInterface $object */
-		foreach ($objects as $object) {
-			$flatObjects[$object->getUid()] = array(
-				'item' =>  $object,
-				'parent' => ($object->getParent()) ? $object->getParent()->getUid() : NULL
-			);
-		}
-		$tree = array();
-		// If leaves are selected without its parents selected, those are shown as parent
-		foreach($flatObjects as $id => &$flatCategory) {
-			if (!isset($flatObjects[$flatCategory['parent']])) {
-				$flatCategory['parent'] = NULL;
-			}
-		}
-		foreach ($flatObjects as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatObjects[$node['parent']]['children'][$id] = &$node;
-			}
-		}
-		return $tree;
 	}
 }
 
