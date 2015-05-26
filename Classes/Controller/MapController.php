@@ -138,17 +138,18 @@ class MapController extends AbstractController {
 		$places = array();
 		if ($mapId) {
 			/** @var Map $map */
-			$map = $this->mapRepository->findByUid($mapId);
-			if ($map) {
+			if ($map = $this->mapRepository->findByUid($mapId)) {
 				if ($map->getPlaces()) {
 					$places = $map->getPlaces()->toArray();
-				} elseif ($map->getLocationTypes()) {
-					$places = $this->getPlaces($map);
+				} else {
+					$placeDemand = $this->buildPlaceDemandFromMap($map);
+					/** @var QueryResult $placeObjects */
+					$placeObjects = $this->placeRepository->findDemanded($placeDemand, TRUE, NULL, FALSE);
+					foreach($placeObjects as $place) {
+						$places[] = $place->toArray(10, $this->settings['mapping']);
+					}
 				}
 			}
-		} else {
-			// get all places
-			$places = $this->placeRepository->findAll()->toArray();
 		}
 
 		return json_encode($places);
@@ -266,14 +267,12 @@ class MapController extends AbstractController {
 	}
 
 	/**
-	 * Get all places (defined by placeGroups, location, manually selected in map)
+	 * Builds a demand object from map properties
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
-	 * @return array
+	 * @param Map $map
+	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
-	private function getPlaces(Map $map) {
-		$placesArray = array();
-
+	protected function buildPlaceDemandFromMap(Map $map) {
 		/** @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand $placeDemand */
 		$placeDemand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
 		$placeDemand->setConstraintsConjunction('or');
@@ -288,17 +287,7 @@ class MapController extends AbstractController {
 			$placeDemand->setLocationTypes($types);
 		}
 
-		/** @var QuerySettingsInterface $querySettings */
-		$querySettings = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QuerySettingsInterface');
-		$querySettings->setRespectStoragePage(FALSE);
-		$this->placeRepository->setDefaultQuerySettings($querySettings);
-
-		/** @var QueryResult $places */
-		$places = $this->placeRepository->findDemanded($placeDemand);
-		foreach($places as $place) {
-			$placesArray[] = $place->toArray(10, $this->settings['mapping']);
-		}
-		return $placesArray;
+		return $placeDemand;
 	}
 
 	/**
