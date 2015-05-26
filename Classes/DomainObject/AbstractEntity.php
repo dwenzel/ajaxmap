@@ -58,6 +58,10 @@ class AbstractEntity
 		$properties = ObjectAccess::getGettableProperties($this);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
+			if ($propertyValue instanceof LazyLoadingProxy) {
+				$propertyValue = $propertyValue->_loadRealInstance();
+			}
+
 			$hasMapping = FALSE;
 			$className = get_class($this);
 			if($mapping && count($mapping)) {
