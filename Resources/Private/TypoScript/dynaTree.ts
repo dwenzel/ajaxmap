@@ -22,13 +22,16 @@ plugin.tx_ajaxmap.settings {
 			uid = key
 			regions = children
 		}
+		Webfox\Ajaxmap\Domain\Model\Place {
+			uid = key
+			description = tooltip
+		}
 		Webfox\Ajaxmap\Domain\Model\PlaceGroup {
 			uid = key
 			place_groups = place_groups
 			categories = categories
 			description = tooltip
 		}
-
 		Webfox\Ajaxmap\Domain\Model\LocationType {
 			uid = key
 			icon = markerIcon 

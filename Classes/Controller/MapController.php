@@ -115,7 +115,7 @@ class MapController extends AbstractController {
 		switch ($task) {
 			case 'buildMap':
 				if ($mapId) {
-					$response = $map->toArray(100, $this->settings['mapping']);
+					$response = $map->toArray(5, $this->settings['mapping']);
 				}
 				break;
 			case 'getAddress':
