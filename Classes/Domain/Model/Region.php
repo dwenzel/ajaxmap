@@ -80,7 +80,7 @@ class Region extends AbstractEntity {
 	/**
 	 * Main Place
 	 *
-	 * @var Place
+	 * @var \Webfox\Ajaxmap\Domain\Model\Place
 	 * @lazy
 	 */
 	protected $mainPlace;
@@ -267,7 +267,7 @@ class Region extends AbstractEntity {
 	/**
 	 * Gets the main place
 	 *
-	 * @return Place
+	 * @return \Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	public function getMainPlace() {
 		return $this->mainPlace;
@@ -276,9 +276,9 @@ class Region extends AbstractEntity {
 	/**
 	 * Sets the main place
 	 *
-	 * @param Place $place
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
 	 */
-	public function setMainPlace(Place $place) {
+	public function setMainPlace($place) {
 		$this->mainPlace = $place;
 	}
 }
