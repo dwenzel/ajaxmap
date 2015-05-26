@@ -157,6 +157,7 @@ CREATE TABLE tx_ajaxmap_domain_model_region (
 	suppress_info_windows tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	preserve_viewport tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
+	main_place int(11) unsigned DEFAULT '0' NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

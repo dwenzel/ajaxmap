@@ -78,9 +78,17 @@ class Region extends AbstractEntity {
 	protected $regions;
 
 	/**
+	 * Main Place
+	 *
+	 * @var Place
+	 * @lazy
+	 */
+	protected $mainPlace;
+
+	/**
 	 * __construct
 	 *
-	 * @return void
+	 * @return \Webfox\Ajaxmap\Domain\Model\Region
 	 */
 	public function __construct() {
 		$this->initStorageObjects();
@@ -254,6 +262,24 @@ class Region extends AbstractEntity {
 	 */
 	public function addRegion(Region $region) {
 		$this->regions->attach($region);
+	}
+
+	/**
+	 * Gets the main place
+	 *
+	 * @return Place
+	 */
+	public function getMainPlace() {
+		return $this->mainPlace;
+	}
+
+	/**
+	 * Sets the main place
+	 *
+	 * @param Place $place
+	 */
+	public function setMainPlace(Place $place) {
+		$this->mainPlace = $place;
 	}
 }
 
