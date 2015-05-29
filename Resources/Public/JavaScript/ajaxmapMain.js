@@ -115,7 +115,7 @@ function initMap(mapNumber) {
 			// location types Selector
 			if (mapEntry.locationTypes.length) {
 				renderLocationTypesTree(mapEntry.id, mapEntry.locationTypes);
-				initLocationTypesSelector(mapNumber);
+				initLocationTypesSelector(mapEntry);
 			}
 
 			// placeGroups tree
@@ -133,16 +133,16 @@ function initMap(mapNumber) {
 	});
 }
 
-function initLocationTypesSelector(mapNumber) {
+function initLocationTypesSelector(mapEntry) {
 	// find selector by map id	
-	mapId = mapStore[mapNumber].id;
-	var currLocationTypes = mapStore[mapNumber].locationTypes;
+	mapId = mapEntry.id;
+	var currLocationTypes = mapEntry.locationTypes;
 	//remove empty option (since fluid doesn't build a select without option)
-	for (type in currLocationTypes) {
+	for (var type in currLocationTypes) {
 		$("<option/>").val(currLocationTypes[type].key).text(currLocationTypes[type].title).appendTo("#ajaxMapLocationTypesSelector" + mapId);
 	}
 	// set on change function for location types selector
-	$("#ajaxMapLocationTypesSelector" + mapId).change(function (mapNumber) {
+	$("#ajaxMapLocationTypesSelector" + mapId).change(function (mapEntry) {
 		mapNumber = getMapNumber(this.id.split("ajaxMapLocationTypesSelector")[1]);
 		updatePlaces(mapNumber);
 	})
@@ -209,10 +209,10 @@ function getMapNumber(mapId) {
 	}
 }
 
-function getLocationType(mapNumber, typeId) {
-	for (var i = 0; i < mapStore[mapNumber].locationTypes.length; i++) {
-		if (mapStore[mapNumber].locationTypes[i].key == typeId) {
-			return mapStore[mapNumber].locationTypes[i];
+function getLocationType(mapEntry, typeId) {
+	for (var i = 0; i < mapEntry.locationTypes.length; i++) {
+		if (mapEntry.locationTypes[i].key == typeId) {
+			return mapEntry.locationTypes[i];
 		}
 	}
 }
@@ -239,10 +239,6 @@ function renderTreeAjax(select, action, mapId) {
 		selectMode: 3,
 		onSelect: function (flag, node) {
 			var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynaTree' + action)[1]);
-			var selectedNodes = node.tree.getSelectedNodes();
-			var selectedKeys = $.map(selectedNodes, function (node) {
-				return node.data.key;
-			});
 			updatePlaces(mapNumber);
 		},
 		initAjax: {
@@ -348,7 +344,12 @@ function renderLocationTypesTree(mapId, children) {
 		checkbox: true,
 		cookieId: "dynaTreeLocationTypes" + mapId,
 		selectMode: 1,
-		children: children
+		children: children,
+		onSelect: function(flag, node) {
+			var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynaTreeLocationTypes')[1]);
+			updatePlaces(mapNumber);
+		}
+
 	};
 	$(selector).dynatree(settings);
 }
@@ -417,160 +418,179 @@ function getAddress(placeId) {
 	});
 	return address;
 }
+
+function createMarker(mapEntry, mapNumber, place){
+	var map = mapEntry.map,
+		currType = place.locationType.key,
+		tmpCenter = place.geoCoordinates.split(","),
+		currLatlng = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
+
+	var mapMarker = new google.maps.Marker({
+		position: currLatlng,
+		map: map,
+		title: place.title
+	});
+	if (currType) {
+		mapMarker.setIcon = getLocationType(mapEntry, currType).markerIcon;
+	}
+	mapMarker.mapNumber = mapNumber;
+	mapMarker.place = place;
+	// add click function
+	google.maps.event.addListener(mapMarker, 'click', function () {
+		map = this.getMap();
+		infoWindow = mapStore[this.mapNumber].infoWindow;
+		/**
+		 * @todo move content setup to function and make it configurable
+		 * add link for overlay with additional info
+		 */
+		// build a list of place's categories
+		if (this.place.categories) {
+			var list = '<div><ul class="placeCategories">';
+			$.each(this.place.categories, function () {
+				list += '<li>' + this.title + '</li>';
+			});
+			list += '</ul></div>';
+		}
+		/**
+		 * @todo - wrapping could be done by helper or server
+		 *  it should be possible too to configure content of infoWindow by TyoScript
+		 */
+		var addressJson = this.place.address;
+		if (typeof addressJson == 'undefined') {
+			// fetch address data from server
+			addressJson = getAddress(this.place.uid);
+		}
+		if (addressJson) {
+			var address = '';
+			address += '<div class="infoWindowAddress"><div class="infoWindowStreet">' + addressJson.address + '</div>' +
+			'<div class="infoWindowZip">' + addressJson.zip + '</div><div class="infoWindowCity">' + addressJson.city + '</div>' +
+				//'<div class="infoWindowPhone">' + addressJson.phone + '</div>' +
+				//'<div class="infowWindoMobile">' + addressJson.mobile + '</div>' +
+				//'<div class="infoWindowFax">' + addressJson.fax + '</div>' +
+
+				//'<a class="infoWindowWeb" href="http://' +addressJson.www +'">' + addressJson.www +'</a>' +
+			'</div>';
+			/*	$.each(addressJson, function(key, value){
+			 if(value != null){
+			 address += '<div>' + value + '</div>';
+			 }
+
+			 })*/
+			// store address when fetched for the first time and reuse it
+			this.place.address = addressJson;
+		}
+		content = '';
+		content += (this.place.title) ? '<h4 class="infoWindowTitle">' + this.place.title + '</h4>' : "";
+		//content +=(addressJson.tx_kecontacts_function)?'<div class="infoWindowType">' + addressJson.tx_kecontacts_function + '</div>': "";
+		content += (this.place.icon) ?
+		'<img width="120px" class="infoWindowImage" src="' + this.place.icon + '"/>' : "";
+		//'<p class="infoWindowDescription">' + this.place.description + '</p>';
+		content += (list) ? list : "";
+		content += (address) ? address : "";
+		/*
+		 *  special for ext. browser see below - should be changed to use own content
+		 */
+		content += '<div class="browserHelper"><a class="more" href="#">mehr</a></div>';
+		$('body').append('<div id="detailView"><a id="overlay-close" style="display: inline;"></a><divclass="inner"></div></div>');
+		$('#detailView').attr('placeId', this.place.uid);
+		infoWindow.
+			setContent(content);
+		google.maps.
+			event.addListener(infoWindow, 'domready', function () {
+				// remove old handler and add new
+				$('.more').unbind("click").bind(
+					"click", (function (event) {
+						event.preventDefault();
+						openDetailView(
+							"infoWindow", -1);
+						// prevent double event occurrence
+						event.stopPropagation();
+					}));
+			});
+		infoWindow.open(map, this);
+		/*
+		 *  this is kind of a hack to bring ajaxMap and extension browser together
+		 *  and should be moved to custom js
+		 */
+		//ajaxifySingleLinks($('.browserHelper'));
+
+	});
+	return mapMarker;
+}
+
 /*
  *  update display of places
- *  to be used on initial setup of map and each time when 
- *  selection changes 
+ *  to be used on initial setup of map and each time when
+ *  selection changes
  *  (triggerd by changing select field for location type
  *  and selection in dynatree
  *  @todo add filter for regions (overlays from kml files)
  */
 function updatePlaces(mapNumber) {
 	//get map for current map number
-	map = mapStore[mapNumber].map;
-	mapId = mapStore[mapNumber].id;
+	var mapEntry = mapStore[mapNumber],
+		map = mapEntry.map,
+		mapId = mapEntry.id,
+		mapPlaces = mapEntry.places,
+		mapMarker = mapEntry.markers || [],
+		selectedLocationTypeKeys = getSelectedKeys('#ajaxMapLocationTypesTree' + mapId),
+		selectedCategoryKeys = getSelectedKeys('#ajaxMapCategoryTree' + mapId),
+		selectedRegionsKeys = getSelectedKeys('#ajaxMapRegionsTree' + mapId),
+		selectedPlaceGroupsKeys = getSelectedKeys('#ajaxMapPlaceGroupTree' + mapId);
 
-	// get layers for current map number
-	mapPlaces = mapStore[mapNumber].places;
-	//get marker for map
-	mapMarker = mapStore[mapNumber].marker;
-	locationSelectorSelected = 'select#ajaxMapLocationTypesSelector' + mapId + ' option:selected';
-	actLocationType = $(locationSelectorSelected).val();
-	treeSelect = "#ajaxMapCategoryTree" + mapId;
-	var selectedNodes = $(treeSelect).dynatree("getSelectedNodes");
-	var selectedKeys = $.map(selectedNodes, function (node) {
-		return node.data.key;
-	});
+	console.log('selectedRegionKeys: ', selectedRegionsKeys);
+	console.log('selectedPlaceGroupsKeys: ', selectedPlaceGroupsKeys);
+
+	// get selected location type. This should only be one or none
+	if (selectedLocationTypeKeys.length) {
+		selectedLocationType = selectedLocationTypeKeys[0];
+	} else {
+		selectedLocationType = 0;
+	}
+
 	// add markers for all places
-	for (var i = 0, j = mapStore[mapNumber].places.length; i < j; i++) {
-
+	for (var i = 0, j = mapEntry.places.length; i < j; i++) {
+		var place = mapPlaces[i],
+			marker = mapMarker[i];
 		if (!mapMarker[i]) {
-			currType = parseInt(mapPlaces[i].locationType);
-			tmpCenter = mapPlaces[i].geoCoordinates.split(",");
-			currLatlng = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
-			mapMarker[i] = new google.maps.Marker({
-				position: currLatlng,
-				map: map,
-				title: mapPlaces[i].title,
-			});
-			if (currType) {
-				mapMarker[i].setIcon = getLocationType(mapNumber, currType).markerIcon;
-			}
-			mapMarker[i].mapNumber = mapNumber;
-			mapMarker[i].place = mapPlaces[i];
-			// add click function
-			google.maps.event.addListener(mapMarker[i], 'click', function () {
-				map = this.getMap();
-				infoWindow = mapStore[this.mapNumber].infoWindow;
-
-				/*
-				 * @todo move content setup to function and make it configurable
-				 * add link for overlay with additional info
-				 */
-
-				// build a list of place's categories
-				if (this.place.categories) {
-					var list = '<div class"accordion"><h4>Produkte</h4>' +
-						'<ul class="placeCategories">';
-					$.each(this.place.categories, function () {
-						list += '<li>' + this.title + '</li>';
-					})
-					list += '</ul></div>';
-				}
-
-				/*
-				 * @todo - wrapping could be done by helper or server
-				 *  it should be possible too to configure content of infoWindow by TyoScript
-				 */
-				var addressJson;
-				// has an address already?
-				if (this.place.address) {
-					addressJson = this.place.address;
-				}
-				else {
-					// fetch address data from server
-					addressJson = getAddress(this.place.uid);
-				}
-				if (addressJson) {
-					var address = '';
-					address += '<div class="infoWindowAddress"><div class="infoWindowStreet">' + addressJson.address + '</div>' +
-					'<div class="infoWindowZip">' + addressJson.zip + '</div><div class="infoWindowCity">' + addressJson.city + '</div>' +
-						//'<div class="infoWindowPhone">' + addressJson.phone + '</div>' +
-						//'<div class="infowWindoMobile">' + addressJson.mobile + '</div>' +
-						//'<div class="infoWindowFax">' + addressJson.fax + '</div>' +
-						//'<a class="infoWindowWeb" href="http://' +addressJson.www +'">' + addressJson.www +'</a>' +
-					'</div>';
-
-					/*	$.each(addressJson, function(key, value){
-					 if(value != null){
-					 address += '<div>' + value + '</div>';
-					 }
-
-					 })*/
-					// store address when fetched for the first time and reuse it
-					this.place.address = addressJson;
-				}
-				content = '';
-				content += (this.place.title) ? '<h4 class="infoWindowTitle">' + this.place.title + '</h4>' : "";
-				//content +=(addressJson.tx_kecontacts_function)?'<div class="infoWindowType">' + addressJson.tx_kecontacts_function + '</div>': "";
-				content += (this.place.icon) ? '<img width="120px" class="infoWindowImage" src="' + this.place.icon + '"/>' : "";
-				//'<p class="infoWindowDescription">' + this.place.description + '</p>';
-				content += (list) ? list : "";
-				content += (address) ? address : "";
-
-				/*
-				 *  special for ext. browser see below - should be changed to use own content
-				 */
-				content += '<div class="browserHelper"><a class="more" href="#">mehr</a></div>';
-				$('body').append('<div id="detailView"><a id="overlay-close" style="display: inline;"></a><div class="inner"></div></div>');
-				$('#detailView').attr('placeId', this.place.uid);
-				infoWindow.setContent(content);
-				google.maps.event.addListener(infoWindow, 'domready', function () {
-					// remove old handler and add new
-					$('.more').unbind("click").bind("click", (function (event) {
-						event.preventDefault();
-						openDetailView("infoWindow", -1);
-						// prevent double event occurrence
-						event.stopPropagation();
-						//alert('klick');
-					}));
-				});
-				/***/
-				infoWindow.open(map, this);
-				/*
-				 *  this is kind of a hack to bring ajaxMap and extension browser together
-				 *  and should be moved to custom js
-				 */
-				//ajaxifySingleLinks($('.browserHelper'));
-
-			});
-		}
-		else {
-			var hasSelectedKeys = -1;
-			if (selectedKeys == 0) {
-				hasSelectedKeys = 1
-			}
-			else {
-				if (mapMarker[i].place.categories) {
-					$.each(mapMarker[i].place.categories, function () {
-						hasSelectedKeys = $.inArray(parseInt(this.uid), selectedKeys);
-						return (hasSelectedKeys == -1) ? true : false;
+			// marker does not exist, create it
+			mapMarker[i] = createMarker(mapEntry, mapNumber, place);
+		} else {
+			var hasAnActiveCategory = -1;
+			var hasAnActiveRegion = -1;
+			if (selectedCategoryKeys == 0) {
+				hasAnActiveCategory = 1
+			} else {
+				if (marker.place.categories) {
+					$.each(marker.place.categories, function () {
+						hasAnActiveCategory = $.inArray(parseInt(this.key), selectedCategoryKeys);
+						return (hasAnActiveCategory == -1);
 					});
 				}
 			}
 
-			if ((mapPlaces[i].locationType == actLocationType || actLocationType == 0) && hasSelectedKeys != -1) {
-				mapMarker[i].setMap(map);
+			if (selectedRegionsKeys !== 0 && marker.place.regions) {
+				$.each(marker.place.regions, function () {
+					hasAnActiveRegion = $.inArray(parseInt(this.key), selectedRegionsKeys);
+					return (hasAnActiveRegion == -1);
+				});
+			}
+
+			if (
+				(place.locationType.key == selectedLocationType || selectedLocationType == 0)
+				&& hasAnActiveCategory != -1
+				&& hasAnActiveRegion != -1) {
+				marker.setMap(map);
 			}
 			else {
-				mapMarker[i].setMap(null);
+				marker.setMap(null);
 			}
 		}
 
 	}
 	;
 	//set marker for map
-	mapStore[mapNumber].marker = mapMarker;
+	mapEntry.markers = mapMarker;
 }
 
 function openDetailView(caller, placeId) {
@@ -635,3 +655,9 @@ function openDetailView(caller, placeId) {
 	}
 }
 
+function getSelectedKeys(selector) {
+	var selectedNodes = $(selector).dynatree('getSelectedNodes');
+	return $.map(selectedNodes, function (node) {
+		return parseInt(node.data.key);
+	});
+}
