@@ -495,11 +495,9 @@ function createMarker(mapEntry, mapNumber, place){
 		$('#detailView').attr('placeId', this.place.uid);
 		infoWindow.
 			setContent(content);
-		google.maps.
-			event.addListener(infoWindow, 'domready', function () {
+		google.maps.event.addListener(infoWindow, 'domready', function () {
 				// remove old handler and add new
-				$('.more').unbind("click").bind(
-					"click", (function (event) {
+				$('.more').unbind("click").bind("click", (function (event) {
 						event.preventDefault();
 						openDetailView(
 							"infoWindow", -1);
@@ -527,59 +525,49 @@ function createMarker(mapEntry, mapNumber, place){
  *  @todo add filter for regions (overlays from kml files)
  */
 function updatePlaces(mapNumber) {
-	//get map for current map number
 	var mapEntry = mapStore[mapNumber],
 		map = mapEntry.map,
 		mapId = mapEntry.id,
 		mapPlaces = mapEntry.places,
-		mapMarker = mapEntry.markers || [],
+		mapMarkers = mapEntry.markers || [],
 		selectedLocationTypeKeys = getSelectedKeys('#ajaxMapLocationTypesTree' + mapId),
 		selectedCategoryKeys = getSelectedKeys('#ajaxMapCategoryTree' + mapId),
-		selectedRegionsKeys = getSelectedKeys('#ajaxMapRegionsTree' + mapId),
+		selectedRegionKeys = getSelectedKeys('#ajaxMapRegionsTree' + mapId),
 		selectedPlaceGroupsKeys = getSelectedKeys('#ajaxMapPlaceGroupTree' + mapId);
 
-	console.log('selectedRegionKeys: ', selectedRegionsKeys);
-	console.log('selectedPlaceGroupsKeys: ', selectedPlaceGroupsKeys);
-
-	// get selected location type. This should only be one or none
+	// get selected location type. This should be one or none
 	if (selectedLocationTypeKeys.length) {
 		selectedLocationType = selectedLocationTypeKeys[0];
-	} else {
-		selectedLocationType = 0;
 	}
 
 	// add markers for all places
 	for (var i = 0, j = mapEntry.places.length; i < j; i++) {
 		var place = mapPlaces[i],
-			marker = mapMarker[i];
-		if (!mapMarker[i]) {
+			marker = mapMarkers[i];
+		if (!mapMarkers[i]) {
 			// marker does not exist, create it
-			mapMarker[i] = createMarker(mapEntry, mapNumber, place);
+			mapMarkers[i] = createMarker(mapEntry, mapNumber, place);
 		} else {
-			var hasAnActiveCategory = -1;
-			var hasAnActiveRegion = -1;
-			if (selectedCategoryKeys == 0) {
-				hasAnActiveCategory = 1
-			} else {
+			var hasAnActiveCategory = 0;
+			var hasAnActiveRegion = 0;
 				if (marker.place.categories) {
 					$.each(marker.place.categories, function () {
-						hasAnActiveCategory = $.inArray(parseInt(this.key), selectedCategoryKeys);
-						return (hasAnActiveCategory == -1);
+						hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
+						return (!hasAnActiveCategory);
 					});
 				}
-			}
 
-			if (selectedRegionsKeys !== 0 && marker.place.regions) {
+			if (selectedRegionKeys.length && marker.place.regions) {
 				$.each(marker.place.regions, function () {
-					hasAnActiveRegion = $.inArray(parseInt(this.key), selectedRegionsKeys);
-					return (hasAnActiveRegion == -1);
+					hasAnActiveRegion = ($.inArray(parseInt(this.key), selectedRegionKeys) > -1);
+					return (!hasAnActiveRegion);
 				});
 			}
 
 			if (
-				(place.locationType.key == selectedLocationType || selectedLocationType == 0)
-				&& hasAnActiveCategory != -1
-				&& hasAnActiveRegion != -1) {
+				(place.locationType.key == selectedLocationType || !selectedLocationTypeKeys.length)
+				&& (hasAnActiveCategory || !selectedCategoryKeys.length)
+				&& (hasAnActiveRegion || !selectedRegionKeys.length)) {
 				marker.setMap(map);
 			}
 			else {
@@ -588,9 +576,7 @@ function updatePlaces(mapNumber) {
 		}
 
 	}
-	;
-	//set marker for map
-	mapEntry.markers = mapMarker;
+	mapEntry.markers = mapMarkers;
 }
 
 function openDetailView(caller, placeId) {
@@ -600,8 +586,8 @@ function openDetailView(caller, placeId) {
 			break;
 		case "listView":
 			//placeId= ;
-			break
-		default :
+			break;
+		default:
 			break;
 	}
 	var singleContent;
