@@ -107,8 +107,8 @@ $TCA['tx_ajaxmap_domain_model_placegroup'] = array(
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_placegroup.description',
 			'config' => array(
 				'type' => 'text',
-				'cols' => 40,
-				'rows' => 15,
+				'cols' => 32,
+				'rows' => 3,
 				'eval' => 'trim'
 			),
 		),
@@ -117,11 +117,11 @@ $TCA['tx_ajaxmap_domain_model_placegroup'] = array(
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_placegroup.icon',
 			'config' => array(
 				'type' => 'group',
-				'internal_type' => 'file',
-				'uploadfolder' => 'uploads/tx_ajaxmap',
+				'internal_type' => 'file_reference',
 				'show_thumbs' => 1,
-				'size' => 5,
+				'size' => 1,
 				'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+				'uploadfolder' => 'uploads/tx_ajaxmap',
 				'disallowed' => '',
 			),
 		),
@@ -146,14 +146,6 @@ $TCA['tx_ajaxmap_domain_model_placegroup'] = array(
 				'wizards' => array(
 					'_PADDING' => 1,
 					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
 					'add' => Array(
 						'type' => 'script',
 						'title' => 'Create new',
@@ -173,20 +165,3 @@ $TCA['tx_ajaxmap_domain_model_placegroup'] = array(
 		),
 	),
 );
-
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-$TCA['tx_ajaxmap_domain_model_placegroup']['columns']['icon']['config'] = array(
-	'type' => 'group',
-	'internal_type' => 'file_reference',
-	'show_thumbs' => 1,
-	'size' => 1,
-	'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-	'disallowed' => '',
-);
-$TCA['tx_ajaxmap_domain_model_placegroup']['columns']['description']['config'] = array(
-	'type' => 'text',
-	'cols' => 32,
-	'rows' => 3,
-	'eval' => 'trim'
-);
-?>

@@ -148,6 +148,7 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_ajaxmap_domain_model_placegroup',
+				'MM' => 'tx_ajaxmap_place_placegroup_mm',
 				'renderMode' => 'tree',
 				'treeConfig' => array(
 					'appearance' => array(
@@ -222,14 +223,6 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 				'wizards' => array(
 					'_PADDING' => 1,
 					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
 					'add' => Array(
 						'type' => 'script',
 						'title' => 'Create new',
@@ -276,23 +269,16 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.address',
 			'config' => array(
-				'type' => 'select',
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tt_address',
 				'foreign_table' => 'tt_address',
+				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
 			),
 		),
 	),
-);
-
-$TCA['tx_ajaxmap_domain_model_place']['columns']['address']['config'] = array(
-	'type' => 'group',
-	'internal_type' => 'db',
-	'allowed' => 'tt_address',
-	'foreign_table' => 'tt_address',
-	'size' => 1,
-	'minitems' => 0,
-	'maxitems' => 1,
 );
 
 $TCA['tx_ajaxmap_domain_model_place']['columns']['description']['config'] = array(

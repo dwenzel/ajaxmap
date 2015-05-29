@@ -145,7 +145,7 @@ $TCA['tx_ajaxmap_domain_model_region'] = array(
 				'type' => 'select',
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'foreign_table_where' => ' AND tx_ajaxmap_domain_model_region.uid!=###THIS_UID###',
-				'MM' => 'tx_ajaxmap_place_region_mm',
+				'MM' => 'tx_ajaxmap_region_region_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
