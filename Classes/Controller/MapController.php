@@ -19,6 +19,7 @@ namespace Webfox\Ajaxmap\Controller;
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
+use Webfox\Ajaxmap\Domain\Model\Place;
 use Webfox\Ajaxmap\Domain\Repository\MapRepository;
 use Webfox\Ajaxmap\Domain\Repository\PlaceRepository;
 use Webfox\Ajaxmap\Domain\Repository\RegionRepository;
@@ -146,7 +147,7 @@ class MapController extends AbstractController {
 					/** @var QueryResult $placeObjects */
 					$placeObjects = $this->placeRepository->findDemanded($placeDemand, TRUE, NULL, FALSE);
 					foreach($placeObjects as $place) {
-						$places[] = $place->toArray(10, $this->settings['mapping']);
+						$places[] = $place->toArray(2, $this->settings['mapping']['listPlaces']);
 					}
 				}
 			}
@@ -295,7 +296,13 @@ class MapController extends AbstractController {
 	 * @return array|NULL
 	 */
 	private function getAddressForPlace($placeId) {
-		return $this->placeRepository->findAddressForPlace($placeId);
+		$address = array();
+		/** @var Place $place */
+		$place = $this->placeRepository->findByUid($placeId);
+		if ($place) {
+			$address = $place->getAddress()->toArray();
+		}
+		return $address;
 	}
 
 }
