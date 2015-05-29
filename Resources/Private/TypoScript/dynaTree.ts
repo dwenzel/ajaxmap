@@ -14,27 +14,78 @@ page {
 
 plugin.tx_ajaxmap.settings {
 	mapping {
+		Webfox\Ajaxmap\Domain\Model\Map {
+			categories.exclude = 1
+			pid.exclude = 1
+			placeGroups.exclude = 1
+		}
 		Webfox\Ajaxmap\Domain\Model\Category {
-			uid = key
-			description = tooltip
+			pid.exclude = 1
+			uid.mapTo = key
 		}
 		Webfox\Ajaxmap\Domain\Model\Region {
-			uid = key
-			regions = children
+			uid.mapTo = key
+			regions {
+				mapTo = children
+				maxDept = 5
+			}
+			pid.exclude = 1
 		}
 		Webfox\Ajaxmap\Domain\Model\Place {
-			uid = key
-			description = tooltip
+			uid.mapTo = key
+			description.mapTo = tooltip
+			pid.exclude = 1
+			info.exclude = 1
 		}
 		Webfox\Ajaxmap\Domain\Model\PlaceGroup {
-			uid = key
-			place_groups = place_groups
-			categories = categories
-			description = tooltip
+			uid.mapTo = key
+			description.mapTo = tooltip
+			pid.exclude = 1
 		}
 		Webfox\Ajaxmap\Domain\Model\LocationType {
-			uid = key
-			icon = markerIcon 
+			uid.mapTo = key
+			icon.mapTo = markerIcon
+			pid.exclude = 1
+		}
+	}
+	// mapping for ajaxListPlaces action
+	mapping.listPlaces {
+		Webfox\Ajaxmap\Domain\Model\Category {
+			uid.mapTo = key
+			pid.exclude = 1
+			//title.exclude = 1
+			description.exclude = 1
+			icon.exclude = 1
+			parent.exclude = 1
+		}
+		Webfox\Ajaxmap\Domain\Model\Region {
+			uid.mapTo = key
+			regions {
+				maxDept = 1
+			}
+			pid.exclude = 1
+		}
+		Webfox\Ajaxmap\Domain\Model\Place {
+			uid.mapTo = key
+			description.mapTo = tooltip
+			pid.exclude = 1
+			info.exclude = 1
+			content.exclude = 1
+		}
+		Webfox\Ajaxmap\Domain\Model\PlaceGroup {
+			uid.mapTo = key
+			description.exclude = 1
+			pid.exclude = 1
+			title.exclude = 1
+			parent.exclude = 1
+			icon.exclude = 1
+		}
+		Webfox\Ajaxmap\Domain\Model\LocationType {
+			uid.mapTo = key
+			description.exclude = 1
+			icon.exclude = 1
+			pid.exclude = 1
+			title.exclude = 1
 		}
 	}
 }

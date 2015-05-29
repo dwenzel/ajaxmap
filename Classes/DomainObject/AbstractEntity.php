@@ -52,26 +52,37 @@ class AbstractEntity
 			$this->_loadRealInstance();
 		}
 		if($treeDepth < 1) {
-			return 'maximum tree depth reached!';
+			return NULL;
 		}
 		$treeDepth = $treeDepth - 1;
 		$properties = ObjectAccess::getGettableProperties($this);
 		$result = array();
 		foreach($properties as $propertyName=>$propertyValue) {
+			$maxDept = $treeDepth;
+
 			if ($propertyValue instanceof LazyLoadingProxy) {
 				$propertyValue = $propertyValue->_loadRealInstance();
 			}
 
 			$hasMapping = FALSE;
 			$className = get_class($this);
-			if($mapping && count($mapping)) {
+			if((bool)$mapping) {
 				$hasMapping = isset($mapping[$className]);
 			}
 			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {
-				$propertyName = $mapping[$className][$propertyName];
+				if (isset($mapping[$className][$propertyName]['mapTo'])) {
+					$propertyName = $mapping[$className][$propertyName]['mapTo'];
+				} elseif (isset($mapping[$className][$propertyName]['exclude'])){
+					continue;
+				}
+
+				if (isset($mapping[$className][$propertyName]['maxDept'])) {
+					$maxDept = $mapping[$className][$propertyName]['maxDept'];
+				}
 			}
-			$result[$propertyName] = $this->convertValueToArray($propertyValue, $treeDepth, $mapping);
+			$result[$propertyName] = $this->convertValueToArray($propertyValue, $maxDept, $mapping);
 		}
+
 		return $result;
 	}
 
