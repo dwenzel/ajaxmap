@@ -232,10 +232,23 @@ CREATE TABLE tx_ajaxmap_domain_model_locationtype (
 );
 
 #
-# Table structure for table 'tx_ajaxmap_placegroup_placegroup_mm'
+# Table structure for table 'tx_ajaxmap_place_placegroup_mm'
 # @todo do we need this (parent field)
 #
-CREATE TABLE tx_ajaxmap_placegroup_placegroup_mm (
+CREATE TABLE tx_ajaxmap_place_placegroup_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_ajaxmap_region_region_mm'
+#
+CREATE TABLE tx_ajaxmap_region_region_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

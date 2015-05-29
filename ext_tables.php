@@ -37,6 +37,7 @@ $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_
 						'starttime' => 'starttime',
 						'endtime' => 'endtime',
 					),
+					'sortby' => 'sorting',
 					'dynamicConfigFile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($_EXTKEY) . 'Configuration/TCA/PlaceGroup.php',
 					'iconfile' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_ajaxmap_domain_model_placegroup.gif'
 				),
