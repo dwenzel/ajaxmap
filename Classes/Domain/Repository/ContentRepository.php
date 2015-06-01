@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +24,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Extbase\Persistence\Repository;
 /**
  *
  *
@@ -31,7 +32,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Repository_CategoryRepository extends Tx_Extbase_Persistence_Repository {
+class ContentRepository extends Repository {
 
 }
-?>
+

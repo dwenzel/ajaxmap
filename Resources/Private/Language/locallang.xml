@@ -6,17 +6,17 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_ajaxmap_domain_model_category">Category</label>
-			<label index="tx_ajaxmap_domain_model_category.title">Title</label>
-			<label index="tx_ajaxmap_domain_model_category.description">description</label>
-			<label index="tx_ajaxmap_domain_model_category.icon">icon</label>
-			<label index="tx_ajaxmap_domain_model_category.child_categories">childCategories</label>
+			<label index="tx_ajaxmap_domain_model_placegroup">Place Group</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.description">description</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.icon">icon</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.place_groups">Place Groups</label>
 			<label index="tx_ajaxmap_domain_model_place">Place</label>
 			<label index="tx_ajaxmap_domain_model_place.title">Geographic location - defined by its latitude and longitude</label>
 			<label index="tx_ajaxmap_domain_model_place.geo_coordinates">Enter  geo coordinates (latitude,longitude - 10.99999,51.8888)</label>
 			<label index="tx_ajaxmap_domain_model_place.description">description</label>
 			<label index="tx_ajaxmap_domain_model_place.info">Additional info. Can be shown in info window.</label>
-			<label index="tx_ajaxmap_domain_model_place.category">category</label>
+			<label index="tx_ajaxmap_domain_model_place.placeGroups">Place Groups</label>
 			<label index="tx_ajaxmap_domain_model_place.type">type</label>
 			<label index="tx_ajaxmap_domain_model_place.regions">regions</label>
 			<label index="tx_ajaxmap_domain_model_place.content">Add content.</label>
@@ -30,7 +30,7 @@
 			<label index="tx_ajaxmap_domain_model_map.initial_zoom">initialZoom</label>
 			<label index="tx_ajaxmap_domain_model_map.map_style">optional Style (json Array)</label>
 			<label index="tx_ajaxmap_domain_model_map.disable_default_ui">disable default UI</label>
-			<label index="tx_ajaxmap_domain_model_map.categories">Select items for display by category.</label>
+			<label index="tx_ajaxmap_domain_model_map.placeGroups">Select items for display by place group.</label>
 			<label index="tx_ajaxmap_domain_model_map.regions">regions</label>
 			<label index="tx_ajaxmap_domain_model_map.places">Display selected places as markers.</label>
 			<label index="tx_ajaxmap_domain_model_region">Region</label>

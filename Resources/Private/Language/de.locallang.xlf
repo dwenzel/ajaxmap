@@ -4,20 +4,20 @@
 		<header/>
 		<body>
 
-			<trans-unit id="tx_ajaxmap_domain_model_category">
-				<source>Kategorie</source>
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup">
+				<source>Ortegruppierung</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.title">
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.title">
 				<source>Titel</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.description">
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.description">
 				<source>Beschreibung</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.icon">
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.icon">
 				<source>Symbol</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.child_categories">
-				<source>Unterkategorien</source>
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.parent">
+				<source>Elternelement</source>
 			</trans-unit>
 			
 			<trans-unit id="tx_ajaxmap_domain_model_place">
@@ -35,8 +35,8 @@
 			<trans-unit id="tx_ajaxmap_domain_model_place.info">
 				<source>Zusätzliche Informationen. Können in einem Info-Fenster angezeigt werden.</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.category">
-				<source>Kategorie</source>
+			<trans-unit id="tx_ajaxmap_domain_model_place.placeGroups">
+				<source>Gruppierung (Orte)</source>
 			</trans-unit>
 			<trans-unit id="tx_ajaxmap_domain_model_place.type">
 				<source>Typ</source>
@@ -78,8 +78,8 @@
 			<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui">
 				<source>Standard Benutzeroberfläche deaktivieren</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.categories">
-				<source>Elemente zur Darstellung nach Kategorie auswählen.</source>
+			<trans-unit id="tx_ajaxmap_domain_model_map.placeGroups">
+				<source>Elemente zur Darstellung nach Gruppe auswählen.</source>
 			</trans-unit>
 			<trans-unit id="tx_ajaxmap_domain_model_map.regions">
 				<source>Regionen</source>

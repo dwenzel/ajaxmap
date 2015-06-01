@@ -4,22 +4,25 @@
 		<header/>
 		<body>
 
-			<trans-unit id="tx_ajaxmap_domain_model_category">
-				<source>Category</source>
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup">
+				<source>Place Group</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.title">
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.title">
 				<source>Title</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.description">
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.description">
 				<source>description</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.icon">
-				<source>icon</source>
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.icon">
+				<source>Icon</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_category.child_categories">
-				<source>childCategories</source>
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.place_groups">
+				<source>Place Groups</source>
 			</trans-unit>
-			
+			<trans-unit id="tx_ajaxmap_domain_model_placegroup.parent">
+				<source>Parent</source>
+			</trans-unit>
+
 			<trans-unit id="tx_ajaxmap_domain_model_place">
 				<source>Place</source>
 			</trans-unit>
@@ -35,8 +38,8 @@
 			<trans-unit id="tx_ajaxmap_domain_model_place.info">
 				<source>Additional info. Can be shown in info window.</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_place.category">
-				<source>category</source>
+			<trans-unit id="tx_ajaxmap_domain_model_place.placeGroups">
+				<source>Place Group</source>
 			</trans-unit>
 			<trans-unit id="tx_ajaxmap_domain_model_place.type">
 				<source>type</source>
@@ -78,8 +81,8 @@
 			<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui">
 				<source>disable default UI</source>
 			</trans-unit>
-			<trans-unit id="tx_ajaxmap_domain_model_map.categories">
-				<source>Select items for display by category.</source>
+			<trans-unit id="tx_ajaxmap_domain_model_map.placeGroups">
+				<source>Select items for display by place group.</source>
 			</trans-unit>
 			<trans-unit id="tx_ajaxmap_domain_model_map.regions">
 				<source>regions</source>

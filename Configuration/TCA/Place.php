@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ajaxmap_domain_model_place'] = array(
 	'ctrl' => $TCA['tx_ajaxmap_domain_model_place']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, geo_coordinates, description, info, category, type, regions, content, address',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, geo_coordinates, description, info, place_groups, location_type, regions, content, address',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, geo_coordinates, description, info, category, type, regions, content, address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, geo_coordinates, description, info, place_groups, location_type, regions, content, address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -142,13 +142,22 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 			),
 			'defaultExtras' => 'richtext[]',
 		),
-		'category' => array(
+		'place_groups' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.category',
+			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.placeGroups',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_ajaxmap_domain_model_category',
-				'MM' => 'tx_ajaxmap_place_category_mm',
+				'foreign_table' => 'tx_ajaxmap_domain_model_placegroup',
+				'MM' => 'tx_ajaxmap_place_placegroup_mm',
+				'renderMode' => 'tree',
+				'treeConfig' => array(
+					'appearance' => array(
+						'expandAll' => 1,
+						'maxLevels' => 99,
+						'showHeader' => 1
+					),
+					'parentField' => 'parent',
+				),
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
@@ -169,21 +178,18 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table' => 'tx_ajaxmap_domain_model_category',
+							'table' => 'tx_ajaxmap_domain_model_placegroup',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 							),
 						'script' => 'wizard_add.php',
 					),
-					'suggest' => array(    
-					  	'type' => 'suggest',
-					),
 				),
 			),
 		),
-		'type' => array(
+		'location_type' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.type',
+			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.location_type',
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_ajaxmap_domain_model_locationtype',
@@ -203,8 +209,6 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 				'disallowed' => '',
 			),
 		),
-		
-		
 		'regions' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.regions',
@@ -219,14 +223,6 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 				'wizards' => array(
 					'_PADDING' => 1,
 					'_VERTICAL' => 1,
-					'edit' => array(
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						),
 					'add' => Array(
 						'type' => 'script',
 						'title' => 'Create new',
@@ -273,25 +269,16 @@ $TCA['tx_ajaxmap_domain_model_place'] = array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.address',
 			'config' => array(
-				'type' => 'select',
+				'type' => 'group',
+				'internal_type' => 'db',
+				'allowed' => 'tt_address',
 				'foreign_table' => 'tt_address',
+				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
 			),
 		),
 	),
-);
-
-## EXTENSION BUILDER DEFAULTS END TOKEN - Everything BEFORE this line is overwritten with the defaults of the extension builder
-# overwrite settings from extension builder
-$TCA['tx_ajaxmap_domain_model_place']['columns']['address']['config'] = array(
-	'type' => 'group',
-	'internal_type' => 'db',
-	'allowed' => 'tt_address',
-	'foreign_table' => 'tt_address',
-	'size' => 1,
-	'minitems' => 0,
-	'maxitems' => 1,
 );
 
 $TCA['tx_ajaxmap_domain_model_place']['columns']['description']['config'] = array(
@@ -302,10 +289,10 @@ $TCA['tx_ajaxmap_domain_model_place']['columns']['description']['config'] = arra
 );
 
 $TCA['tx_ajaxmap_domain_model_place']['interface'] = array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, type, title, address, description,  geo_coordinates, category, regions, info, icon, content',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, location_type, title, address, description,  geo_coordinates, place_groups, regions, info, icon, content',
 	);
 $TCA['tx_ajaxmap_domain_model_place']['types'] = array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, type, title, address, description, geo_coordinates,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.attribution, category, regions,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.content, info, icon, content, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, location_type, title, address, description, geo_coordinates,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.attribution, place_groups, regions,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.content, info, icon, content, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 );
 $TCA['tx_ajaxmap_domain_model_place']['palettes'] = array(
 		'1' => array(

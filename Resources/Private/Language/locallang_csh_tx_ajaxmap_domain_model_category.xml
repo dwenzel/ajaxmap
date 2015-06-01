@@ -9,7 +9,7 @@
 			<label index="title.description">Title</label>
 			<label index="description.description">description</label>
 			<label index="icon.description">icon</label>
-			<label index="child_categories.description">childCategories</label>
+			<label index="place_groups.description">Place Groups</label>
 		</languageKey>
 	</data>
 </T3locallang>

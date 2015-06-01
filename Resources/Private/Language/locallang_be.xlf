@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" datatype="plaintext" original="messages" date="2014-07-01T13:03:33Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="flexforms_general.backPage" xml:space="preserve">
+			<source>Back Page</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroups" xml:space="preserve">
+			<source>Place Groups</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction" xml:space="preserve">
+			<source>Place Group Mode</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.and" xml:space="preserve">
+			<source>Show items with selected place groups (AND)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.empty" xml:space="preserve">
+			<source>Ignore selected place groups.</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notand" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (AND)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notor" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (OR)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.or" xml:space="preserve">
+			<source>Show items with selected place groups (OR)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraints" xml:space="preserve">
+			<source>Selection</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction" xml:space="preserve">
+			<source>Conjunction</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction.and" xml:space="preserve">
+			<source>AND</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction.or" xml:space="preserve">
+			<source>OR</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.detailPage" xml:space="preserve">
+			<source>Detail Page</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.entryDate" xml:space="preserve">
+			<source>Entry Date</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.height" xml:space="preserve">
+			<source>Height</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.identifier" xml:space="preserve">
+			<source>Identifier</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.initialZoom" xml:space="preserve">
+			<source>Initial Zoom</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.latitude" xml:space="preserve">
+			<source>Latitude</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.listPage" xml:space="preserve">
+			<source>List Page</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.locationTypes" xml:space="preserve">
+			<source>Location Types</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.locations" xml:space="preserve">
+			<source>Locations</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.longitude" xml:space="preserve">
+			<source>Longitude</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.map" xml:space="preserve">
+			<source>Map</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType" xml:space="preserve">
+			<source>Map Display Type</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.singleView" xml:space="preserve">
+			<source>Single View</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.switchView" xml:space="preserve">
+			<source>switch between list and map</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.syncWithPagination" xml:space="preserve">
+			<source>sync with pagination</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.maximumZoom" xml:space="preserve">
+			<source>Maximum Zoom</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.optionGroupOthers" xml:space="preserve">
+			<source>Others</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.optionGroupSearch" xml:space="preserve">
+			<source>Search</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderBy" xml:space="preserve">
+			<source>sort by</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection" xml:space="preserve">
+			<source>sort direction</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection.ascending" xml:space="preserve">
+			<source>ascending</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection.descending" xml:space="preserve">
+			<source>descending</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.pages" xml:space="preserve">
+			<source>Pages</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.quickMenu" xml:space="preserve">
+			<source>Quick Menu</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm" xml:space="preserve">
+			<source>Search Form</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm.extended" xml:space="preserve">
+			<source>Search Form (extended)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm.simple" xml:space="preserve">
+			<source>Search Form (simple)</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchResult" xml:space="preserve">
+			<source>Search Result</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.select_function" xml:space="preserve">
+			<source>What to display</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.settings" xml:space="preserve">
+			<source>Settings</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showCategorySelector" xml:space="preserve">
+			<source>Show Place Group Selector</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showConjunctionSelector" xml:space="preserve">
+			<source>Show Conjunction Selector</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showSearchField" xml:space="preserve">
+			<source>Show Search Field</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.template" xml:space="preserve">
+			<source>Template</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.templateLayout" xml:space="preserve">
+			<source>Template Layout</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.title" xml:space="preserve">
+			<source>Title</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.type" xml:space="preserve">
+			<source>Location Type</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.users" xml:space="preserve">
+			<source>Users</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.width" xml:space="preserve">
+			<source>Width</source>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

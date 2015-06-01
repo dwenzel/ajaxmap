@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_LocationType.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\LocationType.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,18 +37,22 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class LocationTypeTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class LocationTypeTest extends UnitTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_LocationType
+	 * @var \Webfox\Ajaxmap\Domain\Model\LocationType
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_LocationType();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\LocationType();
 	}
 
 	/**
@@ -112,6 +117,23 @@ class Tx_Ajaxmap_Domain_Model_LocationTypeTest extends Tx_Extbase_Tests_Unit_Bas
 			$this->fixture->getIcon()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsInitialValueForArray() {
+		$result = array(
+				'description' => null,
+				'icon' => null,
+				'pid' => null,
+				'title' => null,
+				'uid' => null,
+		);
+		$this->assertSame(
+				$this->fixture->toArray(),
+				$result
+		);
+	}
+
 }
 ?>

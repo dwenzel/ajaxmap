@@ -6,17 +6,17 @@
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_ajaxmap_domain_model_category">Category</label>
-			<label index="tx_ajaxmap_domain_model_category.title">Title</label>
-			<label index="tx_ajaxmap_domain_model_category.description">Description</label>
-			<label index="tx_ajaxmap_domain_model_category.icon">Icon</label>
-			<label index="tx_ajaxmap_domain_model_category.child_categories">Child Categories</label>
+			<label index="tx_ajaxmap_domain_model_placegroup">Place Group</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.title">Title</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.description">Description</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.icon">Icon</label>
+			<label index="tx_ajaxmap_domain_model_placegroup.parent">Parent</label>
 			<label index="tx_ajaxmap_domain_model_place">Place</label>
 			<label index="tx_ajaxmap_domain_model_place.title">Title</label>
 			<label index="tx_ajaxmap_domain_model_place.geo_coordinates">Geo Coordinates</label>
 			<label index="tx_ajaxmap_domain_model_place.description">Description</label>
 			<label index="tx_ajaxmap_domain_model_place.info">Info</label>
-			<label index="tx_ajaxmap_domain_model_place.category">Category</label>
+			<label index="tx_ajaxmap_domain_model_place.placeGroups">Place Groups</label>
 			<label index="tx_ajaxmap_domain_model_place.type">Type</label>
 			<label index="tx_ajaxmap_domain_model_place.icon">Icon</label>
 			<label index="tx_ajaxmap_domain_model_place.regions">Regions</label>
@@ -31,7 +31,7 @@
 			<label index="tx_ajaxmap_domain_model_map.initial_zoom">Initial Zoom</label>
 			<label index="tx_ajaxmap_domain_model_map.map_style">Map Style</label>
 			<label index="tx_ajaxmap_domain_model_map.disable_default_ui">Disable Default UI</label>
-			<label index="tx_ajaxmap_domain_model_map.categories">Categories</label>
+			<label index="tx_ajaxmap_domain_model_map.placeGroups">Place Groups</label>
 			<label index="tx_ajaxmap_domain_model_map.regions">Regions</label>
 			<label index="tx_ajaxmap_domain_model_map.markers">Markers</label>
 			<label index="tx_ajaxmap_domain_model_map.overlays">Overlays</label>

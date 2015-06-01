@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Content.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Content.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +37,21 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_ContentTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class ContentTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class ContentTest extends UnitTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Content
+	 * @var \Webfox\Ajaxmap\Domain\Model\Content
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Content();
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Content();
 	}
 
 	public function tearDown() {
@@ -63,7 +71,7 @@ class Tx_Ajaxmap_Domain_Model_ContentTest extends Tx_Extbase_Tests_Unit_BaseTest
 	 * @test
 	 */
 	public function setCrdateForDateTimeSetsCrdate() {
-		$date = new DateTime();
+		$date = new \DateTime();
 		$this->fixture->setCrdate($date);
 		$this->assertSame(
 				$this->fixture->getCrdate(),

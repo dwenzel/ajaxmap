@@ -1,4 +1,8 @@
 page.includeJSFooter {
 	googleMaps = http://maps.googleapis.com/maps/api/js?sensor=false
-	googleMaps.external = 1
+	googleMaps {
+		external = 1
+		excludeFromConcatenation = 1
+		disableCompression = 1
+	}
 }

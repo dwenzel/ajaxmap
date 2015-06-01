@@ -1,10 +1,11 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
- *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,15 +24,17 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 
 /**
- *
+ * Category
  *
  * @package ajaxmap
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractEntity {
+class Category extends AbstractEntity
+ implements TreeItemInterface {
 
 	/**
 	 * Title
@@ -56,11 +59,12 @@ class Tx_Ajaxmap_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractE
 	protected $icon;
 
 	/**
-	 * childCategories
+	 * Parent
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category>
+	 * @var \Webfox\Ajaxmap\Domain\Model\Category | NULL
+	 * @lazy
 	 */
-	protected $childCategories;
+	protected $parent = NULL;
 
 	/**
 	 * Returns the title
@@ -101,30 +105,6 @@ class Tx_Ajaxmap_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * __construct
-	 *
-	 * @return void
-	 */
-	public function __construct() {
-		//Do not remove the next line: It would break the functionality
-		$this->initStorageObjects();
-	}
-
-	/**
-	 * Initializes all Tx_Extbase_Persistence_ObjectStorage properties.
-	 *
-	 * @return void
-	 */
-	protected function initStorageObjects() {
-		/**
-		 * Do not modify this method!
-		 * It will be rewritten on each save in the extension builder
-		 * You may modify the constructor of this class instead
-		 */
-		$this->childCategories = new Tx_Extbase_Persistence_ObjectStorage();
-	}
-
-	/**
 	 * Returns the description
 	 *
 	 * @return string $description
@@ -144,69 +124,23 @@ class Tx_Ajaxmap_Domain_Model_Category extends Tx_Extbase_DomainObject_AbstractE
 	}
 
 	/**
-	 * Adds a Category
+	 * Gets the parent
 	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Category $childCategory
-	 * @return void
+	 * @return Category
 	 */
-	public function addChildCategory(Tx_Ajaxmap_Domain_Model_Category $childCategory) {
-		$this->childCategories->attach($childCategory);
-	}
-
-	/**
-	 * Removes a Category
-	 *
-	 * @param Tx_Ajaxmap_Domain_Model_Category $childCategoryToRemove The Category to be removed
-	 * @return void
-	 */
-	public function removeChildCategory(Tx_Ajaxmap_Domain_Model_Category $childCategoryToRemove) {
-		$this->childCategories->detach($childCategoryToRemove);
-	}
-
-	/**
-	 * Returns the childCategories
-	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $childCategories
-	 */
-	public function getChildCategories() {
-		return $this->childCategories;
-	}
-
-	/**
-	 * Sets the childCategories
-	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Ajaxmap_Domain_Model_Category> $childCategories
-	 * @return void
-	 */
-	public function setChildCategories(Tx_Extbase_Persistence_ObjectStorage $childCategories) {
-		$this->childCategories = $childCategories;
-	}
-
-	/**
-	 * Returns the childCategories as array
-	 *
-	 * @param int> $treeDepth
-	 * @return array
-	 */
-	public function getChildCategoriesArray($treeDepth = 10) {
-		$childCategories = array();
-		if ($this->getChildCategories() && $treeDepth>0){
-			$treeDepth = $treeDepth-1;
-			
-			$childrenObjArray = $this->getChildCategories()->toArray();
-			foreach ($childrenObjArray as $childCategory){
-				$category = array(
-					'key' => $childCategory->getUid(),
-					'title' => $childCategory->getTitle(),
-					'icon' => $childCategory->getIcon(),
-					'tooltip' => $childCategory->getDescription(),
-					'children' => $childCategory->getChildCategoriesArray($treeDepth),
-				);
-			array_push($childCategories, $category);
-			}				
+	public function getParent() {
+		if ($this->parent instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+			$this->parent->_loadRealInstance();
 		}
-		return $childCategories;
+		return $this->parent;
 	}
 
+	/**
+	 * Sets the parent
+	 *
+	 * @param Category $category The parent category
+	 */
+	public function setParent(Category $category) {
+		$this->parent = $category;
+	}
 }
-?>
