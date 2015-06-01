@@ -313,8 +313,7 @@ function renderPlaceGroupTree(mapId) {
 }
 
 /**
- * Renders a tree of places. Data for tree is
- * fetched via Ajax call
+ * Renders a tree of places from given data
  *
  * @param mapId Unique id of map to which the tree belongs
  * @param children Object containing tree objects
@@ -325,10 +324,25 @@ function renderPlacesTree(mapId, children) {
 		persist: true,
 		cookieId: "dynaTreePlaces" + mapId,
 		selectMode: 2,
-		children: children
+		//children: children
 	};
 	$(selector).dynatree(settings);
+	updatePlacesTree(mapId, children);
 }
+
+function updatePlacesTree(mapId,children) {
+	var selector = '#ajaxMapPlacesTree' + mapId;
+	var rootNode = $(selector).dynatree('getRoot');
+	rootNode.removeChildren();
+	rootNode.addChild(children);
+	var compare = function(a, b) {
+		a = a.data.title.toLowerCase();
+		b = b.data.title.toLowerCase();
+		return a > b ? 1 : a < b ? -1 : 0;
+	};
+	rootNode.sortChildren(compare, false);
+}
+
 
 /**
  * Renders a tree of places. Data for tree is
@@ -529,11 +543,13 @@ function updatePlaces(mapNumber) {
 		map = mapEntry.map,
 		mapId = mapEntry.id,
 		mapPlaces = mapEntry.places,
+		selectedPlaces = [],
 		mapMarkers = mapEntry.markers || [],
 		selectedLocationTypeKeys = getSelectedKeys('#ajaxMapLocationTypesTree' + mapId),
 		selectedCategoryKeys = getSelectedKeys('#ajaxMapCategoryTree' + mapId),
 		selectedRegionKeys = getSelectedKeys('#ajaxMapRegionsTree' + mapId),
-		selectedPlaceGroupsKeys = getSelectedKeys('#ajaxMapPlaceGroupTree' + mapId);
+		selectedPlaceGroupKeys = getSelectedKeys('#ajaxMapPlaceGroupTree' + mapId),
+		selectedLocationType = 0;
 
 	// get selected location type. This should be one or none
 	if (selectedLocationTypeKeys.length) {
@@ -548,14 +564,16 @@ function updatePlaces(mapNumber) {
 			// marker does not exist, create it
 			mapMarkers[i] = createMarker(mapEntry, mapNumber, place);
 		} else {
-			var hasAnActiveCategory = 0;
-			var hasAnActiveRegion = 0;
-				if (marker.place.categories) {
-					$.each(marker.place.categories, function () {
-						hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
-						return (!hasAnActiveCategory);
-					});
-				}
+			var hasAnActiveCategory = 0,
+				hasAnActiveRegion = 0,
+				hasAnActivePlaceGroup = 0;
+
+			if (selectedCategoryKeys && marker.place.categories) {
+				$.each(marker.place.categories, function () {
+					hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
+					return (!hasAnActiveCategory);
+				});
+			}
 
 			if (selectedRegionKeys.length && marker.place.regions) {
 				$.each(marker.place.regions, function () {
@@ -564,17 +582,30 @@ function updatePlaces(mapNumber) {
 				});
 			}
 
+			if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
+				$.each(marker.place.placeGroups, function () {
+					hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
+					return (!hasAnActivePlaceGroup);
+				});
+			}
+
 			if (
 				(place.locationType.key == selectedLocationType || !selectedLocationTypeKeys.length)
 				&& (hasAnActiveCategory || !selectedCategoryKeys.length)
-				&& (hasAnActiveRegion || !selectedRegionKeys.length)) {
+				&& (hasAnActiveRegion || !selectedRegionKeys.length)
+				&& (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)) {
 				marker.setMap(map);
+				selectedPlaces[selectedPlaces.length] = place;
 			}
 			else {
 				marker.setMap(null);
 			}
 		}
 
+	}
+	// update only if mapEntry is already initialized
+	if (typeof mapEntry.markers != 'undefined') {
+		updatePlacesTree(mapId, selectedPlaces);
 	}
 	mapEntry.markers = mapMarkers;
 }
