@@ -17,8 +17,8 @@ $(function () {
 
 function initAllMaps() {
 	// init all maps
-	for (mapNumber in mapStore) {
-		initMap(mapNumber);
+	for (var entry=0; entry < mapStore.length; entry++) {
+		initMap(mapStore[entry]);
 	}
 }
 
@@ -75,9 +75,8 @@ function createMap(response, mapEntry) {
 		}
 	);
 }
-function initMap(mapNumber) {
+function initMap(mapEntry) {
 
-	mapEntry = mapStore[mapNumber];
 
 	//get map data
 	$.ajax({
@@ -223,25 +222,24 @@ function getLocationType(mapEntry, typeId) {
  */
 
 /**
- * Renders a dynaTree
+ * Renders a fancyTree
  * fetches json data by ajax call
  *
  * @param select Selector for node
  * @param action Ajax eID action name
  * @param mapId
+ * @param settings Optional settings
  */
-function renderTreeAjax(select, action, mapId) {
-	$(select).dynatree({
-		//debugLevel: 2,
-		persist: true,
+function renderTreeAjax(select, action, mapId, settings) {
+	var localSettings = {
 		checkbox: true,
-		cookieId: "dynaTree" + action + mapId,
+		cookieId: "fancyTree" + action + mapId,
 		selectMode: 3,
-		onSelect: function (flag, node) {
-			var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynaTree' + action)[1]);
+		select: function (event, data) {
+			var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTree' + action)[1]);
 			updatePlaces(mapNumber);
 		},
-		initAjax: {
+		source: {
 			url: "index.php",
 			type: "GET",
 			dataType: "json",
@@ -257,7 +255,15 @@ function renderTreeAjax(select, action, mapId) {
 				}
 			}
 		}
-	}).data('mapId', mapId);
+	};
+	if (typeof settings === 'object') {
+		for(var property in settings) {
+			if (settings.hasOwnProperty(property)) {
+				localSettings[property] = settings[property];
+			}
+		}
+	}
+	$(select).fancytree(localSettings).data('mapId', mapId);
 }
 
 /**
@@ -266,18 +272,19 @@ function renderTreeAjax(select, action, mapId) {
  * @param mapEntry
  */
 function renderRegionTree(mapEntry) {
-	$('#ajaxMapRegionsTree' + mapEntry.id).dynatree(
+	$('#ajaxMapRegionsTree' + mapEntry.id).fancytree(
 		{
-			persist: false,
 			checkbox: true,
-			cookieId: 'dynaTreeRegions' + mapEntry.id,
+			cookieId: 'fancyTreeRegions' + mapEntry.id,
 			selectMode: 3, //hierarchical select
-			children: mapEntry.regions,
-			onSelect: function(flag, node) {
-				var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynaTreeRegions')[1]);
-				var selectedNodes = node.tree.getSelectedNodes();
+			source: mapEntry.regions,
+			icons: false,
+			select: function(event, data) {
+				//todo node>data
+				var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
+				var selectedNodes = data.tree.getSelectedNodes();
 				var selectedKeys = $.map(selectedNodes, function(node){
-					return node.data.key;
+					return node.key;
 				});
 				updateLayers(mapNumber, selectedKeys);
 				updatePlaces(mapNumber);
@@ -293,10 +300,15 @@ function renderRegionTree(mapEntry) {
  * @param mapId
  */
 function renderCategoryTree(mapId) {
+	var settings = {
+		icons: false
+	};
 	renderTreeAjax(
 		'#ajaxMapCategoryTree' + mapId,
 		"ajaxListCategories",
-		mapId);
+		mapId,
+		settings
+	);
 }
 
 /**
@@ -306,10 +318,15 @@ function renderCategoryTree(mapId) {
  * @param mapId
  */
 function renderPlaceGroupTree(mapId) {
+	var settings = {
+		icons: false
+	};
 	renderTreeAjax(
 		'#ajaxMapPlaceGroupTree' + mapId,
 		"ajaxListPlaceGroups",
-		mapId);
+		mapId,
+		settings
+	);
 }
 
 /**
@@ -321,23 +338,57 @@ function renderPlaceGroupTree(mapId) {
 function renderPlacesTree(mapId, children) {
 	var selector = '#ajaxMapPlacesTree' + mapId;
 	var settings = {
-		persist: true,
-		cookieId: "dynaTreePlaces" + mapId,
+		cookieId: "fancyTreePlaces" + mapId,
 		selectMode: 2,
-		//children: children
+		source: [],
+		icons: false,
+		extensions: ["filter"],
+		quicksearch: true,
+		filter: {
+			autoApply: true,
+			// autoExpand: true,
+			mode: "hide"
+		}
 	};
-	$(selector).dynatree(settings);
+	$(selector).fancytree(settings);
+	//
+	var placesTree = $(selector).fancytree('getTree'),
+		resetFilterButtonSelector = "button#btnResetPlacesFilter";
+
+	$(resetFilterButtonSelector).click(function(e){
+		$("input[name=search]").val("");
+		$("span#matches").text("");
+		placesTree.clearFilter();
+	}).attr("disabled", true);
+
+	$("input[name=filterPlaces]").keyup(function(e){
+		var n,
+			opts = {
+			},
+			match = $(this).val();
+
+		if(e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === ""){
+			$(resetFilterButtonSelector).click();
+			return;
+		}
+		// Pass a string to perform case insensitive matching
+		n = placesTree.filterNodes(match, opts);
+		$(resetFilterButtonSelector).attr("disabled", false);
+		$("span#matches").text(n);
+	}).focus();
+
+	//
 	updatePlacesTree(mapId, children);
 }
 
 function updatePlacesTree(mapId,children) {
 	var selector = '#ajaxMapPlacesTree' + mapId;
-	var rootNode = $(selector).dynatree('getRoot');
+	var rootNode = $(selector).fancytree('getRootNode');
 	rootNode.removeChildren();
-	rootNode.addChild(children);
+	rootNode.addChildren(children);
 	var compare = function(a, b) {
-		a = a.data.title.toLowerCase();
-		b = b.data.title.toLowerCase();
+		a = a.title.toLowerCase();
+		b = b.title.toLowerCase();
 		return a > b ? 1 : a < b ? -1 : 0;
 	};
 	rootNode.sortChildren(compare, false);
@@ -354,18 +405,17 @@ function updatePlacesTree(mapId,children) {
 function renderLocationTypesTree(mapId, children) {
 	var selector = '#ajaxMapLocationTypesTree' + mapId;
 	var settings = {
-		persist: true,
 		checkbox: true,
-		cookieId: "dynaTreeLocationTypes" + mapId,
+		cookieId: "fancyTreeLocationTypes" + mapId,
 		selectMode: 1,
-		children: children,
-		onSelect: function(flag, node) {
-			var mapNumber = getMapNumber(node.tree.options.cookieId.split('dynaTreeLocationTypes')[1]);
+		source: children,
+		select: function(flag, node) {
+			var mapNumber = getMapNumber(node.tree.options.cookieId.split('fancyTreeLocationTypes')[1]);
 			updatePlaces(mapNumber);
 		}
 
 	};
-	$(selector).dynatree(settings);
+	$(selector).fancytree(settings);
 }
 
 /**
@@ -535,7 +585,7 @@ function createMarker(mapEntry, mapNumber, place){
  *  to be used on initial setup of map and each time when
  *  selection changes
  *  (triggerd by changing select field for location type
- *  and selection in dynatree
+ *  and selection in fancytree
  *  @todo add filter for regions (overlays from kml files)
  */
 function updatePlaces(mapNumber) {
@@ -673,8 +723,10 @@ function openDetailView(caller, placeId) {
 }
 
 function getSelectedKeys(selector) {
-	var selectedNodes = $(selector).dynatree('getSelectedNodes');
+	//var selectedNodes = $(selector).fancytree('getSelectedNodes');
+	var tree = $(selector).fancytree('getTree');
+	var selectedNodes = tree.getSelectedNodes();
 	return $.map(selectedNodes, function (node) {
-		return parseInt(node.data.key);
+		return parseInt(node.key);
 	});
 }

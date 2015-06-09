@@ -5,10 +5,11 @@ page {
 	includeJSFooterlibs {
 		jQueryUi = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery-1.10/jquery-ui.custom.js
 		jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery-1.10/jquery.cookie.js
-		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.7/jquery.dynatree.js
+		fancyTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.fancytree-2.9.0/jquery.fancytree-all.js
+		fancyTreeFilter = EXT:ajaxmap/Resources/Public/Contrib/jquery.fancytree-2.9.0/src/jquery.fancytree.filter.js
 	}
 	includeCSS {
-		dynaTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.dynatree-1.2.7/skin/ui.dynatree.css
+		fancyTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.fancytree-2.9.0/skin-lion/ui.fancytree.css
 	}
 }
 
