@@ -12,11 +12,18 @@
 	<div class="mapWrap">
 		<div id="ajaxMapContainer_Map{map.uid}"></div>
 	</div>
-	<div id="ajaxMapPlacesTree{map.uid}" class="dynaTree"></div>
+	<div id="placesTreeWrap">
+		<label>@todo: Filter:</label>
+		<input name="filterPlaces" placeholder="@todo: Filter...">
+		<button id="btnResetPlacesFilter">&times;</button>
+		<span id="matches"></span>
+		<div id="ajaxMapPlacesTree{map.uid}" class="dynaTree"></div>
+	</div>
 	<div id="ajaxMapRegionsTree{map.uid}" class="dynaTree"></div>
 	<div id="ajaxMapLocationTypesTree{map.uid}" class="dynaTree"></div>
 	<div id="ajaxMapCategoryTree{map.uid}" class="dynaTree"></div>
-	<div id="ajaxMapPlaceGroupTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapPlaceGroupTree{map.uid}" class="dynaTree">
+	</div>
 	<f:form name="txAjaxmapStore">
 		<f:form.hidden property="mapId" value="{map.uid}" />
 	</f:form>
