@@ -146,6 +146,7 @@ class MapController extends AbstractController {
 					$placeDemand = $this->buildPlaceDemandFromMap($map);
 					/** @var QueryResult $placeObjects */
 					$placeObjects = $this->placeRepository->findDemanded($placeDemand, TRUE, NULL, FALSE);
+					/** @var Place $place */
 					foreach($placeObjects as $place) {
 						$places[] = $place->toArray(2, $this->settings['mapping']['listPlaces']);
 					}

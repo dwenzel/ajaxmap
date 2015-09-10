@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  *
@@ -32,7 +33,7 @@ namespace Webfox\Ajaxmap\Controller;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class AbstractController extends \TYPO3\CMS\Extbase\Mvc\Controller\ActionController {
+class AbstractController extends ActionController {
 
 	/**
 	 * Sets the view
