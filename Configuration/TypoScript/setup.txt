@@ -8,6 +8,17 @@ plugin.tx_ajaxmap {
 		storagePid = {$plugin.tx_ajaxmap.persistence.storagePid}
 	}
 }
+# ==================================
+# Ajax Page Type
+# ==================================
+ajaxMapPage = PAGE
+ajaxMapPage {
+	typeNum = 1441916976
+	config.disableAllHeaderCode = 1
+	config.metaCharset = UTF-8
+	10 = COA
+	10 < tt_content.list.20.ajaxmap_map
+}
 
 plugin.tx_ajaxmap._CSS_DEFAULT_STYLE (
 	input.f3-form-error {

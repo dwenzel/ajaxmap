@@ -25,7 +25,7 @@ TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
 	'Webfox.' . $_EXTKEY,
 	'Map',
 	array(
-		'Place' => 'list, show',
+		'Place' => 'list, show, ajaxShow',
 		'Map' => ' item, show,',
 		'Region' => 'list',
 		'LocationType' => 'item',

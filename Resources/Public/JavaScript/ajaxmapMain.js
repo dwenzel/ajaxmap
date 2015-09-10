@@ -91,11 +91,51 @@ var ajaxMap = ajaxMap || {};
 		 *  special for ext. browser see below - should be changed to use own content
 		 */
 		content += '<div class="browserHelper"><a class="more" href="#">mehr</a></div>';
-		$('body').append('<div id="detailView"><a id="overlay-close" style="display: inline;"></a><divclass="inner"></div></div>');
-		$('#detailView').attr('placeId', place.uid);
+		$('body').append('<div id="detailView"><a id="overlay-close" style="display: inline;"></a><div class="inner"></div></div>');
+		$('#detailView').data('placeId', place.key);
 
 		return content;
 	};
+
+	this.openDetailView = function(caller, placeId) {
+		switch (caller) {
+			case "infoWindow":
+				placeId = $('#detailView').data('placeId');
+				console.log('placeId ', placeId);
+				break;
+			case "listView":
+				//placeId= ;
+				break;
+			default:
+				break;
+		}
+		var singleContent;
+
+		if (placeId) {
+			var path = $(location).attr('href') + '&type=1441916976';
+
+			$.ajax({
+				url: path,
+				context: $('#detailView .inner'),
+				data: {
+					tx_ajaxmap_map: {
+						'controller': "Place",
+						'action': 'ajaxShow',
+						'placeId': placeId}
+					}
+				})
+				.done(function(data){
+					this.html(data);
+					$('#detailView').fadeIn('400');
+					$('#overlayDetailHelper').height($(document).height()).fadeIn('400');
+					$('#overlay-close').click(function () {
+						$('#detailView').fadeOut('500');
+						$('#overlayDetailHelper').fadeOut('500');
+						$('#detailView .inner').contents().remove();
+					});
+				});
+		}
+	}
 
 	/*******************************
 	 * PRIVATE METHODS & PROPERTIES
@@ -581,7 +621,7 @@ var ajaxMap = ajaxMap || {};
 			google.maps.event.addListener(infoWindow, 'domready', function () {
 				$('.more').unbind("click").bind("click", (function (event) {
 					event.preventDefault();
-					openDetailView(
+					ajaxMap.openDetailView(
 						"infoWindow", -1);
 					event.stopPropagation();
 				}));
@@ -723,50 +763,6 @@ var ajaxMap = ajaxMap || {};
 			showSelectedPlaces(mapEntry, selectedPlaceKeys);
 		} else {
 			showMatchingPlaces(mapEntry);
-		}
-	}
-
-	function openDetailView(caller, placeId) {
-		switch (caller) {
-			case "infoWindow":
-				placeId = $('#detailView').attr('placeId');
-				break;
-			case "listView":
-				//placeId= ;
-				break;
-			default:
-				break;
-		}
-		var singleContent;
-
-		if (placeId) {
-			// todo adapt path
-			url = basePath + placeId;
-			$.ajax({
-				url: "index.php",
-				type: "GET",
-				data: {
-					'eID': "ajaxMap",
-					request: {
-						'controller': "Place",
-						'pluginName': "Map",
-						'action': 'ajaxShow',
-						'arguments': {'placeId': placeId}
-					}
-				},
-				dataType: "json",
-				success: function (result) {
-					singleContent = result;
-					$('#detailView .inner').append(singleContent);
-					$('#detailView').fadeIn('400');
-					$('#overlayDetailHelper').height($(document).height()).fadeIn('400');
-					$('#overlay-close').click(function () {
-						$('#detailView').fadeOut('500');
-						$('#overlayDetailHelper').fadeOut('500');
-						$('#detailView .inner').contents().remove();
-					});
-				}
-			});
 		}
 	}
 

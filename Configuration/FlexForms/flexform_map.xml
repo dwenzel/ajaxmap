@@ -23,7 +23,7 @@
             </numIndex>
             <numIndex index="1">
              <numIndex index="0">Places</numIndex>
-             <numIndex index="1">Place->list;Place->show</numIndex>
+             <numIndex index="1">Place->list;Place->show;Place->ajaxShow</numIndex>
             </numIndex>
            </items>
          </config>

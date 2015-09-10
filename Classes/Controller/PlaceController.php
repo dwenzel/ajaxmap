@@ -89,13 +89,19 @@ class PlaceController extends AbstractController {
 	 * action ajax show
 	 *
 	 * @param integer $placeId
+	 * @param bool $json Whether to return json string
 	 * @return string
 	 */
-	public function ajaxShowAction($placeId) {
+	public function ajaxShowAction($placeId, $json = FALSE) {
 		$result = '';
-		$place = $this->placeRepository->findByUid($placeId);
-		if($place) {
-			$result = json_encode($place->toArray(10, $this->settings['mapping']));
+
+		if($place = $this->placeRepository->findByUid($placeId)) {
+			if ($json) {
+				$result = json_encode($place->toArray(10, $this->settings['mapping']));
+			} else {
+				$this->view->assign('place', $place);
+				$result = $this->view->render();
+			}
 		}
 		return $result;
 	}
