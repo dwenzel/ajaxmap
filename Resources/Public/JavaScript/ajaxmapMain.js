@@ -452,7 +452,7 @@ var ajaxMap = ajaxMap || {};
 			resetFilterButtonSelector = "button#btnResetPlacesFilter";
 
 		$(resetFilterButtonSelector).click(function(e){
-			$("input[name=search]").val("");
+			$("input[name=filterPlaces]").val("");
 			$("span#matches").text("");
 			placesTree.clearFilter();
 		}).attr("disabled", true);
@@ -731,14 +731,12 @@ var ajaxMap = ajaxMap || {};
 				marker.setMap(null);
 			}
 		}
-
-		selectedPlaceKeys.forEach(
-			function (element) {
-				marker = mapMarkers[element];
-				marker.setMap(map);
-			}
-		);
-		return mapId;
+		mapMarkers.forEach(
+			function(element) {
+				if ($.inArray(element.place.key, selectedPlaceKeys) >-1) {
+					element.setMap(map);
+				}
+			});
 	}
 
 	/**
@@ -779,5 +777,6 @@ $(function () {
 	// initialize all maps
 	if (typeof mapStore !== "undefined" && mapStore instanceof Array) {
 		ajaxMap.initAllMaps();
+		$("input[name=filterPlaces]").val("");
 	}
 });
