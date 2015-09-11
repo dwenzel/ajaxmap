@@ -101,10 +101,8 @@ var ajaxMap = ajaxMap || {};
 		switch (caller) {
 			case "infoWindow":
 				placeId = $('#detailView').data('placeId');
-				console.log('placeId ', placeId);
 				break;
 			case "listView":
-				//placeId= ;
 				break;
 			default:
 				break;
@@ -607,7 +605,7 @@ var ajaxMap = ajaxMap || {};
 			title: place.title
 		});
 		if (currType) {
-			mapMarker.setIcon = getLocationType(mapEntry, currType).markerIcon;
+			mapMarker.setIcon(getLocationType(mapEntry, currType).icon);
 		}
 		mapMarker.mapNumber = mapNumber;
 		mapMarker.place = place;
