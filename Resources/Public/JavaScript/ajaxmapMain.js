@@ -90,7 +90,7 @@ var ajaxMap = ajaxMap || {};
 		/*
 		 *  special for ext. browser see below - should be changed to use own content
 		 */
-		content += '<div class="browserHelper"><a class="more" href="#">mehr</a></div>';
+		content += '<div class="browserHelper"><a class="more detail-view" href="#">mehr</a></div>';
 		$('body').append('<div id="detailView"><a id="overlay-close" style="display: inline;"></a><div class="inner"></div></div>');
 		$('#detailView').data('placeId', place.key);
 
@@ -619,7 +619,7 @@ var ajaxMap = ajaxMap || {};
 
 			infoWindow.setContent(content);
 			google.maps.event.addListener(infoWindow, 'domready', function () {
-				$('.more').unbind("click").bind("click", (function (event) {
+				$('.more.detail-view').unbind("click").bind("click", (function (event) {
 					event.preventDefault();
 					ajaxMap.openDetailView(
 						"infoWindow", -1);
