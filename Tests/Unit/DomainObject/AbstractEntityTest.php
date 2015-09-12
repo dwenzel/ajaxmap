@@ -85,8 +85,8 @@ class AbstractEntityTest extends UnitTestCase {
 	public function toArrayDoesMappingForFieldNames() {
 		$mapping = array(
 			'Webfox\Ajaxmap\DomainObject\AbstractEntity' => array(
-				"pid" => "key",
-				"uid" => "page"
+				"pid" => array('mapTo' =>"key"),
+				"uid" => array('mapTo' => "page")
 			)
 		);
 		$result = array(
@@ -103,10 +103,9 @@ class AbstractEntityTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function toArrayReturnsErrorMessageWhenMaximumTreeDepthIsReached() {
-		$this->assertSame(
-			$this->fixture->toArray(0),
-			'maximum tree depth reached!'
+	public function toArrayReturnsNullWhenMaximumTreeDepthIsReached() {
+		$this->assertNull(
+			$this->fixture->toArray(0)
 		);
 	}
 }

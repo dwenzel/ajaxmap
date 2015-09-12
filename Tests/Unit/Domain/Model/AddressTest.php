@@ -1,5 +1,4 @@
 <?php
-
 namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice

@@ -61,14 +61,22 @@ class MapControllerTest extends UnitTestCase {
 			array('get'), array(), '', FALSE);
 		$this->fixture->_set('objectManager', $mockObjectManager);
 		$mapRepository = $this->getMock(
-				'\\Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
+				'Webfox\\Ajaxmap\\Domain\Repository\\MapRepository', array(), array(), '', FALSE
 		);
+		$categoryRepository = $this->getMock(
+				'Webfox\\Ajaxmap\\Domain\Repository\\CategoryRepository', array(), array(), '', FALSE
+		);
+		$this->fixture->_set('categoryRepository', $categoryRepository);
 		$this->regionRepository = $this->getMock(
-				'\\Webfox\\Ajaxmap\\Domain\\Repository\\RegionRepository', array(), array(), '', FALSE
+				'Webfox\\Ajaxmap\\Domain\\Repository\\RegionRepository', array(), array(), '', FALSE
 		);
 		$this->placeRepository = $this->getMock(
-				'\\Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
+				'Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
 		);
+		$placeGroupRepository = $this->getMock(
+				'Webfox\\Ajaxmap\\Domain\\Repository\\PlaceGroupRepository', array(), array(), '', FALSE
+		);
+		$this->fixture->_set('placeGroupRepository', $placeGroupRepository);
 		$this->fixture->injectMapRepository($mapRepository);
 		$this->fixture->_set('view',
 				$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
@@ -106,16 +114,20 @@ class MapControllerTest extends UnitTestCase {
 	 * @test
 	 */
 	public function ajaxListCategoriesActionReturnsCategoriesForMapAsJson() {
+		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array'); 
 		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
 			array(), array(), '', FALSE);
 		$mockCategory = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
-			array(), array(), '', FALSE);
+			array('getUid'), array(), '', FALSE);
 		$mockObjectStorage = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage',
 			array(), array(), '', FALSE);
+		$mockCategoryRepository = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Repository\\CategoryRepository',
+			array('findByChildren'), array(), '', FALSE);
 		$mockCategory->expects($this->exactly(2))
 			->method('toArray')
 			->will($this->returnValue(array( 'bar')));
@@ -129,6 +141,13 @@ class MapControllerTest extends UnitTestCase {
 			->method('findByUid')
 			->with($mapId)
 			->will($this->returnValue($mockMap));
+		$mockCategory->expects($this->exactly(2))
+			->method('getUid')
+			->will($this->returnValue(1));
+		$this->fixture->_get('categoryRepository')->expects($this->once())
+			->method('findChildren')
+			->with('1,1')
+			->will($this->returnValue($mockCategory));
 		$categoriesJson = '[["bar"],["bar"]]';
 		$this->assertEquals(
 			$categoriesJson,
@@ -151,6 +170,7 @@ class MapControllerTest extends UnitTestCase {
 	 * @test
 	 */
 	public function ajaxListPlaceGroupsReturnsPlaceGroupsForMapAsJson() {
+		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array'); 
 		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
@@ -175,6 +195,10 @@ class MapControllerTest extends UnitTestCase {
 			->method('findByUid')
 			->with($mapId)
 			->will($this->returnValue($mockMap));
+		$this->fixture->_get('placeGroupRepository')->expects($this->once())
+			->method('findChildren')
+			->with(',')
+			->will($this->returnValue($mockPlaceGroup));
 		$categoriesJson = '[["bar"],["bar"]]';
 		$this->assertEquals(
 				$categoriesJson,

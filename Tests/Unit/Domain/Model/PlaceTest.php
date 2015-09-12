@@ -359,6 +359,8 @@ class PlaceTest extends UnitTestCase {
 	public function toArrayReturnsInitialValueForArray() {
 		$result = array(
 			'address' => null,
+			'categories' => Array(),
+			'content' => null,
 			'content' => Array (),
 			'description' => null,
 			'geoCoordinates' => null,
