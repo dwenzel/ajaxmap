@@ -10,7 +10,7 @@
 			<label index="geo_coordinates.description">Geographic location - defined by its latitude and longitude</label>
 			<label index="description.description">Enter a short description - displayed in tooltips</label>
 			<label index="info.description">Additional info - displayed in info window</label>
-			<label index="category.description">Select one or more categories</label>
+			<label index="place_groups.description">Select one or more place groups</label>
 			<label index="type.description">Select a type</label>
 			<label index="regions.description">Select Regions</label>
 			<label index="content.description">Add content elements</label>

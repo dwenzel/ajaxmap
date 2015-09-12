@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Place.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Place.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,24 +37,26 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+class PlaceTest extends UnitTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Place
+	 * @var \Webfox\Ajaxmap\Domain\Model\Place
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Place();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Place();
 	}
 
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
+	public function getTitleReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getTitle()
+		);
+	}
 
 	/**
 	 * @test
@@ -70,7 +73,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getGeoCoordinatesReturnsInitialValueForString() { }
+	public function getGeoCoordinatesReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getGeoCoordinates()
+		);
+	}
 
 	/**
 	 * @test
@@ -87,7 +94,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getDescriptionReturnsInitialValueForString() { }
+	public function getDescriptionReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getDescription()
+		);
+	}
 
 	/**
 	 * @test
@@ -104,7 +115,11 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getInfoReturnsInitialValueForString() { }
+	public function getInfoReturnsInitialValueForString() {
+		$this->assertNull(
+				$this->fixture->getInfo()
+		);
+	}
 
 	/**
 	 * @test
@@ -121,89 +136,89 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getCategoryReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Category() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+	public function getPlaceGroupsReturnsInitialValueForObjectStorageContainingPlaceGroups() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getCategory()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setCategoryForObjectStorageContainingTx_Ajaxmap_Domain_Model_CategorySetsCategory() { 
-		$category = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneCategory = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->setCategory($objectStorageHoldingExactlyOneCategory);
+	public function setPlaceGroupsForObjectStorageContainingPlaceGroupsSetsPlaceGroups() {
+		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
+		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
 
 		$this->assertSame(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategory()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function addCategoryToObjectStorageHoldingCategory() {
-		$category = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneCategory = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->addCategory($category);
+	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
+		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
+		$this->fixture->addPlaceGroup($category);
 
 		$this->assertEquals(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategory()
+			$objectStorageHoldingExactlyOnePlaceGroup,
+			$this->fixture->getPlaceGroups()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function removeCategoryFromObjectStorageHoldingCategory() {
-		$category = new Tx_Ajaxmap_Domain_Model_Category();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($category);
-		$localObjectStorage->detach($category);
-		$this->fixture->addCategory($category);
-		$this->fixture->removeCategory($category);
+	public function removePlaceGroupFromObjectStorageHoldingPlaceGroup() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$localObjectStorage->attach($placeGroup);
+		$localObjectStorage->detach($placeGroup);
+		$this->fixture->addPlaceGroup($placeGroup);
+		$this->fixture->removePlaceGroup($placeGroup);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getCategory()
+			$this->fixture->getPlaceGroups()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function getTypeReturnsInitialValueForTx_Ajaxmap_Domain_Model_LocationType() { 
+	public function getLocationTypeReturnsInitialValueForLocationLocationType() { 
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getType()
+			$this->fixture->getLocationType()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setTypeForTx_Ajaxmap_Domain_Model_LocationTypeSetsType() { 
-		$dummyObject = new Tx_Ajaxmap_Domain_Model_LocationType();
-		$this->fixture->setType($dummyObject);
+	public function setLocationTypeForLocationLocationTypeSetsLocationType() { 
+		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\LocationType();
+		$this->fixture->setLocationType($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getType()
+			$this->fixture->getLocationType()
 		);
 	}
 	
 	/**
 	 * @test
 	 */
-	public function getRegionsReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Region() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() { 
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getRegions()
@@ -213,9 +228,9 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function setRegionsForObjectStorageContainingTx_Ajaxmap_Domain_Model_RegionSetsRegions() { 
-		$region = new Tx_Ajaxmap_Domain_Model_Region();
-		$objectStorageHoldingExactlyOneRegions = new Tx_Extbase_Persistence_ObjectStorage();
+	public function setRegionsForObjectStorageContainingRegionSetsRegions() { 
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
 		$this->fixture->setRegions($objectStorageHoldingExactlyOneRegions);
 
@@ -229,8 +244,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	 * @test
 	 */
 	public function addRegionToObjectStorageHoldingRegions() {
-		$region = new Tx_Ajaxmap_Domain_Model_Region();
-		$objectStorageHoldingExactlyOneRegion = new Tx_Extbase_Persistence_ObjectStorage();
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegion->attach($region);
 		$this->fixture->addRegion($region);
 
@@ -244,8 +259,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	 * @test
 	 */
 	public function removeRegionFromObjectStorageHoldingRegions() {
-		$region = new Tx_Ajaxmap_Domain_Model_Region();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($region);
 		$localObjectStorage->detach($region);
 		$this->fixture->addRegion($region);
@@ -260,8 +275,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getContentReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Content() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+	public function getContentReturnsInitialValueForObjectStorageContainingContent() { 
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getContent()
@@ -271,9 +286,9 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function setContentForObjectStorageContainingTx_Ajaxmap_Domain_Model_ContentSetsContent() { 
-		$content = new Tx_Ajaxmap_Domain_Model_Content();
-		$objectStorageHoldingExactlyOneContent = new Tx_Extbase_Persistence_ObjectStorage();
+	public function setContentForObjectStorageContainingContentSetsContent() { 
+		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
 		$this->fixture->setContent($objectStorageHoldingExactlyOneContent);
 
@@ -287,8 +302,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	 * @test
 	 */
 	public function addContentToObjectStorageHoldingContent() {
-		$content = new Tx_Ajaxmap_Domain_Model_Content();
-		$objectStorageHoldingExactlyOneContent = new Tx_Extbase_Persistence_ObjectStorage();
+		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
 		$this->fixture->addContent($content);
 
@@ -302,8 +317,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	 * @test
 	 */
 	public function removeContentFromObjectStorageHoldingContent() {
-		$content = new Tx_Ajaxmap_Domain_Model_Content();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
+		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($content);
 		$localObjectStorage->detach($content);
 		$this->fixture->addContent($content);
@@ -318,7 +333,7 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function getAddressReturnsInitialValueForTx_Ajaxmap_Domain_Model_Address() { 
+	public function getAddressReturnsInitialValueForAddress() { 
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getAddress()
@@ -328,8 +343,8 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 	/**
 	 * @test
 	 */
-	public function setAddressForTx_Ajaxmap_Domain_Model_AddressSetsAddress() { 
-		$dummyObject = new Tx_Ajaxmap_Domain_Model_Address();
+	public function setAddressForAddressSetsAddress() { 
+		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\Address();
 		$this->fixture->setAddress($dummyObject);
 
 		$this->assertSame(
@@ -337,6 +352,28 @@ class Tx_Ajaxmap_Domain_Model_PlaceTest extends Tx_Extbase_Tests_Unit_BaseTestCa
 			$this->fixture->getAddress()
 		);
 	}
-	
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsInitialValueForArray() {
+		$result = array(
+			'address' => null,
+			'content' => Array (),
+			'description' => null,
+			'geoCoordinates' => null,
+			'info' => null,
+			'locationType' => null,
+			'pid' => null,
+			'placeGroups' => Array (),
+			'regions' => Array (),
+			'title' => null,
+			'uid' => null,
+		);
+		$this->assertSame(
+				$this->fixture->toArray(),
+				$result
+		);
+	}
 }
-?>
+

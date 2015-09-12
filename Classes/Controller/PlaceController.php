@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,6 +24,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 
 /**
  *
@@ -31,12 +33,12 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_ActionController {
+class PlaceController extends AbstractController {
 
 	/**
 	 * placeRepository
 	 *
-	 * @var Tx_Ajaxmap_Domain_Repository_PlaceRepository
+	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	protected $placeRepository;
 
@@ -44,42 +46,90 @@ class Tx_Ajaxmap_Controller_PlaceController extends Tx_Extbase_MVC_Controller_Ac
 	 * action list
 	 *
 	 * @return void
-	 * @param Tx_Ajaxmap_Domain_Model_Place
+	 * @param \array $overwriteDemand
 	 */
-	public function listAction() {
-		$places = $this->placeRepository->findAll();
-		$this->view->assign('places', $places);
+	public function listAction($overwriteDemand = NULL) {
+		$demand = $this->createDemandFromSettings($this->settings);
+		$places = $this->placeRepository->findDemanded($demand);
+		$this->view->assignMultiple(
+			array(
+				'places' => $places,
+				'settings' => $this->settings,
+				'overwriteDemand' => $overwriteDemand
+			)
+		);
 	}
 
 	/**
 	 * injectLocationRepository
 	 *
-	 * @param Tx_Ajaxmap_Domain_Repository_PlaceRepository $PlaceRepository
+	 * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
 	 * @return void
 	 */
-	public function injectPlaceRepository(Tx_Ajaxmap_Domain_Repository_PlaceRepository $placeRepository) {
+	public function injectPlaceRepository(\Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
 		$this->placeRepository = $placeRepository;
 	}
 
 	/**
 	 * action show
 	 *
-	 * @param $place
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
 	 * @return void
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Place $place) {
-		$this->view->assign('place', $place);
+	public function showAction(\Webfox\Ajaxmap\Domain\Model\Place $place) {
+		$this->view->assignMultiple(
+			array(
+				'place' => $place,
+				'settings' => $this->settings
+			)
+		);
 	}
 
 	/**
 	 * action ajax show
 	 *
-	 * @param $place
-	 * @return void
+	 * @param integer $placeId
+	 * @param bool $json Whether to return json string
+	 * @return string
 	 */
-	public function showAction(Tx_Ajaxmap_Domain_Model_Place $place) {
-		return $place;
+	public function ajaxShowAction($placeId, $json = FALSE) {
+		$result = '';
+
+		if($place = $this->placeRepository->findByUid($placeId)) {
+			if ($json) {
+				$result = json_encode($place->toArray(10, $this->settings['mapping']));
+			} else {
+				$this->view->assign('place', $place);
+				$result = $this->view->render();
+			}
+		}
+		return $result;
+	}
+
+	/**
+	 * Create demand from settings
+	 *
+	 * @param \array $settings
+	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 */
+	public function createDemandFromSettings ($settings) {
+		/** @var PlaceDemand $demand */
+		$demand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
+		if ($settings['orderBy']) {
+			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
+		}
+		(isset($settings['map']))? $demand->setMap($settings['map']) : NULL;
+		(isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
+		(isset($settings['placeGroups'])) ? $demand->setPlaceGroups($settings['placeGroups']) : NULL;
+		if(isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
+			$demand->setConstraintsConjunction($settings['constraintsConjunction']);
+		}
+		if(isset($settings['placeGroupConjunction']) AND $settings['placeGroupConjunction'] !== '') {
+			$demand->setPlaceGroupConjunction($settings['placeGroupConjunction']);
+		}
+		(isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
+		return $demand;
 	}
 
 }
-?>
+

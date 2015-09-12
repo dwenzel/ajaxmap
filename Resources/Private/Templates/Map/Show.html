@@ -1,24 +1,29 @@
 <f:layout name="Default" />
 
 <f:section name="main">
+	<f:if condition="{settings.map.debug}">
+		<f:debug title="settings">{settings}</f:debug>
+		<f:debug title="map">{map}</f:debug>
+	</f:if>
 	<f:flashMessages />
+	<f:if condition="{map}">
+		<f:render partial="Map/Data" arguments="{settings: settings, map: map, pid: pid}"/>
+	</f:if>
 	<div class="mapWrap">
 		<div id="ajaxMapContainer_Map{map.uid}"></div>
 	</div>
-	<div class="regionsSelectorWrap">
-		<f:form name="ajaxMapRegionsSelectForm{map.uid}">
-			<f:form.select id="ajaxMapRegionsSelector{map.uid}"
-				name="regionsSelect" class="select region" options="{}" />
-		</f:form>
+	<div id="placesTreeWrap">
+		<input name="filterPlaces" placeholder="{f:translate(key: 'placeholder.filterPlaces')}">
+		<button id="btnResetPlacesFilter" title="{f:translate(key: 'label.reset')}">&times;</button>
+		<span id="matches"></span>
+		<div id="ajaxMapPlacesTree{map.uid}" class="dynaTree"></div>
 	</div>
-	<div class="typeSelectorWrap">
-		<f:form name="ajaxMapLocationTypesSelectForm{map.uid}">
-			<f:form.select id="ajaxMapLocationTypesSelector{map.uid}"
-				name="typeSelect" class="select type" options="{0: 'Alle Standorte'}" />
-		</f:form>
+	<div id="ajaxMapRegionsTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapLocationTypesTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapCategoryTree{map.uid}" class="dynaTree"></div>
+	<div id="ajaxMapPlaceGroupTree{map.uid}" class="dynaTree">
 	</div>
 	<f:form name="txAjaxmapStore">
 		<f:form.hidden property="mapId" value="{map.uid}" />
 	</f:form>
-	<div id="ajaxMapCategoryTree{map.uid}" class="dynaTree"></div>
 </f:section>

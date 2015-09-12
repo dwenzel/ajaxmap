@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,6 +24,7 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 
 /**
  *
@@ -31,7 +33,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_LocationType extends Tx_Extbase_DomainObject_AbstractValueObject {
+class LocationType extends AbstractEntity{
 
 	/**
 	 * title

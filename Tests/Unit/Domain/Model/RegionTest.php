@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Region.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Region.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,18 +37,16 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+class RegionTest extends UnitTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Region
+	 * @var \Webfox\Ajaxmap\Domain\Model\Region
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Region();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Region();
 	}
 
 	/**
@@ -208,4 +207,4 @@ class Tx_Ajaxmap_Domain_Model_RegionTest extends Tx_Extbase_Tests_Unit_BaseTestC
 	}
 
 }
-?>
+

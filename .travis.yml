@@ -1,73 +1,58 @@
+script: 
+#- phpCodeSniff
+- if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
+- if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
+- if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=build/artifacts/coverage/clover.xml -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
+- if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v; fi
 language: php
-php:
-  - 5.3
-  - 5.4
-
-env:
+before_script: 
+#- sudo apt-get update && sudo apt-get install git
+- cd ..
+- mkdir build
+- mkdir build/artifacts
+- mkdir build/artifacts/coverage
+- mkdir build/artifacts/logs
+- git clone --single-branch --branch $INTEGRATION --depth 1 git://github.com/dwenzel/TYPO3-Travis-Integration.git build-environment
+- git clone --single-branch --branch $TYPO3 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git core
+- source build-environment/install-helper.sh
+#- phpenv config-add build-environment/php_custom.ini
+- if [[ "$TRAVIS_PHP_VERSION" != "5.5" ]]; then installPhpModule igbinary; fi
+- installPhpModule -y memcache
+- if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
+- if [[ "$COVERAGE" == "1" ]]; then mv build-environment/composer.json ./; fi
+- if [[ "$COVERAGE" == "1" ]]; then curl -s http://getcomposer.org/installer | php; fi
+- if [[ "$COVERAGE" == "1" ]]; then php composer.phar install --dev --no-interaction; fi
+- if [[ "$COVERAGE" == "1" ]]; then export COVERALLS_SERVICE_NAME=travis-ci; fi
+- if [[ "$COVERAGE" == "1" ]]; then cp -R ajaxmap/.git .; fi
+- if [[ "$COVERAGE" == "1" ]]; then mv ajaxmap/.coveralls.yml ./; fi
+- if [[ "$COVERAGE" == "1" ]]; then php composer.phar update satooshi/php-coveralls --dev; fi
+- git clone --single-branch --branch $TYPO3 --depth 1 git://git.typo3.org/TYPO3CMS/Distributions/Introduction.git build-environment/Introduction
+- mv core/typo3 .
+- if [[ -d core/t3lib ]]; then mv core/t3lib . ; fi
+- mv build-environment/typo3conf .
+- git clone --single-branch --branch master --depth 1 git://git.typo3.org/TYPO3CMS/Extensions/phpunit.git typo3conf/ext/phpunit/
+- mv ajaxmap ./typo3conf/ext
+- mkdir fileadmin
+- mkdir uploads
+- if [[ "$DB" == "mysql" ]]; then mysql -e "DROP DATABASE IF EXISTS typo3_test;" -uroot; fi
+- if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS typo3_test;" -uroot; fi
+- if [[ "$DB" == "mysql" ]]; then mysql -uroot typo3_test < build-environment/Introduction/typo3conf/ext/introduction/Resources/Private/Subpackages/Introduction/Database/introduction.sql; fi
+- if [[ "$DB" == "mysql" && -f build-environment/dbimport/cache_tables.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/cache_tables.sql; fi
+- if [[ "$DB" == "mysql" && -f  build-environment/dbimport/cli_users.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/cli_users.sql; fi
+- if [[ "$DB" == "mysql" && -f  build-environment/dbimport/ajaxmap.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/ajaxmap.sql; fi
+after_script:
+#- source build-environment/update-gh-pages.sh
+matrix: 
+  include: 
+  - env: DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=1
+    php: 5.5
+services: 
+- memcached
+env: 
+  global: 
+    secure: S8QheEMVpSRsPPIhYQZ4tUCTbxpM7csZ0GydJaPY8p/FAEnZLiH6xcsiTGKOljva5HDelCdBvunaWtUO/+CdKIgsdbQGbqc1aWmG6gr+ShQk4X3KzeAA91AFmkJOR6Jv69lUTm6Uo9AKs1JtuVZsOa1aoOmfApohqFuXsRBNXlg=
+  matrix: 
   - DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=0
-#  - DB=mysql TYPO3=TYPO3_6-1 INTEGRATION=master-ajaxmap COVERAGE=0
-#  - DB=mysql TYPO3=TYPO3_6-0 INTEGRATION=master-ajaxmap COVERAGE=0
-
-matrix:
-  include:
-    - php: 5.5
-      env: DB=mysql TYPO3=master INTEGRATION=master-ajaxmap COVERAGE=1
-
-services:
-  - memcached
-
-#notifications:
-#  email:
-#    - der-wenzel@gmx.de
-
-before_script:
-  # Get latest git version cause of travis issues (https://github.com/travis-ci/travis-ci/issues/1710)
-  - sudo apt-get update && sudo apt-get install git
-# prepare build
-  - cd ..
-  - mkdir build
-  - mkdir build/artifacts
-  - mkdir build/artifacts/coverage
-  - mkdir build/artifacts/logs
-# Install build dependencies
-  - git clone --single-branch --branch $INTEGRATION --depth 1 git://github.com/dwenzel/TYPO3-Travis-Integration.git build-environment
-  - git clone --single-branch --branch $TYPO3 --depth 1 https://github.com/TYPO3/TYPO3.CMS.git core
-  - source build-environment/install-helper.sh
-  - if [[ "$TRAVIS_PHP_VERSION" != "5.5" ]]; then installPhpModule igbinary; fi
-  - installPhpModule -y memcache
-  - installPhpModule redis
-  - if [[ "$TRAVIS_PHP_VERSION" == "5.3" ]]; then installPhpModule -y apc; fi
-# prepare composer
-  - if [[ "$COVERAGE" == "1" ]]; then mv build-environment/composer.json ./; fi
-  - if [[ "$COVERAGE" == "1" ]]; then curl -s http://getcomposer.org/installer | php; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php composer.phar install --dev --no-interaction; fi
-# prepare coveralls
-  - if [[ "$COVERAGE" == "1" ]]; then export COVERALLS_SERVICE_NAME=travis-ci; fi
-#  - export COVERALLS_REPO_TOKEN=p7zWhntZXnzvYTYwSkLaDwTT5QOYUQnNt
-  - if [[ "$COVERAGE" == "1" ]]; then cp -R ajaxmap/.git .; fi
-  - if [[ "$COVERAGE" == "1" ]]; then mv ajaxmap/.coveralls.yml ./; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php composer.phar update satooshi/php-coveralls --dev; fi
-
-# Install rudimentary TYPO3
-  - git clone --single-branch --branch $TYPO3 --depth 1 git://git.typo3.org/TYPO3CMS/Distributions/Introduction.git build-environment/Introduction
-  - mv core/typo3 .
-  - if [[ -d core/t3lib ]]; then mv core/t3lib . ; fi
-  - mv build-environment/typo3conf .
-  - git clone --single-branch --branch master --depth 1 git://git.typo3.org/TYPO3CMS/Extensions/phpunit.git typo3conf/ext/phpunit/
-  - mv ajaxmap ./typo3conf/ext
-  - mkdir fileadmin
-  - mkdir uploads
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "DROP DATABASE IF EXISTS typo3_test;" -uroot; fi
-  - if [[ "$DB" == "mysql" ]]; then mysql -e "create database IF NOT EXISTS typo3_test;" -uroot; fi
-  - if [[ "$DB" == "mysql" ]]; then mysql -uroot typo3_test < build-environment/Introduction/typo3conf/ext/introduction/Resources/Private/Subpackages/Introduction/Database/introduction.sql; fi
-  - if [[ "$DB" == "mysql" && -f build-environment/dbimport/cache_tables.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/cache_tables.sql; fi
-  - if [[ "$DB" == "mysql" && -f  build-environment/dbimport/cli_users.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/cli_users.sql; fi
-  - if [[ "$DB" == "mysql" && -f  build-environment/dbimport/ajaxmap.sql ]]; then mysql -uroot typo3_test < build-environment/dbimport/ajaxmap.sql; fi
-
-
-script:
-#  - phpLint all
-  - if [[ "$COVERAGE" == "0" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3conf/ext/phpunit/Composer/vendor/bin/phpunit --process-isolation  --bootstrap typo3/sysext/core/Build/FunctionalTestsBootstrap.php typo3conf/ext/ajaxmap/Tests/Functional/; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php $PWD/typo3/cli_dispatch.phpsh phpunit --coverage-clover=build/artifacts/coverage/clover.xml -c typo3conf/ext/ajaxmap/Tests/Build/UnitTests.xml; fi
-  - if [[ "$COVERAGE" == "1" ]]; then php vendor/bin/coveralls -v; fi
+php: 
+- 5.3
+- 5.4

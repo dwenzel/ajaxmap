@@ -1,0 +1,41 @@
+<script type="text/javascript"><![CDATA[
+	if(typeof mapStore === "undefined") {
+		var mapStore = [];	
+	}
+	if(typeof regionStore === "undefined") {
+		var regionStore = [];
+	}
+	if(typeof categoryTreeStore === "undefined") {
+		var categoryTreeStore = [];
+	}
+	var pageId = ]]>{pid}<![CDATA[;
+	currId = ]]>{settings.map}<![CDATA[;
+	locationTypes = [];
+	markerArr = [];]]>
+	<f:for each="{map.locationTypes}" as="locationType">
+		<![CDATA[
+			locationTypes.push(
+				{
+					"key":]]>{locationType.uid}<![CDATA[,
+					"title": ']]>{locationType.title}<![CDATA[',
+					"description": ']]>{locationType.description}<![CDATA[',
+					"icon": ']]>{locationType.icon}<![CDATA['
+				}
+			);
+		]]>
+	</f:for>
+	var mapSettings = {
+		"id": currId,
+		"map": "",
+		"regions": "",
+		"kmlLayer": "",
+		"placeGroups": "",
+		"locationTypes": locationTypes,
+		"infoWindow": "",
+		"places": "",
+		"marker": markerArr,
+	};
+	mapStore.push(mapSettings);
+	regionStore.push({"id": currId}); 
+	categoryTreeStore.push({"id": currId})
+</script>

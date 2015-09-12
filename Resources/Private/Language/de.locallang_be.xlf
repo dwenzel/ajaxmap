@@ -1,0 +1,210 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<xliff version="1.0">
+	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2014-07-01T13:03:33Z">
+		<header>
+			<generator>LFEditor</generator>
+		</header>
+		<body>
+		<trans-unit id="flexforms_general.backPage" approved="yes" xml:space="preserve">
+			<source>Back Page</source>
+			<target>Zurück-Seite</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroups" approved="yes" xml:space="preserve">
+			<source>Place Groups</source>
+			<target>Gruppen (Orte)</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction" approved="yes" xml:space="preserve">
+			<source>Place Group Conjunction</source>
+			<target>Gruppenverknüpfung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.and" approved="yes" xml:space="preserve">
+			<source>Show items with selected place groups (AND)</source>
+			<target>Zeige Datensätze aus gewählten Gruppen (AND)</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.empty" approved="yes" xml:space="preserve">
+			<source>Ignore selected place groups.</source>
+			<target>Ignoriere gewählte Gruppen</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notand" approved="yes" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (AND)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen NICHT (AND)</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.notor" approved="yes" xml:space="preserve">
+			<source>Do NOT show items with selected place groups (OR)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen NICHT (OR)</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.placeGroupConjunction.or" approved="yes" xml:space="preserve">
+			<source>Show items with selected place groups (OR)</source>
+			<target>Zeige Datensätze mit gewählten Gruppen (OR)</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraints" approved="yes" xml:space="preserve">
+			<source>Selection</source>
+			<target>Auswahl</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction" approved="yes" xml:space="preserve">
+			<source>Conjunction</source>
+			<target>Verknüpfung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction.and" approved="yes" xml:space="preserve">
+			<source>AND</source>
+			<target>UND</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.constraintsConjunction.or" approved="yes" xml:space="preserve">
+			<source>OR</source>
+			<target>ODER</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.detailPage" approved="yes" xml:space="preserve">
+			<source>Detail Page</source>
+			<target>Seite für Detailansicht</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.height" approved="yes" xml:space="preserve">
+			<source>Height</source>
+			<target>Höhe</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.identifier" approved="yes" xml:space="preserve">
+			<source>Identifier</source>
+			<target>Id</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.initialZoom" approved="yes" xml:space="preserve">
+			<source>Initial Zoom</source>
+			<target>Initiale Vergrößerung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.latitude" approved="yes" xml:space="preserve">
+			<source>Latitude</source>
+			<target>Geographische Breite</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.listPage" approved="yes" xml:space="preserve">
+			<source>List Page</source>
+			<target>Seite für Listenansicht</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.locationTypes" approved="yes" xml:space="preserve">
+			<source>Location Types</source>
+			<target>Ortstypen</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.locations" approved="yes" xml:space="preserve">
+			<source>Locations</source>
+			<target>Orte</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.longitude" approved="yes" xml:space="preserve">
+			<source>Longitude</source>
+			<target>Geographische Länge</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.map" approved="yes" xml:space="preserve">
+			<source>Map</source>
+			<target>Karte</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType" approved="yes" xml:space="preserve">
+			<source>Map Display Type</source>
+			<target>Kartendarstellung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.singleView" approved="yes" xml:space="preserve">
+			<source>Single View</source>
+			<target>Einzelansicht</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.switchView" approved="yes" xml:space="preserve">
+			<source>switch between list and map</source>
+			<target>schalte zwischen Liste und Karte um</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.mapDisplayType.syncWithPagination" approved="yes" xml:space="preserve">
+			<source>sync with pagination</source>
+			<target>synchronisiere mit Paginierung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.maximumZoom" approved="yes" xml:space="preserve">
+			<source>Maximum Zoom</source>
+			<target>Größter Zoom</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.optionGroupOthers" approved="yes" xml:space="preserve">
+			<source>Others</source>
+			<target>Andere</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.optionGroupSearch" approved="yes" xml:space="preserve">
+			<source>Search</source>
+			<target>Suche</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderBy" approved="yes" xml:space="preserve">
+			<source>sort by</source>
+			<target>sortiere nach</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection" approved="yes" xml:space="preserve">
+			<source>sort direction</source>
+			<target>Sortierrichtung</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection.ascending" approved="yes" xml:space="preserve">
+			<source>ascending</source>
+			<target>aufsteigend</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.orderDirection.descending" approved="yes" xml:space="preserve">
+			<source>descending</source>
+			<target>absteigend</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.pages" approved="yes" xml:space="preserve">
+			<source>Pages</source>
+			<target>Seiten</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.quickMenu" approved="yes" xml:space="preserve">
+			<source>Quick Menu</source>
+			<target>Schnellmenü</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm" approved="yes" xml:space="preserve">
+			<source>Search Form</source>
+			<target>Suchformular</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm.extended" approved="yes" xml:space="preserve">
+			<source>Search Form (extended)</source>
+			<target>Erweitertes Suchformular</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchForm.simple" approved="yes" xml:space="preserve">
+			<source>Search Form (simple)</source>
+			<target>Einfaches Suchformular</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.searchResult" approved="yes" xml:space="preserve">
+			<source>Search Result</source>
+			<target>Suchergebnis</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.select_function" approved="yes" xml:space="preserve">
+			<source>What to display</source>
+			<target>Funktion</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.settings" approved="yes" xml:space="preserve">
+			<source>Settings</source>
+			<target>Einstellungen</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showCategorySelector" approved="yes" xml:space="preserve">
+			<source>Show Place Group Selector</source>
+			<target>Zeige Gruppenauswahl</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showConjunctionSelector" approved="yes" xml:space="preserve">
+			<source>Show Conjunction Selector</source>
+			<target>Zeige Verknüpfungsauswahl</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showSearchField" approved="yes" xml:space="preserve">
+			<source>Show Search Field</source>
+			<target>Zeige Suchfeld</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.template" approved="yes" xml:space="preserve">
+			<source>Template</source>
+			<target>Vorlage</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.templateLayout" approved="yes" xml:space="preserve">
+			<source>Template Layout</source>
+			<target>Vorlagenlayout</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.title" approved="yes" xml:space="preserve">
+			<source>Title</source>
+			<target>Titel</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.type" approved="yes" xml:space="preserve">
+			<source>Location Type</source>
+			<target>Ortstype</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.users" approved="yes" xml:space="preserve">
+			<source>Users</source>
+			<target>Benutzer</target>
+		</trans-unit>
+		<trans-unit id="flexforms_general.width" approved="yes" xml:space="preserve">
+			<source>Width</source>
+			<target>Breite</target>
+		</trans-unit>
+		</body>
+	</file>
+</xliff>

@@ -19,8 +19,8 @@
 			<trans-unit id="region.description">
 				<source>region</source>
 			</trans-unit>
-			<trans-unit id="category.description">
-				<source>category</source>
+			<trans-unit id="placeGroups.description">
+				<source>Place Group</source>
 			</trans-unit>
 			<trans-unit id="location_type.description">
 				<source>locationType</source>

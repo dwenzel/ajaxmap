@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +26,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Ajaxmap_Controller_PlaceController.
+ * Test case for class Webfox\Ajaxmap\Controller\PlaceController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,26 +37,195 @@
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-class Tx_Ajaxmap_Controller_PlaceControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+/**
+ * Class PlaceControllerTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ */
+class PlaceControllerTest extends UnitTestCase {
+
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Place
+	 * @var \Webfox\Ajaxmap\Controller\PlaceController
 	 */
 	protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Place();
-	}
+	/**
+	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 */
+	protected $mockDemand;
 
-	public function tearDown() {
-		unset($this->fixture);
+	/**
+	 * @var \TYPO3\CMS\Extbase\Object\ObjectManager
+	 */
+	protected $mockObjectManager;
+
+	protected function setUp() {
+		$this->fixture = $this->getAccessibleMock (
+			'Webfox\\Ajaxmap\\Controller\\PlaceController',
+			array('dummy'), array(), '', FALSE);
+		$this->mockObjectManager = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
+			array('get'), array(), '', FALSE);
+		$this->fixture->_set('objectManager', $this->mockObjectManager);
+		$this->mockDemand = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand',
+			array(), array(), '', FALSE);
+		$placeRepository = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
+		);
+		$this->fixture->injectPlaceRepository($placeRepository);
+		$this->fixture->_set('view',
+			$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
 	}
 
 	/**
 	 * @test
 	 */
-	public function dummyMethod() {
-		$this->markTestIncomplete();
+	public function createDemandFromSettingsCreatesEmptyDemandFromInvalidSettings() {
+		$settings = array(
+			'foo' => 'bar'
+		);
+		$this->mockObjectManager->expects($this->once())
+			->method('get')
+			->will($this->returnValue($this->mockDemand));
+		$this->mockDemand->expects($this->never())->method('setMap');
+		$this->mockDemand->expects($this->never())->method('setLocationTypes');
+		$this->mockDemand->expects($this->never())->method('setOrder');
+		$this->mockDemand->expects($this->never())->method('setConstraintsConjunction');
+		$this->mockDemand->expects($this->never())->method('setPlaceGroupConjunction');
+		$this->mockDemand->expects($this->never())->method('setLimit');
+		$this->mockDemand->expects($this->never())->method('setPlaceGroups');
+		$this->fixture->createDemandFromSettings($settings);		
 	}
 
+	/**
+	 * @test
+	 */
+	public function createDemandFromSettingsCreatesDemandFromValidSettings() {
+		$settings = array(
+			'map' => 1,
+			'locationTypes' => '3,5,7',
+			'orderBy' => 'bar',
+			'orderDirection' => 'foo',
+			'constraintsConjunction' => 'AND',
+			'placeGroupConjunction' => 'NOR',
+			'limit' => 5,
+			'placeGroups' => 'baz'
+		);
+		$this->mockObjectManager->expects($this->any())->method('get')
+			->will($this->returnValue($this->mockDemand));
+		$this->mockDemand->expects($this->once())
+			->method('setMap')
+			->with($this->equalTo(1));
+		$this->mockDemand->expects($this->once())
+			->method('setLocationTypes')
+			->with($this->equalTo('3,5,7'));
+		$this->mockDemand->expects($this->once())
+			->method('setOrder')
+			->with($this->equalTo('bar|foo'));
+		$this->mockDemand->expects($this->once())
+			->method('setConstraintsConjunction')
+			->with($this->equalTo('AND'));
+		$this->mockDemand->expects($this->once())
+			->method('setPlaceGroupConjunction')
+			->with($this->equalTo('NOR'));
+		$this->mockDemand->expects($this->once())
+			->method('setLimit')
+			->with($this->equalTo(5));
+		$this->mockDemand->expects($this->once())
+			->method('setPlaceGroups')
+			->with($this->equalTo('baz'));
+		$this->fixture->expects($this->any())
+			->method('createDemandFromSettings')
+			->will($this->returnValue($this->mockDemand));
+		$this->fixture->createDemandFromSettings($settings);
+	}
+
+	 /**
+	 * Test for creating correct demand call
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function listActionFindsDemandedPlacesByDemandFromSettings() {
+		$settings = array('list' => 'foo', 'orderBy' => 'datetime');
+		$mockQueryResult = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\QueryResult',
+			array(), array(), '', FALSE);
+		$configurationManager = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
+		);
+
+		$this->fixture->injectConfigurationManager($configurationManager);
+		$this->fixture->_set('settings', $settings);
+		$this->mockObjectManager->expects($this
+			->any())
+			->method('get')
+			->with('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand')
+			->will($this
+			->returnValue($this->mockDemand));
+		
+		$this->mockDemand->expects($this->once())->method('setOrder')->with($this->equalTo('datetime|'));
+
+		$this->fixture->_get('placeRepository')->expects($this
+			->once())
+			->method('findDemanded')
+			->with($this->mockDemand)->will($this->returnValue($mockQueryResult));
+		$this->fixture->_get('view')->expects($this->once())
+			->method('assignMultiple')
+			->with(
+				array(
+					'places' => $mockQueryResult,
+					'settings' => $settings,
+					'overwriteDemand' => NULL
+				)
+			);
+		$this->fixture->listAction();
+	}
+
+	 /**
+	 * Test for creating correct demand call
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function ajaxShowActionFindsOneByUid() {
+		$placeId = 1;
+		$mockQueryResult = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\QueryResult',
+			array(), array(), '', FALSE);
+		$mockPlace = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', FALSE);
+		$this->fixture->_get('placeRepository')->expects(
+			$this->once())
+			->method('findByUid')
+			->will($this->returnValue($mockPlace));
+
+		$this->fixture->ajaxShowAction($placeId);
+	}
+
+	 /**
+	 * Test for assigning variables to view
+	 *
+	 * @test
+	 * @return void
+	 */
+	public function showActionAssignsVariables() {
+		$settings = array( 'foo' => 'bar');
+		$mockPlace = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', FALSE);
+		$this->fixture->_set('settings', $settings);
+		$this->fixture->_get('view')->expects($this->once())
+			->method('assignMultiple')
+			->with(
+				array(
+					'place' => $mockPlace,
+					'settings' => $settings
+				)
+		);
+		$this->fixture->showAction($mockPlace);
+	}
 }
-?>

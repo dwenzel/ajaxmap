@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,9 +24,12 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+use Webfox\Ajaxmap\Domain\Model\Category;
+use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
- * Test case for class Tx_Ajaxmap_Domain_Model_Category.
+ * Test case for class Webfox\Ajaxmap\Domain\Model\Category.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -34,20 +38,16 @@
  * @package TYPO3
  * @subpackage Ajax Map
  *
- * @author Dirk Wenzel <wenzel@webfox01.de>
+ * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
  */
-class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class CategoryTest extends UnitTestCase {
 	/**
-	 * @var Tx_Ajaxmap_Domain_Model_Category
+	 * @var \Webfox\Ajaxmap\Domain\Model\Category
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Ajaxmap_Domain_Model_Category();
-	}
-
-	public function tearDown() {
-		unset($this->fixture);
+		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Category();
 	}
 
 	/**
@@ -116,110 +116,92 @@ class Tx_Ajaxmap_Domain_Model_CategoryTest extends Tx_Extbase_Tests_Unit_BaseTes
 	/**
 	 * @test
 	 */
-	public function getChildCategoriesReturnsInitialValueForObjectStorageContainingTx_Ajaxmap_Domain_Model_Category() { 
-		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getChildCategories()
+	public function getParentReturnsInitiallyNull() {
+		$this->assertNull(
+			$this->fixture->getParent()
 		);
 	}
 
 	/**
 	 * @test
 	 */
-	public function setChildCategoriesForObjectStorageContainingTx_Ajaxmap_Domain_Model_CategorySetsChildCategories() { 
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneChildCategories = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneChildCategories->attach($childCategory);
-		$this->fixture->setChildCategories($objectStorageHoldingExactlyOneChildCategories);
+	public function setParentForPlaceGroupSetsParent() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture->setParent($placeGroup);
 
 		$this->assertSame(
-			$objectStorageHoldingExactlyOneChildCategories,
-			$this->fixture->getChildCategories()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function addChildCategoryToObjectStorageHoldingChildCategories() {
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$objectStorageHoldingExactlyOneChildCategory = new Tx_Extbase_Persistence_ObjectStorage();
-		$objectStorageHoldingExactlyOneChildCategory->attach($childCategory);
-		$this->fixture->addChildCategory($childCategory);
-
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneChildCategory,
-			$this->fixture->getChildCategories()
+			$placeGroup,
+			$this->fixture->getParent()
 		);
 	}
 
 	/**
 	 * @test
+	 * @covers ::getParent
 	 */
-	public function removeChildCategoryFromObjectStorageHoldingChildCategories() {
-		$childCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
-		$localObjectStorage->attach($childCategory);
-		$localObjectStorage->detach($childCategory);
-		$this->fixture->addChildCategory($childCategory);
-		$this->fixture->removeChildCategory($childCategory);
-
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getChildCategories()
+	public function getParentLoadsRealInstanceForLazyLoadingProxy() {
+		$fixture = $this->getAccessibleMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
+			array('dummy'), array(), '', FALSE
 		);
+		$mockParent = $this->getAccessibleMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyLoadingProxy',
+			array('_loadRealInstance'), array(), '', FALSE
+		);
+		$fixture->_set('parent', $mockParent);
+		$mockParent->expects($this->once())->method('_loadRealInstance');
+		$fixture->getParent();
 	}
 
 	/**
 	 * @test
 	 */
-	public function getChildCategoriesArrayReturnsInitialEmptyArray() {
-		$array = array();
-		$this->assertSame(
-				$this->fixture->getChildCategoriesArray(),
-				$array
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getChildCategoriesArrayReturnsNestedArrayForNestedCategories() {
-		$childCategoryWithoutChildren = new Tx_Ajaxmap_Domain_Model_Category();
-		$childCategoryWithOneChild = new Tx_Ajaxmap_Domain_Model_Category();
-		$secondLevelCategory = new Tx_Ajaxmap_Domain_Model_Category();
-		$childCategoryWithOneChild->addChildCategory($secondLevelCategory);
-		$this->fixture->addChildCategory($childCategoryWithoutChildren);
-		$this->fixture->addChildCategory($childCategoryWithOneChild);
+	public function toArrayReturnsInitialValue() {
 		$result = array(
-				0 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array()
-				),
-				1 => array (
-					'key' => null,
-					'title' => null,
-					'icon' => null,
-					'tooltip' => null,
-					'children' => array(
-						0 => array (
-							'key' => null,
-							'title' => null,
-							'icon' => null,
-							'tooltip' => null,
-							'children' => array()
-						),
-					)
-				)
-			);
+			'description' => null,
+			'icon' => null,
+			'parent' => null,
+			'pid' => null,
+			'title' => null,
+			'uid' => null
+		);
 		$this->assertSame(
-				$this->fixture->getChildCategoriesArray(),
-				$result
+			$this->fixture->toArray(),
+			$result
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function toArrayReturnsArrayWithCorrectValues() {
+		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture->setParent($placeGroup);
+		$this->fixture->setDescription('foo');
+		$this->fixture->setIcon('bar');
+		$this->fixture->setPid(1);
+		$this->fixture->setTitle('foobar');
+		$this->fixture->_setProperty('uid', 2);
+		$result = array(
+						'description' => 'foo',
+						'icon' => 'bar',
+						'parent' => array(
+							'description' => null,
+							'icon' => null,
+							'parent' => null,
+							'pid' => null,
+							'title' => null,
+							'uid' => null
+						),
+						'pid' => 1,
+						'title' => 'foobar',
+						'uid' => 2
+
+		);
+		$this->assertEquals(
+			$result,
+			$this->fixture->toArray()
 		);
 	}
 }
-?>
+

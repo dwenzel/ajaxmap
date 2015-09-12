@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -23,7 +24,9 @@
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use Webfox\Ajaxmap\DomainObject\AbstractEntity;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 /**
  *
  *
@@ -31,7 +34,7 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Model_Region extends Tx_Extbase_DomainObject_AbstractEntity {
+class Region extends AbstractEntity {
 
 	/**
 	 * title
@@ -67,6 +70,38 @@ class Tx_Ajaxmap_Domain_Model_Region extends Tx_Extbase_DomainObject_AbstractEnt
 	 * @var boolean
 	 */
 	protected $preserveViewport = FALSE;
+
+	/**
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 * @lazy
+	 */
+	protected $regions;
+
+	/**
+	 * Main Place
+	 *
+	 * @var \Webfox\Ajaxmap\Domain\Model\Place
+	 * @lazy
+	 */
+	protected $mainPlace;
+
+	/**
+	 * __construct
+	 *
+	 * @return \Webfox\Ajaxmap\Domain\Model\Region
+	 */
+	public function __construct() {
+		$this->initStorageObjects();
+	}
+
+	/**
+	 * Initializes all \TYPO3\CMS\Extbase\Persistence\ObjectStorage properties.
+	 *
+	 * @return void
+	 */
+	protected function initStorageObjects() {
+		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+	}
 
 	/**
 	 * Returns the title
@@ -190,5 +225,61 @@ class Tx_Ajaxmap_Domain_Model_Region extends Tx_Extbase_DomainObject_AbstractEnt
 		return $this->getPreserveViewport();
 	}
 
+	/**
+	 * Removes a Region
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
+	 * @return void
+	 */
+	public function removeRegion(Region $regionToRemove) {
+		$this->regions->detach($regionToRemove);
+	}
+
+	/**
+	 * Returns the regions
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 */
+	public function getRegions() {
+		return $this->regions;
+	}
+
+	/**
+	 * Sets the regions
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @return void
+	 */
+	public function setRegions(ObjectStorage $regions) {
+		$this->regions = $regions;
+	}
+
+	/**
+	 * Adds a Region
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $region
+	 * @return void
+	 */
+	public function addRegion(Region $region) {
+		$this->regions->attach($region);
+	}
+
+	/**
+	 * Gets the main place
+	 *
+	 * @return \Webfox\Ajaxmap\Domain\Model\Place
+	 */
+	public function getMainPlace() {
+		return $this->mainPlace;
+	}
+
+	/**
+	 * Sets the main place
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
+	 */
+	public function setMainPlace($place) {
+		$this->mainPlace = $place;
+	}
 }
-?>
+

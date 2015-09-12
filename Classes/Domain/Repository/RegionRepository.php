@@ -1,5 +1,6 @@
 <?php
 
+namespace Webfox\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -31,34 +32,5 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Ajaxmap_Domain_Repository_RegionRepository extends Tx_Extbase_Persistence_Repository {
-
-	/**
-	 * findByMap
-	 *
-	 * @param $map
-	 * @param $limit
-	 * @return
-	 */
-	public function findByMap(Tx_Ajaxmap_Domain_Model_Map $map, $limit = 100) {
-		
-		// devlog
-		$msg = 'findByMap';
-       	$extKey = 'ajaxmap';
-        $severity =  '1';
-        $dataVar = $map;
-        //t3lib_div::devLog($msg, $extKeyl, $severity, $dataVar); 
-       
-		$query = $this->createQuery();
-        $query->matching('Tx_Ajaxmap_Domain_Model_Map', $map);
-        	/*$query->logicalAnd(
-        		$query->matching('map', $map),
-        		$query->equals('pid', $this->storagePid)
-        	)
-        );*/
-        $query->setLimit((integer)$limit);
-        return $this->findByUid($query->execute());
-	}
-
+class RegionRepository extends \TYPO3\CMS\Extbase\Persistence\Repository {
 }
-?>

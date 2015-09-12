@@ -14,7 +14,7 @@
 			<label index="initial_zoom.description">initialZoom</label>
 			<label index="map_style.description">optional Style (json Array)</label>
 			<label index="disable_default_ui.description">disable default UI</label>
-			<label index="categories.description">Select items for display by category.</label>
+			<label index="placeGroups.description">Select items for display by place group.</label>
 			<label index="regions.description">regions</label>
 			<label index="places.description">Display selected places as markers.</label>
 			<label index="location_types.description">Selected places by location type.</label>
