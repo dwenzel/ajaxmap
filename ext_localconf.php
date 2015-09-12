@@ -8,9 +8,9 @@ if (!empty($settings['includeJQuery'])) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
 		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:' . $_EXTKEY . '/Resources/Private/TypoScript/jQuery.ts">');
 }
-if (!empty($settings['includeDynatree'])) {
+if (!empty($settings['includeFancyTree'])) {
 	\TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:'. $_EXTKEY . '/Resources/Private/TypoScript/dynaTree.ts">');
+		'<INCLUDE_TYPOSCRIPT: source="FILE:EXT:'. $_EXTKEY . '/Resources/Private/TypoScript/fancyTree.ts">');
 }
 
 if (!empty($settings['includeGoogleMaps'])) {
