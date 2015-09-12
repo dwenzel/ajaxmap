@@ -1,3 +1,265 @@
+2015-09-12         [RELEASE] Release of ajaxmap 0.2.0 (Dirk Wenzel)
+2015-09-12 25a20b5 [BUGFIX] Default plugin TypoScript moved to setup.txt. Configuration option for tree plugin renamed.
+2015-09-11 4b08488 [BUGFIX] fixed error when setting icon for marker by locationType
+2015-09-11 c8cdb7b [BUGFIX] error fixed which cause wrong selection of markers. Empty places filter input on page reload.
+2015-09-11 27210db [TASK] localized strings added, use another class for detail view button
+2015-09-10 46f197b [TASK] eID ajax call for detail view of place replaced by TypoScript plugin. JavaScript function openDetailView public made public.
+2015-09-10 d1cd4d7 [TASK] main javascript refactored and extended. WE now use a namespace and expose only a few public method.
+2015-06-09 a623480 Merge branch 'feature/fancyTree' into develop
+2015-06-09 8e1090f [TASK] JavaScript refactored: dynatree replaced by fancytree. Search field added to result list.
+2015-06-03 6528812 [TASK] resources for query.fancytree added
+2015-06-01 bc1b8a8 Merge branch 'feature/listView' into develop
+2015-06-01 f96cf31 [TASK] filtering completed: result list is being updated on change of each dynaTree and sorted by title.
+2015-05-30 eb1576a [TASK] filter by region, category and place type.
+2015-05-29 8f78c4b [TASK] main javascript mostly rewritten (WIP)
+2015-05-29 9d483d5 [TASK] mapping improved: configuration for ajaxListPlacesAction added. Allow local configuration for maxDepth and exclusion of fields.
+2015-05-29 6b1485e [TASK] move form to the end of template
+2015-05-29 bd27f87 [TASK] relation table for place groups renamed, sorting added
+2015-05-29 c573bcc [BUGFIX] TCA errors fixed, code cleanup
+2015-05-29 436ae4c [TASK] Address now inherits toArray method. Use this method instead of repository method in getAddressForPlace
+2015-05-26 9ca3fbc [TASK] mapping for Place added, tree depth for mapping of map reduced.
+2015-05-26 7efe091 [BUGFIX] annotation of mainPlace corrected.
+2015-05-26 f5ed0ef [TASK] AbstractEntity now loads real instances of LazyLoadingProxy values before converting them to array
+2015-05-26 b9a0e44 [TASK] Main JavaScript refactored. Now all selectors are build using dynaTree plugin. A result list for places has been added.
+2015-05-26 c6c8254 [TASK] regions can now have a main place
+2015-05-26 b384b70 [TASK] method getPlaces replaced by more flexible buildPlaceDemandFromMap
+2015-05-23 6b41284 [TASK] itemAction refactored. Use map id only for task buildMap
+2015-05-23 36366fc [TASK] Container for places, regions and location trees added. Obsolete selectors removed.
+2015-05-23 5e4c9fa [TASK] Model Map extended by placeGroups
+2015-05-23 c010a4a [TASK] AbstractDemand and DemandInterface extended. Code cleanup
+2015-05-23 64520c3 [TASK] method getPlaces refactored using method findDemanded instead of findRawSelectWhere
+2015-05-23 d601f34 [TASK] method ajaxListCategories refactored. Now uses category repository method and TreeUtility for building a tree.
+2015-05-23 c9ee1d0 [TASK] method ajaxListPlaceGroupsAction implemented
+2015-05-23 2b469d8 [TASK] methods findDemanded and findDemandedRaw now allow to ignore enable field and storage page. Method generateQuery changed accordingly
+2015-05-23 bf7fbb1 [TASK] code cleanup
+2015-05-23 a432091 [TASK] method findChildren implemented
+2015-05-23 7cbb51a [TASK] allow choosing if storage page is respected in method find multipleByUid
+2015-05-23 16927f6 [TASK] method createOrderingsFromDemand implemented
+2015-05-23 8cb9bf3 [TASK] method getTableName implemented
+2015-05-23 6ff2dad [TASK] code cleanup
+2015-05-23 cbc008d [TASK] use jQuery version 1.10.2 , jQuery cookie 1.4.1, jQueryUI 1.9.2 and dynaTree 1.2.7, disable concatenation and compression for external googleMaps JavaScript resources
+2015-05-23 c742561 [TASK] changed parent class of unit tests to UnitTestCase from core.
+2015-05-23 47a9847 [TASK] load real instances of lazy loading proxies, convert objects to array if possible
+2015-05-23 832bc6d [TASK] obsolete method findTree removed (use method findChildren from parent and TreeUtility instead)
+2015-05-23 ddaa173 [BUGFIX] class name corrected
+2015-05-23 52e5035 [TASK] parent class of CategoryRepository changed to AbstractDemandedRepository
+2015-05-23 f05506a [TASK] local variable renamed, code cleanup
+2015-05-23 68843bc [TASK] init TCA
+2015-05-23 136f5a6 [TASK] method buildObjectTree implemented
+2015-05-23 0be3444 [TASK] model Category changed: use parent instead of children
+2015-05-22 d4f7182 [TASK] new model PlaceGroup implemented added to Place model. Use sys_category table for Category model.
+2015-05-22 7ef9dbb [TASK] extension builder artifacts removed
+2015-05-22 0ecc196 [TASK] ChildrenService and TreeUtility implemented.
+2015-05-22 c9e9aca [TASK] TreeItemInterface implemented.
+2015-05-04 c64ea6c [TASK] regions may now contain (sub) regions.
+2015-05-04 d101c8f [TASK] annotations added, code clean up
+2014-07-03 53d20c1 obsolete class MappingUtility removed
+2014-07-03 852bca5 obsolete class Div removed
+2014-07-03 4ec7b9e obsolete controller and unit tests removed
+2014-07-03 3bfa9f8 unit test for MapController added, test case renamed to match tested method
+2014-07-03 5fb3bd4 refactored: switch case for locationTypes moved to new method ajaxListLocationTypes
+2014-07-03 e42ef66 unit test for MapController added, code cleanup
+2014-07-03 3b3818e obsolete list action for map removed
+2014-07-03 bd5053e obsolete listAction removed, use findByUid in showAction
+2014-07-03 a19104c unit test for MapController added
+2014-07-03 39cd6d5 respect empty query result in condition
+2014-07-03 a0331af use new method in ajax call for categories
+2014-07-03 d84fc0c MapController refactored, method ajaxListCategories implemented @todo: cover method in unit tests
+2014-07-03 4ecf215 unit test for MapController added, mock fixture too
+2014-07-03 9419e46 fixed error caused by false field name type
+2014-07-03 b1e0e1c typo corrected
+2014-07-03 069bb31 unit test for AbstractEntity added, code cleanup
+2014-07-03 bc1f57d use instanceof instead of is_a(), (should be faster), dead code removed
+2014-07-03 6615075 unit test for PlaceController added
+2014-07-03 7295f95 unit tests for PlaceController rewritten
+2014-07-03 4b17909 createDemandFromSettings: test if keys are set before setting values
+2014-07-02 aac6f5f method createConstraintsFromDemand edited, using new field name locationType instead of type, client constraints removed
+2014-07-02 435a626 use createDemandFromSettings and findDemanded in listAction
+2014-07-02 4cf2bb0 unit test for PlaceController added
+2014-07-02 5f13550 adapted for changed field name type > locationType
+2014-07-02 e67cb2f property type renamed to locationType, getter and setter adapted
+2014-07-02 3a1443c Breaking change! Field tx_ajaxmap_domain_model_place.type renamed to location_type
+2014-07-02 c07a79c Breaking change! Field tx_ajaxmap_domain_model_place.type renamed to location_type
+2014-07-01 be080c5 parent class changed to AbstractController
+2014-07-01 a2006dd parent classe changed to AbstractController, method setView removed
+2014-07-01 d65501d AbstractController implemented
+2014-07-01 caea989 unit tests for domain model PlaceDemand added
+2014-07-01 f3bd7e8 obsolete methods for deletd property orderBy removed
+2014-07-01 8048904 unit tests for exceptions added
+2014-07-01 e421f82 property orderBy removed, storagePage renamed to storagePages, param type changed to string
+2014-07-01 a1d42e8 unit tests for domain models AbstractDemand and Search added
+2014-07-01 5fe3d4b unit tests for domain model Address added
+2014-07-01 c62e341 param annotation corrected, error in method setFacebook fixed
+2014-07-01 399ada1 missing pluginName added to ajax request
+2014-07-01 29a58d0 methods createConstraintsFromDemand and createOrderingsFromDemand added, work in progress!
+2014-07-01 1015eb4 property comment corrected
+2014-07-01 37fe44c work on listAction, use treeDepth and mapping settings in showAction,  method createDemandFromSettings implemented
+2014-07-01 46517ba unit test for PlaceController added
+2014-07-01 dfc8b59 configuration for Place action added
+2014-07-01 1d4e033 localization files for backend added
+2014-07-01 c42c75c class PlaceDemand implemented
+2014-07-01 c59ee53 unit test for PlaceDemand implemented
+2014-07-01 5ec140e base class changed: AbstractDemandedRepository
+2014-07-01 e4f9dcf properties, getter and setter added, addressGroup commented out!
+2014-07-01 ab05d47 list and show template for places edited, partial Place/List/Item added
+2014-07-01 d095e7d showAction: @param annotation corrected, assingn place and settings to view, ajaxShowAction implemented
+2014-07-01 ccec863 class naming corrected (missing leading back slash
+2014-07-01 f92899e switchable action for place list added
+2014-07-01 5a4d76f class names for mapping adapted to backslash syntax
+2014-07-01 1293f6e line with tx_contacts_function commented out, argument for ajax call adapted
+2014-07-01 1fa6900 second method showAction renamed to ajaxShowAction, parameter and return value adapted
+2014-07-01 b846ebb method signature for itemAction changed, use request arguments directly, case loadPlaces removed
+2014-07-01 0f6c46c namespace corrected
+2014-07-01 3c88ac5 classes for demand added: AbstractDemand, DemandInterface, Search, AbstractDemandedRepository
+2014-07-01 d6331df using new action ajaxListPlaces
+2014-07-01 a440e40 method ajaxListPlacesAction implemented
+2014-06-30 b1ffebb Merge branch 'feature/listView' of github.com:dwenzel/ajaxmap into feature/listView
+2014-06-29 d09b4f7 console logs and commented code removed
+2014-06-29 34fca84 Merge pull request #23 from dwenzel/feature/namespaces
+2014-06-29 a2f31f2 now using namespaces
+2014-06-29 91a68e4 extension builder config removed
+2014-06-29 ae41dc6 set JavaScript var pageId in template/partial
+2014-06-29 af8ba2f call of ajax dispatcher from extension pt_extbase replaced by own dispatcher, JavaScript, extension configuration and extension dependencies adapted
+2014-06-28 2e90c9e obsolete tests for deleted methods removed
+2014-06-28 298eac6 method getLocationTypesArray replaced, variable renamed
+2014-06-28 48a2648 calls to removed methods replaced
+2014-06-28 f01667c wrapper methods getChildren and getKey removed
+2014-06-28 23dde75 methods getCategoriesArray and getLocationTypesArray removed
+2014-06-28 926f802 mapping for category edited, for location type added
+2014-06-27 d713839 argument mapping added to toArray call
+2014-06-27 dabf788 error in condition fixed, missing argument $mapping added to call of convertValueToArray
+2014-06-27 9f70eb9 mapping configuration for category model added
+2014-06-27 eca8d9d unit test for AbstractEntity added
+2014-06-27 00bb284 use mapping in methods toArray and convertValueToArray
+2014-06-27 3b87246 method map implemented
+2014-06-27 1ca14f8 tests for mapping utility added
+2014-06-27 a4517a9 declaration for MappingUtility added
+2014-06-26 6cfed70 use method toArray instead of mapping
+2014-06-26 6a3de18 wrapper methods for key and children
+2014-06-26 4e49b7f code cleanup
+2014-06-26 9a66bfd unit test for AbstractEntity added
+2014-06-26 ab41adc dead code removed
+2014-06-26 1d72b89 error caused by missing tree depth fixed
+2014-06-26 d9a5922 devLog calls removed, respect tree depth in method toArray
+2014-06-26 3cebc6f remove whitespace from mapStyle
+2014-06-26 ce4199d code cleanup
+2014-06-26 b408605 prevent call to undefined method getChildCategoriesArray
+2014-06-26 9df7941 selectors for mapCenter, initilaZoom and mapStyle adapted, set default value for mapStyle
+2014-06-25 4eddf23 obsolete methods removed
+2014-06-25 bd41447 stub method removed
+2014-06-25 541e43e stub method removed
+2014-06-25 61abbb3 obsolete value childCategoriesArray removed from expected result
+2014-06-25 d833c49 test for obsolete method getChildCategoriesArray removed
+2014-06-25 1fcdcb1 test for string properties added,test for method toArray implemented
+2014-06-25 4ce238d obsolete tests for method getChildCategoriesArray removed, some tests for method toArray of child objects removed, test renamed
+2014-06-25 3736ac0 test for method toArray implemented
+2014-06-25 5ba1654 obsolete tests for method getChildCategoriesArray removed, tests for new method toArray implemented
+2014-06-25 189bbee parameter treeDepth added to method toArray, new method convertValueToArray implemented
+2014-06-25 4071b66 parent class changed to Tx_Ajaxmap_DomainObject_AbstractEntity
+2014-06-25 189c1ee parent class changed to Tx_Ajaxmap_DomainObject_AbstractEntity
+2014-06-25 95eec21 method getChildCategoriesArray removed.
+2014-06-25 7b66102 parent class changed to Tx_Ajaxmap_DomainObject_AbstractEntity
+2014-06-25 1c94a38 code cleanup
+2014-06-25 bec518f parent class changed to Tx_Ajaxmap_DomainObject_AbstractEntity
+2014-06-25 aa89e9b expected return value for toArrayReturnsCorrectValueForRegions adapted
+2014-06-25 6933ba1 parent class changed
+2014-06-25 1571e8f AbstractEntity and SerializableInterface moved to DomainObject
+2014-06-25 5e7367f return value for toJson
+2014-06-25 0f9ee9b AbstractEntity and Serializable Interface implemented, work in progress! (method toArray)
+2014-06-25 d1e656b unit test for domain model map added
+2014-06-25 e8dc7dd parent class changed
+2014-06-25 6706691 Merge pull request #21 from dwenzel/improveUnitTests
+2014-06-25 1f38311 code cleanup
+2014-06-25 a4375e7 dispatcher call updated
+2014-06-25 05aa453 stub method removed
+2014-06-25 5837ab3 Merge branch 'dev' into feature/listView
+2014-06-25 84cc1c8 phpcs disabled
+2014-06-24 dac72a8 add custom php config
+2014-06-24 f36d605 git installation deactivated
+2014-06-24 e1f0ba3 after_script added
+2014-06-24 71673d8 locationTypeStore removed, response.locationTypes is not necessary any more
+2014-06-24 16a9304 locationTypeStore removed, render locationTypes in Map/Data partial
+2014-06-24 19ea51e locationTypes removed from response. They are now rendered in the partial Map/Data
+2014-06-24 99bb261 call initAllMaps only if mapStore is an array
+2014-06-24 e74c17a JavaScript refactored. New partial Map/Data provides settings for Show template, some variables renamed
+2014-06-24 cf1a450 unit test for controller map added
+2014-06-24 4c3d057 method setView added (for unit testing only), showAction changed: search only one map, assign setting to view too
+2014-06-23 e15efc3 phpredis deactivated, phpCodeSniff added
+2014-06-22 caf4edc Merge pull request #17 from dwenzel/improveUnitTests
+2014-06-22 4f0eaac unit tests for domain model map added
+2014-06-22 39cc3dd obsolete method getLocationTypesJson removed
+2014-06-22 7a35e32 use getLocationTypesArray instead of getLocationTypesJson
+2014-06-22 d30ab49 obsolete method getCategoriesJson removed
+2014-06-22 edfb896 obsolete method getCategoriesFlatArray removed
+2014-06-22 ec36fdf unit test for domain model category added
+2014-06-22 76c733d unit test for domain model map added
+2014-06-22 ede33ee unit tests for domain model location type added
+2014-06-22 bde8cbb domain model address restored, oops
+2014-06-22 425bb83 unit tests for domain model region added
+2014-06-22 02447e7 AddressController removed
+2014-06-22 96bf589 unit tests for domain model content added
+2014-06-22 830a157 method getCategorieArray removed
+2014-06-22 ba8c2bc unit tests for domain model category added
+2014-06-21 621b380 domain model address removed
+2014-06-21 b5082bf unit tests for domain model content added
+2014-06-21 35c2e65 Merge pull request #16 from dwenzel/version62compatible
+2014-06-21 7f8aab9 debug for coveralls removed
+2014-06-21 8a728a4 load composer only when coverage runs
+2014-06-21 bee2318 test without repo_token
+2014-06-21 27bc1e1 new coveralls repo_token, export it via cmd line
+2014-06-21 85237cd typo corrected
+2014-06-21 783e542 Merge branch 'version62compatible' of github.com:dwenzel/ajaxmap into version62compatible
+2014-06-21 dabccf2 debug coveralls json
+2014-06-21 86f09ae Update .coveralls.yml
+2014-06-21 b7e903a Update .coveralls.yml
+2014-06-21 f369804 Update .coveralls.yml
+2014-06-21 b6d10e7 Update .coveralls.yml
+2014-06-21 fac24ff indentation corrected
+2014-06-21 d7f0995 coveralls setup
+2014-06-20 ce4eaa1 Merge branch 'version62compatible' of github.com:dwenzel/ajaxmap into version62compatible
+2014-06-20 9dd4682 update .coveralls.yml
+2014-06-20 d441575 Update README.md
+2014-06-20 021a41c update php-coveralls
+2014-06-20 86e23d0 src dir changed
+2014-06-20 e83167e set src dir for coveralls
+2014-06-20 523e805 typo corrected
+2014-06-20 40a7a9a composer.json removed (put into travis-integration)
+2014-06-20 6768a46 mv composer.json
+2014-06-20 a540468 composer.json added
+2014-06-20 9936491 composer added
+2014-06-20 45fb9cc fixed missing semicolon
+2014-06-20 c213b1b coveralls.yml added
+2014-06-20 b9075a5 use default travis notification scheme
+2014-06-20 d214eac coveralls added
+2014-06-20 ef1a360 Merge branch 'version62compatible' of github.com:dwenzel/ajaxmap into version62compatible
+2014-06-20 d274d35 existing unit tests fixed, closes #14
+2014-06-20 b932996 use integration branch master-ajaxmap
+2014-06-19 ec76b54 obsolete unit test removed
+2014-06-19 c6163fc travis configuration added
+2014-06-19 96cdb13 file rights again - argh!
+2014-06-19 201fab6 select all fields from tt_address
+2014-06-19 c3e80be local merge conflict resolved
+2014-06-19 30b9e03 compatibility class added
+2014-06-18 136107d dynatree lib included
+2014-06-18 43917f2 JavaScript libraries added: jquery-ui, jquery.cookie, jquer.dynatree
+2014-06-18 f5c892a add option for automatic inclusion of dynatree JavaScript
+2014-06-18 f14b481 TypoScript for JavaScript inclusion added: dynatree, google maps, jQuery, extension js
+2014-06-18 675161c dead code and comments removed
+2014-06-18 a2bb33c typos on TypoScript inclusion fixed, TypoScript for dynatree added, allow map item action in pt_extbase ajaxDispatcher
+2014-06-18 9e820ce files touched
+2014-06-18 11a7d2b dependencies updated: TYPO3 version 6.2.x and extensions pt_extbase and tt_address
+2014-06-09 a67aac4 dependency of pt_extbase and suggestion for xliff added
+2014-06-09 f8139cc include of TypoScript for JavaScript depending on Extension Manager settings
+2014-06-09 ae92767 fluid comment removed
+2014-06-09 05c1c0b jQuery libraries 1.11.1 and 2.1.1 added
+2014-06-09 792233c extension manager configuration added, provides settings for JavaScript inclusion
+2014-06-09 176ce25 localization files in xml format added (generated by xliff)
+2014-06-09 996d270 localization files in xml format added (generated by xliff)
+2014-06-09 1b1b5d0 version 0.1.0-dev
+2013-04-23 7e4bb38 add missing file
+2013-04-23 587b0ab spelling error corrected
+2013-04-23 e46f544 initial upload
+2013-04-23 3057b82 Initial commit
 2012-06-27 version 0.0.3 Dirk Wenzel wenzel@webfox01.de
 	- test implementation of ajax controller class
 2012-06-27 version 0.0.2 Dirk Wenzel wenzel@webfox01.de
