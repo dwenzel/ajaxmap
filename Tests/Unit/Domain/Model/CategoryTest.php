@@ -39,6 +39,7 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * @subpackage Ajax Map
  *
  * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Category
  */
 class CategoryTest extends UnitTestCase {
 	/**
@@ -52,6 +53,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::getTitle
 	 */
 	public function getTitleReturnsInitialValueForString() {
 		$this->assertNull(
@@ -61,6 +63,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::setTitle
 	 */
 	public function setTitleForStringSetsTitle() { 
 		$this->fixture->setTitle('Conceived at T3CON10');
@@ -73,6 +76,7 @@ class CategoryTest extends UnitTestCase {
 	
 	/**
 	 * @test
+	 * @covers ::getDescription
 	 */
 	public function getDescriptionReturnsInitialValueForString() {
 		$this->assertNull(
@@ -82,6 +86,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::setDescription
 	 */
 	public function setDescriptionForStringSetsDescription() { 
 		$this->fixture->setDescription('Conceived at T3CON10');
@@ -94,6 +99,7 @@ class CategoryTest extends UnitTestCase {
 	
 	/**
 	 * @test
+	 * @covers ::getIcon
 	 */
 	public function getIconReturnsInitialValueForString() {
 		$this->assertNull(
@@ -103,6 +109,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::setIcon
 	 */
 	public function setIconForStringSetsIcon() { 
 		$this->fixture->setIcon('Conceived at T3CON10');
@@ -115,6 +122,7 @@ class CategoryTest extends UnitTestCase {
 	
 	/**
 	 * @test
+	 * @covers ::getParent
 	 */
 	public function getParentReturnsInitiallyNull() {
 		$this->assertNull(
@@ -124,6 +132,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::setParent
 	 */
 	public function setParentForPlaceGroupSetsParent() {
 		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();

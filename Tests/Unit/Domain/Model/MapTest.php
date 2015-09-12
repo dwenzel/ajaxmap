@@ -36,6 +36,7 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * Class MapTest
  *
  * @package Webfox\Ajaxmap\Tests
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Map
  */
 class MapTest extends UnitTestCase {
 
