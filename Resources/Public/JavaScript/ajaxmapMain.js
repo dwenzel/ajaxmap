@@ -110,7 +110,12 @@ var ajaxMap = ajaxMap || {};
 		var singleContent;
 
 		if (placeId) {
-			var path = $(location).attr('href') + '&type=1441916976';
+			var path = $(location).attr('href');
+			if(path.indexOf('?') > -1) {
+				path = path + '&type=1441916976';
+			} else {
+				path = path + '?type=1441916976';
+			}
 
 			$.ajax({
 				url: path,
