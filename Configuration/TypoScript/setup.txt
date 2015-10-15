@@ -98,6 +98,7 @@ ajaxMapPage {
 	typeNum = 1441916976
 	config.disableAllHeaderCode = 1
 	config.metaCharset = UTF-8
+	config.no_cache = 1
 	10 = COA
 	10 < tt_content.list.20.ajaxmap_map
 }
