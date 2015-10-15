@@ -249,8 +249,8 @@ var ajaxMap = ajaxMap || {};
 					initLocationTypesSelector(mapEntry);
 				}
 				// placeGroups tree
-				renderCategoryTree(mapEntry.id);
-				renderPlaceGroupTree(mapEntry.id);
+				renderCategoryTree(mapEntry);
+				renderPlaceGroupTree(mapEntry);
 				initPlaces(mapEntry);
 				$('body').append('<div id="overlayDetailHelper"></div>');
 			},
@@ -361,13 +361,13 @@ var ajaxMap = ajaxMap || {};
 	function renderRegionTree(mapEntry) {
 		$('#ajaxMapRegionsTree' + mapEntry.id).fancytree(
 			{
-				checkbox: true,
+				checkbox: mapEntry.settings.regionTree.checkbox,
 				cookieId: 'fancyTreeRegions' + mapEntry.id,
-				selectMode: 3, //hierarchical select
+				minExpandLevel: mapEntry.settings.regionTree.minExpandLevel,
+				selectMode: mapEntry.settings.regionTree.selectMode, //hierarchical select
 				source: mapEntry.regions,
-				icons: false,
+				icons: mapEntry.settings.regionTree.icons,
 				select: function(event, data) {
-					//todo node>data
 					var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
 					var selectedNodes = data.tree.getSelectedNodes();
 					var selectedKeys = $.map(selectedNodes, function(node){
@@ -384,17 +384,14 @@ var ajaxMap = ajaxMap || {};
 	 * Renders a category tree. Data for tree is
 	 * fetched via Ajax call
 	 *
-	 * @param mapId
+	 * @param mapEntry
 	 */
-	function renderCategoryTree(mapId) {
-		var settings = {
-			icons: false
-		};
+	function renderCategoryTree(mapEntry) {
 		renderTreeAjax(
-			'#ajaxMapCategoryTree' + mapId,
+			'#ajaxMapCategoryTree' + mapEntry.id,
 			"ajaxListCategories",
-			mapId,
-			settings
+			mapEntry.id,
+			mapEntry.settings.categoryTree
 		);
 	}
 
@@ -402,17 +399,14 @@ var ajaxMap = ajaxMap || {};
 	 * Renders a tree of place groups. Data for tree is
 	 * fetched via Ajax call
 	 *
-	 * @param mapId
+	 * @param mapEntry
 	 */
-	function renderPlaceGroupTree(mapId) {
-		var settings = {
-			icons: false
-		};
+	function renderPlaceGroupTree(mapEntry) {
 		renderTreeAjax(
-			'#ajaxMapPlaceGroupTree' + mapId,
+			'#ajaxMapPlaceGroupTree' + mapEntry.id,
 			"ajaxListPlaceGroups",
-			mapId,
-			settings
+			mapEntry.id,
+			mapEntry.settings.placeGroupTree
 		);
 	}
 
