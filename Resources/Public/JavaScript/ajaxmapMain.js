@@ -522,7 +522,7 @@ var ajaxMap = ajaxMap || {};
 		var mapId = placesTree.data.mapId,
 			attributes = {
 				locationType: {treeName: 'ajaxMapLocationTypesTree'},
-				category: {treeName: 'ajaxMapCategoryTree'},
+				categories: {treeName: 'ajaxMapCategoryTree'},
 				regions: {treeName: 'ajaxMapRegionsTree'},
 				placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
 			};
