@@ -74,7 +74,7 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @test
 	 * @covers ::convertObjectLeafToArray
 	 */
-	public function converObjectLeafToArrayConvertsReturnsEmptyArrayIfItemIsNotSerializable() {
+	public function convertObjectLeafToArrayConvertsReturnsEmptyArrayIfItemIsNotSerializable() {
 		$mockObjectLeaf = array(
 				'item' => 'bar'
 				);
@@ -89,7 +89,7 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @test
 	 * @covers ::convertObjectLeafToArray
 	 */
-	public function converObjectLeafToArrayConvertsSerializableLeafItems() {
+	public function convertObjectLeafToArrayConvertsSerializableLeafItems() {
 		$mockSerializable = $this->getMock(
 				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
 				array('toArray', 'toJson'), array(), '', FALSE);
@@ -103,8 +103,106 @@ class TreeUtilityTest extends UnitTestCase {
 			->will($this->returnValue($expectedArray));
 		$this->assertSame(
 				 $expectedArray,
-				$this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
+				$this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf)
 		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectLeafToArray
+	 */
+	public function convertObjectLeafToArrayRemovesKeys() {
+		$mockSerializable = $this->getMock(
+				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
+				array('toArray', 'toJson'), array(), '', FALSE);
+		$mockObjectLeaf = array(
+				'item' => $mockSerializable
+				);
+		$convertedArray = array(
+				'foo' => 'bar',
+				'keyToRemove' => 'baz'
+		);
+		$expectedArray = array(
+				'foo' => 'bar'
+				);
+		$mockSerializable->expects($this->once())
+			->method('toArray')
+			->with(10, NULL)
+			->will($this->returnValue($convertedArray));
+		$this->assertSame(
+				 $expectedArray,
+				$this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf, 'keyToRemove')
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectBranchToArray
+	 */
+	public function convertObjectBranchToArrayReturnsInitiallyFalse() {
+		$mockObjectLeaf = array(
+				'foo' => 'bar'
+		);
+		$this->assertFalse(
+				$this->subject->_call('convertObjectBranchToArray', $mockObjectLeaf)
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectBranchToArray
+	 */
+	public function convertObjectBranchToArrayConvertsBranch() {
+		$subject = $this->getAccessibleMock(
+				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
+				array('convertObjectLeafToArray'), array(), '', FALSE
+		);
+		$mockSerializable = $this->getMock(
+				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
+				array('toArray', 'toJson'), array(), '', FALSE);
+		$mockObjectLeaf = array(
+				'item' => $mockSerializable
+		);
+		$keyToRemove = 'foo,bar';
+		$mapping = array('foo' => 'bar');
+
+		$subject->expects($this->once())
+			->method('convertObjectLeafToArray')
+			->with($mockObjectLeaf, $keysToRemove, $mapping)
+			->will($this->returnValue($result));
+
+		$subject->_call('convertObjectBranchToArray', $mockObjectLeaf, $keysToRemove, $mapping);
+	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectBranchToArray
+	 */
+	public function convertObjectBranchToArrayConvertsChildren() {
+		$subject = $this->getAccessibleMock(
+				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
+				array('convertObjectLeafToArray'), array(), '', FALSE
+		);
+		$mockSerializable = $this->getMock(
+				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
+				array('toArray', 'toJson'), array(), '', FALSE);
+		$child = 'foo';
+
+		$mockObjectLeaf = array(
+				'item' => $mockSerializable,
+				'children' => array($child)
+		);
+		$keyToRemove = 'foo,bar';
+		$mapping = array('foo' => 'bar');
+
+		$subject->expects($this->exactly(2))
+			->method('convertObjectLeafToArray')
+			->withConsecutive(
+					array($mockObjectLeaf, $keysToRemove, $mapping),
+					array($child, $keysToRemove, $mapping)
+			);
+
+		$subject->_call('convertObjectBranchToArray', $mockObjectLeaf, $keysToRemove, $mapping);
 	}
 }
 

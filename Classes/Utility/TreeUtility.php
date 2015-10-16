@@ -85,12 +85,12 @@ class TreeUtility {
 	}
 
 	/**
-	 * @param $objectTreeItem
+	 * @param array $objectTreeItem
 	 * @return mixed
 	 */
 	protected function convertObjectBranchToArray($objectTreeItem, $keysToRemove = NULL, $mapping = NULL) {
 		if (isset($objectTreeItem['item'])
-			AND $objectTreeItem['item'] instanceof AbstractEntity
+			AND $objectTreeItem['item'] instanceof SerializableInterface
 		) {
 			$treeArrayItem = $this->convertObjectLeafToArray($objectTreeItem, $keysToRemove, $mapping);
 			if (isset($objectTreeItem['children'])
