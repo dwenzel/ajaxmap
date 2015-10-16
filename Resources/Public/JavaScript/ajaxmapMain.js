@@ -245,7 +245,7 @@ var ajaxMap = ajaxMap || {};
 				}
 				// location types Selector
 				if (mapEntry.locationTypes.length) {
-					renderLocationTypesTree(mapEntry.id, mapEntry.locationTypes);
+					renderLocationTypesTree(mapEntry);
 					initLocationTypesSelector(mapEntry);
 				}
 				// placeGroups tree
@@ -359,14 +359,17 @@ var ajaxMap = ajaxMap || {};
 	 * @param mapEntry
 	 */
 	function renderRegionTree(mapEntry) {
+		var options = mapEntry.settings.regionTree;
 		$('#ajaxMapRegionsTree' + mapEntry.id).fancytree(
 			{
-				checkbox: mapEntry.settings.regionTree.checkbox,
+				checkbox: options.checkbox,
 				cookieId: 'fancyTreeRegions' + mapEntry.id,
-				minExpandLevel: mapEntry.settings.regionTree.minExpandLevel,
-				selectMode: mapEntry.settings.regionTree.selectMode, //hierarchical select
+				minExpandLevel: options.minExpandLevel,
+				selectMode: options.selectMode,
 				source: mapEntry.regions,
-				icons: mapEntry.settings.regionTree.icons,
+				filter: options.filter,
+				extensions: options.extensions,
+				icons: options.icons,
 				select: function(event, data) {
 					var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
 					var selectedNodes = data.tree.getSelectedNodes();
@@ -470,7 +473,6 @@ var ajaxMap = ajaxMap || {};
 			$("span#matches").text(n);
 		}).focus();
 
-		//
 		updatePlacesTree(mapId, children);
 	}
 
@@ -502,23 +504,96 @@ var ajaxMap = ajaxMap || {};
 			return a > b ? 1 : a < b ? -1 : 0;
 		};
 		rootNode.sortChildren(compare, false);
+		updateFilter(rootNode.tree);
 	}
 
+	/**
+	 * Updates all filter (trees)
+	 * Determines for all nodes in all filter trees whether
+	 * they should be shown.
+	 * A node in a filter tree should be visible if at least
+	 * one node in the result tree (placesTree) has the
+	 * according option (for instance if it belongs to a region)
+	 *
+	 * @param placesTree The places tree
+	 * @return void
+	 */
+	function updateFilter(placesTree) {
+		var mapId = placesTree.data.mapId,
+			attributes = {
+				locationType: {treeName: 'ajaxMapLocationTypesTree'},
+				category: {treeName: 'ajaxMapCategoryTree'},
+				regions: {treeName: 'ajaxMapRegionsTree'},
+				placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
+			};
+		$.each(attributes, function(attributeName, attribute){
+			var tree = $('#' + attribute.treeName + mapId).fancytree('getTree'),
+				children = placesTree.getRootNode().children,
+				placeKeys = getKeysByAttribute(children, attributeName);
+			filterTree(tree, placeKeys);
+		});
+	}
+
+	/**
+	 * Searches all children for an attribute in their data property
+	 * and returns a unique array of keys for this attribute
+	 *
+	 * @param children
+	 * @param name
+	 * @return Array
+	 */
+	function getKeysByAttribute(children, name) {
+		var keys = [];
+		$.each(children, function(index, child){
+			if (child.data.hasOwnProperty(name)) {
+				var attribute = child.data[name];
+				if (attribute.hasOwnProperty('key') && keys.indexOf(attribute.key) < 0) {
+					keys.push(attribute.key);
+				} else {
+					if (attribute instanceof Array) {
+						for(var i = 0, k = attribute.length; i < k; i++) {
+							if (attribute[i].hasOwnProperty('key') && keys.indexOf(attribute[i].key) < 0){
+								keys.push(attribute[i].key);
+							}
+						}
+					}
+				}
+			}
+		});
+
+		return keys;
+	}
+
+	/**
+	 * Filters a tree by a unique array of keys
+	 * A node will be visible if its key is in the this array
+	 *
+	 * @param tree Fancy tree
+	 * @param keys Unique array of keys
+	 */
+	function filterTree(tree, keys) {
+		options = {autoExpand: true};
+		tree.filterNodes(function(node){
+			return (keys.indexOf(parseInt(node.key)) != -1);
+		}, options);
+	}
 
 	/**
 	 * Renders a tree of places. Data for tree is
 	 * fetched via Ajax call
 	 *
-	 * @param mapId Unique id of map to which the tree belongs
-	 * @param children Object containing tree objects
+	 * @param mapEntry Unique id of map to which the tree belongs
 	 */
-	function renderLocationTypesTree(mapId, children) {
-		var selector = '#ajaxMapLocationTypesTree' + mapId;
-		var settings = {
-			checkbox: true,
-			cookieId: "fancyTreeLocationTypes" + mapId,
-			selectMode: 1,
-			source: children,
+	function renderLocationTypesTree(mapEntry) {
+		var selector = '#ajaxMapLocationTypesTree' + mapEntry.id,
+			options = mapEntry.settings.locationTypeTree,
+			settings = {
+			checkbox: options.checkbox,
+			cookieId: "fancyTreeLocationTypes" + mapEntry.id,
+			selectMode: options.selectMode,
+			extensions: options.extensions,
+			filter: options.filter,
+			source: mapEntry.locationTypes,
 			select: function(flag, node) {
 				var mapNumber = getMapNumber(node.tree.options.cookieId.split('fancyTreeLocationTypes')[1]);
 				updatePlaces(mapNumber, true);

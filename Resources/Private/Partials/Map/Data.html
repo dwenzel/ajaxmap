@@ -37,15 +37,39 @@
 		"settings": {
 			"regionTree" : {
 				minExpandLevel: 3,
-				selectMode: 3,
+				selectMode: 3, //1: single, 2: multi, 3: multi hierarchical
 				icons: false,
-				checkbox: true
+				checkbox: true,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
 			},
 			"categoryTree" : {
-				icons: false
+				icons: false,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
 			},
 			"placeGroupTree" : {
-				icons: false
+				icons: false,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
+			},
+			"locationTypeTree": {
+				checkbox: true,
+				selectMode: 1,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
 			}
 		}
 	};
