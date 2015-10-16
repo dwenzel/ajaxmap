@@ -43,6 +43,7 @@ class TreeUtility {
 	 */
 	public function buildObjectTree(QueryResultInterface $objects) {
 		$tree = array();
+		$objects = $objects->toArray();
 
 		$flatObjects = array();
 		/** @var TreeItemInterface $object */
@@ -53,9 +54,9 @@ class TreeUtility {
 			);
 		}
 		// If leaves are selected without its parents selected, those are shown as parent
-		foreach ($flatObjects as $id => &$flatCategory) {
-			if (!isset($flatObjects[$flatCategory['parent']])) {
-				$flatCategory['parent'] = NULL;
+		foreach ($flatObjects as $id => &$flatObject) {
+			if (!isset($flatObjects[$flatObject['parent']])) {
+				$flatObject['parent'] = NULL;
 			}
 		}
 		foreach ($flatObjects as $id => &$node) {

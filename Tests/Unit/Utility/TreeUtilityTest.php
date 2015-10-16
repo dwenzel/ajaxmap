@@ -204,5 +204,145 @@ class TreeUtilityTest extends UnitTestCase {
 
 		$subject->_call('convertObjectBranchToArray', $mockObjectLeaf, $keysToRemove, $mapping);
 	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectTreeToArray
+	 */
+	public function convertObjectTreeToArrayReturnsInitiallyEmptyArray() {
+		$objectTree = [
+			'foo'
+			];
+		$this->assertEquals(
+				[],
+				$this->subject->convertObjectTreeToArray($objectTree)
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::convertObjectTreeToArray
+	 */
+	public function convertObjectTreeToArrayConvertsBranch() {
+		$subject = $this->getAccessibleMock(
+				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
+				array('convertObjectBranchToArray'), array(), '', FALSE
+		);
+		$branch = 'foo';
+		$objectTree = [
+			$branch
+			];
+		$convertedBranch = 'bar';
+		$mapping = ['fooBar'];
+		$keysToRemove = 'baz';
+
+		$subject->expects($this->once())
+			->method('convertObjectBranchToArray')
+			->with($branch, $keysToRemove, $mapping)
+			->will($this->returnValue($convertedBranch));
+
+		$this->assertEquals(
+				[$convertedBranch],
+				$subject->convertObjectTreeToArray($objectTree, $keysToRemove, $mapping)
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::buildObjectTree
+	 */
+	public function buildObjectTreeReturnsInitiallyEmptyArray() {
+		$queryResult = $this->getMock(
+				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
+				[], [], '', FALSE);
+
+		$queryResult->expects($this->once())
+			->method('toArray')
+			->will($this->returnValue([]));
+		$this->assertEquals(
+				[],
+				$this->subject->buildObjectTree($queryResult)
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::buildObjectTree
+	 */
+	public function buildObjectTreeFlattensObjects() {
+		$queryResult = $this->getMock(
+				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
+				[], [], '', FALSE);
+		$mockObject = $this->getMock(
+				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
+				[], [], '', FALSE);
+		$uid = 6;
+		$expectedTree = [
+			$uid => [
+				'item' => $mockObject,
+				'parent' => NULL
+			]
+		];
+
+		$queryResult->expects($this->once())
+			->method('toArray')
+			->will($this->returnValue(array($mockObject)));
+		$mockObject->expects($this->once())
+			->method('getUid')
+			->will($this->returnValue($uid));
+		$this->assertEquals(
+				$expectedTree,
+				$this->subject->buildObjectTree($queryResult)
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::buildObjectTree
+	 */
+	public function buildObjectTreeSetsObjectsWithoutParentToParent() {
+		$queryResult = $this->getMock(
+				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
+				[], [], '', FALSE);
+		$mockObject = $this->getMock(
+				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
+				[], [], '', FALSE);
+		/*$mockParent =  $this->getMock(
+				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
+				['getParent', 'getUid'], [], '', FALSE);*/
+		$mockParent = clone($mockObject);
+		$uid = 6;
+		$parentId = 99;
+		$expectedTree = [
+			$parentId => [
+				'children' => [
+					$uid => [
+						'item' => $mockObject,
+						'parent' => $parentId
+					]
+				],
+				'item' => $mockParent,
+				'parent' => NULL
+			]
+		];
+
+		$queryResult->expects($this->once())
+			->method('toArray')
+			->will($this->returnValue(array($mockObject, $mockParent)));
+		$mockObject->expects($this->once())
+			->method('getUid')
+			->will($this->returnValue($uid));
+		$mockObject->expects($this->exactly(2))
+			->method('getParent')
+			->will($this->returnValue($mockParent));
+		$mockParent->expects($this->exactly(2))
+			->method('getUid')
+			->will($this->returnValue($parentId));
+
+		$this->assertEquals(
+				$expectedTree,
+				$this->subject->buildObjectTree($queryResult)
+		);
+	}
 }
 
