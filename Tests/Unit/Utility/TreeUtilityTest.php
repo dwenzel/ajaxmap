@@ -210,11 +210,11 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::convertObjectTreeToArray
 	 */
 	public function convertObjectTreeToArrayReturnsInitiallyEmptyArray() {
-		$objectTree = [
+		$objectTree = array(
 			'foo'
-			];
+			);
 		$this->assertEquals(
-				[],
+				array(),
 				$this->subject->convertObjectTreeToArray($objectTree)
 		);
 	}
@@ -229,11 +229,11 @@ class TreeUtilityTest extends UnitTestCase {
 				array('convertObjectBranchToArray'), array(), '', FALSE
 		);
 		$branch = 'foo';
-		$objectTree = [
+		$objectTree = array(
 			$branch
-			];
+			);
 		$convertedBranch = 'bar';
-		$mapping = ['fooBar'];
+		$mapping = array('fooBar');
 		$keysToRemove = 'baz';
 
 		$subject->expects($this->once())
@@ -242,7 +242,7 @@ class TreeUtilityTest extends UnitTestCase {
 			->will($this->returnValue($convertedBranch));
 
 		$this->assertEquals(
-				[$convertedBranch],
+				array($convertedBranch),
 				$subject->convertObjectTreeToArray($objectTree, $keysToRemove, $mapping)
 		);
 	}
@@ -254,13 +254,13 @@ class TreeUtilityTest extends UnitTestCase {
 	public function buildObjectTreeReturnsInitiallyEmptyArray() {
 		$queryResult = $this->getMock(
 				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				[], [], '', FALSE);
+				array(), array(), '', FALSE);
 
 		$queryResult->expects($this->once())
 			->method('toArray')
-			->will($this->returnValue([]));
+			->will($this->returnValue(array()));
 		$this->assertEquals(
-				[],
+				array(),
 				$this->subject->buildObjectTree($queryResult)
 		);
 	}
@@ -272,17 +272,17 @@ class TreeUtilityTest extends UnitTestCase {
 	public function buildObjectTreeFlattensObjects() {
 		$queryResult = $this->getMock(
 				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				[], [], '', FALSE);
+				array(), array(), '', FALSE);
 		$mockObject = $this->getMock(
 				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				[], [], '', FALSE);
+				array(), array(), '', FALSE);
 		$uid = 6;
-		$expectedTree = [
-			$uid => [
+		$expectedTree = array(
+			$uid => array(
 				'item' => $mockObject,
 				'parent' => NULL
-			]
-		];
+			)
+		);
 
 		$queryResult->expects($this->once())
 			->method('toArray')
@@ -303,28 +303,28 @@ class TreeUtilityTest extends UnitTestCase {
 	public function buildObjectTreeSetsObjectsWithoutParentToParent() {
 		$queryResult = $this->getMock(
 				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				[], [], '', FALSE);
+				array(), array(), '', FALSE);
 		$mockObject = $this->getMock(
 				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				[], [], '', FALSE);
+				array(), array(), '', FALSE);
 		/*$mockParent =  $this->getMock(
 				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				['getParent', 'getUid'], [], '', FALSE);*/
+				array('getParent', 'getUid'), array(), '', FALSE);*/
 		$mockParent = clone($mockObject);
 		$uid = 6;
 		$parentId = 99;
-		$expectedTree = [
-			$parentId => [
-				'children' => [
-					$uid => [
+		$expectedTree = array(
+			$parentId => array(
+				'children' => array(
+					$uid => array(
 						'item' => $mockObject,
 						'parent' => $parentId
-					]
-				],
+					)
+				),
 				'item' => $mockParent,
 				'parent' => NULL
-			]
-		];
+			)
+		);
 
 		$queryResult->expects($this->once())
 			->method('toArray')
