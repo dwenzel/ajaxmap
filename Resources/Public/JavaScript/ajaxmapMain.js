@@ -416,32 +416,27 @@ var ajaxMap = ajaxMap || {};
 	/**
 	 * Renders a tree of places from given data
 	 *
-	 * @param mapId Unique id of map to which the tree belongs
+	 * @param mapEntry Map entry to which the tree belongs
 	 * @param children Object containing tree objects
 	 */
-	function renderPlacesTree(mapId, children) {
-		var selector = '#ajaxMapPlacesTree' + mapId,
-			mapNumber = getMapNumber(mapId),
-			mapEntry = mapStore[mapNumber],
+	function renderPlacesTree(mapEntry, children) {
+		var selector = '#ajaxMapPlacesTree' + mapEntry.id,
+			mapNumber = getMapNumber(mapEntry.id),
 			map = mapEntry.map;
 
 		var settings = {
-			cookieId: "fancyTreePlaces" + mapId,
-			selectMode: 2,
+			cookieId: "fancyTreePlaces" + mapEntry.id,
+			selectMode: mapEntry.settings.placesTree.selectMode,
 			source: {
 				mapNumber: mapNumber,
-				mapId: mapId,
+				mapId: mapEntry.id,
 				map: map,
 				children: []
 			},
-			icons: false,
-			extensions: ["filter"],
-			quicksearch: true,
-			filter: {
-				autoApply: true,
-				// autoExpand: true,
-				mode: "hide"
-			},
+			icons: mapEntry.settings.placesTree.icons,
+			extensions: mapEntry.settings.placesTree.extensions,
+			quicksearch: mapEntry.settings.placesTree.quicksearch,
+			filter: mapEntry.settings.placesTree.filter,
 			activate: function(event,data) {
 				togglePlace(event, data);
 			}
@@ -473,7 +468,7 @@ var ajaxMap = ajaxMap || {};
 			$("span#matches").text(n);
 		}).focus();
 
-		updatePlacesTree(mapId, children);
+		updatePlacesTree(mapEntry.id, children);
 	}
 
 	/**
@@ -484,11 +479,28 @@ var ajaxMap = ajaxMap || {};
 	 * @param data
 	 */
 	function togglePlace(event, data) {
+		var mapNumber = getMapNumber(data.tree.data.mapId),
+			mapEntry = mapStore[mapNumber],
+			mapMarkers = mapEntry.markers || [],
+			infoWindow = mapEntry.infoWindow;
+
 		if (!data.node.selected) {
 			data.node.setSelected(true);
+			if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
+				for (var i = 0, j = mapMarkers.length; i < j; i++) {
+					var marker = mapMarkers[i];
+					if (marker.place.key == data.node.key) {
+						var content = ajaxMap.getInfoWindowContent(marker.place);
+						infoWindow.setContent(content);
+						infoWindow.open(mapEntry.map, marker);
+					}
+				}
+			}
 		} else {
 			data.node.setSelected(false);
+			infoWindow.close();
 		}
+
 		data.node.setActive(false);
 		updatePlaces(data.tree.data.mapNumber);
 	}
@@ -629,7 +641,7 @@ var ajaxMap = ajaxMap || {};
 				mapStore[mapNumber].places = result;
 
 				if (result.length) {
-					renderPlacesTree(mapEntry.id, result);
+					renderPlacesTree(mapEntry, result);
 					updatePlaces(mapNumber);
 				}
 			}
