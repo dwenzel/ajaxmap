@@ -110,6 +110,7 @@ CREATE TABLE tx_ajaxmap_domain_model_map (
 	disable_default_ui tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	place_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
+	static_layers int(11) unsigned DEFAULT '0' NOT NULL,
 	places int(11) unsigned DEFAULT '0' NOT NULL,
 	location_types int(11) unsigned DEFAULT '0' NOT NULL,
 
@@ -303,6 +304,19 @@ CREATE TABLE tx_ajaxmap_map_placegroup_mm (
 # Table structure for table 'tx_ajaxmap_map_region_mm'
 #
 CREATE TABLE tx_ajaxmap_map_region_mm (
+	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
+	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting int(11) unsigned DEFAULT '0' NOT NULL,
+	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
+
+	KEY uid_local (uid_local),
+	KEY uid_foreign (uid_foreign)
+);
+
+#
+# Table structure for table 'tx_ajaxmap_map_static_layer_mm'
+#
+CREATE TABLE tx_ajaxmap_map_static_layer_mm (
 	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
 	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
 	sorting int(11) unsigned DEFAULT '0' NOT NULL,

@@ -27,6 +27,7 @@
       <label index="tx_ajaxmap_domain_model_map.overlays">Overlays</label>
       <label index="tx_ajaxmap_domain_model_map.placeGroups">Place Groups</label>
       <label index="tx_ajaxmap_domain_model_map.regions">Regions</label>
+      <label index="tx_ajaxmap_domain_model_map.static_layers">Static Layers</label>
       <label index="tx_ajaxmap_domain_model_map.title">Title</label>
       <label index="tx_ajaxmap_domain_model_map.type">Type</label>
       <label index="tx_ajaxmap_domain_model_map.width">Width</label>
