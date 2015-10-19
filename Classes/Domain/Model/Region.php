@@ -86,6 +86,16 @@ class Region extends AbstractEntity {
 	protected $mainPlace;
 
 	/**
+	 * @var bool
+	 */
+	protected $unselectable;
+
+	/**
+	 * @var bool
+	 */
+	protected $selected;
+	
+	/**
 	 * __construct
 	 *
 	 * @return \Webfox\Ajaxmap\Domain\Model\Region
@@ -281,5 +291,44 @@ class Region extends AbstractEntity {
 	public function setMainPlace($place) {
 		$this->mainPlace = $place;
 	}
+
+	/**
+	 * Returns the unselectable
+	 *
+	 * @return boolean $unselectable
+	 */
+	public function getUnselectable() {
+		return $this->unselectable;
+	}
+
+	/**
+	 * Sets the unselectable
+	 *
+	 * @param boolean $unselectable
+	 * @return void
+	 */
+	public function setUnselectable($unselectable) {
+		$this->unselectable = $unselectable;
+	}
+
+	/**
+	 * Returns the selected
+	 *
+	 * @return boolean $selected
+	 */
+	public function getSelected() {
+		return $this->selected;
+	}
+
+	/**
+	 * Sets the selected
+	 *
+	 * @param boolean $selected
+	 * @return void
+	 */
+	public function setSelected($selected) {
+		$this->selected = $selected;
+	}
+
 }
 
