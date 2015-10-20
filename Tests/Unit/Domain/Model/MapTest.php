@@ -482,6 +482,7 @@ class MapTest extends UnitTestCase {
 			'placeGroups' => array(),
 			'places' => array(),
 			'regions' => array(),
+			'staticLayers' => array(),
 			'title' => NULL,
 			'type' => NULL,
 			'uid' => NULL,
@@ -565,6 +566,134 @@ class MapTest extends UnitTestCase {
 		$this->assertInstanceOf(
 			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
 			$this->fixture->getLocationTypes()
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesCategoriesWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getCategoriesReturnsInitialValueForObjectStorageContainingCategories() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setCategoriesForObjectStorageContainingCategoriesSetsCategories() {
+		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneCategory->attach($category);
+		$this->fixture->setCategories($objectStorageHoldingExactlyOneCategory);
+
+		$this->assertSame(
+			$objectStorageHoldingExactlyOneCategory,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addCategoryToObjectStorageHoldingCategories() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneCategory->attach($region);
+		$this->fixture->addCategory($region);
+
+		$this->assertEquals(
+			$objectStorageHoldingExactlyOneCategory,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeCategoryFromObjectStorageHoldingCategories() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$localObjectStorage->attach($region);
+		$localObjectStorage->detach($region);
+		$this->fixture->addCategory($region);
+		$this->fixture->removeCategory($region);
+
+		$this->assertEquals(
+			$localObjectStorage,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getStaticLayersReturnsInitialValueForObjectStorageContainingRegion() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setStaticLayersForObjectStorageContainingRegionSetsStaticLayers() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneRegions->attach($region);
+		$this->fixture->setStaticLayers($objectStorageHoldingExactlyOneRegions);
+
+		$this->assertSame(
+			$objectStorageHoldingExactlyOneRegions,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addStaticLayerToObjectStorageHoldingRegions() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneRegion->attach($region);
+		$this->fixture->addStaticLayer($region);
+
+		$this->assertEquals(
+			$objectStorageHoldingExactlyOneRegion,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeStaticLayerFromObjectStorageHoldingRegions() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$localObjectStorage->attach($region);
+		$localObjectStorage->detach($region);
+		$this->fixture->addStaticLayer($region);
+		$this->fixture->removeStaticLayer($region);
+
+		$this->assertEquals(
+			$localObjectStorage,
+			$this->fixture->getStaticLayers()
 		);
 	}
 }

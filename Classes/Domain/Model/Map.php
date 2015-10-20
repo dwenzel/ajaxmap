@@ -122,6 +122,13 @@ class Map extends AbstractEntity {
 	protected $regions;
 
 	/**
+	 * Static layers
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 */
+	protected $staticLayers;
+
+	/**
 	 * Display selected places as markers.
 	 *
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place>
@@ -210,6 +217,7 @@ class Map extends AbstractEntity {
 		$this->categories = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->placeGroups = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->staticLayers = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->places = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->locationTypes = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 	}
@@ -251,6 +259,45 @@ class Map extends AbstractEntity {
 	 */
 	public function setRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $regions) {
 		$this->regions = $regions;
+	}
+
+	/**
+	 * Adds a Static Layer
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayer
+	 * @return void
+	 */
+	public function addStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayer) {
+		$this->staticLayers->attach($staticLayer);
+	}
+
+	/**
+	 * Removes a Static Layer
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove The Region to be removed
+	 * @return void
+	 */
+	public function removeStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove) {
+		$this->staticLayers->detach($staticLayerToRemove);
+	}
+
+	/**
+	 * Returns the static Layers
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 */
+	public function getStaticLayers() {
+		return $this->staticLayers;
+	}
+
+	/**
+	 * Sets the staticLayers
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 * @return void
+	 */
+	public function setStaticLayers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $staticLayers) {
+		$this->staticLayers = $staticLayers;
 	}
 
 	/**

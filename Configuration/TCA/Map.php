@@ -9,7 +9,7 @@ $TCA['tx_ajaxmap_domain_model_map'] = array(
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,
 		title,type,width,height,map_center,initial_zoom, map_style, disable_default_ui,
-		place_groups,regions,places,location_types,categories',
+		place_groups,regions,static_layers,places,location_types,categories',
 	),
 	'types' => array(
 		'1' => array('showitem' =>
@@ -22,7 +22,7 @@ $TCA['tx_ajaxmap_domain_model_map'] = array(
 			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.markers,
 				place_groups,location_types,categories,
 			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.overlays,
-				regions,
+				regions,static_layers,
 
 			--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
 				starttime,endtime'
@@ -243,6 +243,45 @@ $TCA['tx_ajaxmap_domain_model_map'] = array(
 				'type' => 'select',
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'MM' => 'tx_ajaxmap_map_region_mm',
+				'size' => 10,
+				'autoSizeMax' => 30,
+				'maxitems' => 9999,
+				'multiple' => 0,
+				'wizards' => array(
+					'_PADDING' => 1,
+					'_VERTICAL' => 1,
+					'edit' => array(
+						'type' => 'popup',
+						'title' => 'Edit',
+						'script' => 'wizard_edit.php',
+						'icon' => 'edit2.gif',
+						'popup_onlyOpenIfSelected' => 1,
+						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+						),
+					'add' => Array(
+						'type' => 'script',
+						'title' => 'Create new',
+						'icon' => 'add.gif',
+						'params' => array(
+							'table' => 'tx_ajaxmap_domain_model_region',
+							'pid' => '###CURRENT_PID###',
+							'setValue' => 'prepend'
+							),
+						'script' => 'wizard_add.php',
+					),
+                    'suggest' => array(    
+                        'type' => 'suggest',
+                    ),
+				),
+			),
+		),
+		'static_layers' => array(
+			'exclude' => 0,
+			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.static_layers',
+			'config' => array(
+				'type' => 'select',
+				'foreign_table' => 'tx_ajaxmap_domain_model_region',
+				'MM' => 'tx_ajaxmap_map_static_layer_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
