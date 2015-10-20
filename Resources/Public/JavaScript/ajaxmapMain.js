@@ -194,7 +194,8 @@ var ajaxMap = ajaxMap || {};
 		// store map in array
 		mapEntry.map = map;
 		// store regions
-		mapEntry.regions = response.regions;
+		mapEntry.regions = response.regions || [];
+		mapEntry.staticLayers = response.staticLayers || [];
 
 		// info window
 		mapEntry.infoWindow = new google.maps.InfoWindow(
@@ -230,6 +231,7 @@ var ajaxMap = ajaxMap || {};
 			dataType: "json",
 			success: function (response) {
 				createMap(response, mapEntry);
+
 				// regions selector
 				if (mapEntry.regions.length) {
 					mapEntry.layers = {};
@@ -243,6 +245,17 @@ var ajaxMap = ajaxMap || {};
 					});
 					renderRegionTree(mapEntry);
 				}
+				if (mapEntry.staticLayers.length) {
+					mapEntry.staticLayers.forEach(function(staticLayer){
+						ajaxMap.addStaticLayer(staticLayer, mapEntry);
+						if (staticLayer.children.length) {
+							staticLayer.children.forEach(function(childRegion){
+								ajaxMap.addStaticLayer(childRegion, mapEntry);
+							});
+						}
+					});
+				}
+
 				// location types Selector
 				if (mapEntry.locationTypes.length) {
 					renderLocationTypesTree(mapEntry);
@@ -277,6 +290,13 @@ var ajaxMap = ajaxMap || {};
 		})
 	}
 
+	/**
+	 * Adds a layer to the map. The layer will appear in the regions tree
+	 * too and can be switched on and off
+	 *
+	 * @param newLayerData
+	 * @param mapEntry
+	 */
 	this.addLayer = function(newLayerData, mapEntry) {
 		if (typeof(mapEntry.layers[newLayerData.key]) === 'undefined') {
 			var layerUrl = basePath + newLayerData.file,
@@ -290,6 +310,24 @@ var ajaxMap = ajaxMap || {};
 				mapEntry.layers[newLayerData.key] = newLayer;
 			}
 		}
+	};
+
+	/**
+	 * Adds a static layer to the map. I.e. the layer will not
+	 * appear in the regions tree and will permanently visible
+	 *
+	 * @param newLayerData
+	 * @param mapEntry
+	 */
+	this.addStaticLayer = function(newLayerData, mapEntry) {
+		var layerUrl = basePath + newLayerData.file,
+			layerOptions = {
+				clickable: newLayerData.clickable,
+				preserveViewport: newLayerData.preserveViewport,
+				suppressInfoWindows: newLayerData.suppressInfoWindows
+			},
+			newLayer = new google.maps.KmlLayer(layerUrl, layerOptions);
+			newLayer.setMap(mapEntry.map);
 	};
 
 	function getMapNumber (mapId) {

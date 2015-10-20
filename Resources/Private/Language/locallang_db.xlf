@@ -119,6 +119,9 @@
 		<trans-unit id="tx_ajaxmap_domain_model_place.regions" xml:space="preserve">
 			<source>Regions</source>
 		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.static_layers" xml:space="preserve">
+			<source>Static Layers</source>
+		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_place.title" xml:space="preserve">
 			<source>Title</source>
 		</trans-unit>
@@ -130,6 +133,12 @@
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_region.clickable" xml:space="preserve">
 			<source>Clickable</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.selectable" xml:space="preserve">
+			<source>Selectable</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.selected" xml:space="preserve">
+			<source>Selected</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_region.file" xml:space="preserve">
 			<source>File</source>
