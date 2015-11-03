@@ -36,7 +36,7 @@ var ajaxMap = ajaxMap || {};
 			var existingKeys = Object.keys(existingLayers);
 			for(var i=0; i<existingKeys.length; i++) {
 				var key = existingKeys[i];
-				if (layerIds.indexOf(key)>-1) {
+				if (layerIds.indexOf(parseInt(key))>-1) {
 					mapEntry.layers[key].setMap(mapEntry.map);
 				} else {
 					mapEntry.layers[key].setMap(null);
@@ -573,14 +573,20 @@ var ajaxMap = ajaxMap || {};
 			attributes = {
 				locationType: {treeName: 'ajaxMapLocationTypesTree'},
 				categories: {treeName: 'ajaxMapCategoryTree'},
-				regions: {treeName: 'ajaxMapRegionsTree'},
+				regions: {treeName: 'ajaxMapRegionsTree', updateLayers: true},
 				placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
 			};
 		$.each(attributes, function(attributeName, attribute){
-			var tree = $('#' + attribute.treeName + mapId).fancytree('getTree'),
+			var treeSelector = '#' + attribute.treeName + mapId,
+				tree = $(treeSelector).fancytree('getTree'),
 				children = placesTree.getRootNode().children,
 				placeKeys = getKeysByAttribute(children, attributeName);
 			filterTree(tree, placeKeys);
+			if (attributeName === 'regions' && attribute.updateLayers) {
+				var mapNumber = getMapNumber(mapId),
+					selectedKeys = getSelectedKeys(treeSelector);
+				ajaxMap.updateLayers(mapNumber, selectedKeys);
+			}
 		});
 	}
 
