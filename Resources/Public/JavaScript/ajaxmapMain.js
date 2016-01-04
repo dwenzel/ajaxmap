@@ -570,21 +570,17 @@ var ajaxMap = ajaxMap || {};
 	 */
 	function updateFilter(placesTree) {
 		var mapId = placesTree.data.mapId,
-			attributes = {
-				locationType: {treeName: 'ajaxMapLocationTypesTree'},
-				categories: {treeName: 'ajaxMapCategoryTree'},
-				regions: {treeName: 'ajaxMapRegionsTree', updateLayers: true},
-				placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
-			};
-		$.each(attributes, function(attributeName, attribute){
-			var treeSelector = '#' + attribute.treeName + mapId,
+			mapNumber = getMapNumber(mapId),
+			mapEntry = mapStore[mapNumber],
+			filters = mapEntry.settings.placesTree.updateFilters;
+		$.each(filters, function(filterName, filter){
+			var treeSelector = '#' + filter.treeName + mapId,
 				tree = $(treeSelector).fancytree('getTree'),
 				children = placesTree.getRootNode().children,
-				placeKeys = getKeysByAttribute(children, attributeName);
+				placeKeys = getKeysByAttribute(children, filterName);
 			filterTree(tree, placeKeys);
-			if (attributeName === 'regions' && attribute.updateLayers) {
-				var mapNumber = getMapNumber(mapId),
-					selectedKeys = getSelectedKeys(treeSelector);
+			if (filterName === 'regions' && filter.updateLayers) {
+				var selectedKeys = getSelectedKeys(treeSelector);
 				ajaxMap.updateLayers(mapNumber, selectedKeys);
 			}
 		});
@@ -893,11 +889,15 @@ var ajaxMap = ajaxMap || {};
 	}
 
 	function getSelectedKeys(selector) {
-		var tree = $(selector).fancytree('getTree');
-		var selectedNodes = tree.getSelectedNodes();
-		return $.map(selectedNodes, function (node) {
-			return parseInt(node.key);
-		});
+		var tree = $(selector).fancytree('getTree'),
+			selectedKeys = [];
+		if (typeof tree.getSelectedNodes === 'function') {
+			var selectedNodes = tree.getSelectedNodes();
+			selectedKeys =  $.map(selectedNodes, function (node) {
+				return parseInt(node.key);
+			});
+		}
+		return selectedKeys;
 	}
 }).apply(ajaxMap, [jQuery]);
 

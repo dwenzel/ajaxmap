@@ -80,6 +80,12 @@
 				filter: {
 					autoApply: true,
 					mode: "hide"
+				},
+				updateFilters: {
+					locationType: {treeName: 'ajaxMapLocationTypesTree'},
+					categories: {treeName: 'ajaxMapCategoryTree'},
+					regions: {treeName: 'ajaxMapRegionsTree', updateLayers: true},
+					placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
 				}
 			}
 		}
