@@ -1,5 +1,6 @@
 <?php
 namespace Webfox\Ajaxmap\Controller;
+
 /***************************************************************
  *  Copyright notice
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
@@ -34,6 +35,7 @@ use Webfox\Ajaxmap\Utility\TreeUtility;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class MapController extends AbstractController {
+
 	/**
 	 * mapRepository
 	 *
@@ -72,6 +74,11 @@ class MapController extends AbstractController {
 	protected $categoryRepository;
 
 	/**
+	 * @var \Webfox\Ajaxmap\Utility\TreeUtility
+	 */
+	protected $treeUtility;
+
+	/**
 	 * injectMapRepository
 	 *
 	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
@@ -99,6 +106,16 @@ class MapController extends AbstractController {
 	 */
 	public function injectRegionRepository(RegionRepository $regionRepository) {
 		$this->regionRepository = $regionRepository;
+	}
+
+	/**
+	 * inject tree utility
+	 *
+	 * @param \Webfox\Ajaxmap\Utility\TreeUtility $treeUtility
+	 * @return void
+	 */
+	public function injectTreeUtility(TreeUtility $treeUtility) {
+		$this->treeUtility = $treeUtility;
 	}
 
 	/**
@@ -147,7 +164,7 @@ class MapController extends AbstractController {
 					/** @var QueryResult $placeObjects */
 					$placeObjects = $this->placeRepository->findDemanded($placeDemand, TRUE, NULL, FALSE);
 					/** @var Place $place */
-					foreach($placeObjects as $place) {
+					foreach ($placeObjects as $place) {
 						$places[] = $place->toArray(2, $this->settings['mapping']['listPlaces']);
 					}
 				}
@@ -177,8 +194,8 @@ class MapController extends AbstractController {
 					}
 					$rootIdList = implode(',', $rootIds);
 					if ($children = $this->categoryRepository->findChildren($rootIdList)) {
-						$objectTree = TreeUtility::buildObjectTree($children);
-						$categories = TreeUtility::convertObjectTreeToArray(
+						$objectTree = $this->treeUtility->buildObjectTree($children);
+						$categories = $this->treeUtility->convertObjectTreeToArray(
 							$objectTree,
 							'parent,pid',
 							$this->settings['mapping']
@@ -204,7 +221,7 @@ class MapController extends AbstractController {
 			$map = $this->mapRepository->findByUid($mapId);
 			if ($map AND $map->getPlaceGroups()) {
 				$placeGroupObjArray = $map->getPlaceGroups()->toArray();
-				if ((bool)$placeGroupObjArray) {
+				if ((bool) $placeGroupObjArray) {
 					$rootIds = array();
 					foreach ($placeGroupObjArray as $placeGroup) {
 						/** @var PlaceGroup $placeGroup */
@@ -212,8 +229,8 @@ class MapController extends AbstractController {
 					}
 					$rootIdList = implode(',', $rootIds);
 					if ($children = $this->placeGroupRepository->findChildren($rootIdList, FALSE)) {
-						$objectTree = TreeUtility::buildObjectTree($children);
-						$placeGroups = TreeUtility::convertObjectTreeToArray(
+						$objectTree = $this->treeUtility->buildObjectTree($children);
+						$placeGroups = $this->treeUtility->convertObjectTreeToArray(
 							$objectTree,
 							'parent,pid',
 							$this->settings['mapping']
@@ -303,6 +320,7 @@ class MapController extends AbstractController {
 		if ($place) {
 			$address = $place->getAddress()->toArray();
 		}
+
 		return $address;
 	}
 
