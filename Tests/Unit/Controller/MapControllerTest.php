@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Tests\Controller;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,6 +24,7 @@ namespace Webfox\Ajaxmap\Tests\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use Webfox\Ajaxmap\Controller\MapController;
 
 /**
@@ -39,6 +40,8 @@ use Webfox\Ajaxmap\Controller\MapController;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Webfox\Ajaxmap\Domain\Model\Category;
+use Webfox\Ajaxmap\Domain\Model\Map;
 
 /**
  * Class MapControllerTest
@@ -84,6 +87,28 @@ class MapControllerTest extends UnitTestCase {
 	}
 
 	/**
+	 * @return Map
+	 */
+	protected function mockMapWithOneCategory() {
+		$map = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Map', ['getCategories']
+		);
+		$category = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Model\\Category', ['getUid']
+		);
+		$category->expects($this->any())
+			->method('getUid')
+			->will($this->returnValue(1));
+		$objectStorage = new ObjectStorage();
+		$objectStorage->attach($category);
+		$map->expects($this->any())
+			->method('getCategories')
+			->will($this->returnValue($objectStorage));
+
+		return $map;
+	}
+
+	/**
 	 * @test
 	 */
 	public function showActionReturnsEmptyJsonWhenMapIsNotSet() {
@@ -114,7 +139,7 @@ class MapControllerTest extends UnitTestCase {
 	 * @test
 	 */
 	public function ajaxListCategoriesActionReturnsCategoriesForMapAsJson() {
-		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array'); 
+		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array');
 		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
@@ -170,7 +195,7 @@ class MapControllerTest extends UnitTestCase {
 	 * @test
 	 */
 	public function ajaxListPlaceGroupsReturnsPlaceGroupsForMapAsJson() {
-		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array'); 
+		$this->markTestIncomplete('method contains static call - refactor TreeUtility::buildObjectTree to consume array');
 		$mapId = 1;
 		$mockMap = $this->getMock(
 			'Webfox\\Ajaxmap\\Domain\\Model\\Map',
@@ -276,6 +301,60 @@ class MapControllerTest extends UnitTestCase {
 				)
 		);
 		$this->fixture->showAction($mockMap);
+	}
+
+	/**
+	 * @test
+	 */
+	public function ajaxListActionGetsSingleCategoryFromMap() {
+		$settings = array(
+			'mapping' => array()
+		);
+		$this->fixture->_set('settings', $settings);
+		$map = $this->mockMapWithOneCategory();
+		$mockMapRepository = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Repository\\MapRepository',
+			array('findByUid'), array(), '', false
+		);
+		$this->fixture->injectMapRepository($mockMapRepository);
+		$mockCategoryRepository = $this->getMock(
+			'Webfox\\Ajaxmap\\Domain\\Repository\\CategoryRepository',
+			array('findChildren'), array(), '', false
+		);
+		$this->inject($this->fixture, 'categoryRepository', $mockCategoryRepository);
+		$mockResult = $this->getMock(
+			'TYPO3\\CMS\\Extbase\\Persistence\\QueryResultInterface',
+			array(), array(), '', false
+		);
+		$mockMapRepository->expects($this->once())
+			->method('findByUid')
+			->will($this->returnValue($map));
+		$mockCategoryRepository->expects($this->once())
+			->method('findChildren')
+			->will($this->returnValue($mockResult));
+		$mockTreeUtility = $this->getMock(
+			'Webfox\\Ajaxmap\\Utility\\TreeUtility', array('buildObjectTree', 'convertObjectTreeToArray')
+		);
+
+		$mockObjectTree = 'foo';
+		$mockTreeUtility->expects($this->once())
+			->method('buildObjectTree')
+			->with($mockResult)
+			->will($this->returnValue($mockObjectTree));
+
+		$mockCategories = array(
+			'bar' => 'baz'
+		);
+		$mockTreeUtility->expects($this->once())
+			->method('convertObjectTreeToArray')
+			->with($mockObjectTree, 'parent,pid', $settings['mapping'])
+			->will($this->returnValue($mockCategories));
+		$this->fixture->_set('treeUtility', $mockTreeUtility);
+
+		$this->assertEquals(
+			json_encode($mockCategories),
+			$this->fixture->ajaxListCategoriesAction(1)
+		);
 	}
 }
 
