@@ -31,6 +31,8 @@ namespace Webfox\Ajaxmap\Tests;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 
 /**
  * Class MapTest
@@ -571,70 +573,22 @@ class MapTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 */
+	public function objectImplementsCategorizableInterface() {
+		$this->assertInstanceOf(
+			CategorizableInterface::class,
+			$this->fixture
+		);
+	}
+
+	/**
+	 * @test
 	 * @covers ::__construct
 	 */
 	public function constructorInitializesCategoriesWithStorageObject() {
 		$this->fixture->__construct();
 		$this->assertInstanceOf(
-			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
-			$this->fixture->getCategories()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function getCategoriesReturnsInitialValueForObjectStorageContainingCategories() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getCategories()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setCategoriesForObjectStorageContainingCategoriesSetsCategories() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($category);
-		$this->fixture->setCategories($objectStorageHoldingExactlyOneCategory);
-
-		$this->assertSame(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategories()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function addCategoryToObjectStorageHoldingCategories() {
-		$region = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$objectStorageHoldingExactlyOneCategory = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOneCategory->attach($region);
-		$this->fixture->addCategory($region);
-
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOneCategory,
-			$this->fixture->getCategories()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function removeCategoryFromObjectStorageHoldingCategories() {
-		$region = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$localObjectStorage->attach($region);
-		$localObjectStorage->detach($region);
-		$this->fixture->addCategory($region);
-		$this->fixture->removeCategory($region);
-
-		$this->assertEquals(
-			$localObjectStorage,
+			ObjectStorage::class,
 			$this->fixture->getCategories()
 		);
 	}

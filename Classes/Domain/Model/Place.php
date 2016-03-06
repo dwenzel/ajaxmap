@@ -26,6 +26,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  ***************************************************************/
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
@@ -36,8 +37,8 @@ use Webfox\Ajaxmap\DomainObject\SerializableInterface;
  *
  */
 class Place extends AbstractEntity
-	implements SerializableInterface {
-	use ToArrayTrait, ToJsonTrait;
+	implements SerializableInterface, CategorizableInterface {
+	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 	/**
 	 * Title
 	 *
@@ -66,13 +67,6 @@ class Place extends AbstractEntity
 	 * @var string
 	 */
 	protected $info;
-
-	/**
-	 * Categories
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
-	 */
-	protected $categories;
 
 	/**
 	 * Place Groups
@@ -167,44 +161,6 @@ class Place extends AbstractEntity
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
-	}
-
-	/**
-	 * Adds a category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category) {
-		$this->categories->attach($category);
-	}
-
-	/**
-	 * Removes a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category The Category to be removed
-	 * @return void
-	 */
-	public function removeCategory(\Webfox\Ajaxmap\Domain\Model\Category $category) {
-		$this->categories->detach($category);
-	}
-
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $category
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
-	 * @return void
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
 	}
 
 	/**

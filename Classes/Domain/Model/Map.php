@@ -27,6 +27,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
@@ -37,8 +38,8 @@ use Webfox\Ajaxmap\DomainObject\SerializableInterface;
  *
  */
 class Map extends AbstractEntity
-	implements SerializableInterface {
-	use ToArrayTrait, ToJsonTrait;
+	implements SerializableInterface, CategorizableInterface {
+	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 
 	/**
 	 * title
@@ -404,41 +405,6 @@ class Map extends AbstractEntity
 	 */
 	public function setMapCenter($mapCenter) {
 		$this->mapCenter = $mapCenter;
-	}
-
-	/**
-	 * Adds a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category) {
-		$this->categories->attach($category);
-	}
-	/**
-	 * Removes a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category The Category to be removed
-	 */
-	public function removeCategory(Category $category) {
-		$this->categories->detach($category);
-	}
-
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
 	}
 
 	/**
