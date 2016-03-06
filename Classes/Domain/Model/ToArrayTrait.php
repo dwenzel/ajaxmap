@@ -1,50 +1,21 @@
 <?php
+namespace Webfox\Ajaxmap\Domain\Model;
 
-namespace Webfox\Ajaxmap\DomainObject;
-/***************************************************************
- *  Copyright notice
- *
- *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
- *  All rights reserved
- *
- *  This script is part of the TYPO3 project. The TYPO3 project is
- *  free software; you can redistribute it and/or modify
- *  it under the terms of the GNU General Public License as published by
- *  the Free Software Foundation; either version 3 of the License, or
- *  (at your option) any later version.
- *
- *  The GNU General Public License can be found at
- *  http://www.gnu.org/copyleft/gpl.html.
- *
- *  This script is distributed in the hope that it will be useful,
- *  but WITHOUT ANY WARRANTY; without even the implied warranty of
- *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- *  GNU General Public License for more details.
- *
- *  This copyright notice MUST APPEAR in all copies of the script!
- ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
-use TYPO3\CMS\Extbase\Persistence\Generic\LazyObjectStorage;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 /**
- * Abstract Entity
+ * Class ToArrayTrait
  *
- * @package ajaxmap
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * @package Webfox\Ajaxmap\Domain\Model
  */
-class AbstractEntity 
-	extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity 
-	implements SerializableInterface {
-
+trait ToArrayTrait {
 	/**
 	 * Return the object as array
 	 *
 	 * @param integer $treeDepth maximum tree depth
 	 * @param array $mapping An array with keys for each model
-	 * which should be mapped. 
+	 * which should be mapped.
 	 * @return array
 	 */
 	public function toArray($treeDepth = 100, $mapping = NULL) {
@@ -87,15 +58,6 @@ class AbstractEntity
 	}
 
 	/**
-	 * Returns a JSON Representation of the object
-	 *
-	 * @return string
-	 */
-	public function toJson() {
-		return json_encode($this->toArray());
-	}
-
-	/**
 	 * Convert a property value to an array
 	 *
 	 * @param mixed $value
@@ -123,4 +85,3 @@ class AbstractEntity
 		return $result;
 	}
 }
-

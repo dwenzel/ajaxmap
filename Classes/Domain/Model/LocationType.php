@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -33,7 +34,9 @@ use Webfox\Ajaxmap\DomainObject\AbstractEntity;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class LocationType extends AbstractEntity{
+class LocationType extends AbstractEntity
+	implements SerializableInterface {
+	use ToArrayTrait, ToJsonTrait;
 
 	/**
 	 * title
@@ -95,7 +98,7 @@ class LocationType extends AbstractEntity{
 		$this->description = $description;
 	}
 
-	
+
     /**
      * Returns the icon
      *

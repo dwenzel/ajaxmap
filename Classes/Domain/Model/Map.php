@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,10 +24,11 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\Domain\Model\Category;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -36,7 +37,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Map extends AbstractEntity {
+class Map extends AbstractEntity
+	implements SerializableInterface, CategorizableInterface {
+	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 
 	/**
 	 * title
@@ -402,41 +405,6 @@ class Map extends AbstractEntity {
 	 */
 	public function setMapCenter($mapCenter) {
 		$this->mapCenter = $mapCenter;
-	}
-
-	/**
-	 * Adds a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category) {
-		$this->categories->attach($category);
-	}
-	/**
-	 * Removes a Category
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category The Category to be removed
-	 */
-	public function removeCategory(Category $category) {
-		$this->categories->detach($category);
-	}
-
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
 	}
 
 	/**

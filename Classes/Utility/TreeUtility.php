@@ -19,7 +19,6 @@ namespace Webfox\Ajaxmap\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 use Webfox\Ajaxmap\Domain\Model\TreeItemInterface;
 use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
