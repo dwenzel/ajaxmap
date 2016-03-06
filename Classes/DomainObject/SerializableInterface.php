@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\DomainObject;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,9 +37,12 @@ interface SerializableInterface {
 	/**
 	 * Return the object as array
 	 *
+	 * @param integer $treeDepth maximum tree depth
+	 * @param array $mapping An array with keys for each model
+	 * which should be mapped.
 	 * @return array
 	 */
-	public function toArray();
+	public function toArray($treeDepth = 100, $mapping = NULL);
 
 	/**
 	 * Returns a JSON Representation of the object
