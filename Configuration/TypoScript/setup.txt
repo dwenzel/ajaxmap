@@ -123,32 +123,3 @@ plugin.tx_ajaxmap._CSS_DEFAULT_STYLE (
 	}
 )
 
-# ==============================================
-# Mapping of tt_content and its properties
-# ==============================================
-config.tx_extbase.persistence.classes {
-	Webfox\Ajaxmap\Domain\Model\Content {
-		mapping {
-			tableName = tt_content
-#			recordType = Tx_Ajaxmap_Domain_Model_Content
-			columns {
-				altText.mapOnProperty = altText
-				titleText.mapOnProperty = titleText
-			}
-		}
-	}
-	Webfox\Ajaxmap\Domain\Model\Address {
-		mapping {
-			tableName = tt_address
-			columns {
-			}
-		}
-	}
-	Webfox\Ajaxmap\Domain\Model\Category {
-		mapping {
-			tableName = sys_category
-			columns {
-			}
-		}
-	}
-}

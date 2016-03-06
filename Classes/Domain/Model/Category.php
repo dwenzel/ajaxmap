@@ -24,8 +24,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
-
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Domain\Model\Category as ExtbaseCategory;
 /**
  * Category
  *
@@ -33,95 +33,16 @@ use Webfox\Ajaxmap\DomainObject\AbstractEntity;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends AbstractEntity
- implements TreeItemInterface {
-
-	/**
-	 * Title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title;
-
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	protected $description;
-
-	/**
-	 * icon
-	 *
-	 * @var string
-	 */
-	protected $icon;
-
+class Category extends ExtbaseCategory
+ implements TreeItemInterface, SerializableInterface {
+	use ToArrayTrait, ToJsonTrait;
 	/**
 	 * Parent
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Model\Category | NULL
+	 * @var \Webfox\Ajaxmap\Domain\Model\Category|null
 	 * @lazy
 	 */
-	protected $parent = NULL;
-
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
-
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
-
-	/**
-	 * Returns the icon
-	 *
-	 * @return string $icon
-	 */
-	public function getIcon() {
-		return $this->icon;
-	}
-
-	/**
-	 * Sets the icon
-	 *
-	 * @param string $icon
-	 * @return void
-	 */
-	public function setIcon($icon) {
-		$this->icon = $icon;
-	}
-
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
-
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+	protected $parent = null;
 
 	/**
 	 * Gets the parent
@@ -133,14 +54,5 @@ class Category extends AbstractEntity
 			$this->parent->_loadRealInstance();
 		}
 		return $this->parent;
-	}
-
-	/**
-	 * Sets the parent
-	 *
-	 * @param Category $category The parent category
-	 */
-	public function setParent(Category $category) {
-		$this->parent = $category;
 	}
 }
