@@ -23,53 +23,46 @@ namespace Webfox\Ajaxmap\Domain\Model\Dto;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\Domain\Model\Map;
 
 /**
  * Place Demand object which holds all information to get the correct
  * Place records.
  *
- * @package ajaxmap 
+ * @package ajaxmap
  */
-class PlaceDemand extends AbstractDemand implements DemandInterface {
+class PlaceDemand
+	extends AbstractDemand
+	implements DemandInterface, CategoryAwareDemandInterface {
+	use CategoryAwareDemandTrait;
+
 	/**
-	* @var \string
+	* @var string
 	*/
 	protected $locationTypes;
 
 	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $constraintsConjunction;
 
 	/**
-	 * @var \string
-	 */
-	protected $categories;
-
-	/**
-	 * @var \string
-	 */
-	protected $categoryConjunction;
-
-	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $placeGroups;
 
 	/**
-	 * @var \string
+	 * @var string
 	 */
 	protected $placeGroupConjunction;
 
 	/**
-	 * @var \integer
+	 * @var int
 	 */
 	protected $map;
 
 	/**
 	 * Get LocationTypes
-	 * @return \string
+	 * @return string
 	 */
 	public function getLocationTypes () {
 	    return $this->locationTypes;
@@ -77,7 +70,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 
 	/**
 	 * Set LocationTypes
-	 * @param \string $locationTypes A comma separated list of location type uids
+	 * @param string $locationTypes A comma separated list of location type uids
 	 */
 	public function setLocationTypes ($locationTypes) {
 	    $this->locationTypes = $locationTypes;
@@ -85,7 +78,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 
 	/**
 	 * Get Constraints Conjunction
-	 * @return \string
+	 * @return string
 	 */
 	public function getConstraintsConjunction () {
 		return $this->constraintsConjunction;
@@ -94,48 +87,15 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	/**
 	 * Set Constraints Conjunction
 	 *
-	 * @param \string $conjunction
+	 * @param string $conjunction
 	 */
 	public function setConstraintsConjunction ($conjunction) {
 		$this->constraintsConjunction = $conjunction;
 	}
 
 	/**
-	 * Get Categories
-	 * @return \string
-	 */
-	public function getCategories () {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the Categories
-	 * @param \string $categories A comma separated list of category uids
-	 */
-	public function setCategories ($categories) {
-		$this->categories = $categories;
-	}
-
-	/**
-	 * Get Category conjunction
-	 * @return \string
-	 */
-	public function getCategoryConjunction () {
-		return $this->categoryConjunction;
-	}
-
-	/**
-	 * Set Category conjunction
-	 *
-	 * @param \string $conjunction
-	 */
-	public function setCategoryConjunction ($conjunction) {
-		$this->categoryConjunction = $conjunction;
-	}
-
-	/**
 	 * Gets the place groups
-	 * @return \string
+	 * @return string
 	 */
 	public function getPlaceGroups () {
 		return $this->placeGroups;
@@ -144,7 +104,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	/**
 	 * Sets the place groups
 	 *
-	 * @param \string $placeGroups A comma separated list of placeGroups uids
+	 * @param string $placeGroups A comma separated list of placeGroups uids
 	 */
 	public function setPlaceGroups($placeGroups) {
 		$this->placeGroups = $placeGroups;
@@ -152,7 +112,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 
 	/**
 	 * Get PlaceGroup conjunction
-	 * @return \string
+	 * @return string
 	 */
 	public function getPlaceGroupConjunction () {
 		return $this->placeGroupConjunction;
@@ -161,7 +121,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	/**
 	 * Set PlaceGroup conjunction
 	 *
-	 * @param \string $conjunction
+	 * @param string $conjunction
 	 */
 	public function setPlaceGroupConjunction ($conjunction) {
 		$this->placeGroupConjunction = $conjunction;
@@ -169,7 +129,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 
 	/**
 	 * Get Map
-	 * @return \integer
+	 * @return int
 	 */
 	public function getMap () {
 		return $this->map;
@@ -178,7 +138,7 @@ class PlaceDemand extends AbstractDemand implements DemandInterface {
 	/**
 	 * Set Map
 	 *
-	 * @param Map $map
+	 * @param int $map
 	 */
 	public function setMap ($map) {
 		$this->map = $map;
