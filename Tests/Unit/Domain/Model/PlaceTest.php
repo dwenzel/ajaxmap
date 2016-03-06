@@ -41,6 +41,12 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 
+/**
+ * Class PlaceTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Place
+ */
 class PlaceTest extends UnitTestCase {
 	/**
 	 * @var \Webfox\Ajaxmap\Domain\Model\Place
