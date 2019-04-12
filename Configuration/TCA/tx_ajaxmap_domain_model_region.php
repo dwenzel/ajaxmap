@@ -3,161 +3,183 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_ajaxmap_domain_model_region'] = array(
-	'ctrl' => $TCA['tx_ajaxmap_domain_model_region']['ctrl'],
-	'interface' => array(
+$cll = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+
+return [
+    'ctrl' => [
+        'title'	=> 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region',
+        'label' => 'title',
+        'tstamp' => 'tstamp',
+        'crdate' => 'crdate',
+        'cruser_id' => 'cruser_id',
+        'dividers2tabs' => TRUE,
+        'versioningWS' => 2,
+        'versioning_followPages' => TRUE,
+        'origUid' => 't3_origuid',
+        'languageField' => 'sys_language_uid',
+        'transOrigPointerField' => 'l10n_parent',
+        'transOrigDiffSourceField' => 'l10n_diffsource',
+        'delete' => 'deleted',
+        'enablecolumns' => [
+            'disabled' => 'hidden',
+            'starttime' => 'starttime',
+            'endtime' => 'endtime',
+        ],
+        'iconfile' => 'EXT:ajaxmap/Resources/Public/Icons/tx_ajaxmap_domain_model_region.gif'
+    ],
+    'interface' => [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,regions,main_place',
-	),
-	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,main_place,regions,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
-	),
-	'palettes' => array(
-		'1' => array('showitem' => ''),
-	),
-	'columns' => array(
-		'sys_language_uid' => array(
+	],
+	'types' => [
+		'1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,main_place,regions,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+	],
+	'palettes' => [
+		'1' => ['showitem' => ''],
+	],
+	'columns' => [
+		'sys_language_uid' => [
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.language',
-			'config' => array(
+			'label' => $cll . 'LGL.language',
+			'config' => [
 				'type' => 'select',
 				'foreign_table' => 'sys_language',
 				'foreign_table_where' => 'ORDER BY sys_language.title',
-				'items' => array(
-					array('LLL:EXT:lang/locallang_general.xml:LGL.allLanguages', -1),
-					array('LLL:EXT:lang/locallang_general.xml:LGL.default_value', 0)
-				),
-			),
-		),
-		'l10n_parent' => array(
+				'items' => [
+					[$cll . 'LGL.allLanguages', -1],
+					[$cll . 'LGL.default_value', 0]
+				],
+			],
+		],
+		'l10n_parent' => [
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.l18n_parent',
-			'config' => array(
+			'label' => $cll . 'LGL.l18n_parent',
+			'config' => [
 				'type' => 'select',
-				'items' => array(
-					array('', 0),
-				),
+				'items' => [
+					['', 0],
+				],
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'foreign_table_where' => 'AND tx_ajaxmap_domain_model_region.pid=###CURRENT_PID### AND tx_ajaxmap_domain_model_region.sys_language_uid IN (-1,0)',
-			),
-		),
-		'l10n_diffsource' => array(
-			'config' => array(
+			],
+		],
+		'l10n_diffsource' => [
+			'config' => [
 				'type' => 'passthrough',
-			),
-		),
-		't3ver_label' => array(
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.versionLabel',
-			'config' => array(
+			],
+		],
+		't3ver_label' => [
+			'label' => $cll . 'LGL.versionLabel',
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'max' => 255,
-			)
-		),
-		'hidden' => array(
+			]
+		],
+		'hidden' => [
 			'exclude' => 1,
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.hidden',
-			'config' => array(
+			'label' => $cll . 'LGL.hidden',
+			'config' => [
 				'type' => 'check',
-			),
-		),
-		'starttime' => array(
+			],
+		],
+		'starttime' => [
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.starttime',
-			'config' => array(
+			'label' => $cll . 'LGL.starttime',
+			'config' => [
 				'type' => 'input',
 				'size' => 13,
 				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
-				'range' => array(
+				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
-		'endtime' => array(
+				],
+			],
+		],
+		'endtime' => [
 			'exclude' => 1,
 			'l10n_mode' => 'mergeIfNotBlank',
-			'label' => 'LLL:EXT:lang/locallang_general.xml:LGL.endtime',
-			'config' => array(
+			'label' => $cll . 'LGL.endtime',
+			'config' => [
 				'type' => 'input',
 				'size' => 13,
 				'max' => 20,
 				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
-				'range' => array(
+				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
-				),
-			),
-		),
-		'title' => array(
+				],
+			],
+		],
+		'title' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.title',
-			'config' => array(
+			'config' => [
 				'type' => 'input',
 				'size' => 30,
 				'eval' => 'trim'
-			),
-		),
-		'file' => array(
+			],
+		],
+		'file' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.file',
-			'config' => array(
+			'config' => [
 				'type' => 'group',
 				'internal_type' => 'file_reference',
 				'uploadfolder' => 'uploads/tx_ajaxmap',
 				'allowed' => '*',
 				'disallowed' => 'php',
 				'size' => 5,
-			),
-		),
-		'clickable' => array(
+			],
+		],
+		'clickable' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.clickable',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
 				'default' => 0
-			),
-		),
-		'unselectable' => array(
+			],
+		],
+		'unselectable' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.unselectable',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
 				'default' => 0
-			),
-		),
-		'selected' => array(
+			],
+		],
+		'selected' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.selected',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
 				'default' => 0
-			),
-		),
-		'suppress_info_windows' => array(
+			],
+		],
+		'suppress_info_windows' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.suppress_info_windows',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
 				'default' => 0
-			),
-		),
-		'preserve_viewport' => array(
+			],
+		],
+		'preserve_viewport' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.preserve_viewport',
-			'config' => array(
+			'config' => [
 				'type' => 'check',
 				'default' => 0
-			),
-		),
-		'regions' => array(
+			],
+		],
+		'regions' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.regions',
-			'config' => array(
+			'config' => [
 				'type' => 'select',
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'foreign_table_where' => ' AND tx_ajaxmap_domain_model_region.uid!=###THIS_UID###',
@@ -166,38 +188,38 @@ $TCA['tx_ajaxmap_domain_model_region'] = array(
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => array(
+				'wizards' => [
 					'_PADDING' => 1,
 					'_VERTICAL' => 1,
-					'edit' => array(
+					'edit' => [
 						'type' => 'popup',
 						'title' => 'Edit',
 						'script' => 'wizard_edit.php',
 						'icon' => 'edit2.gif',
 						'popup_onlyOpenIfSelected' => 1,
 						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-					),
-					'add' => Array(
+					],
+					'add' => [
 						'type' => 'script',
 						'title' => 'Create new',
 						'icon' => 'add.gif',
-						'params' => array(
+						'params' => [
 							'table' => 'tx_ajaxmap_domain_model_region',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
-						),
+						],
 						'script' => 'wizard_add.php',
-					),
-					'suggest' => array(
+					],
+					'suggest' => [
 						'type' => 'suggest',
-					),
-				),
-			),
-		),
-		'main_place' => array(
+					],
+				],
+			],
+		],
+		'main_place' => [
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.main_place',
-			'config' => array(
+			'config' => [
 				'type' => 'group',
 				'internal_type' => 'db',
 				'allowed' => 'tx_ajaxmap_domain_model_place',
@@ -205,33 +227,33 @@ $TCA['tx_ajaxmap_domain_model_region'] = array(
 				'size' => 1,
 				'minitems' => 0,
 				'maxitems' => 1,
-				'wizards' => array(
+				'wizards' => [
 					'_PADDING' => 1,
 					'_VERTICAL' => 1,
-					'edit' => array(
+					'edit' => [
 						'type' => 'popup',
 						'title' => 'Edit',
 						'script' => 'wizard_edit.php',
 						'icon' => 'edit2.gif',
 						'popup_onlyOpenIfSelected' => 1,
 						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-					),
-					'add' => Array(
+					],
+					'add' => [
 						'type' => 'script',
 						'title' => 'Create new',
 						'icon' => 'add.gif',
-						'params' => array(
+						'params' => [
 							'table' => 'tx_ajaxmap_domain_model_place',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
-						),
+						],
 						'script' => 'wizard_add.php',
-					),
-					'suggest' => array(
+					],
+					'suggest' => [
 						'type' => 'suggest',
-					),
-				),
-			)
-		),
-	),
-);
+					],
+				],
+			]
+		],
+	],
+];
