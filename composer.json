@@ -1,20 +1,28 @@
 {
-	"name": "dwenzel/ajaxmap",
-	"type": "typo3-cms-extension",
-	"description": "Versatile map extension for the TYPO3 CMS. Map data are requested dynamically via ajax.",
-	"keywords": ["TYPO3", "extension", "map", "ajax"],
-	"version": "0.2.0",
-	"license": ["GPL-2.0+"],
-	"authors": [
-		{
-			"name": "Dirk Wenzel",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"typo3/cms-core": ">=8.4,<=9.5"
-	},
-	"require-dev": {
+  "name": "dwenzel/ajaxmap",
+  "type": "typo3-cms-extension",
+  "description": "Versatile map extension for the TYPO3 CMS. Map data are requested dynamically via ajax.",
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "map",
+    "ajax"
+  ],
+  "version": "0.2.0",
+  "license": [
+    "GPL-2.0+"
+  ],
+  "authors": [
+    {
+      "name": "Dirk Wenzel",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": ">=8.4,<=9.5",
+    "friendsoftypo3/tt-address": "*"
+  },
+  "require-dev": {
     "mikey179/vfsStream": "1.4.*@dev",
     "phpunit/phpunit": "~4.8.0",
     "satooshi/php-coveralls": "dev-master"
@@ -47,9 +55,9 @@
     ]
   },
   "extra": {
-		"branch-alias": {
-			"dev-master": "0.3.x-dev"
-		},
+    "branch-alias": {
+      "dev-master": "0.3.x-dev"
+    },
     "typo3/cms": {
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/Web"
