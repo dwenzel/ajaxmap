@@ -61,7 +61,7 @@ class MapController extends AbstractController {
 	 * Place Group Repository
 	 *
 	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceGroupRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $placeGroupRepository;
 
@@ -69,7 +69,7 @@ class MapController extends AbstractController {
 	 * Category Repository
 	 *
 	 * @var \Webfox\Ajaxmap\Domain\Repository\CategoryRepository
-	 * @inject
+	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $categoryRepository;
 

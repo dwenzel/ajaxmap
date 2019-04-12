@@ -40,7 +40,7 @@ class Category extends ExtbaseCategory
 	 * Parent
 	 *
 	 * @var \Webfox\Ajaxmap\Domain\Model\Category|null
-	 * @lazy
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $parent = null;
 

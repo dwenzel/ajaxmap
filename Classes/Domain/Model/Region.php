@@ -77,7 +77,7 @@ class Region extends AbstractEntity
 
 	/**
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
-	 * @lazy
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $regions;
 
@@ -85,7 +85,7 @@ class Region extends AbstractEntity
 	 * Main Place
 	 *
 	 * @var \Webfox\Ajaxmap\Domain\Model\Place
-	 * @lazy
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $mainPlace;
 
