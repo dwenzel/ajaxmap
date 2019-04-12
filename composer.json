@@ -1,5 +1,5 @@
 {
-	"name": "webfox/ajaxmap",
+	"name": "dwenzel/ajaxmap",
 	"type": "typo3-cms-extension",
 	"description": "Versatile map extension for the TYPO3 CMS. Map data are requested dynamically via ajax.",
 	"keywords": ["TYPO3", "extension", "map", "ajax"],
