@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Dto\AbstractDemand.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -42,16 +42,16 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 /**
  * Class AbstractDemandTest
  *
- * @package Webfox\Ajaxmap\Tests
+ * @package DWenzel\Ajaxmap\Tests
  */
 class AbstractDemandTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\AbstractDemand
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Dto\AbstractDemand();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand();
 	}
 
 	/**
@@ -67,7 +67,7 @@ class AbstractDemandTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setSearchForDomainModelSearchSetsSearch() {
-		$searchObject = new \Webfox\Ajaxmap\Domain\Model\Dto\Search();
+		$searchObject = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
 		$this->fixture->setSearch($searchObject);
 
 		$this->assertEquals(

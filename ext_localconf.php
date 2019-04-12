@@ -27,7 +27,7 @@ $boot = function () {
             '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/javaScript.ts">');
     }
     TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'Webfox.' . 'ajaxmap',
+        'DWenzel.' . 'ajaxmap',
         'Map',
         [
             'Place' => 'list, show, ajaxShow',

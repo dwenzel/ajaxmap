@@ -1,10 +1,10 @@
 <?php
-namespace Webfox\Ajaxmap\Tests\Unit\Domain\Model;
+namespace DWenzel\Ajaxmap\Tests\Unit\Domain\Model;
 
 use TYPO3\CMS\Core\Tests\UnitTestCase;
-use Webfox\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\Domain\Model\CategorizableTrait;
+use DWenzel\Ajaxmap\Domain\Model\CategorizableTrait;
 
 /***************************************************************
  *
@@ -33,7 +33,7 @@ use Webfox\Ajaxmap\Domain\Model\CategorizableTrait;
 class CategorizableTraitTest extends UnitTestCase {
 
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\CategorizableTrait
+	 * @var \DWenzel\Ajaxmap\Domain\Model\CategorizableTrait
 	 */
 	protected $subject;
 

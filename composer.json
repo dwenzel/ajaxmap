@@ -29,12 +29,12 @@
   },
   "autoload": {
     "psr-4": {
-      "Webfox\\Ajaxmap\\": "Classes"
+      "DWenzel\\Ajaxmap\\": "Classes"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Webfox\\Ajaxmap\\Tests\\": "Tests",
+      "DWenzel\\Ajaxmap\\Tests\\": "Tests",
       "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
       "TYPO3\\CMS\\Fluid\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/fluid/Tests/"
     }

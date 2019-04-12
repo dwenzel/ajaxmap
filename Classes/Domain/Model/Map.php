@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,8 +27,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -101,47 +101,47 @@ class Map extends AbstractEntity
 	 *
 	 * @var boolean
 	 */
-	protected $disableDefaultUi = FALSE;
+	protected $disableDefaultUi = false;
 
 	/**
 	 * Select items for display by category.
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category>
 	 */
 	protected $categories;
 
 	/**
 	 * Select items for display by placeGroups.
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup>
 	 */
 	protected $placeGroups;
 
 	/**
 	 * regions
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
 	 */
 	protected $regions;
 
 	/**
 	 * Static layers
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
 	 */
 	protected $staticLayers;
 
 	/**
 	 * Display selected places as markers.
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Place>
 	 */
 	protected $places;
 
 	/**
 	 * Selected places by location type.
 	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\LocationType>
 	 */
 	protected $locationTypes;
 
@@ -228,27 +228,27 @@ class Map extends AbstractEntity
 	/**
 	 * Adds a Region
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $region
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $region
 	 * @return void
 	 */
-	public function addRegion(\Webfox\Ajaxmap\Domain\Model\Region $region) {
+	public function addRegion(\DWenzel\Ajaxmap\Domain\Model\Region $region) {
 		$this->regions->attach($region);
 	}
 
 	/**
 	 * Removes a Region
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
 	 * @return void
 	 */
-	public function removeRegion(\Webfox\Ajaxmap\Domain\Model\Region $regionToRemove) {
+	public function removeRegion(\DWenzel\Ajaxmap\Domain\Model\Region $regionToRemove) {
 		$this->regions->detach($regionToRemove);
 	}
 
 	/**
 	 * Returns the regions
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
 	 */
 	public function getRegions() {
 		return $this->regions;
@@ -257,7 +257,7 @@ class Map extends AbstractEntity
 	/**
 	 * Sets the regions
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
 	 * @return void
 	 */
 	public function setRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $regions) {
@@ -267,27 +267,27 @@ class Map extends AbstractEntity
 	/**
 	 * Adds a Static Layer
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayer
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $staticLayer
 	 * @return void
 	 */
-	public function addStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayer) {
+	public function addStaticLayer(\DWenzel\Ajaxmap\Domain\Model\Region $staticLayer) {
 		$this->staticLayers->attach($staticLayer);
 	}
 
 	/**
 	 * Removes a Static Layer
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove The Region to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $staticLayerToRemove The Region to be removed
 	 * @return void
 	 */
-	public function removeStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove) {
+	public function removeStaticLayer(\DWenzel\Ajaxmap\Domain\Model\Region $staticLayerToRemove) {
 		$this->staticLayers->detach($staticLayerToRemove);
 	}
 
 	/**
 	 * Returns the static Layers
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $staticLayers
 	 */
 	public function getStaticLayers() {
 		return $this->staticLayers;
@@ -296,7 +296,7 @@ class Map extends AbstractEntity
 	/**
 	 * Sets the staticLayers
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $staticLayers
 	 * @return void
 	 */
 	public function setStaticLayers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $staticLayers) {
@@ -410,27 +410,27 @@ class Map extends AbstractEntity
 	/**
 	 * Adds a PlaceGroup
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
 	 */
-	public function addPlaceGroup(\Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
+	public function addPlaceGroup(\DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
 		$this->placeGroups->attach($placeGroup);
 	}
 
 	/**
 	 * Removes a PlaceGroup
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup The PlaceGroup to be removed
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup The PlaceGroup to be removed
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
 	 */
-	public function removePlaceGroup(\Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
+	public function removePlaceGroup(\DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup) {
 		$this->placeGroups->detach($placeGroup);
 	}
 
 	/**
 	 * Returns the placeGroups
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
 	 */
 	public function getPlaceGroups() {
 		return $this->placeGroups;
@@ -439,8 +439,8 @@ class Map extends AbstractEntity
 	/**
 	 * Sets the placeGroups
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> $placeGroups
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup> $placeGroups
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup> placeGroups
 	 */
 	public function setPlaceGroups(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $placeGroups) {
 		$this->placeGroups = $placeGroups;
@@ -449,27 +449,27 @@ class Map extends AbstractEntity
 	/**
 	 * Adds a Place
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $place
 	 * @return void
 	 */
-	public function addPlace(\Webfox\Ajaxmap\Domain\Model\Place $place) {
+	public function addPlace(\DWenzel\Ajaxmap\Domain\Model\Place $place) {
 		$this->places->attach($place);
 	}
 
 	/**
 	 * Removes a Place
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Place $placeToRemove The Place to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $placeToRemove The Place to be removed
 	 * @return void
 	 */
-	public function removePlace(\Webfox\Ajaxmap\Domain\Model\Place $placeToRemove) {
+	public function removePlace(\DWenzel\Ajaxmap\Domain\Model\Place $placeToRemove) {
 		$this->places->detach($placeToRemove);
 	}
 
 	/**
 	 * Returns the places
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place> $places
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Place> $places
 	 */
 	public function getPlaces() {
 		return $this->places;
@@ -478,7 +478,7 @@ class Map extends AbstractEntity
 	/**
 	 * Sets the places
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Place> $places
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Place> $places
 	 * @return void
 	 */
 	public function setPlaces(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $places) {
@@ -488,27 +488,27 @@ class Map extends AbstractEntity
 	/**
 	 * Adds a LocationType
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $locationType
+	 * @param \DWenzel\Ajaxmap\Domain\Model\LocationType $locationType
 	 * @return void
 	 */
-	public function addLocationType(\Webfox\Ajaxmap\Domain\Model\LocationType $locationType) {
+	public function addLocationType(\DWenzel\Ajaxmap\Domain\Model\LocationType $locationType) {
 		$this->locationTypes->attach($locationType);
 	}
 
 	/**
 	 * Removes a LocationType
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove The LocationType to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove The LocationType to be removed
 	 * @return void
 	 */
-	public function removeLocationType(\Webfox\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove) {
+	public function removeLocationType(\DWenzel\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove) {
 		$this->locationTypes->detach($locationTypeToRemove);
 	}
 
 	/**
 	 * Returns the locationTypes
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType> $locationTypes
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\LocationType> $locationTypes
 	 */
 	public function getLocationTypes() {
 		return $this->locationTypes;
@@ -517,7 +517,7 @@ class Map extends AbstractEntity
 	/**
 	 * Sets the locationTypes
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\LocationType> $locationTypes
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\LocationType> $locationTypes
 	 * @return void
 	 */
 	public function setLocationTypes(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $locationTypes) {

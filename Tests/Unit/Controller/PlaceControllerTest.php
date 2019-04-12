@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Controller\PlaceController.
+ * Test case for class DWenzel\Ajaxmap\Controller\PlaceController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -42,17 +42,17 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 /**
  * Class PlaceControllerTest
  *
- * @package Webfox\Ajaxmap\Tests
+ * @package DWenzel\Ajaxmap\Tests
  */
 class PlaceControllerTest extends UnitTestCase {
 
 	/**
-	 * @var \Webfox\Ajaxmap\Controller\PlaceController
+	 * @var \DWenzel\Ajaxmap\Controller\PlaceController
 	 */
 	protected $fixture;
 
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
 	protected $mockDemand;
 
@@ -63,21 +63,21 @@ class PlaceControllerTest extends UnitTestCase {
 
 	protected function setUp() {
 		$this->fixture = $this->getAccessibleMock (
-			'Webfox\\Ajaxmap\\Controller\\PlaceController',
-			array('dummy'), array(), '', FALSE);
+			'DWenzel\\Ajaxmap\\Controller\\PlaceController',
+			array('dummy'), array(), '', false);
 		$this->mockObjectManager = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Object\\ObjectManager',
-			array('get'), array(), '', FALSE);
+			array('get'), array(), '', false);
 		$this->fixture->_set('objectManager', $this->mockObjectManager);
 		$this->mockDemand = $this->getMock(
-			'Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand',
-			array(), array(), '', FALSE);
+			'DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand',
+			array(), array(), '', false);
 		$placeRepository = $this->getMock(
-			'Webfox\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', FALSE
+			'DWenzel\\Ajaxmap\\Domain\\Repository\\PlaceRepository', array(), array(), '', false
 		);
 		$this->fixture->injectPlaceRepository($placeRepository);
 		$this->fixture->_set('view',
-			$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', FALSE));
+			$this->getMock('TYPO3\\CMS\\Fluid\\View\\TemplateView', array(), array(), '', false));
 	}
 
 	/**
@@ -152,7 +152,7 @@ class PlaceControllerTest extends UnitTestCase {
 	public function listActionFindsDemandedPlacesByDemandFromSettings() {
 		$settings = array('list' => 'foo', 'orderBy' => 'datetime');
 		$mockQueryResult = $this->getMock('TYPO3\\CMS\\Extbase\\Persistence\\QueryResult',
-			array(), array(), '', FALSE);
+			array(), array(), '', false);
 		$configurationManager = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManagerInterface'
 		);
@@ -162,7 +162,7 @@ class PlaceControllerTest extends UnitTestCase {
 		$this->mockObjectManager->expects($this
 			->any())
 			->method('get')
-			->with('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand')
+			->with('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand')
 			->will($this
 			->returnValue($this->mockDemand));
 		
@@ -194,10 +194,10 @@ class PlaceControllerTest extends UnitTestCase {
 		$placeId = 1;
 		$mockQueryResult = $this->getMock(
 			'TYPO3\\CMS\\Extbase\\Persistence\\QueryResult',
-			array(), array(), '', FALSE);
+			array(), array(), '', false);
 		$mockPlace = $this->getMock(
-			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
-			array(), array(), '', FALSE);
+			'DWenzel\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', false);
 		$this->fixture->_get('placeRepository')->expects(
 			$this->once())
 			->method('findByUid')
@@ -215,8 +215,8 @@ class PlaceControllerTest extends UnitTestCase {
 	public function showActionAssignsVariables() {
 		$settings = array( 'foo' => 'bar');
 		$mockPlace = $this->getMock(
-			'Webfox\\Ajaxmap\\Domain\\Model\\Place',
-			array(), array(), '', FALSE);
+			'DWenzel\\Ajaxmap\\Domain\\Model\\Place',
+			array(), array(), '', false);
 		$this->fixture->_set('settings', $settings);
 		$this->fixture->_get('view')->expects($this->once())
 			->method('assignMultiple')

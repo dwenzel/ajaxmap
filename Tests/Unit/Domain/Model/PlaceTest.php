@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Place.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\Place.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -39,22 +39,22 @@ namespace Webfox\Ajaxmap\Tests;
  */
 use TYPO3\CMS\Core\Tests\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
+use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 
 /**
  * Class PlaceTest
  *
- * @package Webfox\Ajaxmap\Tests
- * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Place
+ * @package DWenzel\Ajaxmap\Tests
+ * @coversDefaultClass DWenzel\Ajaxmap\Domain\Model\Place
  */
 class PlaceTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Place
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Place
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Place();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Place();
 	}
 
 	/**
@@ -156,7 +156,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setPlaceGroupsForObjectStorageContainingPlaceGroupsSetsPlaceGroups() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$category = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
 		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
@@ -171,7 +171,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
-		$category = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$category = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
 		$this->fixture->addPlaceGroup($category);
@@ -186,7 +186,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removePlaceGroupFromObjectStorageHoldingPlaceGroup() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($placeGroup);
 		$localObjectStorage->detach($placeGroup);
@@ -213,7 +213,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setLocationTypeForLocationLocationTypeSetsLocationType() {
-		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\LocationType();
+		$dummyObject = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
 		$this->fixture->setLocationType($dummyObject);
 
 		$this->assertSame(
@@ -237,7 +237,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setRegionsForObjectStorageContainingRegionSetsRegions() {
-		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
 		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
 		$this->fixture->setRegions($objectStorageHoldingExactlyOneRegions);
@@ -252,7 +252,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addRegionToObjectStorageHoldingRegions() {
-		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
 		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegion->attach($region);
 		$this->fixture->addRegion($region);
@@ -267,7 +267,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeRegionFromObjectStorageHoldingRegions() {
-		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($region);
 		$localObjectStorage->detach($region);
@@ -295,7 +295,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setContentForObjectStorageContainingContentSetsContent() {
-		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
 		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
 		$this->fixture->setContent($objectStorageHoldingExactlyOneContent);
@@ -310,7 +310,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addContentToObjectStorageHoldingContent() {
-		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
 		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
 		$this->fixture->addContent($content);
@@ -325,7 +325,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeContentFromObjectStorageHoldingContent() {
-		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
+		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
 		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$localObjectStorage->attach($content);
 		$localObjectStorage->detach($content);
@@ -352,7 +352,7 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setAddressForAddressSetsAddress() {
-		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\Address();
+		$dummyObject = new \DWenzel\Ajaxmap\Domain\Model\Address();
 		$this->fixture->setAddress($dummyObject);
 
 		$this->assertSame(

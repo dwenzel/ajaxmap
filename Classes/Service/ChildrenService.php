@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Service;
+namespace DWenzel\Ajaxmap\Service;
  /**
   * This file is part of the TYPO3 CMS project.
   *
@@ -27,7 +27,7 @@ use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
  * @author Georg Ringer (tx_news)
  * @author Dirk Wenzel
  *
- * @package Webfox\Ajaxmap\Service
+ * @package DWenzel\Ajaxmap\Service
  */
 class ChildrenService {
 	/**
@@ -40,7 +40,7 @@ class ChildrenService {
 	 * @param boolean $removeGivenIdListFromResult remove the given id list from result
 	 * @return string comma separated list of category ids
 	 */
-	public static function getChildren($tableName, $idList, $counter = 0, $additionalWhere = '', $removeGivenIdListFromResult = FALSE) {
+	public static function getChildren($tableName, $idList, $counter = 0, $additionalWhere = '', $removeGivenIdListFromResult = false) {
 		// @todo implement caching (see tx_news)
 		$entry = self::getChildrenRecursive($tableName, $idList, $counter, $additionalWhere);
 		if ($removeGivenIdListFromResult) {
@@ -57,8 +57,8 @@ class ChildrenService {
 	 * @return string
 	 */
 	public static function removeValuesFromString($result, $toBeRemoved) {
-		$resultAsArray = GeneralUtility::trimExplode(',', $result, TRUE);
-		$idListAsArray = GeneralUtility::trimExplode(',', $toBeRemoved, TRUE);
+		$resultAsArray = GeneralUtility::trimExplode(',', $result, true);
+		$idListAsArray = GeneralUtility::trimExplode(',', $toBeRemoved, true);
 		$result = implode(',', array_diff($resultAsArray, $idListAsArray));
 		return $result;
 	}

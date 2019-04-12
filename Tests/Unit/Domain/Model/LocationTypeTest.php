@@ -1,11 +1,11 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\LocationType.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\LocationType.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -43,97 +43,106 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
 /**
  * Class LocationTypeTest
  *
- * @package Webfox\Ajaxmap\Tests
+ * @package DWenzel\Ajaxmap\Tests
  */
-class LocationTypeTest extends UnitTestCase {
-	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\LocationType
-	 */
-	protected $fixture;
+class LocationTypeTest extends UnitTestCase
+{
+    /**
+     * @var \DWenzel\Ajaxmap\Domain\Model\LocationType
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\LocationType();
-	}
+    public function setUp()
+    {
+        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
+    }
 
-	/**
-	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getTitle()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getTitleReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() { 
-		$this->fixture->setTitle('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setTitleForStringSetsTitle()
+    {
+        $this->fixture->setTitle('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTitle()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getDescription()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getTitle()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getDescriptionReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->fixture->getDescription()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getIconReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getIcon()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setDescriptionForStringSetsDescription()
+    {
+        $this->fixture->setDescription('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setIconForStringSetsIcon() { 
-		$this->fixture->setIcon('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getDescription()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getIcon()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getIconReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->fixture->getIcon()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function toArrayReturnsInitialValueForArray() {
-		$result = array(
-				'description' => null,
-				'icon' => null,
-				'pid' => null,
-				'title' => null,
-				'uid' => null,
-		);
-		$this->assertSame(
-				$this->fixture->toArray(),
-				$result
-		);
-	}
+    /**
+     * @test
+     */
+    public function setIconForStringSetsIcon()
+    {
+        $this->fixture->setIcon('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getIcon()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function toArrayReturnsInitialValueForArray()
+    {
+        $result = array(
+            'description' => null,
+            'icon' => null,
+            'pid' => null,
+            'title' => null,
+            'uid' => null,
+        );
+        $this->assertSame(
+            $this->fixture->toArray(),
+            $result
+        );
+    }
 
 }
-?>
+

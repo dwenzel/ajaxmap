@@ -12,9 +12,9 @@ return [
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
         'cruser_id' => 'cruser_id',
-        'dividers2tabs' => TRUE,
+        'dividers2tabs' => true,
         'versioningWS' => 2,
-        'versioning_followPages' => TRUE,
+        'versioning_followPages' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -281,7 +281,7 @@ return [
                     'showAllLocalizationLink' => 1,
                     'showSynchronizationLink' => 1,
                     'enabledControls' => [
-                        'info' => FALSE,
+                        'info' => false,
                     ]
                 ]
             ],
@@ -293,7 +293,6 @@ return [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tt_address',
-                //'foreign_table' => 'tt_address',
                 'fieldControl' => [
                     'editPopup' => [
                         'disabled' => false,
@@ -332,4 +331,3 @@ $TCA['tx_ajaxmap_domain_model_place']['palettes'] = [
         ''
     ]
 ];
-?>

@@ -1,16 +1,16 @@
 <?php
-namespace Webfox\Ajaxmap\Tests\Unit\Domain\Model\Dto;
+namespace DWenzel\Ajaxmap\Tests\Unit\Domain\Model\Dto;
 
 use TYPO3\CMS\Core\Tests\UnitTestCase;
-use Webfox\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait;
+use DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait;
 
 /**
- * Test case for class \Webfox\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait.
+ * Test case for class \DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait.
  */
 class CategoryAwareDemandTraitTest extends UnitTestCase {
 
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait
 	 */
 	protected $subject;
 

@@ -1,7 +1,7 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 
-use Webfox\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /***************************************************************
@@ -31,7 +31,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 trait CategorizableTrait {
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category>
 	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $categories;
@@ -39,7 +39,7 @@ trait CategorizableTrait {
 	/**
 	 * Adds a Category
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category
 	 * @return void
 	 */
 	public function addCategory(Category $category) {
@@ -48,7 +48,7 @@ trait CategorizableTrait {
 	/**
 	 * Removes a Category
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $categoryToRemove The Category to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $categoryToRemove The Category to be removed
 	 * @return void
 	 */
 	public function removeCategory(Category $categoryToRemove) {
@@ -57,7 +57,7 @@ trait CategorizableTrait {
 	/**
 	 * Returns the categories
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> $categories
 	 */
 	public function getCategories() {
 		return $this->categories;
@@ -66,7 +66,7 @@ trait CategorizableTrait {
 	/**
 	 * Sets the categories
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> $categories
 	 * @return void
 	 */
 	public function setCategories(ObjectStorage $categories) {

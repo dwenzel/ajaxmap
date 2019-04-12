@@ -1,10 +1,10 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model\Dto;
+namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
 /**
  * Interface CategoryAwareDemandInterface
  *
- * @package Webfox\Ajaxmap\Domain\Model\Dto
+ * @package DWenzel\Ajaxmap\Domain\Model\Dto
  */
 interface CategoryAwareDemandInterface {
 	/**

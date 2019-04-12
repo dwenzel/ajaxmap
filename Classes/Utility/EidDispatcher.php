@@ -1,5 +1,5 @@
 <?php
- 
+
 /** *************************************************************
  *
  * Extbase Dispatcher for Ajax Calls TYPO3 6.1 namespaces
@@ -25,9 +25,9 @@
  *
  * This copyright notice MUST APPEAR in all copies of the script!
  */
- 
+
 /**
- * Eid Dispatcher 
+ * Eid Dispatcher
  * originally written by Klaus Heuer
  * adapted by Dirk Wenzel
  *
@@ -42,14 +42,14 @@
  *     $('.jqAjax').click(function(e)  {
  *       var uid = $(this).find('.uid').html();
  *       var storagePid = '11';
- *      
+ *
  *       $.ajax({
  *           async: 'true',
- *           url: 'index.php',      
- *           type: 'POST', 
- *        
+ *           url: 'index.php',
+ *           type: 'POST',
+ *
  *           data: {
- *               eID: "placementsAjax",  
+ *               eID: "placementsAjax",
  *               request: {
  *                   pluginName:  'Placements',
  *                   controller:  'Position',
@@ -60,38 +60,38 @@
  *                   }
  *               }
  *           },
- *           dataType: "json",      
- *          
+ *           dataType: "json",
+ *
  *           success: function(result) {
  *               console.log(result);
  *           },
  *           error: function(error) {
- *              console.log(error);               
+ *              console.log(error);
  *           }
  *       });
  *************************************************************** */
- 
- 
+
+
 /**
  * Gets the Ajax Call Parameters
  */
 $ajax = \TYPO3\CMS\Core\Utility\GeneralUtility::_GP('request');
-         
+
 /**
  * Set Vendor and Extension Name
  *
  * Vendor Name like your Vendor Name in namespaces
  * ExtensionName in upperCamelCase
  */
-$ajax['vendor'] = 'Webfox';
+$ajax['vendor'] = 'DWenzel';
 $ajax['extensionName'] = 'Ajaxmap';
-         
- 
+
+
 /**
  * @var $objectManager \TYPO3\CMS\Extbase\Object\ObjectManager
  */
 $objectManager = new \TYPO3\CMS\Extbase\Object\ObjectManager;
- 
+
 /**
  * @var $TSFE \TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController
  */
@@ -103,7 +103,7 @@ $TSFE = $objectManager->get('TYPO3\\CMS\\Frontend\\Controller\\TypoScriptFronten
 $TSFE->initFEuser();
 // Important: no Cache for Ajax stuff
 $TSFE->set_no_cache();
- 
+
 //$TSFE->checkAlternativCoreMethods();
 $TSFE->checkAlternativeIdMethods();
 $TSFE->determineId();
@@ -114,40 +114,40 @@ $TSFE->getConfigArray();
 $TSFE->cObj = $objectManager->get('TYPO3\\CMS\\Frontend\\ContentObject\\ContentObjectRenderer');
 $TSFE->settingLanguage();
 $TSFE->settingLocale();
- 
+
 /**
  * Initialize Database
  */
 \TYPO3\CMS\Frontend\Utility\EidUtility::connectDB();
- 
+
 /**
  * Initialize Extbase bootstap
  */
 $bootstrapConf['extensionName'] = $ajax['extensionName'];
 $bootstrapConf['pluginName'] = $ajax['pluginName'];
- 
+
 $bootstrap = new \TYPO3\CMS\Extbase\Core\Bootstrap();
 $bootstrap->initialize($bootstrapConf);
- 
+
 $bootstrap->cObj = $objectManager->get('tslib_cObj');
- 
+
 /**
  * Build the request
  */
 $request = $objectManager->get('TYPO3\CMS\Extbase\Mvc\Request');
- 
+
 $request->setControllerVendorName($ajax['vendor']);
 $request->setcontrollerExtensionName($ajax['extensionName']);
 $request->setPluginName($ajax['pluginName']);
 $request->setControllerName($ajax['controller']);
 $request->setControllerActionName($ajax['action']);
 $request->setArguments($ajax['arguments']);
- 
+
 $response = $objectManager->get('TYPO3\CMS\Extbase\Mvc\ResponseInterface');
- 
+
 $dispatcher = $objectManager->get('TYPO3\CMS\Extbase\Mvc\Dispatcher');
- 
+
 $dispatcher->dispatch($request, $response);
- 
+
 echo $response->getContent();
-?>
+

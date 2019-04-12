@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Repository;
+namespace DWenzel\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *

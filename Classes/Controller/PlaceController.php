@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Controller;
+namespace DWenzel\Ajaxmap\Controller;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +24,7 @@ namespace Webfox\Ajaxmap\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand;
+use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 
 /**
  *
@@ -38,7 +38,7 @@ class PlaceController extends AbstractController {
 	/**
 	 * placeRepository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	protected $placeRepository;
 
@@ -63,20 +63,20 @@ class PlaceController extends AbstractController {
 	/**
 	 * injectLocationRepository
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
+	 * @param \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
 	 * @return void
 	 */
-	public function injectPlaceRepository(\Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
+	public function injectPlaceRepository(\DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
 		$this->placeRepository = $placeRepository;
 	}
 
 	/**
 	 * action show
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $place
 	 * @return void
 	 */
-	public function showAction(\Webfox\Ajaxmap\Domain\Model\Place $place) {
+	public function showAction(\DWenzel\Ajaxmap\Domain\Model\Place $place) {
 		$this->view->assignMultiple(
 			array(
 				'place' => $place,
@@ -92,7 +92,7 @@ class PlaceController extends AbstractController {
 	 * @param bool $json Whether to return json string
 	 * @return string
 	 */
-	public function ajaxShowAction($placeId, $json = FALSE) {
+	public function ajaxShowAction($placeId, $json = false) {
 		$result = '';
 
 		if($place = $this->placeRepository->findByUid($placeId)) {
@@ -110,11 +110,11 @@ class PlaceController extends AbstractController {
 	 * Create demand from settings
 	 *
 	 * @param \array $settings
-	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 * @return \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
 	public function createDemandFromSettings ($settings) {
 		/** @var PlaceDemand $demand */
-		$demand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
+		$demand = $this->objectManager->get('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
 		if ($settings['orderBy']) {
 			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
 		}

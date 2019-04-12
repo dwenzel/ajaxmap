@@ -1,10 +1,10 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 
 /**
  * Class ToJsonTrait
  *
- * @package Webfox\Ajaxmap\Domain\Model
+ * @package DWenzel\Ajaxmap\Domain\Model
  */
 trait ToJsonTrait {
 	/**

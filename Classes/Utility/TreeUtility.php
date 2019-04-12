@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Utility;
+namespace DWenzel\Ajaxmap\Utility;
 
 /***************************************************************
  *  Copyright notice
@@ -19,13 +19,13 @@ namespace Webfox\Ajaxmap\Utility;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use Webfox\Ajaxmap\Domain\Model\TreeItemInterface;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\Domain\Model\TreeItemInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  * Class TreeUtility
  *
- * @package Webfox\Ajaxmap\Utility
+ * @package DWenzel\Ajaxmap\Utility
  */
 class TreeUtility {
 	/**
@@ -101,7 +101,7 @@ class TreeUtility {
 			return $treeArrayItem;
 		}
 
-		return FALSE;
+		return false;
 	}
 
 	/**

@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Controller;
+namespace DWenzel\Ajaxmap\Controller;
 
 /***************************************************************
  *  Copyright notice
@@ -20,15 +20,15 @@ namespace Webfox\Ajaxmap\Controller;
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
-use Webfox\Ajaxmap\Domain\Model\Place;
-use Webfox\Ajaxmap\Domain\Repository\MapRepository;
-use Webfox\Ajaxmap\Domain\Repository\PlaceRepository;
-use Webfox\Ajaxmap\Domain\Repository\RegionRepository;
-use Webfox\Ajaxmap\Domain\Model\Category;
-use Webfox\Ajaxmap\Domain\Model\LocationType;
-use Webfox\Ajaxmap\Domain\Model\Map;
-use Webfox\Ajaxmap\Domain\Model\PlaceGroup;
-use Webfox\Ajaxmap\Utility\TreeUtility;
+use DWenzel\Ajaxmap\Domain\Model\Place;
+use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
+use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
+use DWenzel\Ajaxmap\Domain\Repository\RegionRepository;
+use DWenzel\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
+use DWenzel\Ajaxmap\Domain\Model\Map;
+use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
+use DWenzel\Ajaxmap\Utility\TreeUtility;
 
 /**
  * @package ajaxmap
@@ -39,28 +39,28 @@ class MapController extends AbstractController {
 	/**
 	 * mapRepository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\MapRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\MapRepository
 	 */
 	protected $mapRepository;
 
 	/**
 	 * regionRepository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\RegionRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\RegionRepository
 	 */
 	protected $regionRepository;
 
 	/**
 	 * Place Repository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository
 	 */
 	protected $placeRepository;
 
 	/**
 	 * Place Group Repository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\PlaceGroupRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceGroupRepository
 	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $placeGroupRepository;
@@ -68,20 +68,20 @@ class MapController extends AbstractController {
 	/**
 	 * Category Repository
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Repository\CategoryRepository
+	 * @var \DWenzel\Ajaxmap\Domain\Repository\CategoryRepository
 	 * @TYPO3\CMS\Extbase\Annotation\Inject
 	 */
 	protected $categoryRepository;
 
 	/**
-	 * @var \Webfox\Ajaxmap\Utility\TreeUtility
+	 * @var \DWenzel\Ajaxmap\Utility\TreeUtility
 	 */
 	protected $treeUtility;
 
 	/**
 	 * injectMapRepository
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Repository\MapRepository $mapRepository
+	 * @param \DWenzel\Ajaxmap\Domain\Repository\MapRepository $mapRepository
 	 * @return void
 	 */
 	public function injectMapRepository(MapRepository $mapRepository) {
@@ -91,7 +91,7 @@ class MapController extends AbstractController {
 	/**
 	 * inject place repository
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
+	 * @param \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
 	 * @return void
 	 */
 	public function injectPlaceRepository(PlaceRepository $placeRepository) {
@@ -101,7 +101,7 @@ class MapController extends AbstractController {
 	/**
 	 * injectRegionRepository
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
+	 * @param \DWenzel\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
 	 * @return void
 	 */
 	public function injectRegionRepository(RegionRepository $regionRepository) {
@@ -111,7 +111,7 @@ class MapController extends AbstractController {
 	/**
 	 * inject tree utility
 	 *
-	 * @param \Webfox\Ajaxmap\Utility\TreeUtility $treeUtility
+	 * @param \DWenzel\Ajaxmap\Utility\TreeUtility $treeUtility
 	 * @return void
 	 */
 	public function injectTreeUtility(TreeUtility $treeUtility) {
@@ -128,7 +128,7 @@ class MapController extends AbstractController {
 	 */
 	public function itemAction($task, $mapId = NULL, $placeId = NULL) {
 		$response = array();
-		/** @var \Webfox\Ajaxmap\Domain\Model\Map $map */
+		/** @var \DWenzel\Ajaxmap\Domain\Model\Map $map */
 		$map = $this->mapRepository->findByUid($mapId);
 		switch ($task) {
 			case 'buildMap':
@@ -162,7 +162,7 @@ class MapController extends AbstractController {
 				} else {
 					$placeDemand = $this->buildPlaceDemandFromMap($map);
 					/** @var QueryResult $placeObjects */
-					$placeObjects = $this->placeRepository->findDemanded($placeDemand, TRUE, NULL, FALSE);
+					$placeObjects = $this->placeRepository->findDemanded($placeDemand, true, NULL, false);
 					/** @var Place $place */
 					foreach ($placeObjects as $place) {
 						$places[] = $place->toArray(2, $this->settings['mapping']['listPlaces']);
@@ -228,7 +228,7 @@ class MapController extends AbstractController {
 						$rootIds[] = $placeGroup->getUid();
 					}
 					$rootIdList = implode(',', $rootIds);
-					if ($children = $this->placeGroupRepository->findChildren($rootIdList, FALSE)) {
+					if ($children = $this->placeGroupRepository->findChildren($rootIdList, false)) {
 						$objectTree = $this->treeUtility->buildObjectTree($children);
 						$placeGroups = $this->treeUtility->convertObjectTreeToArray(
 							$objectTree,
@@ -268,7 +268,7 @@ class MapController extends AbstractController {
 	/**
 	 * action show
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Map $map
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Map $map
 	 * @return void
 	 */
 	public function showAction(Map $map = NULL) {
@@ -289,11 +289,11 @@ class MapController extends AbstractController {
 	 * Builds a demand object from map properties
 	 *
 	 * @param Map $map
-	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand
+	 * @return \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
 	 */
 	protected function buildPlaceDemandFromMap(Map $map) {
-		/** @var \Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand $placeDemand */
-		$placeDemand = $this->objectManager->get('Webfox\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
+		/** @var \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand $placeDemand */
+		$placeDemand = $this->objectManager->get('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
 		$placeDemand->setConstraintsConjunction('or');
 
 		$locationTypes = array();

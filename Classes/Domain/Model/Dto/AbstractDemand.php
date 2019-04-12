@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model\Dto;
+namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
 /***************************************************************
  *  Copyright notice
@@ -45,7 +45,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	protected $hidden;
 
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\Search
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\Search
 	 */
 	protected $search;
 
@@ -131,7 +131,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	/**
 	 * Set search object
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\Search $search A search object
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Dto\Search $search A search object
 	 * @return void
 	 */
 	public function setSearch($search) {
@@ -141,7 +141,7 @@ class AbstractDemand extends AbstractEntity implements DemandInterface {
 	/**
 	 * Get search 
 	 *
-	 * @return \Webfox\Ajaxmap\Domain\Model\Dto\Search
+	 * @return \DWenzel\Ajaxmap\Domain\Model\Dto\Search
 	 */
 	public function getSearch() {
 		return $this->search;

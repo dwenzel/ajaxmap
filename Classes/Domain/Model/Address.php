@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 
 	/***************************************************************
 	 *  Copyright notice
@@ -20,12 +20,12 @@ namespace Webfox\Ajaxmap\Domain\Model;
 	 ***************************************************************/
 
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  * Class Address
  *
- * @package Webfox\Ajaxmap\Domain\Model
+ * @package DWenzel\Ajaxmap\Domain\Model
  */
 class Address extends AbstractEntity
 	implements SerializableInterface {
