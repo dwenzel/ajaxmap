@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\Ajaxmap\Tests;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,20 +26,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-/**
- * Test case for class DWenzel\Ajaxmap\Domain\Model\Address.
- *
- * @version $Id$
- * @copyright Copyright belongs to the respective authors
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- * @package TYPO3
- * @subpackage Ajax Map
- *
- * @author Dirk Wenzel <wenzel@webfox01.de>
- */
-
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class AddressTest
