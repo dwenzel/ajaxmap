@@ -25,7 +25,10 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'iconfile' => 'EXT:ajaxmap/Resources/Public/Icons/tx_ajaxmap_domain_model_place.gif'],
+        'typeicon_classes' => [
+            'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_PLACE
+        ]
+    ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, geo_coordinates,icon,description, info, place_groups, location_type, regions, content, address',
     ],

@@ -26,8 +26,9 @@ return [
             'endtime' => 'endtime',
         ],
         'sortby' => 'sorting',
-        'iconfile' => 'EXT:ajaxmap/Resources/Public/Icons/tx_ajaxmap_domain_model_placegroup.gif'
-
+        'typeicon_classes' => [
+            'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_PLACEGROUP
+        ]
     ],
     'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon, parent',

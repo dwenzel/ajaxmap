@@ -25,7 +25,9 @@ return [
             'starttime' => 'starttime',
             'endtime' => 'endtime',
         ],
-        'iconfile' => 'EXT:ajaxmap/Resources/Public/Icons/tx_ajaxmap_domain_model_region.gif'
+        'typeicon_classes' => [
+            'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_REGION
+        ]
     ],
     'interface' => [
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,regions,main_place',
