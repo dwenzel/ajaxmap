@@ -39,7 +39,6 @@
     }
   },
   "replace": {
-    "ajaxmap": "self.version",
     "typo3-ter/ajaxmap": "self.version"
   },
   "config": {

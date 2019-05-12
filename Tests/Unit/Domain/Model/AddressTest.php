@@ -603,8 +603,7 @@ class AddressTest extends UnitTestCase
      */
     public function getImageForStringReturnsInitiallValue()
     {
-        $this->assertInstanceOf(
-            ObjectStorage::class,
+        $this->assertNull(
             $this->fixture->getImage()
         );
     }
