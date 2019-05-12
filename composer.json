@@ -23,9 +23,8 @@
     "friendsoftypo3/tt-address": "*"
   },
   "require-dev": {
-    "mikey179/vfsStream": "1.4.*@dev",
     "phpunit/phpunit": "^5.6 || ^6.0",
-    "nimut/testing-framework": "^3.0"
+    "nimut/testing-framework": "^4.1"
   },
   "autoload": {
     "psr-4": {
