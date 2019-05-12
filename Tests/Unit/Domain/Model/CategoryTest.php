@@ -26,7 +26,7 @@ namespace DWenzel\Ajaxmap\Tests;
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use DWenzel\Ajaxmap\Domain\Model\Category;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Category.
@@ -99,15 +99,14 @@ class CategoryTest extends UnitTestCase {
 	public function toArrayReturnsInitialValue() {
 		$result = array(
 			'description' => '',
-			'icon' => '',
 			'parent' => null,
 			'pid' => null,
 			'title' => '',
 			'uid' => null
 		);
 		$this->assertSame(
-			$this->fixture->toArray(),
-			$result
+			$result,
+			$this->fixture->toArray()
 		);
 	}
 
@@ -118,16 +117,13 @@ class CategoryTest extends UnitTestCase {
 		$parentCategory = new \DWenzel\Ajaxmap\Domain\Model\Category();
 		$this->fixture->setParent($parentCategory);
 		$this->fixture->setDescription('foo');
-		$this->fixture->setIcon('bar');
 		$this->fixture->setPid(1);
 		$this->fixture->setTitle('foobar');
 		$this->fixture->_setProperty('uid', 2);
 		$result = array(
 						'description' => 'foo',
-						'icon' => 'bar',
 						'parent' => array(
-							'description' => null,
-							'icon' => null,
+							'description' => '',
 							'parent' => null,
 							'pid' => null,
 							'title' => null,

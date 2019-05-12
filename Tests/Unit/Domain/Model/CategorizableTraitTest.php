@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\Ajaxmap\Tests\Unit\Domain\Model;
 
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DWenzel\Ajaxmap\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\Domain\Model\CategorizableTrait;

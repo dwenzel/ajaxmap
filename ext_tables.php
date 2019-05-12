@@ -15,7 +15,7 @@ $configure = function () {
     );
 
     $pluginSignature = str_replace('_', '', $extensionKey) . '_' . 'map';
-    $TCA['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
+    $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extensionKey . '/Configuration/FlexForms/flexform_map.xml');
 
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addStaticFile($extensionKey, 'Configuration/TypoScript', 'Ajax Map');
@@ -37,21 +37,11 @@ $configure = function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_ajaxmap_domain_model_locationtype', 'EXT:ajaxmap/Resources/Private/Language/locallang_csh_tx_ajaxmap_domain_model_locationtype.xml');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_ajaxmap_domain_model_locationtype');
 
-    $TCA['tt_address']['columns'][$TCA['tt_address']['ctrl']['type']]['config']['items'][] = array('LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tt_address.tx_extbase_type.Tx_Ajaxmap_Address', 'Tx_Ajaxmap_Address');
+    $GLOBALS['TCA']['tt_address']['columns'][$GLOBALS['TCA']['tt_address']['ctrl']['type']]['config']['items'][] = array('LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tt_address.tx_extbase_type.Tx_Ajaxmap_Address', 'Tx_Ajaxmap_Address');
 
-    $TCA['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] = $TCA['tt_address']['types']['1']['showitem'];
-    $TCA['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= ',--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_address,';
-    $TCA['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= '';
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-        'ajaxmap',
-        'tx_ajaxmap_domain_model_place'
-    );
-
-    \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
-        'ajaxmap',
-        'tx_ajaxmap_domain_model_map'
-    );
+    $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] = $GLOBALS['TCA']['tt_address']['types']['1']['showitem'];
+    $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= ',--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_address,';
+    $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= '';
 
     /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
     $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(

@@ -37,7 +37,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 

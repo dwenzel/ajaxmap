@@ -24,7 +24,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand.
  *
@@ -37,7 +37,6 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-use TYPO3\CMS\Core\Tests\UnitTestCase;
 
 /**
  * Class AbstractDemandTest

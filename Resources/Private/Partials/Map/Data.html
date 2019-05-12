@@ -1,6 +1,6 @@
-<script type="text/javascript"><![CDATA[
+<script type="text/javascript">
 	if(typeof mapStore === "undefined") {
-		var mapStore = [];	
+		var mapStore = [];
 	}
 	if(typeof regionStore === "undefined") {
 		var regionStore = [];
@@ -8,89 +8,8 @@
 	if(typeof categoryTreeStore === "undefined") {
 		var categoryTreeStore = [];
 	}
-	var pageId = ]]>{pid}<![CDATA[;
-	currId = ]]>{settings.map}<![CDATA[;
-	locationTypes = [];
-	markerArr = [];]]>
-	<f:for each="{map.locationTypes}" as="locationType">
-		<![CDATA[
-			locationTypes.push(
-				{
-					"key":]]>{locationType.uid}<![CDATA[,
-					"title": ']]>{locationType.title}<![CDATA[',
-					"description": ']]>{locationType.description}<![CDATA[',
-					"icon": ']]>{locationType.icon}<![CDATA['
-				}
-			);
-		]]>
-	</f:for>
-	var mapSettings = {
-		"id": currId,
-		"map": "",
-		"regions": "",
-		"kmlLayer": "",
-		"placeGroups": "",
-		"locationTypes": locationTypes,
-		"infoWindow": "",
-		"places": "",
-		"marker": markerArr,
-		"settings": {
-			"regionTree" : {
-				minExpandLevel: 3,
-				selectMode: 3, //1: single, 2: multi, 3: multi hierarchical
-				icons: false,
-				checkbox: true,
-				extensions: ["filter"],
-				filter: {
-					autoApply: true,
-					mode: "hide"
-				}
-			},
-			"categoryTree" : {
-				icons: false,
-				extensions: ["filter"],
-				filter: {
-					autoApply: true,
-					mode: "hide"
-				}
-			},
-			"placeGroupTree" : {
-				icons: false,
-				extensions: ["filter"],
-				filter: {
-					autoApply: true,
-					mode: "hide"
-				}
-			},
-			"locationTypeTree": {
-				checkbox: true,
-				selectMode: 1,
-				extensions: ["filter"],
-				filter: {
-					autoApply: true,
-					mode: "hide"
-				}
-			},
-			"placesTree": {
-				toggleInfoWindowOnSelect: true,
-				selectMode: 1,
-				icons: false,
-				extensions: ["filter"],
-				quicksearch: true,
-				filter: {
-					autoApply: true,
-					mode: "hide"
-				},
-				updateFilters: {
-					locationType: {treeName: 'ajaxMapLocationTypesTree'},
-					categories: {treeName: 'ajaxMapCategoryTree'},
-					regions: {treeName: 'ajaxMapRegionsTree', updateLayers: true},
-					placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
-				}
-			}
-		}
-	};
+        var mapSettings = <f:format.raw>{mapSettings}</f:format.raw>;
 	mapStore.push(mapSettings);
-	regionStore.push({"id": currId}); 
-	categoryTreeStore.push({"id": currId})
+	regionStore.push({"id": mapSettings.id});
+	categoryTreeStore.push({"id": mapSettings.id});
 </script>

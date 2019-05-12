@@ -27,6 +27,8 @@ namespace DWenzel\Ajaxmap\Tests;
  ***************************************************************/
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+use Symfony\Component\ExpressionLanguage\Tests\Node\Obj;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
  * Class AddressTest
@@ -385,7 +387,7 @@ class AddressTest extends UnitTestCase
      */
     public function setTwitterThrowsInvalidArgumentExceptionForString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->fixture->setTwitter('ping');
     }
 
@@ -416,7 +418,7 @@ class AddressTest extends UnitTestCase
      */
     public function setFacebookThrowsInvalidArgumentExceptionForString()
     {
-        $this->setExpectedException('InvalidArgumentException');
+        $this->expectException('InvalidArgumentException');
         $this->fixture->setFacebook('ping');
     }
 
@@ -599,9 +601,10 @@ class AddressTest extends UnitTestCase
     /**
      * @test
      */
-    public function getImageForStringReturnsInitiallyNull()
+    public function getImageForStringReturnsInitiallValue()
     {
-        $this->assertNull(
+        $this->assertInstanceOf(
+            ObjectStorage::class,
             $this->fixture->getImage()
         );
     }
@@ -611,10 +614,12 @@ class AddressTest extends UnitTestCase
      */
     public function setImageForStringSetsImage()
     {
-        $this->fixture->setImage('aloha');
+        $image = new ObjectStorage();
+
+        $this->fixture->setImage($image);
         $this->assertSame(
-            $this->fixture->getImage(),
-            'aloha'
+            $image,
+            $this->fixture->getImage()
         );
     }
 

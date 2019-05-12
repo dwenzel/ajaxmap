@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\Ajaxmap\Controller;
 
 /***************************************************************
@@ -18,311 +19,61 @@ namespace DWenzel\Ajaxmap\Controller;
  *  GNU General Public License for more details.
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
-use TYPO3\CMS\Extbase\Persistence\Generic\QuerySettingsInterface;
-use DWenzel\Ajaxmap\Domain\Model\Place;
-use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
-use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
-use DWenzel\Ajaxmap\Domain\Repository\RegionRepository;
-use DWenzel\Ajaxmap\Domain\Model\Category;
-use DWenzel\Ajaxmap\Domain\Model\LocationType;
-use DWenzel\Ajaxmap\Domain\Model\Map;
-use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
-use DWenzel\Ajaxmap\Utility\TreeUtility;
 
+use DWenzel\Ajaxmap\Domain\Model\Map;
+use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 /**
  * @package ajaxmap
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
-class MapController extends AbstractController {
+class MapController extends AbstractController
+{
 
-	/**
-	 * mapRepository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\MapRepository
-	 */
-	protected $mapRepository;
+    /**
+     * mapRepository
+     *
+     * @var \DWenzel\Ajaxmap\Domain\Repository\MapRepository
+     */
+    protected $mapRepository;
 
-	/**
-	 * regionRepository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\RegionRepository
-	 */
-	protected $regionRepository;
+    protected $mapSettings = SI::MAP_SETTINGS;
 
-	/**
-	 * Place Repository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository
-	 */
-	protected $placeRepository;
+    /**
+     * injectMapRepository
+     *
+     * @param \DWenzel\Ajaxmap\Domain\Repository\MapRepository $mapRepository
+     * @return void
+     */
+    public function injectMapRepository(MapRepository $mapRepository)
+    {
+        $this->mapRepository = $mapRepository;
+    }
 
-	/**
-	 * Place Group Repository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceGroupRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
-	 */
-	protected $placeGroupRepository;
+    /**
+     * action show
+     *
+     * @param \DWenzel\Ajaxmap\Domain\Model\Map $map
+     * @return void
+     */
+    public function showAction(Map $map = NULL)
+    {
+        $mapId = $this->settings['map'];
 
-	/**
-	 * Category Repository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\CategoryRepository
-	 * @TYPO3\CMS\Extbase\Annotation\Inject
-	 */
-	protected $categoryRepository;
+        if ($map === NULL) {
+            $map = $this->mapRepository->findByUid($mapId);
+        }
+        //should be merged with plugin settings
+        $this->mapSettings['id'] = $mapId;
 
-	/**
-	 * @var \DWenzel\Ajaxmap\Utility\TreeUtility
-	 */
-	protected $treeUtility;
-
-	/**
-	 * injectMapRepository
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Repository\MapRepository $mapRepository
-	 * @return void
-	 */
-	public function injectMapRepository(MapRepository $mapRepository) {
-		$this->mapRepository = $mapRepository;
-	}
-
-	/**
-	 * inject place repository
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository
-	 * @return void
-	 */
-	public function injectPlaceRepository(PlaceRepository $placeRepository) {
-		$this->placeRepository = $placeRepository;
-	}
-
-	/**
-	 * injectRegionRepository
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Repository\RegionRepository $regionRepository
-	 * @return void
-	 */
-	public function injectRegionRepository(RegionRepository $regionRepository) {
-		$this->regionRepository = $regionRepository;
-	}
-
-	/**
-	 * inject tree utility
-	 *
-	 * @param \DWenzel\Ajaxmap\Utility\TreeUtility $treeUtility
-	 * @return void
-	 */
-	public function injectTreeUtility(TreeUtility $treeUtility) {
-		$this->treeUtility = $treeUtility;
-	}
-
-	/**
-	 * action item - get map attributes
-	 *
-	 * @param \string $task
-	 * @param \integer $mapId
-	 * @param \integer $placeId
-	 * @return string JSON data
-	 */
-	public function itemAction($task, $mapId = NULL, $placeId = NULL) {
-		$response = array();
-		/** @var \DWenzel\Ajaxmap\Domain\Model\Map $map */
-		$map = $this->mapRepository->findByUid($mapId);
-		switch ($task) {
-			case 'buildMap':
-				if ($mapId) {
-					$response = $map->toArray(5, $this->settings['mapping']);
-				}
-				break;
-			case 'getAddress':
-				$response = $this->getAddressForPlace($placeId);
-				break;
-			default:
-
-		}
-
-		return json_encode($response);
-	}
-
-	/**
-	 * Ajax list place action
-	 *
-	 * @param \integer $mapId
-	 * @return string JSON encoded array of places
-	 */
-	public function ajaxListPlacesAction($mapId = NULL) {
-		$places = array();
-		if ($mapId) {
-			/** @var Map $map */
-			if ($map = $this->mapRepository->findByUid($mapId)) {
-				if ($map->getPlaces()) {
-					$places = $map->getPlaces()->toArray();
-				} else {
-					$placeDemand = $this->buildPlaceDemandFromMap($map);
-					/** @var QueryResult $placeObjects */
-					$placeObjects = $this->placeRepository->findDemanded($placeDemand, true, NULL, false);
-					/** @var Place $place */
-					foreach ($placeObjects as $place) {
-						$places[] = $place->toArray(2, $this->settings['mapping']['listPlaces']);
-					}
-				}
-			}
-		}
-
-		return json_encode($places);
-	}
-
-	/**
-	 * Ajax list categories action
-	 *
-	 * @param \integer $mapId
-	 * @return string JSON
-	 */
-	public function ajaxListCategoriesAction($mapId = NULL) {
-		$categories = array();
-		if ($mapId) {
-			$map = $this->mapRepository->findByUid($mapId);
-			if ($map AND $map->getCategories()) {
-				$categoryObjArray = $map->getCategories()->toArray();
-				if ((bool) $categoryObjArray) {
-					$rootIds = array();
-					/** @var Category $category */
-					foreach ($categoryObjArray as $category) {
-						$rootIds[] = $category->getUid();
-					}
-					$rootIdList = implode(',', $rootIds);
-					if ($children = $this->categoryRepository->findChildren($rootIdList)) {
-						$objectTree = $this->treeUtility->buildObjectTree($children);
-						$categories = $this->treeUtility->convertObjectTreeToArray(
-							$objectTree,
-							'parent,pid',
-							$this->settings['mapping']
-						);
-					}
-				}
-			}
-		}
-
-		return json_encode($categories);
-	}
-
-	/**
-	 * Ajax list place groups action
-	 *
-	 * @param \integer $mapId
-	 * @return string JSON
-	 */
-	public function ajaxListPlaceGroupsAction($mapId = NULL) {
-		$placeGroups = array();
-		if ($mapId) {
-			/** @var Map $map */
-			$map = $this->mapRepository->findByUid($mapId);
-			if ($map AND $map->getPlaceGroups()) {
-				$placeGroupObjArray = $map->getPlaceGroups()->toArray();
-				if ((bool) $placeGroupObjArray) {
-					$rootIds = array();
-					foreach ($placeGroupObjArray as $placeGroup) {
-						/** @var PlaceGroup $placeGroup */
-						$rootIds[] = $placeGroup->getUid();
-					}
-					$rootIdList = implode(',', $rootIds);
-					if ($children = $this->placeGroupRepository->findChildren($rootIdList, false)) {
-						$objectTree = $this->treeUtility->buildObjectTree($children);
-						$placeGroups = $this->treeUtility->convertObjectTreeToArray(
-							$objectTree,
-							'parent,pid',
-							$this->settings['mapping']
-						);
-					}
-				}
-			}
-		}
-
-		return json_encode($placeGroups);
-	}
-
-	/**
-	 * Ajax list location types action
-	 *
-	 * @param \integer $mapId
-	 * @return string json
-	 */
-	public function ajaxListLocationTypesAction($mapId = NULL) {
-		$locationTypes = array();
-		if ($mapId) {
-			$map = $this->mapRepository->findByUid($mapId);
-			if ($map AND $map->getLocationTypes()) {
-				$locationTypesObjArray = $map->getLocationTypes()->toArray();
-				foreach ($locationTypesObjArray as $locationType) {
-					/** @var LocationType $locationType */
-					$locationTypes[] = $locationType->toArray(10, $this->settings['mapping']);
-				}
-			}
-		}
-
-		return json_encode($locationTypes);
-	}
-
-	/**
-	 * action show
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Map $map
-	 * @return void
-	 */
-	public function showAction(Map $map = NULL) {
-		if ($map === NULL) {
-			$mapId = $this->settings['map'];
-			$map = $this->mapRepository->findByUid($mapId);
-		}
-		$this->view->assignMultiple(
-			array(
-				'map' => $map,
-				'settings' => $this->settings,
-				'pid' => $GLOBALS['TSFE']->id
-			)
-		);
-	}
-
-	/**
-	 * Builds a demand object from map properties
-	 *
-	 * @param Map $map
-	 * @return \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
-	 */
-	protected function buildPlaceDemandFromMap(Map $map) {
-		/** @var \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand $placeDemand */
-		$placeDemand = $this->objectManager->get('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
-		$placeDemand->setConstraintsConjunction('or');
-
-		$locationTypes = array();
-		/** @var LocationType $type */
-		foreach ($map->getLocationTypes()->toArray() as $type) {
-			$locationTypes[] = $type->getUid();
-		}
-		if ((bool) $locationTypes) {
-			$types = implode(',', $locationTypes);
-			$placeDemand->setLocationTypes($types);
-		}
-
-		return $placeDemand;
-	}
-
-	/**
-	 * @param integer $placeId
-	 * @return array|NULL
-	 */
-	private function getAddressForPlace($placeId) {
-		$address = array();
-		/** @var Place $place */
-		$place = $this->placeRepository->findByUid($placeId);
-		if ($place) {
-			$address = $place->getAddress()->toArray();
-		}
-
-		return $address;
-	}
+        $this->view->assignMultiple(
+            array(
+                'map' => $map,
+                'mapSettings' => \json_encode($this->mapSettings),
+                'settings' => $this->settings,
+            )
+        );
+    }
 
 }
 

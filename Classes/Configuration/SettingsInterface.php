@@ -26,6 +26,8 @@ use TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider;
  */
 interface SettingsInterface
 {
+    const EXTENSION_KEY = 'ajaxmap';
+    const VENDOR_NAME = 'DWenzel';
     /**
      * Key for icon registration
      */
@@ -41,6 +43,16 @@ interface SettingsInterface
     const ICON_IDENTIFIER_PLACE = 'ajaxmap-place';
     const ICON_IDENTIFIER_PLACEGROUP = 'ajaxmap-place-group';
     const ICON_IDENTIFIER_REGION = 'ajaxmap-region';
+
+    /**
+     * ajax action identifiers
+     */
+    const ACTION_BUILD_MAP = 'buildMap';
+    const ACTION_GET_ADDRESS = 'getAddress';
+    const ACTION_LIST_CATEGORIES = 'listCategories';
+    const ACTION_LIST_LOCATION_TYPES = 'listLocationTypes';
+    const ACTION_LIST_PLACES = 'listPlaces';
+    const ACTION_LIST_PLACE_GROUPS = 'listPlaceGroups';
 
     /**
      * Icons to register via API
@@ -77,6 +89,74 @@ interface SettingsInterface
 
             ]
         ],
-
     ];
+
+    const MAP_SETTINGS = [
+        'id' => null,
+        'map' => '',
+        'regions' => '',
+        'kmlLayer' => '',
+        'placeGroups' => '',
+        'locationTypes' => [],
+        'infoWindow' => '',
+        'places' => '',
+        'marker' => [],
+        'settings' => [
+            'regionTree' => [
+                'minExpandLevel' => 3,
+                // 1=> single, 2=> multi, 3=> multi hierarchical
+                'selectMode' => 3,
+                'icons' => false,
+                'checkbox' => true,
+                'extensions' => ['filter'],
+                'filter' => [
+                    'autoApply' => true,
+                    'mode' => 'hide'
+                ]
+            ],
+            'categoryTree' => [
+                'icons' => false,
+                'extensions' => ['filter'],
+                'filter' => [
+                    'autoApply' => true,
+                    'mode' => 'hide'
+                ]
+            ],
+            'placeGroupTree' => [
+                'icons' => false,
+                'extensions' => ['filter'],
+                'filter' => [
+                    'autoApply' => true,
+                    'mode' => 'hide'
+                ]
+            ],
+            'locationTypeTree' => [
+                'checkbox' => true,
+                'selectMode' => 1,
+                'extensions' => ['filter'],
+                'filter' => [
+                    'autoApply' => true,
+                    'mode' => 'hide'
+                ]
+            ],
+            'placesTree' => [
+                'toggleInfoWindowOnSelect' => true,
+                'selectMode' => 1,
+                'icons' => false,
+                'extensions' => ['filter'],
+                'quicksearch' => true,
+                'filter' => [
+                    'autoApply' => true,
+                    'mode' => 'hide'
+                ],
+                'updateFilters' => [
+                    'locationType' => ['treeName' => 'ajaxMapLocationTypesTree'],
+                    'categories' => ['treeName' => 'ajaxMapCategoryTree'],
+                    'regions' => ['treeName' => 'ajaxMapRegionsTree', 'updateLayers' => true],
+                    'placeGroups' => ['treeName' => 'ajaxMapPlaceGroupTree']
+                ]
+            ]
+        ]
+    ];
+
 }

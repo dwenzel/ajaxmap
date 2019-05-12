@@ -37,7 +37,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 class RegionTest extends UnitTestCase {
 	/**
@@ -52,11 +52,6 @@ class RegionTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getTitleReturnsInitialValueForString() { }
-
-	/**
-	 * @test
-	 */
 	public function setTitleForStringSetsTitle() { 
 		$this->fixture->setTitle('Conceived at T3CON10');
 
@@ -66,11 +61,6 @@ class RegionTest extends UnitTestCase {
 		);
 	}
 	
-	/**
-	 * @test
-	 */
-	public function getFileReturnsInitialValueForString() { }
-
 	/**
 	 * @test
 	 */

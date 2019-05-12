@@ -115,7 +115,7 @@ class PlaceController extends AbstractController {
 	public function createDemandFromSettings ($settings) {
 		/** @var PlaceDemand $demand */
 		$demand = $this->objectManager->get('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
-		if ($settings['orderBy']) {
+		if (isset($settings['orderBy']) && isset($settings['orderDirection'])) {
 			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
 		}
 		(isset($settings['map']))? $demand->setMap($settings['map']) : NULL;

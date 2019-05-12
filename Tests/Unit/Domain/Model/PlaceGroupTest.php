@@ -26,7 +26,7 @@ namespace DWenzel\Ajaxmap\Tests;
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\PlaceGroup.

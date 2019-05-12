@@ -46,7 +46,7 @@ $boot = function () {
 
 
 // include eid dispatcher
-    $TYPO3_CONF_VARS['FE']['eID_include']['ajaxMap'] = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath('ajaxmap') . 'Classes/Utility/EidDispatcher.php';
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['ajaxMap'] = \DWenzel\Ajaxmap\Controller\AjaxController::class . '::processRequest';
 };
 
 $boot();

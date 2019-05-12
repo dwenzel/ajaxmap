@@ -217,16 +217,8 @@ var ajaxMap = ajaxMap || {};
 			type: "GET",
 			data: {
 				'eID': "ajaxMap",
-				request: {
-					'pluginName': "Map",
-					'controller': "Map",
-					'action': "item",
-					'arguments': {
-						'task': 'buildMap',
-						'mapId': mapEntry.id,
-						'pageId': pageId
-					}
-				}
+				'action': 'buildMap',
+				'mapId': mapEntry.id
 			},
 			dataType: "json",
 			success: function (response) {
@@ -370,14 +362,8 @@ var ajaxMap = ajaxMap || {};
 				dataType: "json",
 				data: {
 					'eID': "ajaxMap",
-					request: {
-						'pluginName': "Map",
-						'controller': "Map",
-						'action': action,
-						'arguments': {
-							'mapId': mapId
-						}
-					}
+					'action': action,
+					'mapId': mapId
 				}
 			}
 		};
@@ -430,7 +416,7 @@ var ajaxMap = ajaxMap || {};
 	function renderCategoryTree(mapEntry) {
 		renderTreeAjax(
 			'#ajaxMapCategoryTree' + mapEntry.id,
-			"ajaxListCategories",
+			"listCategories",
 			mapEntry.id,
 			mapEntry.settings.categoryTree
 		);
@@ -445,7 +431,7 @@ var ajaxMap = ajaxMap || {};
 	function renderPlaceGroupTree(mapEntry) {
 		renderTreeAjax(
 			'#ajaxMapPlaceGroupTree' + mapEntry.id,
-			"ajaxListPlaceGroups",
+			"listPlaceGroups",
 			mapEntry.id,
 			mapEntry.settings.placeGroupTree
 		);
@@ -665,14 +651,8 @@ var ajaxMap = ajaxMap || {};
 			type: "GET",
 			data: {
 				'eID': "ajaxMap",
-				request: {
-					'pluginName': "Map",
-					'controller': "Map",
-					'action': "ajaxListPlaces",
-					'arguments': {
-						'mapId': mapEntry.id
-					}
-				}
+                'action': "listPlaces",
+                'mapId': mapEntry.id
 			},
 			dataType: "json",
 			success: function (result) {
@@ -700,16 +680,8 @@ var ajaxMap = ajaxMap || {};
 			type: "GET",
 			data: {
 				'eID': "ajaxMap",
-				request: {
-					'extensionName': "Ajaxmap",
-					'pluginName': "Map",
-					'controller': "Map",
-					'action': "item",
-					'arguments': {
-						'task': 'getAddress',
-						'placeId': placeId
-					}
-				}
+				'action': "getAddress",
+				'placeId': placeId
 			},
 			dataType: "json",
 			success: function (result) {

@@ -7,7 +7,7 @@
 	</f:if>
 	<f:flashMessages />
 	<f:if condition="{map}">
-		<f:render partial="Map/Data" arguments="{settings: settings, map: map, pid: pid}"/>
+		<f:render partial="Map/Data" arguments="{settings: settings, map: map, pid: pid, mapSettings: '{mapSettings}'}"/>
 	</f:if>
 	<div class="mapWrap">
 		<div id="ajaxMapContainer_Map{map.uid}"></div>

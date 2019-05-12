@@ -1,7 +1,7 @@
 <?php
 namespace DWenzel\Ajaxmap\Tests\Unit\Domain\Model\Dto;
 
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 use DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait;
 
 /**

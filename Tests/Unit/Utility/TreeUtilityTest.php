@@ -23,7 +23,11 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+use DWenzel\Ajaxmap\Domain\Model\TreeItemInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Test case for class DWenzel\Ajaxmap\Utility\TreeUtility.
@@ -90,9 +94,8 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::convertObjectLeafToArray
 	 */
 	public function convertObjectLeafToArrayConvertsSerializableLeafItems() {
-		$mockSerializable = $this->getMock(
-				'DWenzel\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', false);
+		$mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
 		$mockObjectLeaf = array(
 				'item' => $mockSerializable
 				);
@@ -112,9 +115,8 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::convertObjectLeafToArray
 	 */
 	public function convertObjectLeafToArrayRemovesKeys() {
-		$mockSerializable = $this->getMock(
-				'DWenzel\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', false);
+		$mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
 		$mockObjectLeaf = array(
 				'item' => $mockSerializable
 				);
@@ -157,14 +159,14 @@ class TreeUtilityTest extends UnitTestCase {
 				'DWenzel\\Ajaxmap\\Utility\\TreeUtility',
 				array('convertObjectLeafToArray'), array(), '', false
 		);
-		$mockSerializable = $this->getMock(
-				'DWenzel\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', false);
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
 		$mockObjectLeaf = array(
 				'item' => $mockSerializable
 		);
-		$keyToRemove = 'foo,bar';
+		$keysToRemove = 'foo,bar';
 		$mapping = array('foo' => 'bar');
+		$result = [];
 
 		$subject->expects($this->once())
 			->method('convertObjectLeafToArray')
@@ -183,16 +185,15 @@ class TreeUtilityTest extends UnitTestCase {
 				'DWenzel\\Ajaxmap\\Utility\\TreeUtility',
 				array('convertObjectLeafToArray'), array(), '', false
 		);
-		$mockSerializable = $this->getMock(
-				'DWenzel\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', false);
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
 		$child = 'foo';
 
 		$mockObjectLeaf = array(
 				'item' => $mockSerializable,
 				'children' => array($child)
 		);
-		$keyToRemove = 'foo,bar';
+		$keysToRemove = 'foo,bar';
 		$mapping = array('foo' => 'bar');
 
 		$subject->expects($this->exactly(2))
@@ -252,9 +253,8 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::buildObjectTree
 	 */
 	public function buildObjectTreeReturnsInitiallyEmptyArray() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', false);
+		$queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
 
 		$queryResult->expects($this->once())
 			->method('toArray')
@@ -270,12 +270,10 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::buildObjectTree
 	 */
 	public function buildObjectTreeFlattensObjects() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', false);
-		$mockObject = $this->getMock(
-				'DWenzel\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array(), array(), '', false);
+        $queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
+		$mockObject = $this->getMockBuilder(TreeItemInterface::class)
+        ->getMockForAbstractClass();
 		$uid = 6;
 		$expectedTree = array(
 			$uid => array(
@@ -301,15 +299,10 @@ class TreeUtilityTest extends UnitTestCase {
 	 * @covers ::buildObjectTree
 	 */
 	public function buildObjectTreeSetsObjectsWithoutParentToParent() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', false);
-		$mockObject = $this->getMock(
-				'DWenzel\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array(), array(), '', false);
-		/*$mockParent =  $this->getMock(
-				'DWenzel\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array('getParent', 'getUid'), array(), '', false);*/
+        $queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
+        $mockObject = $this->getMockBuilder(TreeItemInterface::class)
+            ->getMockForAbstractClass();
 		$mockParent = clone($mockObject);
 		$uid = 6;
 		$parentId = 99;
