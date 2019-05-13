@@ -83,6 +83,7 @@ class MapControllerTest extends UnitTestCase
         $this->view = $this->getMockBuilder(TemplateView::class)
             ->disableOriginalConstructor()->getMock();
 
+        $this->setBackupGlobals(true);
         $this->inject(
             $this->subject,
             'view',
@@ -98,11 +99,16 @@ class MapControllerTest extends UnitTestCase
      */
     public function showActionAssignsVariables()
     {
+        $pageId = 5;
+        $GLOBALS['TSFE'] = new \stdClass();
+
+        $GLOBALS['TSFE']->id = $pageId;
         $mockMap = $this->getMockBuilder(Map::class)
             ->getMock();
         $settings = ['map' => '1'];
         $expectedMapSettings = SI::MAP_SETTINGS;
         $expectedMapSettings['id'] = $settings['map'];
+        $expectedMapSettings['pageId'] = $pageId;
 
         $this->inject(
             $this->subject,
