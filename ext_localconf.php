@@ -11,20 +11,20 @@ $boot = function () {
     $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('ajaxmap');
     if (!empty($settings['includeJQuery'])) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/jQuery.ts">');
+            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/jQuery.typoScript">');
     }
     if (!empty($settings['includeFancyTree'])) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/fancyTree.ts">');
+            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/fancyTree.typoScript">');
     }
 
     if (!empty($settings['includeGoogleMaps'])) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/googleMaps.ts">');
+            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/googleMaps.typoScript">');
     }
     if (!empty($settings['includeJavaScript'])) {
         \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addTypoScriptSetup(
-            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/javaScript.ts">');
+            '<INCLUDE_TYPOSCRIPT: source="FILE:EXT:ajaxmap/Resources/Private/TypoScript/javaScript.typoScript">');
     }
     TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
         'DWenzel.' . 'ajaxmap',
@@ -46,7 +46,7 @@ $boot = function () {
 
 
 // include eid dispatcher
-    $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['ajaxMap'] = \DWenzel\Ajaxmap\Controller\AjaxController::class . '::processRequest';
+//    $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['ajaxMap'] = \DWenzel\Ajaxmap\Controller\AjaxController::class . '::processRequest';
 };
 
 $boot();

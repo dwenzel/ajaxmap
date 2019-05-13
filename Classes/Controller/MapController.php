@@ -65,12 +65,13 @@ class MapController extends AbstractController
         }
         //should be merged with plugin settings
         $this->mapSettings['id'] = $mapId;
+        $this->mapSettings['pageId'] = $GLOBALS['TSFE']->id;
 
         $this->view->assignMultiple(
             array(
                 'map' => $map,
                 'mapSettings' => \json_encode($this->mapSettings),
-                'settings' => $this->settings,
+                'settings' => $this->settings
             )
         );
     }

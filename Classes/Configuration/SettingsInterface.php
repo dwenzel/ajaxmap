@@ -28,6 +28,12 @@ interface SettingsInterface
 {
     const EXTENSION_KEY = 'ajaxmap';
     const VENDOR_NAME = 'DWenzel';
+
+    /**
+     * API parameters
+     */
+    const API_PARAMETER_MAP = 'map';
+
     /**
      * Key for icon registration
      */

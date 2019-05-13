@@ -107,7 +107,6 @@ var ajaxMap = ajaxMap || {};
 			default:
 				break;
 		}
-		var singleContent;
 
 		if (placeId) {
 			var path = $(location).attr('href');
@@ -216,7 +215,8 @@ var ajaxMap = ajaxMap || {};
 			url: "index.php",
 			type: "GET",
 			data: {
-				'eID': "ajaxMap",
+				'id': mapSettings.pageId,
+				'api': "map",
 				'action': 'buildMap',
 				'mapId': mapEntry.id
 			},
@@ -361,7 +361,8 @@ var ajaxMap = ajaxMap || {};
 				type: "GET",
 				dataType: "json",
 				data: {
-					'eID': "ajaxMap",
+					'id': mapSettings.pageId,
+					'api': "map",
 					'action': action,
 					'mapId': mapId
 				}
@@ -650,7 +651,8 @@ var ajaxMap = ajaxMap || {};
 			url: "index.php",
 			type: "GET",
 			data: {
-				'eID': "ajaxMap",
+				'id': mapSettings.pageId,
+				'api': "map",
                 'action': "listPlaces",
                 'mapId': mapEntry.id
 			},
@@ -679,7 +681,8 @@ var ajaxMap = ajaxMap || {};
 			url: "index.php",
 			type: "GET",
 			data: {
-				'eID': "ajaxMap",
+				'id': mapSettings.pageId,
+				'api': "map",
 				'action': "getAddress",
 				'placeId': placeId
 			},

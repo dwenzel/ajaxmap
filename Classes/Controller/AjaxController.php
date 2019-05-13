@@ -24,6 +24,10 @@ use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Frontend\Middleware\FrontendUserAuthenticator;
 
 /**
  * Class AjaxController
@@ -42,7 +46,6 @@ class AjaxController
     {
         $this->initializeLanguage();
 
-        $action = '';
         $queryParams = $request->getQueryParams();
         if (isset($queryParams['action'])) {
             $action = $queryParams['action'];
