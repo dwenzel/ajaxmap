@@ -97,7 +97,7 @@ class PlaceGroupDataProvider implements DataProviderInterface
 
         /** @var Map $map */
         $map = $this->mapRepository->findByUid($mapId);
-        if ($map AND $map->getPlaceGroups()) {
+        if ($map && $map->getPlaceGroups()) {
             $placeGroupObjArray = $map->getPlaceGroups()->toArray();
             if ((bool)$placeGroupObjArray) {
                 $rootIds = array();
