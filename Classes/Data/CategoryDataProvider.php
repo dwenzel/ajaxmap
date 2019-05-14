@@ -58,12 +58,12 @@ class CategoryDataProvider implements DataProviderInterface
 
     /**
      * CategoryDataProvider constructor.
-     * @param ObjectManagerInterface $objectManager
+     * @param null|ObjectManagerInterface $objectManager
      * @param null|array $mapping
      */
     public function __construct(
-        ?ObjectManagerInterface $objectManager,
-        ?array $mapping
+        ObjectManagerInterface $objectManager = null,
+        array $mapping = null
     )
     {
         if (null === $objectManager) {
