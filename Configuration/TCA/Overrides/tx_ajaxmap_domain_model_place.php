@@ -6,7 +6,7 @@ if (!defined('TYPO3_MODE')) {
 $configure = function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::makeCategorizable(
         'ajaxmap',
-        'tx_ajaxmap_domain_model_placei'
+        'tx_ajaxmap_domain_model_place'
     );
 };
 $configure();
