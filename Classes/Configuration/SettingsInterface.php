@@ -33,6 +33,8 @@ interface SettingsInterface
      * API parameters
      */
     const API_PARAMETER_MAP = 'map';
+    const API_PARAMETER_PLACE_ID = 'placeId';
+    const API_PARAMETER_MAP_ID = 'mapId';
 
     /**
      * Key for icon registration

@@ -1,15 +1,18 @@
 <?php
+declare(strict_types=1);
 
 namespace DWenzel\Ajaxmap\Data;
 
 use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
 use DWenzel\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\CategoryRepository;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Utility\TreeUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 
 /***************************************************************
  *  Copyright notice
@@ -55,23 +58,21 @@ class CategoryDataProvider implements DataProviderInterface
 
     /**
      * CategoryDataProvider constructor.
-     * @param MapRepository|null $mapRepository
-     * @param CategoryRepository|null $categoryRepository
-     * @param TreeUtility|null $treeUtility
-     * @param null $mapping
+     * @param null|ObjectManagerInterface $objectManager
+     * @param null|array $mapping
      */
     public function __construct(
-        MapRepository $mapRepository = null,
-        CategoryRepository $categoryRepository = null,
-        TreeUtility $treeUtility = null,
-        $mapping = null
+        ObjectManagerInterface $objectManager = null,
+        array $mapping = null
     )
     {
-        /** @var ObjectManagerInterface objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->mapRepository = $mapRepository ?: $objectManager->get(MapRepository::class);
-        $this->categoryRepository = $categoryRepository ?: $objectManager->get(CategoryRepository::class);
-        $this->treeUtility = $treeUtility ?: $objectManager->get(TreeUtility::class);
+        if (null === $objectManager) {
+            /** @var ObjectManagerInterface objectManager */
+            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        }
+        $this->mapRepository = $objectManager->get(MapRepository::class);
+        $this->categoryRepository = $objectManager->get(CategoryRepository::class);
+        $this->treeUtility = $objectManager->get(TreeUtility::class);
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
@@ -85,20 +86,20 @@ class CategoryDataProvider implements DataProviderInterface
      */
     public function get(array $queryParameter): array
     {
-        if (!isset($queryParameter['mapId'])) {
+        if (!isset($queryParameter[SI::API_PARAMETER_MAP_ID])) {
             throw  new MissingRequestArgumentException(
                 'Request argument mapId missing', 1557505647
             );
         }
-        $mapId = (int)$queryParameter['mapId'];
-
+        $mapId = (int)$queryParameter[SI::API_PARAMETER_MAP_ID];
         $data = [];
 
+        /** @var Map $map */
         $map = $this->mapRepository->findByUid($mapId);
-        if ($map AND $map->getCategories()) {
+        if ($map && $map->getCategories()) {
             $categoryObjArray = $map->getCategories()->toArray();
             if ((bool)$categoryObjArray) {
-                $rootIds = array();
+                $rootIds = [];
                 /** @var Category $category */
                 foreach ($categoryObjArray as $category) {
                     $rootIds[] = $category->getUid();
