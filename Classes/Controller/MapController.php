@@ -61,6 +61,7 @@ class MapController extends AbstractController
         $mapId = $this->settings['map'];
 
         if ($map === NULL) {
+            /** @var object|Map $map */
             $map = $this->mapRepository->findByUid($mapId);
         }
         //should be merged with plugin settings

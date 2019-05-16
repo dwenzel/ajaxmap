@@ -41,43 +41,44 @@ class PlaceDataProvider implements DataProviderInterface
 {
     protected $mapping = [
         Category::class => [
-            'pid' => ['exclude' => 1],
-            'uid' => ['mapTo' => 'key'],
             'description' => ['exclude' => 1],
             'icon' => ['exclude' => 1],
-            'parent' => ['exclude' => 1]
+            'parent' => ['exclude' => 1],
+            'pid' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key']
         ],
         Region::class => [
             'pid' => ['exclude' => 1],
-            'uid' => ['mapTo' => 'key'],
             'regions' => [
                 'mapTo' => 'children',
                 'maxDepth' => 1
-            ]
+            ],
+            'uid' => ['mapTo' => 'key']
         ],
         Place::class => [
-            'pid' => ['exclude' => 1],
-            'uid' => ['mapTo' => 'key'],
-            'info' => ['exclude' => 1],
             'content' => ['exclude' => 1],
             'description' => [
                 'mapTo' => 'tooltip'
-            ]
+            ],
+            'info' => ['exclude' => 1],
+            'pid' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key'],
+
         ],
         PlaceGroup::class => [
-            'pid' => ['exclude' => 1],
-            'uid' => ['mapTo' => 'key'],
-            'title' => ['exclude' => 1],
-            'parent' => ['exclude' => 1],
+            'description' => ['exclude' => 1],
             'icon' => ['exclude' => 1],
-            'description' => ['exclude' => 1]
+            'parent' => ['exclude' => 1],
+            'pid' => ['exclude' => 1],
+            'title' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key']
         ],
         LocationType::class => [
-            'pid' => ['exclude' => 1],
-            'uid' => ['mapTo' => 'key'],
-            'title' => ['exclude' => 1],
+            'description' => ['exclude' => 1],
             'icon' => ['exclude' => 1],
-            'description' => ['exclude' => 1]
+            'pid' => ['exclude' => 1],
+            'title' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key'],
         ],
 
     ];

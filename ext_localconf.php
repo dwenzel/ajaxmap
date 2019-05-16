@@ -43,10 +43,6 @@ $boot = function () {
             'Map' => 'item',
         ]
     );
-
-
-// include eid dispatcher
-//    $GLOBALS['TYPO3_CONF_VARS']['FE']['eID_include']['ajaxMap'] = \DWenzel\Ajaxmap\Controller\AjaxController::class . '::processRequest';
 };
 
 $boot();

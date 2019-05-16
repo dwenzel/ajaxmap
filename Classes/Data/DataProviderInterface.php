@@ -3,8 +3,10 @@
 namespace DWenzel\Ajaxmap\Data;
 
 use DWenzel\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
+use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
 use DWenzel\Ajaxmap\Domain\Model\Region;
 
 /***************************************************************
@@ -53,6 +55,20 @@ interface DataProviderInterface
             'info' => ['exclude' => 1],
             'description' => [
                 'mapTo' => 'tooltip'
+            ]
+        ],
+        PlaceGroup::class => [
+            'pid' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key'],
+            'description' => [
+                'mapTo' => 'tooltip'
+            ]
+        ],
+        LocationType::class => [
+            'pid' => ['exclude' => 1],
+            'uid' => ['mapTo' => 'key'],
+            'icon' => [
+                'mapTo' => 'markerIcon'
             ]
         ]
     ];
