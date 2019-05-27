@@ -692,5 +692,16 @@ class AddressTest extends UnitTestCase
         );
 
     }
+
+    public function testGetPlaceReturnsCity()
+    {
+        $place = 'foo';
+        $this->subject->setCity($place);
+
+        $this->assertSame(
+            $place,
+            $this->subject->getPlace()
+        );
+    }
 }
 

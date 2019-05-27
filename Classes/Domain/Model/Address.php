@@ -20,9 +20,10 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use CPSIT\GeoLocationService\Domain\Model\GeoCodableInterface;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use FriendsOfTYPO3\TtAddress\Domain\Model\Address as BaseAddress;
-use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 
 /**
  * Class Address
@@ -30,7 +31,7 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
  * @package DWenzel\Ajaxmap\Domain\Model
  */
 class Address extends BaseAddress
-    implements SerializableInterface
+    implements SerializableInterface, GeoCodableInterface
 {
     use ToJsonTrait, ToArrayTrait;
 
@@ -48,5 +49,15 @@ class Address extends BaseAddress
         }
 
         return $coordinates;
+    }
+
+
+    /**
+     * Wrapper method
+     * required by GeoCodableInterface
+     */
+    public function getPlace()
+    {
+        return $this->getCity();
     }
 }
