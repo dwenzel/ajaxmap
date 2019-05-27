@@ -27,7 +27,6 @@ namespace DWenzel\Ajaxmap\Tests;
  ***************************************************************/
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use Symfony\Component\ExpressionLanguage\Tests\Node\Obj;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
 /**
@@ -603,7 +602,8 @@ class AddressTest extends UnitTestCase
      */
     public function getImageForStringReturnsInitiallValue()
     {
-        $this->assertNull(
+        $this->assertInstanceOf(
+            ObjectStorage::class,
             $this->fixture->getImage()
         );
     }
