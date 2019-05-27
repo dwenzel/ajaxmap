@@ -27,6 +27,8 @@ namespace DWenzel\Ajaxmap\Domain\Model;
 
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 
 /**
  *
@@ -44,7 +46,7 @@ class LocationType extends AbstractEntity
      * title
      *
      * @var string
-     * @validate NotEmpty
+     * @Extbase\Validate("NotEmpty")
      */
     protected $title;
 

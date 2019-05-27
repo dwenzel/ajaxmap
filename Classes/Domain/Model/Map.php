@@ -29,6 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  *
@@ -45,7 +46,7 @@ class Map extends AbstractEntity
 	 * title
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $title;
 
@@ -60,7 +61,7 @@ class Map extends AbstractEntity
 	 * width
 	 *
 	 * @var integer
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $width;
 
@@ -68,7 +69,7 @@ class Map extends AbstractEntity
 	 * height
 	 *
 	 * @var integer
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $height;
 
@@ -76,7 +77,7 @@ class Map extends AbstractEntity
 	 * Center of Map (Geo location: latitude, longitude - 10.999999,51.777777)
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $mapCenter;
 
@@ -84,7 +85,7 @@ class Map extends AbstractEntity
 	 * initialZoom
 	 *
 	 * @var integer
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $initialZoom;
 
@@ -92,7 +93,7 @@ class Map extends AbstractEntity
 	 * optional Style (json Array)
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $mapStyle;
 

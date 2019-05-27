@@ -27,8 +27,8 @@ namespace DWenzel\Ajaxmap\Tests;
  ***************************************************************/
 
 use Nimut\TestingFramework\TestCase\UnitTestCase;
-use Symfony\Component\ExpressionLanguage\Tests\Node\Obj;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 
 /**
  * Class AddressTest
@@ -40,16 +40,16 @@ class AddressTest extends UnitTestCase
     /**
      * @var \DWenzel\Ajaxmap\Domain\Model\Address
      */
-    protected $fixture;
+    protected $subject;
 
     public function setUp()
     {
-        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Address();
+        $this->subject = new \DWenzel\Ajaxmap\Domain\Model\Address();
     }
 
     public function tearDown()
     {
-        unset($this->fixture);
+        unset($this->subject);
     }
 
     /**
@@ -58,7 +58,7 @@ class AddressTest extends UnitTestCase
     public function getGenderForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getGender()
+            $this->subject->getGender()
         );
     }
 
@@ -67,9 +67,9 @@ class AddressTest extends UnitTestCase
      */
     public function setGenderForStringSetsGender()
     {
-        $this->fixture->setGender('aloha');
+        $this->subject->setGender('aloha');
         $this->assertSame(
-            $this->fixture->getGender(),
+            $this->subject->getGender(),
             'aloha'
         );
     }
@@ -80,7 +80,7 @@ class AddressTest extends UnitTestCase
     public function getNameForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getName()
+            $this->subject->getName()
         );
     }
 
@@ -89,9 +89,9 @@ class AddressTest extends UnitTestCase
      */
     public function setNameForStringSetsName()
     {
-        $this->fixture->setName('aloha');
+        $this->subject->setName('aloha');
         $this->assertSame(
-            $this->fixture->getName(),
+            $this->subject->getName(),
             'aloha'
         );
     }
@@ -102,7 +102,7 @@ class AddressTest extends UnitTestCase
     public function getFirstNameForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getFirstName()
+            $this->subject->getFirstName()
         );
     }
 
@@ -111,9 +111,9 @@ class AddressTest extends UnitTestCase
      */
     public function setFirstNameForStringSetsFirstName()
     {
-        $this->fixture->setFirstName('aloha');
+        $this->subject->setFirstName('aloha');
         $this->assertSame(
-            $this->fixture->getFirstName(),
+            $this->subject->getFirstName(),
             'aloha'
         );
     }
@@ -124,7 +124,7 @@ class AddressTest extends UnitTestCase
     public function getMiddleNameForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getMiddleName()
+            $this->subject->getMiddleName()
         );
     }
 
@@ -133,9 +133,9 @@ class AddressTest extends UnitTestCase
      */
     public function setMiddleNameForStringSetsMiddleName()
     {
-        $this->fixture->setMiddleName('aloha');
+        $this->subject->setMiddleName('aloha');
         $this->assertSame(
-            $this->fixture->getMiddleName(),
+            $this->subject->getMiddleName(),
             'aloha'
         );
     }
@@ -146,7 +146,7 @@ class AddressTest extends UnitTestCase
     public function getLastNameForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getLastName()
+            $this->subject->getLastName()
         );
     }
 
@@ -155,9 +155,9 @@ class AddressTest extends UnitTestCase
      */
     public function setLastNameForStringSetsLastName()
     {
-        $this->fixture->setLastName('aloha');
+        $this->subject->setLastName('aloha');
         $this->assertSame(
-            $this->fixture->getLastName(),
+            $this->subject->getLastName(),
             'aloha'
         );
     }
@@ -168,7 +168,7 @@ class AddressTest extends UnitTestCase
     public function getTitleForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getTitle()
+            $this->subject->getTitle()
         );
     }
 
@@ -177,9 +177,9 @@ class AddressTest extends UnitTestCase
      */
     public function setTitleForStringSetsTitle()
     {
-        $this->fixture->setTitle('aloha');
+        $this->subject->setTitle('aloha');
         $this->assertSame(
-            $this->fixture->getTitle(),
+            $this->subject->getTitle(),
             'aloha'
         );
     }
@@ -190,7 +190,7 @@ class AddressTest extends UnitTestCase
     public function getAddressForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getAddress()
+            $this->subject->getAddress()
         );
     }
 
@@ -199,9 +199,9 @@ class AddressTest extends UnitTestCase
      */
     public function setAddressForStringSetsAddress()
     {
-        $this->fixture->setAddress('aloha');
+        $this->subject->setAddress('aloha');
         $this->assertSame(
-            $this->fixture->getAddress(),
+            $this->subject->getAddress(),
             'aloha'
         );
     }
@@ -212,7 +212,7 @@ class AddressTest extends UnitTestCase
     public function getBuildingForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getBuilding()
+            $this->subject->getBuilding()
         );
     }
 
@@ -221,9 +221,9 @@ class AddressTest extends UnitTestCase
      */
     public function setBuildingForStringSetsBuilding()
     {
-        $this->fixture->setBuilding('aloha');
+        $this->subject->setBuilding('aloha');
         $this->assertSame(
-            $this->fixture->getBuilding(),
+            $this->subject->getBuilding(),
             'aloha'
         );
     }
@@ -234,7 +234,7 @@ class AddressTest extends UnitTestCase
     public function getRoomForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getRoom()
+            $this->subject->getRoom()
         );
     }
 
@@ -243,9 +243,9 @@ class AddressTest extends UnitTestCase
      */
     public function setRoomForStringSetsRoom()
     {
-        $this->fixture->setRoom('aloha');
+        $this->subject->setRoom('aloha');
         $this->assertSame(
-            $this->fixture->getRoom(),
+            $this->subject->getRoom(),
             'aloha'
         );
     }
@@ -256,7 +256,7 @@ class AddressTest extends UnitTestCase
     public function getPhoneForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getPhone()
+            $this->subject->getPhone()
         );
     }
 
@@ -265,9 +265,9 @@ class AddressTest extends UnitTestCase
      */
     public function setPhoneForStringSetsPhone()
     {
-        $this->fixture->setPhone('aloha');
+        $this->subject->setPhone('aloha');
         $this->assertSame(
-            $this->fixture->getPhone(),
+            $this->subject->getPhone(),
             'aloha'
         );
     }
@@ -278,7 +278,7 @@ class AddressTest extends UnitTestCase
     public function getFaxForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getFax()
+            $this->subject->getFax()
         );
     }
 
@@ -287,9 +287,9 @@ class AddressTest extends UnitTestCase
      */
     public function setFaxForStringSetsFax()
     {
-        $this->fixture->setFax('aloha');
+        $this->subject->setFax('aloha');
         $this->assertSame(
-            $this->fixture->getFax(),
+            $this->subject->getFax(),
             'aloha'
         );
     }
@@ -300,7 +300,7 @@ class AddressTest extends UnitTestCase
     public function getMobileForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getMobile()
+            $this->subject->getMobile()
         );
     }
 
@@ -309,9 +309,9 @@ class AddressTest extends UnitTestCase
      */
     public function setMobileForStringSetsMobile()
     {
-        $this->fixture->setMobile('aloha');
+        $this->subject->setMobile('aloha');
         $this->assertSame(
-            $this->fixture->getMobile(),
+            $this->subject->getMobile(),
             'aloha'
         );
     }
@@ -322,7 +322,7 @@ class AddressTest extends UnitTestCase
     public function getWwwForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getWww()
+            $this->subject->getWww()
         );
     }
 
@@ -331,9 +331,9 @@ class AddressTest extends UnitTestCase
      */
     public function setWwwForStringSetsWww()
     {
-        $this->fixture->setWww('aloha');
+        $this->subject->setWww('aloha');
         $this->assertSame(
-            $this->fixture->getWww(),
+            $this->subject->getWww(),
             'aloha'
         );
     }
@@ -344,7 +344,7 @@ class AddressTest extends UnitTestCase
     public function getSkypeForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getSkype()
+            $this->subject->getSkype()
         );
     }
 
@@ -353,9 +353,9 @@ class AddressTest extends UnitTestCase
      */
     public function setSkypeForStringSetsSkype()
     {
-        $this->fixture->setSkype('aloha');
+        $this->subject->setSkype('aloha');
         $this->assertSame(
-            $this->fixture->getSkype(),
+            $this->subject->getSkype(),
             'aloha'
         );
     }
@@ -366,7 +366,7 @@ class AddressTest extends UnitTestCase
     public function getTwitterForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getTwitter()
+            $this->subject->getTwitter()
         );
     }
 
@@ -375,9 +375,9 @@ class AddressTest extends UnitTestCase
      */
     public function setTwitterForStringSetsTwitter()
     {
-        $this->fixture->setTwitter('@aloha');
+        $this->subject->setTwitter('@aloha');
         $this->assertSame(
-            $this->fixture->getTwitter(),
+            $this->subject->getTwitter(),
             '@aloha'
         );
     }
@@ -388,7 +388,7 @@ class AddressTest extends UnitTestCase
     public function setTwitterThrowsInvalidArgumentExceptionForString()
     {
         $this->expectException('InvalidArgumentException');
-        $this->fixture->setTwitter('ping');
+        $this->subject->setTwitter('ping');
     }
 
     /**
@@ -397,7 +397,7 @@ class AddressTest extends UnitTestCase
     public function getFacebookForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getFacebook()
+            $this->subject->getFacebook()
         );
     }
 
@@ -406,9 +406,9 @@ class AddressTest extends UnitTestCase
      */
     public function setFacebookForStringSetsFacebook()
     {
-        $this->fixture->setFacebook('/aloha');
+        $this->subject->setFacebook('/aloha');
         $this->assertSame(
-            $this->fixture->getFacebook(),
+            $this->subject->getFacebook(),
             '/aloha'
         );
     }
@@ -419,7 +419,7 @@ class AddressTest extends UnitTestCase
     public function setFacebookThrowsInvalidArgumentExceptionForString()
     {
         $this->expectException('InvalidArgumentException');
-        $this->fixture->setFacebook('ping');
+        $this->subject->setFacebook('ping');
     }
 
     /**
@@ -428,7 +428,7 @@ class AddressTest extends UnitTestCase
     public function getLinkedInForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getLinkedIn()
+            $this->subject->getLinkedIn()
         );
     }
 
@@ -437,9 +437,9 @@ class AddressTest extends UnitTestCase
      */
     public function setLinkedInForStringSetsLinkedIn()
     {
-        $this->fixture->setLinkedIn('aloha');
+        $this->subject->setLinkedIn('aloha');
         $this->assertSame(
-            $this->fixture->getLinkedIn(),
+            $this->subject->getLinkedIn(),
             'aloha'
         );
     }
@@ -450,7 +450,7 @@ class AddressTest extends UnitTestCase
     public function getEmailForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getEmail()
+            $this->subject->getEmail()
         );
     }
 
@@ -459,9 +459,9 @@ class AddressTest extends UnitTestCase
      */
     public function setEmailForStringSetsEmail()
     {
-        $this->fixture->setEmail('aloha');
+        $this->subject->setEmail('aloha');
         $this->assertSame(
-            $this->fixture->getEmail(),
+            $this->subject->getEmail(),
             'aloha'
         );
     }
@@ -472,7 +472,7 @@ class AddressTest extends UnitTestCase
     public function getCompanyForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getCompany()
+            $this->subject->getCompany()
         );
     }
 
@@ -481,9 +481,9 @@ class AddressTest extends UnitTestCase
      */
     public function setCompanyForStringSetsCompany()
     {
-        $this->fixture->setCompany('aloha');
+        $this->subject->setCompany('aloha');
         $this->assertSame(
-            $this->fixture->getCompany(),
+            $this->subject->getCompany(),
             'aloha'
         );
     }
@@ -494,7 +494,7 @@ class AddressTest extends UnitTestCase
     public function getPositionForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getPosition()
+            $this->subject->getPosition()
         );
     }
 
@@ -503,9 +503,9 @@ class AddressTest extends UnitTestCase
      */
     public function setPositionForStringSetsPosition()
     {
-        $this->fixture->setPosition('aloha');
+        $this->subject->setPosition('aloha');
         $this->assertSame(
-            $this->fixture->getPosition(),
+            $this->subject->getPosition(),
             'aloha'
         );
     }
@@ -516,7 +516,7 @@ class AddressTest extends UnitTestCase
     public function getCityForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getCity()
+            $this->subject->getCity()
         );
     }
 
@@ -525,9 +525,9 @@ class AddressTest extends UnitTestCase
      */
     public function setCityForStringSetsCity()
     {
-        $this->fixture->setCity('aloha');
+        $this->subject->setCity('aloha');
         $this->assertSame(
-            $this->fixture->getCity(),
+            $this->subject->getCity(),
             'aloha'
         );
     }
@@ -538,7 +538,7 @@ class AddressTest extends UnitTestCase
     public function getZipForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getZip()
+            $this->subject->getZip()
         );
     }
 
@@ -547,9 +547,9 @@ class AddressTest extends UnitTestCase
      */
     public function setZipForStringSetsZip()
     {
-        $this->fixture->setZip('aloha');
+        $this->subject->setZip('aloha');
         $this->assertSame(
-            $this->fixture->getZip(),
+            $this->subject->getZip(),
             'aloha'
         );
     }
@@ -560,7 +560,7 @@ class AddressTest extends UnitTestCase
     public function getRegionForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getRegion()
+            $this->subject->getRegion()
         );
     }
 
@@ -569,9 +569,9 @@ class AddressTest extends UnitTestCase
      */
     public function setRegionForStringSetsRegion()
     {
-        $this->fixture->setRegion('aloha');
+        $this->subject->setRegion('aloha');
         $this->assertSame(
-            $this->fixture->getRegion(),
+            $this->subject->getRegion(),
             'aloha'
         );
     }
@@ -582,7 +582,7 @@ class AddressTest extends UnitTestCase
     public function getCountryForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getCountry()
+            $this->subject->getCountry()
         );
     }
 
@@ -591,9 +591,9 @@ class AddressTest extends UnitTestCase
      */
     public function setCountryForStringSetsCountry()
     {
-        $this->fixture->setCountry('aloha');
+        $this->subject->setCountry('aloha');
         $this->assertSame(
-            $this->fixture->getCountry(),
+            $this->subject->getCountry(),
             'aloha'
         );
     }
@@ -603,8 +603,9 @@ class AddressTest extends UnitTestCase
      */
     public function getImageForStringReturnsInitiallValue()
     {
-        $this->assertNull(
-            $this->fixture->getImage()
+        $this->assertInstanceOf(
+            ObjectStorage::class,
+            $this->subject->getImage()
         );
     }
 
@@ -615,10 +616,10 @@ class AddressTest extends UnitTestCase
     {
         $image = new ObjectStorage();
 
-        $this->fixture->setImage($image);
+        $this->subject->setImage($image);
         $this->assertSame(
             $image,
-            $this->fixture->getImage()
+            $this->subject->getImage()
         );
     }
 
@@ -628,7 +629,7 @@ class AddressTest extends UnitTestCase
     public function getDescriptionForStringReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getDescription()
+            $this->subject->getDescription()
         );
     }
 
@@ -637,9 +638,9 @@ class AddressTest extends UnitTestCase
      */
     public function setDescriptionForStringSetsDescription()
     {
-        $this->fixture->setDescription('aloha');
+        $this->subject->setDescription('aloha');
         $this->assertSame(
-            $this->fixture->getDescription(),
+            $this->subject->getDescription(),
             'aloha'
         );
     }
@@ -650,7 +651,7 @@ class AddressTest extends UnitTestCase
     public function getBirthdayForDateTimeReturnsInitiallyNull()
     {
         $this->assertNull(
-            $this->fixture->getBirthday()
+            $this->subject->getBirthday()
         );
     }
 
@@ -660,10 +661,46 @@ class AddressTest extends UnitTestCase
     public function setBirthdayForDateTimeSetsBirthday()
     {
         $dateTime = new \DateTime('now');
-        $this->fixture->setBirthday($dateTime);
+        $this->subject->setBirthday($dateTime);
         $this->assertEquals(
-            $this->fixture->getBirthday(),
+            $this->subject->getBirthday(),
             $dateTime
+        );
+    }
+
+    public function testGetGeoCoordinatesReturnsInitialValue()
+    {
+        $this->assertSame(
+            '',
+            $this->subject->getGeoCoordinates()
+        );
+    }
+
+    public function testGetGeoCoordinatesReturnsConcatenatedValue()
+    {
+        $latitude = '1.5';
+        $longitude =  '2.4';
+
+        $this->subject->setLatitude($latitude);
+        $this->subject->setLongitude($longitude);
+
+        $expectedCoordinates = $latitude . SI::SEPARATOR_GEO_COORDINATES . $longitude;
+
+        $this->assertSame(
+            $expectedCoordinates,
+            $this->subject->getGeoCoordinates()
+        );
+
+    }
+
+    public function testGetPlaceReturnsCity()
+    {
+        $place = 'foo';
+        $this->subject->setCity($place);
+
+        $this->assertSame(
+            $place,
+            $this->subject->getPlace()
         );
     }
 }

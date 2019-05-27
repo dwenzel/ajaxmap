@@ -27,6 +27,7 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  ***************************************************************/
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Place Group
@@ -42,7 +43,7 @@ class PlaceGroup extends AbstractEntity
 	 * Title
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $title;
 
