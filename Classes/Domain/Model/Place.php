@@ -28,6 +28,7 @@ use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  *
@@ -43,7 +44,7 @@ class Place extends AbstractEntity
 	 * Title
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $title;
 
