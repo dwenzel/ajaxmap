@@ -167,4 +167,6 @@ interface SettingsInterface
         ]
     ];
 
+    const SEPARATOR_GEO_COORDINATES = ',';
+
 }

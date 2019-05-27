@@ -29,7 +29,7 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 /**
  *
  *
@@ -341,6 +341,13 @@ class Place extends AbstractEntity
 	 * @return string geoCoordinates
 	 */
 	public function getGeoCoordinates() {
+	    if (
+	        empty($this->geoCoordinates) &&
+            $this->address instanceof Address &&
+            !empty($this->address->getGeoCoordinates())
+        ) {
+	        $this->geoCoordinates = $this->address->getGeoCoordinates();
+	    }
 		return $this->geoCoordinates;
 	}
 

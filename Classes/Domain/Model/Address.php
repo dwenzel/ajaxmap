@@ -22,6 +22,7 @@ namespace DWenzel\Ajaxmap\Domain\Model;
 
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use FriendsOfTYPO3\TtAddress\Domain\Model\Address as BaseAddress;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 
 /**
  * Class Address
@@ -32,4 +33,20 @@ class Address extends BaseAddress
     implements SerializableInterface
 {
     use ToJsonTrait, ToArrayTrait;
+
+    /**
+     * Get Geo Coordinates
+     *
+     * @return string
+     */
+    public function getGeoCoordinates()
+    {
+        $coordinates = '';
+
+        if (!empty($this->getLatitude()) && !empty($this->getLongitude())) {
+            $coordinates = $this->getLatitude() . SI::SEPARATOR_GEO_COORDINATES . $this->getLongitude();
+        }
+
+        return $coordinates;
+    }
 }

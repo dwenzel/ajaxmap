@@ -37,6 +37,13 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
+
+use DWenzel\Ajaxmap\Domain\Model\Address;
+use DWenzel\Ajaxmap\Domain\Model\Content;
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
+use DWenzel\Ajaxmap\Domain\Model\Place;
+use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
+use DWenzel\Ajaxmap\Domain\Model\Region;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
@@ -49,12 +56,12 @@ use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
  */
 class PlaceTest extends UnitTestCase {
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Place
+	 * @var Place
 	 */
-	protected $fixture;
+	protected $subject;
 
 	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Place();
+		$this->subject = new Place();
 	}
 
 	/**
@@ -62,7 +69,7 @@ class PlaceTest extends UnitTestCase {
 	 */
 	public function getTitleReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getTitle()
+				$this->subject->getTitle()
 		);
 	}
 
@@ -70,11 +77,11 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setTitleForStringSetsTitle() {
-		$this->fixture->setTitle('Conceived at T3CON10');
+		$this->subject->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getTitle()
+			$this->subject->getTitle()
 		);
 	}
 
@@ -83,7 +90,7 @@ class PlaceTest extends UnitTestCase {
 	 */
 	public function getGeoCoordinatesReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getGeoCoordinates()
+				$this->subject->getGeoCoordinates()
 		);
 	}
 
@@ -91,11 +98,11 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setGeoCoordinatesForStringSetsGeoCoordinates() {
-		$this->fixture->setGeoCoordinates('Conceived at T3CON10');
+		$this->subject->setGeoCoordinates('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getGeoCoordinates()
+			$this->subject->getGeoCoordinates()
 		);
 	}
 
@@ -104,7 +111,7 @@ class PlaceTest extends UnitTestCase {
 	 */
 	public function getDescriptionReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getDescription()
+				$this->subject->getDescription()
 		);
 	}
 
@@ -112,11 +119,11 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setDescriptionForStringSetsDescription() {
-		$this->fixture->setDescription('Conceived at T3CON10');
+		$this->subject->setDescription('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getDescription()
+			$this->subject->getDescription()
 		);
 	}
 
@@ -125,7 +132,7 @@ class PlaceTest extends UnitTestCase {
 	 */
 	public function getInfoReturnsInitialValueForString() {
 		$this->assertNull(
-				$this->fixture->getInfo()
+				$this->subject->getInfo()
 		);
 	}
 
@@ -133,11 +140,11 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setInfoForStringSetsInfo() {
-		$this->fixture->setInfo('Conceived at T3CON10');
+		$this->subject->setInfo('Conceived at T3CON10');
 
 		$this->assertSame(
 			'Conceived at T3CON10',
-			$this->fixture->getInfo()
+			$this->subject->getInfo()
 		);
 	}
 
@@ -145,10 +152,10 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getPlaceGroupsReturnsInitialValueForObjectStorageContainingPlaceGroups() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getPlaceGroups()
+			$this->subject->getPlaceGroups()
 		);
 	}
 
@@ -156,14 +163,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setPlaceGroupsForObjectStorageContainingPlaceGroupsSetsPlaceGroups() {
-		$category = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$category = new PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
-		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
+		$this->subject->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
 
 		$this->assertSame(
 			$objectStorageHoldingExactlyOnePlaceGroup,
-			$this->fixture->getPlaceGroups()
+			$this->subject->getPlaceGroups()
 		);
 	}
 
@@ -171,14 +178,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
-		$category = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$category = new PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($category);
-		$this->fixture->addPlaceGroup($category);
+		$this->subject->addPlaceGroup($category);
 
 		$this->assertEquals(
 			$objectStorageHoldingExactlyOnePlaceGroup,
-			$this->fixture->getPlaceGroups()
+			$this->subject->getPlaceGroups()
 		);
 	}
 
@@ -186,16 +193,16 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removePlaceGroupFromObjectStorageHoldingPlaceGroup() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$placeGroup = new PlaceGroup();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($placeGroup);
 		$localObjectStorage->detach($placeGroup);
-		$this->fixture->addPlaceGroup($placeGroup);
-		$this->fixture->removePlaceGroup($placeGroup);
+		$this->subject->addPlaceGroup($placeGroup);
+		$this->subject->removePlaceGroup($placeGroup);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getPlaceGroups()
+			$this->subject->getPlaceGroups()
 		);
 	}
 
@@ -205,7 +212,7 @@ class PlaceTest extends UnitTestCase {
 	public function getLocationTypeReturnsInitialValueForLocationLocationType() {
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getLocationType()
+			$this->subject->getLocationType()
 		);
 	}
 
@@ -213,12 +220,12 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setLocationTypeForLocationLocationTypeSetsLocationType() {
-		$dummyObject = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
-		$this->fixture->setLocationType($dummyObject);
+		$dummyObject = new LocationType();
+		$this->subject->setLocationType($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getLocationType()
+			$this->subject->getLocationType()
 		);
 	}
 
@@ -226,10 +233,10 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getRegions()
+			$this->subject->getRegions()
 		);
 	}
 
@@ -237,14 +244,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setRegionsForObjectStorageContainingRegionSetsRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegions = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
-		$this->fixture->setRegions($objectStorageHoldingExactlyOneRegions);
+		$this->subject->setRegions($objectStorageHoldingExactlyOneRegions);
 
 		$this->assertSame(
 			$objectStorageHoldingExactlyOneRegions,
-			$this->fixture->getRegions()
+			$this->subject->getRegions()
 		);
 	}
 
@@ -252,14 +259,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addRegionToObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegion = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegion->attach($region);
-		$this->fixture->addRegion($region);
+		$this->subject->addRegion($region);
 
 		$this->assertEquals(
 			$objectStorageHoldingExactlyOneRegion,
-			$this->fixture->getRegions()
+			$this->subject->getRegions()
 		);
 	}
 
@@ -267,16 +274,16 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeRegionFromObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($region);
 		$localObjectStorage->detach($region);
-		$this->fixture->addRegion($region);
-		$this->fixture->removeRegion($region);
+		$this->subject->addRegion($region);
+		$this->subject->removeRegion($region);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getRegions()
+			$this->subject->getRegions()
 		);
 	}
 
@@ -284,10 +291,10 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getContentReturnsInitialValueForObjectStorageContainingContent() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
-			$this->fixture->getContent()
+			$this->subject->getContent()
 		);
 	}
 
@@ -295,14 +302,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setContentForObjectStorageContainingContentSetsContent() {
-		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
-		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$content = new Content();
+		$objectStorageHoldingExactlyOneContent = new ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
-		$this->fixture->setContent($objectStorageHoldingExactlyOneContent);
+		$this->subject->setContent($objectStorageHoldingExactlyOneContent);
 
 		$this->assertSame(
 			$objectStorageHoldingExactlyOneContent,
-			$this->fixture->getContent()
+			$this->subject->getContent()
 		);
 	}
 
@@ -310,14 +317,14 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addContentToObjectStorageHoldingContent() {
-		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
-		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$content = new Content();
+		$objectStorageHoldingExactlyOneContent = new ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
-		$this->fixture->addContent($content);
+		$this->subject->addContent($content);
 
 		$this->assertEquals(
 			$objectStorageHoldingExactlyOneContent,
-			$this->fixture->getContent()
+			$this->subject->getContent()
 		);
 	}
 
@@ -325,16 +332,16 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeContentFromObjectStorageHoldingContent() {
-		$content = new \DWenzel\Ajaxmap\Domain\Model\Content();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$content = new Content();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($content);
 		$localObjectStorage->detach($content);
-		$this->fixture->addContent($content);
-		$this->fixture->removeContent($content);
+		$this->subject->addContent($content);
+		$this->subject->removeContent($content);
 
 		$this->assertEquals(
 			$localObjectStorage,
-			$this->fixture->getContent()
+			$this->subject->getContent()
 		);
 	}
 
@@ -344,7 +351,7 @@ class PlaceTest extends UnitTestCase {
 	public function getAddressReturnsInitialValueForAddress() {
 		$this->assertEquals(
 			NULL,
-			$this->fixture->getAddress()
+			$this->subject->getAddress()
 		);
 	}
 
@@ -352,12 +359,12 @@ class PlaceTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setAddressForAddressSetsAddress() {
-		$dummyObject = new \DWenzel\Ajaxmap\Domain\Model\Address();
-		$this->fixture->setAddress($dummyObject);
+		$dummyObject = new Address();
+		$this->subject->setAddress($dummyObject);
 
 		$this->assertSame(
 			$dummyObject,
-			$this->fixture->getAddress()
+			$this->subject->getAddress()
 		);
 	}
 
@@ -381,7 +388,7 @@ class PlaceTest extends UnitTestCase {
 			'uid' => null,
 		);
 		$this->assertSame(
-				$this->fixture->toArray(),
+				$this->subject->toArray(),
 				$result
 		);
 	}
@@ -391,10 +398,10 @@ class PlaceTest extends UnitTestCase {
 	 * @covers ::__construct
 	 */
 	public function constructorInitializesCategoriesWithStorageObject() {
-		$this->fixture->__construct();
+		$this->subject->__construct();
 		$this->assertInstanceOf(
 			ObjectStorage::class,
-			$this->fixture->getCategories()
+			$this->subject->getCategories()
 		);
 	}
 
@@ -404,8 +411,32 @@ class PlaceTest extends UnitTestCase {
 	public function objectImplementsCategorizableInterface() {
 		$this->assertInstanceOf(
 			CategorizableInterface::class,
-			$this->fixture
+			$this->subject
 		);
 	}
+
+	public function testGetGeoCoordinatesReturnsCoordinatesFromAddressIfEmpty()
+    {
+        $latitude = '1.5';
+        $longitude =  '2.4';
+        $address = $this->getMockBuilder(Address::class)
+            ->setMethods(['getGeoCoordinates'])
+            ->getMock();
+
+        $address->setLatitude($latitude);
+        $address->setLongitude($longitude);
+        $this->subject->setAddress($address);
+
+        $expectedCoordinates = $latitude . ',' . $longitude;
+
+        $address->expects($this->atLeast(1))
+            ->method('getGeoCoordinates')
+            ->willReturn($expectedCoordinates);
+
+        $this->assertSame(
+            $expectedCoordinates,
+            $this->subject->getGeoCoordinates()
+        );
+    }
 }
 
