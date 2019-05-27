@@ -1,4 +1,5 @@
 <?php
+
 namespace DWenzel\Ajaxmap\Utility;
 
 /***************************************************************
@@ -27,102 +28,107 @@ use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
  *
  * @package DWenzel\Ajaxmap\Utility
  */
-class TreeUtility {
-	/**
-	 * Builds a tree of objects.
-	 *
-	 * @param QueryResultInterface $objects
-	 * @return array
-	 */
-	public function buildObjectTree(QueryResultInterface $objects) {
-		$tree = array();
-		$objects = $objects->toArray();
+class TreeUtility
+{
+    /**
+     * Builds a tree of objects.
+     *
+     * @param QueryResultInterface $objects
+     * @return array
+     */
+    public function buildObjectTree(QueryResultInterface $objects)
+    {
+        $tree = array();
+        $objects = $objects->toArray();
 
-		$flatObjects = array();
-		/** @var TreeItemInterface $object */
-		foreach ($objects as $object) {
-			$flatObjects[$object->getUid()] = array(
-				'item' => $object,
-				'parent' => ($object->getParent()) ? $object->getParent()->getUid() : NULL
-			);
-		}
-		// If leaves are selected without its parents selected, those are shown as parent
-		foreach ($flatObjects as $id => &$flatObject) {
-			if (!isset($flatObjects[$flatObject['parent']])) {
-				$flatObject['parent'] = NULL;
-			}
-		}
-		foreach ($flatObjects as $id => &$node) {
-			if ($node['parent'] === NULL) {
-				$tree[$id] = &$node;
-			} else {
-				$flatObjects[$node['parent']]['children'][$id] = &$node;
-			}
-		}
+        $flatObjects = array();
+        /** @var TreeItemInterface $object */
+        foreach ($objects as $object) {
+            $flatObjects[$object->getUid()] = array(
+                'item' => $object,
+                'parent' => ($object->getParent()) ? $object->getParent()->getUid() : NULL
+            );
+        }
+        // If leaves are selected without its parents selected, those are shown as parent
+        foreach ($flatObjects as $id => &$flatObject) {
+            if (!isset($flatObjects[$flatObject['parent']])) {
+                $flatObject['parent'] = NULL;
+            }
+        }
+        foreach ($flatObjects as $id => &$node) {
+            if ($node['parent'] === NULL) {
+                $tree[$id] = &$node;
+            } else {
+                $flatObjects[$node['parent']]['children'][$id] = &$node;
+            }
+        }
 
-		return $tree;
-	}
+        return $tree;
+    }
 
-	/**
-	 * @param array $objectTree
-	 * @return mixed
-	 */
-	public function convertObjectTreeToArray($objectTree, $keysToRemove = NULL, $mapping = NULL) {
-		$treeArray = array();
-		foreach ($objectTree as $objectTreeItem) {
-			if ($treeArrayItem = $this->convertObjectBranchToArray($objectTreeItem, $keysToRemove, $mapping)) {
-				$treeArray[] = $treeArrayItem;
-			}
-		}
+    /**
+     * @param array $objectTree
+     * @return mixed
+     */
+    public function convertObjectTreeToArray($objectTree, $keysToRemove = NULL, $mapping = NULL)
+    {
+        $treeArray = array();
+        foreach ($objectTree as $objectTreeItem) {
+            if ($treeArrayItem = $this->convertObjectBranchToArray($objectTreeItem, $keysToRemove, $mapping)) {
+                $treeArray[] = $treeArrayItem;
+            }
+        }
 
-		return $treeArray;
-	}
+        return $treeArray;
+    }
 
-	/**
-	 * @param array $objectTreeItem
-	 * @return mixed
-	 */
-	protected function convertObjectBranchToArray($objectTreeItem, $keysToRemove = NULL, $mapping = NULL) {
-		if (isset($objectTreeItem['item'])
-			AND $objectTreeItem['item'] instanceof SerializableInterface
-		) {
-			$treeArrayItem = $this->convertObjectLeafToArray($objectTreeItem, $keysToRemove, $mapping);
-			if (isset($objectTreeItem['children'])
-				AND is_array($objectTreeItem['children'])
-			) {
-				$children = array();
-				foreach ($objectTreeItem['children'] as $child) {
-					$mappedChild = $this->convertObjectLeafToArray($child, $keysToRemove, $mapping);
-					$children[] = $mappedChild;
-				}
-				$treeArrayItem['children'] = $children;
-			}
+    /**
+     * @param array $objectTreeItem
+     * @return mixed
+     */
+    public function convertObjectBranchToArray($objectTreeItem, $keysToRemove = NULL, $mapping = NULL)
+    {
+        if (isset($objectTreeItem['item'])
+            AND $objectTreeItem['item'] instanceof SerializableInterface
+        ) {
+            $treeArrayItem = $this->convertObjectLeafToArray($objectTreeItem, $keysToRemove, $mapping);
+            if (isset($objectTreeItem['children'])
+                AND is_array($objectTreeItem['children'])
+            ) {
+                $children = array();
+                foreach ($objectTreeItem['children'] as $child) {
+                    $mappedChild = $this->convertObjectBranchToArray($child, $keysToRemove, $mapping);
+                    $children[] = $mappedChild;
+                }
+                $treeArrayItem['children'] = $children;
+            }
 
-			return $treeArrayItem;
-		}
+            return $treeArrayItem;
+        }
 
-		return false;
-	}
+        return false;
+    }
 
-	/**
-	 * @param array $objectLeaf
-	 * @param string $keysToRemove
-	 * @return mixed
-	 */
-	protected function convertObjectLeafToArray($objectLeaf, $keysToRemove = NULL, $mapping = NULL) {
-		$arrayItem = array();
-		if (isset($objectLeaf['item']) AND
-			$objectLeaf['item'] instanceof SerializableInterface
-		) {
-			$arrayItem = $objectLeaf['item']->toArray(10, $mapping);
-			if ($keysToRemove) {
-				$keys = explode(',', $keysToRemove);
-				foreach ($keys as $key) {
-					unset($arrayItem[$key]);
-				}
-			}
-		}
+    /**
+     * @param array $objectLeaf
+     * @param string $keysToRemove
+     * @return mixed
+     */
+    protected function convertObjectLeafToArray($objectLeaf, $keysToRemove = NULL, $mapping = NULL)
+    {
+        $arrayItem = array();
+        if (isset($objectLeaf['item']) AND
+            $objectLeaf['item'] instanceof SerializableInterface
+        ) {
+            $arrayItem = $objectLeaf['item']->toArray(10, $mapping);
+            if ($keysToRemove) {
+                $keys = explode(',', $keysToRemove);
+                foreach ($keys as $key) {
+                    unset($arrayItem[$key]);
+                }
+            }
+        }
 
-		return $arrayItem;
-	}
+        return $arrayItem;
+    }
 }

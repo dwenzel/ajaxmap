@@ -20,6 +20,7 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
@@ -67,7 +68,6 @@ class MapController extends AbstractController
         //should be merged with plugin settings
         $this->mapSettings['id'] = $mapId;
         $this->mapSettings['pageId'] = $GLOBALS['TSFE']->id;
-
         $this->view->assignMultiple(
             array(
                 'map' => $map,

@@ -16,9 +16,12 @@ namespace DWenzel\Ajaxmap\Service;
  */
 
 use Doctrine\DBAL\Connection;
+use TYPO3\CMS\Core\Cache\CacheManager;
+use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Database\ConnectionPool;
 use TYPO3\CMS\Core\Database\Query\QueryBuilder;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 
 /**
  * Class ChildrenService
@@ -34,6 +37,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  */
 class ChildrenService
 {
+    /** @var FrontendInterface */
+    protected $cache;
+
+    /**
+     * ChildrenService constructor.
+     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     */
+    public function __construct()
+    {
+        $this->cache = GeneralUtility::makeInstance(CacheManager::class)
+            ->getCache(SI::CACHE_CHILDREN);
+    }
+
     /**
      * Get children by calling recursive function
      *
@@ -44,13 +60,19 @@ class ChildrenService
      * @param boolean $removeGivenIdListFromResult remove the given id list from result
      * @return string comma separated list of category ids
      */
-    public static function getChildren($tableName, $idList, $counter = 0, $additionalWhere = '', $removeGivenIdListFromResult = false)
+    public function getChildren($tableName, $idList, $counter = 0, $additionalWhere = '', $removeGivenIdListFromResult = false): string
     {
-        // @todo implement caching (see tx_news)
-        $entry = self::getChildrenRecursive($tableName, $idList, $counter, $additionalWhere);
-        if ($removeGivenIdListFromResult) {
-            $entry = self::removeValuesFromString($entry, $idList);
+        $cacheIdentifier = sha1($tableName . $idList . $additionalWhere . (int)$removeGivenIdListFromResult);
+
+        $entry = $this->cache->get($cacheIdentifier);
+        if (!$entry ) {
+            $entry = $this->getChildrenRecursive($tableName, $idList, $counter, $additionalWhere);
+            if ($removeGivenIdListFromResult) {
+                $entry = $this->removeValuesFromString($entry, $idList);
+            }
+            $this->cache->set($cacheIdentifier, $entry);
         }
+
         return $entry;
     }
 
@@ -61,7 +83,7 @@ class ChildrenService
      * @param $toBeRemoved string comma separated list
      * @return string
      */
-    public static function removeValuesFromString($result, $toBeRemoved)
+    public function removeValuesFromString($result, $toBeRemoved): string
     {
         $resultAsArray = GeneralUtility::trimExplode(',', $result, true);
         $idListAsArray = GeneralUtility::trimExplode(',', $toBeRemoved, true);
@@ -78,7 +100,7 @@ class ChildrenService
      * @param string $additionalWhere additional where clause
      * @return string comma separated list of category ids
      */
-    private static function getChildrenRecursive($tableName, $idList, $counter = 0, $additionalWhere = '')
+    private function getChildrenRecursive($tableName, $idList, $counter = 0, $additionalWhere = ''): string
     {
         /** @var QueryBuilder $queryBuilder */
         $result = [];
@@ -106,7 +128,7 @@ class ChildrenService
                 $GLOBALS['TT']->setTSlogMessage('EXT:ajaxmap: one or more recursive objects where found');
                 return implode(',', $result);
             }
-            $children = self::getChildrenRecursive($tableName, $row['uid'], $counter, $additionalWhere);
+            $children = $this->getChildrenRecursive($tableName, $row['uid'], $counter, $additionalWhere);
             $result[] = $row['uid'] . ($children ? ',' . $children : '');
         }
         $result = implode(',', $result);

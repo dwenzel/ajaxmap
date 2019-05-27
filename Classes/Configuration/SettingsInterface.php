@@ -167,4 +167,9 @@ interface SettingsInterface
         ]
     ];
 
+    /**
+     * Cache identifiers
+     */
+    const CACHE_CHILDREN = 'cache_ajaxmap_children';
+
 }

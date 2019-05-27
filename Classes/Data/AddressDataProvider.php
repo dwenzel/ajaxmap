@@ -37,14 +37,18 @@ class AddressDataProvider implements DataProviderInterface
      */
     protected $placeRepository;
 
+    /**
+     * AddressDataProvider constructor.
+     * @param ObjectManagerInterface|null $objectManager
+     */
     public function __construct(
         ObjectManagerInterface $objectManager = null
     )
     {
         if(null === $objectManager) {
+            /** @var ObjectManagerInterface $objectManager */
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
         }
-        /** @var ObjectManagerInterface objectManager */
         $this->placeRepository = $objectManager->get(PlaceRepository::class);
     }
 
