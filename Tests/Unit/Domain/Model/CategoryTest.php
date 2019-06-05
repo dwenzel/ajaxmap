@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Tests;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -39,6 +39,7 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * @subpackage Ajax Map
  *
  * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Category
  */
 class CategoryTest extends UnitTestCase {
 	/**
@@ -52,69 +53,7 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getTitle()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setTitleForStringSetsTitle() { 
-		$this->fixture->setTitle('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getTitle()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getDescriptionReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getDescription()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setDescriptionForStringSetsDescription() { 
-		$this->fixture->setDescription('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getDescription()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getIconReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getIcon()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setIconForStringSetsIcon() { 
-		$this->fixture->setIcon('Conceived at T3CON10');
-
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getIcon()
-		);
-	}
-	
-	/**
-	 * @test
+	 * @covers ::getParent
 	 */
 	public function getParentReturnsInitiallyNull() {
 		$this->assertNull(
@@ -124,13 +63,14 @@ class CategoryTest extends UnitTestCase {
 
 	/**
 	 * @test
+	 * @covers ::setParent
 	 */
-	public function setParentForPlaceGroupSetsParent() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$this->fixture->setParent($placeGroup);
+	public function setParentForObjectSetsParent() {
+		$parentCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture->setParent($parentCategory);
 
 		$this->assertSame(
-			$placeGroup,
+			$parentCategory,
 			$this->fixture->getParent()
 		);
 	}
@@ -158,11 +98,11 @@ class CategoryTest extends UnitTestCase {
 	 */
 	public function toArrayReturnsInitialValue() {
 		$result = array(
-			'description' => null,
-			'icon' => null,
+			'description' => '',
+			'icon' => '',
 			'parent' => null,
 			'pid' => null,
-			'title' => null,
+			'title' => '',
 			'uid' => null
 		);
 		$this->assertSame(
@@ -175,8 +115,8 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\Category();
-		$this->fixture->setParent($placeGroup);
+		$parentCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture->setParent($parentCategory);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setIcon('bar');
 		$this->fixture->setPid(1);

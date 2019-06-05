@@ -39,13 +39,6 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
  */
 abstract class AbstractDemandedRepository
 	extends Repository {
-
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\Generic\Storage\Typo3DbBackend
-	 * @inject
-	 */
-	protected $storageBackend;
-
 	/**
 	 * Returns an array of constraints created from a given demand object.
 	 *
@@ -136,82 +129,11 @@ abstract class AbstractDemandedRepository
 		$orderings = $queryResult->getQuery()->getOrderings();
 		$sortField = array_shift(array_keys($orderings));
 		$sortOrder = array_shift(array_values($orderings));
-		$objects = self::findMultipleByUid(
+		$objects = $this->findMultipleByUid(
 			implode(',', $objectUids), $sortField, $sortOrder
 		);
 
 		return $objects;
-	}
-
-	/**
-	 * Returns the database query to get the matching result
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
-	 * @param boolean $respectEnableFields
-	 * @param array $enableFieldsToIgnore
-	 * @param bool $respectStoragePage
-	 * @return string
-	 */
-	public function findDemandedRaw(DemandInterface $demand, $respectEnableFields = TRUE, $enableFieldsToIgnore = NULL, $respectStoragePage = TRUE) {
-		$query = $this->generateQuery($demand, $respectEnableFields, $enableFieldsToIgnore, $respectStoragePage);
-		$queryParser = $this->objectManager->get('TYPO3\\CMS\\Extbase\\Persistence\\Generic\\Storage\\Typo3DbQueryParser');
-		list($hash, $parameters) = $queryParser->preparseQuery($query);
-		$statementParts = $queryParser->parseQuery($query);
-
-		// Limit and offset are not cached to allow caching of pagebrowser queries.
-		$statementParts['limit'] = ((int) $query->getLimit() ?: NULL);
-		$statementParts['offset'] = ((int) $query->getOffset() ?: NULL);
-
-		$tableNameForEscape = (reset($statementParts['tables']) ?: 'foo');
-		foreach ($parameters as $parameterPlaceholder => $parameter) {
-			if ($parameter instanceof LazyLoadingProxy) {
-				$parameter = $parameter->_loadRealInstance();
-			}
-
-			if ($parameter instanceof \DateTime) {
-				$parameter = $parameter->format('U');
-			} elseif ($parameter instanceof DomainObjectInterface) {
-				$parameter = (int) $parameter->getUid();
-			} elseif (is_array($parameter)) {
-				$subParameters = array();
-				foreach ($parameter as $subParameter) {
-					$subParameters[] = $GLOBALS['TYPO3_DB']->fullQuoteStr($subParameter, $tableNameForEscape);
-				}
-				$parameter = implode(',', $subParameters);
-			} elseif ($parameter === NULL) {
-				$parameter = 'NULL';
-			} elseif (is_bool($parameter)) {
-				return ($parameter === TRUE ? 1 : 0);
-			} else {
-				$parameter = $GLOBALS['TYPO3_DB']->fullQuoteStr((string) $parameter, $tableNameForEscape);
-			}
-
-			$statementParts['where'] = str_replace($parameterPlaceholder, $parameter, $statementParts['where']);
-		}
-
-		$statementParts = array(
-			'selectFields' => implode(' ', $statementParts['keywords']) . ' ' . implode(',', $statementParts['fields']),
-			'fromTable' => implode(' ', $statementParts['tables']) . ' ' . implode(' ', $statementParts['unions']),
-			'whereClause' => (!empty($statementParts['where']) ? implode('', $statementParts['where']) : '1')
-				. (!empty($statementParts['additionalWhereClause'])
-					? ' AND ' . implode(' AND ', $statementParts['additionalWhereClause'])
-					: ''
-				),
-			'orderBy' => (!empty($statementParts['orderings']) ? implode(', ', $statementParts['orderings']) : ''),
-			'limit' => ($statementParts['offset'] ? $statementParts['offset'] . ', ' : '')
-				. ($statementParts['limit'] ? $statementParts['limit'] : '')
-		);
-
-		$sql = $GLOBALS['TYPO3_DB']->SELECTquery(
-			$statementParts['selectFields'],
-			$statementParts['fromTable'],
-			$statementParts['whereClause'],
-			'',
-			$statementParts['orderBy'],
-			$statementParts['limit']
-		);
-
-		return $sql;
 	}
 
 	/**
@@ -348,40 +270,5 @@ abstract class AbstractDemandedRepository
 
 		return $result->count();
 	}
-
-	/**
-	 * Copy of the one from Typo3DbBackend
-	 * Replace query placeholders in a query part by the given
-	 * parameters.
-	 *
-	 * @param string $sqlString The query part with placeholders
-	 * @param array $parameters The parameters
-	 * @param string $tableName
-	 * @throws \TYPO3\CMS\Extbase\Persistence\Generic\Exception
-	 * @return void
-	 */
-	protected function replacePlaceholders(&$sqlString, array $parameters, $tableName = 'foo') {
-		if (substr_count($sqlString, '?') !== count($parameters)) {
-			throw new \TYPO3\CMS\Extbase\Persistence\Generic\Exception('The number of question marks to replace must be equal to the number of parameters.', 1242816074);
-		}
-		$offset = 0;
-		foreach ($parameters as $parameter) {
-			$markPosition = strpos($sqlString, '?', $offset);
-			if ($markPosition !== FALSE) {
-				if ($parameter === NULL) {
-					$parameter = 'NULL';
-				} elseif (is_array($parameter) || $parameter instanceof \ArrayAccess || $parameter instanceof \Traversable) {
-					$items = array();
-					foreach ($parameter as $item) {
-						$items[] = $GLOBALS['TYPO3_DB']->fullQuoteStr($item, $tableName);
-					}
-					$parameter = '(' . implode(',', $items) . ')';
-				} else {
-					$parameter = $GLOBALS['TYPO3_DB']->fullQuoteStr($parameter, $tableName);
-				}
-				$sqlString = substr($sqlString, 0, $markPosition) . $parameter . substr($sqlString, ($markPosition + 1));
-			}
-			$offset = $markPosition + strlen($parameter);
-		}
-	}
 }
+

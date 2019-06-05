@@ -6,10 +6,10 @@ if (!defined ('TYPO3_MODE')) {
 $TCA['tx_ajaxmap_domain_model_region'] = array(
 	'ctrl' => $TCA['tx_ajaxmap_domain_model_region']['ctrl'],
 	'interface' => array(
-		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, file, clickable, suppress_info_windows, preserve_viewport,regions,main_place',
+		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,regions,main_place',
 	),
 	'types' => array(
-		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, file, clickable, suppress_info_windows, preserve_viewport,main_place,regions,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
+		'1' => array('showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, file, unselectable, selected, clickable, suppress_info_windows, preserve_viewport,main_place,regions,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'),
 	),
 	'palettes' => array(
 		'1' => array('showitem' => ''),
@@ -117,6 +117,22 @@ $TCA['tx_ajaxmap_domain_model_region'] = array(
 		'clickable' => array(
 			'exclude' => 0,
 			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.clickable',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			),
+		),
+		'unselectable' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.unselectable',
+			'config' => array(
+				'type' => 'check',
+				'default' => 0
+			),
+		),
+		'selected' => array(
+			'exclude' => 0,
+			'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_region.selected',
 			'config' => array(
 				'type' => 'check',
 				'default' => 0

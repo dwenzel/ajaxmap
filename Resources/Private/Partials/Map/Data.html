@@ -34,6 +34,61 @@
 		"infoWindow": "",
 		"places": "",
 		"marker": markerArr,
+		"settings": {
+			"regionTree" : {
+				minExpandLevel: 3,
+				selectMode: 3, //1: single, 2: multi, 3: multi hierarchical
+				icons: false,
+				checkbox: true,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
+			},
+			"categoryTree" : {
+				icons: false,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
+			},
+			"placeGroupTree" : {
+				icons: false,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
+			},
+			"locationTypeTree": {
+				checkbox: true,
+				selectMode: 1,
+				extensions: ["filter"],
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				}
+			},
+			"placesTree": {
+				toggleInfoWindowOnSelect: true,
+				selectMode: 1,
+				icons: false,
+				extensions: ["filter"],
+				quicksearch: true,
+				filter: {
+					autoApply: true,
+					mode: "hide"
+				},
+				updateFilters: {
+					locationType: {treeName: 'ajaxMapLocationTypesTree'},
+					categories: {treeName: 'ajaxMapCategoryTree'},
+					regions: {treeName: 'ajaxMapRegionsTree', updateLayers: true},
+					placeGroups: {treeName: 'ajaxMapPlaceGroupTree'}
+				}
+			}
+		}
 	};
 	mapStore.push(mapSettings);
 	regionStore.push({"id": currId}); 

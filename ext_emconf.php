@@ -21,20 +21,19 @@ $EM_CONF[$_EXTKEY] = array (
 	'uploadfolder' => 1,
 	'createDirs' => '',
 	'clearCacheOnLoad' => 0,
-	'version' => '0.2.0',
-	'constraints' => 
+	'version' => '1.0.0',
+	'constraints' =>
 	array (
-		'depends' => 
+		'depends' =>
 		array (
-			'extbase' => '6.2',
-			'fluid' => '6.2',
-			'typo3' => '6.2.0-6.2.99',
-			'tt_address' => '2.3.4-',
+			'typo3' => '6.2.0-7.99.99',
+			'tt_address' => '2.3.4-0.0.0',
+			'geo_location_service' => '0.2.0-0.0.0',
 		),
-		'conflicts' => 
+		'conflicts' =>
 		array (
 		),
-		'suggests' => 
+		'suggests' =>
 		array (
 		),
 	),

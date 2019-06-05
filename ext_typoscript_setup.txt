@@ -1,0 +1,25 @@
+config.tx_extbase {
+	persistence {
+		classes {
+			Webfox\Ajaxmap\Domain\Model\Content {
+				mapping {
+					tableName = tt_content
+					columns {
+						altText.mapOnProperty = altText
+						titleText.mapOnProperty = titleText
+					}
+				}
+			}
+			Webfox\Ajaxmap\Domain\Model\Address {
+				mapping {
+					tableName = tt_address
+				}
+			}
+			Webfox\Ajaxmap\Domain\Model\Category {
+				mapping {
+					tableName = sys_category
+				}
+			}
+		}
+	}
+}

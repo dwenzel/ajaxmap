@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Tests;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -38,7 +38,15 @@ namespace Webfox\Ajaxmap\Tests;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 
+/**
+ * Class PlaceTest
+ *
+ * @package Webfox\Ajaxmap\Tests
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Place
+ */
 class PlaceTest extends UnitTestCase {
 	/**
 	 * @var \Webfox\Ajaxmap\Domain\Model\Place
@@ -61,7 +69,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setTitleForStringSetsTitle() { 
+	public function setTitleForStringSetsTitle() {
 		$this->fixture->setTitle('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -69,7 +77,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getTitle()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -82,7 +90,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setGeoCoordinatesForStringSetsGeoCoordinates() { 
+	public function setGeoCoordinatesForStringSetsGeoCoordinates() {
 		$this->fixture->setGeoCoordinates('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -90,7 +98,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getGeoCoordinates()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -103,7 +111,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setDescriptionForStringSetsDescription() { 
+	public function setDescriptionForStringSetsDescription() {
 		$this->fixture->setDescription('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -111,7 +119,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getDescription()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -124,7 +132,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setInfoForStringSetsInfo() { 
+	public function setInfoForStringSetsInfo() {
 		$this->fixture->setInfo('Conceived at T3CON10');
 
 		$this->assertSame(
@@ -132,7 +140,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getInfo()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -158,7 +166,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getPlaceGroups()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -190,11 +198,11 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getPlaceGroups()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getLocationTypeReturnsInitialValueForLocationLocationType() { 
+	public function getLocationTypeReturnsInitialValueForLocationLocationType() {
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getLocationType()
@@ -204,7 +212,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setLocationTypeForLocationLocationTypeSetsLocationType() { 
+	public function setLocationTypeForLocationLocationTypeSetsLocationType() {
 		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\LocationType();
 		$this->fixture->setLocationType($dummyObject);
 
@@ -213,11 +221,11 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getLocationType()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() { 
+	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -228,7 +236,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setRegionsForObjectStorageContainingRegionSetsRegions() { 
+	public function setRegionsForObjectStorageContainingRegionSetsRegions() {
 		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
 		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
@@ -239,7 +247,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getRegions()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -271,11 +279,11 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getRegions()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getContentReturnsInitialValueForObjectStorageContainingContent() { 
+	public function getContentReturnsInitialValueForObjectStorageContainingContent() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -286,7 +294,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setContentForObjectStorageContainingContentSetsContent() { 
+	public function setContentForObjectStorageContainingContentSetsContent() {
 		$content = new \Webfox\Ajaxmap\Domain\Model\Content();
 		$objectStorageHoldingExactlyOneContent = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$objectStorageHoldingExactlyOneContent->attach($content);
@@ -297,7 +305,7 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getContent()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
@@ -329,11 +337,11 @@ class PlaceTest extends UnitTestCase {
 			$this->fixture->getContent()
 		);
 	}
-	
+
 	/**
 	 * @test
 	 */
-	public function getAddressReturnsInitialValueForAddress() { 
+	public function getAddressReturnsInitialValueForAddress() {
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getAddress()
@@ -343,7 +351,7 @@ class PlaceTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function setAddressForAddressSetsAddress() { 
+	public function setAddressForAddressSetsAddress() {
 		$dummyObject = new \Webfox\Ajaxmap\Domain\Model\Address();
 		$this->fixture->setAddress($dummyObject);
 
@@ -359,6 +367,8 @@ class PlaceTest extends UnitTestCase {
 	public function toArrayReturnsInitialValueForArray() {
 		$result = array(
 			'address' => null,
+			'categories' => Array(),
+			'content' => null,
 			'content' => Array (),
 			'description' => null,
 			'geoCoordinates' => null,
@@ -373,6 +383,28 @@ class PlaceTest extends UnitTestCase {
 		$this->assertSame(
 				$this->fixture->toArray(),
 				$result
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesCategoriesWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			ObjectStorage::class,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function objectImplementsCategorizableInterface() {
+		$this->assertInstanceOf(
+			CategorizableInterface::class,
+			$this->fixture
 		);
 	}
 }

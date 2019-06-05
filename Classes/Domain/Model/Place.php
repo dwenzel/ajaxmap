@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,10 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -33,8 +36,9 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
-
+class Place extends AbstractEntity
+	implements SerializableInterface, CategorizableInterface {
+	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 	/**
 	 * Title
 	 *
@@ -63,13 +67,6 @@ class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	 * @var string
 	 */
 	protected $info;
-
-	/**
-	 * Categories
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category>
-	 */
-	protected $categories;
 
 	/**
 	 * Place Groups
@@ -164,44 +161,6 @@ class Place extends \Webfox\Ajaxmap\DomainObject\AbstractEntity {
 	 */
 	public function setDescription($description) {
 		$this->description = $description;
-	}
-
-	/**
-	 * Adds a category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category) {
-		$this->categories->attach($category);
-	}
-
-	/**
-	 * Removes a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category The Category to be removed
-	 * @return void
-	 */
-	public function removeCategory(\Webfox\Ajaxmap\Domain\Model\Category $category) {
-		$this->categories->detach($category);
-	}
-
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $category
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> $categories
-	 * @return void
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
 	}
 
 	/**

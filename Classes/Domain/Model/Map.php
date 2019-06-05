@@ -5,7 +5,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,10 +24,11 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\Domain\Model\Category;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -36,7 +37,9 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Map extends AbstractEntity {
+class Map extends AbstractEntity
+	implements SerializableInterface, CategorizableInterface {
+	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 
 	/**
 	 * title
@@ -120,6 +123,13 @@ class Map extends AbstractEntity {
 	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
 	 */
 	protected $regions;
+
+	/**
+	 * Static layers
+	 *
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
+	 */
+	protected $staticLayers;
 
 	/**
 	 * Display selected places as markers.
@@ -210,6 +220,7 @@ class Map extends AbstractEntity {
 		$this->categories = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->placeGroups = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->staticLayers = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->places = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 		$this->locationTypes = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
 	}
@@ -251,6 +262,45 @@ class Map extends AbstractEntity {
 	 */
 	public function setRegions(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $regions) {
 		$this->regions = $regions;
+	}
+
+	/**
+	 * Adds a Static Layer
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayer
+	 * @return void
+	 */
+	public function addStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayer) {
+		$this->staticLayers->attach($staticLayer);
+	}
+
+	/**
+	 * Removes a Static Layer
+	 *
+	 * @param \Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove The Region to be removed
+	 * @return void
+	 */
+	public function removeStaticLayer(\Webfox\Ajaxmap\Domain\Model\Region $staticLayerToRemove) {
+		$this->staticLayers->detach($staticLayerToRemove);
+	}
+
+	/**
+	 * Returns the static Layers
+	 *
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 */
+	public function getStaticLayers() {
+		return $this->staticLayers;
+	}
+
+	/**
+	 * Sets the staticLayers
+	 *
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $staticLayers
+	 * @return void
+	 */
+	public function setStaticLayers(\TYPO3\CMS\Extbase\Persistence\ObjectStorage $staticLayers) {
+		$this->staticLayers = $staticLayers;
 	}
 
 	/**
@@ -355,41 +405,6 @@ class Map extends AbstractEntity {
 	 */
 	public function setMapCenter($mapCenter) {
 		$this->mapCenter = $mapCenter;
-	}
-
-	/**
-	 * Adds a Category
-	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category) {
-		$this->categories->attach($category);
-	}
-	/**
-	 * Removes a Category
-	 *
-	 * @param \TYPO3\CMS\Extbase\Domain\Model\Category $category The Category to be removed
-	 */
-	public function removeCategory(Category $category) {
-		$this->categories->detach($category);
-	}
-
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
-
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
 	}
 
 	/**

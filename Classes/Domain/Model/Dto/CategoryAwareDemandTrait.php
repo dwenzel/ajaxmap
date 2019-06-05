@@ -1,10 +1,11 @@
 <?php
+namespace Webfox\Ajaxmap\Domain\Model\Dto;
 
-namespace Webfox\Ajaxmap\DomainObject;
-/***************************************************************
+ /***************************************************************
+ *
  *  Copyright notice
  *
- *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
+ *  (c) 2016 Dirk Wenzel <dirk.wenzel@cps-it.de>
  *
  *  All rights reserved
  *
@@ -24,31 +25,43 @@ namespace Webfox\Ajaxmap\DomainObject;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
-/**
- * Serializable Interface
- *
- * @package ajaxmap
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
- */
-interface SerializableInterface {
+trait CategoryAwareDemandTrait {
 
 	/**
-	 * Return the object as array
-	 *
-	 * @param integer $treeDepth maximum tree depth
-	 * @param array $mapping An array with keys for each model
-	 * which should be mapped.
-	 * @return array
+	 * @var string
 	 */
-	public function toArray($treeDepth = 100, $mapping = NULL);
+	protected $categories;
 
 	/**
-	 * Returns a JSON Representation of the object
-	 *
+	 * @var string
+	 */
+	protected $categoryConjunction;
+
+	/**
 	 * @return string
 	 */
-	public function toJson();
-}
+	public function getCategories() {
+		return $this->categories;
+	}
 
+	/**
+	 * @param string $categories
+	 */
+	public function setCategories($categories) {
+		$this->categories = $categories;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getCategoryConjunction() {
+		return $this->categoryConjunction;
+	}
+
+	/**
+	 * @param $conjunction
+	 */
+	public function setCategoryConjunction($conjunction) {
+		$this->categoryConjunction = $conjunction;
+	}
+}

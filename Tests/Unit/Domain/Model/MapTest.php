@@ -31,11 +31,14 @@ namespace Webfox\Ajaxmap\Tests;
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
 use TYPO3\CMS\Core\Tests\UnitTestCase;
+use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
+use Webfox\Ajaxmap\DomainObject\CategorizableInterface;
 
 /**
  * Class MapTest
  *
  * @package Webfox\Ajaxmap\Tests
+ * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Map
  */
 class MapTest extends UnitTestCase {
 
@@ -481,6 +484,7 @@ class MapTest extends UnitTestCase {
 			'placeGroups' => array(),
 			'places' => array(),
 			'regions' => array(),
+			'staticLayers' => array(),
 			'title' => NULL,
 			'type' => NULL,
 			'uid' => NULL,
@@ -564,6 +568,86 @@ class MapTest extends UnitTestCase {
 		$this->assertInstanceOf(
 			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
 			$this->fixture->getLocationTypes()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function objectImplementsCategorizableInterface() {
+		$this->assertInstanceOf(
+			CategorizableInterface::class,
+			$this->fixture
+		);
+	}
+
+	/**
+	 * @test
+	 * @covers ::__construct
+	 */
+	public function constructorInitializesCategoriesWithStorageObject() {
+		$this->fixture->__construct();
+		$this->assertInstanceOf(
+			ObjectStorage::class,
+			$this->fixture->getCategories()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function getStaticLayersReturnsInitialValueForObjectStorageContainingRegion() {
+		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$this->assertEquals(
+			$newObjectStorage,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function setStaticLayersForObjectStorageContainingRegionSetsStaticLayers() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneRegions->attach($region);
+		$this->fixture->setStaticLayers($objectStorageHoldingExactlyOneRegions);
+
+		$this->assertSame(
+			$objectStorageHoldingExactlyOneRegions,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function addStaticLayerToObjectStorageHoldingRegions() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$objectStorageHoldingExactlyOneRegion->attach($region);
+		$this->fixture->addStaticLayer($region);
+
+		$this->assertEquals(
+			$objectStorageHoldingExactlyOneRegion,
+			$this->fixture->getStaticLayers()
+		);
+	}
+
+	/**
+	 * @test
+	 */
+	public function removeStaticLayerFromObjectStorageHoldingRegions() {
+		$region = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$localObjectStorage->attach($region);
+		$localObjectStorage->detach($region);
+		$this->fixture->addStaticLayer($region);
+		$this->fixture->removeStaticLayer($region);
+
+		$this->assertEquals(
+			$localObjectStorage,
+			$this->fixture->getStaticLayers()
 		);
 	}
 }

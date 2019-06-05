@@ -1,33 +1,27 @@
 <?php
 namespace Webfox\Ajaxmap\Utility;
- 
- /***************************************************************
- *
+
+/***************************************************************
  *  Copyright notice
- *
  *  (c) 2015 Dirk Wenzel <dirk.wenzel@cps-it.de>
- *
  *  All rights reserved
- *
  *  This script is part of the TYPO3 project. The TYPO3 project is
  *  free software; you can redistribute it and/or modify
  *  it under the terms of the GNU General Public License as published by
  *  the Free Software Foundation; either version 3 of the License, or
  *  (at your option) any later version.
- *
  *  The GNU General Public License can be found at
  *  http://www.gnu.org/copyleft/gpl.html.
- *
  *  This script is distributed in the hope that it will be useful,
  *  but WITHOUT ANY WARRANTY; without even the implied warranty of
  *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  *  GNU General Public License for more details.
- *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
 use Webfox\Ajaxmap\Domain\Model\TreeItemInterface;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+
 /**
  * Class TreeUtility
  *
@@ -40,8 +34,9 @@ class TreeUtility {
 	 * @param QueryResultInterface $objects
 	 * @return array
 	 */
-	static public function buildObjectTree(QueryResultInterface $objects) {
+	public function buildObjectTree(QueryResultInterface $objects) {
 		$tree = array();
+		$objects = $objects->toArray();
 
 		$flatObjects = array();
 		/** @var TreeItemInterface $object */
@@ -52,9 +47,9 @@ class TreeUtility {
 			);
 		}
 		// If leaves are selected without its parents selected, those are shown as parent
-		foreach ($flatObjects as $id => &$flatCategory) {
-			if (!isset($flatObjects[$flatCategory['parent']])) {
-				$flatCategory['parent'] = NULL;
+		foreach ($flatObjects as $id => &$flatObject) {
+			if (!isset($flatObjects[$flatObject['parent']])) {
+				$flatObject['parent'] = NULL;
 			}
 		}
 		foreach ($flatObjects as $id => &$node) {
@@ -72,10 +67,10 @@ class TreeUtility {
 	 * @param array $objectTree
 	 * @return mixed
 	 */
-	static public function convertObjectTreeToArray($objectTree, $keysToRemove = NULL, $mapping = NULL) {
+	public function convertObjectTreeToArray($objectTree, $keysToRemove = NULL, $mapping = NULL) {
 		$treeArray = array();
 		foreach ($objectTree as $objectTreeItem) {
-			if ($treeArrayItem = self::convertObjectBranchToArray($objectTreeItem, $keysToRemove, $mapping)) {
+			if ($treeArrayItem = $this->convertObjectBranchToArray($objectTreeItem, $keysToRemove, $mapping)) {
 				$treeArray[] = $treeArrayItem;
 			}
 		}
@@ -84,20 +79,20 @@ class TreeUtility {
 	}
 
 	/**
-	 * @param $objectTreeItem
+	 * @param array $objectTreeItem
 	 * @return mixed
 	 */
-	static protected function convertObjectBranchToArray($objectTreeItem, $keysToRemove = NULL, $mapping = NULL) {
+	protected function convertObjectBranchToArray($objectTreeItem, $keysToRemove = NULL, $mapping = NULL) {
 		if (isset($objectTreeItem['item'])
-			AND $objectTreeItem['item'] instanceof AbstractEntity
+			AND $objectTreeItem['item'] instanceof SerializableInterface
 		) {
-			$treeArrayItem = self::convertObjectLeafToArray($objectTreeItem, $keysToRemove, $mapping);
+			$treeArrayItem = $this->convertObjectLeafToArray($objectTreeItem, $keysToRemove, $mapping);
 			if (isset($objectTreeItem['children'])
 				AND is_array($objectTreeItem['children'])
 			) {
 				$children = array();
 				foreach ($objectTreeItem['children'] as $child) {
-					$mappedChild = self::convertObjectLeafToArray($child, $keysToRemove, $mapping);
+					$mappedChild = $this->convertObjectLeafToArray($child, $keysToRemove, $mapping);
 					$children[] = $mappedChild;
 				}
 				$treeArrayItem['children'] = $children;
@@ -114,12 +109,17 @@ class TreeUtility {
 	 * @param string $keysToRemove
 	 * @return mixed
 	 */
-	static protected function convertObjectLeafToArray($objectLeaf, $keysToRemove = NULL, $mapping = NULL) {
-		$arrayItem = $objectLeaf['item']->toArray(10, $mapping);
-		if ($keysToRemove) {
-			$keys = explode(',', $keysToRemove);
-			foreach ($keys as $key) {
-				unset($arrayItem[$key]);
+	protected function convertObjectLeafToArray($objectLeaf, $keysToRemove = NULL, $mapping = NULL) {
+		$arrayItem = array();
+		if (isset($objectLeaf['item']) AND
+			$objectLeaf['item'] instanceof SerializableInterface
+		) {
+			$arrayItem = $objectLeaf['item']->toArray(10, $mapping);
+			if ($keysToRemove) {
+				$keys = explode(',', $keysToRemove);
+				foreach ($keys as $key) {
+					unset($arrayItem[$key]);
+				}
 			}
 		}
 

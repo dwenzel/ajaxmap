@@ -6,7 +6,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  * (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
  * (c) 2014 Dirk Wenzel <dirk.wenzel@cps-it.de>
- *  
+ *
  * All rights reserved
  *
  * This script is part of the TYPO3 project. The TYPO3 project is
@@ -25,7 +25,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\DomainObject\AbstractEntity;
+use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
+use Webfox\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  * Place Group
@@ -34,7 +35,8 @@ use Webfox\Ajaxmap\DomainObject\AbstractEntity;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  */
 class PlaceGroup extends AbstractEntity
-implements TreeItemInterface {
+	implements TreeItemInterface, SerializableInterface {
+	use ToArrayTrait, ToJsonTrait;
 
 	/**
 	 * Title
