@@ -1,3 +1,6 @@
+2019-06-05         [RELEASE] Release of ajaxmap 1.0.2 (Dirk Wenzel)
+2019-06-05 83cd375 [BUGFIX] extension status corrected (Dirk Wenzel)
+
 2019-06-05         [RELEASE] Release of ajaxmap 1.0.1 (Dirk Wenzel)
 2019-05-27 ac38165 [BUGFIX] fixed error where location type tree was not initialized correctly (Dirk Wenzel)
 2019-05-27 9add380 [TASK] caching for ChildrenService implemented, - fixed error in TreeUtility where recursion stopped too early - (Dirk Wenzel)
