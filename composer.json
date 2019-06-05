@@ -1,38 +1,44 @@
 {
-	"name": "dwenzel/ajaxmap",
-	"type": "typo3-cms-extension",
-	"description": "Versatile map extension for the TYPO3 CMS. Map data are requested dynamically via ajax.",
-	"keywords": ["TYPO3", "extension", "map", "ajax"],
-	"version": "0.2.0",
-	"license": ["GPL-2.0+"],
-	"authors": [
-		{
-			"name": "Dirk Wenzel",
-			"role": "Developer"
-		}
-	],
-	"require": {
-		"typo3/cms": ">=6.2.0,<8.0"
-	},
-	"require-dev": {
-    "mikey179/vfsStream": "1.4.*@dev",
-    "phpunit/phpunit": "~4.8.0",
-    "satooshi/php-coveralls": "dev-master"
+  "name": "dwenzel/ajaxmap",
+  "type": "typo3-cms-extension",
+  "description": "Versatile map extension for the TYPO3 CMS. Map data are requested dynamically via ajax.",
+  "keywords": [
+    "TYPO3",
+    "extension",
+    "map",
+    "ajax"
+  ],
+  "license": [
+    "GPL-2.0+"
+  ],
+  "authors": [
+    {
+      "name": "Dirk Wenzel",
+      "role": "Developer"
+    }
+  ],
+  "require": {
+    "typo3/cms-core": "^9.5",
+    "friendsoftypo3/tt-address": "*",
+    "cpsit/geo-location-service": "^0.2"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^5.6 || ^6.0",
+    "nimut/testing-framework": "^4.1"
   },
   "autoload": {
     "psr-4": {
-      "Webfox\\Ajaxmap\\": "Classes"
+      "DWenzel\\Ajaxmap\\": "Classes"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Webfox\\Ajaxmap\\Tests\\": "Tests",
+      "DWenzel\\Ajaxmap\\Tests\\": "Tests",
       "TYPO3\\CMS\\Core\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/core/Tests/",
       "TYPO3\\CMS\\Fluid\\Tests\\": ".Build/vendor/typo3/cms/typo3/sysext/fluid/Tests/"
     }
   },
   "replace": {
-    "ajaxmap": "self.version",
     "typo3-ter/ajaxmap": "self.version"
   },
   "config": {
@@ -47,9 +53,6 @@
     ]
   },
   "extra": {
-		"branch-alias": {
-			"dev-master": "0.3.x-dev"
-		},
     "typo3/cms": {
       "cms-package-dir": "{$vendor-dir}/typo3/cms",
       "web-dir": ".Build/Web"
