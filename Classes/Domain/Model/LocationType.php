@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +24,11 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
+
 
 /**
  *
@@ -35,23 +38,24 @@ use Webfox\Ajaxmap\DomainObject\SerializableInterface;
  *
  */
 class LocationType extends AbstractEntity
-	implements SerializableInterface {
-	use ToArrayTrait, ToJsonTrait;
+    implements SerializableInterface
+{
+    use ToArrayTrait, ToJsonTrait;
 
-	/**
-	 * title
-	 *
-	 * @var string
-	 * @validate NotEmpty
-	 */
-	protected $title;
+    /**
+     * title
+     *
+     * @var string
+     * @Extbase\Validate("NotEmpty")
+     */
+    protected $title;
 
-	/**
-	 * description
-	 *
-	 * @var string
-	 */
-	protected $description;
+    /**
+     * description
+     *
+     * @var string
+     */
+    protected $description;
 
     /**
      * icon
@@ -60,43 +64,47 @@ class LocationType extends AbstractEntity
      */
     protected $icon;
 
-	/**
-	 * Returns the title
-	 *
-	 * @return string $title
-	 */
-	public function getTitle() {
-		return $this->title;
-	}
+    /**
+     * Returns the title
+     *
+     * @return string $title
+     */
+    public function getTitle()
+    {
+        return $this->title;
+    }
 
-	/**
-	 * Sets the title
-	 *
-	 * @param string $title
-	 * @return void
-	 */
-	public function setTitle($title) {
-		$this->title = $title;
-	}
+    /**
+     * Sets the title
+     *
+     * @param string $title
+     * @return void
+     */
+    public function setTitle($title)
+    {
+        $this->title = $title;
+    }
 
-	/**
-	 * Returns the description
-	 *
-	 * @return string $description
-	 */
-	public function getDescription() {
-		return $this->description;
-	}
+    /**
+     * Returns the description
+     *
+     * @return string $description
+     */
+    public function getDescription()
+    {
+        return $this->description;
+    }
 
-	/**
-	 * Sets the description
-	 *
-	 * @param string $description
-	 * @return void
-	 */
-	public function setDescription($description) {
-		$this->description = $description;
-	}
+    /**
+     * Sets the description
+     *
+     * @param string $description
+     * @return void
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+    }
 
 
     /**
@@ -104,18 +112,20 @@ class LocationType extends AbstractEntity
      *
      * @return string $description
      */
-    public function getIcon() {
+    public function getIcon()
+    {
         return $this->icon;
     }
 
-     /**
+    /**
      * Sets the icon
      *
-		 * @param string $icon
+     * @param string $icon
      * @return void
      */
-    public function setIcon($icon) {
-        $this->icon =$icon;
+    public function setIcon($icon)
+    {
+        $this->icon = $icon;
     }
 }
-?>
+

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -24,7 +24,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\Domain\Model\Category as ExtbaseCategory;
 /**
  * Category
@@ -39,8 +39,8 @@ class Category extends ExtbaseCategory
 	/**
 	 * Parent
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Model\Category|null
-	 * @lazy
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Category|null
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $parent = null;
 

@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
  
  /***************************************************************
  *
@@ -31,7 +31,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *
  * Tree items defined by their parent
  *
- * @package Webfox\Ajaxmap\Domain\Model
+ * @package DWenzel\Ajaxmap\Domain\Model
  */
 interface TreeItemInterface {
 	/**

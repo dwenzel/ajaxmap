@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,11 +25,11 @@ namespace Webfox\Ajaxmap\Tests;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use Webfox\Ajaxmap\Domain\Model\Category;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use DWenzel\Ajaxmap\Domain\Model\Category;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Category.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\Category.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -39,16 +39,16 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * @subpackage Ajax Map
  *
  * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
- * @coversDefaultClass Webfox\Ajaxmap\Domain\Model\Category
+ * @coversDefaultClass DWenzel\Ajaxmap\Domain\Model\Category
  */
 class CategoryTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Category
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Category
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Category();
 	}
 
 	/**
@@ -66,7 +66,7 @@ class CategoryTest extends UnitTestCase {
 	 * @covers ::setParent
 	 */
 	public function setParentForObjectSetsParent() {
-		$parentCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$parentCategory = new \DWenzel\Ajaxmap\Domain\Model\Category();
 		$this->fixture->setParent($parentCategory);
 
 		$this->assertSame(
@@ -81,12 +81,12 @@ class CategoryTest extends UnitTestCase {
 	 */
 	public function getParentLoadsRealInstanceForLazyLoadingProxy() {
 		$fixture = $this->getAccessibleMock(
-			'Webfox\\Ajaxmap\\Domain\\Model\\Category',
-			array('dummy'), array(), '', FALSE
+			'DWenzel\\Ajaxmap\\Domain\\Model\\Category',
+			array('dummy'), array(), '', false
 		);
 		$mockParent = $this->getAccessibleMock(
 			'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyLoadingProxy',
-			array('_loadRealInstance'), array(), '', FALSE
+			array('_loadRealInstance'), array(), '', false
 		);
 		$fixture->_set('parent', $mockParent);
 		$mockParent->expects($this->once())->method('_loadRealInstance');
@@ -99,15 +99,14 @@ class CategoryTest extends UnitTestCase {
 	public function toArrayReturnsInitialValue() {
 		$result = array(
 			'description' => '',
-			'icon' => '',
 			'parent' => null,
 			'pid' => null,
 			'title' => '',
 			'uid' => null
 		);
 		$this->assertSame(
-			$this->fixture->toArray(),
-			$result
+			$result,
+			$this->fixture->toArray()
 		);
 	}
 
@@ -115,19 +114,16 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$parentCategory = new \Webfox\Ajaxmap\Domain\Model\Category();
+		$parentCategory = new \DWenzel\Ajaxmap\Domain\Model\Category();
 		$this->fixture->setParent($parentCategory);
 		$this->fixture->setDescription('foo');
-		$this->fixture->setIcon('bar');
 		$this->fixture->setPid(1);
 		$this->fixture->setTitle('foobar');
 		$this->fixture->_setProperty('uid', 2);
 		$result = array(
 						'description' => 'foo',
-						'icon' => 'bar',
 						'parent' => array(
-							'description' => null,
-							'icon' => null,
+							'description' => '',
 							'parent' => null,
 							'pid' => null,
 							'title' => null,

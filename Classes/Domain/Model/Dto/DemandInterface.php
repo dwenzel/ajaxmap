@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model\Dto;
+namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
 /***************************************************************
 *  Copyright notice

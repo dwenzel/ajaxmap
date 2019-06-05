@@ -1,5 +1,5 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -7,7 +7,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 /**
  * Class ToArrayTrait
  *
- * @package Webfox\Ajaxmap\Domain\Model
+ * @package DWenzel\Ajaxmap\Domain\Model
  */
 trait ToArrayTrait {
 	/**
@@ -35,7 +35,7 @@ trait ToArrayTrait {
 				$propertyValue = $propertyValue->_loadRealInstance();
 			}
 
-			$hasMapping = FALSE;
+			$hasMapping = false;
 			$className = get_class($this);
 			if((bool)$mapping) {
 				$hasMapping = isset($mapping[$className]);

@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,8 @@ namespace Webfox\Ajaxmap\Domain\Model;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use TYPO3\CMS\Extbase\Annotation as Extbase;
 
 /**
  * Place Group
@@ -42,7 +43,7 @@ class PlaceGroup extends AbstractEntity
 	 * Title
 	 *
 	 * @var string
-	 * @validate NotEmpty
+	 * @Extbase\Validate("NotEmpty")
 	 */
 	protected $title;
 
@@ -63,7 +64,7 @@ class PlaceGroup extends AbstractEntity
 	/**
 	 * placeGroups
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Model\PlaceGroup
+	 * @var \DWenzel\Ajaxmap\Domain\Model\PlaceGroup
 	 */
 	protected $parent;
 
@@ -127,7 +128,7 @@ class PlaceGroup extends AbstractEntity
 	/**
 	 * Returns the parent
 	 *
-	 * @return \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
+	 * @return \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
 	 */
 	public function getParent() {
 		return $this->parent;
@@ -136,7 +137,7 @@ class PlaceGroup extends AbstractEntity
 	/**
 	 * Sets the parent
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
+	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
 	 * @return void
 	 */
 	public function setParent(PlaceGroup $placeGroup) {

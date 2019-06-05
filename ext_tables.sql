@@ -58,9 +58,9 @@ CREATE TABLE tx_ajaxmap_domain_model_place (
 	place_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	location_type int(11) unsigned DEFAULT '0',
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
-	icon text NOT NULL,
+	icon text DEFAULT '' NOT NULL,
 	content text,
-	address int(11) unsigned DEFAULT '0',
+	address text,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,
@@ -160,7 +160,7 @@ CREATE TABLE tx_ajaxmap_domain_model_region (
 	suppress_info_windows tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	preserve_viewport tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
-	main_place int(11) unsigned DEFAULT '0' NOT NULL,
+	main_place text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

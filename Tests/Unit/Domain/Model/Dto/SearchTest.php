@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Dto\PlaceDemand.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -37,21 +37,21 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
  * Class SearchTest
  *
- * @package Webfox\Ajaxmap\Tests
+ * @package DWenzel\Ajaxmap\Tests
  */
 class SearchTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Dto\Search
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\Search
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Dto\Search();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
 	}
 
 	public function tearDown() {

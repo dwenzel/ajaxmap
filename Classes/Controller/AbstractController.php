@@ -1,11 +1,12 @@
 <?php
 
-namespace Webfox\Ajaxmap\Controller;
+namespace DWenzel\Ajaxmap\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,6 +25,7 @@ namespace Webfox\Ajaxmap\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -33,18 +35,20 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class AbstractController extends ActionController {
+class AbstractController extends ActionController
+{
 
-	/**
-	 * Sets the view
-	 *
-	 * This method should only be used for unit testing purposes.
-	 * @param \TYPO3\CMS\Fluid\View\TemplateView $view The new view
-	 * @return void
-	 */
-	public function setView($view) {
-		$this->view = $view;
-	}
-	
+    /**
+     * Sets the view
+     *
+     * This method should only be used for unit testing purposes.
+     * @param \TYPO3\CMS\Fluid\View\TemplateView $view The new view
+     * @return void
+     */
+    public function setView($view)
+    {
+        $this->view = $view;
+    }
+
 }
-?>
+

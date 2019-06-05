@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,11 +25,11 @@ namespace Webfox\Ajaxmap\Tests;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
-use Webfox\Ajaxmap\Domain\Model\PlaceGroup;
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\PlaceGroup.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\PlaceGroup.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -42,12 +42,12 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  */
 class PlaceGroupTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\PlaceGroup
+	 * @var \DWenzel\Ajaxmap\Domain\Model\PlaceGroup
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 	}
 
 	/**
@@ -126,7 +126,7 @@ class PlaceGroupTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setParentForPlaceGroupSetsParent() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 
 		$this->assertSame(
@@ -157,7 +157,7 @@ class PlaceGroupTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$placeGroup = new \Webfox\Ajaxmap\Domain\Model\PlaceGroup();
+		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setIcon('bar');

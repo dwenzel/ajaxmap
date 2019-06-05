@@ -1,5 +1,6 @@
 <?php
-namespace Webfox\Ajaxmap\Domain\Model\Dto;
+
+namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
 /***************************************************************
  *  Copyright notice
@@ -24,135 +25,145 @@ namespace Webfox\Ajaxmap\Domain\Model\Dto;
  *
  * @package placements
  */
-class Search extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity {
+class Search extends \TYPO3\CMS\Extbase\DomainObject\AbstractEntity
+{
 
-	/**
-	 * Basic search word
-	 *
-	 * @var \string
-	 */
-	protected $subject;
+    /**
+     * Basic search word
+     *
+     * @var \string
+     */
+    protected $subject;
 
-	/**
-	 * Search fields
-	 *
-	 * @var \string
-	 */
-	protected $fields;
+    /**
+     * Search fields
+     *
+     * @var \string
+     */
+    protected $fields;
 
-	/**
-	 * Search location
-	 *
-	 * @var \string
-	 */
-	protected $location;
+    /**
+     * Search location
+     *
+     * @var \string
+     */
+    protected $location;
 
-	/**
-	 * Search radius
-	 *
-	 * @var \integer
-	 */
-	protected $radius;
+    /**
+     * Search radius
+     *
+     * @var \integer
+     */
+    protected $radius;
 
-	/**
-	 * Bounding box
-	 * 
-	 * @var \array
-	 */
-	protected $bounds;
+    /**
+     * Bounding box
+     *
+     * @var \array
+     */
+    protected $bounds;
 
-	/**
-	 * Get the subject
-	 *
-	 * @return \string
-	 */
-	public function getSubject() {
-		return $this->subject;
-	}
+    /**
+     * Get the subject
+     *
+     * @return \string
+     */
+    public function getSubject()
+    {
+        return $this->subject;
+    }
 
-	/**
-	 * Set subject
-	 *
-	 * @param \string $subject
-	 * @return void
-	 */
-	public function setSubject($subject) {
-		$this->subject = $subject;
-	}
+    /**
+     * Set subject
+     *
+     * @param \string $subject
+     * @return void
+     */
+    public function setSubject($subject)
+    {
+        $this->subject = $subject;
+    }
 
-	/**
-	 * Get fields
-	 *
-	 * @return \string A comma separated list of search fields
-	 */
-	public function getFields() {
-		return $this->fields;
-	}
+    /**
+     * Get fields
+     *
+     * @return \string A comma separated list of search fields
+     */
+    public function getFields()
+    {
+        return $this->fields;
+    }
 
-	/**
-	 * Set fields
-	 *
-	 * @param $fields A comma separated list of search fields
-	 * @return void
-	 */
-	public function setFields($fields) {
-		$this->fields = $fields;
-	}
+    /**
+     * Set fields
+     *
+     * @param $fields A comma separated list of search fields
+     * @return void
+     */
+    public function setFields($fields)
+    {
+        $this->fields = $fields;
+    }
 
-	/**
-	 * Get location
-	 *
-	 * @return \string A string describing a location 
-	 */
-	public function getLocation() {
-		return $this->location;
-	}
+    /**
+     * Get location
+     *
+     * @return \string A string describing a location
+     */
+    public function getLocation()
+    {
+        return $this->location;
+    }
 
-	/**
-	 * Set location
-	 *
-	 * @param $location A string describing a location
-	 * @return void
-	 */
-	public function setLocation($location) {
-		$this->location = $location;
-	}
+    /**
+     * Set location
+     *
+     * @param $location A string describing a location
+     * @return void
+     */
+    public function setLocation($location)
+    {
+        $this->location = $location;
+    }
 
-	/**
-	 * Get radius
-	 *
-	 * @return \integer The search radius in meter around the search location 
-	 */
-	public function getRadius() {
-		return $this->radius;
-	}
+    /**
+     * Get radius
+     *
+     * @return \integer The search radius in meter around the search location
+     */
+    public function getRadius()
+    {
+        return $this->radius;
+    }
 
-	/**
-	 * Set radius
-	 *
-	 * @param \integer $radius The search radius in meter
-	 * @return void
-	 */
-	public function setRadius($radius) {
-		$this->radius = $radius;
-	}
+    /**
+     * Set radius
+     *
+     * @param \integer $radius The search radius in meter
+     * @return void
+     */
+    public function setRadius($radius)
+    {
+        $this->radius = $radius;
+    }
 
-	/**
-	 * Get Bounds
-	 * @return \array An array describing a bounding box around a geolocation
-	 */
-	public function getBounds() {
-		return $this->bounds;
-	}
-	
-	/**
-	 * Set Bounds
-	 * @param \array $bounds
-	 * @return void
-	 */
-	public function setBounds($bounds) {
-		$this->bounds = $bounds;
-	}
+    /**
+     * Get Bounds
+     * @return \array An array describing a bounding box around a geolocation
+     */
+    public function getBounds()
+    {
+        return $this->bounds;
+    }
+
+    /**
+     * Set Bounds
+     * @param \array $bounds
+     * @return void
+     */
+    public function setBounds($bounds)
+    {
+        $this->bounds = $bounds;
+    }
 }
 
-?>
