@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Repository;
+namespace DWenzel\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,9 +25,9 @@ namespace Webfox\Ajaxmap\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use Webfox\Ajaxmap\Domain\Model\Category;
-use Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface;
-use Webfox\Ajaxmap\Service\ChildrenService;
+use DWenzel\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
+use DWenzel\Ajaxmap\Service\ChildrenService;
 
 /**
  *

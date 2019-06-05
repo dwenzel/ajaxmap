@@ -1,9 +1,9 @@
 <?php
 
-namespace Webfox\Ajaxmap\DomainObject;
+namespace DWenzel\Ajaxmap\DomainObject;
 
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Category;
 
 
 /**
@@ -14,21 +14,21 @@ interface CategorizableInterface {
 	/**
 	 * Adds a Category
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category
 	 */
 	public function addCategory(Category $category);
 
 	/**
 	 * Removes a Category
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Category $category The Category to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category The Category to be removed
 	 */
 	public function removeCategory(Category $category);
 
 	/**
 	 * Returns the categories
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Category> categories
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> categories
 	 */
 	public function getCategories();
 

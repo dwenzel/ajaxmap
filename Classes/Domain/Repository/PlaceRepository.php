@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Repository;
+namespace DWenzel\Ajaxmap\Domain\Repository;
 /***************************************************************
  *  Copyright notice
  *
@@ -40,7 +40,7 @@ class PlaceRepository extends AbstractDemandedRepository {
     public function findRawSelectWhere($select, $where){
     	$statement = 'SELECT ' .$select .' from tx_ajaxmap_domain_model_place WHERE ' . $where;
     	$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		$query->getQuerySettings()->setReturnRawQueryResult(true);
 		$query->statement($statement);
 		return $query->execute();
     }
@@ -54,7 +54,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 			.'ON (mm.uid_foreign = categories.uid) '
 			.'WHERE places.categories AND categories.uid AND places.uid=' .$placeId;
 		$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+		$query->getQuerySettings()->setReturnRawQueryResult(true);
 		$query->statement($statement);
 		return $query->execute();
 	}
@@ -72,7 +72,7 @@ class PlaceRepository extends AbstractDemandedRepository {
         .'ON (mm.uid_foreign = placeGroups.uid) '
         .'WHERE places.place_groups AND placeGroups.uid AND places.uid=' .$placeId;
         $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+        $query->getQuerySettings()->setReturnRawQueryResult(true);
         $query->statement($statement);
         return $query->execute();
     }
@@ -88,7 +88,7 @@ class PlaceRepository extends AbstractDemandedRepository {
         .'ON (place.address= address.uid) ' 
         . 'WHERE place.uid='.$placeId;
         $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(TRUE);
+        $query->getQuerySettings()->setReturnRawQueryResult(true);
         $query->statement($statement);
         if ($result = $query->execute()) {
 			return $result[0];
@@ -100,10 +100,10 @@ class PlaceRepository extends AbstractDemandedRepository {
 	 * Returns an array of query constraints from a given demand object
 	 *
 	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query A query object
-	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand A demand object
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand A demand object
 	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
 	 */
-	protected function createConstraintsFromDemand (\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+	protected function createConstraintsFromDemand (\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
 		$constraints = array();
 		$categories = $demand->getCategories();
 		$categoryConjunction = $demand->getCategoryConjunction();
@@ -116,7 +116,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 				$query,
 				$categories,
 				$categoryConjunction,
-				FALSE
+				false
 			);
 		}
 		$constraintsConjunction = $demand->getConstraintsConjunction();
@@ -149,7 +149,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 
 			if(!empty($subject)) {
 				// search text in specified search fields
-				$searchFields = GeneralUtility::trimExplode(',', $search->getFields(), TRUE);
+				$searchFields = GeneralUtility::trimExplode(',', $search->getFields(), true);
 				if (count($searchFields) === 0) {
 					throw new \UnexpectedValueException('No search fields given', 1382608407);
 				}
@@ -166,7 +166,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 			if(!empty($location)
 					AND !empty($radius)
 					AND empty($bounds)) {
-					$geoCoder = new \Webfox\Ajaxmap\Utility\Geocoder;
+					$geoCoder = new \DWenzel\Ajaxmap\Utility\Geocoder;
 					$geoLocation = $geoCoder::getLocation($location);
 					if ($geoLocation) {
 						$bounds = $geoCoder::getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius/1000);
@@ -197,20 +197,20 @@ class PlaceRepository extends AbstractDemandedRepository {
 	/**
 	 * Returns an array of orderings created from a given demand object.
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
 	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
 	 */
-	protected function createOrderingsFromDemand(\Webfox\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+	protected function createOrderingsFromDemand(\DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
 		$orderings = array();
 
 		//@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
 		if ($demand->getOrder()) {
-			$orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), TRUE);
+			$orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), true);
 
 			if (!empty($orderList)) {
 				// go through every order statement
 				foreach ($orderList as $orderItem) {
-					list($orderField, $ascDesc) = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('|', $orderItem, TRUE);
+					list($orderField, $ascDesc) = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('|', $orderItem, true);
 					// count == 1 means that no direction is given
 					if ($ascDesc) {
 						$orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?

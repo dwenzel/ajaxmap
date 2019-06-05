@@ -1,10 +1,12 @@
 <?php
-namespace Webfox\Ajaxmap\Tests;
+
+namespace DWenzel\Ajaxmap\Tests;
+
 /***************************************************************
  *  Copyright notice
  *
  *  (c) 2015 Dirk Wenzel <dirk.wenzl@cps-it.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -23,10 +25,17 @@ namespace Webfox\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+
+use DWenzel\Ajaxmap\Domain\Model\TreeItemInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\Utility\TreeUtility;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
+use PHPUnit\Framework\MockObject\MockObject;
+use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
- * Test case for class Webfox\Ajaxmap\Utility\TreeUtility.
+ * Test case for class DWenzel\Ajaxmap\Utility\TreeUtility.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,313 +45,310 @@ use TYPO3\CMS\Core\Tests\UnitTestCase;
  * @subpackage Ajax Map
  *
  * @author Dirk Wenzel <dirk.wenzel@cps-it.de>
- * @coversDefaultClass Webfox\Ajaxmap\Utility\TreeUtility
+ * @coversDefaultClass DWenzel\Ajaxmap\Utility\TreeUtility
  */
-class TreeUtilityTest extends UnitTestCase {
-	/**
-	 * @var \Webfox\Ajaxmap\Utility\TreeUtility
-	 */
-	protected $subject;
+class TreeUtilityTest extends UnitTestCase
+{
+    /**
+     * @var \DWenzel\Ajaxmap\Utility\TreeUtility
+     */
+    protected $subject;
 
-	public function setUp() {
-		$this->subject = $this->getAccessibleMock(
-				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
-				array('dummy'), array(), '', FALSE
-		);
-	}
+    public function setUp()
+    {
+        $this->subject = $this->getAccessibleMock(
+            TreeUtility::class,
+            array('dummy'), array(), '', false
+        );
+    }
 
-	public function tearDown() {
-		unset($this->subject);
-	}
+    public function tearDown()
+    {
+        unset($this->subject);
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectLeafToArray
-	 */
-	public function convertObjectLeafToArrayInitiallyReturnsEmptyArray() {
-		$mockObjectLeaf = array(
-				'foo' => 'bar'
-				);
+    /**
+     * @test
+     * @covers ::convertObjectLeafToArray
+     */
+    public function convertObjectLeafToArrayInitiallyReturnsEmptyArray()
+    {
+        $mockObjectLeaf = array(
+            'foo' => 'bar'
+        );
 
-		$this->assertSame(
-				array(),
-				$this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
-		);
-	}
+        $this->assertSame(
+            array(),
+            $this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectLeafToArray
-	 */
-	public function convertObjectLeafToArrayConvertsReturnsEmptyArrayIfItemIsNotSerializable() {
-		$mockObjectLeaf = array(
-				'item' => 'bar'
-				);
+    /**
+     * @test
+     * @covers ::convertObjectLeafToArray
+     */
+    public function convertObjectLeafToArrayConvertsReturnsEmptyArrayIfItemIsNotSerializable()
+    {
+        $mockObjectLeaf = array(
+            'item' => 'bar'
+        );
 
-		$this->assertSame(
-				array(),
-				$this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
-		);
-	}
+        $this->assertSame(
+            array(),
+            $this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectLeafToArray
-	 */
-	public function convertObjectLeafToArrayConvertsSerializableLeafItems() {
-		$mockSerializable = $this->getMock(
-				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', FALSE);
-		$mockObjectLeaf = array(
-				'item' => $mockSerializable
-				);
-		$expectedArray = array('foo' => 'bar');
-		$mockSerializable->expects($this->once())
-			->method('toArray')
-			->with(10, NULL)
-			->will($this->returnValue($expectedArray));
-		$this->assertSame(
-				 $expectedArray,
-				$this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf)
-		);
-	}
+    /**
+     * @test
+     * @covers ::convertObjectLeafToArray
+     */
+    public function convertObjectLeafToArrayConvertsSerializableLeafItems()
+    {
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
+        $mockObjectLeaf = array(
+            'item' => $mockSerializable
+        );
+        $expectedArray = array('foo' => 'bar');
+        $mockSerializable->expects($this->once())
+            ->method('toArray')
+            ->with(10, NULL)
+            ->will($this->returnValue($expectedArray));
+        $this->assertSame(
+            $expectedArray,
+            $this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectLeafToArray
-	 */
-	public function convertObjectLeafToArrayRemovesKeys() {
-		$mockSerializable = $this->getMock(
-				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', FALSE);
-		$mockObjectLeaf = array(
-				'item' => $mockSerializable
-				);
-		$convertedArray = array(
-				'foo' => 'bar',
-				'keyToRemove' => 'baz'
-		);
-		$expectedArray = array(
-				'foo' => 'bar'
-				);
-		$mockSerializable->expects($this->once())
-			->method('toArray')
-			->with(10, NULL)
-			->will($this->returnValue($convertedArray));
-		$this->assertSame(
-				 $expectedArray,
-				$this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf, 'keyToRemove')
-		);
-	}
+    /**
+     * @test
+     * @covers ::convertObjectLeafToArray
+     */
+    public function convertObjectLeafToArrayRemovesKeys()
+    {
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
+        $mockObjectLeaf = array(
+            'item' => $mockSerializable
+        );
+        $convertedArray = array(
+            'foo' => 'bar',
+            'keyToRemove' => 'baz'
+        );
+        $expectedArray = array(
+            'foo' => 'bar'
+        );
+        $mockSerializable->expects($this->once())
+            ->method('toArray')
+            ->with(10, NULL)
+            ->will($this->returnValue($convertedArray));
+        $this->assertSame(
+            $expectedArray,
+            $this->subject->_call('convertObjectLeafToArray', $mockObjectLeaf, 'keyToRemove')
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectBranchToArray
-	 */
-	public function convertObjectBranchToArrayReturnsInitiallyFalse() {
-		$mockObjectLeaf = array(
-				'foo' => 'bar'
-		);
-		$this->assertFalse(
-				$this->subject->_call('convertObjectBranchToArray', $mockObjectLeaf)
-		);
-	}
+    /**
+     * @test
+     * @covers ::convertObjectBranchToArray
+     */
+    public function convertObjectBranchToArrayReturnsInitiallyFalse()
+    {
+        $mockObjectLeaf = array(
+            'foo' => 'bar'
+        );
+        $this->assertFalse(
+            $this->subject->convertObjectBranchToArray($mockObjectLeaf)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectBranchToArray
-	 */
-	public function convertObjectBranchToArrayConvertsBranch() {
-		$subject = $this->getAccessibleMock(
-				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
-				array('convertObjectLeafToArray'), array(), '', FALSE
-		);
-		$mockSerializable = $this->getMock(
-				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', FALSE);
-		$mockObjectLeaf = array(
-				'item' => $mockSerializable
-		);
-		$keyToRemove = 'foo,bar';
-		$mapping = array('foo' => 'bar');
+    /**
+     * @test
+     * @covers ::convertObjectBranchToArray
+     */
+    public function convertObjectBranchToArrayConvertsBranch()
+    {
+        /** @var TreeUtility|MockObject $subject */
+        $subject = $this->getMockBuilder(TreeUtility::class)
+            ->setMethods(['convertObjectLeafToArray'])->getMock();
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
+        $mockObjectLeaf = [
+            'item' => $mockSerializable
+        ];
+        $keysToRemove = 'foo,bar';
+        $mapping = ['foo' => 'bar'];
+        $result = [];
 
-		$subject->expects($this->once())
-			->method('convertObjectLeafToArray')
-			->with($mockObjectLeaf, $keysToRemove, $mapping)
-			->will($this->returnValue($result));
+        $subject->expects($this->once())
+            ->method('convertObjectLeafToArray')
+            ->with($mockObjectLeaf, $keysToRemove, $mapping)
+            ->will($this->returnValue($result));
 
-		$subject->_call('convertObjectBranchToArray', $mockObjectLeaf, $keysToRemove, $mapping);
-	}
+        $subject->convertObjectBranchToArray($mockObjectLeaf, $keysToRemove, $mapping);
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectBranchToArray
-	 */
-	public function convertObjectBranchToArrayConvertsChildren() {
-		$subject = $this->getAccessibleMock(
-				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
-				array('convertObjectLeafToArray'), array(), '', FALSE
-		);
-		$mockSerializable = $this->getMock(
-				'Webfox\\Ajaxmap\\DomainObject\\SerializableInterface',
-				array('toArray', 'toJson'), array(), '', FALSE);
-		$child = 'foo';
+    /**
+     * @test
+     * @covers ::convertObjectBranchToArray
+     */
+    public function convertObjectBranchToArrayConvertsChildren()
+    {
+        /** @var TreeUtility|MockObject $subject */
+        $subject = $this->getMockBuilder(TreeUtility::class)
+            ->setMethods(['convertObjectLeafToArray'])
+            ->getMock();
+        $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
+            ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
+        $child = 'foo';
 
-		$mockObjectLeaf = array(
-				'item' => $mockSerializable,
-				'children' => array($child)
-		);
-		$keyToRemove = 'foo,bar';
-		$mapping = array('foo' => 'bar');
+        $mockObjectLeaf = [
+            'item' => $mockSerializable,
+            'children' => [$child]
+        ];
+        $keysToRemove = 'foo,bar';
+        $mapping = ['foo' => 'bar'];
 
-		$subject->expects($this->exactly(2))
-			->method('convertObjectLeafToArray')
-			->withConsecutive(
-					array($mockObjectLeaf, $keysToRemove, $mapping),
-					array($child, $keysToRemove, $mapping)
-			);
+        $subject->expects($this->exactly(1))
+            ->method('convertObjectLeafToArray')
+            ->with($mockObjectLeaf, $keysToRemove, $mapping);
 
-		$subject->_call('convertObjectBranchToArray', $mockObjectLeaf, $keysToRemove, $mapping);
-	}
+        $subject->convertObjectBranchToArray($mockObjectLeaf, $keysToRemove, $mapping);
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectTreeToArray
-	 */
-	public function convertObjectTreeToArrayReturnsInitiallyEmptyArray() {
-		$objectTree = array(
-			'foo'
-			);
-		$this->assertEquals(
-				array(),
-				$this->subject->convertObjectTreeToArray($objectTree)
-		);
-	}
+    /**
+     * @test
+     * @covers ::convertObjectTreeToArray
+     */
+    public function convertObjectTreeToArrayReturnsInitiallyEmptyArray()
+    {
+        $objectTree = ['foo'];
+        $this->assertEquals(
+            [],
+            $this->subject->convertObjectTreeToArray($objectTree)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::convertObjectTreeToArray
-	 */
-	public function convertObjectTreeToArrayConvertsBranch() {
-		$subject = $this->getAccessibleMock(
-				'Webfox\\Ajaxmap\\Utility\\TreeUtility',
-				array('convertObjectBranchToArray'), array(), '', FALSE
-		);
-		$branch = 'foo';
-		$objectTree = array(
-			$branch
-			);
-		$convertedBranch = 'bar';
-		$mapping = array('fooBar');
-		$keysToRemove = 'baz';
+    /**
+     * @test
+     * @covers ::convertObjectTreeToArray
+     */
+    public function convertObjectTreeToArrayConvertsBranch()
+    {
+        /** @var TreeUtility|MockObject $subject */
+        $subject = $this->getMockBuilder(TreeUtility::class)
+            ->setMethods(['convertObjectBranchToArray'])->getMock();
+        $branch = 'foo';
+        $objectTree = [$branch];
+        $convertedBranch = 'bar';
+        $mapping = ['fooBar'];
+        $keysToRemove = 'baz';
 
-		$subject->expects($this->once())
-			->method('convertObjectBranchToArray')
-			->with($branch, $keysToRemove, $mapping)
-			->will($this->returnValue($convertedBranch));
+        $subject->expects($this->once())
+            ->method('convertObjectBranchToArray')
+            ->with($branch, $keysToRemove, $mapping)
+            ->will($this->returnValue($convertedBranch));
 
-		$this->assertEquals(
-				array($convertedBranch),
-				$subject->convertObjectTreeToArray($objectTree, $keysToRemove, $mapping)
-		);
-	}
+        $this->assertEquals(
+            [$convertedBranch],
+            $subject->convertObjectTreeToArray($objectTree, $keysToRemove, $mapping)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::buildObjectTree
-	 */
-	public function buildObjectTreeReturnsInitiallyEmptyArray() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', FALSE);
+    /**
+     * @test
+     * @covers ::buildObjectTree
+     */
+    public function buildObjectTreeReturnsInitiallyEmptyArray()
+    {
+        /** @var QueryResultInterface|MockObject $queryResult */
+        $queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
 
-		$queryResult->expects($this->once())
-			->method('toArray')
-			->will($this->returnValue(array()));
-		$this->assertEquals(
-				array(),
-				$this->subject->buildObjectTree($queryResult)
-		);
-	}
+        $queryResult->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue(array()));
+        $this->assertEquals(
+            array(),
+            $this->subject->buildObjectTree($queryResult)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::buildObjectTree
-	 */
-	public function buildObjectTreeFlattensObjects() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', FALSE);
-		$mockObject = $this->getMock(
-				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array(), array(), '', FALSE);
-		$uid = 6;
-		$expectedTree = array(
-			$uid => array(
-				'item' => $mockObject,
-				'parent' => NULL
-			)
-		);
+    /**
+     * @test
+     * @covers ::buildObjectTree
+     */
+    public function buildObjectTreeFlattensObjects()
+    {
+        $queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
+        $mockObject = $this->getMockBuilder(TreeItemInterface::class)
+            ->getMockForAbstractClass();
+        $uid = 6;
+        $expectedTree = array(
+            $uid => array(
+                'item' => $mockObject,
+                'parent' => NULL
+            )
+        );
 
-		$queryResult->expects($this->once())
-			->method('toArray')
-			->will($this->returnValue(array($mockObject)));
-		$mockObject->expects($this->once())
-			->method('getUid')
-			->will($this->returnValue($uid));
-		$this->assertEquals(
-				$expectedTree,
-				$this->subject->buildObjectTree($queryResult)
-		);
-	}
+        $queryResult->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue(array($mockObject)));
+        $mockObject->expects($this->once())
+            ->method('getUid')
+            ->will($this->returnValue($uid));
+        $this->assertEquals(
+            $expectedTree,
+            $this->subject->buildObjectTree($queryResult)
+        );
+    }
 
-	/**
-	 * @test
-	 * @covers ::buildObjectTree
-	 */
-	public function buildObjectTreeSetsObjectsWithoutParentToParent() {
-		$queryResult = $this->getMock(
-				'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\QueryResult',
-				array(), array(), '', FALSE);
-		$mockObject = $this->getMock(
-				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array(), array(), '', FALSE);
-		/*$mockParent =  $this->getMock(
-				'Webfox\\Ajaxmap\\Domain\\Model\\TreeItemInterface',
-				array('getParent', 'getUid'), array(), '', FALSE);*/
-		$mockParent = clone($mockObject);
-		$uid = 6;
-		$parentId = 99;
-		$expectedTree = array(
-			$parentId => array(
-				'children' => array(
-					$uid => array(
-						'item' => $mockObject,
-						'parent' => $parentId
-					)
-				),
-				'item' => $mockParent,
-				'parent' => NULL
-			)
-		);
+    /**
+     * @test
+     * @covers ::buildObjectTree
+     */
+    public function buildObjectTreeSetsObjectsWithoutParentToParent()
+    {
+        /** @var QueryResult|MockObject $queryResult */
+        $queryResult = $this->getMockBuilder(QueryResultInterface::class)
+            ->getMockForAbstractClass();
+        $mockObject = $this->getMockBuilder(TreeItemInterface::class)
+            ->getMockForAbstractClass();
+        $mockParent = clone($mockObject);
+        $uid = 6;
+        $parentId = 99;
+        $expectedTree = array(
+            $parentId => array(
+                'children' => array(
+                    $uid => array(
+                        'item' => $mockObject,
+                        'parent' => $parentId
+                    )
+                ),
+                'item' => $mockParent,
+                'parent' => NULL
+            )
+        );
 
-		$queryResult->expects($this->once())
-			->method('toArray')
-			->will($this->returnValue(array($mockObject, $mockParent)));
-		$mockObject->expects($this->once())
-			->method('getUid')
-			->will($this->returnValue($uid));
-		$mockObject->expects($this->exactly(2))
-			->method('getParent')
-			->will($this->returnValue($mockParent));
-		$mockParent->expects($this->exactly(2))
-			->method('getUid')
-			->will($this->returnValue($parentId));
+        $queryResult->expects($this->once())
+            ->method('toArray')
+            ->will($this->returnValue(array($mockObject, $mockParent)));
+        $mockObject->expects($this->once())
+            ->method('getUid')
+            ->will($this->returnValue($uid));
+        $mockObject->expects($this->exactly(2))
+            ->method('getParent')
+            ->will($this->returnValue($mockParent));
+        $mockParent->expects($this->exactly(2))
+            ->method('getUid')
+            ->will($this->returnValue($parentId));
 
-		$this->assertEquals(
-				$expectedTree,
-				$this->subject->buildObjectTree($queryResult)
-		);
-	}
+        $this->assertEquals(
+            $expectedTree,
+            $this->subject->buildObjectTree($queryResult)
+        );
+    }
 }
 

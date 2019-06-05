@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -25,7 +25,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  * Model of tt_content

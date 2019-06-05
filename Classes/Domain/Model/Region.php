@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Domain\Model;
+namespace DWenzel\Ajaxmap\Domain\Model;
 /***************************************************************
  *  Copyright notice
  *
@@ -27,7 +27,7 @@ namespace Webfox\Ajaxmap\Domain\Model;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
-use Webfox\Ajaxmap\DomainObject\SerializableInterface;
+use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 
 /**
  *
@@ -59,40 +59,40 @@ class Region extends AbstractEntity
 	 *
 	 * @var boolean
 	 */
-	protected $clickable = FALSE;
+	protected $clickable = false;
 
 	/**
 	 * suppressInfoWindows
 	 *
 	 * @var boolean
 	 */
-	protected $suppressInfoWindows = FALSE;
+	protected $suppressInfoWindows = false;
 
 	/**
 	 * preserveViewport
 	 *
 	 * @var boolean
 	 */
-	protected $preserveViewport = FALSE;
+	protected $preserveViewport = false;
 
 	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region>
-	 * @lazy
+	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $regions;
 
 	/**
 	 * Main Place
 	 *
-	 * @var \Webfox\Ajaxmap\Domain\Model\Place
-	 * @lazy
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Place
+	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
 	 */
 	protected $mainPlace;
 
 	/**
 	 * __construct
 	 *
-	 * @return \Webfox\Ajaxmap\Domain\Model\Region
+	 * @return \DWenzel\Ajaxmap\Domain\Model\Region
 	 */
 	public function __construct() {
 		$this->initStorageObjects();
@@ -232,7 +232,7 @@ class Region extends AbstractEntity
 	/**
 	 * Removes a Region
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $regionToRemove The Region to be removed
 	 * @return void
 	 */
 	public function removeRegion(Region $regionToRemove) {
@@ -242,7 +242,7 @@ class Region extends AbstractEntity
 	/**
 	 * Returns the regions
 	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
 	 */
 	public function getRegions() {
 		return $this->regions;
@@ -251,7 +251,7 @@ class Region extends AbstractEntity
 	/**
 	 * Sets the regions
 	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\Webfox\Ajaxmap\Domain\Model\Region> $regions
+	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
 	 * @return void
 	 */
 	public function setRegions(ObjectStorage $regions) {
@@ -261,7 +261,7 @@ class Region extends AbstractEntity
 	/**
 	 * Adds a Region
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Region $region
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $region
 	 * @return void
 	 */
 	public function addRegion(Region $region) {
@@ -271,7 +271,7 @@ class Region extends AbstractEntity
 	/**
 	 * Gets the main place
 	 *
-	 * @return \Webfox\Ajaxmap\Domain\Model\Place
+	 * @return \DWenzel\Ajaxmap\Domain\Model\Place
 	 */
 	public function getMainPlace() {
 		return $this->mainPlace;
@@ -280,7 +280,7 @@ class Region extends AbstractEntity
 	/**
 	 * Sets the main place
 	 *
-	 * @param \Webfox\Ajaxmap\Domain\Model\Place $place
+	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $place
 	 */
 	public function setMainPlace($place) {
 		$this->mainPlace = $place;

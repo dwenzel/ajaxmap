@@ -1,6 +1,6 @@
 <?php
 
-namespace Webfox\Ajaxmap\Tests;
+namespace DWenzel\Ajaxmap\Tests;
 /***************************************************************
  *  Copyright notice
  *
@@ -26,7 +26,7 @@ namespace Webfox\Ajaxmap\Tests;
  ***************************************************************/
 
 /**
- * Test case for class Webfox\Ajaxmap\Domain\Model\Region.
+ * Test case for class DWenzel\Ajaxmap\Domain\Model\Region.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -37,22 +37,17 @@ namespace Webfox\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-use TYPO3\CMS\Core\Tests\UnitTestCase;
+use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 class RegionTest extends UnitTestCase {
 	/**
-	 * @var \Webfox\Ajaxmap\Domain\Model\Region
+	 * @var \DWenzel\Ajaxmap\Domain\Model\Region
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \Webfox\Ajaxmap\Domain\Model\Region();
+		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Region();
 	}
-
-	/**
-	 * @test
-	 */
-	public function getTitleReturnsInitialValueForString() { }
 
 	/**
 	 * @test
@@ -66,11 +61,6 @@ class RegionTest extends UnitTestCase {
 		);
 	}
 	
-	/**
-	 * @test
-	 */
-	public function getFileReturnsInitialValueForString() { }
-
 	/**
 	 * @test
 	 */
@@ -88,7 +78,7 @@ class RegionTest extends UnitTestCase {
 	 */
 	public function getClickableReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			FALSE,
+			false,
 			$this->fixture->getClickable()
 		);
 	}
@@ -97,10 +87,10 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setClickableForBooleanSetsClickable() { 
-		$this->fixture->setClickable(TRUE);
+		$this->fixture->setClickable(true);
 
 		$this->assertSame(
-			TRUE,
+			true,
 			$this->fixture->getClickable()
 		);
 	}
@@ -118,7 +108,7 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function isClickableForBooleanReturnsIsClickable() {
-		$this->fixture->setClickable(TRUE);
+		$this->fixture->setClickable(true);
 		$this->assertTrue(
 				$this->fixture->isClickable()
 		);
@@ -129,7 +119,7 @@ class RegionTest extends UnitTestCase {
 	 */
 	public function getSuppressInfoWindowsReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			FALSE,
+			false,
 			$this->fixture->getSuppressInfoWindows()
 		);
 	}
@@ -138,10 +128,10 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setSuppressInfoWindowsForBooleanSetsSuppressInfoWindows() { 
-		$this->fixture->setSuppressInfoWindows(TRUE);
+		$this->fixture->setSuppressInfoWindows(true);
 
 		$this->assertSame(
-			TRUE,
+			true,
 			$this->fixture->getSuppressInfoWindows()
 		);
 	}
@@ -159,7 +149,7 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function isSuppressInfoWindowsForBooleanReturnsIsSuppressInfoWindows() {
-		$this->fixture->setSuppressInfoWindows(TRUE);
+		$this->fixture->setSuppressInfoWindows(true);
 		$this->assertTrue(
 				$this->fixture->isSuppressInfoWindows()
 		);
@@ -170,7 +160,7 @@ class RegionTest extends UnitTestCase {
 	 */
 	public function getPreserveViewportReturnsInitialValueForBoolean() { 
 		$this->assertSame(
-			FALSE,
+			false,
 			$this->fixture->getPreserveViewport()
 		);
 	}
@@ -179,10 +169,10 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setPreserveViewportForBooleanSetsPreserveViewport() { 
-		$this->fixture->setPreserveViewport(TRUE);
+		$this->fixture->setPreserveViewport(true);
 
 		$this->assertSame(
-			TRUE,
+			true,
 			$this->fixture->getPreserveViewport()
 		);
 	}
@@ -200,7 +190,7 @@ class RegionTest extends UnitTestCase {
 	 * @test
 	 */
 	public function isPreserveViewportForBooleanReturnsIsPreserveViewport() {
-		$this->fixture->setPreserveViewport(TRUE);
+		$this->fixture->setPreserveViewport(true);
 		$this->assertTrue(
 				$this->fixture->isPreserveViewport()
 		);

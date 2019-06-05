@@ -137,6 +137,9 @@
 		<trans-unit id="tx_ajaxmap_domain_model_region.selectable" xml:space="preserve">
 			<source>Selectable</source>
 		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_region.unselectable" xml:space="preserve">
+			<source>not selectable</source>
+		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_region.selected" xml:space="preserve">
 			<source>Selected</source>
 		</trans-unit>
