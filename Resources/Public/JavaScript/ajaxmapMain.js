@@ -250,7 +250,8 @@ var ajaxMap = ajaxMap || {};
                 }
 
                 // location types Selector
-                if (mapEntry.locationTypes.length) {
+                if (response.locationTypes.length) {
+                    mapEntry.locationTypes = response.locationTypes;
                     renderLocationTypesTree(mapEntry);
                     initLocationTypesSelector(mapEntry);
                 }
@@ -586,7 +587,9 @@ var ajaxMap = ajaxMap || {};
         $.each(children, function (index, child) {
             if (child.data.hasOwnProperty(name)) {
                 var attribute = child.data[name];
-                if (attribute.hasOwnProperty('key') && keys.indexOf(attribute.key) < 0) {
+                if (attribute !== undefined &&
+                    attribute !== null &&
+                    attribute.hasOwnProperty('key') && !keys[attribute.key]) {
                     keys.push(attribute.key);
                 } else {
                     if (attribute instanceof Array) {

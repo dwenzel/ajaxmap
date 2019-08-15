@@ -22,6 +22,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  ***************************************************************/
 
 use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
+use DWenzel\Ajaxmap\Domain\Model\TreeItemInterface;
 use DWenzel\Ajaxmap\Service\ChildrenService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Generic\Mapper\DataMapper;
@@ -39,6 +40,18 @@ use TYPO3\CMS\Extbase\Persistence\Repository;
 abstract class AbstractDemandedRepository
     extends Repository
 {
+    /**
+     * @var ChildrenService
+     */
+    protected $childrenService;
+
+    /**
+     * @param ChildrenService $childrenService
+     */
+    public function injectChildrenService(ChildrenService $childrenService)
+    {
+        $this->childrenService = $childrenService;
+    }
     /**
      * Returns the objects of this repository matching the demand.
      *
@@ -228,8 +241,8 @@ abstract class AbstractDemandedRepository
     public function findChildren($rootIdList, $respectStoragePage = true, $removeGivenIdListFromResult = false)
     {
         $objectClass = new \ReflectionClass($this->objectType);
-        if ($objectClass->implementsInterface('DWenzel\\Ajaxmap\\Domain\\Model\\TreeItemInterface')) {
-            $idList = ChildrenService::getChildren(
+        if ($objectClass->implementsInterface(TreeItemInterface::class)) {
+            $idList = $this->childrenService->getChildren(
                 $this->getTableName(),
                 $rootIdList,
                 0,

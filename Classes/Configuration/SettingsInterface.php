@@ -168,5 +168,10 @@ interface SettingsInterface
     ];
 
     const SEPARATOR_GEO_COORDINATES = ',';
+    
+    /**
+     * Cache identifiers
+     */
+    const CACHE_CHILDREN = 'cache_ajaxmap_children';
 
 }

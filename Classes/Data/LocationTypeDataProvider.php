@@ -4,6 +4,7 @@ namespace DWenzel\Ajaxmap\Data;
 
 use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
+use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
@@ -73,8 +74,9 @@ class LocationTypeDataProvider implements DataProviderInterface
         $mapId = (int)$queryParameter['mapId'];
         $data = [];
 
+        /** @var Map $map */
         $map = $this->mapRepository->findByUid($mapId);
-        if ($map AND $map->getLocationTypes()) {
+        if ($map && $map->getLocationTypes()) {
             $locationTypesObjArray = $map->getLocationTypes()->toArray();
             foreach ($locationTypesObjArray as $locationType) {
                 /** @var LocationType $locationType */
