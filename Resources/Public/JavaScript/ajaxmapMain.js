@@ -561,8 +561,8 @@ var ajaxMap = ajaxMap || {};
             mapEntry = mapStore[mapNumber],
             filters = mapEntry.settings.placesTree.updateFilters;
         $.each(filters, function (filterName, filter) {
-            var treeSelector = '#' + filter.treeName + mapId,
-                tree = $(treeSelector).fancytree('getTree'),
+            var treeSelector = '#' + filter.treeName + mapId;
+                var tree = $(treeSelector).fancytree('getTree'),
                 children = placesTree.getRootNode().children,
                 placeKeys = getKeysByAttribute(children, filterName);
             filterTree(tree, placeKeys);
