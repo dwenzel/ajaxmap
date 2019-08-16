@@ -2,5 +2,5 @@
 # include jQuery library
 
 page.includeJSFooterlibs {
-    jQuery = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery/jquery-2.2.4.min.js
+    jQuery = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jquery-3.4.1.min.js
 }
