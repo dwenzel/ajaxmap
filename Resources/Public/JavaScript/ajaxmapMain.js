@@ -377,7 +377,6 @@ var ajaxMap = ajaxMap || {};
                 }
             }
         }
-        console.log(localSettings);
         $(select).fancytree(localSettings).data('mapId', mapId);
     }
 
@@ -397,6 +396,7 @@ var ajaxMap = ajaxMap || {};
                 source: mapEntry.regions,
                 filter: options.filter,
                 extensions: options.extensions,
+                glyph: options.glyph,
                 icon: options.icons,
                 select: function (event, data) {
                     var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
@@ -635,6 +635,7 @@ var ajaxMap = ajaxMap || {};
                 cookieId: "fancyTreeLocationTypes" + mapEntry.id,
                 selectMode: options.selectMode,
                 extensions: options.extensions,
+                glyph: options.glyph,
                 filter: options.filter,
                 source: mapEntry.locationTypes,
                 select: function (flag, node) {

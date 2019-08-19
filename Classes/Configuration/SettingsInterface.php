@@ -116,7 +116,14 @@ interface SettingsInterface
                 'selectMode' => 3,
                 'icons' => false,
                 'checkbox' => true,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -124,15 +131,30 @@ interface SettingsInterface
             ],
             'categoryTree' => [
                 'icons' => false,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
                 ]
             ],
             'placeGroupTree' => [
+                'checkbox' => true,
                 'icons' => false,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -140,8 +162,16 @@ interface SettingsInterface
             ],
             'locationTypeTree' => [
                 'checkbox' => true,
+                'icons' => false,
                 'selectMode' => 1,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -168,7 +198,7 @@ interface SettingsInterface
     ];
 
     const SEPARATOR_GEO_COORDINATES = ',';
-    
+
     /**
      * Cache identifiers
      */
