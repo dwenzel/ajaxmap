@@ -191,6 +191,7 @@ var ajaxMap = ajaxMap || {};
                 disableDefaultUI: response.disableDefaultUI
             });
 
+
         // store map in array
         mapEntry.map = map;
         // store regions
@@ -203,6 +204,10 @@ var ajaxMap = ajaxMap || {};
                 maxWidth: 370
             }
         );
+
+        // marker clusterer
+        mapEntry.markerClusterer = new MarkerClusterer(map, [], mapEntry.settings.markerClusterer);
+
     }
 
     /**
@@ -255,6 +260,7 @@ var ajaxMap = ajaxMap || {};
                     renderLocationTypesTree(mapEntry);
                     initLocationTypesSelector(mapEntry);
                 }
+
                 // placeGroups tree
                 renderCategoryTree(mapEntry);
                 renderPlaceGroupTree(mapEntry);
@@ -747,6 +753,7 @@ var ajaxMap = ajaxMap || {};
             mapId = mapEntry.id,
             mapPlaces = mapEntry.places,
             selectedPlaces = [],
+            clusterer = mapEntry.markerClusterer,
             mapMarkers = mapEntry.markers || [],
             selectedLocationTypeKeys = getSelectedKeys('#ajaxMapLocationTypesTree' + mapId),
             selectedCategoryKeys = getSelectedKeys('#ajaxMapCategoryTree' + mapId),
@@ -799,9 +806,11 @@ var ajaxMap = ajaxMap || {};
                     && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)) {
                     marker.setMap(map);
                     selectedPlaces[selectedPlaces.length] = place;
+                    clusterer.addMarker(marker);
                 }
                 else {
                     marker.setMap(null);
+                    clusterer.removeMarker(marker);
                 }
             }
         }
@@ -823,6 +832,7 @@ var ajaxMap = ajaxMap || {};
         var map = mapEntry.map,
             mapId = mapEntry.id,
             mapPlaces = mapEntry.places,
+            clusterer = mapEntry.markerClusterer,
             mapMarkers = mapEntry.markers || [];
 
         for (var i = 0, j = mapPlaces.length; i < j; i++) {
@@ -833,12 +843,14 @@ var ajaxMap = ajaxMap || {};
                 mapMarkers[i] = createMarker(mapEntry, getMapNumber(mapId), place);
             } else {
                 marker.setMap(null);
+                clusterer.removeMarker(marker);
             }
         }
         mapMarkers.forEach(
             function (element) {
                 if ($.inArray(element.place.key, selectedPlaceKeys) > -1) {
                     element.setMap(map);
+                    clusterer.addMarker(element);
                 }
             });
     }

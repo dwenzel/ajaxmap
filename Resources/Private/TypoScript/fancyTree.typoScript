@@ -3,6 +3,7 @@
 
 page {
     includeJSFooterlibs {
+        markerClusterer = EXT:ajaxmap/Resources/Public/JavaScript/Lib/googleMaps/markerclusterer.js
         jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery/jquery.cookie.js
         fancyTree = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/jquery.fancytree-all-deps.js
         fancyTreeGlyph = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/modules/jquery.fancytree.glyph.js

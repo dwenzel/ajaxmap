@@ -29,6 +29,7 @@ interface SettingsInterface
     const EXTENSION_KEY = 'ajaxmap';
     const VENDOR_NAME = 'DWenzel';
 
+    const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
     /**
      * API parameters
      */
@@ -110,6 +111,9 @@ interface SettingsInterface
         'places' => '',
         'marker' => [],
         'settings' => [
+            'markerClusterer' => [
+                'imagePath' => self::RESOURCES_PATH . 'Public/Icons/Cluster/m'
+            ],
             'regionTree' => [
                 'minExpandLevel' => 3,
                 // 1=> single, 2=> multi, 3=> multi hierarchical
