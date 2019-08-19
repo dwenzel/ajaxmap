@@ -377,6 +377,7 @@ var ajaxMap = ajaxMap || {};
                 }
             }
         }
+        console.log(localSettings);
         $(select).fancytree(localSettings).data('mapId', mapId);
     }
 
@@ -396,7 +397,7 @@ var ajaxMap = ajaxMap || {};
                 source: mapEntry.regions,
                 filter: options.filter,
                 extensions: options.extensions,
-                icons: options.icons,
+                icon: options.icons,
                 select: function (event, data) {
                     var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
                     var selectedNodes = data.tree.getSelectedNodes();
@@ -460,7 +461,7 @@ var ajaxMap = ajaxMap || {};
                 map: map,
                 children: []
             },
-            icons: mapEntry.settings.placesTree.icons,
+            icon: mapEntry.settings.placesTree.icons,
             extensions: mapEntry.settings.placesTree.extensions,
             quicksearch: mapEntry.settings.placesTree.quicksearch,
             filter: mapEntry.settings.placesTree.filter,
