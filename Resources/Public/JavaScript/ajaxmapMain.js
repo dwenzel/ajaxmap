@@ -4,8 +4,7 @@ var ajaxMap = ajaxMap || {};
     var basePath; // base path for resources like icons and kml files
     if (!window.location.origin) {
         basePath = window.location.protocol + "//" + window.location.host + "/";
-    }
-    else {
+    } else {
         // for webkit browsers
         basePath = window.location.origin + "/";
     }
@@ -298,7 +297,7 @@ var ajaxMap = ajaxMap || {};
      * @param mapEntry
      */
     this.addLayer = function (newLayerData, mapEntry) {
-        if (typeof(mapEntry.layers[newLayerData.key]) === 'undefined') {
+        if (typeof (mapEntry.layers[newLayerData.key]) === 'undefined') {
             var layerUrl = basePath + newLayerData.file,
                 layerOptions = {
                     clickable: newLayerData.clickable,
@@ -306,7 +305,7 @@ var ajaxMap = ajaxMap || {};
                     suppressInfoWindows: newLayerData.suppressInfoWindows
                 },
                 newLayer = new google.maps.KmlLayer(layerUrl, layerOptions);
-            if (typeof(newLayer) !== 'undefined') {
+            if (typeof (newLayer) !== 'undefined') {
                 mapEntry.layers[newLayerData.key] = newLayer;
             }
         }
@@ -570,7 +569,7 @@ var ajaxMap = ajaxMap || {};
             filters = mapEntry.settings.placesTree.updateFilters;
         $.each(filters, function (filterName, filter) {
             var treeSelector = '#' + filter.treeName + mapId;
-                var tree = $(treeSelector).fancytree('getTree'),
+            var tree = $(treeSelector).fancytree('getTree'),
                 children = placesTree.getRootNode().children,
                 placeKeys = getKeysByAttribute(children, filterName);
             filterTree(tree, placeKeys);
@@ -766,6 +765,8 @@ var ajaxMap = ajaxMap || {};
             selectedLocationType = selectedLocationTypeKeys[0];
         }
 
+        clusterer.removeMarkers(mapMarkers);
+
         // add markers for all places
         for (var i = 0, j = mapPlaces.length; i < j; i++) {
             var place = mapPlaces[i],
@@ -806,14 +807,15 @@ var ajaxMap = ajaxMap || {};
                     && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)) {
                     marker.setMap(map);
                     selectedPlaces[selectedPlaces.length] = place;
-                    clusterer.addMarker(marker);
                 }
                 else {
                     marker.setMap(null);
-                    clusterer.removeMarker(marker);
                 }
             }
         }
+
+        clusterer.addMarkers(mapMarkers);
+
         // update only if mapEntry is already initialized
         if (typeof mapEntry.markers != 'undefined') {
             updatePlacesTree(mapId, selectedPlaces);
@@ -846,11 +848,12 @@ var ajaxMap = ajaxMap || {};
                 clusterer.removeMarker(marker);
             }
         }
+        clusterer.addMarkers(mapMarkers);
+
         mapMarkers.forEach(
             function (element) {
                 if ($.inArray(element.place.key, selectedPlaceKeys) > -1) {
                     element.setMap(map);
-                    clusterer.addMarker(element);
                 }
             });
     }
