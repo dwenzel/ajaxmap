@@ -1,4 +1,13 @@
-var ajaxMap = ajaxMap || {};
+import $ from "jquery";
+import 'google-maps'
+import '@google/markerclusterer'
+import {createTree} from 'jquery.fancytree';
+
+import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
+import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
+
+let ajaxMap = ajaxMap || {};
+
 
 (function ($) {
     var basePath; // base path for resources like icons and kml files
