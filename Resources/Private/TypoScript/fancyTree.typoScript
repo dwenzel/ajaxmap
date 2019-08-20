@@ -2,12 +2,20 @@
 # include JavaScript for jQuery plugin FancyTree
 
 page {
-	includeJSFooterlibs {
-		jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery-1.10/jquery.cookie.js
-		fancyTree = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/jquery.fancytree-all-deps.js
-		fancyTreeFilter = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/modules/jquery.fancytree.filter.js
-	}
-	includeCSS {
-		fancyTree = EXT:ajaxmap/Resources/Public/Contrib/jquery.fancytree-2.9.0/skin-lion/ui.fancytree.css
-	}
+    includeJSFooterlibs {
+        markerClusterer = EXT:ajaxmap/Resources/Public/JavaScript/Lib/googleMaps/markerclusterer.js
+        jQueryCookie = EXT:ajaxmap/Resources/Public/JavaScript/Lib/jQuery/jquery.cookie.js
+        fancyTree = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/jquery.fancytree-all-deps.js
+        fancyTreeGlyph = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/modules/jquery.fancytree.glyph.js
+        fancyTreeFilter = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/modules/jquery.fancytree.filter.js
+    }
+
+    includeCSSLibs {
+        fontAwesome = https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css
+        fontAwesome.external = 1
+    }
+
+    includeCSS {
+        fancyTree = EXT:ajaxmap/Resources/Public/Contrib/fancytree-2.31.0/skin-awesome/ui.fancytree.css
+    }
 }

@@ -29,6 +29,7 @@ interface SettingsInterface
     const EXTENSION_KEY = 'ajaxmap';
     const VENDOR_NAME = 'DWenzel';
 
+    const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
     /**
      * API parameters
      */
@@ -110,13 +111,23 @@ interface SettingsInterface
         'places' => '',
         'marker' => [],
         'settings' => [
+            'markerClusterer' => [
+                'imagePath' => self::RESOURCES_PATH . 'Public/Icons/Cluster/m'
+            ],
             'regionTree' => [
                 'minExpandLevel' => 3,
                 // 1=> single, 2=> multi, 3=> multi hierarchical
                 'selectMode' => 3,
                 'icons' => false,
                 'checkbox' => true,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -124,15 +135,30 @@ interface SettingsInterface
             ],
             'categoryTree' => [
                 'icons' => false,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
                 ]
             ],
             'placeGroupTree' => [
+                'checkbox' => true,
                 'icons' => false,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -140,8 +166,16 @@ interface SettingsInterface
             ],
             'locationTypeTree' => [
                 'checkbox' => true,
+                'icons' => false,
                 'selectMode' => 1,
-                'extensions' => ['filter'],
+                'extensions' => ['filter', 'glyph'],
+                'glyph' => [
+                    'preset' => 'awesome4',
+                    'map' => [
+                        'folder' => 'fa-folder',
+                        'folderOpen' => 'fa-folder-open'
+                    ]
+                ],
                 'filter' => [
                     'autoApply' => true,
                     'mode' => 'hide'
@@ -168,7 +202,7 @@ interface SettingsInterface
     ];
 
     const SEPARATOR_GEO_COORDINATES = ',';
-    
+
     /**
      * Cache identifiers
      */
