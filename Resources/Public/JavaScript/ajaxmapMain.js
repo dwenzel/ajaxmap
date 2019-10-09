@@ -1,6 +1,10 @@
 import $ from "jquery";
+import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
+import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
+import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
+
 import MarkerClusterer from '@google/markerclusterer'
-import css from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
+import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
 
 // import folder icons for tree
@@ -35,14 +39,9 @@ library.add(
     farSquare
 );
 
+var ajaxMap = {};
 // Replace any existing <i> tags with <svg> and set up a MutationObserver to
 // continue doing this as the DOM changes.
-dom.watch();
-import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
-import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
-import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
-
-var ajaxMap = {};
 
 (function ($) {
 
@@ -124,7 +123,7 @@ var ajaxMap = {};
             // store address when fetched for the first time and reuse it
             place.address = addressJson;
         }
-        content = '';
+        let content = '';
         content += (place.title) ? '<h4 class="infoWindowTitle">' + place.title + '</h4>' : "";
         content += (place.icon) ?
             '<img width="120px" class="infoWindowImage" src="' + place.icon + '"/>' : "";
