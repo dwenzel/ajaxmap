@@ -21,3 +21,29 @@ composer require dwenzel/ajaxmap
 ``` 
 
 * Include static TypoScript Template 
+
+
+## Contribution
+
+Suggestions and contributions are highly welcome.
+Please submit issues or pull requests.
+
+### Install Dependencies
+```
+npm install
+```
+
+### Build JavaScript
+
+The main extension script is located in `Resources/Public/JavaScript` 
+and build into the `Resources/Public/Dist` directory.
+
+* Production Mode
+
+npx webpack --mode=production --watch=true
+```
+* Development Mode
+
+```
+npx webpack --mode=development --watch=true
+```
