@@ -40,6 +40,7 @@ and build into the `Resources/Public/Dist` directory.
 
 * Production Mode
 
+```
 npx webpack --mode=production --watch=true
 ```
 * Development Mode
