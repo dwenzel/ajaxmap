@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script>
+</head>
+<body>
+
+<div id="c35"
+    class="u-space-b:default"
+
+>
+    <div class="tx-ajaxmap">
+        <script type="text/javascript">
+            var mapStore = null;
+
+            if (!mapStore) {
+                var mapStore = [];
+            }
+
+            if (typeof regionStore === "undefined") {
+                var regionStore = [];
+            }
+            if (typeof categoryTreeStore === "undefined") {
+                var categoryTreeStore = [];
+            }
+
+            var mapSettings = {
+                "id": "1",
+                "map": "",
+                "regions": "",
+                "kmlLayer": "",
+                "placeGroups": "",
+                "locationTypes": [],
+                "infoWindow": "",
+                "places": "",
+                "marker": [],
+                "settings": {
+                    "markerClusterer": {"imagePath": "typo3conf\/ext\/ajaxmap\/Resources\/Public\/Icons\/Cluster\/m"},
+                    "regionTree": {
+                        "minExpandLevel": 3,
+                        "selectMode": 3,
+                        "icons": false,
+                        "checkbox": true,
+                        "extensions": ["filter", "glyph"],
+                        "glyph": {
+                            "preset": "awesome4",
+                            "map": {
+                                "folder": "fa-folder",
+                                "folderOpen": "fa-folder-open"
+                            }
+                        },
+                        "filter": {
+                            "autoApply": true,
+                            "mode": "hide"
+                        }
+                    },
+                    "categoryTree": {
+                        "icons": false,
+                        "extensions": ["filter", "glyph"],
+                        "glyph": {
+                            "preset": "awesome4",
+                            "map": {
+                                "folder": "fa-folder",
+                                "folderOpen": "fa-folder-open"
+                            }
+                        },
+                        "filter": {
+                            "autoApply": true,
+                            "mode": "hide"
+                        }
+                    },
+                    "placeGroupTree": {
+                        "checkbox": true,
+                        "icons": false,
+                        "extensions": ["filter", "glyph"],
+                        "glyph": {
+                            "preset": "awesome4",
+                            "map": {
+                                "folder": "fa-folder",
+                                "folderOpen": "fa-folder-open"
+                            }
+                        },
+                        "filter": {
+                            "autoApply": true,
+                            "mode": "hide"
+                        }
+                    },
+                    "locationTypeTree": {
+                        "checkbox": true,
+                        "icons": false,
+                        "selectMode": 1,
+                        "extensions": ["filter", "glyph"],
+                        "glyph": {
+                            "preset": "awesome4",
+                            "map": {
+                                "folder": "fa-folder",
+                                "folderOpen": "fa-folder-open"
+                            }
+                        },
+                        "filter": {
+                            "autoApply": true,
+                            "mode": "hide"
+                        }
+                    },
+                    "placesTree": {
+                        "toggleInfoWindowOnSelect": true,
+                        "selectMode": 1,
+                        "icons": false,
+                        "extensions": ["filter"],
+                        "quicksearch": true,
+                        "filter": {
+                            "autoApply": true,
+                            "mode": "hide"
+                        },
+                        "updateFilters": {
+                            "locationType": {"treeName": "ajaxMapLocationTypesTree"},
+                            "categories": {"treeName": "ajaxMapCategoryTree"},
+                            "regions": {
+                                "treeName": "ajaxMapRegionsTree",
+                                "updateLayers": true
+                            },
+                            "placeGroups": {"treeName": "ajaxMapPlaceGroupTree"}
+                        }
+                    }
+                },
+                "pageId": 149
+            };
+
+            mapStore.push(mapSettings);
+            regionStore.push({"id": mapSettings.id});
+            categoryTreeStore.push({"id": mapSettings.id});
+
+        </script>
+
+        <div class="mapWrap">
+            <div id="ajaxMapContainer_Map1"></div>
+        </div>
+
+        <div id="placesTreeWrap"><input name="filterPlaces" placeholder="Suchbegriff">
+            <button id="btnResetPlacesFilter" title="Filter zurücksetzen">&times;</button>
+            <span id="matches"></span>
+            <div id="ajaxMapPlacesTree1" class="dynaTree"></div>
+        </div>
+
+        <div id="ajaxMapRegionsTree1" class="dynaTree"></div>
+        <div id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
+        <div id="ajaxMapCategoryTree1" class="dynaTree"></div>
+        <div id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
+
+        <form name="txAjaxmapStore" action="/beraterkarte-2?tx_ajaxmap_map%5Bcontroller%5D=Map&amp;cHash=7a54e36bceaa376d21d6255e28ebb40a" method="post">
+            <div>
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][@extension]" value="Ajaxmap" />
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][@vendor]" value="DWenzel" />
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][@controller]" value="Map" />
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][@action]" value="show" />
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][arguments]" value="YTowOnt9f86ca4fd3e3b6aacedcfb2344bc198b4d44cfebb" />
+                <input type="hidden" name="tx_ajaxmap_map[__referrer][@request]" value="a:4:{s:10:&quot;@extension&quot;;s:7:&quot;Ajaxmap&quot;;s:11:&quot;@controller&quot;;s:3:&quot;Map&quot;;s:7:&quot;@action&quot;;s:4:&quot;show&quot;;s:7:&quot;@vendor&quot;;s:7:&quot;DWenzel&quot;;}6beac5590010337ac3931c66cd706544a46cc564" />
+                <input type="hidden" name="tx_ajaxmap_map[__trustedProperties]" value="a:1:{s:14:&quot;txAjaxmapStore&quot;;a:1:{s:5:&quot;mapId&quot;;i:1;}}d2f9d8e7dd4ea12d85c9bb4c7102601b9d8ac873" />
+            </div>
+
+            <input type="hidden" name="tx_ajaxmap_map[txAjaxmapStore][mapId]" value="1" /></form>
+    </div>
+</div>
+
+</body>
+</html>
+

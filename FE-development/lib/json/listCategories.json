@@ -1,0 +1,26 @@
+[
+  {
+    "description": "",
+    "title": "top cat",
+    "key": 2,
+    "children": [
+      {
+        "description": "",
+        "title": "cat A",
+        "key": 1,
+        "children": [
+          {
+            "description": "",
+            "title": "cat A-A",
+            "key": 4
+          }
+        ]
+      },
+      {
+        "description": "",
+        "title": "cat B",
+        "key": 3
+      }
+    ]
+  }
+]
