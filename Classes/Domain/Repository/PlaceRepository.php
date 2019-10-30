@@ -24,8 +24,13 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
+
+use CPSIT\GeoLocationService\Service\GeoCoder;
+use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+
 /**
  *
  *
@@ -34,76 +39,16 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
  *
  */
 class PlaceRepository extends AbstractDemandedRepository {
+
     /**
-    *@param string $where
-    */
-    public function findRawSelectWhere($select, $where){
-    	$statement = 'SELECT ' .$select .' from tx_ajaxmap_domain_model_place WHERE ' . $where;
-    	$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(true);
-		$query->statement($statement);
-		return $query->execute();
-    }
-
-	public function findCategoriesForPlace($placeId){
-		$statement = 'SELECT categories.uid, categories.title '
-			.' FROM tx_ajaxmap_domain_model_place AS places '
-			.'LEFT JOIN tx_ajaxmap_place_category_mm AS mm '
-			.'ON (places.uid = mm.uid_local) '
-			.'LEFT JOIN sys_category AS categories '
-			.'ON (mm.uid_foreign = categories.uid) '
-			.'WHERE places.categories AND categories.uid AND places.uid=' .$placeId;
-		$query = $this->createQuery();
-		$query->getQuerySettings()->setReturnRawQueryResult(true);
-		$query->statement($statement);
-		return $query->execute();
-	}
-
-	/**
-	 * @param integer $placeId
-	 * @return array|\TYPO3\CMS\Extbase\Persistence\QueryResultInterface
-	 */
-    public function findPlaceGroupsForPlace($placeId){
-        $statement = 'SELECT placeGroups.uid, placeGroups.title '
-        .' FROM tx_ajaxmap_domain_model_place AS places '
-        .'LEFT JOIN tx_ajaxmap_place_placegroup_mm AS mm '
-        .'ON (places.uid = mm.uid_local) '
-        .'LEFT JOIN tx_ajaxmap_domain_model_placegroup AS placeGroups '
-        .'ON (mm.uid_foreign = placeGroups.uid) '
-        .'WHERE places.place_groups AND placeGroups.uid AND places.uid=' .$placeId;
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(true);
-        $query->statement($statement);
-        return $query->execute();
-    }
-
-	/**
-	 * @param integer $placeId
-	 * @return array | NULL
-	 */
-	public function findAddressForPlace($placeId){
-        $statement = 'SELECT * 
-             FROM tt_address AS address ' 
-        .'LEFT JOIN tx_ajaxmap_domain_model_place AS place '
-        .'ON (place.address= address.uid) ' 
-        . 'WHERE place.uid='.$placeId;
-        $query = $this->createQuery();
-        $query->getQuerySettings()->setReturnRawQueryResult(true);
-        $query->statement($statement);
-        if ($result = $query->execute()) {
-			return $result[0];
-		}
-		return NULL;
-    }
-
-	/**
-	 * Returns an array of query constraints from a given demand object
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\QueryInterface $query A query object
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand A demand object
-	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
-	 */
-	protected function createConstraintsFromDemand (\TYPO3\CMS\Extbase\Persistence\QueryInterface $query, \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+     * Returns an array of query constraints from a given demand object
+     *
+     * @param QueryInterface $query A query object
+     * @param DemandInterface $demand A demand object
+     * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
+     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     */
+	protected function createConstraintsFromDemand (QueryInterface $query, DemandInterface $demand) {
 		$constraints = array();
 		$categories = $demand->getCategories();
 		$categoryConjunction = $demand->getCategoryConjunction();
@@ -166,10 +111,10 @@ class PlaceRepository extends AbstractDemandedRepository {
 			if(!empty($location)
 					AND !empty($radius)
 					AND empty($bounds)) {
-					$geoCoder = new \DWenzel\Ajaxmap\Utility\Geocoder;
-					$geoLocation = $geoCoder::getLocation($location);
+					$geoCoder = new GeoCoder();
+					$geoLocation = $geoCoder->getLocation($location);
 					if ($geoLocation) {
-						$bounds = $geoCoder::getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius/1000);
+						$bounds = $geoCoder->getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius/1000);
 					}
 			}
 			if($bounds AND
@@ -197,27 +142,27 @@ class PlaceRepository extends AbstractDemandedRepository {
 	/**
 	 * Returns an array of orderings created from a given demand object.
 	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand
-	 * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
+	 * @param DemandInterface $demand
+	 * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
 	 */
-	protected function createOrderingsFromDemand(\DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface $demand) {
+	protected function createOrderingsFromDemand(DemandInterface $demand) {
 		$orderings = array();
 
 		//@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
 		if ($demand->getOrder()) {
-			$orderList = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode(',', $demand->getOrder(), true);
+			$orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
 
 			if (!empty($orderList)) {
 				// go through every order statement
 				foreach ($orderList as $orderItem) {
-					list($orderField, $ascDesc) = \TYPO3\CMS\Core\Utility\GeneralUtility::trimExplode('|', $orderItem, true);
+					list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, true);
 					// count == 1 means that no direction is given
 					if ($ascDesc) {
 						$orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
-							\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_DESCENDING :
-							\TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING);
+							QueryInterface::ORDER_DESCENDING :
+							QueryInterface::ORDER_ASCENDING);
 					} else {
-						$orderings[$orderField] = \TYPO3\CMS\Extbase\Persistence\QueryInterface::ORDER_ASCENDING;
+						$orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
 					}
 				}
 			}

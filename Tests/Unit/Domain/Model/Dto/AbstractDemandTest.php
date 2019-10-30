@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,12 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand;
+use DWenzel\Ajaxmap\Domain\Model\Dto\NullSearch;
+use DWenzel\Ajaxmap\Domain\Model\Dto\Search;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
+
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand.
  *
@@ -43,188 +48,209 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  *
  * @package DWenzel\Ajaxmap\Tests
  */
-class AbstractDemandTest extends UnitTestCase {
-	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand
-	 */
-	protected $fixture;
+class AbstractDemandTest extends UnitTestCase
+{
+    /**
+     * @var AbstractDemand
+     */
+    protected $subject;
 
-	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand();
-	}
+    public function setUp()
+    {
+        $this->subject = new AbstractDemand();
+    }
 
-	/**
-	 * @test
-	 */
-	public function getSearchReturnsInitialValueForDomainModelSearch() {
-		$this->assertNull(
-				$this->fixture->getSearch()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getSearchReturnsInitialValueForDomainModelSearch()
+    {
+        $expected = new NullSearch();
 
-	/**
-	 * @test
-	 */
-	public function setSearchForDomainModelSearchSetsSearch() {
-		$searchObject = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
-		$this->fixture->setSearch($searchObject);
+        $this->assertEquals(
+            $expected,
+            $this->subject->getSearch()
+        );
+    }
 
-		$this->assertEquals(
-			$searchObject,
-			$this->fixture->getSearch()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getOrderReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getOrder()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setSearchForDomainModelSearchSetsSearch()
+    {
+        $searchObject = new Search();
+        $this->subject->setSearch($searchObject);
 
-	/**
-	 * @test
-	 */
-	public function setOrderForStringSetsOrder() { 
-		$this->fixture->setOrder('Conceived at T3CON10');
+        $this->assertEquals(
+            $searchObject,
+            $this->subject->getSearch()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getOrder()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getOrderByAllowedReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getOrderByAllowed()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getOrderReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->subject->getOrder()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setOrderByAllowedForStringSetsOrderByAllowed() { 
-		$this->fixture->setOrderByAllowed('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setOrderForStringSetsOrder()
+    {
+        $this->subject->setOrder('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getOrderByAllowed()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getStoragePagesReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getStoragePages()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->subject->getOrder()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setStoragePagesForStringSetsStoragePages() { 
-		$this->fixture->setStoragePages('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getOrderByAllowedReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->subject->getOrderByAllowed()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getStoragePages()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getLimitReturnsInitialValueForInteger() {
-		$this->assertNull(
-				$this->fixture->getLimit()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setOrderByAllowedForStringSetsOrderByAllowed()
+    {
+        $this->subject->setOrderByAllowed('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setLimitForIntegerSetsLimit() { 
-		$this->fixture->setLimit(100);
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->subject->getOrderByAllowed()
+        );
+    }
 
-		$this->assertSame(
-			100,
-			$this->fixture->getLimit()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getOffsetReturnsInitialValueForInteger() {
-		$this->assertNull(
-				$this->fixture->getOffset()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getStoragePagesReturnsInitialValueForString()
+    {
+        $this->assertNull(
+            $this->subject->getStoragePages()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setOffsetForIntegerSetsOffset() { 
-		$this->fixture->setOffset(100);
+    /**
+     * @test
+     */
+    public function setStoragePagesForStringSetsStoragePages()
+    {
+        $this->subject->setStoragePages('Conceived at T3CON10');
 
-		$this->assertSame(
-			100,
-			$this->fixture->getOffset()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getRadiusReturnsInitialValueForInteger() {
-		$this->assertNull(
-				$this->fixture->getRadius()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->subject->getStoragePages()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setRadiusForIntegerSetsRadius() { 
-		$this->fixture->setRadius(100);
+    /**
+     * @test
+     */
+    public function getLimitReturnsInitialValueForInteger()
+    {
+        $this->assertNull(
+            $this->subject->getLimit()
+        );
+    }
 
-		$this->assertSame(
-			100,
-			$this->fixture->getRadius()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getGeoLocationReturnsInitialValueForArray() {
-		$this->assertNull(
-				$this->fixture->getGeoLocation()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setLimitForIntegerSetsLimit()
+    {
+        $this->subject->setLimit(100);
 
-	/**
-	 * @test
-	 */
-	public function setGeoLocationForArraySetsGeoLocation() { 
-		$geoLocation = array(
-			'lat' => 1.23,
-			'lng' => 4.56
-		);
-		$this->fixture->setGeoLocation($geoLocation);
+        $this->assertSame(
+            100,
+            $this->subject->getLimit()
+        );
+    }
 
-		$this->assertSame(
-			$geoLocation,
-			$this->fixture->getGeoLocation()
-		);
-	}
-	
+    /**
+     * @test
+     */
+    public function getOffsetReturnsInitialValueForInteger()
+    {
+        $this->assertNull(
+            $this->subject->getOffset()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setOffsetForIntegerSetsOffset()
+    {
+        $this->subject->setOffset(100);
+
+        $this->assertSame(
+            100,
+            $this->subject->getOffset()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getRadiusReturnsInitialValueForInteger()
+    {
+        $this->assertNull(
+            $this->subject->getRadius()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setRadiusForIntegerSetsRadius()
+    {
+        $this->subject->setRadius(100);
+
+        $this->assertSame(
+            100,
+            $this->subject->getRadius()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getGeoLocationReturnsInitialValueForArray()
+    {
+        $this->assertNull(
+            $this->subject->getGeoLocation()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setGeoLocationForArraySetsGeoLocation()
+    {
+        $geoLocation = array(
+            'lat' => 1.23,
+            'lng' => 4.56
+        );
+        $this->subject->setGeoLocation($geoLocation);
+
+        $this->assertSame(
+            $geoLocation,
+            $this->subject->getGeoLocation()
+        );
+    }
+
 }
 

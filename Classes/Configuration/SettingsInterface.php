@@ -3,6 +3,7 @@
 namespace DWenzel\Ajaxmap\Configuration;
 
 use TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /***************************************************************
  *  Copyright notice
@@ -208,4 +209,20 @@ interface SettingsInterface
      */
     const CACHE_CHILDREN = 'cache_ajaxmap_children';
 
+    /**
+     * Settings keys
+     */
+    const LOCATION_TYPES = 'locationTypes';
+    const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
+    const PLACE_GROUPS = 'placeGroups';
+    const MAP = 'map';
+    const SEARCH = 'search';
+    const SUBJECT = 'subject';
+    const FIELDS = 'fields';
+    const LOCATION = 'location';
+    const RADIUS = 'radius';
+    const BOUNDS = 'bounds';
+    const ORDER = 'order';
+    const CONJUNCTION_AND = 'AND';
+    const CONJUNCTION_OR = 'OR';
 }
