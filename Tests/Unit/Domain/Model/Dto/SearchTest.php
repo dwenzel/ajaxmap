@@ -91,7 +91,8 @@ class SearchTest extends UnitTestCase
      */
     public function getFieldsReturnsInitialValueForString()
     {
-        $this->assertNull(
+        $this->assertSame(
+            '',
             $this->fixture->getFields()
         );
     }
