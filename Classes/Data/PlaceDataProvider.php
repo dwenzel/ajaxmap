@@ -2,9 +2,10 @@
 
 namespace DWenzel\Ajaxmap\Data;
 
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
+use DWenzel\Ajaxmap\Domain\Factory\Dto\PlaceDemandFactory;
 use DWenzel\Ajaxmap\Domain\Model\Category;
-use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
@@ -39,6 +40,13 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
  */
 class PlaceDataProvider implements DataProviderInterface
 {
+    const ALLOWED_SEARCH_PARAMS = [
+        SI::RADIUS,
+        SI::SUBJECT,
+        SI::LOCATION,
+        SI::BOUNDS
+    ];
+
     protected $mapping = [
         Category::class => [
             'description' => ['exclude' => 1],
@@ -89,6 +97,11 @@ class PlaceDataProvider implements DataProviderInterface
     protected $placeRepository;
 
     /**
+     * @var PlaceDemandFactory
+     */
+    protected $demandFactory;
+
+    /**
      * @var ObjectManagerInterface
      */
     protected $objectManager;
@@ -111,6 +124,7 @@ class PlaceDataProvider implements DataProviderInterface
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
+        $this->demandFactory = $this->objectManager->get(PlaceDemandFactory::class);
     }
 
     /**
@@ -136,7 +150,10 @@ class PlaceDataProvider implements DataProviderInterface
         if ($map->getPlaces()) {
             $data = $map->getPlaces()->toArray();
         } else {
-            $placeDemand = $this->buildPlaceDemandFromMap($map);
+            $settings = $this->getSettingsFromMap($map);
+            $settings = $this->overrideSettings($settings, $queryParameter);
+
+            $placeDemand = $this->demandFactory->fromSettings($settings);
             /** @var QueryResult $placeObjects */
             $placeObjects = $this->placeRepository->findDemanded($placeDemand, true, NULL, false);
             /** @var Place $place */
@@ -149,28 +166,43 @@ class PlaceDataProvider implements DataProviderInterface
     }
 
     /**
-     * Builds a demand object from map properties
-     *
      * @param Map $map
-     * @return PlaceDemand
+     * @return array
      */
-    protected function buildPlaceDemandFromMap(Map $map)
+    protected function getSettingsFromMap(Map $map): array
     {
-        /** @var PlaceDemand $placeDemand */
-        $placeDemand = $this->objectManager->get(PlaceDemand::class);
-        $placeDemand->setConstraintsConjunction('or');
+        $settings = [
+            SI::CONSTRAINTS_CONJUNCTION => SI::CONJUNCTION_OR
+        ];
 
-        $locationTypes = array();
+        $locationTypes = [];
         /** @var LocationType $type */
         foreach ($map->getLocationTypes()->toArray() as $type) {
             $locationTypes[] = $type->getUid();
         }
         if ((bool)$locationTypes) {
             $types = implode(',', $locationTypes);
-            $placeDemand->setLocationTypes($types);
+            $settings[SI::LOCATION_TYPES] = $types;
         }
 
-        return $placeDemand;
+        return $settings;
     }
 
+    protected function overrideSettings(array $settings, $queryParameter)
+    {
+        if (!empty($queryParameter[SI::SEARCH])) {
+            $searchParam = $queryParameter[SI::SEARCH];
+            if (is_array($searchParam)) {
+                $searchSettings = [];
+                foreach (static::ALLOWED_SEARCH_PARAMS as $parameter) {
+                    if (!empty($searchParam[$parameter])) {
+                        $searchSettings[$parameter] = $searchParam[$parameter];
+                    }
+                }
+                $settings[SI::SEARCH] = $searchSettings;
+            }
+        }
+
+        return $settings;
+    }
 }

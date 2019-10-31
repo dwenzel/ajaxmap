@@ -38,7 +38,7 @@ class Search implements LocationAwareInterface
      *
      * @var string
      */
-    protected $fields;
+    protected $fields = '';
 
     /**
      * Get the subject
@@ -56,7 +56,7 @@ class Search implements LocationAwareInterface
      * @param string $subject
      * @return void
      */
-    public function setSubject($subject)
+    public function setSubject(string $subject): void
     {
         $this->subject = $subject;
     }
@@ -66,7 +66,7 @@ class Search implements LocationAwareInterface
      *
      * @return string A comma separated list of search fields
      */
-    public function getFields()
+    public function getFields():string
     {
         return $this->fields;
     }
@@ -74,13 +74,12 @@ class Search implements LocationAwareInterface
     /**
      * Set fields
      *
-     * @param $fields A comma separated list of search fields
+     * @param string $fields A comma separated list of search fields
      * @return void
      */
-    public function setFields($fields)
+    public function setFields(string $fields): void
     {
         $this->fields = $fields;
     }
-
 }
 

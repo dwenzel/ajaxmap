@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -38,7 +38,8 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PlaceRepository extends AbstractDemandedRepository {
+class PlaceRepository extends AbstractDemandedRepository
+{
 
     /**
      * Returns an array of query constraints from a given demand object
@@ -48,128 +49,130 @@ class PlaceRepository extends AbstractDemandedRepository {
      * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
      * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
      */
-	protected function createConstraintsFromDemand (QueryInterface $query, DemandInterface $demand) {
-		$constraints = array();
-		$categories = $demand->getCategories();
-		$categoryConjunction = $demand->getCategoryConjunction();
-	
-		// Category constraints
-		if ($categories && !empty($categoryConjunction)) {
-			
-			// @todo get subcategories ($demand->getIncludeSubCategories())
-			$constraints[] = $this->createCategoryConstraint(
-				$query,
-				$categories,
-				$categoryConjunction,
-				false
-			);
-		}
-		$constraintsConjunction = $demand->getConstraintsConjunction();
-		// Location type constraints
-		if ($demand->getLocationTypes()) {
-			$locationTypes = GeneralUtility::intExplode(',', $demand->getLocationTypes());
-			$locationTypeConstraints = array();
-			foreach ($locationTypes as $locationType) {
-				$locationTypeConstraints[] = $query->equals('locationType', $locationType);
-			}
+    protected function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand)
+    {
+        $constraints = array();
+        $categories = $demand->getCategories();
+        $categoryConjunction = $demand->getCategoryConjunction();
 
-			if (count($locationTypeConstraints)) {
-				switch ($constraintsConjunction) {
-					case 'or':
-						$constraints[] = $query->logicalOr($locationTypeConstraints);
-						break;
-					case 'and':
-					default:
-						$constraints[] = $query->logicalAnd($locationTypeConstraints);
-				}
-			}
-		}
+        // Category constraints
+        if ($categories && !empty($categoryConjunction)) {
 
-		// Search constraints
-		if ($demand->getSearch()) {
-			$searchConstraints = array();
-			$locationConstraints = array();
-			$search = $demand->getSearch();
-			$subject = $search->getSubject();
+            // @todo get subcategories ($demand->getIncludeSubCategories())
+            $constraints[] = $this->createCategoryConstraint(
+                $query,
+                $categories,
+                $categoryConjunction,
+                false
+            );
+        }
+        $constraintsConjunction = $demand->getConstraintsConjunction();
+        // Location type constraints
+        if ($demand->getLocationTypes()) {
+            $locationTypes = GeneralUtility::intExplode(',', $demand->getLocationTypes());
+            $locationTypeConstraints = array();
+            foreach ($locationTypes as $locationType) {
+                $locationTypeConstraints[] = $query->equals('locationType', $locationType);
+            }
 
-			if(!empty($subject)) {
-				// search text in specified search fields
-				$searchFields = GeneralUtility::trimExplode(',', $search->getFields(), true);
-				if (count($searchFields) === 0) {
-					throw new \UnexpectedValueException('No search fields given', 1382608407);
-				}
-				foreach($searchFields as $field) {
-					$searchConstraints[] = $query->like($field, '%' . $subject . '%');
-				}
-			}
+            if (count($locationTypeConstraints)) {
+                switch ($constraintsConjunction) {
+                    case 'or':
+                        $constraints[] = $query->logicalOr($locationTypeConstraints);
+                        break;
+                    case 'and':
+                    default:
+                        $constraints[] = $query->logicalAnd($locationTypeConstraints);
+                }
+            }
+        }
 
-			// search by bounding box
-			$bounds = $search->getBounds();
-			$location = $search->getLocation();
-			$radius = $search->getRadius();
+        // Search constraints
+        if ($demand->getSearch()) {
+            $searchConstraints = array();
+            $locationConstraints = array();
+            $search = $demand->getSearch();
+            $subject = $search->getSubject();
 
-			if(!empty($location)
-					AND !empty($radius)
-					AND empty($bounds)) {
-					$geoCoder = new GeoCoder();
-					$geoLocation = $geoCoder->getLocation($location);
-					if ($geoLocation) {
-						$bounds = $geoCoder->getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius/1000);
-					}
-			}
-			if($bounds AND
-					!empty($bounds['N']) AND
-					!empty($bounds['S']) AND
-					!empty($bounds['W']) AND
-					!empty($bounds['E'])) {
-						$locationConstraints[] = $query->greaterThan('latitude', $bounds['S']['lat']);
-						$locationConstraints[] = $query->lessThan('latitude', $bounds['N']['lat']);
-						$locationConstraints[] = $query->greaterThan('longitude', $bounds['W']['lng']);
-						$locationConstraints[] = $query->lessThan('longitude', $bounds['E']['lng']);
-			}
-					
-			if(count($searchConstraints)) {
-				$constraints[] = $query->logicalOr($searchConstraints);
-			}
-			if(count($locationConstraints)) {
-				$constraints[] = $query->logicalAnd($locationConstraints);
-			}
-		}
+            if (!empty($subject)) {
+                // search text in specified search fields
+                $searchFields = GeneralUtility::trimExplode(',', $search->getFields(), true);
+                if (count($searchFields) === 0) {
+                    throw new \UnexpectedValueException('No search fields given', 1382608407);
+                }
+                foreach ($searchFields as $field) {
+                    $searchConstraints[] = $query->like($field, '%' . $subject . '%');
+                }
+            }
 
-		return $constraints;
-	}
+            // search by bounding box
+            $bounds = $search->getBounds();
+            $location = $search->getLocation();
+            $radius = $search->getRadius();
 
-	/**
-	 * Returns an array of orderings created from a given demand object.
-	 *
-	 * @param DemandInterface $demand
-	 * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
-	 */
-	protected function createOrderingsFromDemand(DemandInterface $demand) {
-		$orderings = array();
+            if (!empty($location)
+                AND !empty($radius)
+                AND empty($bounds)) {
+                $geoCoder = new GeoCoder();
+                $geoLocation = $geoCoder->getLocation($location);
+                if ($geoLocation) {
+                    $bounds = $geoCoder->getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius / 1000);
+                }
+            }
+            if ($bounds AND
+                !empty($bounds['N']) AND
+                !empty($bounds['S']) AND
+                !empty($bounds['W']) AND
+                !empty($bounds['E'])) {
+                $locationConstraints[] = $query->greaterThan('latitude', $bounds['S']['lat']);
+                $locationConstraints[] = $query->lessThan('latitude', $bounds['N']['lat']);
+                $locationConstraints[] = $query->greaterThan('longitude', $bounds['W']['lng']);
+                $locationConstraints[] = $query->lessThan('longitude', $bounds['E']['lng']);
+            }
 
-		//@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
-		if ($demand->getOrder()) {
-			$orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
+            if (count($searchConstraints)) {
+                $constraints[] = $query->logicalOr($searchConstraints);
+            }
+            if (count($locationConstraints)) {
+                $constraints[] = $query->logicalAnd($locationConstraints);
+            }
+        }
 
-			if (!empty($orderList)) {
-				// go through every order statement
-				foreach ($orderList as $orderItem) {
-					list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, true);
-					// count == 1 means that no direction is given
-					if ($ascDesc) {
-						$orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
-							QueryInterface::ORDER_DESCENDING :
-							QueryInterface::ORDER_ASCENDING);
-					} else {
-						$orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
-					}
-				}
-			}
-		}
+        return $constraints;
+    }
 
-		return $orderings;
-	}
+    /**
+     * Returns an array of orderings created from a given demand object.
+     *
+     * @param DemandInterface $demand
+     * @return array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
+     */
+    protected function createOrderingsFromDemand(DemandInterface $demand)
+    {
+        $orderings = array();
+
+        //@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
+        if ($demand->getOrder()) {
+            $orderList = GeneralUtility::trimExplode(',', $demand->getOrder(), true);
+
+            if (!empty($orderList)) {
+                // go through every order statement
+                foreach ($orderList as $orderItem) {
+                    list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, true);
+                    // count == 1 means that no direction is given
+                    if ($ascDesc) {
+                        $orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+                            QueryInterface::ORDER_DESCENDING :
+                            QueryInterface::ORDER_ASCENDING);
+                    } else {
+                        $orderings[$orderField] = QueryInterface::ORDER_ASCENDING;
+                    }
+                }
+            }
+        }
+
+        return $orderings;
+    }
 
 }
 
