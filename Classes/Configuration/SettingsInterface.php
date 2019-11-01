@@ -3,7 +3,6 @@
 namespace DWenzel\Ajaxmap\Configuration;
 
 use TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider;
-use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 
 /***************************************************************
  *  Copyright notice

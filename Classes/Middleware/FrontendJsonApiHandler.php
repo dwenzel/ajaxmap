@@ -34,6 +34,8 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /**
  * Class FrontendJsonApiHandler
+ *
+ * Middleware for request to the map api
  */
 class FrontendJsonApiHandler implements MiddlewareInterface
 {
@@ -44,6 +46,7 @@ class FrontendJsonApiHandler implements MiddlewareInterface
         'controller' => 'Map',
         'action' => 'show'
     ];
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $api = $request->getParsedBody()['api'] ?? $request->getQueryParams()['api'] ?? null;
@@ -74,5 +77,4 @@ class FrontendJsonApiHandler implements MiddlewareInterface
 
         return new NullResponse();
     }
-
 }

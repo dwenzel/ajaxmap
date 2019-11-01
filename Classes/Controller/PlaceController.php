@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Controller;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -24,7 +24,11 @@ namespace DWenzel\Ajaxmap\Controller;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
+use DWenzel\Ajaxmap\Domain\Model\Place;
+use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 /**
  *
@@ -33,103 +37,110 @@ use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class PlaceController extends AbstractController {
+class PlaceController extends AbstractController
+{
 
-	/**
-	 * placeRepository
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository
-	 */
-	protected $placeRepository;
+    /**
+     * placeRepository
+     *
+     * @var PlaceRepository
+     */
+    protected $placeRepository;
 
-	/**
-	 * action list
-	 *
-	 * @return void
-	 * @param \array $overwriteDemand
-	 */
-	public function listAction($overwriteDemand = NULL) {
-		$demand = $this->createDemandFromSettings($this->settings);
-		$places = $this->placeRepository->findDemanded($demand);
-		$this->view->assignMultiple(
-			array(
-				'places' => $places,
-				'settings' => $this->settings,
-				'overwriteDemand' => $overwriteDemand
-			)
-		);
-	}
+    /**
+     * action list
+     *
+     * @param array $overwriteDemand
+     * @return void
+     * @throws InvalidQueryException
+     */
+    public function listAction($overwriteDemand = null)
+    {
+        $demand = $this->createDemandFromSettings($this->settings);
+        $places = $this->placeRepository->findDemanded($demand);
+        $this->view->assignMultiple(
+            array(
+                'places' => $places,
+                'settings' => $this->settings,
+                'overwriteDemand' => $overwriteDemand
+            )
+        );
+    }
 
-	/**
-	 * injectLocationRepository
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $PlaceRepository
-	 * @return void
-	 */
-	public function injectPlaceRepository(\DWenzel\Ajaxmap\Domain\Repository\PlaceRepository $placeRepository) {
-		$this->placeRepository = $placeRepository;
-	}
+    /**
+     * Create demand from settings
+     *
+     * @param array $settings
+     * @return PlaceDemand
+     */
+    public function createDemandFromSettings($settings)
+    {
+        /** @var PlaceDemand $demand */
+        $demand = $this->objectManager->get(PlaceDemand::class);
+        if (isset($settings['orderBy']) && isset($settings['orderDirection'])) {
+            $demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
+        }
+        (isset($settings['map'])) ? $demand->setMap($settings['map']) : NULL;
+        (isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
+        (isset($settings['placeGroups'])) ? $demand->setPlaceGroups($settings['placeGroups']) : NULL;
+        if (isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
+            $demand->setConstraintsConjunction($settings['constraintsConjunction']);
+        }
+        if (isset($settings['placeGroupConjunction']) AND $settings['placeGroupConjunction'] !== '') {
+            $demand->setPlaceGroupConjunction($settings['placeGroupConjunction']);
+        }
+        (isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
+        return $demand;
+    }
 
-	/**
-	 * action show
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $place
-	 * @return void
-	 */
-	public function showAction(\DWenzel\Ajaxmap\Domain\Model\Place $place) {
-		$this->view->assignMultiple(
-			array(
-				'place' => $place,
-				'settings' => $this->settings
-			)
-		);
-	}
+    /**
+     * Inject place repository
+     *
+     * @param PlaceRepository $placeRepository
+     * @return void
+     */
+    public function injectPlaceRepository(PlaceRepository $placeRepository)
+    {
+        $this->placeRepository = $placeRepository;
+    }
 
-	/**
-	 * action ajax show
-	 *
-	 * @param integer $placeId
-	 * @param bool $json Whether to return json string
-	 * @return string
-	 */
-	public function ajaxShowAction($placeId, $json = false) {
-		$result = '';
+    /**
+     * action show
+     *
+     * @param Place $place
+     * @return void
+     */
+    public function showAction(Place $place)
+    {
+        $this->view->assignMultiple(
+            array(
+                'place' => $place,
+                'settings' => $this->settings
+            )
+        );
+    }
 
-		if($place = $this->placeRepository->findByUid($placeId)) {
-			if ($json) {
-				$result = json_encode($place->toArray(10, $this->settings['mapping']));
-			} else {
-				$this->view->assign('place', $place);
-				$result = $this->view->render();
-			}
-		}
-		return $result;
-	}
+    /**
+     * action ajax show
+     *
+     * @param integer $placeId
+     * @param bool $json Whether to return json string
+     * @return string
+     */
+    public function ajaxShowAction($placeId, $json = false)
+    {
+        $result = '';
 
-	/**
-	 * Create demand from settings
-	 *
-	 * @param \array $settings
-	 * @return \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
-	 */
-	public function createDemandFromSettings ($settings) {
-		/** @var PlaceDemand $demand */
-		$demand = $this->objectManager->get('DWenzel\\Ajaxmap\\Domain\\Model\\Dto\\PlaceDemand');
-		if (isset($settings['orderBy']) && isset($settings['orderDirection'])) {
-			$demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
-		}
-		(isset($settings['map']))? $demand->setMap($settings['map']) : NULL;
-		(isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
-		(isset($settings['placeGroups'])) ? $demand->setPlaceGroups($settings['placeGroups']) : NULL;
-		if(isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
-			$demand->setConstraintsConjunction($settings['constraintsConjunction']);
-		}
-		if(isset($settings['placeGroupConjunction']) AND $settings['placeGroupConjunction'] !== '') {
-			$demand->setPlaceGroupConjunction($settings['placeGroupConjunction']);
-		}
-		(isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
-		return $demand;
-	}
+        if ($place = $this->placeRepository->findByUid($placeId)) {
+            if ($json) {
+                $result = json_encode($place->toArray(10, $this->settings['mapping']));
+            } else {
+                $this->view->assign('place', $place);
+                $result = $this->view->render();
+            }
+        }
+        return $result;
+    }
 
 }
 
