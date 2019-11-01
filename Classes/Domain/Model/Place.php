@@ -24,12 +24,13 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use CPSIT\GeoLocationService\Domain\Model\GeoCodableInterface;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\Annotation as Extbase;
-use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 /**
  *
  *
@@ -38,7 +39,7 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
  *
  */
 class Place extends AbstractEntity
-	implements SerializableInterface, CategorizableInterface {
+	implements CategorizableInterface, GeoCodableInterface, SerializableInterface {
 	use ToArrayTrait, ToJsonTrait, CategorizableTrait;
 	/**
 	 * Title
@@ -54,6 +55,20 @@ class Place extends AbstractEntity
 	 * @var string
 	 */
 	protected $geoCoordinates;
+
+    /**
+     * Latitude
+     *
+     * @var float
+     */
+	protected $latitude = 0.0;
+
+    /**
+     * Longitude
+     *
+     * @var float
+     */
+	protected $longitude = 0.0;
 
 	/**
 	 * description
@@ -167,7 +182,7 @@ class Place extends AbstractEntity
 	/**
 	 * Adds a PlaceGroup
 	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
+	 * @param PlaceGroup $placeGroup
 	 * @return void
 	 */
 	public function addPlaceGroup(PlaceGroup $placeGroup) {
@@ -177,7 +192,7 @@ class Place extends AbstractEntity
 	/**
 	 * Removes a PlaceGroup
 	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup The PlaceGroup to be removed
+	 * @param PlaceGroup $placeGroup The PlaceGroup to be removed
 	 * @return void
 	 */
 	public function removePlaceGroup(PlaceGroup $placeGroup) {
@@ -360,4 +375,71 @@ class Place extends AbstractEntity
 	public function setGeoCoordinates($geoCoordinates) {
 		$this->geoCoordinates = $geoCoordinates;
 	}
+
+    /**
+     * @return float
+     */
+    public function getLatitude(): float
+    {
+        if (empty($this->latitude)
+            && $this->address instanceof Address
+        )
+        {
+            if ($this->address->getLatitude()) {
+                $this->latitude = (float)$this->address->getLatitude();
+            }
+        }
+        return $this->latitude;
+    }
+
+    /**
+     * @param float $latitude
+     */
+    public function setLatitude($latitude): void
+    {
+        $this->latitude = (float)$latitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getLongitude(): float
+    {
+        if (empty($this->longitude)
+            && $this->address instanceof Address
+        )
+        {
+            if ($this->address->getLongitude()) {
+                $this->longitude = (float)$this->address->getLongitude();
+            }
+        }
+        return $this->longitude;
+    }
+
+    /**
+     * @param float $longitude
+     */
+    public function setLongitude($longitude): void
+    {
+        $this->longitude = (float)$longitude;
+    }
+
+    public function getPlace()
+    {
+        if ($this->address instanceof Address)
+        {
+            return $this->address->getPlace();
+        }
+
+        return '';
+    }
+
+    public function getZip()
+    {
+        if ($this->address instanceof Address) {
+            return $this->address->getZip();
+        }
+
+        return '';
+    }
 }

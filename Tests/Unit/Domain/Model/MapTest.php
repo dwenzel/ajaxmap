@@ -358,64 +358,6 @@ class MapTest extends UnitTestCase {
 	/**
 	 * @test
 	 */
-	public function getPlacesReturnsInitialValueForObjectStorageContainingPlace() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$this->assertEquals(
-			$newObjectStorage,
-			$this->fixture->getPlaces()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function setPlacesForObjectStorageContainingPlaceSetsPlaces() {
-		$place = new \DWenzel\Ajaxmap\Domain\Model\Place();
-		$objectStorageHoldingExactlyOnePlaces = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOnePlaces->attach($place);
-		$this->fixture->setPlaces($objectStorageHoldingExactlyOnePlaces);
-
-		$this->assertSame(
-			$objectStorageHoldingExactlyOnePlaces,
-			$this->fixture->getPlaces()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function addPlaceToObjectStorageHoldingPlaces() {
-		$place = new \DWenzel\Ajaxmap\Domain\Model\Place();
-		$objectStorageHoldingExactlyOnePlace = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$objectStorageHoldingExactlyOnePlace->attach($place);
-		$this->fixture->addPlace($place);
-
-		$this->assertEquals(
-			$objectStorageHoldingExactlyOnePlace,
-			$this->fixture->getPlaces()
-		);
-	}
-
-	/**
-	 * @test
-	 */
-	public function removePlaceFromObjectStorageHoldingPlaces() {
-		$place = new \DWenzel\Ajaxmap\Domain\Model\Place();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
-		$localObjectStorage->attach($place);
-		$localObjectStorage->detach($place);
-		$this->fixture->addPlace($place);
-		$this->fixture->removePlace($place);
-
-		$this->assertEquals(
-			$localObjectStorage,
-			$this->fixture->getPlaces()
-		);
-	}
-
-	/**
-	 * @test
-	 */
 	public function getLocationTypesReturnsInitialValueForObjectStorageContainingLocationType() {
 		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
 		$this->assertEquals(
@@ -485,7 +427,6 @@ class MapTest extends UnitTestCase {
 			'mapStyle' => NULL,
 			'pid' => NULL,
 			'placeGroups' => array(),
-			'places' => array(),
 			'regions' => array(),
 			'staticLayers' => array(),
 			'title' => NULL,
@@ -548,17 +489,6 @@ class MapTest extends UnitTestCase {
 		$this->assertInstanceOf(
 			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
 			$this->fixture->getRegions()
-		);
-	}
-	/**
-	 * @test
-	 * @covers ::__construct
-	 */
-	public function constructorInitializesPlacesWithStorageObject() {
-		$this->fixture->__construct();
-		$this->assertInstanceOf(
-			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
-			$this->fixture->getPlaces()
 		);
 	}
 

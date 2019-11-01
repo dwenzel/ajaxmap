@@ -2,6 +2,8 @@
 
 namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
+use CPSIT\GeoLocationService\Service\GeoCoder;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -239,6 +241,13 @@ class AbstractDemand implements DemandInterface, OrderAwareDemandInterface, Sear
      */
     public function getGeoLocation()
     {
+        if ($this->geoLocation === null &&
+            $this->search instanceof Search
+            && !empty($this->search->getLocation())) {
+            $geoCoder = new GeoCoder();
+            $this->geoLocation = $geoCoder->getLocation($this->search->getLocation());
+        }
+
         return $this->geoLocation;
     }
 
@@ -260,6 +269,10 @@ class AbstractDemand implements DemandInterface, OrderAwareDemandInterface, Sear
      */
     public function getRadius()
     {
+        if ($this->search instanceof Search
+            && !empty($this->search->getRadius())) {
+            $this->radius = $this->search->getRadius();
+        }
         return $this->radius;
     }
 

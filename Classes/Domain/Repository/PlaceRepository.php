@@ -30,16 +30,17 @@ use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
+use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
- *
- *
- * @package ajaxmap
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
- *
+ * Class PlaceRepository
  */
 class PlaceRepository extends AbstractDemandedRepository
 {
+
+    protected $defaultOrderings = [
+        'title' => QueryInterface::ORDER_ASCENDING
+    ];
 
     /**
      * Returns an array of query constraints from a given demand object
@@ -51,7 +52,7 @@ class PlaceRepository extends AbstractDemandedRepository
      */
     protected function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand)
     {
-        $constraints = array();
+        $constraints = [];
         $categories = $demand->getCategories();
         $categoryConjunction = $demand->getCategoryConjunction();
 
@@ -89,8 +90,7 @@ class PlaceRepository extends AbstractDemandedRepository
 
         // Search constraints
         if ($demand->getSearch()) {
-            $searchConstraints = array();
-            $locationConstraints = array();
+            $searchConstraints = [];
             $search = $demand->getSearch();
             $subject = $search->getSubject();
 
@@ -105,36 +105,9 @@ class PlaceRepository extends AbstractDemandedRepository
                 }
             }
 
-            // search by bounding box
-            $bounds = $search->getBounds();
-            $location = $search->getLocation();
-            $radius = $search->getRadius();
 
-            if (!empty($location)
-                AND !empty($radius)
-                AND empty($bounds)) {
-                $geoCoder = new GeoCoder();
-                $geoLocation = $geoCoder->getLocation($location);
-                if ($geoLocation) {
-                    $bounds = $geoCoder->getBoundsByRadius($geoLocation['lat'], $geoLocation['lng'], $radius / 1000);
-                }
-            }
-            if ($bounds AND
-                !empty($bounds['N']) AND
-                !empty($bounds['S']) AND
-                !empty($bounds['W']) AND
-                !empty($bounds['E'])) {
-                $locationConstraints[] = $query->greaterThan('latitude', $bounds['S']['lat']);
-                $locationConstraints[] = $query->lessThan('latitude', $bounds['N']['lat']);
-                $locationConstraints[] = $query->greaterThan('longitude', $bounds['W']['lng']);
-                $locationConstraints[] = $query->lessThan('longitude', $bounds['E']['lng']);
-            }
-
-            if (count($searchConstraints)) {
+            if ((bool)$searchConstraints) {
                 $constraints[] = $query->logicalOr($searchConstraints);
-            }
-            if (count($locationConstraints)) {
-                $constraints[] = $query->logicalAnd($locationConstraints);
             }
         }
 

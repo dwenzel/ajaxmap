@@ -16,6 +16,7 @@ use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /***************************************************************
@@ -131,6 +132,7 @@ class PlaceDataProvider implements DataProviderInterface
      * @param array $queryParameter
      * @return array
      * @throws MissingRequestArgumentException
+     * @throws InvalidQueryException
      */
     public function get(array $queryParameter = []): array
     {
@@ -147,22 +149,49 @@ class PlaceDataProvider implements DataProviderInterface
             return $data;
         }
 
-        if ($map->getPlaces()) {
-            $data = $map->getPlaces()->toArray();
-        } else {
-            $settings = $this->getSettingsFromMap($map);
-            $settings = $this->overrideSettings($settings, $queryParameter);
+        $settings = $this->overrideSettings(
+            $this->getSettingsFromMap($map),
+            $queryParameter);
 
-            $placeDemand = $this->demandFactory->fromSettings($settings);
-            /** @var QueryResult $placeObjects */
-            $placeObjects = $this->placeRepository->findDemanded($placeDemand, true, NULL, false);
-            /** @var Place $place */
-            foreach ($placeObjects as $place) {
-                $data[] = $place->toArray(2, $this->mapping);
-            }
+        $demand = $this->demandFactory->fromSettings($settings);
+        /** @var QueryResult $places */
+        $places = $this->placeRepository->findDemanded(
+            $demand,
+            true,
+            null,
+            false
+        );
+        /** @var Place $place */
+        foreach ($places as $place) {
+            $data[] = $place->toArray(2, $this->mapping);
         }
 
         return $data;
+    }
+
+    /**
+     * Override settings with allowed query parameters
+     *
+     * @param array $settings
+     * @param $queryParameter
+     * @return array
+     */
+    protected function overrideSettings(array $settings, $queryParameter)
+    {
+        if (!empty($queryParameter[SI::SEARCH])) {
+            $searchParam = $queryParameter[SI::SEARCH];
+            if (is_array($searchParam)) {
+                $searchSettings = [];
+                foreach (static::ALLOWED_SEARCH_PARAMS as $parameter) {
+                    if (!empty($searchParam[$parameter])) {
+                        $searchSettings[$parameter] = $searchParam[$parameter];
+                    }
+                }
+                $settings[SI::SEARCH] = $searchSettings;
+            }
+        }
+
+        return $settings;
     }
 
     /**
@@ -183,24 +212,6 @@ class PlaceDataProvider implements DataProviderInterface
         if ((bool)$locationTypes) {
             $types = implode(',', $locationTypes);
             $settings[SI::LOCATION_TYPES] = $types;
-        }
-
-        return $settings;
-    }
-
-    protected function overrideSettings(array $settings, $queryParameter)
-    {
-        if (!empty($queryParameter[SI::SEARCH])) {
-            $searchParam = $queryParameter[SI::SEARCH];
-            if (is_array($searchParam)) {
-                $searchSettings = [];
-                foreach (static::ALLOWED_SEARCH_PARAMS as $parameter) {
-                    if (!empty($searchParam[$parameter])) {
-                        $searchSettings[$parameter] = $searchParam[$parameter];
-                    }
-                }
-                $settings[SI::SEARCH] = $searchSettings;
-            }
         }
 
         return $settings;

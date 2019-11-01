@@ -4,10 +4,11 @@ if (!defined('TYPO3_MODE')) {
 }
 
 $cll = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+$ll = 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place',
+        'title' => $ll . 'tx_ajaxmap_domain_model_place',
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -30,10 +31,10 @@ return [
         ]
     ],
     'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, geo_coordinates,icon,description, info, place_groups, location_type, regions, content, address',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title,latitude,longitude,icon,description, info, place_groups, location_type, regions, content, address',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, geo_coordinates, icon, description, info, categories, place_groups, location_type, regions, content, address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title,latitude,longitude,icon, description, info, categories, place_groups, location_type, regions, content, address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -119,25 +120,16 @@ return [
         ],
         'title' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.title',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,required'
             ],
         ],
-        'geo_coordinates' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.geo_coordinates',
-            'config' => [
-                'type' => 'input',
-                'size' => 30,
-                'eval' => 'trim'
-            ],
-        ],
         'description' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.description',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.description',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
@@ -147,7 +139,7 @@ return [
         ],
         'info' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.info',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.info',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
@@ -168,7 +160,7 @@ return [
         ],
         'place_groups' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.placeGroups',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.placeGroups',
             'config' => [
                 'type' => 'select',
                 'foreign_table' => 'tx_ajaxmap_domain_model_placegroup',
@@ -213,7 +205,7 @@ return [
         ],
         'location_type' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.location_type',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.location_type',
             'config' => [
                 'type' => 'select',
                 'foreign_table' => 'tx_ajaxmap_domain_model_locationtype',
@@ -223,7 +215,7 @@ return [
         ],
         'icon' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.icon',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.icon',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'file_reference',
@@ -235,7 +227,7 @@ return [
         ],
         'regions' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.regions',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.regions',
             'config' => [
                 'type' => 'select',
                 'foreign_table' => 'tx_ajaxmap_domain_model_region',
@@ -266,7 +258,7 @@ return [
         ],
         'content' => [
             'exclude' => 1,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.content',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.content',
             'config' => [
                 'type' => 'inline',
                 'allowed' => 'tt_content',
@@ -289,9 +281,38 @@ return [
                 ]
             ],
         ],
+        'latitude' => [
+            'exclude' => true,
+            'label' => $ll . 'latitude',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'null,' . \FriendsOfTYPO3\TtAddress\Evaluation\LatitudeEvaluation::class,
+                'default' => null,
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
+        'longitude' => [
+            'exclude' => true,
+            'label' => $ll . 'longitude',
+            'config' => [
+                'type' => 'input',
+                'eval' => 'null,' . \FriendsOfTYPO3\TtAddress\Evaluation\LongitudeEvaluation::class,
+                'default' => null,
+                'fieldControl' => [
+                    'locationMap' => [
+                        'renderType' => 'locationMapWizard'
+                    ]
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ]
+        ],
         'address' => [
             'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.address',
+            'label' => $ll . 'tx_ajaxmap_domain_model_place.address',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'db',
@@ -313,24 +334,4 @@ return [
             ],
         ],
     ],
-];
-
-$TCA['tx_ajaxmap_domain_model_place']['columns']['description']['config'] = [
-    'type' => 'text',
-    'cols' => 32,
-    'rows' => 5,
-    'eval' => 'trim'
-];
-
-$TCA['tx_ajaxmap_domain_model_place']['interface'] = [
-    'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, location_type, title, address, description,  geo_coordinates, place_groups, regions, info, icon, content',
-];
-$TCA['tx_ajaxmap_domain_model_place']['types'] = [
-    '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, location_type, title, address, description, geo_coordinates,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.attribution, place_groups, regions,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_place.content, info, icon, content, --div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
-];
-$TCA['tx_ajaxmap_domain_model_place']['palettes'] = [
-    '1' => [
-        'showitem' => '',
-        ''
-    ]
 ];

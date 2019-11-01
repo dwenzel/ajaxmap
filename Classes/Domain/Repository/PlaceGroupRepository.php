@@ -42,9 +42,7 @@ class PlaceGroupRepository extends AbstractDemandedRepository {
 	 * @return array
 	 */
 	public function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demandInterface) {
-		$constraints = array();
-		// @todo add constraints
-		return $constraints;
+		return [];
 	}
 }
 

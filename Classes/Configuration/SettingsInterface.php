@@ -28,6 +28,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 interface SettingsInterface
 {
     const EXTENSION_KEY = 'ajaxmap';
+    const EXTENSION_NAME = 'Ajaxmap';
     const VENDOR_NAME = 'DWenzel';
 
     const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
