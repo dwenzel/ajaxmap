@@ -1,6 +1,50 @@
-var ajaxMap = ajaxMap || {};
+import $ from "jquery";
+import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
+import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
+import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
+
+import MarkerClusterer from '@google/markerclusterer'
+import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
+import {library, dom} from '@fortawesome/fontawesome-svg-core'
+
+// import folder icons for tree
+import {
+    faCaretDown as fasCaretDown,
+    faCaretRight as fasCaretRight,
+    faFile as fasFile,
+    faFolder as fasFolder,
+    faFolderOpen as fasFolderOpen,
+    faSquare as fasSquare
+
+} from '@fortawesome/free-solid-svg-icons';
+
+import {
+    faFile as farFile,
+    faFolder as farFolder,
+    faFolderOpen as farFolderOpen,
+    faSquare as farSquare
+} from '@fortawesome/free-regular-svg-icons';
+
+// Add icons to library
+library.add(
+    fasCaretDown,
+    fasCaretRight,
+    fasFile,
+    fasFolder,
+    fasFolderOpen,
+    fasSquare,
+    farFile,
+    farFolder,
+    farFolderOpen,
+    farSquare
+);
+
+var ajaxMap = {};
+// Replace any existing <i> tags with <svg> and set up a MutationObserver to
+// continue doing this as the DOM changes.
 
 (function ($) {
+
     var basePath; // base path for resources like icons and kml files
     if (!window.location.origin) {
         basePath = window.location.protocol + "//" + window.location.host + "/";
@@ -79,7 +123,7 @@ var ajaxMap = ajaxMap || {};
             // store address when fetched for the first time and reuse it
             place.address = addressJson;
         }
-        content = '';
+        let content = '';
         content += (place.title) ? '<h4 class="infoWindowTitle">' + place.title + '</h4>' : "";
         content += (place.icon) ?
             '<img width="120px" class="infoWindowImage" src="' + place.icon + '"/>' : "";
@@ -150,13 +194,15 @@ var ajaxMap = ajaxMap || {};
      * @param mapEntry
      */
     function createMap(response, mapEntry) {
-        var map;
+        var map,
+            mapType,
+            mapStyle;
 
         // prepare data
-        mapContainer = document.getElementById('ajaxMapContainer_Map' + mapEntry.id);
+        let mapContainer = document.getElementById('ajaxMapContainer_Map' + mapEntry.id);
         $(mapContainer).height(response.height).width(response.width);
-        tmpCenter = (response.mapCenter).split(",");
-        mapCenter = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
+        const tmpCenter = (response.mapCenter).split(",");
+        let mapCenter = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
 
         switch (response.type) {
             case "2":
@@ -174,7 +220,7 @@ var ajaxMap = ajaxMap || {};
                 break;
         }
 
-        if (response.type = "0" && response.mapStyle) {
+        if (response.type === "0" && response.mapStyle) {
             mapStyle = $.parseJSON('[' + response.mapStyle + ']');
         } else {
             mapStyle = '';
@@ -620,7 +666,7 @@ var ajaxMap = ajaxMap || {};
      * @param keys Unique array of keys
      */
     function filterTree(tree, keys) {
-        options = {autoExpand: true};
+        const options = {autoExpand: true};
         tree.filterNodes(function (node) {
             return (keys.indexOf(parseInt(node.key)) != -1);
         }, options);

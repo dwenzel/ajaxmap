@@ -2,6 +2,8 @@
 
 namespace DWenzel\Ajaxmap\Controller;
 
+use Exception;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -22,7 +24,6 @@ namespace DWenzel\Ajaxmap\Controller;
 /**
  * Class MissingRequestArgumentException
  */
-class MissingRequestArgumentException extends \Exception
+class MissingRequestArgumentException extends Exception
 {
-
 }

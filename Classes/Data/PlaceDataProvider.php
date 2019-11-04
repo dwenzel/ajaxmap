@@ -2,9 +2,10 @@
 
 namespace DWenzel\Ajaxmap\Data;
 
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
+use DWenzel\Ajaxmap\Domain\Factory\Dto\PlaceDemandFactory;
 use DWenzel\Ajaxmap\Domain\Model\Category;
-use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
@@ -15,6 +16,7 @@ use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 
 /***************************************************************
@@ -39,6 +41,13 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
  */
 class PlaceDataProvider implements DataProviderInterface
 {
+    const ALLOWED_SEARCH_PARAMS = [
+        SI::RADIUS,
+        SI::SUBJECT,
+        SI::LOCATION,
+        SI::BOUNDS
+    ];
+
     protected $mapping = [
         Category::class => [
             'description' => ['exclude' => 1],
@@ -89,9 +98,9 @@ class PlaceDataProvider implements DataProviderInterface
     protected $placeRepository;
 
     /**
-     * @var ObjectManagerInterface
+     * @var PlaceDemandFactory
      */
-    protected $objectManager;
+    protected $demandFactory;
 
     /**
      * @var MapRepository
@@ -105,18 +114,20 @@ class PlaceDataProvider implements DataProviderInterface
     )
     {
         /** @var ObjectManagerInterface objectManager */
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->placeRepository = $placeRepository ?: $this->objectManager->get(PlaceRepository::class);
-        $this->mapRepository = $mapRepository ?: $this->objectManager->get(MapRepository::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->placeRepository = $placeRepository ?: $objectManager->get(PlaceRepository::class);
+        $this->mapRepository = $mapRepository ?: $objectManager->get(MapRepository::class);
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
+        $this->demandFactory = $objectManager->get(PlaceDemandFactory::class);
     }
 
     /**
      * @param array $queryParameter
      * @return array
      * @throws MissingRequestArgumentException
+     * @throws InvalidQueryException
      */
     public function get(array $queryParameter = []): array
     {
@@ -133,44 +144,71 @@ class PlaceDataProvider implements DataProviderInterface
             return $data;
         }
 
-        if ($map->getPlaces()) {
-            $data = $map->getPlaces()->toArray();
-        } else {
-            $placeDemand = $this->buildPlaceDemandFromMap($map);
-            /** @var QueryResult $placeObjects */
-            $placeObjects = $this->placeRepository->findDemanded($placeDemand, true, NULL, false);
-            /** @var Place $place */
-            foreach ($placeObjects as $place) {
-                $data[] = $place->toArray(2, $this->mapping);
-            }
+        $settings = $this->overrideSettings(
+            $this->getSettingsFromMap($map),
+            $queryParameter);
+
+        $demand = $this->demandFactory->fromSettings($settings);
+        /** @var QueryResult $places */
+        $places = $this->placeRepository->findDemanded(
+            $demand,
+            true,
+            null,
+            false
+        );
+        /** @var Place $place */
+        foreach ($places as $place) {
+            $data[] = $place->toArray(2, $this->mapping);
         }
 
         return $data;
     }
 
     /**
-     * Builds a demand object from map properties
+     * Override settings with allowed query parameters
      *
-     * @param Map $map
-     * @return PlaceDemand
+     * @param array $settings
+     * @param $queryParameter
+     * @return array
      */
-    protected function buildPlaceDemandFromMap(Map $map)
+    protected function overrideSettings(array $settings, $queryParameter)
     {
-        /** @var PlaceDemand $placeDemand */
-        $placeDemand = $this->objectManager->get(PlaceDemand::class);
-        $placeDemand->setConstraintsConjunction('or');
+        if (!empty($queryParameter[SI::SEARCH])) {
+            $searchParam = $queryParameter[SI::SEARCH];
+            if (is_array($searchParam)) {
+                $searchSettings = [];
+                foreach (static::ALLOWED_SEARCH_PARAMS as $parameter) {
+                    if (!empty($searchParam[$parameter])) {
+                        $searchSettings[$parameter] = $searchParam[$parameter];
+                    }
+                }
+                $settings[SI::SEARCH] = $searchSettings;
+            }
+        }
 
-        $locationTypes = array();
+        return $settings;
+    }
+
+    /**
+     * @param Map $map
+     * @return array
+     */
+    protected function getSettingsFromMap(Map $map): array
+    {
+        $settings = [
+            SI::CONSTRAINTS_CONJUNCTION => SI::CONJUNCTION_OR
+        ];
+
+        $locationTypes = [];
         /** @var LocationType $type */
         foreach ($map->getLocationTypes()->toArray() as $type) {
             $locationTypes[] = $type->getUid();
         }
         if ((bool)$locationTypes) {
             $types = implode(',', $locationTypes);
-            $placeDemand->setLocationTypes($types);
+            $settings[SI::LOCATION_TYPES] = $types;
         }
 
-        return $placeDemand;
+        return $settings;
     }
-
 }

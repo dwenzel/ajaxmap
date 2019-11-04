@@ -1,0 +1,145 @@
+{
+  "disableDefaultUi": false,
+  "height": 500,
+  "initialZoom": 10,
+  "locationTypes": [
+    {
+      "description": "Funny Location Type Description",
+      "markerIcon": "fileadmin\/user_upload\/couch.png",
+      "title": "Funny Location Type",
+      "key": 1
+    }
+  ],
+  "mapCenter": "52.540849006917,13.375978260576",
+  "mapStyle": "",
+  "places": null,
+  "regions": [
+    {
+      "clickable": false,
+      "file": "",
+      "mainPlace": {
+        "address": {
+          "address": "Gustav-Meyer-Allee 25\r\nGeb\u00e4ude 13\/5",
+          "birthday": null,
+          "building": "",
+          "categories": [],
+          "city": "Berlin",
+          "company": "",
+          "country": "",
+          "description": "",
+          "email": "",
+          "facebook": "",
+          "fax": "",
+          "firstImage": null,
+          "firstName": "Teo",
+          "fullName": "Teo The Tester",
+          "gender": "",
+          "geoCoordinates": "52.540849006917,13.385978260576",
+          "image": [],
+          "lastName": "Tester",
+          "latitude": "52.540849006917",
+          "linkedin": "",
+          "longitude": "13.385978260576",
+          "middleName": "The",
+          "mobile": "",
+          "name": "Teo Tester",
+          "phone": "",
+          "pid": 2,
+          "place": "Berlin",
+          "position": "",
+          "region": "",
+          "room": "",
+          "skype": "",
+          "title": "",
+          "twitter": "",
+          "uid": 1,
+          "www": "",
+          "wwwSimplified": "",
+          "zip": "13355"
+        },
+        "categories": [
+          {
+            "description": "",
+            "parent": {
+              "description": "",
+              "parent": null,
+              "title": "cat A",
+              "key": 1
+            },
+            "title": "cat A-A",
+            "key": 4
+          }
+        ],
+        "content": null,
+        "tooltip": "Teo's Place Description",
+        "geoCoordinates": "52.540849006917,13.385978260576",
+        "locationType": {
+          "description": "Funny Location Type Description",
+          "markerIcon": "fileadmin\/user_upload\/couch.png",
+          "title": "Funny Location Type",
+          "key": 1
+        },
+        "placeGroups": [
+          {
+            "tooltip": "a group of fine places",
+            "icon": "",
+            "parent": null,
+            "title": "Fine Places",
+            "key": 2
+          }
+        ],
+        "regions": [
+          {
+            "clickable": false,
+            "file": "",
+            "mainPlace": {
+              "address": null,
+              "categories": [
+                null
+              ],
+              "content": null,
+              "tooltip": "Teo's Place Description",
+              "geoCoordinates": "52.540849006917,13.385978260576",
+              "locationType": null,
+              "placeGroups": [
+                null
+              ],
+              "regions": [
+                null
+              ],
+              "title": "Teo's Place",
+              "key": 1
+            },
+            "preserveViewport": false,
+            "children": [],
+            "suppressInfoWindows": false,
+            "title": "Cool Region",
+            "key": 1
+          }
+        ],
+        "title": "Teo's Place",
+        "key": 1
+      },
+      "preserveViewport": false,
+      "children": [],
+      "suppressInfoWindows": false,
+      "title": "Cool Region",
+      "key": 1
+    },
+    {
+      "clickable": false,
+      "file": "",
+      "mainPlace": null,
+      "preserveViewport": false,
+      "children": [],
+      "suppressInfoWindows": false,
+      "title": "Other Region",
+      "key": 2
+    }
+  ],
+  "staticLayers": [],
+  "title": "my map",
+  "type": 1,
+  "uid": 1,
+  "width": 700
+}

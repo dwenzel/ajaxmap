@@ -32,7 +32,7 @@ return [
 	'interface' => [
 		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,
 		title,type,width,height,map_center,initial_zoom, map_style, disable_default_ui,
-		place_groups,regions,static_layers,places,location_types,categories',
+		place_groups,regions,static_layers,location_types,categories',
 	],
 	'types' => [
 		'1' => ['showitem' =>

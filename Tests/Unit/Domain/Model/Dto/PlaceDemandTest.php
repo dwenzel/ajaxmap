@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,123 +37,143 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
+
+use DWenzel\Ajaxmap\Configuration\SettingsInterface;
+use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
-class PlaceDemandTest extends UnitTestCase {
-	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
-	 */
-	protected $fixture;
+class PlaceDemandTest extends UnitTestCase
+{
+    /**
+     * @var PlaceDemand
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand();
-	}
+    public function setUp()
+    {
+        $this->fixture = new PlaceDemand();
+    }
 
-	/**
-	 * @test
-	 */
-	public function getLocationTypesReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getLocationTypes()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getLocationTypesReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getLocationTypes()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setLocationTypesForStringSetsLocationTypes() { 
-		$this->fixture->setLocationTypes('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setLocationTypesForStringSetsLocationTypes()
+    {
+        $this->fixture->setLocationTypes('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getLocationTypes()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getConstraintsConjunctionReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getConstraintsConjunction()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getLocationTypes()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setConstraintsConjunctionForStringSetsConstraintsConjunction() { 
-		$this->fixture->setConstraintsConjunction('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getConstraintsConjunctionReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            SettingsInterface::CONJUNCTION_AND,
+            $this->fixture->getConstraintsConjunction()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getConstraintsConjunction()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getPlaceGroupsReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getPlaceGroups()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setConstraintsConjunctionForStringSetsConstraintsConjunction()
+    {
+        $this->fixture->setConstraintsConjunction('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setPlaceGroupsForStringSetsCategories() {
-		$this->fixture->setPlaceGroups('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getConstraintsConjunction()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getPlaceGroups()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getPlaceGroupConjunctionReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getPlaceGroupConjunction()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getMapReturnsInitialValueForInteger() {
-		$this->assertNull(
-				$this->fixture->getMap()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getPlaceGroupsReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getPlaceGroups()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setMapForIntegerSetsMap() { 
-		$this->fixture->setMap(99);
+    /**
+     * @test
+     */
+    public function setPlaceGroupsForStringSetsCategories()
+    {
+        $this->fixture->setPlaceGroups('Conceived at T3CON10');
 
-		$this->assertSame(
-			99,
-			$this->fixture->getMap()
-		);
-	}
-	
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getPlaceGroups()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setPlaceGroupConjunctionForStringSetsPlaceGroupConjunction() {
-		$this->fixture->setPlaceGroupConjunction('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getPlaceGroupConjunctionReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            SettingsInterface::CONJUNCTION_OR,
+            $this->fixture->getPlaceGroupConjunction()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getPlaceGroupConjunction()
-		);
-	}
-	
+    /**
+     * @test
+     */
+    public function getMapReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getMap()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setMapForIntegerSetsMap()
+    {
+        $this->fixture->setMap(99);
+
+        $this->assertSame(
+            99,
+            $this->fixture->getMap()
+        );
+    }
+
+
+    /**
+     * @test
+     */
+    public function setPlaceGroupConjunctionForStringSetsPlaceGroupConjunction()
+    {
+        $this->fixture->setPlaceGroupConjunction('Conceived at T3CON10');
+
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getPlaceGroupConjunction()
+        );
+    }
+
 }
 

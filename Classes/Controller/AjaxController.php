@@ -20,20 +20,20 @@ namespace DWenzel\Ajaxmap\Controller;
  ***************************************************************/
 
 use DWenzel\Ajaxmap\Data\ProviderFactory;
+use DWenzel\Ajaxmap\Traits\ObjectManagerTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
 use TYPO3\CMS\Extbase\Object\ObjectManager;
-use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
-use TYPO3\CMS\Frontend\Middleware\FrontendUserAuthenticator;
 
 /**
  * Class AjaxController
  */
 class AjaxController
 {
+    use ObjectManagerTrait;
+
     /**
      * @var array
      */
@@ -42,16 +42,20 @@ class AjaxController
         'message' => ''
     ];
 
+
+    public function __construct()
+    {
+        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+    }
+
     public function processRequest(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
     {
         $this->initializeLanguage();
 
         $queryParams = $request->getQueryParams();
-        if (isset($queryParams['action'])) {
-            $action = $queryParams['action'];
-        }
+        $action = isset($queryParams['action']) ? $queryParams['action'] : '';
 
-        $providerFactory = new ProviderFactory();
+        $providerFactory = $this->objectManager->get(ProviderFactory::class);
         $dataProvider = $providerFactory->get($action);
 
         $this->responseArray = $dataProvider->get($queryParams);

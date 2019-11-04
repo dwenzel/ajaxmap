@@ -1,4 +1,4 @@
 
 page.includeJSFooter {
-	ajaxmap = EXT:ajaxmap/Resources/Public/JavaScript/ajaxmapMain.js
+	ajaxmap = EXT:ajaxmap/Resources/Public/Dist/ajaxmap.bundle.js
 }

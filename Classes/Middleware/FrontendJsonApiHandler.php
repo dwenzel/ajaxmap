@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Http\Dispatcher;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Core\Bootstrap;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /***************************************************************
  *  Copyright notice
@@ -32,9 +34,19 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FrontendJsonApiHandler
+ *
+ * Middleware for request to the map api
  */
 class FrontendJsonApiHandler implements MiddlewareInterface
 {
+    const PLUGIN_CONFIGURATION = [
+        'extensionName' => SI::EXTENSION_NAME,
+        'pluginName' => 'Map',
+        'vendorName' => SI::VENDOR_NAME,
+        'controller' => 'Map',
+        'action' => 'show'
+    ];
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $api = $request->getParsedBody()['api'] ?? $request->getQueryParams()['api'] ?? null;
@@ -46,14 +58,23 @@ class FrontendJsonApiHandler implements MiddlewareInterface
 
         // for now we dispatch only to this single endpoint
         if ($api === SI::API_PARAMETER_MAP) {
-            $configuration = AjaxController::class . '::' . 'processRequest';
+            /** @var Bootstrap $bootstrap */
+            $bootstrap = GeneralUtility::makeInstance(Bootstrap::class);
+            /**
+             * initialize framework with default plugin configuration
+             * this ensures proper configuration even though we do not use
+             * this plugin
+             */
+            $bootstrap->initialize(static::PLUGIN_CONFIGURATION);
+
+            /** @var TypoScriptFrontendController $frontendController */
+            $requestConfiguration = AjaxController::class . '::' . 'processRequest';
             /** @var Dispatcher $dispatcher */
             $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
-            $request = $request->withAttribute('target', $configuration);
+            $request = $request->withAttribute('target', $requestConfiguration);
             return $dispatcher->dispatch($request, $response) ?? new NullResponse();
         }
 
         return new NullResponse();
     }
-
 }

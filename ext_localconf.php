@@ -35,17 +35,8 @@ $boot = function () {
         'DWenzel.' . 'ajaxmap',
         'Map',
         [
-            'Place' => 'list, show, ajaxShow',
-            'Map' => ' item, show,',
-            'Region' => 'list',
-            'LocationType' => 'item',
-            'Content' => 'list, show',
-            'Address' => 'list, show',
-
-        ],
-        // non-cacheable actions
-        [
-            'Map' => 'item',
+            'Place' => 'show, ajaxShow',
+            'Map' => 'show,',
         ]
     );
 };
