@@ -103,11 +103,6 @@ class PlaceDataProvider implements DataProviderInterface
     protected $demandFactory;
 
     /**
-     * @var ObjectManagerInterface
-     */
-    protected $objectManager;
-
-    /**
      * @var MapRepository
      */
     protected $mapRepository;
@@ -119,13 +114,13 @@ class PlaceDataProvider implements DataProviderInterface
     )
     {
         /** @var ObjectManagerInterface objectManager */
-        $this->objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->placeRepository = $placeRepository ?: $this->objectManager->get(PlaceRepository::class);
-        $this->mapRepository = $mapRepository ?: $this->objectManager->get(MapRepository::class);
+        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
+        $this->placeRepository = $placeRepository ?: $objectManager->get(PlaceRepository::class);
+        $this->mapRepository = $mapRepository ?: $objectManager->get(MapRepository::class);
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
-        $this->demandFactory = $this->objectManager->get(PlaceDemandFactory::class);
+        $this->demandFactory = $objectManager->get(PlaceDemandFactory::class);
     }
 
     /**
