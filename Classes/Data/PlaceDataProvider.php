@@ -44,6 +44,7 @@ class PlaceDataProvider implements DataProviderInterface
     const ALLOWED_SEARCH_PARAMS = [
         SI::RADIUS,
         SI::SUBJECT,
+        SI::FIELDS,
         SI::LOCATION,
         SI::BOUNDS
     ];
