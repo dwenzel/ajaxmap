@@ -3,6 +3,15 @@
  */
 
 module.exports = {
+    sort: {
+        aplhabetic: {
+            asc: (a, b) => {
+                a = a.title.toLowerCase();
+                b = b.title.toLowerCase();
+                return a > b ? 1 : a < b ? -1 : 0;
+            }
+        }
+    },
     inserScriptTag: (src) => {
 
         return new Promise(function(resolve, reject) {

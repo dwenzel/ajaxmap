@@ -1,3 +1,5 @@
+import ajaxMap from './ajaxMap'
+import $ from 'jquery';
 /**
  * Updates all filter (trees)
  * Determines for all nodes in all filter trees whether
@@ -8,27 +10,35 @@
  *
  * @param placesTree The places tree
  * @return void
+ *
+ * formals :updateFilter
  */
-function updateFilter(placesTree) {
-    var mapId = placesTree.data.mapId,
-        mapNumber = getMapNumber(mapId),
-        mapEntry = mapStore[mapNumber],
-        filters = mapEntry.settings.placesTree.updateFilters;
+function update($rootNode, mapId) {
+
+    var mapEntry = ajaxMap.lookUp[mapId].mapEntry;
+
+    console.log('---->', mapEntry)
+
+    const filters = mapEntry.settings.settings.placesTree.updateFilters;
+
     $.each(filters, function(filterName, filter) {
         var treeSelector = '#' + filter.treeName + mapId;
+
+        //todo filter not initalised eg location typd:88??@dirk--everytime locationTypes
+        console.log('treeSelector---->', treeSelector)
+
         var tree = $(treeSelector).fancytree('getTree'),
-            children = placesTree.getRootNode().children,
+            children = $rootNode[0].children,
             placeKeys = getKeysByAttribute(children, filterName);
+
         filterTree(tree, placeKeys);
+
         if (filterName === 'regions' && filter.updateLayers) {
             var selectedKeys = getSelectedKeys(treeSelector);
             ajaxMap.updateLayers(mapNumber, selectedKeys);
         }
     });
 }
-
-
-
 
 /**
  * Searches all children for an attribute in their data property
@@ -157,7 +167,6 @@ function showMatchingPlaces(mapEntry) {
     mapEntry.markers = mapMarkers;
 }
 
-
 /**
  * Shows places from a list of selected places
  *
@@ -193,7 +202,7 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
         });
 }
 const filterPlaces = {
-    updateFilter,
+    update,
     showSelectedPlaces
 };
 

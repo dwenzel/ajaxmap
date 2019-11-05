@@ -590,12 +590,8 @@ var ajaxMap = {};
         var rootNode = $(selector).fancytree('getRootNode');
         rootNode.removeChildren();
         rootNode.addChildren(children);
-        var compare = function(a, b) {
-            a = a.title.toLowerCase();
-            b = b.title.toLowerCase();
-            return a > b ? 1 : a < b ? -1 : 0;
-        };
-        rootNode.sortChildren(compare, false);
+
+        rootNode.sortChildren(utilitys.sort.asc, false);
         updateFilter(rootNode.tree);
     }
 

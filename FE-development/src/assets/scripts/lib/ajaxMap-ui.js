@@ -8,6 +8,7 @@ const _ = {
     init: () => {
         _.cache.$filterPlaces = $('input[name=filterPlaces]');
 
+        $('body').append('<div id="overlayDetailHelper">');
 
         _.reset();
     },

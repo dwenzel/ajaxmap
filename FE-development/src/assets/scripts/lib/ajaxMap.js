@@ -17,13 +17,11 @@ class AjaxMap {
     constructor(mapEntry) {
         this.mapEntry = mapEntry;
 
+        mapEntry.id = mapEntry.settings.id;
+        mapEntry.instance = this;
         mapEntry.layers = null;
         this.places = null;
         this.$mapEl = null;
-    }
-
-    initPlaces() {
-        places.init.call(this);
     }
 
     panTo(lat, long) {
@@ -38,6 +36,7 @@ const _ = {
         const
             basePath =
                 window.location.protocol + "//" + window.location.host + "/",
+
             webkitPath =
                 window.location.origin + "/";
 
@@ -53,32 +52,27 @@ const _ = {
             const mapStore = ajaxMap.configData.mapStore;
 
             ajaxMap.maps = mapStore.map((mapEntry) => {
-
                 const ajaxMapInstance = new AjaxMap(mapEntry);
 
                 map.build(mapEntry).then((response) => {
-                    locationTypes.init(ajaxMapInstance, response.locationTypes);
+
+                    locationTypes.init(mapEntry, response.locationTypes);
 
                     mapLayers.buildStatic(mapEntry);
 
                     regions.build(mapEntry)
 
+                    places.init(ajaxMapInstance)
+
                     fancyTreeRenderer.category(mapEntry);
                     fancyTreeRenderer.placeGroup(mapEntry);
-
-                    ajaxMapInstance.initPlaces();
                 });
 
-
-
-                //same as mapstore!!
+                //same as mapstore!!no mpastore is [mapEntra] not instance
                 ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
 
                 return ajaxMapInstance;
             });
-
-            $('body').append('<div id="overlayDetailHelper">');
-
         })
     }
 };
@@ -97,7 +91,7 @@ ajaxMap = {
 
             _.initAllMaps()
 
-           // ui.init();
+            ui.init();
 
             //Promise.all(ajaxMap.maps)
         }, console.error)

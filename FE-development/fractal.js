@@ -1,6 +1,6 @@
 'use strict';
 
-const _fractalServerPort = 7133;
+const _fractalServerPort = 2222;
 
 const path = require('path');
 const packageJSON = require('./package.json');

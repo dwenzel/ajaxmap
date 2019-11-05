@@ -5,8 +5,6 @@
 import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer'
 
-import ajaxMap from './ajaxMap'
-
 const helpers = {
     setDimension: ($mapEl, response) => {
         $mapEl.height(response.height).width(response.width);

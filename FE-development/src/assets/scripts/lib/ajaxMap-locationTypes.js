@@ -1,36 +1,33 @@
 import treeRenderer  from './fancytree-renderer'
 import places from'./ajaxMap-places'
+import $ from 'jquery';
 
-const _ = {
-    selector: '#ajaxMapLocationTypesSelector'
-}
 
 const mapLocationTypes = {
-    ui: function() {
-        const currLocationTypes = this.mapEntry.locationTypes,
-            mapId = this.mapEntry;
+    treeSelector: '#ajaxMapLocationTypesTree',
+    ui: function(mapEntry) {
+        const currLocationTypes = mapEntry.locationTypes,
+            mapId = mapEntry.id;
 
         //remove empty option (since fluid doesn't build a select without option)
         for (var type in currLocationTypes) {
 
             $('<option/>').val(currLocationTypes[type].key)
             .text(currLocationTypes[type].title)
-            .appendTo($(selector + mapId));
+            .appendTo($(mapLocationTypes.treeSelector + mapId));
         }
 
-        // set on change function for location types selector
-        $(selector + mapId).change(function() {
+        // set on change function for location types treeSelector
+        $(mapLocationTypes.treeSelector + mapId).change(function() {
             places.updatePlaces(mapId);
         });
     },
-    init: function(locationTypes) {
+    init: function(mapEntry, locationTypes) {
 
-        if (locationTypes.length) {
-            const mapEntry = this.mapEntry;
-
+        if (locationTypes) {
             mapEntry.locationTypes = locationTypes;
 
-            mapLocationTypes.ui();
+            mapLocationTypes.ui(mapEntry);
             treeRenderer.locationTypes(mapEntry);
         }
     }

@@ -77,8 +77,8 @@
 	"project": {
 		"title": "extension FE-builder",
 		"publicPath": "/resources",
-		"ajaxProxyPort": 7834,
-		"googleApiKey":"AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"
+		"ajaxProxyPort": 7835,
+		"googleApiKey": "AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"
 	},
 	"dependencies": {
 		"jquery": "^3.4.1",

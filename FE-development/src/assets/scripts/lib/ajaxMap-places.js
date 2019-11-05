@@ -6,22 +6,23 @@ import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 
-import filter  from './ajaxMap-filter-places'
-
 const _ = {
     updatePlaces: (mapNumber, clearSelected) => {
         var mapEntry = ajaxMap.lookUp[mapNumber],
-            treeSelector = '#ajaxMapPlacesTree' + mapEntry.id;
+            treeSelector = _.treeSelector + mapEntry.id;
 
         if (typeof clearSelected != 'undefined') {
             var tree = $(treeSelector).fancytree('getTree');
+
             tree.clearFilter();
             tree.visit(function(node) {
                 node.setSelected(false);
             });
         }
+
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
         if (selectedPlaceKeys.length) {
+
             showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
@@ -55,32 +56,40 @@ const _ = {
 
         data.node.setActive(false);
         updatePlaces(data.tree.data.mapNumber);
-    }
-    ,
-    updatePlacesTree: (mapId, children) => {
-        var selector = '#ajaxMapPlacesTree' + mapId;
-        var rootNode = $(selector).fancytree('getRootNode');
-
-        console.log(rootNode,'rootNode')
-
-        rootNode.removeChildren();
-        rootNode.addChildren(children);
-
-        var compare = function(a, b) {
-            a = a.title.toLowerCase();
-            b = b.title.toLowerCase();
-            return a > b ? 1 : a < b ? -1 : 0;
-        };
-
-        rootNode.sortChildren(compare, false);
-        updateFilter(rootNode.tree);
     },
+    clickResetButton: function(e) {
+        $(resetFilterButtonSelector).click(places.resetButtonClick).attr("disabled", true);
+        $("input[name=filterPlaces]").val("");
+        $("span#matches").text("");
 
+        placesTree.clearFilter();
+    },
+    setEvents: (placesTree) => {
+        const resetFilterButtonSelector = "button#btnResetPlacesFilter";
 
-    init: function() {
+        $(resetFilterButtonSelector).click(function(e) {
+            $("input[name=filterPlaces]").val("");
+            $("span#matches").text("");
+            placesTree.clearFilter();
+        }).attr("disabled", true);
 
-        const mapEntry = this.mapEntry;
-        const that=this;
+        $("input[name=filterPlaces]").keyup(function(e) {
+            var n,
+                opts = {},
+                match = $(this).val();
+
+            if (e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === "") {
+                $(resetFilterButtonSelector).click();
+                return;
+            }
+            // Pass a string to perform case insensitive matching
+            n = placesTree.filterNodes(match, opts);
+            $(resetFilterButtonSelector).attr("disabled", false);
+            $("span#matches").text(n);
+        }).focus();
+    },
+    init: (mapInstance) => {
+        const mapEntry = mapInstance.mapEntry;
 
         return new Promise(function(resolve, reject) {
             $.ajax({
@@ -95,11 +104,13 @@ const _ = {
                 dataType: "json",
                 success: function(result) {
                     // store places
-                    that.places = result;
+                    mapInstance.places = result;
 
                     if (result.length) {
-                        treeRenderer.places(mapEntry, result);
 
+                        var placesTree = treeRenderer.places(mapEntry, result);
+
+                        _.setEvents(placesTree);
                         _.updatePlaces(mapEntry.id);
                     }
                 }
@@ -110,8 +121,8 @@ const _ = {
 
 const places = {
     init: _.init,
-    updatePlacesTree:_.updatePlacesTree
-
+    treeSelector: '#ajaxMapPlacesTree',
+    togglePlace:_.togglePlace
 };
 
 export default places;

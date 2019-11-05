@@ -1,4 +1,15 @@
 ---
-title: Fractal
+title: Fractal-based ajax-map FE-development-set
 ---
-Golden master for Fractal based project for building ** FE-for TYPO3-Extensions **
+
+to install in the folder:$ npm i 
+
+
+to start in the folder:$ npm start
+
+to build in the folder:$ npm build (todo)(change the pathes in js, and push it to ...)
+
+
+
+
+
