@@ -1,0 +1,33 @@
+
+.c-chapter--F {
+    height: 100vh*1.5;
+
+    .o-bg-img {
+        background-position-x: right;
+    }
+
+
+    a{
+        color:inherit;
+        text-decoration: underline;
+    }
+
+    #c-F-titleBox {
+        opacity: 0;
+        margin-top: -15vh;
+
+        &.aos-animate {
+            opacity: 1;
+        }
+
+        .c-text-box {
+            margin-left: -$default-distance;
+            margin-right: -$default-distance;
+        }
+    }
+    #c-F-textbox {
+        margin-top: $element-sitance-3*2;
+    }
+}
+
+

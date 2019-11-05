@@ -1,0 +1,5 @@
+// release from grid, full screen width
+@mixin grid-release {
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+}

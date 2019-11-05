@@ -1,10 +1,13 @@
-import $ from "jquery";
+import $ from 'jquery';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 
 import MarkerClusterer from '@google/markerclusterer'
 import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
+
+import '../css/main.scss';
+
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
 
 // import folder icons for tree
@@ -43,7 +46,7 @@ var ajaxMap = {};
 // Replace any existing <i> tags with <svg> and set up a MutationObserver to
 // continue doing this as the DOM changes.
 
-(function ($) {
+(function($) {
 
     var basePath; // base path for resources like icons and kml files
     if (!window.location.origin) {
@@ -60,7 +63,7 @@ var ajaxMap = {};
     /**
      * Initializes all maps from mapStore
      */
-    this.initAllMaps = function () {
+    this.initAllMaps = function() {
         // init all maps
         for (var entry = 0; entry < mapStore.length; entry++) {
             initMap(mapStore[entry]);
@@ -72,7 +75,7 @@ var ajaxMap = {};
      * @param mapNumber
      * @param layerIds
      */
-    this.updateLayers = function (mapNumber, layerIds) {
+    this.updateLayers = function(mapNumber, layerIds) {
         var mapEntry = mapStore[mapNumber];
         var existingLayers = mapEntry.layers;
         if (typeof (existingLayers) !== 'undefined') {
@@ -87,21 +90,20 @@ var ajaxMap = {};
             }
         }
     };
-
     /**
      * Renders the info window content for a place
      *
      * @param place
      * @returns {string|*}
      */
-    this.getInfoWindowContent = function (place) {
+    this.getInfoWindowContent = function(place) {
         /**
          * @todo make content rendering configurable, add link for overlay with additional info
          */
         // build a list of place's categories
         if (place.categories) {
             var list = '<div><ul class="placeCategories">';
-            $.each(place.categories, function () {
+            $.each(place.categories, function() {
                 list += '<li>' + this.title + '</li>';
             });
             list += '</ul></div>';
@@ -140,7 +142,7 @@ var ajaxMap = {};
         return content;
     };
 
-    this.openDetailView = function (caller, placeId) {
+    this.openDetailView = function(caller, placeId) {
         switch (caller) {
             case "infoWindow":
                 placeId = $('#detailView').data('placeId');
@@ -170,16 +172,16 @@ var ajaxMap = {};
                     }
                 }
             })
-                .done(function (data) {
-                    this.html(data);
-                    $('#detailView').fadeIn('400');
-                    $('#overlayDetailHelper').height($(document).height()).fadeIn('400');
-                    $('#overlay-close').click(function () {
-                        $('#detailView').fadeOut('500');
-                        $('#overlayDetailHelper').fadeOut('500');
-                        $('#detailView .inner').contents().remove();
-                    });
+            .done(function(data) {
+                this.html(data);
+                $('#detailView').fadeIn('400');
+                $('#overlayDetailHelper').height($(document).height()).fadeIn('400');
+                $('#overlay-close').click(function() {
+                    $('#detailView').fadeOut('500');
+                    $('#overlayDetailHelper').fadeOut('500');
+                    $('#detailView .inner').contents().remove();
                 });
+            });
         }
     }
 
@@ -236,7 +238,6 @@ var ajaxMap = {};
                 disableDefaultUI: response.disableDefaultUI
             });
 
-
         // store map in array
         mapEntry.map = map;
         // store regions
@@ -272,16 +273,16 @@ var ajaxMap = {};
                 'mapId': mapEntry.id
             },
             dataType: "json",
-            success: function (response) {
+            success: function(response) {
                 createMap(response, mapEntry);
 
                 // regions selector
                 if (mapEntry.regions.length) {
                     mapEntry.layers = {};
-                    mapEntry.regions.forEach(function (region) {
+                    mapEntry.regions.forEach(function(region) {
                         ajaxMap.addLayer(region, mapEntry);
                         if (region.children.length) {
-                            region.children.forEach(function (childRegion) {
+                            region.children.forEach(function(childRegion) {
                                 ajaxMap.addLayer(childRegion, mapEntry);
                             });
                         }
@@ -289,10 +290,10 @@ var ajaxMap = {};
                     renderRegionTree(mapEntry);
                 }
                 if (mapEntry.staticLayers.length) {
-                    mapEntry.staticLayers.forEach(function (staticLayer) {
+                    mapEntry.staticLayers.forEach(function(staticLayer) {
                         ajaxMap.addStaticLayer(staticLayer, mapEntry);
                         if (staticLayer.children.length) {
-                            staticLayer.children.forEach(function (childRegion) {
+                            staticLayer.children.forEach(function(childRegion) {
                                 ajaxMap.addStaticLayer(childRegion, mapEntry);
                             });
                         }
@@ -313,7 +314,7 @@ var ajaxMap = {};
                 $('body').append('<div id="overlayDetailHelper"></div>');
             },
 
-            error: function (error) {
+            error: function(error) {
                 //@todo get localized error message
                 alert("Sorry! Unable to load map data.");
             }
@@ -329,7 +330,7 @@ var ajaxMap = {};
             $("<option/>").val(currLocationTypes[type].key).text(currLocationTypes[type].title).appendTo("#ajaxMapLocationTypesSelector" + mapId);
         }
         // set on change function for location types selector
-        $("#ajaxMapLocationTypesSelector" + mapId).change(function () {
+        $("#ajaxMapLocationTypesSelector" + mapId).change(function() {
             var mapNumber = getMapNumber(this.id.split("ajaxMapLocationTypesSelector")[1]);
             updatePlaces(mapNumber);
         })
@@ -342,7 +343,7 @@ var ajaxMap = {};
      * @param newLayerData
      * @param mapEntry
      */
-    this.addLayer = function (newLayerData, mapEntry) {
+    this.addLayer = function(newLayerData, mapEntry) {
         if (typeof (mapEntry.layers[newLayerData.key]) === 'undefined') {
             var layerUrl = basePath + newLayerData.file,
                 layerOptions = {
@@ -364,7 +365,7 @@ var ajaxMap = {};
      * @param newLayerData
      * @param mapEntry
      */
-    this.addStaticLayer = function (newLayerData, mapEntry) {
+    this.addStaticLayer = function(newLayerData, mapEntry) {
         var layerUrl = basePath + newLayerData.file,
             layerOptions = {
                 clickable: newLayerData.clickable,
@@ -405,7 +406,7 @@ var ajaxMap = {};
             checkbox: true,
             cookieId: "fancyTree" + action + mapId,
             selectMode: 3,
-            select: function (event, data) {
+            select: function(event, data) {
                 var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTree' + action)[1]);
                 updatePlaces(mapNumber, true);
             },
@@ -449,10 +450,10 @@ var ajaxMap = {};
                 extensions: options.extensions,
                 glyph: options.glyph,
                 icon: options.icons,
-                select: function (event, data) {
+                select: function(event, data) {
                     var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
                     var selectedNodes = data.tree.getSelectedNodes();
-                    var selectedKeys = $.map(selectedNodes, function (node) {
+                    var selectedKeys = $.map(selectedNodes, function(node) {
                         return node.key;
                     });
                     ajaxMap.updateLayers(mapNumber, selectedKeys);
@@ -516,7 +517,7 @@ var ajaxMap = {};
             extensions: mapEntry.settings.placesTree.extensions,
             quicksearch: mapEntry.settings.placesTree.quicksearch,
             filter: mapEntry.settings.placesTree.filter,
-            activate: function (event, data) {
+            activate: function(event, data) {
                 togglePlace(event, data);
             }
         };
@@ -525,13 +526,13 @@ var ajaxMap = {};
         var placesTree = $(selector).fancytree('getTree'),
             resetFilterButtonSelector = "button#btnResetPlacesFilter";
 
-        $(resetFilterButtonSelector).click(function (e) {
+        $(resetFilterButtonSelector).click(function(e) {
             $("input[name=filterPlaces]").val("");
             $("span#matches").text("");
             placesTree.clearFilter();
         }).attr("disabled", true);
 
-        $("input[name=filterPlaces]").keyup(function (e) {
+        $("input[name=filterPlaces]").keyup(function(e) {
             var n,
                 opts = {},
                 match = $(this).val();
@@ -588,7 +589,7 @@ var ajaxMap = {};
         var rootNode = $(selector).fancytree('getRootNode');
         rootNode.removeChildren();
         rootNode.addChildren(children);
-        var compare = function (a, b) {
+        var compare = function(a, b) {
             a = a.title.toLowerCase();
             b = b.title.toLowerCase();
             return a > b ? 1 : a < b ? -1 : 0;
@@ -613,7 +614,7 @@ var ajaxMap = {};
             mapNumber = getMapNumber(mapId),
             mapEntry = mapStore[mapNumber],
             filters = mapEntry.settings.placesTree.updateFilters;
-        $.each(filters, function (filterName, filter) {
+        $.each(filters, function(filterName, filter) {
             var treeSelector = '#' + filter.treeName + mapId;
             var tree = $(treeSelector).fancytree('getTree'),
                 children = placesTree.getRootNode().children,
@@ -636,7 +637,7 @@ var ajaxMap = {};
      */
     function getKeysByAttribute(children, name) {
         var keys = [];
-        $.each(children, function (index, child) {
+        $.each(children, function(index, child) {
             if (child.data.hasOwnProperty(name)) {
                 var attribute = child.data[name];
                 if (attribute !== undefined &&
@@ -667,7 +668,7 @@ var ajaxMap = {};
      */
     function filterTree(tree, keys) {
         const options = {autoExpand: true};
-        tree.filterNodes(function (node) {
+        tree.filterNodes(function(node) {
             return (keys.indexOf(parseInt(node.key)) != -1);
         }, options);
     }
@@ -689,7 +690,7 @@ var ajaxMap = {};
                 glyph: options.glyph,
                 filter: options.filter,
                 source: mapEntry.locationTypes,
-                select: function (flag, node) {
+                select: function(flag, node) {
                     var mapNumber = getMapNumber(node.tree.options.cookieId.split('fancyTreeLocationTypes')[1]);
                     updatePlaces(mapNumber, true);
                 }
@@ -713,7 +714,7 @@ var ajaxMap = {};
                 'mapId': mapEntry.id
             },
             dataType: "json",
-            success: function (result) {
+            success: function(result) {
                 var mapNumber = getMapNumber(mapEntry.id);
                 // store places
                 mapStore[mapNumber].places = result;
@@ -743,7 +744,7 @@ var ajaxMap = {};
                 'placeId': placeId
             },
             dataType: "json",
-            success: function (result) {
+            success: function(result) {
                 address = result;
             }
         });
@@ -767,14 +768,14 @@ var ajaxMap = {};
         mapMarker.mapNumber = mapNumber;
         mapMarker.place = place;
         // add click function
-        google.maps.event.addListener(mapMarker, 'click', function () {
+        google.maps.event.addListener(mapMarker, 'click', function() {
             var map = this.getMap(),
                 infoWindow = mapStore[this.mapNumber].infoWindow,
                 content = ajaxMap.getInfoWindowContent(this.place);
 
             infoWindow.setContent(content);
-            google.maps.event.addListener(infoWindow, 'domready', function () {
-                $('.more.detail-view').unbind("click").bind("click", (function (event) {
+            google.maps.event.addListener(infoWindow, 'domready', function() {
+                $('.more.detail-view').unbind("click").bind("click", (function(event) {
                     event.preventDefault();
                     ajaxMap.openDetailView(
                         "infoWindow", -1);
@@ -826,21 +827,21 @@ var ajaxMap = {};
                     hasAnActivePlaceGroup = 0;
 
                 if (selectedCategoryKeys && marker.place.categories) {
-                    $.each(marker.place.categories, function () {
+                    $.each(marker.place.categories, function() {
                         hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
                         return (!hasAnActiveCategory);
                     });
                 }
 
                 if (selectedRegionKeys.length && marker.place.regions) {
-                    $.each(marker.place.regions, function () {
+                    $.each(marker.place.regions, function() {
                         hasAnActiveRegion = ($.inArray(parseInt(this.key), selectedRegionKeys) > -1);
                         return (!hasAnActiveRegion);
                     });
                 }
 
                 if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
-                    $.each(marker.place.placeGroups, function () {
+                    $.each(marker.place.placeGroups, function() {
                         hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
                         return (!hasAnActivePlaceGroup);
                     });
@@ -859,7 +860,7 @@ var ajaxMap = {};
             }
         }
 
-        clusterer.addMarkers(mapMarkers);
+     //   clusterer.addMarkers(mapMarkers);
 
         // update only if mapEntry is already initialized
         if (typeof mapEntry.markers != 'undefined') {
@@ -896,7 +897,7 @@ var ajaxMap = {};
         clusterer.addMarkers(mapMarkers);
 
         mapMarkers.forEach(
-            function (element) {
+            function(element) {
                 if ($.inArray(element.place.key, selectedPlaceKeys) > -1) {
                     element.setMap(map);
                 }
@@ -916,7 +917,7 @@ var ajaxMap = {};
         if (typeof clearSelected != 'undefined') {
             var tree = $(treeSelector).fancytree('getTree');
             tree.clearFilter();
-            tree.visit(function (node) {
+            tree.visit(function(node) {
                 node.setSelected(false);
             });
         }
@@ -933,18 +934,20 @@ var ajaxMap = {};
             selectedKeys = [];
         if (typeof tree.getSelectedNodes === 'function') {
             var selectedNodes = tree.getSelectedNodes();
-            selectedKeys = $.map(selectedNodes, function (node) {
+            selectedKeys = $.map(selectedNodes, function(node) {
                 return parseInt(node.key);
             });
         }
         return selectedKeys;
     }
-}).apply(ajaxMap, [jQuery]);
+}).apply(ajaxMap, [$]);
 
-$(function () {
+$(function() {
     // initialize all maps
     if (typeof mapStore !== "undefined" && mapStore instanceof Array) {
         ajaxMap.initAllMaps();
+        //alert('33')
+
         $("input[name=filterPlaces]").val("");
     }
 });

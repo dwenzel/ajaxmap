@@ -1,0 +1,13 @@
+@mixin bold(){
+    font-family: 'bundessansbold'!important;
+
+    p {
+        font-family: inherit;
+    }
+}
+
+
+
+.c-chapter b {
+  @include bold();
+}

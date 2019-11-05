@@ -1,0 +1,118 @@
+const proxy = require('./proxy'),
+    ajaxProxyPort = require('../../../package.json').project.ajaxProxyPort;
+
+proxy.start(ajaxProxyPort);
+
+const map = {
+    settings: {
+        keys: {
+            googleMap: "AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"
+        },
+        "id": "1",
+        "map": "",
+        "regions": "",
+        "kmlLayer": "",
+        "placeGroups": "",
+        "locationTypes": [],
+        "infoWindow": "",
+        "places": "",
+        "marker": [],
+        "settings": {
+            "markerClusterer": {"imagePath": "typo3conf\/ext\/ajaxmap\/Resources\/Public\/Icons\/Cluster\/m"},
+            "regionTree": {
+                "minExpandLevel": 3,
+                "selectMode": 3,
+                "icons": false,
+                "checkbox": true,
+                "extensions": ["filter", "glyph"],
+                "glyph": {
+                    "preset": "awesome4",
+                    "map": {
+                        "folder": "fa-folder",
+                        "folderOpen": "fa-folder-open"
+                    }
+                },
+                "filter": {
+                    "autoApply": true,
+                    "mode": "hide"
+                }
+            },
+            "categoryTree": {
+                "icons": false,
+                "extensions": ["filter", "glyph"],
+                "glyph": {
+                    "preset": "awesome4",
+                    "map": {
+                        "folder": "fa-folder",
+                        "folderOpen": "fa-folder-open"
+                    }
+                },
+                "filter": {
+                    "autoApply": true,
+                    "mode": "hide"
+                }
+            },
+            "placeGroupTree": {
+                "checkbox": true,
+                "icons": false,
+                "extensions": ["filter", "glyph"],
+                "glyph": {
+                    "preset": "awesome4",
+                    "map": {
+                        "folder": "fa-folder",
+                        "folderOpen": "fa-folder-open"
+                    }
+                },
+                "filter": {
+                    "autoApply": true,
+                    "mode": "hide"
+                }
+            },
+            "locationTypeTree": {
+                "checkbox": true,
+                "icons": false,
+                "selectMode": 1,
+                "extensions": ["filter", "glyph"],
+                "glyph": {
+                    "preset": "awesome4",
+                    "map": {
+                        "folder": "fa-folder",
+                        "folderOpen": "fa-folder-open"
+                    }
+                },
+                "filter": {
+                    "autoApply": true,
+                    "mode": "hide"
+                }
+            },
+            "placesTree": {
+                "toggleInfoWindowOnSelect": true,
+                "selectMode": 1,
+                "icons": false,
+                "extensions": ["filter"],
+                "quicksearch": true,
+                "filter": {
+                    "autoApply": true,
+                    "mode": "hide"
+                },
+                "updateFilters": {
+                    "locationType": {"treeName": "ajaxMapLocationTypesTree"},
+                    "categories": {"treeName": "ajaxMapCategoryTree"},
+                    "regions": {
+                        "treeName": "ajaxMapRegionsTree",
+                        "updateLayers": true
+                    },
+                    "placeGroups": {"treeName": "ajaxMapPlaceGroupTree"}
+                }
+            }
+        },
+        "pageId": 149
+    }
+};
+
+module.exports = {
+
+    context: {
+        map: JSON.stringify(map)
+    }
+};

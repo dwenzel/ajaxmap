@@ -1,0 +1,49 @@
+// this will always return the width of the columns on the first level,
+// no matter how deep the element is nested.
+// $i ist number of columns 1-12
+// $bp is the name of the breakpoint  xs - big
+// $toolbox-grid-fixed-widths: (
+//     'xs': 100vw,
+//     'sm': 100vw,
+//     'md': 100vw,
+//     'big': 1180px,
+// );
+//
+
+@mixin grid-static-col($i) {
+    @each $breakpoint, $width in $toolbox-grid-fixed-widths {
+        @include breakpoint($breakpoint) {
+            //$staticwidth: ($width / (($toolbox-grid-cols-$toolbox-grid-gutter) / $i));
+            $staticwidth: calc(#{$width} / (#{$toolbox-grid-cols}  / #{$i}));
+
+            flex-basis: $staticwidth;
+            max-width: $staticwidth;
+            min-width: $staticwidth;
+        }
+    }
+}
+
+@mixin grid-static-col-attr($attr,$i) {
+    @each $breakpoint, $width in $toolbox-grid-fixed-widths {
+        @include breakpoint($breakpoint) {
+            //$staticwidth: ($width / (($toolbox-grid-cols-$toolbox-grid-gutter) / $i));
+            $staticwidth: calc(#{$width} / (#{$toolbox-grid-cols} / #{$i}));
+
+            #{$attr}: $staticwidth;
+
+        }
+    }
+}
+
+@function grid-fixed-width($bp) {
+    $fixedWidthGrid: map-get($toolbox-grid-fixed-widths, $bp);
+
+    @return $fixedWidthGrid;
+}
+
+@function static-grid-col-bp($i, $bp) {
+    $fixedWidth: map-get($toolbox-grid-fixed-widths, $bp);
+    $staticwidth: $fixedWidth / ($toolbox-grid-cols / $i);
+
+    @return $staticwidth;
+}

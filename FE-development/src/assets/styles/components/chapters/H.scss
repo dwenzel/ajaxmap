@@ -1,0 +1,45 @@
+.c-chapter--H {
+    height: 100vh*2;
+    ///margin: 120vh 0;
+
+    .o-bg-img {
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+    .container {
+        margin-top: 10vh;
+    }
+
+    #c-H-teaser {
+        margin-top: $element-sitance-2;
+
+        @include bp(sm) {
+
+            margin-top:30vh;
+
+        }
+
+        .c-teaser-box {
+            box-shadow: $shadow-xl;
+
+            &:hover {
+                filter: brightness(50%);
+
+                .c-title {
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+
+    #c-H-textbox-2 {
+        font-family: inherit;
+        font-size: font-size(xl);
+
+        @include bp(0, sm) {
+            margin-top: $element-sitance-3;
+        }
+    }
+}

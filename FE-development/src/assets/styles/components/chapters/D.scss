@@ -1,0 +1,51 @@
+.c-chapter--D {
+
+    .container {
+        margin-top: -30%;
+    }
+
+    .row:nth-of-type(2) {
+        // border: 10px solid red;
+        margin-top: 30%;
+    }
+
+    #d-bg-image {
+        width: 100%;
+        height: 100vh;
+        left: 0;
+        top: $offset;
+        position: fixed;
+    }
+
+    #d-text-box-1 {
+        margin-top: 50%;
+    }
+
+    #d-text-box-2 {
+        margin-top: 70%;
+
+        .c-text-box {
+            transition: margin-top 2s;
+
+            &.aos-animate {
+                margin-top: 1vh;
+            }
+        }
+    }
+
+    [data-anchor-id] {
+        z-index: 11;
+        width: 100%;
+        position: absolute;
+        visibility: hidden;
+
+        &[data-anchor-id="d-trigger-image-out"] {
+            top: calc(100% - 30vh);
+        }
+
+        &[data-anchor-id="d-trigger-image-in"] {
+            top: 0;
+        }
+    }
+
+}

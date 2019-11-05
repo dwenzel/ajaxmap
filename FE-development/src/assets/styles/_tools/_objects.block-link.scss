@@ -1,0 +1,19 @@
+/*
+set a element under a link navigation
+*/
+.o-block-link {
+    z-index: 1;
+
+    &:after {
+        background-color: transparent;
+        content: '';
+        display: block;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        text-indent: -9999px;
+        top: 0;
+        width: 100%;
+        z-index: 0;
+    }
+}

@@ -1,0 +1,53 @@
+$el-distance: 4vh;
+
+.c-chapter--G {
+    height: 180vh;
+    padding-top: 16%;
+
+    .o-bg-img {
+        //height: calc(100vh - #{$offset});
+        //top: $offset;
+        background-size: contain;
+        background-position: left bottom;
+
+        &.bg {
+            background: $gray-gradient-left-bright;
+        }
+    }
+
+    .container .row:nth-of-type(1) {
+        margin-top: -$el-distance*2;
+
+        #c-G-textbox-1 {
+            margin-top: -$el-distance*2;
+        }
+
+        #c-G-textbox-2 {
+            margin-top: $el-distance*8;
+        }
+    }
+
+    #c-G-namebox {
+        &.aos-animate {
+
+        }
+
+    }
+
+    .c-text-box {
+
+        &.quote {
+            @include bold();
+            color: $white;
+            font-size: font-size(xl);
+            margin-top: 10vh;
+
+            &:before,
+            &:after {
+                color: $primary-color;
+            }
+        }
+    }
+}
+
+

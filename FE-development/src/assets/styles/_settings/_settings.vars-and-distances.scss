@@ -1,0 +1,14 @@
+$default-distance: 30px;
+
+$element-sitance-1: 4px;
+$element-sitance-2: 8px;
+$element-sitance-3: 16px;
+
+$header-height:175px;
+$header-height-shrink:66px;
+
+$body-vh:calc(100vh - #{$header-height-shrink});
+
+$nav-height: 150px; //144
+$offset: 73px; //data-offset-top
+$nav-height-mobile: 91px; //91+padding
