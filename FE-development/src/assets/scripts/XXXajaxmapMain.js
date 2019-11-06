@@ -713,8 +713,9 @@ var ajaxMap = {};
             dataType: "json",
             success: function(result) {
                 var mapNumber = getMapNumber(mapEntry.id);
+
                 // store places
-                mapStore[mapNumber].places = result;
+                mapEntry.places = result;
 
                 if (result.length) {
                     renderPlacesTree(mapEntry, result);

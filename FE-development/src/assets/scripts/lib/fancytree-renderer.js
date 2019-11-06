@@ -26,8 +26,8 @@ function renderTreeAjax(select, action, mapId, settings) {
         cookieId: "fancyTree" + action + mapId,
         selectMode: 3,
         select: function(event, data) {
-            var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTree' + action)[1]);
-            ajaxMap.updatePlaces(mapNumber, true);
+
+            pla.updatePlaces(mapNumber, true);
         },
         source: {
             url: "index.php",
@@ -53,19 +53,7 @@ function renderTreeAjax(select, action, mapId, settings) {
 }
 
 const _ = {
-    updatePlacesTree: (mapId, children) => {
-        var selector =
-            places.treeSelector + mapId;
 
-        var $rootNode =
-            $(selector).fancytree('getRootNode');
-
-        $rootNode.removeChildren();
-        $rootNode.addChildren(children);
-        $rootNode.sortChildren(sort.aplhabetic.asc, false);
-
-        filter.update($rootNode, mapId);
-    },
     getPlaceTreeSettings: (mapEntry) => {
         //@dirk? ist this per map or general
         const placesTreeConfig = mapEntry.settings.placesTree ? mapEntry.settings.placesTree
@@ -86,12 +74,35 @@ const _ = {
             filter: placesTreeConfig.filter,
             activate: function(event, data) {
 
-                places.togglePlace(event, data);
+                places.togglePlace(event, data, mapEntry);
             }
         };
 
     }
 };
+
+export const updateTree = {
+    places: (mapEntry, children) => {
+        var selector =
+            places.treeSelector + mapEntry.id;
+
+        var $rootNode =
+            $(selector).fancytree('getRootNode');
+
+        $rootNode.removeChildren();
+        $rootNode.addChildren(children);
+        $rootNode.sortChildren(sort.aplhabetic.asc, false);
+
+        filter.update($rootNode, mapEntry);
+    }
+}
+
+export const fancytreeSelector = {
+    locationType: '#ajaxMapLocationTypesTree',
+    category: '#ajaxMapCategoryTree',
+    regions: '#ajaxMapRegionsTree',
+    placeGroup: '#ajaxMapPlaceGroupTree',
+}
 
 const renderTree = {
     places: (mapEntry, children) => {
@@ -100,7 +111,7 @@ const renderTree = {
 
         $placeTree.fancytree(settings);
 
-        _.updatePlacesTree(mapEntry.id, children);
+        updateTree.places(mapEntry, children);
 
         var placesTree = $placeTree.fancytree('getTree');
         return placesTree
@@ -149,8 +160,6 @@ const renderTree = {
         );
     },
     locationTypes: function(mapEntry) {
-
-        console.log('locationTypes--->', mapEntry)
 
         var options = mapEntry.settings.locationTypeTree;
 

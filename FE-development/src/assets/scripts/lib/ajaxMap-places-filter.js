@@ -1,4 +1,8 @@
-import ajaxMap from './ajaxMap'
+import {updateTree}  from './fancytree-renderer'
+import layers from './map-layers'
+import markers from './map-marker'
+import {getSelectedKeys} from './map-helpers'
+import {fancytreeSelector} from './fancytree-renderer'
 import $ from 'jquery';
 /**
  * Updates all filter (trees)
@@ -13,29 +17,28 @@ import $ from 'jquery';
  *
  * formals :updateFilter
  */
-function update($rootNode, mapId) {
-
-    var mapEntry = ajaxMap.lookUp[mapId].mapEntry;
-
-    console.log('---->', mapEntry)
-
+function update($rootNode, mapEntry) {
     const filters = mapEntry.settings.placesTree.updateFilters;
 
     $.each(filters, function(filterName, filter) {
-        var treeSelector = '#' + filter.treeName + mapId;
+        const treeSelector = '#' + filter.treeName + mapEntry.id;
 
-        //todo filter not initalised eg location typd:88??@dirk--everytime locationTypes
-        console.log('treeSelector---->', treeSelector)
+        try {
+            const tree = $(treeSelector).fancytree('getTree');
+            const children = $rootNode.children
+            const placeKeys = getKeysByAttribute(children, filterName);
 
-        var tree = $(treeSelector).fancytree('getTree'),
-            children = $rootNode[0].children,
-            placeKeys = getKeysByAttribute(children, filterName);
+            filterTree(tree, placeKeys);
 
-        filterTree(tree, placeKeys);
+            if (filterName === 'regions' && filter.updateLayers) {
 
-        if (filterName === 'regions' && filter.updateLayers) {
-            var selectedKeys = getSelectedKeys(treeSelector);
-            ajaxMap.updateLayers(mapNumber, selectedKeys);
+                var selectedKeys = getSelectedKeys(treeSelector);
+                layers.update(mapEntry, selectedKeys);
+            }
+        } catch (err) {
+            //todo filter not initalised eg location typd:88??@dirk--everytime locationTypes
+            console.log('treeSelector---->', treeSelector)
+            console.error(err)
         }
     });
 }
@@ -81,6 +84,7 @@ function getKeysByAttribute(children, name) {
  */
 function filterTree(tree, keys) {
     const options = {autoExpand: true};
+
     tree.filterNodes(function(node) {
         return (keys.indexOf(parseInt(node.key)) != -1);
     }, options);
@@ -93,16 +97,21 @@ function filterTree(tree, keys) {
  * @param mapEntry
  */
 function showMatchingPlaces(mapEntry) {
+
+
     var map = mapEntry.map,
         mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
+
         selectedPlaces = [],
         clusterer = mapEntry.markerClusterer,
         mapMarkers = mapEntry.markers || [],
-        selectedLocationTypeKeys = getSelectedKeys('#ajaxMapLocationTypesTree' + mapId),
-        selectedCategoryKeys = getSelectedKeys('#ajaxMapCategoryTree' + mapId),
-        selectedRegionKeys = getSelectedKeys('#ajaxMapRegionsTree' + mapId),
-        selectedPlaceGroupKeys = getSelectedKeys('#ajaxMapPlaceGroupTree' + mapId),
+
+        selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
+        selectedCategoryKeys = getSelectedKeys(fancytreeSelector.categorys  + mapId),
+        selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions  + mapId),
+        selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
+
         selectedLocationType = 0;
 
     // get selected location type. This should be one or none
@@ -110,15 +119,19 @@ function showMatchingPlaces(mapEntry) {
         selectedLocationType = selectedLocationTypeKeys[0];
     }
 
+    console.log('markerClusterer', clusterer, mapEntry)
     clusterer.removeMarkers(mapMarkers);
+
+
 
     // add markers for all places
     for (var i = 0, j = mapPlaces.length; i < j; i++) {
         var place = mapPlaces[i],
             marker = mapMarkers[i];
+
         if (!mapMarkers[i]) {
             // marker does not exist, create it
-            mapMarkers[i] = createMarker(mapEntry, getMapNumber(mapId), place);
+            mapMarkers[i] = markers.create(mapEntry, place);
         } else {
             var hasAnActiveCategory = 0,
                 hasAnActiveRegion = 0,
@@ -161,8 +174,9 @@ function showMatchingPlaces(mapEntry) {
     //   clusterer.addMarkers(mapMarkers);
 
     // update only if mapEntry is already initialized
-    if (typeof mapEntry.markers != 'undefined') {
-        updatePlacesTree(mapId, selectedPlaces);
+    if (typeof mapEntry.markers !== 'undefined') {
+
+        updateTree.places(mapEntry, selectedPlaces);
     }
     mapEntry.markers = mapMarkers;
 }
@@ -186,7 +200,7 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
             marker = mapMarkers[i];
         if (!mapMarkers[i]) {
             // marker does not exist, create it
-            mapMarkers[i] = createMarker(mapEntry, getMapNumber(mapId), place);
+            mapMarkers[i] = marker.create(mapEntry, getMapNumber(mapId), place);
         } else {
             marker.setMap(null);
             clusterer.removeMarker(marker);
@@ -203,6 +217,7 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
 }
 const filterPlaces = {
     update,
+    showMatchingPlaces,
     showSelectedPlaces
 };
 

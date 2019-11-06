@@ -1,7 +1,9 @@
-function createMarker(mapEntry, mapNumber, place) {
-    var map = mapEntry.map,
+import {getLocationType} from './map-helpers'
+
+function create(mapEntry, place) {
+    var map = mapEntry.googleMap,
         currType = place.locationType.key,
-        tmpCenter = place.geoCoordinates.split(","),
+        tmpCenter = place.geoCoordinates.split(','),
         currLatlng = new google.maps.LatLng(parseFloat(tmpCenter[0]), parseFloat(tmpCenter[1]));
 
     var mapMarker = new google.maps.Marker({
@@ -9,16 +11,24 @@ function createMarker(mapEntry, mapNumber, place) {
         map: map,
         title: place.title
     });
+
+    console.log(mapEntry,'map', map)
+    console.log('########')
+
     if (currType) {
-        mapMarker.setIcon(getLocationType(mapEntry, currType).icon);
+        const locationTyp=getLocationType(mapEntry, currType)
+        mapMarker.setIcon(locationTyp.icon);
     }
-    mapMarker.mapNumber = mapNumber;
+
+    mapMarker.mapNumber = mapEntry.id;
     mapMarker.place = place;
     // add click function
     google.maps.event.addListener(mapMarker, 'click', function() {
         var map = this.getMap(),
             infoWindow = mapStore[this.mapNumber].infoWindow,
             content = ajaxMap.getInfoWindowContent(this.place);
+
+
 
         infoWindow.setContent(content);
         google.maps.event.addListener(infoWindow, 'domready', function() {
@@ -32,11 +42,12 @@ function createMarker(mapEntry, mapNumber, place) {
         infoWindow.open(map, this);
 
     });
+
     return mapMarker;
 }
 
 const marker = {
-
+    create
 };
 
 export default marker;

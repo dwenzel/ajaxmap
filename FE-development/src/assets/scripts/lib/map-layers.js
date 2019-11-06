@@ -1,6 +1,20 @@
+const _={
+    getBasePath: () => {
+        if(_.basePath){
+            return _.basePath;
+        }
+
+        const basePath = window.location.protocol + "//" + window.location.host + "/";
+        const webkitPath = window.location.origin + "/";
+
+        _.basePath = !window.location.origin ? basePath : webkitPath;
+
+        return _.basePath;
+    },
+}
+
 const layers = {
-    update: function(mapNumber, layerIds) {
-        var mapEntry = mapStore[mapNumber];
+    update: function(mapEntry, layerIds) {
         var existingLayers = mapEntry.layers;
 
         if (typeof (existingLayers) !== 'undefined') {
@@ -15,10 +29,11 @@ const layers = {
             }
         }
     },
-    add: function(newLayerData,mapEntry) {
-        if (typeof (mapEntry.layers[newLayerData.key]) === 'undefined') {
+    add: function(newLayerData, mapEntry) {
+        //        88
+        if (!mapEntry.layers[newLayerData.key]) {
 
-            var layerUrl = basePath + newLayerData.file,
+            var layerUrl = _.getBasePath() + newLayerData.file,
 
                 layerOptions = {
                     clickable: newLayerData.clickable,
@@ -34,7 +49,7 @@ const layers = {
         }
     },
     addStatic: function(layerData, mapEntry) {
-        const layerUrl = _basePath + layerData.file;
+        const layerUrl = _.getBasePath() + layerData.file;
 
         const layerOptions = {
             clickable: layerData.clickable,

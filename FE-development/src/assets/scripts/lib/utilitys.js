@@ -12,6 +12,7 @@ module.exports = {
             }
         }
     },
+
     inserScriptTag: (src) => {
 
         return new Promise(function(resolve, reject) {

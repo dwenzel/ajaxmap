@@ -1,17 +1,20 @@
-import ajaxMap from './ajaxMap'
 import $ from 'jquery';
-import treeRenderer  from './fancytree-renderer.js'
 
 import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 
-const _ = {
-    updatePlaces: (mapNumber, clearSelected) => {
-        var mapEntry = ajaxMap.lookUp[mapNumber],
-            treeSelector = _.treeSelector + mapEntry.id;
 
-        if (typeof clearSelected != 'undefined') {
+import ajaxMap from './ajaxMap'
+import placesFilter from './ajaxMap-places-filter'
+import treeRenderer  from './fancytree-renderer'
+import {getSelectedKeys} from './map-helpers'
+
+const _ = {
+    updatePlaces: (mapEntry, clearSelected) => {
+        var treeSelector = _.treeSelector + mapEntry.id;
+
+        if (clearSelected) {
             var tree = $(treeSelector).fancytree('getTree');
 
             tree.clearFilter();
@@ -23,18 +26,16 @@ const _ = {
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
         if (selectedPlaceKeys.length) {
 
-            showSelectedPlaces(mapEntry, selectedPlaceKeys);
+            placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
 
-            showMatchingPlaces(mapEntry);
+            placesFilter.showMatchingPlaces(mapEntry);
         }
     },
 
-    togglePlace: (event, data) => {
-        var mapNumber = getMapNumber(data.tree.data.mapId),
-            mapEntry = mapStore[mapNumber],
-            mapMarkers = mapEntry.markers || [],
+    togglePlace: (event, data, mapEntry) => {
+        var mapMarkers = mapEntry.markers || [],
             infoWindow = mapEntry.infoWindow;
 
         if (!data.node.selected) {
@@ -55,14 +56,7 @@ const _ = {
         }
 
         data.node.setActive(false);
-        updatePlaces(data.tree.data.mapNumber);
-    },
-    clickResetButton: function(e) {
-        $(resetFilterButtonSelector).click(places.resetButtonClick).attr("disabled", true);
-        $("input[name=filterPlaces]").val("");
-        $("span#matches").text("");
-
-        placesTree.clearFilter();
+        _.updatePlaces(mapEntry);
     },
     setEvents: (placesTree) => {
         const resetFilterButtonSelector = "button#btnResetPlacesFilter";
@@ -104,14 +98,14 @@ const _ = {
                 dataType: "json",
                 success: function(result) {
                     // store places
-                    mapInstance.places = result;
+                    mapEntry.places = result;
 
                     if (result.length) {
 
                         var placesTree = treeRenderer.places(mapEntry, result);
 
                         _.setEvents(placesTree);
-                        _.updatePlaces(mapEntry.id);
+                        _.updatePlaces(mapEntry);
                     }
                 }
             })
@@ -122,7 +116,7 @@ const _ = {
 const places = {
     init: _.init,
     treeSelector: '#ajaxMapPlacesTree',
-    togglePlace:_.togglePlace
+    togglePlace: _.togglePlace
 };
 
 export default places;

@@ -1,8 +1,8 @@
 import treeRenderer  from './fancytree-renderer.js'
 import layers from './map-layers'
 
-function build(mapEntry) {
-const regions= mapEntry.settings.regions;
+function init(mapEntry) {
+const regions= mapEntry.regions;
 
     if (regions) {
         regions.forEach(function(region) {
@@ -22,5 +22,5 @@ const regions= mapEntry.settings.regions;
 }
 
 export default {
-    build
+    init
 };

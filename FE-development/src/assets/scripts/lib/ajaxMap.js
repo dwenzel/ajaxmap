@@ -18,8 +18,7 @@ class AjaxMap {
         this.mapEntry = mapEntry;
 
         mapEntry.instance = this;
-        mapEntry.layers = null;
-        this.places = null;
+        mapEntry.layers = [];//88 maybe whle init?
         this.$mapEl = null;
     }
 
@@ -30,17 +29,6 @@ class AjaxMap {
 
 let ajaxMap;
 const _ = {
-
-    createBasePath: () => {
-        const
-            basePath =
-                window.location.protocol + "//" + window.location.host + "/",
-
-            webkitPath =
-                window.location.origin + "/";
-
-        return !window.location.origin ? basePath : webkitPath;
-    },
     panTo: (mapId) => {
         "use strict";
         //) console.log(mapCenter, '*****************')//http://jsfiddle.net/fqt7L/1/
@@ -59,7 +47,7 @@ const _ = {
 
                     mapLayers.buildStatic(mapEntry);
 
-                    regions.build(mapEntry)
+                    regions.init(mapEntry)
 
                     places.init(ajaxMapInstance)
 
@@ -77,6 +65,7 @@ const _ = {
 };
 
 ajaxMap = {
+    basePath: '',
     lookUp: {},
     maps: [],//array of ajax-map object
     ajaxServerPath: 'http://localhost:' + ajaxProxyPort,//this path will be replaced bei build script: see readme.txt
