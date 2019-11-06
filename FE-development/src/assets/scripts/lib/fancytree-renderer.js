@@ -152,8 +152,8 @@ const renderTree = {
 
         console.log('locationTypes--->', mapEntry)
 
-        var options = mapEntry.settings.settings.locationTypeTree;
-        
+        var options = mapEntry.settings.locationTypeTree;
+
         const settings = {
             checkbox: options.checkbox,
             cookieId: "fancyTreeLocationTypes" + mapEntry.id,

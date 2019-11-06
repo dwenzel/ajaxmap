@@ -19,7 +19,7 @@ function update($rootNode, mapId) {
 
     console.log('---->', mapEntry)
 
-    const filters = mapEntry.settings.settings.placesTree.updateFilters;
+    const filters = mapEntry.settings.placesTree.updateFilters;
 
     $.each(filters, function(filterName, filter) {
         var treeSelector = '#' + filter.treeName + mapId;

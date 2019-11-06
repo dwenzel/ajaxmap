@@ -12,7 +12,7 @@ $(document).ready(function() {
 
 
     const configData = {
-        mapSettings: mapSettings.settings,
+        mapSettings: mapSettings,
         mapStore: window.mapStore
     }
 

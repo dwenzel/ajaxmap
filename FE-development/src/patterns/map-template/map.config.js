@@ -1,12 +1,13 @@
 const proxy = require('./proxy'),
     ajaxProxyPort = require('../../../package.json').project.ajaxProxyPort;
-
 proxy.start(ajaxProxyPort);
+
+const googleApiKey = require(process.env.HOME + '/config-data/bsb-config').googleApiKey;
 
 const map = {
     settings: {
         keys: {
-            googleMap: "AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"
+            googleMap: googleApiKey
         },
         "id": "1",
         "map": "",
@@ -113,6 +114,6 @@ const map = {
 module.exports = {
 
     context: {
-        map: JSON.stringify(map)
+        map: JSON.stringify(map.settings)
     }
 };

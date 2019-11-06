@@ -17,7 +17,6 @@ class AjaxMap {
     constructor(mapEntry) {
         this.mapEntry = mapEntry;
 
-        mapEntry.id = mapEntry.settings.id;
         mapEntry.instance = this;
         mapEntry.layers = null;
         this.places = null;

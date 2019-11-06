@@ -7,7 +7,6 @@ import mapHelpers from './map-helpers'
 const _map = {
 
     getMapData: (mapEntry) => {
-
         const data = {
             'id': ajaxMap.configData.mapSettings.pageId,
             'api': "map",
@@ -35,11 +34,9 @@ const _map = {
             _map.getMapData(mapEntry)
             .then((response) => {
 
-                const mapId = mapEntry.settings.id;
-                const $el = $('#ajaxMapContainer_Map' + mapId);
+                const $el = $('#ajaxMapContainer_Map' + mapEntry.id);
 
-
-                const googleMap = mapHelpers.createGooglMap(response,$el);
+                const googleMap = mapHelpers.createGooglMap(response, $el);
 
                 const infoWindow = mapHelpers.getInfoWindow();
                 const markerClusterer = mapHelpers.getMarkerClusterer(googleMap, mapEntry.markerClusterer);
