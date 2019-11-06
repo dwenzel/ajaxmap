@@ -21,9 +21,9 @@ const helpers = {
         setDimension: ($mapEl, response) => {
             $mapEl.height(response.height).width(response.width);
         },
-        getMapCenter: (coordsStr) => {
+        getLatLong: (coordsStr) => {
             if (!coordsStr) {
-                throw new Error('no map-center [lat,long]')
+                throw new Error('no map [lat,long]')
             }
 
             const coords = coordsStr.split(',').map((part) => parseFloat(part));
@@ -70,7 +70,7 @@ const helpers = {
             const mapType = helpers.getMapType(response.type);
             const mapStyle = helpers.getMapStyle(response.type);
 
-            let mapCenter = helpers.getMapCenter(response.mapCenter);
+            let mapCenter = helpers.getLatLong(response.mapCenter);
 
             //build map
             return new google.maps.Map(

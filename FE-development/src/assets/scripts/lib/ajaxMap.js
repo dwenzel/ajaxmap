@@ -1,4 +1,4 @@
-import $ from 'jquery';
+
 const ajaxProxyPort = require('../../../../package.json').project.ajaxProxyPort;
 
 import map  from './ajaxMap-map'
@@ -85,6 +85,7 @@ ajaxMap = {
         }, console.error)
     }
 };
+
 export
 default
 ajaxMap;
