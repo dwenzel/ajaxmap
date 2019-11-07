@@ -404,7 +404,7 @@ var ajaxMap = {};
     function renderTreeAjax(select, action, mapId, settings) {
         var localSettings = {
             checkbox: true,
-            cookieId: "fancyTree" + action + mapId,
+            cookieId: 'fancyTree' + action + mapId,
             selectMode: 3,
             select: function(event, data) {
                 var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTree' + action)[1]);

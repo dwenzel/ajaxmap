@@ -26,20 +26,21 @@ function renderTreeAjax(select, action, mapId, settings) {
         cookieId: "fancyTree" + action + mapId,
         selectMode: 3,
         select: function(event, data) {
+            const mapEntry = ajaxMap.lookUp[mapId].mapEntry
 
-            pla.updatePlaces(mapNumber, true);
+            places.update(mapEntry, true);
         },
-        source: {
-            url: "index.php",
-            type: "GET",
-            dataType: "json",
-            data: {
-                'id': mapSettings.pageId,
-                'api': "map",
-                'action': action,
-                'mapId': mapId
-            }
-        }
+        /*   source: {
+         url: "index.php",
+         type: "GET",
+         dataType: "json",
+         data: {
+         'id': mapSettings.pageId,
+         'api': "map",
+         'action': action,
+         'mapId': mapId
+         }
+         }*/
     };
     if (typeof settings === 'object') {
         for (var property in settings) {
@@ -49,13 +50,14 @@ function renderTreeAjax(select, action, mapId, settings) {
         }
     }
 
+    console.dir(localSettings)
+
     $(select).fancytree(localSettings).data('mapId', mapId);
 }
 
 const _ = {
 
     getPlaceTreeSettings: (mapEntry) => {
-        //@dirk? ist this per map or general
         const placesTreeConfig = mapEntry.settings.placesTree ? mapEntry.settings.placesTree
             : ajaxMap.configData.mapSettings.settings.placesTree;
 
@@ -72,7 +74,16 @@ const _ = {
             extensions: placesTreeConfig.extensions,
             quicksearch: placesTreeConfig.quicksearch,
             filter: placesTreeConfig.filter,
-            activate: places.showSoloPlace(mapEntry)
+            activate: places.showSoloPlace(mapEntry),
+            autoScroll: true,
+            renderTitle: (event, data) => {
+                if (placesTreeConfig.renderItem) {
+                    return placesTreeConfig.renderItem(event, data)
+                }
+
+                return null
+                //return markup;//('<span>maus</span>')
+            }
         };
 
     }
@@ -87,7 +98,11 @@ export const updateTree = {
             $(selector).fancytree('getRootNode');
 
         $rootNode.removeChildren();
+
+        console.log('children', children, '+++++')
+
         $rootNode.addChildren(children);
+
         $rootNode.sortChildren(sort.aplhabetic.asc, false);
 
         filter.update($rootNode, mapEntry);
@@ -99,15 +114,23 @@ export const fancytreeSelector = {
     category: '#ajaxMapCategoryTree',
     regions: '#ajaxMapRegionsTree',
     placeGroup: '#ajaxMapPlaceGroupTree',
-    places:'#ajaxMapPlacesTree'
+    places: '#ajaxMapPlacesTree'
 }
 
 const renderTree = {
     places: (mapEntry, children) => {
         const $placeTree = $(fancytreeSelector.places + mapEntry.id);
+
         const settings = _.getPlaceTreeSettings(mapEntry);
 
         $placeTree.fancytree(settings);
+        $placeTree.renderNode = function(event, data) {
+            alert('dffdffsaf')
+
+            var node = data.node,
+                $tdList = $(node.tr).find(">td");
+            $tdList.eq(1).text(node.key);
+        }
 
         updateTree.places(mapEntry, children);
 

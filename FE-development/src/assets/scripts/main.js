@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import ajaxMap from './lib/ajaxMap';
 
-import mapCss from '../../../dist/css/main.css'
+import '../../../dist/css/main.css'
 import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
 
 $(document).ready(function() {
@@ -11,9 +11,8 @@ $(document).ready(function() {
         return;
     }
 
-
     const configData = {
-        mapSettings: mapSettings,
+        mapSettings: window.mapSettings,
         mapStore: window.mapStore
     }
 

@@ -99,8 +99,7 @@ const _ = {
             $("span#matches").text(n);
         }).focus();
     },
-    init: (mapInstance) => {
-        const mapEntry = mapInstance.mapEntry;
+    init: (mapEntry) => {
 
         return new Promise(function(resolve, reject) {
             $.ajax({

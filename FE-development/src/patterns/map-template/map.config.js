@@ -10,14 +10,14 @@ const map = {
             googleMap: googleApiKey
         },
         "id": "1",
-        "map": "",
-        "regions": "",
-        "kmlLayer": "",
-        "placeGroups": "",
-        "locationTypes": [],
         "infoWindow": "",
-        "places": "",
+        "kmlLayer": "",
+        "locationTypes": [],
+        "map": "",
         "marker": [],
+        "placeGroups": "",
+        "places": "",
+        "regions": "",
         "settings": {
             "markerClusterer": {"imagePath": "typo3conf\/ext\/ajaxmap\/Resources\/Public\/Icons\/Cluster\/m"},
             "regionTree": {

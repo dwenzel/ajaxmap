@@ -2,6 +2,16 @@ import {getLocationType} from './map-helpers'
 import mapHelpers from './map-helpers'
 import infoWindow from './map-marker-info-window'
 
+function addMarkerClickFunction(mapEntry, place) {
+    return function() {
+        if (window.ajaxMapConfig && ajaxMapConfig.onMarkerClick) {
+            ajaxMapConfig.onMarkerClick(mapEntry, place);
+        }
+
+        infoWindow.createOnClick()
+    }
+}
+
 function create(mapEntry, place) {
     var map = mapEntry.googleMap,
         currType = place.locationType && place.locationType.key,
@@ -14,7 +24,7 @@ function create(mapEntry, place) {
     });
 
     if (currType) {
-        const locationTyp=getLocationType(mapEntry, currType)
+        const locationTyp = getLocationType(mapEntry, currType)
         mapMarker.setIcon(locationTyp.icon);
     }
 
@@ -22,8 +32,9 @@ function create(mapEntry, place) {
     mapMarker.place = place;
 
     // add click function
-    google.maps.event.addListener(mapMarker, 'click',
-        infoWindow.createOnClick(mapEntry, place));
+    const clickFunction = addMarkerClickFunction(mapEntry, place);
+
+    google.maps.event.addListener(mapMarker, 'click', clickFunction)
 
     return mapMarker;
 }

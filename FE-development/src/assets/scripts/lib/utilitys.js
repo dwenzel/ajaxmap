@@ -12,6 +12,14 @@ export const sort = {
             b = b.title.toLowerCase();
             return a > b ? 1 : a < b ? -1 : 0;
         }
+    },
+    nummeric:{
+        asc: (a, b) => {
+            //Todo Postleitzahl
+            a = a.title.toLowerCase();
+            b = b.title.toLowerCase();
+            return a > b ? 1 : a < b ? -1 : 0;
+        }
     }
 }
 

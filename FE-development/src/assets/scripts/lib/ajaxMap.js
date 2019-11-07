@@ -49,7 +49,7 @@ const _ = {
 
                     regions.init(mapEntry)
 
-                    places.init(ajaxMapInstance)
+                    places.init(mapEntry)
 
                     fancyTreeRenderer.category(mapEntry);
                     fancyTreeRenderer.placeGroup(mapEntry);
@@ -64,15 +64,19 @@ const _ = {
     }
 };
 
-ajaxMap = {
+ajaxMap = {//    TODO:
+    //set public methods and vars.
+    //eg:config data :settings.placeTree.renderItemFunction
     basePath: '',
-    lookUp: {},
+    lookUp: {},//object of instances
     maps: [],//array of ajax-map object
     ajaxServerPath: 'http://localhost:' + ajaxProxyPort,//this path will be replaced bei build script: see readme.txt
     configData: null,
 
     init: function(configData) {
         const url = 'https://maps.googleapis.com/maps/api/js?key=' + configData.mapSettings.keys.googleMap
+        ajaxMap.configData = configData;
+
 
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;
