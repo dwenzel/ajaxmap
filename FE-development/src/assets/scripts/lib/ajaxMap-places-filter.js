@@ -98,7 +98,6 @@ function filterTree(tree, keys) {
  */
 function showMatchingPlaces(mapEntry) {
 
-
     var map = mapEntry.googleMap,
         mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
@@ -108,7 +107,7 @@ function showMatchingPlaces(mapEntry) {
         mapMarkers = mapEntry.markers || [],
 
         selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
-        selectedCategoryKeys = getSelectedKeys(fancytreeSelector.categorys  + mapId),
+        selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category  + mapId),
         selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions  + mapId),
         selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
 
@@ -158,6 +157,8 @@ function showMatchingPlaces(mapEntry) {
                 });
             }
 
+
+            //----
             if (
                 (place.locationType.key == selectedLocationType || !selectedLocationTypeKeys.length)
                 && (hasAnActiveCategory || !selectedCategoryKeys.length)
@@ -175,7 +176,7 @@ function showMatchingPlaces(mapEntry) {
 
     // update only if mapEntry is already initialized
     if (typeof mapEntry.markers !== 'undefined') {
-
+console.log('!!', selectedPlaces)
         updateTree.places(mapEntry, selectedPlaces);
     }
     mapEntry.markers = mapMarkers;
@@ -189,15 +190,17 @@ function showMatchingPlaces(mapEntry) {
  * @returns {*}
  */
 function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
-    var map = mapEntry.map,
+    var map = mapEntry.googleMap,
         mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
         clusterer = mapEntry.markerClusterer,
         mapMarkers = mapEntry.markers || [];
 
     for (var i = 0, j = mapPlaces.length; i < j; i++) {
+
         var place = mapPlaces[i],
             marker = mapMarkers[i];
+
         if (!mapMarkers[i]) {
             // marker does not exist, create it
             mapMarkers[i] = marker.create(mapEntry, getMapNumber(mapId), place);
@@ -206,6 +209,8 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
             clusterer.removeMarker(marker);
         }
     }
+
+    
     clusterer.addMarkers(mapMarkers);
 
     mapMarkers.forEach(

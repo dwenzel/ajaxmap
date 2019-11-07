@@ -72,10 +72,7 @@ const _ = {
             extensions: placesTreeConfig.extensions,
             quicksearch: placesTreeConfig.quicksearch,
             filter: placesTreeConfig.filter,
-            activate: function(event, data) {
-
-                places.togglePlace(event, data, mapEntry);
-            }
+            activate: places.showSoloPlace(mapEntry)
         };
 
     }
@@ -84,7 +81,7 @@ const _ = {
 export const updateTree = {
     places: (mapEntry, children) => {
         var selector =
-            places.treeSelector + mapEntry.id;
+            fancytreeSelector.places + mapEntry.id;
 
         var $rootNode =
             $(selector).fancytree('getRootNode');
@@ -102,11 +99,12 @@ export const fancytreeSelector = {
     category: '#ajaxMapCategoryTree',
     regions: '#ajaxMapRegionsTree',
     placeGroup: '#ajaxMapPlaceGroupTree',
+    places:'#ajaxMapPlacesTree'
 }
 
 const renderTree = {
     places: (mapEntry, children) => {
-        const $placeTree = $(places.treeSelector + mapEntry.id);
+        const $placeTree = $(fancytreeSelector.places + mapEntry.id);
         const settings = _.getPlaceTreeSettings(mapEntry);
 
         $placeTree.fancytree(settings);

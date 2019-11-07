@@ -10,10 +10,11 @@ import placesFilter from './ajaxMap-places-filter'
 import treeRenderer  from './fancytree-renderer'
 import markerInfoWindow from './map-marker-info-window'
 import {getSelectedKeys} from './map-helpers'
+import {fancytreeSelector} from './fancytree-renderer'
 
 const _ = {
     updatePlaces: (mapEntry, clearSelected) => {
-        var treeSelector = _.treeSelector + mapEntry.id;
+        var treeSelector = fancytreeSelector.places + mapEntry.id;
 
         if (clearSelected) {
             var tree = $(treeSelector).fancytree('getTree');
@@ -25,8 +26,10 @@ const _ = {
         }
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
-        if (selectedPlaceKeys.length) {
 
+
+        if (selectedPlaceKeys.length) {
+console.log(selectedPlaceKeys,'++++')
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
@@ -34,42 +37,50 @@ const _ = {
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
+    showSoloPlace: (mapEntry)=>{
+        return (event, data) => {
+            var mapMarkers = mapEntry.markers || [],
+                infoWindow = mapEntry.infoWindow;
 
-    togglePlace: (event, data, mapEntry) => {
-        var mapMarkers = mapEntry.markers || [],
-            infoWindow = mapEntry.infoWindow;
 
-        if (!data.node.selected) {
-            data.node.setSelected(true);
-            if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
-                for (var i = 0, j = mapMarkers.length; i < j; i++) {
-                    
-                    var marker = mapMarkers[i];
+            if (!data.node.selected) {
+                data.node.setSelected(true);
 
-                    if (marker.place.key === data.node.key) {
 
-                        markerInfoWindow.getInfoWindowContent(marker.place)
-                        .then((content)=>{
-                            infoWindow.setContent(content);
-                            infoWindow.open(mapEntry.map, marker);
-                        });
 
+
+                if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
+                    for (var i = 0, j = mapMarkers.length; i < j; i++) {
+
+                        var marker = mapMarkers[i];
+
+                        if (marker.place.key === data.node.key) {
+
+                            markerInfoWindow.getInfoWindowContent(marker.place)
+                            .then((content) => {
+                                infoWindow.setContent(content);
+                                infoWindow.open(mapEntry.map, marker);
+                            });
+
+                        }
                     }
                 }
-            }
-        } else {
-            data.node.setSelected(false);
-            infoWindow.close();
-        }
+            } else {
 
-        data.node.setActive(false);
-        _.updatePlaces(mapEntry);
+                data.node.setSelected(false);
+                infoWindow.close();
+            }
+
+            data.node.setActive(false);
+
+            _.updatePlaces(mapEntry);
+        }
     },
     setEvents: (placesTree) => {
         const resetFilterButtonSelector = "button#btnResetPlacesFilter";
 
         $(resetFilterButtonSelector).click(function(e) {
-            $("input[name=filterPlaces]").val("");
+            $("input[name=filterPlaces]").val('');
             $("span#matches").text("");
             placesTree.clearFilter();
         }).attr("disabled", true);
@@ -122,8 +133,7 @@ const _ = {
 
 const places = {
     init: _.init,
-    treeSelector: '#ajaxMapPlacesTree',
-    togglePlace: _.togglePlace
+    showSoloPlace: _.showSoloPlace
 };
 
 export default places;
