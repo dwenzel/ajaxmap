@@ -38,9 +38,12 @@
             <div id="ajaxMapContainer_Map1"></div>
         </div>
 
+        {{render '@radial-search-input'}}
+
         <div id="placesTreeWrap"><input name="filterPlaces" placeholder="Suchbegriff">
             <button id="btnResetPlacesFilter" title="Filter zurücksetzen">&times;</button>
             <span id="matches"></span>
+
             <div id="ajaxMapPlacesTree1" class="dynaTree"></div>
         </div>
 

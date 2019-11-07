@@ -29,7 +29,6 @@ const _ = {
 
 
         if (selectedPlaceKeys.length) {
-console.log(selectedPlaceKeys,'++++')
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {

@@ -107,8 +107,8 @@ function showMatchingPlaces(mapEntry) {
         mapMarkers = mapEntry.markers || [],
 
         selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
-        selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category  + mapId),
-        selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions  + mapId),
+        selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category + mapId),
+        selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions + mapId),
         selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
 
         selectedLocationType = 0;
@@ -120,8 +120,6 @@ function showMatchingPlaces(mapEntry) {
 
     console.log('markerClusterer', clusterer, mapEntry)
     clusterer.removeMarkers(mapMarkers);
-
-
 
     // add markers for all places
     for (var i = 0, j = mapPlaces.length; i < j; i++) {
@@ -157,7 +155,6 @@ function showMatchingPlaces(mapEntry) {
                 });
             }
 
-
             //----
             if (
                 (place.locationType.key == selectedLocationType || !selectedLocationTypeKeys.length)
@@ -176,7 +173,7 @@ function showMatchingPlaces(mapEntry) {
 
     // update only if mapEntry is already initialized
     if (typeof mapEntry.markers !== 'undefined') {
-console.log('!!', selectedPlaces)
+        console.log('!!', selectedPlaces)
         updateTree.places(mapEntry, selectedPlaces);
     }
     mapEntry.markers = mapMarkers;
@@ -191,34 +188,29 @@ console.log('!!', selectedPlaces)
  */
 function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
     var map = mapEntry.googleMap,
-        mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
         clusterer = mapEntry.markerClusterer,
         mapMarkers = mapEntry.markers || [];
 
-    for (var i = 0, j = mapPlaces.length; i < j; i++) {
+    mapPlaces.forEach((place, i) => {
+        mapMarkers[i] = mapMarkers[i] ?
+            mapMarkers[i] : markers.create(mapEntry, place);
 
-        var place = mapPlaces[i],
-            marker = mapMarkers[i];
+        mapMarkers[i].setMap(null);
+        clusterer.removeMarker(mapMarkers[i]);
+    });
 
-        if (!mapMarkers[i]) {
-            // marker does not exist, create it
-            mapMarkers[i] = marker.create(mapEntry, getMapNumber(mapId), place);
-        } else {
-            marker.setMap(null);
-            clusterer.removeMarker(marker);
-        }
-    }
-
-    
     clusterer.addMarkers(mapMarkers);
 
-    mapMarkers.forEach(
-        function(element) {
-            if ($.inArray(element.place.key, selectedPlaceKeys) > -1) {
-                element.setMap(map);
+    mapMarkers.forEach((marker) => {
+            const isSelectedPlace =
+                selectedPlaceKeys.some(key => marker.place.key === key);
+
+            if (isSelectedPlace) {
+                marker.setMap(map);
             }
-        });
+        }
+    );
 }
 const filterPlaces = {
     update,
