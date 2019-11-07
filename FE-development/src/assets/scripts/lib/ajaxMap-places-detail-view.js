@@ -10,8 +10,9 @@ function openDetailView(caller, placeId) {
             break;
     }
 
-    if (placeId) {
+    if (placeId) {//?@dirk
         var path = $(location).attr('href');
+
         if (path.indexOf('?') > -1) {
             path = path + '&type=1441916976';
         } else {

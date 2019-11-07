@@ -3,6 +3,7 @@ import $ from 'jquery';
 import detailView from './ajaxMap-places-detail-view';
 import {getAddress} from './utilitys'
 
+import markerInfoWindow from './map-marker-info-window'
 const _ = {
     cache: {},
     markup: {
@@ -65,6 +66,23 @@ const _ = {
         })
     },
 
+
+    initCache: () => {
+        _.cache.$body = $('body');
+        _.cache.$moreDetailView = $('.more.detail-view');
+
+    },
+    checkCache: () => {
+        if (_.cache.$body) {
+            return;
+        }
+
+        _.initCache();
+    }
+
+}
+
+const infoWindow = {
     /**
      * Renders the info window content for a place
      *
@@ -91,29 +109,13 @@ const _ = {
             })
         })
     },
-    initCache: () => {
-        _.cache.$body = $('body');
-        _.cache.$moreDetailView = $('.more.detail-view');
-
-    },
-    checkCache: () => {
-        if (_.cache.$body) {
-            return;
-        }
-
-        _.initCache();
-    }
-
-}
-
-const infoWindow = {
     createOnClick: (mapEntry, place) => function() {
         _.checkCache();
 
         const map = mapEntry.googleMap,
             infoWindow = mapEntry.infoWindow;
 
-        _.getInfoWindowContent(place).then(function(content) {
+        markerInfoWindow.getInfoWindowContent(place).then(function(content) {
 
             infoWindow.setContent(content);
 

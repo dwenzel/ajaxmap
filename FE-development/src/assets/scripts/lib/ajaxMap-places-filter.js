@@ -99,7 +99,7 @@ function filterTree(tree, keys) {
 function showMatchingPlaces(mapEntry) {
 
 
-    var map = mapEntry.map,
+    var map = mapEntry.googleMap,
         mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
 

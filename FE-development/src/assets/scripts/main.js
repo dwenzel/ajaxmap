@@ -1,7 +1,8 @@
 import $ from 'jquery';
 import ajaxMap from './lib/ajaxMap';
 
-import '../../../dist/css/main.css'
+import mapCss from '../../../dist/css/main.css'
+import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
 
 $(document).ready(function() {
 

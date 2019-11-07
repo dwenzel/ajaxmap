@@ -8,6 +8,7 @@ import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 import ajaxMap from './ajaxMap'
 import placesFilter from './ajaxMap-places-filter'
 import treeRenderer  from './fancytree-renderer'
+import markerInfoWindow from './map-marker-info-window'
 import {getSelectedKeys} from './map-helpers'
 
 const _ = {
@@ -42,11 +43,17 @@ const _ = {
             data.node.setSelected(true);
             if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
                 for (var i = 0, j = mapMarkers.length; i < j; i++) {
+                    
                     var marker = mapMarkers[i];
-                    if (marker.place.key == data.node.key) {
-                        var content = ajaxMap.getInfoWindowContent(marker.place);
-                        infoWindow.setContent(content);
-                        infoWindow.open(mapEntry.map, marker);
+
+                    if (marker.place.key === data.node.key) {
+
+                        markerInfoWindow.getInfoWindowContent(marker.place)
+                        .then((content)=>{
+                            infoWindow.setContent(content);
+                            infoWindow.open(mapEntry.map, marker);
+                        });
+
                     }
                 }
             }

@@ -35,6 +35,10 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
+                test: /\.css$/i,
+                use: ['style-loader', 'css-loader'],
+            },
+            {
                 test: /\.scss$/,
                 use: [
                     {
@@ -97,6 +101,14 @@ module.exports = {
                         }
                     }
                 ]
+            },
+            {
+                test: /\.(png|jpe?g|gif)$/i,
+                use: [
+                    {
+                        loader: 'file-loader',
+                    },
+                ],
             },
             {
                 test: /\.(woff|woff2)$/,
