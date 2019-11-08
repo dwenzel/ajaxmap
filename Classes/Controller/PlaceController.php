@@ -77,7 +77,7 @@ class PlaceController extends AbstractController
     {
         /** @var PlaceDemand $demand */
         $demand = $this->objectManager->get(PlaceDemand::class);
-        if (isset($settings['orderBy']) && isset($settings['orderDirection'])) {
+        if (!empty($settings['orderBy']) && !empty($settings['orderDirection'])) {
             $demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
         }
         (isset($settings['map'])) ? $demand->setMap($settings['map']) : NULL;
