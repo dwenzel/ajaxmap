@@ -36,7 +36,10 @@ $boot = function () {
         'Map',
         [
             'Place' => 'show, ajaxShow',
-            'Map' => 'show,',
+            'Map' => 'show,search',
+        ],
+        [
+            'Map' => 'search'
         ]
     );
 };

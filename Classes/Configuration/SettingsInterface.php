@@ -215,8 +215,12 @@ interface SettingsInterface
     const LOCATION_TYPES = 'locationTypes';
     const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
     const PLACE_GROUPS = 'placeGroups';
+    const ID = 'id';
     const MAP = 'map';
+    const PAGE_ID = 'pageId';
     const SEARCH = 'search';
+    const SETTINGS = 'settings';
+    const MAP_SETTINGS_KEY = 'mapSettings';
     const SUBJECT = 'subject';
     const FIELDS = 'fields';
     const LOCATION = 'location';

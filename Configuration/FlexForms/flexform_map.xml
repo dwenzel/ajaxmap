@@ -26,6 +26,10 @@
                                         <numIndex index="0">Places</numIndex>
                                         <numIndex index="1">Place->list;Place->show;Place->ajaxShow</numIndex>
                                     </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">Search</numIndex>
+                                        <numIndex index="1">Map->search;Map->show</numIndex>
+                                    </numIndex>
                                 </items>
                             </config>
                         </TCEforms>
@@ -181,7 +185,12 @@
                     <settings.showRadiusSearch>
                         <TCEforms>
                             <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.showRadiusSearch</label>
-                                <displayCond>FIELD:sDEF.switchableControllerActions:=:Map->show</displayCond>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                </OR>
+                            </displayCond>
                             <config>
                                 <type>check</type>
                                 <default>0</default>
@@ -192,7 +201,12 @@
                     <settings.showSearchField>
                         <TCEforms>
                             <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.showSearchField</label>
-                            <displayCond>FIELD:sDEF.switchableControllerActions:=:Map->show</displayCond>
+                            <displayCond>
+                                <OR>
+                                    <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                </OR>
+                            </displayCond>
                             <config>
                                 <type>check</type>
                                 <default>1</default>

@@ -20,13 +20,12 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
+
 /**
- * @package ajaxmap
- * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
+ * Class MapController
  */
 class MapController extends AbstractController
 {
@@ -55,26 +54,56 @@ class MapController extends AbstractController
      * action show
      *
      * @param \DWenzel\Ajaxmap\Domain\Model\Map $map
+     * @param array $search
      * @return void
      */
-    public function showAction(Map $map = NULL)
+    public function showAction(Map $map = null, array $search = [])
     {
-        $mapId = $this->settings['map'];
-
-        if ($map === NULL) {
-            /** @var object|Map $map */
-            $map = $this->mapRepository->findByUid($mapId);
+        if ($map === null) {
+            /** @var Map $map */
+            $map = $this->mapRepository->findByUid(
+                $this->settings[SI::MAP]
+            );
         }
-        //should be merged with plugin settings
-        $this->mapSettings['id'] = $mapId;
-        $this->mapSettings['pageId'] = $GLOBALS['TSFE']->id;
+        $this->getMapSettings($search);
         $this->view->assignMultiple(
             array(
-                'map' => $map,
-                'mapSettings' => \json_encode($this->mapSettings),
-                'settings' => $this->settings
+                SI::MAP => $map,
+                SI::MAP_SETTINGS_KEY => \json_encode($this->mapSettings),
+                SI::SETTINGS => $this->settings,
+                SI::SEARCH => $search
             )
         );
+    }
+
+    /**
+     * Display a search form
+     * @param array $search
+     */
+    public function searchAction(array $search = [])
+    {
+        $this->view->assignMultiple(
+            [
+                SI::SETTINGS => $this->settings,
+                SI::SEARCH => $search
+            ]
+        );
+    }
+
+    /**
+     * @param array $search
+     */
+    protected function getMapSettings(array $search = []): void
+    {
+        $this->mapSettings[SI::ID] = $this->settings[SI::MAP];
+        $this->mapSettings[SI::PAGE_ID] = $GLOBALS['TSFE']->id;
+        if (empty($this->settings[SI::SEARCH])) {
+            $this->settings[SI::SEARCH] = [];
+        }
+
+        if(!empty($search)) {
+            $this->mapSettings[SI::SEARCH] = array_merge($this->settings[SI::SEARCH], $search);
+        }
     }
 
 }
