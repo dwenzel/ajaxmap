@@ -25,9 +25,9 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand;
 use DWenzel\Ajaxmap\Domain\Model\Place;
 use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
+use DWenzel\Ajaxmap\Traits\PlaceDemandFactoryTrait;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 
 /**
@@ -39,6 +39,7 @@ use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
  */
 class PlaceController extends AbstractController
 {
+    use PlaceDemandFactoryTrait;
 
     /**
      * placeRepository
@@ -46,6 +47,7 @@ class PlaceController extends AbstractController
      * @var PlaceRepository
      */
     protected $placeRepository;
+
 
     /**
      * action list
@@ -56,7 +58,7 @@ class PlaceController extends AbstractController
      */
     public function listAction($overwriteDemand = null)
     {
-        $demand = $this->createDemandFromSettings($this->settings);
+        $demand = $this->getPlaceDemandFactory()->fromSettings($this->settings);
         $places = $this->placeRepository->findDemanded($demand);
         $this->view->assignMultiple(
             array(
@@ -65,32 +67,6 @@ class PlaceController extends AbstractController
                 'overwriteDemand' => $overwriteDemand
             )
         );
-    }
-
-    /**
-     * Create demand from settings
-     *
-     * @param array $settings
-     * @return PlaceDemand
-     */
-    public function createDemandFromSettings($settings)
-    {
-        /** @var PlaceDemand $demand */
-        $demand = $this->objectManager->get(PlaceDemand::class);
-        if (!empty($settings['orderBy']) && !empty($settings['orderDirection'])) {
-            $demand->setOrder($settings['orderBy'] . '|' . $settings['orderDirection']);
-        }
-        (isset($settings['map'])) ? $demand->setMap($settings['map']) : NULL;
-        (isset($settings['locationTypes'])) ? $demand->setLocationTypes($settings['locationTypes']) : NULL;
-        (isset($settings['placeGroups'])) ? $demand->setPlaceGroups($settings['placeGroups']) : NULL;
-        if (isset($settings['constraintsConjunction']) AND $settings['constraintsConjunction'] !== '') {
-            $demand->setConstraintsConjunction($settings['constraintsConjunction']);
-        }
-        if (isset($settings['placeGroupConjunction']) AND $settings['placeGroupConjunction'] !== '') {
-            $demand->setPlaceGroupConjunction($settings['placeGroupConjunction']);
-        }
-        (isset($settings['limit'])) ? $demand->setLimit($settings['limit']) : NULL;
-        return $demand;
     }
 
     /**

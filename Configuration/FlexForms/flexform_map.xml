@@ -1,130 +1,206 @@
 <T3DataStructure>
-	<meta type="array">
-		<langChildren>0</langChildren>
-	    <langDisable>1</langDisable>
-	</meta>
- <sheets>
-  <sDEF>
-   <ROOT>
-     <TCEforms>
-      <sheetTitle>Funktion</sheetTitle>
-     </TCEforms>
-     <type>array</type>
-     <el>
-      <switchableControllerActions>
-       <TCEforms>
-         <label>Select function</label>
-         <config>
-          <type>select</type>
-          <items>
-            <numIndex index="0">
-             <numIndex index="0">Map</numIndex>
-             <numIndex index="1">Map->show;Map->item</numIndex>
-            </numIndex>
-            <numIndex index="1">
-             <numIndex index="0">Places</numIndex>
-             <numIndex index="1">Place->list;Place->show;Place->ajaxShow</numIndex>
-            </numIndex>
-           </items>
-         </config>
-       </TCEforms>
-      </switchableControllerActions>
-      <settings.map>
-	   	<TCEforms>
-	   		<label>Map</label>
-			<config>
-		  		<type>group</type>
-				<internal_type>db</internal_type>
-				<allowed>tx_ajaxmap_domain_model_map</allowed>
-				<size>1</size>
-				<minitems>1</minitems>
-				<maxitems>1</maxitems>
-			</config>
-	  	</TCEforms>
-	  </settings.map>
-					<!-- order by -->
-					<settings.orderBy>
-						<TCEforms>
-							<label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderBy</label>
-							<displayCond>FIELD:switchableControllerActions:!=:Position->quickMenu</displayCond>
-							<config>
-								<type>select</type>
-								<items>
-									<numIndex index="0" type="array">
-										<numIndex index="0"></numIndex>
-										<numIndex index="1"></numIndex>
-									</numIndex>
-									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.title</numIndex>
-										<numIndex index="1">title</numIndex>
-									</numIndex>
-									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.identifier</numIndex>
-										<numIndex index="1">identifier</numIndex>
-									</numIndex>
-									<numIndex index="3">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.type</numIndex>
-										<numIndex index="1">type</numIndex>
-									</numIndex>
-									<numIndex index="4">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.entryDate</numIndex>
-										<numIndex index="1">entryDate</numIndex>
-									</numIndex>
-								</items>
-							</config>
-						</TCEforms>
-					</settings.orderBy>
+    <meta type="array">
+        <langChildren>0</langChildren>
+        <langDisable>1</langDisable>
+    </meta>
+    <sheets>
+        <sDEF>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>Funktion</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <switchableControllerActions>
+                        <TCEforms>
+                            <label>Select function</label>
+                            <onChange>reload</onChange>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0">
+                                        <numIndex index="0">Map</numIndex>
+                                        <numIndex index="1">Map->show</numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">Places</numIndex>
+                                        <numIndex index="1">Place->list;Place->show;Place->ajaxShow</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </switchableControllerActions>
+                    <settings.map>
+                        <TCEforms>
+                            <label>Map</label>
+                            <displayCond>FIELD:switchableControllerActions:=:Map->show</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_ajaxmap_domain_model_map</allowed>
+                                <size>1</size>
+                                <minitems>1</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.map>
+                </el>
+            </ROOT>
+        </sDEF>
+        <sorting>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.sorting
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <!-- order by -->
+                    <settings.orderBy>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderBy
+                            </label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:!=:Map->show</displayCond>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">
+                                            LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.title
+                                        </numIndex>
+                                        <numIndex index="1">title</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.orderBy>
 
-					<!-- order direction -->
-					<settings.orderDirection>
-						<TCEforms>
-							<label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection</label>
-							<displayCond>FIELD:switchableControllerActions:!=:Position->quickMenu</displayCond>
-							<config>
-								<type>select</type>
-								<items>
-									<numIndex index="0" type="array">
-										<numIndex index="0"></numIndex>
-										<numIndex index="1"></numIndex>
-									</numIndex>
-									<numIndex index="1">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection.ascending</numIndex>
-										<numIndex index="1">asc</numIndex>
-									</numIndex>
-									<numIndex index="2">
-										<numIndex index="0">LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection.descending</numIndex>
-										<numIndex index="1">desc</numIndex>
-									</numIndex>
-								</items>
-							</config>
-						</TCEforms>
-					</settings.orderDirection>
-	 </el>
-   </ROOT>
-  </sDEF>
-	<!-- SHEET CONSTRAINTS -->
-	<constraints>
-		<ROOT>
-			<TCEforms>
-				<sheetTitle>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.constraints</sheetTitle>
-			</TCEforms>
-			<type>array</type>
-			<el>
-     		<settings.locationTypes>
-	   			<TCEforms>
-		   			<label>Location Types</label>
-						<config>
-		 		 			<type>group</type>
-							<internal_type>db</internal_type>
-							<allowed>tx_ajaxmap_domain_model_locationtype</allowed>
-							<size>10</size>
-							<minitems>0</minitems>
-							<maxitems>9999</maxitems>
-						</config>
-	  			</TCEforms>
-	 			 </settings.locationTypes>
-				</el>
-			</ROOT>
-		</constraints>
- </sheets>
+                    <!-- order direction -->
+                    <settings.orderDirection>
+                        <TCEforms>
+                            <label>
+                                LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection
+                            </label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:!=:Map->show</displayCond>
+                            <config>
+                                <type>select</type>
+                                <items>
+                                    <numIndex index="0" type="array">
+                                        <numIndex index="0"></numIndex>
+                                        <numIndex index="1"></numIndex>
+                                    </numIndex>
+                                    <numIndex index="1">
+                                        <numIndex index="0">
+                                            LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection.ascending
+                                        </numIndex>
+                                        <numIndex index="1">asc</numIndex>
+                                    </numIndex>
+                                    <numIndex index="2">
+                                        <numIndex index="0">
+                                            LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.orderDirection.descending
+                                        </numIndex>
+                                        <numIndex index="1">desc</numIndex>
+                                    </numIndex>
+                                </items>
+                            </config>
+                        </TCEforms>
+                    </settings.orderDirection>
+                </el>
+            </ROOT>
+        </sorting>
+        <!-- SHEET CONSTRAINTS -->
+        <constraints>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.constraints
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.locationTypes>
+                        <TCEforms>
+                            <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.locationTypes</label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:=:Place->list;Place->show;Place->ajaxShow</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_ajaxmap_domain_model_locationtype</allowed>
+                                <size>10</size>
+                                <minitems>0</minitems>
+                                <maxitems>9999</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.locationTypes>
+                    <settings.placeGroups>
+                        <TCEforms>
+                            <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.placeGroups</label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:=:Place->list;Place->show;Place->ajaxShow</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_ajaxmap_domain_model_placegroup</allowed>
+                                <size>10</size>
+                                <minitems>0</minitems>
+                                <maxitems>9999</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.placeGroups>
+                    <settings.map>
+                        <TCEforms>
+                            <label>Map</label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:=:Place->list;Place->show;Place->ajaxShow</displayCond>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>tx_ajaxmap_domain_model_map</allowed>
+                                <size>1</size>
+                                <minitems>0</minitems>
+                                <maxitems>1</maxitems>
+                            </config>
+                        </TCEforms>
+                    </settings.map>
+                </el>
+            </ROOT>
+        </constraints>
+        <display>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>
+                        LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.display
+                    </sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.showRadiusSearch>
+                        <TCEforms>
+                            <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.showRadiusSearch</label>
+                                <displayCond>FIELD:sDEF.switchableControllerActions:=:Map->show</displayCond>
+                            <config>
+                                <type>check</type>
+                                <default>0</default>
+                            </config>
+                        </TCEforms>
+                    </settings.showRadiusSearch>
+
+                    <settings.showSearchField>
+                        <TCEforms>
+                            <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.showSearchField</label>
+                            <displayCond>FIELD:sDEF.switchableControllerActions:=:Map->show</displayCond>
+                            <config>
+                                <type>check</type>
+                                <default>1</default>
+                            </config>
+                        </TCEforms>
+                    </settings.showSearchField>
+                </el>
+            </ROOT>
+        </display>
+    </sheets>
 </T3DataStructure>

@@ -101,7 +101,7 @@ class PlaceDataProvider implements DataProviderInterface
     /**
      * @var PlaceDemandFactory
      */
-    protected $demandFactory;
+    protected $placeDemandFactory;
 
     /**
      * @var MapRepository
@@ -121,7 +121,7 @@ class PlaceDataProvider implements DataProviderInterface
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
-        $this->demandFactory = $objectManager->get(PlaceDemandFactory::class);
+        $this->placeDemandFactory = $objectManager->get(PlaceDemandFactory::class);
     }
 
     /**
@@ -149,7 +149,7 @@ class PlaceDataProvider implements DataProviderInterface
             $this->getSettingsFromMap($map),
             $queryParameter);
 
-        $demand = $this->demandFactory->fromSettings($settings);
+        $demand = $this->placeDemandFactory->fromSettings($settings);
         /** @var QueryResult $places */
         $places = $this->placeRepository->findDemanded(
             $demand,
