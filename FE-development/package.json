@@ -6,7 +6,8 @@
 	"scripts": {
 		"start": "cross-env APP_ENV=development npm-run-all webpack:build -p webpack:watch:nolint fractal:watch",
 		"start:nolint": "cross-env APP_ENV=development npm-run-all webpack:build -p webpack:watch:nolint fractal:watch",
-		"build": "cross-env APP_ENV=build npm-run-all webpack:clear webpack:build fractal:build",
+		"build": "cross-env APP_ENV=build npm-run-all webpack:build build:index-url",
+		"build:index-url": "node build_inject-url.js",
 		"deploy": "cross-env APP_ENV=production npm-run-all webpack:clear webpack:build fractal:build",
 		"test": "npm-run-all test:lint:js test:lint:css",
 		"webpack:clear": "del-cli dist/*",
@@ -76,9 +77,7 @@
 	},
 	"project": {
 		"title": "extension FE-builder",
-		"publicPath": "/resources",
-		"ajaxProxyPort": 7835,
-		"googleApiKey": "AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"
+		"publicPath": "/resources"
 	},
 	"dependencies": {
 		"jquery": "^3.4.1",

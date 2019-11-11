@@ -1,6 +1,8 @@
-const proxy = require('./proxy'),
-    ajaxProxyPort = require('../../../package.json').project.ajaxProxyPort;
+const proxy = require('./proxy');
+
+const ajaxProxyPort= require('../../../_config-proxy-port.json').ajaxProxyPort;
 proxy.start(ajaxProxyPort);
+
 
 const googleApiKey = require(process.env.HOME + '/config-data/bsb-config').googleApiKey;
 

@@ -23,6 +23,7 @@ function readJson(name) {
 }
 
 const proxy = {
+
     started: false,
     start: (proxyPort) => {
         if (proxy.started) {

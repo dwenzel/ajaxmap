@@ -1,5 +1,4 @@
-
-const ajaxProxyPort = require('../../../../package.json').project.ajaxProxyPort;
+const ajaxProxyPort = require('../../../../_config-proxy-port.json').ajaxProxyPort;
 
 import map  from './ajaxMap-map'
 
@@ -35,6 +34,7 @@ const _ = {
     },
 
     initAllMaps: () => {
+
         return new Promise(function(resolve, reject) {
             const mapStore = ajaxMap.configData.mapStore;
 
@@ -67,17 +67,18 @@ const _ = {
 ajaxMap = {//    TODO:
     //set public methods and vars.
     //eg:config data :settings.placeTree.renderItemFunction
-    // and remove access to lookup and maps
     basePath: '',
     lookUp: {},//object of instances
     maps: [],//array of ajax-map object
-    ajaxServerPath: 'http://localhost:' + ajaxProxyPort,//this path will be replaced bei build script: see readme.txt
+    ajaxServerPath:
+    //replace #### dont delete this! its for the build process
+    'http://localhost:' + ajaxProxyPort,
+    //end-replace //#### dont delete this! its for the build process
     configData: null,
 
     init: function(configData) {
         const url = 'https://maps.googleapis.com/maps/api/js?key=' + configData.mapSettings.keys.googleMap
         ajaxMap.configData = configData;
-
 
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;
