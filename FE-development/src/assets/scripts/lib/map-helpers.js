@@ -87,4 +87,6 @@ const helpers = {
 
 export const getLocationType = helpers.getLocationType;
 export const getSelectedKeys = helpers.getSelectedKeys;
+export const getLatLong = helpers.getLatLong;
+
 export default helpers;

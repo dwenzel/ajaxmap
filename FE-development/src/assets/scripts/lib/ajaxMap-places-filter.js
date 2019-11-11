@@ -121,6 +121,7 @@ function showMatchingPlaces(mapEntry) {
     console.log('markerClusterer', clusterer, mapEntry)
     clusterer.removeMarkers(mapMarkers);
 
+
     // add markers for all places
     for (var i = 0, j = mapPlaces.length; i < j; i++) {
         var place = mapPlaces[i],

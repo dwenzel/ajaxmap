@@ -4,13 +4,25 @@ import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 
-
 import ajaxMap from './ajaxMap'
 import placesFilter from './ajaxMap-places-filter'
 import treeRenderer  from './fancytree-renderer'
 import markerInfoWindow from './map-marker-info-window'
-import {getSelectedKeys} from './map-helpers'
+import {getSelectedKeys, getLatLong} from './map-helpers'
+
 import {fancytreeSelector} from './fancytree-renderer'
+
+class Place {
+    constructor(mapEntry, placeData) {
+        this.mapEntry = mapEntry;
+        this.placeData = placeData;
+        this.LatLong = getLatLong(placeData.geoCoordinates)
+    }
+
+    panToSelf() {
+        this.mapEntry.googleMap.panTo(this.LatLong)
+    }
+}
 
 const _ = {
     updatePlaces: (mapEntry, clearSelected) => {
@@ -27,8 +39,8 @@ const _ = {
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
-
         if (selectedPlaceKeys.length) {
+            //from select a place in list
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
@@ -36,17 +48,13 @@ const _ = {
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
-    showSoloPlace: (mapEntry)=>{
+    showSoloPlace: (mapEntry) => {
         return (event, data) => {
             var mapMarkers = mapEntry.markers || [],
                 infoWindow = mapEntry.infoWindow;
 
-
             if (!data.node.selected) {
                 data.node.setSelected(true);
-
-
-
 
                 if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
                     for (var i = 0, j = mapMarkers.length; i < j; i++) {
@@ -73,6 +81,10 @@ const _ = {
             data.node.setActive(false);
 
             _.updatePlaces(mapEntry);
+
+          //  console.log(data.node.data.placeInstance.panToSelf(),'++++++++++')
+            data.node.data.placeInstance.panToSelf()
+            //  placeInstance.up
         }
     },
     setEvents: (placesTree) => {
@@ -114,9 +126,13 @@ const _ = {
                 dataType: "json",
                 success: function(result) {
                     // store places
-                    mapEntry.places = result;
 
                     if (result.length) {
+                        mapEntry.places = result;
+                        mapEntry.places.forEach((placeData, index) => {
+
+                            placeData.placeInstance= new Place(mapEntry, placeData);
+                        })
 
                         var placesTree = treeRenderer.places(mapEntry, result);
 
@@ -131,7 +147,8 @@ const _ = {
 
 const places = {
     init: _.init,
-    showSoloPlace: _.showSoloPlace
+    showSoloPlace: _.showSoloPlace,
+    update: _.updatePlaces
 };
 
 export default places;

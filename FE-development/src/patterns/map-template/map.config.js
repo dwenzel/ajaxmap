@@ -25,7 +25,7 @@ const map = {
             "regionTree": {
                 "minExpandLevel": 3,
                 "selectMode": 3,
-                "icons": false,
+                "icon": false,
                 "checkbox": true,
                 "extensions": ["filter", "glyph"],
                 "glyph": {
@@ -41,7 +41,7 @@ const map = {
                 }
             },
             "categoryTree": {
-                "icons": false,
+                "icon": false,
                 "extensions": ["filter", "glyph"],
                 "glyph": {
                     "preset": "awesome4",
@@ -57,7 +57,7 @@ const map = {
             },
             "placeGroupTree": {
                 "checkbox": true,
-                "icons": false,
+                "icon": false,
                 "extensions": ["filter", "glyph"],
                 "glyph": {
                     "preset": "awesome4",
@@ -73,7 +73,7 @@ const map = {
             },
             "locationTypeTree": {
                 "checkbox": true,
-                "icons": false,
+                "icon": false,
                 "selectMode": 1,
                 "extensions": ["filter", "glyph"],
                 "glyph": {
@@ -91,7 +91,7 @@ const map = {
             "placesTree": {
                 "toggleInfoWindowOnSelect": true,
                 "selectMode": 1,
-                "icons": false,
+                "icon": false,
                 "extensions": ["filter"],
                 "quicksearch": true,
                 "filter": {

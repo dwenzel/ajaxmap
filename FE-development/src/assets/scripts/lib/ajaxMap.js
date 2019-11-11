@@ -20,10 +20,6 @@ class AjaxMap {
         mapEntry.layers = [];//88 maybe whle init?
         this.$mapEl = null;
     }
-
-    panTo(lat, long) {
-
-    }
 }
 
 let ajaxMap;
