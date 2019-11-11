@@ -67,6 +67,7 @@ const _ = {
 ajaxMap = {//    TODO:
     //set public methods and vars.
     //eg:config data :settings.placeTree.renderItemFunction
+    // and remove access to lookup and maps
     basePath: '',
     lookUp: {},//object of instances
     maps: [],//array of ajax-map object

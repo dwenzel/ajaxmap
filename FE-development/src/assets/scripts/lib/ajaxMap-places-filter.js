@@ -161,6 +161,7 @@ function showMatchingPlaces(mapEntry) {
                 && (hasAnActiveCategory || !selectedCategoryKeys.length)
                 && (hasAnActiveRegion || !selectedRegionKeys.length)
                 && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)) {
+
                 marker.setMap(map);
                 selectedPlaces[selectedPlaces.length] = place;
             } else {
