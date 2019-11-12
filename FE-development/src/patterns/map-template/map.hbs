@@ -9,9 +9,9 @@
 
 <script>
     window.ajaxMapConfig = {};
-    window.ajaxMapConfig.onMarkerClick = function(mapMarker, mapEntry) {
-        var place = mapMarker.place;
+    window.ajaxMapConfig.onMarkerClick = function(mapEntry, place) {
 
+        console.log(place.treeNode)//has all domNodes
         //  $('#tablediv').scrollTop($('#' + id).offset().top);
         console.log('miao', place);
 

@@ -9,6 +9,7 @@ const path = require('path'),
 
 const app = express();
 
+app.use(express.static(__dirname+'/../../../../dist/public'))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -33,8 +34,12 @@ const proxy = {
         proxy.started = true;
         const port = proxyPort;
 
-        app.get('/', function(req, res) {
+        app.get('/', function(req, res,next) {
             let params = req.query;
+
+            if(!params){
+                next();
+            }
 
             console.log('-->', params)
             res.json(readJson(params.action))

@@ -83,7 +83,7 @@ const _ = {
 
             _.updatePlaces(mapEntry);
 
-          //  console.log(data.node.data.placeInstance.panToSelf(),'++++++++++')
+            //  console.log(data.node.data.placeInstance.panToSelf(),'++++++++++')
             data.node.data.placeInstance.panToSelf()
             //  placeInstance.up
         }
@@ -132,10 +132,16 @@ const _ = {
                         mapEntry.places = result;
                         mapEntry.places.forEach((placeData, index) => {
 
-                            placeData.placeInstance= new Place(mapEntry, placeData);
+                            placeData.placeInstance = new Place(mapEntry, placeData);
                         })
 
                         var placesTree = treeRenderer.places(mapEntry, result);
+
+                        console.log(placesTree.rootNode.children)
+                        placesTree.rootNode.children.forEach((treeNode, i) => {
+                            mapEntry.places[i].treeNode = treeNode;
+
+                        })
 
                         _.setEvents(placesTree);
                         _.updatePlaces(mapEntry);
