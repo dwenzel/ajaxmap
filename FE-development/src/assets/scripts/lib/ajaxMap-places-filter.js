@@ -118,7 +118,7 @@ function showMatchingPlaces(mapEntry) {
         selectedLocationType = selectedLocationTypeKeys[0];
     }
 
-    console.log('markerClusterer', clusterer, mapEntry)
+
     clusterer.removeMarkers(mapMarkers);
 
 
@@ -150,6 +150,7 @@ function showMatchingPlaces(mapEntry) {
             }
 
             if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
+
                 $.each(marker.place.placeGroups, function() {
                     hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
                     return (!hasAnActivePlaceGroup);
@@ -158,10 +159,11 @@ function showMatchingPlaces(mapEntry) {
 
             //----
             if (
-                (place.locationType.key == selectedLocationType || !selectedLocationTypeKeys.length)
+                (place.locationType.key === selectedLocationType || !selectedLocationTypeKeys.length)
                 && (hasAnActiveCategory || !selectedCategoryKeys.length)
                 && (hasAnActiveRegion || !selectedRegionKeys.length)
-                && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)) {
+                && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
+            ) {
 
                 marker.setMap(map);
                 selectedPlaces[selectedPlaces.length] = place;
@@ -175,7 +177,8 @@ function showMatchingPlaces(mapEntry) {
 
     // update only if mapEntry is already initialized
     if (typeof mapEntry.markers !== 'undefined') {
-        console.log('!!', selectedPlaces)
+
+
         updateTree.places(mapEntry, selectedPlaces);
     }
     mapEntry.markers = mapMarkers;

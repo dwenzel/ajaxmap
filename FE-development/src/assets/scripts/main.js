@@ -2,8 +2,8 @@ import $ from 'jquery';
 import ajaxMap from './lib/ajaxMap';
 
 import '../../../dist/css/main.css'
-import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
-
+//import {css} from 'jquery.fancytree/dist/skin-awesome/ui.fancytree.min.css';
+import 'jquery.fancytree/dist/skin-lion/ui.fancytree.css';
 import {library, dom} from '@fortawesome/fontawesome-svg-core'
 
 // import folder icons for tree

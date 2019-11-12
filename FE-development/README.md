@@ -1,11 +1,8 @@
-# BMG-care-story
+# FE-development
 
-*if you change html
-->$ npm run build
+its a fractal.js kernel
+to start:
+- $ npm start
 
-->$ node render.home-care-story.js
-
-*only assets css/js:
-->$ node render.home-care-story.js
-
-
+to deploy in Ajax map:
+- $ npm run build 

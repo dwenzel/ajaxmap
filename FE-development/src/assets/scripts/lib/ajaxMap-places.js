@@ -33,6 +33,7 @@ const _ = {
 
             tree.clearFilter();
             tree.visit(function(node) {
+
                 node.setSelected(false);
             });
         }

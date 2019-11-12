@@ -139,7 +139,7 @@ const renderTree = {
         updateTree.places(mapEntry, children);
 
         var placesTree = $placeTree.fancytree('getTree');
-        return placesTree
+        return placesTree;
     },
 
     category: (mapEntry) => {
@@ -192,15 +192,16 @@ const renderTree = {
             checkbox: options.checkbox,
             cookieId: 'fancyTreeLocationTypes' + mapEntry.id,
             selectMode: options.selectMode,
-            extensions: options.extensions,
-            glyph: options.glyph,
+            //extensions: options.extensions,
+       //     glyph: options.glyph,
             filter: options.filter,
             source: mapEntry.locationTypes,
             select: function(flag, node) {
+
                 places.update(mapEntry, true);
             }
         };
-
+console.log('settings---Y', settings)
         const selector = locationTypes.treeSelector + mapEntry.id;
         return $(selector).fancytree(settings);
     }
