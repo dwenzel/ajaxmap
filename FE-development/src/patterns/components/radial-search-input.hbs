@@ -1,7 +1,9 @@
 <div class="c-radial-search">
+    <select name="radial" id="radialSelect">
+        {{#options}}
+            <option value="{{value}}">{{label}}</option>
 
-    <label for="radialSearch1">{{label}}</label>
+        {{/options}}
 
-    <input type="text" name="radialSearch1" id="radialSearch1"
-        minlength="4" maxlength="8" size="10" placeholder="{{placeholder}}">
+    </select>
 </div>

@@ -9,9 +9,9 @@ import locationTypes from './ajaxMap-locationTypes'
 import fancyTreeRenderer from './fancytree-renderer'
 
 import {inserScriptTag} from './utilitys'
-
 import ui from '../lib/ajaxMap-ui';
 
+let ajaxMap;
 class AjaxMap {
     constructor(mapEntry) {
         this.mapEntry = mapEntry;
@@ -22,13 +22,7 @@ class AjaxMap {
     }
 }
 
-let ajaxMap;
 const _ = {
-    panTo: (mapId) => {
-        "use strict";
-        //) console.log(mapCenter, '*****************')//http://jsfiddle.net/fqt7L/1/
-    },
-
     initAllMaps: () => {
 
         return new Promise(function(resolve, reject) {
@@ -66,12 +60,14 @@ ajaxMap = {//    TODO:
     basePath: '',
     lookUp: {},//object of instances
     maps: [],//array of ajax-map object
-    ajaxServerPath:
-    //replace #### dont delete this! its for the build process
+
+    ///////////
+    ajaxServerPath: //replace #### dont delete this! its for the build process
     'http://localhost:' + ajaxProxyPort,
     //end-replace //#### dont delete this! its for the build process
-    configData: null,
+    //////////
 
+    configData: null,
     init: function(configData) {
         const url = 'https://maps.googleapis.com/maps/api/js?key=' + configData.mapSettings.keys.googleMap
         ajaxMap.configData = configData;
@@ -82,8 +78,6 @@ ajaxMap = {//    TODO:
             _.initAllMaps()
 
             ui.init();
-
-            //Promise.all(ajaxMap.maps)
         }, console.error)
     }
 };

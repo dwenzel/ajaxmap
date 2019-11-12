@@ -9,8 +9,12 @@
 
 <script>
     window.ajaxMapConfig = {};
-    window.ajaxMapConfig.onMarkerClick = function(mapEntry,place) {
-        console.log('miao', place)
+    window.ajaxMapConfig.onMarkerClick = function(mapMarker, mapEntry) {
+        var place = mapMarker.place;
+
+        //  $('#tablediv').scrollTop($('#' + id).offset().top);
+        console.log('miao', place);
+
     }
 </script>
 
@@ -45,13 +49,20 @@
             <div id="ajaxMapContainer_Map1"></div>
         </div>
 
-        {{render '@radial-search-input'}}
-
         <div id="placesTreeWrap"><input name="filterPlaces" placeholder="Suchbegriff">
             <button id="btnResetPlacesFilter" title="Filter zurücksetzen">&times;</button>
             <span id="matches"></span>
 
             <div id="ajaxMapPlacesTree1" class="dynaTree"></div>
+        </div>
+
+        <div>
+            {{render '@suggest-search-input'}}
+            {{render '@radial-search-input'}}
+
+            <button>
+                submit
+            </button>
         </div>
 
         <div id="ajaxMapRegionsTree1" class="dynaTree"></div>

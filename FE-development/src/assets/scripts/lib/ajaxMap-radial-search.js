@@ -1,23 +1,28 @@
 import $ from 'jquery';
-
 import treeRenderer  from './fancytree-renderer'
+import {inserScriptTag} from './utilitys'
 
+const _ = {
+    selector: '.c-radial-search',
+    loadApi: () => {
+        const key = configData.mapSettings.keys.googleMap,
+            url = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places';
 
-const _={
-    selector:'.c-radial-search'
+        return inserScriptTag(url)
+    },
+    ui: () => {
+
+    },
 }
-
 
 const radialSearch = {
 
-    ui:()=>{
-
-
-    },
-
-
     init: (mapEntry) => {
-        radialSearch.initUi(mapEntry)
+        loadApi.then(()=>{
+            _.ui(mapEntry);
+
+        })
+
 
         return new Promise(function(resolve, reject) {
             $.ajax({
