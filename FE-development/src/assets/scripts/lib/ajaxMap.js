@@ -5,6 +5,7 @@ import map  from './ajaxMap-map'
 import mapLayers  from './map-layers'
 import regions from './ajaxMap-regions'
 import places from './ajaxMap-places'
+import radialSearch from './ajaxMap-radial-search'
 import locationTypes from './ajaxMap-locationTypes'
 import fancyTreeRenderer from './fancytree-renderer'
 
@@ -40,6 +41,8 @@ const _ = {
                     regions.init(mapEntry)
 
                     places.init(mapEntry)
+console.log(radialSearch)
+                 radialSearch.init(mapEntry);
 
                     fancyTreeRenderer.category(mapEntry);
                     fancyTreeRenderer.placeGroup(mapEntry);

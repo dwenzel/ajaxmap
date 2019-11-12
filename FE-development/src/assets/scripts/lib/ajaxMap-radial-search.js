@@ -2,10 +2,21 @@ import $ from 'jquery';
 import treeRenderer  from './fancytree-renderer'
 import {inserScriptTag} from './utilitys'
 
+import ajaxMap from './ajaxMap'
+
 const _ = {
+    apiAlreadyloaded: false,
     selector: '.c-radial-search',
     loadApi: () => {
-        const key = configData.mapSettings.keys.googleMap,
+        //todo generate places api key
+        return Promise.resolve();
+
+        if (_.apiAlreadyloaded) {
+
+            return Promise.reject('googlemap places-api already Loaded')
+        }
+        _.apiAlreadyloaded = true;
+        const key = ajaxMap.configData.mapSettings.keys.googleMap,
             url = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places';
 
         return inserScriptTag(url)
@@ -16,38 +27,15 @@ const _ = {
 }
 
 const radialSearch = {
-
     init: (mapEntry) => {
-        loadApi.then(()=>{
-            _.ui(mapEntry);
 
+        _.loadApi().then(() => {
+
+            //   _.ui(mapEntry);
+            return;
         })
 
-
-        return new Promise(function(resolve, reject) {
-            $.ajax({
-                url: ajaxMap.ajaxServerPath,
-                type: 'GET',
-                data: {
-                    'id': ajaxMap.configData.mapSettings.pageId,
-                    'api': 'map',
-                    'action': 'listPlaces',
-                    'mapId': mapEntry.id
-                },
-                dataType: "json",
-                success: function(result) {
-                    // store places
-                    mapEntry.places = result;
-
-                    if (result.length) {
-                        treeRenderer.places(mapEntry, result);
-
-                        _.updatePlaces(mapEntry);
-                    }
-                }
-            })
-        })
     }
 }
 
-export default radialSearch.init;
+export default radialSearch;
