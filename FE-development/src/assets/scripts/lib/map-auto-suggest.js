@@ -1,13 +1,17 @@
+
 const _ = {
     inputSelector: '',
 }
 
 const autoSuggest = {
     setUp: () => {
-        var input = document.getElementById('searchTextField');
+        const input = document.getElementById('searchTextField');
+        var germanBounds = new google.maps.LatLngBounds(
+            google.maps.LatLng(5.98865807458, 47.3024876979),
+            google.maps.LatLng(15.0169958839, 54.983104153))
 
-        var options = {
-            bounds: defaultBounds,
+        const options = {
+            bounds: germanBounds,//https://gist.github.com/graydon/11198540/revisions
             types: ['establishment']
         };
 

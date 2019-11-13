@@ -34,7 +34,7 @@ const _ = {
 
         places.init(mapEntry)
 
-        autoSuggest.init(mapEntry);
+        autoSuggest(mapEntry);
         //radialSearch.init(mapEntry);
 
         fancyTreeRenderer.category(mapEntry);
