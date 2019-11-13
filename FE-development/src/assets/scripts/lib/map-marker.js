@@ -4,8 +4,7 @@ import infoWindow from './map-marker-info-window'
 
 function addMarkerClickFunction(mapEntry, place) {
     return function() {
-        if (window.ajaxMapConfig && ajaxMapConfig.onMarkerClick) {
-
+        if (/*window.ajaxMapConfig && the error is your friend */ajaxMapConfig.onMarkerClick) {
             ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
 

@@ -1,5 +1,5 @@
 const _ = {
-    addPlaceListMarkup: () => {
+   BSB_ajaxMapConfigData: () => {
 
         //hold the api for ajaxmap
         window.ajaxMapConfig = {};
@@ -9,6 +9,8 @@ const _ = {
         //gets the mapEntry and the place
         window.ajaxMapConfig.onMarkerClick = function(mapEntry, place) {
            const treeNode = place.treeNode//has all domNodes
+
+            console.log(treeNode);
             //  $('#tablediv').scrollTop($('#' + id).offset().top);
         }
 
@@ -27,7 +29,7 @@ const _ = {
     }
 };
 
-_.addPlaceListMarkup();
+_.BSB_ajaxMapConfigData();
 
 
 

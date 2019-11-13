@@ -1,5 +1,3 @@
-
-
 <div id="c35"
     class="u-space-b:default">
 
@@ -24,6 +22,9 @@
             mapStore.push(mapSettings);
             regionStore.push({"id": mapSettings.id});
             categoryTreeStore.push({"id": mapSettings.id});
+
+            var ajaxMapConfig = window.ajaxMapConfig;
+            window.ajaxMapConfig = ajaxMapConfig ? ajaxMapConfig : {};
 
         </script>
 

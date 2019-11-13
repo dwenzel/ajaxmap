@@ -74,7 +74,7 @@ ajaxMap = {//    TODO:
     configData: null,
     init: function(configData) {
         const url = 'https://maps.googleapis.com/maps/api/js?key=' +
-            configData.mapSettings.keys.googleMap;
+            configData.mapSettings.keys.googleMap+'&libraries=places';
 
         ajaxMap.configData = configData;
 
