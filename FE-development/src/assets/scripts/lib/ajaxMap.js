@@ -24,8 +24,22 @@ class AjaxMap {
 }
 
 const _ = {
-    initAllMaps: () => {
+    initMap: (mapEntry, locationTypesResonse) => {
 
+        locationTypes.init(mapEntry, locationTypesResonse);
+
+        mapLayers.buildStatic(mapEntry);
+
+        regions.init(mapEntry)
+
+        places.init(mapEntry)
+
+        radialSearch.init(mapEntry);
+
+        fancyTreeRenderer.category(mapEntry);
+        fancyTreeRenderer.placeGroup(mapEntry);
+    },
+    initAllMaps: () => {
         return new Promise(function(resolve, reject) {
             const mapStore = ajaxMap.configData.mapStore;
 
@@ -34,23 +48,10 @@ const _ = {
 
                 map.build(mapEntry).then((response) => {
 
-                    locationTypes.init(mapEntry, response.locationTypes);
-
-                    mapLayers.buildStatic(mapEntry);
-
-                    regions.init(mapEntry)
-
-                    places.init(mapEntry)
-console.log(radialSearch)
-                 radialSearch.init(mapEntry);
-
-                    fancyTreeRenderer.category(mapEntry);
-                    fancyTreeRenderer.placeGroup(mapEntry);
+                    _.initMap(mapEntry)
                 });
 
-                //same as mapstore!!no mpastore is [mapEntra] not instance
                 ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
-
                 return ajaxMapInstance;
             });
         })
@@ -72,13 +73,15 @@ ajaxMap = {//    TODO:
 
     configData: null,
     init: function(configData) {
-        const url = 'https://maps.googleapis.com/maps/api/js?key=' + configData.mapSettings.keys.googleMap
+        const url = 'https://maps.googleapis.com/maps/api/js?key=' +
+            configData.mapSettings.keys.googleMap;
+
         ajaxMap.configData = configData;
 
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;
 
-            _.initAllMaps()
+            _.initAllMaps();
 
             ui.init();
         }, console.error)

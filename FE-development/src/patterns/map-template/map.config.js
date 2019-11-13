@@ -1,13 +1,14 @@
 const proxy = require('./proxy');
 
-const ajaxProxyPort= require('../../../_config-proxy-port.json').ajaxProxyPort;
+const ajaxProxyPort = require('../../../_config-proxy-port.json').ajaxProxyPort;
 proxy.start(ajaxProxyPort);
-
 
 const googleApiKey = require(process.env.HOME + '/config-data/bsb-config').googleApiKey;
 
 const map = {
     settings: {
+        radiusSearch: true,
+        searchField: true,
         keys: {
             googleMap: googleApiKey
         },

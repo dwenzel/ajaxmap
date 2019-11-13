@@ -12,9 +12,9 @@ const _ = {
         return Promise.resolve();
 
         if (_.apiAlreadyloaded) {
-
-            return Promise.reject('googlemap places-api already Loaded')
+            return Promise.resolve()
         }
+
         _.apiAlreadyloaded = true;
         const key = ajaxMap.configData.mapSettings.keys.googleMap,
             url = 'https://maps.googleapis.com/maps/api/js?key=' + key + '&libraries=places';
@@ -28,10 +28,14 @@ const _ = {
 
 const radialSearch = {
     init: (mapEntry) => {
+       // alert(mapEntry.settings.radiusSearch)
+
+        if (!mapEntry.settings.radiusSearch) {
+            return
+        }
 
         _.loadApi().then(() => {
-
-            //   _.ui(mapEntry);
+            _.ui(mapEntry);
             return;
         })
 

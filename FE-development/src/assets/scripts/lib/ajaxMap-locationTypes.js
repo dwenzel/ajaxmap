@@ -23,10 +23,10 @@ const mapLocationTypes = {
             places.updatePlaces(mapId);
         });
     },
-    init: function(mapEntry, locationTypes) {
+    init: function(mapEntry) {
 
-        if (locationTypes) {
-            mapEntry.locationTypes = locationTypes;
+        if (mapEntry.locationTypes) {
+
 
             //    mapLocationTypes.ui(mapEntry);  //        @dirk ??
             const $tree = treeRenderer.locationTypes(mapEntry);
