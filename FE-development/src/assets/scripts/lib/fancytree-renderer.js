@@ -104,8 +104,8 @@ const renderTree = {
             activate: places.showSoloPlace(mapEntry),
             autoScroll: true,
             renderTitle: (event, data) => {
-                if (placesTreeConfig.renderItem) {
-                    return placesTreeConfig.renderItem(event, data)
+                if (ajaxMapConfig.renderPlaceTreesItem) {
+                    return ajaxMapConfig.renderPlaceTreesItem(data)
                 }
 
                 return null

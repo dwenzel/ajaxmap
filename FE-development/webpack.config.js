@@ -18,6 +18,10 @@ module.exports = {
         main: [
             path.resolve(__dirname, './src/assets/scripts/main.js'),
             path.resolve(__dirname, './src/assets/styles/main.scss')
+        ],
+        'bsb-map': [
+            path.resolve(__dirname, './src/assets-bsb-map/scripts/bsb-map.js'),
+            path.resolve(__dirname, './src/assets-bsb-map/styles/bsb-map.scss')
         ]
     },
 
