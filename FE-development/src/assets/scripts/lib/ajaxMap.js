@@ -5,7 +5,7 @@ import map  from './ajaxMap-map'
 import mapLayers  from './map-layers'
 import regions from './ajaxMap-regions'
 import places from './ajaxMap-places'
-import radialSearch from './ajaxMap-radial-search'
+import autoSuggest from './map-auto-suggest'
 import locationTypes from './ajaxMap-locationTypes'
 import fancyTreeRenderer from './fancytree-renderer'
 
@@ -34,7 +34,8 @@ const _ = {
 
         places.init(mapEntry)
 
-        radialSearch.init(mapEntry);
+        autoSuggest.init(mapEntry);
+        //radialSearch.init(mapEntry);
 
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
@@ -74,7 +75,7 @@ ajaxMap = {//    TODO:
     configData: null,
     init: function(configData) {
         const url = 'https://maps.googleapis.com/maps/api/js?key=' +
-            configData.mapSettings.keys.googleMap+'&libraries=places';
+            configData.mapSettings.keys.googleMap + '&libraries=places';
 
         ajaxMap.configData = configData;
 
