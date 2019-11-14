@@ -45,7 +45,7 @@ library.add(
 $(document).ready(function() {
 
     if (!mapStore || !(mapStore instanceof Array)) {
-        console.log(' no mapstore', mapStore);
+        console.log('no mapstore', mapStore);
         return;
     }
 

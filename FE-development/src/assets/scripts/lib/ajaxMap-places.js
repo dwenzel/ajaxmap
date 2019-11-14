@@ -16,7 +16,8 @@ class Place {
     constructor(mapEntry, placeData) {
         this.mapEntry = mapEntry;
         this.placeData = placeData;
-        this.LatLong = getLatLong(placeData.geoCoordinates)
+        this.LatLong = getLatLong(placeData.geoCoordinates);
+        this.active = true;
     }
 
     panToSelf() {
@@ -25,6 +26,18 @@ class Place {
 }
 
 const _ = {
+    disableAllPlaces: (mapEntry) => {
+        for (var i in mapEntry.placeInstances) {
+            mapEntry.placeInstances[i].active = false;
+        }
+    },
+    filterByActiveKeys: (mapEntry, placesResponse) => {
+        _.disableAllPlaces(mapEntry);
+
+        placesResponse.forEach((item) => {
+            mapEntry.placeInstances[item.key].active = true;
+        })
+    },
     updatePlaces: (mapEntry, clearSelected) => {
         var treeSelector = fancytreeSelector.places + mapEntry.id;
 
@@ -66,6 +79,7 @@ const _ = {
 
                             markerInfoWindow.getInfoWindowContent(marker.place)
                             .then((content) => {
+
                                 infoWindow.setContent(content);
                                 infoWindow.open(mapEntry.map, marker);
                             });
@@ -84,6 +98,8 @@ const _ = {
             _.updatePlaces(mapEntry);
 
             //  console.log(data.node.data.placeInstance.panToSelf(),'++++++++++')
+
+
             data.node.data.placeInstance.panToSelf()
             //  placeInstance.up
         }
@@ -120,12 +136,17 @@ const _ = {
             'mapId': mapEntry.id
         };
 
+        mapEntry.placeInstances = {};
+
         ajaxCall(data).then(function(result) {
+
             if (result.length) {
                 mapEntry.places = result;
                 mapEntry.places.forEach((placeData, index) => {
                     // store places
-                    placeData.placeInstance = new Place(mapEntry, placeData);
+                    const placeInstance = new Place(mapEntry, placeData);
+                    placeData.placeInstance= placeInstance;
+                    mapEntry.placeInstances[placeData.key] = placeInstance;
                 });
 
                 const placesTree = treeRenderer.places(mapEntry, result);
@@ -143,6 +164,7 @@ const _ = {
 
 const places = {
     init: _.init,
+    filterByActiveKeys: _.filterByActiveKeys,
     showSoloPlace: _.showSoloPlace,
     update: _.updatePlaces
 };

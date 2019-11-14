@@ -4,12 +4,12 @@
 
 
 const labels = [
-    'Kein Umkreis',
+    'Deutschlandweit',
     '10km',
     '25km',
     '50km',
     '200km',
-    'Deutschlandweit'
+
 ]
 
 const values = [
@@ -18,7 +18,6 @@ const values = [
     '25000',
     '50000',
     '200000',
-    'de'
 ]
 
 module.exports = {

@@ -5,12 +5,12 @@ import map  from './ajaxMap-map'
 import mapLayers  from './map-layers'
 import regions from './ajaxMap-regions'
 import places from './ajaxMap-places'
-import autoSuggest from './map-auto-suggest'
+
 import locationTypes from './ajaxMap-locationTypes'
 import fancyTreeRenderer from './fancytree-renderer'
 
 import {inserScriptTag} from './utilitys'
-import ui from '../lib/ajaxMap-ui';
+import ui from '../lib/ui';
 
 let ajaxMap;
 class AjaxMap {
@@ -34,8 +34,7 @@ const _ = {
 
         places.init(mapEntry)
 
-        autoSuggest(mapEntry);
-        //radialSearch.init(mapEntry);
+        ui.initByMapEntry(mapEntry)
 
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
