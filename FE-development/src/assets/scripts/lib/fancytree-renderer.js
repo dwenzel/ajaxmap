@@ -1,5 +1,6 @@
 import ajaxMap from './ajaxMap'
 import places from './ajaxMap-places'
+import layers from './map-layers'
 import locationTypes from './ajaxMap-locationTypes'
 import filter  from './ajaxMap-places-filter'
 import {sort}  from './utilitys'
@@ -108,8 +109,7 @@ const renderTree = {
                     return ajaxMapConfig.renderPlaceTreesItem(data)
                 }
 
-                return null
-                //return markup;//('<span>maus</span>')
+                return null; // null is the default
             }
         };
 
@@ -162,13 +162,13 @@ const renderTree = {
                 glyph: options.glyph,
                 icon: options.icons,
                 select: function(event, data) {
-                    var mapNumber = getMapNumber(data.tree.options.cookieId.split('fancyTreeRegions')[1]);
-                    var selectedNodes = data.tree.getSelectedNodes();
-                    var selectedKeys = $.map(selectedNodes, function(node) {
+                    const selectedNodes = data.tree.getSelectedNodes();
+
+                    const selectedKeys = $.map(selectedNodes, function(node) {
                         return node.key;
                     });
-                    ajaxMap.updateLayers(mapNumber, selectedKeys);
 
+                    layers.update(mapEntry, selectedKeys);
                 }
             }
         );
