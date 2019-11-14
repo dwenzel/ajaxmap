@@ -1,23 +1,20 @@
 import $ from 'jquery';
 
-
 const _ = {
-    inputSelector: '#suggest',
+    inputSelector: '#locationSearch',
 }
 
 const autoSuggest = {
-    setUp: (map) => {
-        const input = $(_.inputSelector)[0];
+    setUp: (mapId, map) => {
+        const input = $(_.inputSelector + mapId)[0];
 
         var germanBounds = new google.maps.LatLngBounds(
             google.maps.LatLng(5.98865807458, 47.3024876979),
             google.maps.LatLng(15.0169958839, 54.983104153))
 
-
-
         const options = {
             bounds: germanBounds,//https://gist.github.com/graydon/11198540/revisions,
-            strictBounds:true,
+            strictBounds: true,
             types: ['(cities)'],
             componentRestrictions: {country: 'de'}
         };
@@ -31,8 +28,8 @@ const autoSuggest = {
         if (!mapEntry.searchField) {
             return
         }
-console.log(mapEntry.googleMap)
-        autoSuggest.setUp(mapEntry.googleMap);
+
+        autoSuggest.setUp(mapEntry.id, mapEntry.googleMap);
     }
 };
 

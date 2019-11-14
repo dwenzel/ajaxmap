@@ -28,15 +28,14 @@ export const fancytreeSelector = {
  * @param mapId
  * @param settings Optional settings
  */
-function renderTreeAjax(select, action, mapId, settings) {
+function renderTreeAjax($el, action, mapEntry, treeSettings) {
+    const mapId = mapEntry.mapId;
 
     var localSettings = {
         checkbox: true,
         cookieId: 'fancyTree' + action + mapId,
         selectMode: 3,
         select: function(event, data) {
-            const mapEntry = ajaxMap.lookUp[mapId].mapEntry
-
             places.update(mapEntry, true);
         },
         source: {
@@ -52,15 +51,19 @@ function renderTreeAjax(select, action, mapId, settings) {
         }
     };
 
-    if (typeof settings === 'object') {
-        for (var property in settings) {
-            if (settings.hasOwnProperty(property)) {
-                localSettings[property] = settings[property];
+    if (typeof treeSettings === 'object') {
+        for (var property in treeSettings) {
+            if (treeSettings.hasOwnProperty(property)) {
+                localSettings[property] = treeSettings[property];
             }
         }
     }
 
-    $(select).fancytree(localSettings).data('mapId', mapId);
+    $el.fancytree(localSettings).data('mapId', mapId);
+}
+
+const _ = {
+    $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId)
 }
 
 export const updateTree = {
@@ -83,27 +86,27 @@ export const updateTree = {
 
 const renderTree = {
     places: (mapEntry, children) => {
-
-        const $placeTree = $(fancytreeSelector.places + mapEntry.id);
+        const mapId = mapEntry.id,
+            $el = _.$getTreeEl('places', mapId)
 
         const placesTreeConfig = mapEntry.settings.placesTree ? mapEntry.settings.placesTree
             : ajaxMap.configData.mapSettings.settings.placesTree;
 
         const settings = {
-            cookieId: 'fancyTreePlaces' + mapEntry.id,
+            activate: places.showSoloPlace(mapEntry),
+            autoScroll: true,
+            cookieId: 'fancyTreePlaces' + mapId,
+            extensions: placesTreeConfig.extensions,
+            filter: placesTreeConfig.filter,
+            icon: placesTreeConfig.icon,
+            quicksearch: placesTreeConfig.quicksearch,
             selectMode: placesTreeConfig.selectMode,
             source: {
-                mapNumber: mapEntry.id,//88??
-                mapId: mapEntry.id,
+                mapNumber: mapId,//88??
+                mapId: mapId,
                 map: mapEntry.googleMap,
                 children: []
             },
-            icon: placesTreeConfig.icon,
-            extensions: placesTreeConfig.extensions,
-            quicksearch: placesTreeConfig.quicksearch,
-            filter: placesTreeConfig.filter,
-            activate: places.showSoloPlace(mapEntry),
-            autoScroll: true,
             renderTitle: (event, data) => {
                 if (ajaxMapConfig.renderPlaceTreesItem) {
                     return ajaxMapConfig.renderPlaceTreesItem(data)
@@ -113,7 +116,7 @@ const renderTree = {
             }
         };
 
-        $placeTree.fancytree(settings);
+        $el.fancytree(settings);
 
         /*
          $placeTree.renderNode = function(event, data) {
@@ -127,30 +130,50 @@ const renderTree = {
 
         updateTree.places(mapEntry, children);
 
-        var placesTree = $placeTree.fancytree('getTree');
-        return placesTree;
+        return $el.fancytree('getTree');
     },
 
     category: (mapEntry) => {
+        const mapId = mapEntry.id,
+            $el = _.$getTreeEl('category', mapId)
+
+        if (!$el.length) {
+            return
+        }
+
         renderTreeAjax(
-            '#ajaxMapCategoryTree' + mapEntry.id,
-            "listCategories",
-            mapEntry.id,
-            mapEntry.settings.categoryTree
+            $el,
+            'listCategories',
+            mapEntry,
+            mapEntry.settings.categoryTree,
         );
     },
     placeGroup: function(mapEntry) {
+        const mapId = mapEntry.id,
+            $el = _.$getTreeEl('placeGroup', mapId)
+
+        if (!$el.length) {
+            return
+        }
+
         renderTreeAjax(
-            '#ajaxMapPlaceGroupTree' + mapEntry.id,
-            "listPlaceGroups",
-            mapEntry.id,
+            $el,
+            'listPlaceGroups',
+            mapEntry,
             mapEntry.settings.placeGroupTree
         );
     },
     regions: (mapEntry) => {
-        var options = mapEntry.settings.regionTree;
+        const mapId = mapEntry.id,
+            $el = _.$getTreeEl('regions', mapId)
 
-        $('#ajaxMapRegionsTree' + mapEntry.id).fancytree(
+        if (!$el.length) {
+            return
+        }
+
+        const options = mapEntry.settings.regionTree;
+
+        $el.fancytree(
             {
                 checkbox: options.checkbox,
                 cookieId: 'fancyTreeRegions' + mapEntry.id,
