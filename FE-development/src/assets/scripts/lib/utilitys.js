@@ -5,6 +5,19 @@ import $ from 'jquery';
 
 import ajaxMap from './ajaxMap'
 
+export const ajaxCall = (data) => {
+    return new Promise(function(resolve, reject) {
+        $.ajax({
+            dataType: 'json',
+            type: 'GET',
+            url: ajaxMap.ajaxServerPath,
+            data,
+            success: resolve,
+            error: reject
+        })
+    })
+};
+
 export const sort = {
     aplhabetic: {
         asc: (a, b) => {
@@ -13,7 +26,7 @@ export const sort = {
             return a > b ? 1 : a < b ? -1 : 0;
         }
     },
-    nummeric:{
+    nummeric: {
         asc: (a, b) => {
             //Todo Postleitzahl
             a = a.title.toLowerCase();
@@ -42,21 +55,13 @@ export const inserScriptTag = (src) => {
  * @return json
  */
 export const getAddress = (placeId) => {
-    return new Promise((resolve, reject) => {
+    const data = {
+        'id': ajaxMap.configData.mapSettings.pageId,
+        'api': 'map',
+        'action': "getAddress",
+        'placeId': placeId
+    };
 
-        $.ajax({
-            url: ajaxMap.ajaxServerPath,
-            type: GET,
-            data: {
-                'id': ajaxMap.configData.mapSettings.pageId,
-                'api': 'map',
-                'action': "getAddress",
-                'placeId': placeId
-            },
-            dataType: 'json',
-            success: resolve,
-            error: reject
-        });
-    })
+    return ajaxCall(data)
 }
 

@@ -11,7 +11,7 @@ import markerInfoWindow from './map-marker-info-window'
 import {getSelectedKeys, getLatLong} from './map-helpers'
 
 import {fancytreeSelector} from './fancytree-renderer'
-
+import {ajaxCall} from './utilitys'
 class Place {
     constructor(mapEntry, placeData) {
         this.mapEntry = mapEntry;
@@ -113,41 +113,30 @@ const _ = {
         }).focus();
     },
     init: (mapEntry) => {
+        const data = {
+            'id': ajaxMap.configData.mapSettings.pageId,
+            'api': 'map',
+            'action': 'listPlaces',
+            'mapId': mapEntry.id
+        };
 
-        return new Promise(function(resolve, reject) {
-            $.ajax({
-                url: ajaxMap.ajaxServerPath,
-                type: 'GET',
-                data: {
-                    'id': ajaxMap.configData.mapSettings.pageId,
-                    'api': 'map',
-                    'action': 'listPlaces',
-                    'mapId': mapEntry.id
-                },
-                dataType: "json",
-                success: function(result) {
+        ajaxCall(data).then(function(result) {
+            if (result.length) {
+                mapEntry.places = result;
+                mapEntry.places.forEach((placeData, index) => {
                     // store places
+                    placeData.placeInstance = new Place(mapEntry, placeData);
+                });
 
-                    if (result.length) {
-                        mapEntry.places = result;
-                        mapEntry.places.forEach((placeData, index) => {
+                const placesTree = treeRenderer.places(mapEntry, result);
 
-                            placeData.placeInstance = new Place(mapEntry, placeData);
-                        })
+                placesTree.rootNode.children.forEach((treeNode, i) => {
+                    mapEntry.places[i].treeNode = treeNode;
+                });
 
-                        var placesTree = treeRenderer.places(mapEntry, result);
-
-                        console.log(placesTree.rootNode.children)
-                        placesTree.rootNode.children.forEach((treeNode, i) => {
-                            mapEntry.places[i].treeNode = treeNode;
-
-                        })
-
-                        _.setEvents(placesTree);
-                        _.updatePlaces(mapEntry);
-                    }
-                }
-            })
+                _.setEvents(placesTree);
+                _.updatePlaces(mapEntry);
+            }
         })
     }
 }

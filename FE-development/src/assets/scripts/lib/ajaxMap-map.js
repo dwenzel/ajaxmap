@@ -3,28 +3,19 @@ import $ from 'jquery';
 import ajaxMap from './ajaxMap'
 
 import mapHelpers from './map-helpers'
-
+import {ajaxCall} from './utilitys'
 const _map = {
     containerSelector: '#ajaxMapContainer_Map',
 
     getMapData: (mapEntry) => {
         const data = {
             'id': ajaxMap.configData.mapSettings.pageId,
-            'api': "map",
+            'api': 'map',
             'action': 'buildMap',
             'mapId': mapEntry.id
         };
 
-        return new Promise(function(resolve, reject) {
-            $.ajax({
-                dataType: 'json',
-                type: 'GET',
-                url: ajaxMap.ajaxServerPath,
-                data,
-                success: resolve,
-                error: reject
-            })
-        })
+        return ajaxCall(data);
     },
     mapToDefaultSettings: (mapEntry, response) => {
 

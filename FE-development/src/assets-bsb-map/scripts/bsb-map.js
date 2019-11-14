@@ -20,7 +20,7 @@ const _ = {
 
             console.log(data.node.data);
 
-            let markup = data.node.data.address
+            let markup = data.node.data.address;
 
             return markup;
         }
