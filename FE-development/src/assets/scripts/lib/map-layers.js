@@ -22,7 +22,7 @@ const layers = {
             for (var i = 0; i < existingKeys.length; i++) {
                 var key = existingKeys[i];
                 if (layerIds.indexOf(parseInt(key)) > -1) {
-                    mapEntry.layers[key].setMap(mapEntry.map);
+                    mapEntry.layers[key].setMap(mapEntry.googleMap);
                 } else {
                     mapEntry.layers[key].setMap(null);
                 }
@@ -58,7 +58,7 @@ const layers = {
         };
 
         const newLayer = new google.maps.KmlLayer(layerUrl, layerOptions);
-        newLayer.setMap(mapEntry.map);
+        newLayer.setMap(mapEntry.googleMap);
     },
 
     buildStatic: function(mapEntry) {

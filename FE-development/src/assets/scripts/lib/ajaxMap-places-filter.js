@@ -1,6 +1,6 @@
 import {updateTree}  from './fancytree-renderer'
 import layers from './map-layers'
-import markers from './map-marker'
+
 import {getSelectedKeys} from './map-helpers'
 import {fancytreeSelector} from './fancytree-renderer'
 import $ from 'jquery';
@@ -103,10 +103,11 @@ function showMatchingPlaces(mapEntry) {
         mapPlaces = mapEntry.places,
 
         selectedPlaces = [],
-        clusterer = mapEntry.markerClusterer,
-        mapMarkers = mapEntry.markers || [],
+        clusterer = mapEntry.markerClusterer
+    /*,
+     mapMarkers = mapEntry.markers || [],*/
 
-        selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
+   let selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
         selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category + mapId),
         selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions + mapId),
         selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
@@ -118,70 +119,67 @@ function showMatchingPlaces(mapEntry) {
         selectedLocationType = selectedLocationTypeKeys[0];
     }
 
-
-    clusterer.removeMarkers(mapMarkers);
-
+    clusterer.removeMarkers(mapPlaces.map(item=>item.placeInstance.marker));
 
     // add markers for all places
     for (var i = 0, j = mapPlaces.length; i < j; i++) {
         var place = mapPlaces[i],
-            marker = mapMarkers[i];
+            marker = place.placeInstance.marker;
 
-        if (!mapMarkers[i]) {
-            // marker does not exist, create it
-            mapMarkers[i] = markers.create(mapEntry, place);
-        } else {
-            var hasAnActiveCategory = 0,
-                hasAnActiveRegion = 0,
-                hasAnActivePlaceGroup = 0;
+        /* if (!mapMarkers[i]) {
+         // marker does not exist, create it
+         mapMarkers[i] = markers.create(mapEntry, place);
+         } else {*/
+        var hasAnActiveCategory = 0,
+            hasAnActiveRegion = 0,
+            hasAnActivePlaceGroup = 0;
 
-            if (selectedCategoryKeys && marker.place.categories) {
-                $.each(marker.place.categories, function() {
-                    hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
-                    return (!hasAnActiveCategory);
-                });
-            }
-
-            if (selectedRegionKeys.length && marker.place.regions) {
-                $.each(marker.place.regions, function() {
-                    hasAnActiveRegion = ($.inArray(parseInt(this.key), selectedRegionKeys) > -1);
-                    return (!hasAnActiveRegion);
-                });
-            }
-
-            if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
-
-                $.each(marker.place.placeGroups, function() {
-                    hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
-                    return (!hasAnActivePlaceGroup);
-                });
-            }
-
-            //----
-            if (
-                (place.locationType.key === selectedLocationType || !selectedLocationTypeKeys.length)
-                && (hasAnActiveCategory || !selectedCategoryKeys.length)
-                && (hasAnActiveRegion || !selectedRegionKeys.length)
-                && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
-            ) {
-
-                marker.setMap(map);
-                selectedPlaces[selectedPlaces.length] = place;
-            } else {
-                marker.setMap(null);
-            }
+        if (selectedCategoryKeys && marker.place.categories) {
+            $.each(marker.place.categories, function() {
+                hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
+                return (!hasAnActiveCategory);
+            });
         }
+
+        if (selectedRegionKeys.length && marker.place.regions) {
+            $.each(marker.place.regions, function() {
+                hasAnActiveRegion = ($.inArray(parseInt(this.key), selectedRegionKeys) > -1);
+                return (!hasAnActiveRegion);
+            });
+        }
+
+        if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
+
+            $.each(marker.place.placeGroups, function() {
+                hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
+                return (!hasAnActivePlaceGroup);
+            });
+        }
+
+        //----
+        if (
+            (place.locationType.key === selectedLocationType || !selectedLocationTypeKeys.length)
+            && (hasAnActiveCategory || !selectedCategoryKeys.length)
+            && (hasAnActiveRegion || !selectedRegionKeys.length)
+            && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
+        ) {
+
+            marker.setMap(map);
+            selectedPlaces[selectedPlaces.length] = place;
+        } else {
+            marker.setMap(null);
+        }
+        //}
     }
 
     //   clusterer.addMarkers(mapMarkers);
 
     // update only if mapEntry is already initialized
-    if (typeof mapEntry.markers !== 'undefined') {
-
+   // if (typeof mapEntry.markers !== 'undefined') {
 
         updateTree.places(mapEntry, selectedPlaces);
-    }
-    mapEntry.markers = mapMarkers;
+   // }
+    //mapEntry.markers = mapMarkers;
 }
 
 /**
@@ -194,20 +192,27 @@ function showMatchingPlaces(mapEntry) {
 function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
     var map = mapEntry.googleMap,
         mapPlaces = mapEntry.places,
-        clusterer = mapEntry.markerClusterer,
-        mapMarkers = mapEntry.markers || [];
+        clusterer = mapEntry.markerClusterer;
+    //,
+    //  mapMarkers = mapEntry.markers || [];
 
-    mapPlaces.forEach((place, i) => {
-        mapMarkers[i] = mapMarkers[i] ?
-            mapMarkers[i] : markers.create(mapEntry, place);
+    const mapMarkers = mapPlaces.map((place, i) => {
+        /*  mapMarkers[i] = mapMarkers[i] ?
+         mapMarkers[i] : markers.create(mapEntry, place);
 
-        mapMarkers[i].setMap(null);
-        clusterer.removeMarker(mapMarkers[i]);
+         mapMarkers[i].setMap(null);*/
+
+        const marker= place.placeInstance.marker;
+        clusterer.removeMarker(marker);
+        return marker;
     });
 
     clusterer.addMarkers(mapMarkers);
-
+    console.log(mapMarkers)
     mapMarkers.forEach((marker) => {
+
+        console.log(marker)
+
             const isSelectedPlace =
                 selectedPlaceKeys.some(key => marker.place.key === key);
 

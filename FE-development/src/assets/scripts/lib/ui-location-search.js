@@ -28,6 +28,11 @@ const _ = {
             };
 
             return ajaxCall(data).then((places) => {
+                /*                TODO:
+                map markers
+
+                 */
+
                 places.filterByActiveKeys(mapEntry, places)
             })
         }

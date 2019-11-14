@@ -12,12 +12,15 @@ import {getSelectedKeys, getLatLong} from './map-helpers'
 
 import {fancytreeSelector} from './fancytree-renderer'
 import {ajaxCall} from './utilitys'
+import markers from './map-marker'
 class Place {
     constructor(mapEntry, placeData) {
         this.mapEntry = mapEntry;
         this.placeData = placeData;
         this.LatLong = getLatLong(placeData.geoCoordinates);
         this.active = true;
+
+        this.marker = markers.create(mapEntry, placeData);
     }
 
     panToSelf() {
@@ -26,18 +29,23 @@ class Place {
 }
 
 const _ = {
-    disableAllPlaces: (mapEntry) => {
-        for (var i in mapEntry.placeInstances) {
-            mapEntry.placeInstances[i].active = false;
-        }
-    },
-    filterByActiveKeys: (mapEntry, placesResponse) => {
-        _.disableAllPlaces(mapEntry);
+    /*enableAllPlaces: (mapEntry) => {
+     for (var i in mapEntry.placeInstances) {
+     mapEntry.placeInstances[i].active = true;
+     }
+     },
+     disableAllPlaces: (mapEntry) => {
+     for (var i in mapEntry.placeInstances) {
+     mapEntry.placeInstances[i].active = false;
+     }
+     },
+     filterByActiveKeys: (mapEntry, placesResponse) => {
+     _.disableAllPlaces(mapEntry);
 
-        placesResponse.forEach((item) => {
-            mapEntry.placeInstances[item.key].active = true;
-        })
-    },
+     placesResponse.forEach((item) => {
+     mapEntry.placeInstances[item.key].active = true;
+     })
+     },*/
     updatePlaces: (mapEntry, clearSelected) => {
         var treeSelector = fancytreeSelector.places + mapEntry.id;
 
@@ -53,8 +61,10 @@ const _ = {
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
+        // alert(selectedPlaceKeys.length)
+
         if (selectedPlaceKeys.length) {
-            //from select a place in list
+            //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
@@ -62,47 +72,52 @@ const _ = {
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
-    showSoloPlace: (mapEntry) => {
-        return (event, data) => {
-            var mapMarkers = mapEntry.markers || [],
-                infoWindow = mapEntry.infoWindow;
+    showSoloPlace: (mapEntry) => (event, data) => {
+        //  var mapMarkers = mapEntry.markers || [],
+        const infoWindow = mapEntry.infoWindow;
 
+        /*
+         _.disableAllPlaces(mapEntry);
+         data.node.data.placeInstance.active=true;
+         when klicking on a place :: ehan already clicked toggle state
+         */
+
+        if (true) {
             if (!data.node.selected) {
+
                 data.node.setSelected(true);
 
                 if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
-                    for (var i = 0, j = mapMarkers.length; i < j; i++) {
 
-                        var marker = mapMarkers[i];
 
-                        if (marker.place.key === data.node.key) {
+                    //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
 
-                            markerInfoWindow.getInfoWindowContent(marker.place)
-                            .then((content) => {
+                    //    var marker = mapMarkers[i];
 
-                                infoWindow.setContent(content);
-                                infoWindow.open(mapEntry.map, marker);
-                            });
+                    // if (marker.place.key === data.node.key) {
+                    const placeInstance = data.node.data.placeInstance;
+                    const marker = placeInstance.placeData.marker;
 
-                        }
-                    }
+                    markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
+                    .then(content => {
+
+                        infoWindow.setContent(content);
+                        infoWindow.open(mapEntry.map, marker);
+                    });
+                    //}
+                    //}
                 }
             } else {
 
                 data.node.setSelected(false);
                 infoWindow.close();
             }
-
-            data.node.setActive(false);
-
-            _.updatePlaces(mapEntry);
-
-            //  console.log(data.node.data.placeInstance.panToSelf(),'++++++++++')
-
-
-            data.node.data.placeInstance.panToSelf()
-            //  placeInstance.up
         }
+
+        data.node.setActive(false);
+        data.node.data.placeInstance.panToSelf();
+
+        _.updatePlaces(mapEntry);
     },
     setEvents: (placesTree) => {
         const resetFilterButtonSelector = "button#btnResetPlacesFilter";
@@ -145,8 +160,9 @@ const _ = {
                 mapEntry.places.forEach((placeData, index) => {
                     // store places
                     const placeInstance = new Place(mapEntry, placeData);
-                    placeData.placeInstance= placeInstance;
+                    placeData.placeInstance = placeInstance;
                     mapEntry.placeInstances[placeData.key] = placeInstance;
+
                 });
 
                 const placesTree = treeRenderer.places(mapEntry, result);
