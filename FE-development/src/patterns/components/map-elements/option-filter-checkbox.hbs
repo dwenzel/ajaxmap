@@ -1,0 +1,15 @@
+<!-- option filter as checkbox -->
+<div class="c-option-filter">
+    <div class="c-form__group ">
+        <label class="c-form__label " for="optionFilter">
+            {{label}}
+        </label>
+
+        {{#options}}
+            <div class="c-form__tag">
+                <input id="input-radio-{{id}}" type="checkbox" name="optionFilter">
+                <label for="input-radio-{{id}}">{{label}}</label>
+            </div>
+        {{/options}}
+    </div>
+</div>

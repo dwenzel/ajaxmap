@@ -1,2 +1,8 @@
-@import './map-container';
-@import './content-elements/dyna-tree';
+/**
+ * "Components" importer.
+ */
+@import 'base/components.debug';
+
+@import 'map-elements/components.ajax-map';
+@import 'map-elements/components.sidebar';
+@import 'map-elements/components.dyna-tree';

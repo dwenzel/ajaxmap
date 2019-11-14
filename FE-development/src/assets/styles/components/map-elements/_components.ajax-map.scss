@@ -1,0 +1,18 @@
+.c-ajax-map {
+    height: 100vh;
+    position: relative;
+
+    &__map-wrapper {
+        height: 100%;
+        padding-left: 0;
+
+        .c-ajax-map--sb-is-open & {
+            padding-left: $am-sidebar-width;
+        }
+    }
+
+    &__map {
+        height: 100% !important;
+        width: 100% !important;
+    }
+}

@@ -1,0 +1,11 @@
+.c-ajax-map__sb {
+    position: absolute;
+    left: 0;
+    transform: translateY(-100%);
+    width: $am-sidebar-width;
+    top: 0;
+
+    .c-ajax-map--sb-is-open & {
+        transform: translateY(0);
+    }
+}
