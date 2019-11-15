@@ -26,6 +26,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  ***************************************************************/
 
 use CPSIT\GeoLocationService\Service\GeoCoder;
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -78,10 +79,10 @@ class PlaceRepository extends AbstractDemandedRepository
 
             if (count($locationTypeConstraints)) {
                 switch ($constraintsConjunction) {
-                    case 'or':
+                    case SI::CONJUNCTION_OR:
                         $constraints[] = $query->logicalOr($locationTypeConstraints);
                         break;
-                    case 'and':
+                    case SI::CONJUNCTION_AND:
                     default:
                         $constraints[] = $query->logicalAnd($locationTypeConstraints);
                 }

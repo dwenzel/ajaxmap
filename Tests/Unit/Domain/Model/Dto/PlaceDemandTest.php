@@ -94,10 +94,10 @@ class PlaceDemandTest extends UnitTestCase
      */
     public function setConstraintsConjunctionForStringSetsConstraintsConjunction()
     {
-        $this->fixture->setConstraintsConjunction('Conceived at T3CON10');
+        $this->fixture->setConstraintsConjunction('and');
 
         $this->assertSame(
-            'Conceived at T3CON10',
+            SettingsInterface::CONJUNCTION_AND,
             $this->fixture->getConstraintsConjunction()
         );
     }

@@ -74,7 +74,7 @@ class PlaceDemandFactoryTest extends UnitTestCase
         /** propertyName, $settingsValue, $expectedValue */
         return [
             [SI::LOCATION_TYPES, '1,2', '1,2'],
-            [SI::CONSTRAINTS_CONJUNCTION, 'and', 'and'],
+            [SI::CONSTRAINTS_CONJUNCTION, 'and', 'AND'],
             [SI::PLACE_GROUPS, '5,6', '5,6'],
             [SI::MAP, '50', 50],
             [SI::ORDER, 'foo|bar,baz|asc', 'foo|bar,baz|asc']

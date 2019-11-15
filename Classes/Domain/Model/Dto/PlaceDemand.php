@@ -99,7 +99,7 @@ class PlaceDemand
      */
     public function setConstraintsConjunction($conjunction): void
     {
-        $this->constraintsConjunction = $conjunction;
+        $this->constraintsConjunction = strtoupper($conjunction);
     }
 
     /**
