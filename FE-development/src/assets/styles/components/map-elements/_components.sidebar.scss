@@ -1,11 +1,17 @@
+// sidebar
 .c-ajax-map__sb {
-    position: absolute;
+    background: $am-sb-bg;
+    box-shadow: $am-sb-shadow;
+    height: 100%;
     left: 0;
-    transform: translateY(-100%);
-    width: $am-sidebar-width;
+    position: absolute;
     top: 0;
+    transform: translateX(-100%);
+    transition: transform $am-sb-toggle-transition;
+    width: $am-sb-width;
 
-    .c-ajax-map--sb-is-open & {
-        transform: translateY(0);
+    .ajax-map--sb-is-open & {
+        transform: translateX(0);
+        transition: transform $am-sb-toggle-transition;
     }
 }

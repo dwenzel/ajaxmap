@@ -1,0 +1,32 @@
+// trigger sidebar
+.c-ajax-map__sb__trigger {
+    @include reset-button();
+    background: app-color('primary');
+    box-shadow: $am-trigger-shadow;
+    color: app-color('white');
+    cursor: pointer;
+    height: $am-trigger-size;
+    position: absolute;
+    right: 0;
+    top: $am-trigger-offset-top;
+    transform: translateX(100%);
+    width: $am-trigger-size;
+
+    // arrow
+    .o-icon-font {
+        display: block;
+        font-size: $am-trigger-size/1.5;
+        height: $am-trigger-size/1.5;
+        left: 50%;
+        position: absolute;
+        top: 50%;
+        transform: translate(-50%, -50%) rotate(-180deg);
+        transition: transform $am-sb-toggle-transition;
+        width: $am-trigger-size/1.5;
+
+        .ajax-map--sb-is-open & {
+            transform: translate(-50%, -50%) rotate(0);
+            transition: transform $am-sb-toggle-transition;
+        }
+    }
+}

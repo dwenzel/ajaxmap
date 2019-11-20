@@ -1,1 +1,10 @@
-$am-sidebar-width: 320px
+// sidebar trigger
+$am-trigger-size: 2.4rem;
+$am-trigger-offset-top: 2rem;
+$am-trigger-shadow: 3px 0 5px -3px rgba(map_get($toolbox-colors, 'webblack'), .5);
+
+// sidebar
+$am-sb-width: 320px;
+$am-sb-shadow: 0 0 2rem rgba(map_get($toolbox-colors, 'webblack'), .5);
+$am-sb-bg: map_get($toolbox-colors, 'white');
+$am-sb-toggle-transition: .3s ease;
