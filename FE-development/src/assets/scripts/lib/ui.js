@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import locationSearch from './ui-location-search'
+import search from './ui-suggestion-and-location-search'
 
 //radialSearch.init(mapEntry);
 
@@ -11,7 +11,7 @@ const _ = {
         $filterPlaces: null
     },
     initByMapEntry: (mapEntry) => {
-        locationSearch.init(mapEntry);
+        search.init(mapEntry);
     },
     init: () => {
         _.cache.$filterPlaces = $('input[name=filterPlaces]');

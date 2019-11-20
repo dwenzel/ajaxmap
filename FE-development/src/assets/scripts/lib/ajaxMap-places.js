@@ -19,6 +19,7 @@ class Place {
         this.placeData = placeData;
         this.LatLong = getLatLong(placeData.geoCoordinates);
         this.active = true;
+        this.treeNode; ///full filled in render places tree renderTitle
 
         this.marker = markers.create(mapEntry, placeData);
     }
@@ -29,6 +30,14 @@ class Place {
 }
 
 const _ = {
+    filterByActiveKeys: (mapEntry, placesResponse) => {
+
+        _.disableAllPlaces(mapEntry);
+
+        placesResponse.forEach((item) => {
+            mapEntry.placeInstances[item.key].active = true;
+        })
+    },
     /*enableAllPlaces: (mapEntry) => {
      for (var i in mapEntry.placeInstances) {
      mapEntry.placeInstances[i].active = true;
@@ -143,7 +152,33 @@ const _ = {
             $("span#matches").text(n);
         }).focus();
     },
+    loadData: (data) => {
+        ajaxCall(data).then(function(result) {
+
+            if (result.length) {
+                mapEntry.placeInstances = {};
+                mapEntry.places = result;
+
+                mapEntry.places.forEach((placeData, index) => {
+                    // store places
+                    const placeInstance = new Place(mapEntry, placeData);
+                    placeData.placeInstance = placeInstance;
+
+                    mapEntry.placeInstances[placeData.key]
+                        = placeInstance;//this is a register//
+                    // to remove and add from the tree eg:location-search gives a subset of places
+
+                });
+
+                const placesTree = treeRenderer.places(mapEntry, result);
+                treeRenderer.updateTree.places(mapEntry, children);
+                _.setEvents(placesTree);
+                _.updatePlaces(mapEntry);
+            }
+        })
+    },
     init: (mapEntry) => {
+
         const data = {
             'id': ajaxMap.configData.mapSettings.pageId,
             'api': 'map',
@@ -151,30 +186,6 @@ const _ = {
             'mapId': mapEntry.id
         };
 
-        mapEntry.placeInstances = {};
-
-        ajaxCall(data).then(function(result) {
-
-            if (result.length) {
-                mapEntry.places = result;
-                mapEntry.places.forEach((placeData, index) => {
-                    // store places
-                    const placeInstance = new Place(mapEntry, placeData);
-                    placeData.placeInstance = placeInstance;
-                    mapEntry.placeInstances[placeData.key] = placeInstance;
-
-                });
-
-                const placesTree = treeRenderer.places(mapEntry, result);
-
-                placesTree.rootNode.children.forEach((treeNode, i) => {
-                    mapEntry.places[i].treeNode = treeNode;
-                });
-
-                _.setEvents(placesTree);
-                _.updatePlaces(mapEntry);
-            }
-        })
     }
 }
 
