@@ -105,7 +105,8 @@ class MapControllerTest extends UnitTestCase
         $GLOBALS['TSFE']->id = $pageId;
         $mockMap = $this->getMockBuilder(Map::class)
             ->getMock();
-        $settings = ['map' => '1'];
+        $search = [];
+        $settings = ['map' => '1', 'search' => $search];
         $expectedMapSettings = SI::MAP_SETTINGS;
         $expectedMapSettings['id'] = $settings['map'];
         $expectedMapSettings['pageId'] = $pageId;
@@ -121,7 +122,8 @@ class MapControllerTest extends UnitTestCase
                 [
                     'map' => $mockMap,
                     'settings' => $settings,
-                    'mapSettings' => \json_encode($expectedMapSettings)
+                    'mapSettings' => \json_encode($expectedMapSettings),
+                    'search' => $search,
                 ]
             );
         $this->subject->showAction($mockMap);
