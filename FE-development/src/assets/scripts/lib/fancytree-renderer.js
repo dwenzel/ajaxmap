@@ -108,6 +108,8 @@ const renderTree = {
                 children: []
             },
             renderTitle: (event, data) => {
+                data.node.data.placeInstance.treeNode = data.node;
+
                 if (ajaxMapConfig.renderPlaceTreesItem) {
                     return ajaxMapConfig.renderPlaceTreesItem(data)
                 }
@@ -127,8 +129,6 @@ const renderTree = {
          $tdList.eq(1).text(node.key);
          }
          */
-
-        updateTree.places(mapEntry, children);
 
         return $el.fancytree('getTree');
     },

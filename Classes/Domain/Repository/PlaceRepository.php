@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -83,9 +83,9 @@ class PlaceRepository extends AbstractDemandedRepository {
 	 */
 	public function findAddressForPlace($placeId){
         $statement = 'SELECT * 
-             FROM tt_address AS address ' 
+             FROM tt_address AS address '
         .'LEFT JOIN tx_ajaxmap_domain_model_place AS place '
-        .'ON (place.address= address.uid) ' 
+        .'ON (place.address= address.uid) '
         . 'WHERE place.uid='.$placeId;
         $query = $this->createQuery();
         $query->getQuerySettings()->setReturnRawQueryResult(true);
@@ -107,10 +107,10 @@ class PlaceRepository extends AbstractDemandedRepository {
 		$constraints = array();
 		$categories = $demand->getCategories();
 		$categoryConjunction = $demand->getCategoryConjunction();
-	
+
 		// Category constraints
 		if ($categories && !empty($categoryConjunction)) {
-			
+
 			// @todo get subcategories ($demand->getIncludeSubCategories())
 			$constraints[] = $this->createCategoryConstraint(
 				$query,
@@ -139,6 +139,8 @@ class PlaceRepository extends AbstractDemandedRepository {
 				}
 			}
 		}
+
+
 
 		// Search constraints
 		if ($demand->getSearch()) {
@@ -182,7 +184,7 @@ class PlaceRepository extends AbstractDemandedRepository {
 						$locationConstraints[] = $query->greaterThan('longitude', $bounds['W']['lng']);
 						$locationConstraints[] = $query->lessThan('longitude', $bounds['E']['lng']);
 			}
-					
+
 			if(count($searchConstraints)) {
 				$constraints[] = $query->logicalOr($searchConstraints);
 			}

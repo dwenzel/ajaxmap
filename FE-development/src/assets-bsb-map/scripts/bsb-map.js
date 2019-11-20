@@ -7,7 +7,7 @@ const _ = {
         //function will be fired by clicking on a marker
         //gets the mapEntry and the place
         window.ajaxMapConfig.onMarkerClick = function(mapEntry, place) {
-            const treeNode = place.treeNode//has all domNodes
+            const treeNode = place.placeInstance.treeNode//has all domNodes
 
             console.log(treeNode);
             //  $('#tablediv').scrollTop($('#' + id).offset().top);
@@ -20,7 +20,7 @@ const _ = {
 
             console.log(data.node.data);
 
-            let markup = data.node.data.address;
+            let markup = 'hello'+data.node.data.address;
 
             return markup;
         }

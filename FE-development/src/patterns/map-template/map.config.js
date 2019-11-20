@@ -41,6 +41,11 @@ const map = {
                     "mode": "hide"
                 }
             },
+            "autosuggest": {
+                "options": {
+                    "componentRestrictions": {"country": 'fr'}
+                }
+            },
             "categoryTree": {
                 "icon": false,
                 "extensions": ["filter", "glyph"],
