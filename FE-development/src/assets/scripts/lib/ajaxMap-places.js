@@ -24,8 +24,15 @@ class Place {
 
         this.treeNode; ///full filled in render places tree renderTitle
 
-        this.active=false;
         this.marker = markers.create(mapEntry, placeData);
+    }
+
+    setActive(activeState) {
+        if (this.active !== activeState) {
+            this.active = activeState;
+
+            this.updateMarker = true;
+        }
     }
 
     panToSelf() {
@@ -67,12 +74,12 @@ const _ = {
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
         if (selectedPlaceKeys.length) {
-          //  alert('haskey');
+            //  alert('haskey');
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
-          //  alert('no selectedPlaceKeys');
+            //  alert('no selectedPlaceKeys');
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
@@ -90,30 +97,30 @@ const _ = {
             if (!data.node.selected) {
                 data.node.setSelected(true);
 
-               /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
+                /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 
 
-                    //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
+                 //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
 
-                    //    var marker = mapMarkers[i];
+                 //    var marker = mapMarkers[i];
 
-                    // if (marker.place.key === data.node.key) {
-                    const placeInstance = data.node.data.placeInstance;
-                    const marker = placeInstance.placeData.marker;
+                 // if (marker.place.key === data.node.key) {
+                 const placeInstance = data.node.data.placeInstance;
+                 const marker = placeInstance.placeData.marker;
 
-                    markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
-                    .then(content => {
+                 markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
+                 .then(content => {
 
-                        infoWindow.setContent(content);
-                        infoWindow.open(mapEntry.map, marker);
-                    });
-                    //}
-                    //}
-                }*/
+                 infoWindow.setContent(content);
+                 infoWindow.open(mapEntry.map, marker);
+                 });
+                 //}
+                 //}
+                 }*/
             } else {
 
                 data.node.setSelected(false);
-               // infoWindow.close();
+                // infoWindow.close();
             }
         }
 
@@ -148,16 +155,23 @@ const _ = {
     },
     loadFromData: (mapEntry, data) => {
         ajaxCall(data).then(function(result) {
+            if (!mapEntry.places) {
+                mapEntry.places = [];
+            }
+
+            let turnOfOnBuffer = mapEntry.places.reduce((prev, oldPlace) => {
+                prev[oldPlace.key] = oldPlace.placeInstance;
+                return prev;
+            }, {})
+
             mapEntry.places = [];
 
             if (result.length) {
-
                 result.forEach((placeData, index) => {
                     mapEntry.places[index] = placeData;
 
                     // store places
                     let placeInstance;
-
                     if (!mapEntry.placeInstances[placeData.key]) {
                         placeInstance = new Place(mapEntry, placeData);
                         placeData.placeInstance = placeInstance;
@@ -165,11 +179,20 @@ const _ = {
                         mapEntry.placeInstances[placeData.key] = placeInstance;//this is a register//
 
                     } else {
-                        placeData = mapEntry.placeInstances[placeData.key];
+                        placeData = mapEntry.placeInstances[placeData.key].placeData;
+
                     }
+
+                    turnOfOnBuffer[placeData.key] = false
 
                     mapEntry.places[index] = placeData;
                 });
+            }
+
+            for (var i in turnOfOnBuffer) {
+                if (turnOfOnBuffer[i]) {
+                    turnOfOnBuffer[i].setActive(false)
+                }
             }
 
             _.updatePlaces(mapEntry);

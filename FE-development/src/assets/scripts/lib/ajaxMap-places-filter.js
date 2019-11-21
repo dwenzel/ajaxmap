@@ -21,18 +21,7 @@ import $ from 'jquery';
  */
 
 const _ = {
-    setActive: (placInstance, activeState) => {
-        console.log(placInstance.active, activeState)
 
-        if (placInstance.active === activeState) {
-            placInstance.updateMarker = false;
-
-        } else {
-
-            placInstance.active = activeState;
-            placInstance.updateMarker = true;
-        }
-    },
     updateMarkers: (mapEntry) => {
         var placeCnt = 0,
             toUpdate = 0,
@@ -134,7 +123,7 @@ function showMatchingPlaces(mapEntry) {
 
     selectedPlaces = mapPlaces.filter((place) => {
         const placeInstance = place.placeInstance
-        console.log('---------------->', placeInstance)
+        console.log('---------------->', place, placeInstance)
         /* if (!mapMarkers[i]) {
          // marker does not exist, create it
          mapMarkers[i] = markers.create(mapEntry, place);
@@ -179,10 +168,12 @@ function showMatchingPlaces(mapEntry) {
             && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
         ) {
 
-            _.setActive(placeInstance, true)
+            placeInstance.setActive(true)
             return true;
         }
-        _.setActive(placeInstance, false)
+
+        placeInstance.setActive(false)
+
         return false;
     });
 
@@ -226,7 +217,7 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
         const isSelectedPlace =
             selectedPlaceKeys.some(key => place.key === key);
 
-        _.setActive(placeInstance, isSelectedPlace)
+        placeInstance.setActive(isSelectedPlace)
         mapMarkers[mapMarkers.length] = placeInstance.marker;
 
     })
