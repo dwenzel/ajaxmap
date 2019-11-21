@@ -18,9 +18,13 @@ class Place {
         this.mapEntry = mapEntry;
         this.placeData = placeData;
         this.LatLong = getLatLong(placeData.geoCoordinates);
-        this.active = true;
+
+        this.active = false;
+        this.updateMarker = true;
+
         this.treeNode; ///full filled in render places tree renderTitle
 
+        this.active=false;
         this.marker = markers.create(mapEntry, placeData);
     }
 
@@ -30,14 +34,6 @@ class Place {
 }
 
 const _ = {
-    filterByActiveKeys: (mapEntry, placesResponse) => {
-
-        _.disableAllPlaces(mapEntry);
-
-        placesResponse.forEach((item) => {
-            mapEntry.placeInstances[item.key].active = true;
-        })
-    },
     /*enableAllPlaces: (mapEntry) => {
      for (var i in mapEntry.placeInstances) {
      mapEntry.placeInstances[i].active = true;
@@ -70,14 +66,13 @@ const _ = {
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
-        // alert(selectedPlaceKeys.length)
-
         if (selectedPlaceKeys.length) {
+            alert('haskey');
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
-
+            alert('no selectedPlaceKeys');
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
@@ -93,10 +88,9 @@ const _ = {
 
         if (true) {
             if (!data.node.selected) {
-
                 data.node.setSelected(true);
 
-                if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
+               /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 
 
                     //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
@@ -115,11 +109,11 @@ const _ = {
                     });
                     //}
                     //}
-                }
+                }*/
             } else {
 
                 data.node.setSelected(false);
-                infoWindow.close();
+               // infoWindow.close();
             }
         }
 
@@ -152,32 +146,40 @@ const _ = {
             $("span#matches").text(n);
         }).focus();
     },
-    loadData: (data) => {
+    loadFromData: (mapEntry, data) => {
         ajaxCall(data).then(function(result) {
+            mapEntry.places = [];
 
             if (result.length) {
-                mapEntry.placeInstances = {};
-                mapEntry.places = result;
 
-                mapEntry.places.forEach((placeData, index) => {
+                result.forEach((placeData, index) => {
+                    mapEntry.places[index] = placeData;
+
                     // store places
-                    const placeInstance = new Place(mapEntry, placeData);
-                    placeData.placeInstance = placeInstance;
+                    let placeInstance;
 
-                    mapEntry.placeInstances[placeData.key]
-                        = placeInstance;//this is a register//
-                    // to remove and add from the tree eg:location-search gives a subset of places
+                    if (!mapEntry.placeInstances[placeData.key]) {
+                        placeInstance = new Place(mapEntry, placeData);
+                        placeData.placeInstance = placeInstance;
 
+                        mapEntry.placeInstances[placeData.key] = placeInstance;//this is a register//
+
+                    } else {
+                        placeData = mapEntry.placeInstances[placeData.key];
+                    }
+
+                    mapEntry.places[index] = placeData;
                 });
-
-                const placesTree = treeRenderer.places(mapEntry, result);
-                treeRenderer.updateTree.places(mapEntry, children);
-                _.setEvents(placesTree);
-                _.updatePlaces(mapEntry);
             }
+
+            _.updatePlaces(mapEntry);
         })
     },
     init: (mapEntry) => {
+
+        mapEntry.placeInstances = {};
+
+        const placesTree = treeRenderer.places(mapEntry, []);
 
         const data = {
             'id': ajaxMap.configData.mapSettings.pageId,
@@ -186,14 +188,16 @@ const _ = {
             'mapId': mapEntry.id
         };
 
+        _.setEvents(placesTree);
+        _.loadFromData(mapEntry, data)
     }
 }
 
 const places = {
     init: _.init,
-    filterByActiveKeys: _.filterByActiveKeys,
     showSoloPlace: _.showSoloPlace,
-    update: _.updatePlaces
+    update: _.updatePlaces,
+    loadFromData: _.loadFromData
 };
 
 export default places;

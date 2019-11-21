@@ -1,0 +1,27 @@
+[
+
+	{
+		"address": "Alexanderplatz 12, Berlin",
+		"categories": [],
+		"tooltip": "yeah",
+		"geoCoordinates": "5.5200,12.410123",
+		"locationType": {
+			"key": 1
+		},
+		"placeGroups": [],
+		"regions": [
+			{
+				"clickable": false,
+				"file": "",
+				"mainPlace": null,
+				"preserveViewport": false,
+				"children": [],
+				"suppressInfoWindows": false,
+				"title": "Other Region",
+				"key": 2
+			}
+		],
+		"title": "cooler Place",
+		"key": 25
+	}
+]

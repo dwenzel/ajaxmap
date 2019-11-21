@@ -18,9 +18,9 @@ const _ = {
         window.ajaxMapConfig.renderPlaceTreesItem = (data) => {
             // const mapId = data.source.mapId
 
-            console.log(data.node.data);
+            //  console.log(data.node.data);
 
-            let markup = 'hello'+data.node.data.address;
+            let markup = 'hello' + data.node.data.address;
 
             return markup;
         }

@@ -13,19 +13,11 @@ const _ = {
             search,
             'id': ajaxMap.configData.mapSettings.pageId,
             'api': 'map',
-            'action': 'listPlaces',
+            'action': 'listPlaces2',
             'mapId': mapEntry.id
         };
 
-        return ajaxCall(data).then((newPlaces) => {
-            /*                TODO:
-             map markers
-
-             */
-
-            places.filterByActiveKeys(mapEntry, newPlaces)
-        })
-
+        places.loadFromData(mapEntry, data)
     },
     setUpAutoSuggest: (mapEntry) => {
         const mapId = mapEntry.id,
