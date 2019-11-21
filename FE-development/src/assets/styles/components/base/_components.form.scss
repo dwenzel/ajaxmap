@@ -55,18 +55,6 @@ $form-color-error: map-get($toolbox-colors, 'danger');
 $form-color-valid: map-get($toolbox-colors, 'success');
 
 .am-form {
-    fieldset,
-    &__fieldset {
-        border: 0;
-
-        + .c-form__fieldset {
-            margin-top: $form-fieldset-space-after;
-        }
-    }
-
-    &__legend {
-        margin-bottom: $form-legend-space-after;
-    }
 
     &__group {
         margin-bottom: $form-group-space-after;
@@ -88,22 +76,27 @@ $form-color-valid: map-get($toolbox-colors, 'success');
     &__input-container {
         position: relative;
 
-        .c-form__input[type='text'] {
+        am-form__input[type='text'] {
             // avoid text to overcome icon
             padding-right: $form-field-with-icon-space-inner;
         }
 
-        .c-form__icon,
-        .c-button,
-        .c-button-icon-only {
+        am-form__icon,
+        .am-button,
+        .am-button-icon-only {
             position: absolute;
             right: .5rem;
             top: 50%;
             transform: translateY(-50%);
+
+            span {
+                font-size: 0;
+                color: transparent;
+            }
         }
 
-        .c-button,
-        .c-button-icon-only {
+        .am-button,
+        .am-button-icon-only {
             line-height: inherit;
             padding: $form-field-space-inner-y 1em;
             right: 0;
@@ -283,7 +276,7 @@ $form-color-valid: map-get($toolbox-colors, 'success');
    Theme (Colors / Messages / Validation)
    ========================================================================== */
 
-.c-form {
+am-form {
     &__legend {
         color: $form-legend-color;
     }
@@ -304,33 +297,33 @@ $form-color-valid: map-get($toolbox-colors, 'success');
      */
     &__group {
         &.is-valid {
-            .c-form__input,
-            .c-form__description {
+            am-form__input,
+            am-form__description {
                 color: $form-color-valid;
             }
 
-            .c-form__input {
+            am-form__input {
                 border-color: $form-color-valid;
             }
         }
 
         &.is-error {
-            .c-form__input,
-            .c-form__description {
+            am-form__input,
+            am-form__description {
                 color: $form-color-error;
             }
 
-            .c-form__input,
-            .c-form__checkfields input + label:before,
-            .c-form__checkfields [type='checkbox'] + label:after {
+            am-form__input,
+            am-form__checkfields input + label:before,
+            am-form__checkfields [type='checkbox'] + label:after {
                 border-color: $form-color-error;
             }
 
-            .c-form__checkfields input + label {
+            am-form__checkfields input + label {
                 color: $form-color-error;
             }
 
-            .c-form__checkfields [type='radio'] + label:after {
+            am-form__checkfields [type='radio'] + label:after {
                 background-color: $form-color-error;
             }
         }
@@ -362,11 +355,11 @@ $form-color-valid: map-get($toolbox-colors, 'success');
      * Input Container
      */
     &__input-container {
-        .c-form__input {
+        am-form__input {
             &:focus {
-                ~ .c-form__icon,
-                ~ .c-button,
-                ~ .c-button-icon-only {
+                ~ am-form__icon,
+                ~ .am-button,
+                ~ .am-button-icon-only {
                     color: $form-field-icon-color-focus;
                 }
             }
@@ -375,9 +368,9 @@ $form-color-valid: map-get($toolbox-colors, 'success');
         /**
          * Icon & Button
          */
-        .c-form__icon,
-        .c-button,
-        .c-button-icon-only {
+        am-form__icon,
+        .am-button,
+        .am-button-icon-only {
             color: $form-field-icon-color;
         }
     }
