@@ -39,7 +39,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
 /**
  * Class PlaceDataProvider
  */
-class PlaceDataProvider implements DataProviderInterface
+class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
 {
     const ALLOWED_SEARCH_PARAMS = [
         SI::RADIUS,
@@ -125,6 +125,14 @@ class PlaceDataProvider implements DataProviderInterface
     }
 
     /**
+     * @param array $mapping
+     */
+    public function setMapping(array $mapping)
+    {
+        $this->mapping = $mapping;
+    }
+
+    /**
      * @param array $queryParameter
      * @return array
      * @throws MissingRequestArgumentException
@@ -161,7 +169,6 @@ class PlaceDataProvider implements DataProviderInterface
         foreach ($places as $place) {
             $data[] = $place->toArray(2, $this->mapping);
         }
-
         return $data;
     }
 

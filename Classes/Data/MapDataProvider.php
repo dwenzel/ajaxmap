@@ -29,13 +29,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 /**
  * Class MapDataProvider
  */
-class MapDataProvider implements DataProviderInterface
+class MapDataProvider implements DataProviderInterface, MappingAwareInterface
 {
-
-    /**
-     * @var array
-     */
-    protected $mapping = DataProviderInterface::OBJECT_TO_JSON_MAP;
+    use MappingAwareTrait;
 
     /**
      * @var MapRepository

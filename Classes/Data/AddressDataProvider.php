@@ -29,8 +29,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 /**
  * Class AddressDataProvider
  */
-class AddressDataProvider implements DataProviderInterface
+class AddressDataProvider implements DataProviderInterface, MappingAwareInterface
 {
+    use MappingAwareTrait;
 
     /**
      * @var PlaceRepository
