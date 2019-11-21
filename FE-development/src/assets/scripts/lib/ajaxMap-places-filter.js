@@ -1,6 +1,6 @@
 import treeRenderer  from './fancytree-renderer'
 import layers from './map-layers'
-
+import fastdom from 'fastdom';
 import {getKeysByAttribute} from './map-helpers'
 
 import {getSelectedKeys} from './map-helpers'
@@ -27,27 +27,31 @@ const _ = {
             toUpdate = 0,
             active = 0;
 
-        for (var key in  mapEntry.placeInstances) {
-            const placInstance = mapEntry.placeInstances[key],
-                marker = placInstance.marker;
 
-            placeCnt++
+            for (var key in  mapEntry.placeInstances) {
+                const placInstance = mapEntry.placeInstances[key],
+                    marker = placInstance.marker;
 
-            if (placInstance.updateMarker) {
-                toUpdate++;
+                placeCnt++
 
-                if (placInstance.active) {
-                    marker.setMap(mapEntry.googleMap);
+                if (placInstance.updateMarker) {
+                    toUpdate++;
 
-                    active++
-                } else {
-                    marker.setMap(null)
+                    if (placInstance.active) {
+
+                        fastdom.mutate(() => {
+                            marker.setMap(mapEntry.googleMap);
+                        });
+
+                        active++
+                    } else {
+                        marker.setMap(null)
+                    }
+
+                    placInstance.updateMarker = false;
                 }
 
-                placInstance.updateMarker = false;
             }
-
-        }
 
         console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active);
     }
@@ -123,7 +127,7 @@ function showMatchingPlaces(mapEntry) {
 
     selectedPlaces = mapPlaces.filter((place) => {
         const placeInstance = place.placeInstance
-        console.log('---------------->', place, placeInstance)
+       // console.log('---------------->', place, placeInstance)
         /* if (!mapMarkers[i]) {
          // marker does not exist, create it
          mapMarkers[i] = markers.create(mapEntry, place);

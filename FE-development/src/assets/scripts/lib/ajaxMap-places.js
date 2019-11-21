@@ -79,7 +79,6 @@ const _ = {
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
         } else {
-            //  alert('no selectedPlaceKeys');
             placesFilter.showMatchingPlaces(mapEntry);
         }
     },
@@ -153,17 +152,14 @@ const _ = {
             $("span#matches").text(n);
         }).focus();
     },
+
     loadFromData: (mapEntry, data) => {
         ajaxCall(data).then(function(result) {
             if (!mapEntry.places) {
                 mapEntry.places = [];
             }
 
-            let turnOfOnBuffer = mapEntry.places.reduce((prev, oldPlace) => {
-                prev[oldPlace.key] = oldPlace.placeInstance;
-                return prev;
-            }, {})
-
+            let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry)
             mapEntry.places = [];
 
             if (result.length) {
@@ -183,17 +179,15 @@ const _ = {
 
                     }
 
-                    turnOfOnBuffer[placeData.key] = false
+                    turnOfOnBuffer.buffer[placeData.key] = false
+                    // turnOfOnBuffer[placeData.key] = false
 
                     mapEntry.places[index] = placeData;
                 });
             }
 
-            for (var i in turnOfOnBuffer) {
-                if (turnOfOnBuffer[i]) {
-                    turnOfOnBuffer[i].setActive(false)
-                }
-            }
+            turnOfOnBuffer.evaluate();
+            turnOfOnBuffer=null;
 
             _.updatePlaces(mapEntry);
         })
