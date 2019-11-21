@@ -17,7 +17,7 @@
         height default 100vh
     -->
 
-    <div class="c-ajax-map js-ajax-map u-space-b:default c-ajax-map--sb-is-open" data-height="100vh">
+    <div class="am js-ajax-map u-space-b:default ajax-map--sb-is-open" data-height="100vh">
 
         <!-- inline js -->
         <script type="text/javascript">
@@ -47,45 +47,50 @@
         </script>
 
         <!-- map -->
-        <div class="c-ajax-map__map-wrapper">
-            <div id="ajaxMapContainer_Map1" class="c-ajax-map__map"></div>
+        <div class="am__map-wrapper">
+            <div id="ajaxMapContainer_Map1" class="am__map"></div>
         </div>
 
 
         <!-- sidebar -->
-        <div id="placesTreeWrap" class="c-ajax-map__sb">
-            <button type="button" class="c-ajax-map__sb__trigger js-ajax-map-sb-trigger"
+        <div id="placesTreeWrap" class="am__sb">
+            <button type="button" class="am__sb__trigger js-ajax-map-sb-trigger"
                     aria-label="open/close map sidebar">
-                open/close map sidebar
+                <span hidden>open/close map sidebar</span>
+                <i class="o-icon-font o-icon-font--am-arrow" aria-hidden="true"></i>
             </button>
 
-            <!-- filter -->
-            <header class="c-ajax-map__sb__filter">
-                {{render '@suggest-search-input'}}
-                {{render '@option-filter-select'}}
-                {{render '@option-filter-checkbox'}}
-                {{render '@radial-search-input'}}
-                {{render '@list-search-input'}}
+            <div class="am-form">
 
-                <!-- TODO Emi styling Treelist -->
-                <div id="ajaxMapRegionsTree1" class="dynaTree"></div>
-                <div id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
-                <div id="ajaxMapCategoryTree1" class="dynaTree"></div>
-                <div id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
-            </header>
+                <!-- filter -->
+                <header class="am__sb__filter">
+                    {{render '@suggest-search-input'}}
+                    {{render '@option-filter-select'}}
+                    {{render '@option-filter-checkbox'}}
+                    {{render '@radial-search-input'}}
+                    {{render '@list-search-input'}}
 
-            <!-- results -->
-            <div class="c-ajax-map__scroll-wrapper">
-                <div class="c-ajax-map__msg">
-                    Platz für Hinweistexte
+                    <!-- TODO Emi styling Treelist -->
+                    <div id="ajaxMapRegionsTree1" class="dynaTree"></div>
+                    <div id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
+                    <div id="ajaxMapCategoryTree1" class="dynaTree"></div>
+                    <div id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
+                </header>
+
+                <!-- results -->
+                <div class="am__scroll-wrapper">
+                    <div class="am__msg">
+                        Platz für Hinweistexte
+                    </div>
+
+                    <!-- dynamic list => render js -->
+                    <div id="ajaxMapPlacesTree1" class="am-list dynaTree"></div>
                 </div>
+                <footer class="am__sb__header">
+                    Reset filter
+                </footer>
 
-                <!-- dynamic list => render js -->
-                <div id="ajaxMapPlacesTree1" class="c-ajax-map-list dynaTree"></div>
-            </div>
-            <footer class="c-ajax-map__sb__header">
-                Reset filter
-            </footer>
+            </div><!-- // c-forn -->
         </div>
 
         <!-- ajax form hidden -->

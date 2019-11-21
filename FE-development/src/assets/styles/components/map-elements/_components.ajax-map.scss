@@ -1,13 +1,15 @@
-.c-ajax-map {
+.am {
     height: 100vh;
     position: relative;
 
     &__map-wrapper {
         height: 100%;
         padding-left: 0;
+        transition: padding-left  $am-sb-toggle-transition;
 
-        .c-ajax-map--sb-is-open & {
-            padding-left: $am-sidebar-width;
+        .ajax-map--sb-is-open & {
+            padding-left: $am-sb-width;
+            transition: padding-left $am-sb-toggle-transition;
         }
     }
 

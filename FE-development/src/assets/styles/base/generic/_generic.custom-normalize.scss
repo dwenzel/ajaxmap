@@ -1,0 +1,97 @@
+/* ==========================================================================
+   Custom rests in addition to normalize.css
+   ========================================================================== */
+
+/**
+ * Box sizing
+ */
+html {
+    box-sizing: border-box;
+}
+
+* {
+    &,
+    &:before,
+    &:after {
+        box-sizing: inherit;
+    }
+}
+
+/**
+ * Reset margins and paddings
+ */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ul,
+ol,
+li,
+p,
+pre,
+blockquote,
+figure,
+fieldset,
+hr {
+    margin: 0;
+    padding: 0;
+}
+
+/**
+ * Forms and Buttons
+ */
+ul {
+    list-style: none;
+}
+
+input,
+textarea,
+select,
+button {
+    // Browsers don’t inherit typography for forms and buttons
+    color: inherit;
+    font: inherit;
+    letter-spacing: inherit;
+}
+
+/**
+ * Media Elements
+ */
+embed,
+iframe,
+img,
+object,
+video {
+    display: block;
+    max-width: 100%;
+}
+
+iframe {
+    border: 0;
+}
+
+img {
+    height: auto;
+}
+
+/**
+ * Tables
+ */
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td {
+    font: inherit; // avoid bold in some browsers (e.g. th)
+    vertical-align: baseline;
+}

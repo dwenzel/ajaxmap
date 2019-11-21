@@ -1,0 +1,427 @@
+/* stylelint-disable */
+// stylelint-disable: to keep it clear and structured due to color settings
+
+/* ==========================================================================
+   Form
+   ========================================================================== */
+
+// required: _settings/_settings.ui.scss
+// required: _tools/functions/_functions.alignment.scss
+// required: _tools/mixins/_mixins.focus-outline.scss
+// required: _tools/mixins/_mixins.icon-css-arrow.scss
+
+// Fieldset
+$form-fieldset-space-after: 3rem;
+
+// Legend
+$form-legend-color: map-get($toolbox-colors, 'black');
+$form-legend-space-after: 2rem;
+
+// Group
+$form-group-space-after: 1rem;
+
+// Label
+$form-label-color: map-get($toolbox-colors, 'black');
+$form-label-space-after: .5rem;
+
+// Field
+$form-field-bg-color: map-get($toolbox-colors, 'white');
+$form-field-bg-color-focus: map-get($toolbox-colors, 'white');
+$form-field-border-color: rgba(map-get($toolbox-colors, 'black'), .5);
+$form-field-border-color-focus: map-get($toolbox-colors, 'secondary');
+$form-field-border-radius: 0;
+$form-field-box-shadow: 0 0 4px rgba(map-get($toolbox-colors, 'black'), .5);
+$form-field-color: map-get($toolbox-colors, 'black');
+$form-field-color-focus: map-get($toolbox-colors, 'black');
+$form-field-icon-color: map-get($toolbox-colors, 'black');
+$form-field-icon-color-focus: map-get($toolbox-colors, 'secondary');
+$form-field-space-inner-x: .5em;
+$form-field-space-inner-y: .5em;
+$form-field-with-icon-space-inner: 2em;
+
+// Checkmark
+$form-field-check-icon-color: $form-field-border-color-focus;
+$form-field-check-icon-size: 8px; // avoid rem rounding error: keep absolute unit
+$form-field-check-line-height: nth(map-get($toolbox-typo-sizes, 'm'), 2); // get line-height defined in toolbox
+$form-field-check-size: 1rem;
+$form-field-check-space-after: .25rem;
+
+// Placeholder
+$form-placeholder-color: rgba(map-get($toolbox-colors, 'black'), .5);
+$form-placeholder-color-focus: rgba(map-get($toolbox-colors, 'black'), .5);
+
+// Validation Colors
+$form-color-error: map-get($toolbox-colors, 'danger');
+$form-color-valid: map-get($toolbox-colors, 'success');
+
+.am-form {
+    fieldset,
+    &__fieldset {
+        border: 0;
+
+        + .c-form__fieldset {
+            margin-top: $form-fieldset-space-after;
+        }
+    }
+
+    &__legend {
+        margin-bottom: $form-legend-space-after;
+    }
+
+    &__group {
+        margin-bottom: $form-group-space-after;
+    }
+
+    &__label {
+        display: inline-block;
+    }
+
+    &__label,
+    &__checkfields {
+        margin-bottom: $form-label-space-after;
+    }
+
+    /**
+     * Input Container
+     * use it to place icons/ buttons inside the input element
+     */
+    &__input-container {
+        position: relative;
+
+        .c-form__input[type='text'] {
+            // avoid text to overcome icon
+            padding-right: $form-field-with-icon-space-inner;
+        }
+
+        .c-form__icon,
+        .c-button,
+        .c-button-icon-only {
+            position: absolute;
+            right: .5rem;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .c-button,
+        .c-button-icon-only {
+            line-height: inherit;
+            padding: $form-field-space-inner-y 1em;
+            right: 0;
+        }
+    }
+
+    /**
+     * Input
+     */
+    &__input {
+        border: 1px solid;
+        display: block;
+        font-family: inherit;
+        font-size: inherit;
+        max-width: 100%;
+        padding: $form-field-space-inner-y $form-field-space-inner-x;
+        width: 100%;
+
+        &:not([type='checkbox']),
+        &:not([type='radio']) {
+            border-radius: $form-field-border-radius;
+        }
+
+        &:focus {
+            box-shadow: $form-field-box-shadow;
+        }
+
+        // hide IE clear input button
+        &::-ms-clear {
+            display: none;
+        }
+    }
+
+    &__select-arrow { // select arrow icon
+        pointer-events: none;
+        position: absolute;
+        right: .5rem;
+        top: 50%;
+        //@include icon-css-arrow(.5rem, rotate(-45deg) translateY(-100%), $form-field-icon-color);
+    }
+
+    /**
+     * Textarea
+     */
+    textarea {
+        font-family: inherit;
+        height: 10rem;
+        line-height: inherit;
+        width: 100% !important; // important necessary for FF
+    }
+
+    /**
+     * Select
+     */
+    select {
+        appearance: none;
+        color: $form-placeholder-color;
+        padding-right: $form-field-with-icon-space-inner;
+
+        &:hover {
+            cursor: pointer;
+        }
+
+        // hide default arrow in IE
+        &::-ms-expand {
+            display: none;
+        }
+
+        // remove Firefox dotted focusring
+        &:-moz-focusring {
+            color: transparent;
+            text-shadow: 0 0 0 #000;
+        }
+    }
+
+    /**
+     * Checkbox & Radio Button
+     */
+    &__checkfields {
+        &--inline {
+            display: inline-block;
+            margin-right: 2rem;
+        }
+
+        label {
+            cursor: pointer;
+            display: inline-block;
+            margin-bottom: $form-field-check-space-after;
+            padding-left: 1.5rem;
+            position: relative;
+            user-select: none;
+        }
+
+        input {
+            @include accessibility;
+
+            + label {
+                &:before,
+                &:after {
+                    display: inline-block; // required for the line-height to take effect
+                    position: absolute;
+                }
+
+                &:before {
+                    border: 1px solid;
+                    content: '';
+                    height: $form-field-check-size;
+                    left: 0;
+                    top: alignment($form-field-check-line-height, rem, $form-field-check-size);
+                    width: $form-field-check-size;
+                }
+
+                &:after {
+                    // hide the checkmark by default
+                    content: none;
+                }
+            }
+
+            &:checked {
+                // unhide on the checked state
+                + label {
+                    &:after {
+                        content: '';
+                    }
+                }
+            }
+
+            // checkmark of the fake checkbox
+
+            &[type='checkbox'] + label {
+                &:after {
+                    border-bottom: 2px solid;
+                    border-left: 2px solid;
+                    height: .3rem;
+                    left: alignment($form-field-check-size, '', $form-field-check-icon-size);
+                    top: alignment($form-field-check-line-height, rem, $form-field-check-icon-size);
+                    transform: rotate(-45deg);
+                    width: .6rem;
+                }
+            }
+
+            // checkmark of the fake radio button
+
+            &[type='radio'] + label {
+                &:before,
+                &:after {
+                    border-radius: 50%;
+                }
+
+                &:after {
+                    height: $form-field-check-icon-size;
+                    left: alignment($form-field-check-size, '', $form-field-check-icon-size);
+                    top: alignment($form-field-check-line-height, rem, $form-field-check-icon-size);
+                    width: $form-field-check-icon-size;
+                }
+            }
+        }
+    }
+
+    /**
+     * Text
+     */
+    &__text {
+        p:last-child {
+            margin-bottom: 0;
+        }
+    }
+
+    &__description,
+    &__required-sign,
+    &__required-text {
+        display: inline-block;
+    }
+}
+
+/* ==========================================================================
+   Theme (Colors / Messages / Validation)
+   ========================================================================== */
+
+.c-form {
+    &__legend {
+        color: $form-legend-color;
+    }
+
+    &__label {
+        color: $form-label-color;
+    }
+
+    /**
+     * Placeholder
+     */
+    ::placeholder {
+        color: $form-placeholder-color;
+    }
+
+    /**
+     * Validation Colors
+     */
+    &__group {
+        &.is-valid {
+            .c-form__input,
+            .c-form__description {
+                color: $form-color-valid;
+            }
+
+            .c-form__input {
+                border-color: $form-color-valid;
+            }
+        }
+
+        &.is-error {
+            .c-form__input,
+            .c-form__description {
+                color: $form-color-error;
+            }
+
+            .c-form__input,
+            .c-form__checkfields input + label:before,
+            .c-form__checkfields [type='checkbox'] + label:after {
+                border-color: $form-color-error;
+            }
+
+            .c-form__checkfields input + label {
+                color: $form-color-error;
+            }
+
+            .c-form__checkfields [type='radio'] + label:after {
+                background-color: $form-color-error;
+            }
+        }
+    }
+
+    /**
+     * Input
+     */
+    &__input {
+        background-color: $form-field-bg-color;
+        border-color: $form-field-border-color;
+        color: $form-field-color;
+
+        &:focus {
+            background-color: $form-field-bg-color-focus;
+            border-color: $form-field-border-color-focus;
+            color: $form-field-color-focus;
+
+            /**
+             * Placeholder
+             */
+            &::placeholder {
+                color: $form-placeholder-color-focus;
+            }
+        }
+    }
+
+    /**
+     * Input Container
+     */
+    &__input-container {
+        .c-form__input {
+            &:focus {
+                ~ .c-form__icon,
+                ~ .c-button,
+                ~ .c-button-icon-only {
+                    color: $form-field-icon-color-focus;
+                }
+            }
+        }
+
+        /**
+         * Icon & Button
+         */
+        .c-form__icon,
+        .c-button,
+        .c-button-icon-only {
+            color: $form-field-icon-color;
+        }
+    }
+
+    /**
+     * Select
+     */
+    select {
+        background-color: $form-field-bg-color;
+    }
+
+    /**
+     * Checkbox & Radio Button
+     */
+    &__checkfields {
+        input {
+            + label:before {
+                border-color: $form-field-border-color;
+            }
+
+            &:focus + label {
+                &:before {
+                    border-color: $form-field-icon-color-focus;
+                    box-shadow: $form-field-box-shadow;
+
+                    // accessible focus state
+                    // class set via js
+                    .accessibility-mode & {
+                        @include focus-outline($focus-color);
+                    }
+                }
+            }
+
+            &[type='checkbox'] + label {
+                &:after {
+                    border-color: $form-field-check-icon-color;
+                }
+            }
+
+            &[type='radio'] + label {
+                &:after {
+                    background-color: $form-field-check-icon-color;
+                }
+            }
+        }
+    }
+}

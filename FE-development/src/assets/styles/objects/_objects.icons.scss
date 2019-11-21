@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Icons - Standalone Elements
+   ========================================================================== */
+
+$icon-css-color: #000;
+
+/**
+ * Font
+ */
+.o-icon-font {
+
+    @each $icon in $icons {
+        &--#{$icon} {
+            &:before {
+                // 'font-icon' comes with icon font plugin
+                font-icon: url('../../vectors/#{$icon}.svg');
+            }
+        }
+    }
+
+    &:before {
+        @include icon-font-styles();
+    }
+}

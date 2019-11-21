@@ -1,20 +1,24 @@
 <!-- google location suggest input -->
-<div class="c-location-search">
-    <div class="c-form__group">
-        <label class="c-form__label u-accessibility" for="radialSearch1">
+<div class="am-location-search">
+    <div class="am-form__group">
+        <label class="am-form__label u-accessibility" for="radialSearch1">
             {{label}}
         </label>
-        <div class="c-form__input-container">
-            <input id="locationSearch1" class="c-form__input" name="locationSearch1" placeholder="{{placeholder}}"
+        <div class="am-form__input-container">
+            <input id="locationSearch1" class="am-form__input" name="locationSearch1" placeholder="{{placeholder}}"
                    type="text">
 
-            <button class="c-button  c-button--icon-only u-icon u-icon--target"
+            <button class="c-button c-button--icon-only"
                     aria-label="Standort ermitteln" title="Standort ermitteln" type="button"
-                    value="Standort ermitteln">Standort ermitteln
+                    value="Standort ermitteln">
+                    <span>Standort ermitteln</span>
+                    <i class="o-icon-font o-icon-font--am-target"></i>
             </button>
 
-            <button class="c-button  c-button--icon-only u-icon u-icon--loupe"
-                    aria-label="Suchen" title="Suchen" type="submit" value="submit">Send
+            <button class="c-button c-button--icon-only"
+                    aria-label="Suchen" title="Suchen" type="submit" value="submit">
+                    <span>Senden</span>
+                    <i class="o-icon-font o-icon-font--am-search"></i>
             </button>
         </div>
     </div>
