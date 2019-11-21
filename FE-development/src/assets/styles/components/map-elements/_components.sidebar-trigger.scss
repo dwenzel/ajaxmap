@@ -1,5 +1,5 @@
 // trigger sidebar
-.c-ajax-map__sb__trigger {
+.am__sb__trigger {
     @include reset-button();
     background: app-color('primary');
     box-shadow: $am-trigger-shadow;

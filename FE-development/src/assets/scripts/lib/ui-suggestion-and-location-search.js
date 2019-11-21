@@ -4,7 +4,7 @@ import ajaxMap from './ajaxMap'
 import places from './ajaxMap-places'
 
 const _ = {
-    sendButtonSelector: '.c-location-search button[type="submit"]',
+    sendButtonSelector: '.am-location-search button[type="submit"]',
     locationInputSelector: '#locationSearch',
     radialSearchSelectSelector: '#radialSelect',
     getNewPlaces: (search, mapEntry) => {

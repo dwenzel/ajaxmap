@@ -35,25 +35,31 @@ module.exports = {
         {
             name: 'arrow',
             context: {
-                name: 'arrow'
+                name: 'am-arrow'
+            }
+        },
+        {
+            name: 'cross',
+            context: {
+                name: 'am-cross'
             }
         },
         {
             name: 'marker',
             context: {
-                name: 'marker'
+                name: 'am-marker'
             }
         },
         {
             name: 'search',
             context: {
-                name: 'search'
+                name: 'am-search'
             }
         },
         {
             name: 'target',
             context: {
-                name: 'target'
+                name: 'am-target'
             }
         }
     ]

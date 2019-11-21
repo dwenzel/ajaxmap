@@ -1,14 +1,9 @@
 /* ==========================================================================
-   Icon Variables
+   Set focus outline
    ========================================================================== */
 
-/**
- * Project icons
- */
-$icons: (
-    'am-arrow',
-    'am-cross',
-    'am-marker',
-    'am-search',
-    'am-target'
-);
+// required: _settings/_settings.ui.scss
+
+@mixin focus-outline($color) {
+    outline: $focus-width $focus-style $color;
+}

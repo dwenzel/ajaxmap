@@ -1,17 +1,19 @@
-<div class="c-option-filter">
-    <div class="c-form__group ">
-        <label class="c-form__label " for="optionFilter">
+<div class="am-option-filter">
+    <div class="am-form__group ">
+        <label class="am-form__label " for="optionFilter">
             {{label}}
         </label>
 
-        <div class="c-form__input-container">
-            <select id="optionFilter" name="optionFilter" class="c-form__input">
+        <div class="am-form__input-container">
+            <select id="optionFilter" name="optionFilter" class="am-form__input">
                 <option value="" disabled="" selected="">Option wählen ...</option>
                 {{#options}}
                     <option value="{{value}}">{{label}}</option>
                 {{/options}}
             </select>
-            <div class="c-form__select-arrow" aria-hidden="true"></div>
+            <div class="am-form__select-arrow" aria-hidden="true">
+                <i class="o-icon-font o-icon-font--am-arrow"></i>
+            </div>
         </div>
     </div>
 </div>

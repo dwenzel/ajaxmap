@@ -5,7 +5,7 @@ import search from './ui-suggestion-and-location-search'
 
 const _ = {
     selectors: {
-        radialSearch: '.c-radial-search'
+        radialSearch: '.am-radial-search'
     },
     cache: {
         $filterPlaces: null

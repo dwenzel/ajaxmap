@@ -1,5 +1,5 @@
 // sidebar
-.c-ajax-map__sb {
+.am__sb {
     background: $am-sb-bg;
     box-shadow: $am-sb-shadow;
     height: 100%;
@@ -13,5 +13,9 @@
     .ajax-map--sb-is-open & {
         transform: translateX(0);
         transition: transform $am-sb-toggle-transition;
+    }
+
+    &__filter {
+        background: $am-sb-bg-filter;
     }
 }
