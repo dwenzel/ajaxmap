@@ -1,4 +1,4 @@
-import {updateTree}  from './fancytree-renderer'
+import treeRenderer  from './fancytree-renderer'
 import layers from './map-layers'
 
 import {getSelectedKeys} from './map-helpers'
@@ -17,6 +17,47 @@ import $ from 'jquery';
  *
  * formals :updateFilter
  */
+
+const _ = {
+    setActive: (placInstance, activeState) => {
+
+        if (placInstance.active === activeState) {
+            placInstance.updateMarker = false;
+
+        } else {
+            placInstance.updateMarker = true;
+        }
+
+        placInstance.active = activeState;
+    },
+    updateMarkers: (mapEntry) => {
+        var placeCnt = 0,
+            toUpdate = 0,
+            active = 0;
+        for (var key in  mapEntry.placeInstances) {
+            const placInstance = mapEntry.placeInstances[key],
+                marker = placInstance.marker;
+
+            placeCnt++
+
+            if (placInstance.updateMarker) {
+                toUpdate++
+
+                if (placInstance.active) {
+                    marker.setMap(mapEntry.googleMap);
+
+                    active++
+                } else {
+                    marker.setMap(null)
+                }
+            }
+        }
+
+        console.log('placeCnt', placeCnt,'toUpdate', toUpdate,'active', active);
+    }
+
+};
+
 function update($rootNode, mapEntry) {
     const filters = mapEntry.settings.placesTree.updateFilters;
 
@@ -98,16 +139,12 @@ function filterTree(tree, keys) {
  */
 function showMatchingPlaces(mapEntry) {
 
-    var map = mapEntry.googleMap,
-        mapId = mapEntry.id,
+    var mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
+        selectedPlaces,
+        clusterer = mapEntry.markerClusterer;
 
-        selectedPlaces = [],
-        clusterer = mapEntry.markerClusterer
-    /*,
-     mapMarkers = mapEntry.markers || [],*/
-
-   let selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
+    let selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
         selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category + mapId),
         selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions + mapId),
         selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
@@ -119,13 +156,11 @@ function showMatchingPlaces(mapEntry) {
         selectedLocationType = selectedLocationTypeKeys[0];
     }
 
-    clusterer.removeMarkers(mapPlaces.map(item=>item.placeInstance.marker));
+    clusterer.removeMarkers(mapPlaces.map(item => item.placeInstance.marker));
 
-    // add markers for all places
-    for (var i = 0, j = mapPlaces.length; i < j; i++) {
-        var place = mapPlaces[i],
-            marker = place.placeInstance.marker;
-
+    selectedPlaces = mapPlaces.filter((place) => {
+        const placeInstance = place.placeInstance
+        console.log('---------------->', placeInstance)
         /* if (!mapMarkers[i]) {
          // marker does not exist, create it
          mapMarkers[i] = markers.create(mapEntry, place);
@@ -134,24 +169,30 @@ function showMatchingPlaces(mapEntry) {
             hasAnActiveRegion = 0,
             hasAnActivePlaceGroup = 0;
 
-        if (selectedCategoryKeys && marker.place.categories) {
-            $.each(marker.place.categories, function() {
+        /*-->  if(marker.place === place){
+         alert('same')
+         }
+         */
+
+        if (selectedCategoryKeys && place.categories) {
+            $.each(place.categories, function() {
                 hasAnActiveCategory = ($.inArray(parseInt(this.key), selectedCategoryKeys) > -1);
                 return (!hasAnActiveCategory);
             });
         }
 
-        if (selectedRegionKeys.length && marker.place.regions) {
-            $.each(marker.place.regions, function() {
+        if (selectedRegionKeys.length && place.regions) {
+            $.each(place.regions, function() {
                 hasAnActiveRegion = ($.inArray(parseInt(this.key), selectedRegionKeys) > -1);
                 return (!hasAnActiveRegion);
             });
         }
 
-        if (selectedPlaceGroupKeys.length && marker.place.placeGroups) {
+        if (selectedPlaceGroupKeys.length && place.placeGroups) {
 
-            $.each(marker.place.placeGroups, function() {
+            $.each(place.placeGroups, function() {
                 hasAnActivePlaceGroup = ($.inArray(parseInt(this.key), selectedPlaceGroupKeys) > -1);
+
                 return (!hasAnActivePlaceGroup);
             });
         }
@@ -163,22 +204,27 @@ function showMatchingPlaces(mapEntry) {
             && (hasAnActiveRegion || !selectedRegionKeys.length)
             && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
         ) {
-
-            marker.setMap(map);
-            selectedPlaces[selectedPlaces.length] = place;
-        } else {
-            marker.setMap(null);
+            _.setActive(placeInstance, true)
+            return true;
         }
-        //}
-    }
+
+        _.setActive(placeInstance, false)
+        return false;
+    });
 
     //   clusterer.addMarkers(mapMarkers);
 
     // update only if mapEntry is already initialized
-   // if (typeof mapEntry.markers !== 'undefined') {
+    // if (typeof mapEntry.markers !== 'undefined') {
 
-        updateTree.places(mapEntry, selectedPlaces);
-   // }
+    //   console.log(selectedPlaces)
+    //return;
+
+    //-->    marker.setMap(map);
+
+    _.updateMarkers(mapEntry);
+    treeRenderer.update.places(mapEntry, selectedPlaces);
+    // }
     //mapEntry.markers = mapMarkers;
 }
 
@@ -190,6 +236,7 @@ function showMatchingPlaces(mapEntry) {
  * @returns {*}
  */
 function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
+
     var map = mapEntry.googleMap,
         mapPlaces = mapEntry.places,
         clusterer = mapEntry.markerClusterer;
@@ -202,16 +249,13 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
 
          mapMarkers[i].setMap(null);*/
 
-        const marker= place.placeInstance.marker;
+        const marker = place.placeInstance.marker;
         clusterer.removeMarker(marker);
         return marker;
     });
 
     clusterer.addMarkers(mapMarkers);
-    console.log(mapMarkers)
     mapMarkers.forEach((marker) => {
-
-        console.log(marker)
 
             const isSelectedPlace =
                 selectedPlaceKeys.some(key => marker.place.key === key);

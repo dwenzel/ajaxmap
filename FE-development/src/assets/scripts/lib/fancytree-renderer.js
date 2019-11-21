@@ -66,25 +66,24 @@ const _ = {
     $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId)
 }
 
-export const updateTree = {
-    places: (mapEntry, children) => {
-        var selector =
-            fancytreeSelector.places + mapEntry.id;
-
-        var $rootNode =
-            $(selector).fancytree('getRootNode');
-
-        $rootNode.removeChildren();
-
-        $rootNode.addChildren(children);
-
-        $rootNode.sortChildren(sort.aplhabetic.asc, false);
-
-        filter.update($rootNode, mapEntry);
-    }
-}
-
 const renderTree = {
+    update: {
+        places: (mapEntry, children) => {
+            var selector =
+                fancytreeSelector.places + mapEntry.id;
+
+            var $rootNode =
+                $(selector).fancytree('getRootNode');
+
+            $rootNode.removeChildren();
+
+            $rootNode.addChildren(children);
+
+            $rootNode.sortChildren(sort.aplhabetic.asc, false);
+
+            filter.update($rootNode, mapEntry);
+        }
+    },
     places: (mapEntry, children) => {
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('places', mapId)
