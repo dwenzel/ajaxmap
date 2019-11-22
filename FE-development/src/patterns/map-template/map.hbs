@@ -52,65 +52,76 @@
 
 
         <!-- sidebar -->
-        <div id="placesTreeWrap" class="am__sb">
+        <div id="placesTreeWrap" class="am__sb js-ajax-map-sidebar">
             <button type="button" class="am__sb__trigger js-ajax-map-sb-trigger"
                     aria-label="open/close map sidebar">
                 <span hidden>open/close map sidebar</span>
                 <i class="o-icon-font o-icon-font--am-arrow" aria-hidden="true"></i>
             </button>
 
-            <div class="am-form">
+            <div class="am-wrapper">
 
-                <!-- filter -->
-                <header class="am__sb__filter">
-                    {{render '@suggest-search-input'}}
-                    {{render '@option-filter-select'}}
-                    {{render '@option-filter-checkbox'}}
-                    {{render '@option-filter-radio'}}
-                    {{render '@radial-search-input'}}
-                    {{render '@list-search-input'}}
+                <form class="am-form" name="txAjaxmapStore"
+                      action="/beraterkarte-2?tx_ajaxmap_map%5Bcontroller%5D=Map&amp;cHash=7a54e36bceaa376d21d6255e28ebb40a"
+                      method="post">
 
-                    <!-- TODO Emi styling Treelist -->
-                    <div id="ajaxMapRegionsTree1" class="dynaTree"></div>
-                    <div id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
-                    <div id="ajaxMapCategoryTree1" class="dynaTree"></div>
-                    <div id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
-                </header>
+                    <!-- filter -->
+                    <header class="am__sb__filter">
+                        {{render '@suggest-search-input'}}
+                        {{render '@option-filter-select'}}
+                        {{render '@option-filter-checkbox'}}
+                        {{render '@option-filter-radio'}}
+                        {{render '@radial-search-input'}}
+                        {{render '@list-search-input'}}
 
-                <!-- results -->
-                <div class="am__sb__scroll-wrapper">
-                    <div class="am__sb__scroll-wrapper__inner">
-                        {{render '@no-results-advice'}}
-                        <!-- dynamic list => render js -->
-                        <div id="ajaxMapPlacesTree1" class="am-list dynaTree"></div>
+                        <!-- TODO Emi styling Treelist -->
+                        <div hidden id="ajaxMapRegionsTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapCategoryTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
+                    </header>
+
+                    <!-- results -->
+                    <div class="am__sb__scroll-wrapper">
+                        <div class="am__sb__scroll-wrapper__inner">
+                            {{render '@no-results-advice'}}
+
+                            <!-- example card todo EHO put in fancytree render-->
+                            <ul class="am-results__list">
+                                <li class="am-results__list__item">
+                                    {{render '@card'}}
+                                </li>
+                            </ul>
+
+                            <!-- dynamic list => render js -->
+                            <div id="ajaxMapPlacesTree1" class="am-results dynaTree"></div>
+
+                        </div>
                     </div>
-                </div>
 
-                <!-- footer -->
-                <footer class="am__sb__footer">
-                    <button class="am-link" type="reset">Auswahl zurücksetzen</button>
-                </footer>
+                    <!-- footer -->
+                    <footer class="am__sb__footer">
+                        <button class="am-link" type="reset">Auswahl zurücksetzen</button>
+                    </footer>
+
+                    <!-- ajax form hidden -->
+
+                    <div>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@extension]" value="Ajaxmap"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@vendor]" value="DWenzel"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@controller]" value="Map"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@action]" value="show"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][arguments]"
+                               value="YTowOnt9f86ca4fd3e3b6aacedcfb2344bc198b4d44cfebb"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@request]"
+                               value="a:4:{s:10:&quot;@extension&quot;;s:7:&quot;Ajaxmap&quot;;s:11:&quot;@controller&quot;;s:3:&quot;Map&quot;;s:7:&quot;@action&quot;;s:4:&quot;show&quot;;s:7:&quot;@vendor&quot;;s:7:&quot;DWenzel&quot;;}6beac5590010337ac3931c66cd706544a46cc564"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__trustedProperties]"
+                               value="a:1:{s:14:&quot;txAjaxmapStore&quot;;a:1:{s:5:&quot;mapId&quot;;i:1;}}d2f9d8e7dd4ea12d85c9bb4c7102601b9d8ac873"/>
+                    </div>
+                    <input type="hidden" name="tx_ajaxmap_map[txAjaxmapStore][mapId]" value="1"/></form>
 
             </div><!-- // c-forn -->
         </div>
-
-        <!-- ajax form hidden -->
-        <form name="txAjaxmapStore"
-              action="/beraterkarte-2?tx_ajaxmap_map%5Bcontroller%5D=Map&amp;cHash=7a54e36bceaa376d21d6255e28ebb40a"
-              method="post">
-            <div>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][@extension]" value="Ajaxmap"/>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][@vendor]" value="DWenzel"/>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][@controller]" value="Map"/>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][@action]" value="show"/>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][arguments]"
-                       value="YTowOnt9f86ca4fd3e3b6aacedcfb2344bc198b4d44cfebb"/>
-                <input type="hidden" name="tx_ajaxmap_map[__referrer][@request]"
-                       value="a:4:{s:10:&quot;@extension&quot;;s:7:&quot;Ajaxmap&quot;;s:11:&quot;@controller&quot;;s:3:&quot;Map&quot;;s:7:&quot;@action&quot;;s:4:&quot;show&quot;;s:7:&quot;@vendor&quot;;s:7:&quot;DWenzel&quot;;}6beac5590010337ac3931c66cd706544a46cc564"/>
-                <input type="hidden" name="tx_ajaxmap_map[__trustedProperties]"
-                       value="a:1:{s:14:&quot;txAjaxmapStore&quot;;a:1:{s:5:&quot;mapId&quot;;i:1;}}d2f9d8e7dd4ea12d85c9bb4c7102601b9d8ac873"/>
-            </div>
-            <input type="hidden" name="tx_ajaxmap_map[txAjaxmapStore][mapId]" value="1"/></form>
     </div>
 </div>
 

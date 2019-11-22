@@ -1,13 +1,18 @@
 // sidebar trigger
-$am-trigger-size: 2.4rem;
 $am-trigger-offset-top: 2rem;
 $am-trigger-shadow: 3px 0 5px -3px rgba(map_get($toolbox-colors, 'webblack'), .5);
+$am-trigger-size: 2.4rem;
 
 // sidebar
-$am-sb-width: 320px;
-$am-sb-shadow: 0 0 2rem rgba(map_get($toolbox-colors, 'webblack'), .5);
-$am-sb-footer-shadow: 0 0 .2rem rgba(map_get($toolbox-colors, 'webblack'), .1);
 $am-sb-bg: map_get($toolbox-colors, 'white');
-$am-sb-toggle-transition: .3s ease;
-$am-sb-bg-filter: map_get($toolbox-colors, 'light2');
 $am-sb-inner-padding: 1rem;
+$am-sb-shadow: 0 0 2rem rgba(map_get($toolbox-colors, 'webblack'), .5);
+$am-sb-toggle-transition: .3s ease;
+$am-sb-width: 320px;
+
+// sidebar filter
+$am-sb-bg-filter: map_get($toolbox-colors, 'light2');
+
+// sidebar footer
+$am-sb-footer-height: 2rem;
+$am-sb-footer-shadow: 0 0 .2rem rgba(map_get($toolbox-colors, 'webblack'), .1);

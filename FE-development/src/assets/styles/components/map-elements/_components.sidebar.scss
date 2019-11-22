@@ -4,7 +4,6 @@
     box-shadow: $am-sb-shadow;
     height: 100%;
     left: 0;
-    overflow: hidden;
     position: absolute;
     top: 0;
     transform: translateX(-100%);
@@ -20,10 +19,10 @@
     &__footer {
         align-items: center;
         background: app-color('white');
-        box-shadow: $am-sb-footer-shadow;
         bottom: 0;
+        box-shadow: $am-sb-footer-shadow;
         display: flex;
-        height: 2rem;
+        height: $am-sb-footer-height;
         justify-content: center;
         position: absolute;
         width: 100%;
@@ -34,11 +33,34 @@
         }
     }
 
+    &__msg {
+        padding: $am-sb-inner-padding  0;
+    }
+
     &__scroll-wrapper {
-        border: 1px solid red;
+        overflow: hidden;
+
+        &.show-scrollbar {
+            overflow-y: scroll;
+
+            /* width */
+            &::-webkit-scrollbar {
+                width: 5px;
+            }
+
+            /* Track */
+            &::-webkit-scrollbar-track {
+                background: app-color('light');
+            }
+
+            /* Handle */
+            &::-webkit-scrollbar-thumb {
+                background: app-color('primary');
+            }
+        }
 
         &__inner {
-            padding: $am-sb-inner-padding;
+            padding: 0 $am-sb-inner-padding $am-sb-inner-padding;
         }
     }
 }
