@@ -39,35 +39,18 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class FrontendJsonApiHandler implements MiddlewareInterface
 {
-    const PLUGIN_CONFIGURATION = [
-        'extensionName' => SI::EXTENSION_NAME,
-        'pluginName' => 'Map',
-        'vendorName' => SI::VENDOR_NAME,
-        'controller' => 'Map',
-        'action' => 'show'
-    ];
-
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $api = $request->getParsedBody()['api'] ?? $request->getQueryParams()['api'] ?? null;
         if ($api === null) {
             return $handler->handle($request);
         }
+        ob_clean();
         /** @var Response $response */
         $response = GeneralUtility::makeInstance(Response::class);
 
         // for now we dispatch only to this single endpoint
         if ($api === SI::API_PARAMETER_MAP) {
-            /** @var Bootstrap $bootstrap */
-            $bootstrap = GeneralUtility::makeInstance(Bootstrap::class);
-            /**
-             * initialize framework with default plugin configuration
-             * this ensures proper configuration even though we do not use
-             * this plugin
-             */
-            $bootstrap->initialize(static::PLUGIN_CONFIGURATION);
-
-            /** @var TypoScriptFrontendController $frontendController */
             $requestConfiguration = AjaxController::class . '::' . 'processRequest';
             /** @var Dispatcher $dispatcher */
             $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);

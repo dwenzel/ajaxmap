@@ -12,6 +12,9 @@ $boot = function () {
     if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][SI::CACHE_CHILDREN])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][SI::CACHE_CHILDREN] = [];
     }
+    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][SI::CACHE_AJAX_DATA])) {
+        $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][SI::CACHE_AJAX_DATA] = [];
+    }
 
     $settings = GeneralUtility::makeInstance(ExtensionConfiguration::class)->get('ajaxmap');
     if (!empty($settings['includeJQuery'])) {
