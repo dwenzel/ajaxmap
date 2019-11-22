@@ -42,7 +42,9 @@ trait ToArrayTrait {
 			}
 			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {
 				if (isset($mapping[$className][$propertyName]['mapTo'])) {
-					$propertyName = $mapping[$className][$propertyName]['mapTo'];
+                    $propertyName = $mapping[$className][$propertyName]['mapTo'];
+                } elseif (isset($mapping[$className][$propertyName]['replace'])) {
+                    $propertyValue = ObjectAccess::getPropertyPath($properties, $mapping[$className][$propertyName]['replace']);
 				} elseif (isset($mapping[$className][$propertyName]['exclude'])){
 					continue;
 				}
