@@ -912,6 +912,9 @@ var ajaxMap = {};
      *  and selection in fancyTree)
      */
     function updatePlaces(mapNumber, clearSelected) {
+
+
+        //tree
         var mapEntry = mapStore[mapNumber],
             treeSelector = '#ajaxMapPlacesTree' + mapEntry.id;
         if (typeof clearSelected != 'undefined') {
@@ -921,6 +924,9 @@ var ajaxMap = {};
                 node.setSelected(false);
             });
         }
+
+
+        //markers
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
         if (selectedPlaceKeys.length) {
             showSelectedPlaces(mapEntry, selectedPlaceKeys);

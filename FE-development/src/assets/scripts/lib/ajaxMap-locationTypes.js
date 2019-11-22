@@ -28,7 +28,7 @@ const mapLocationTypes = {
         if (mapEntry.locationTypes) {
 
 
-            //    mapLocationTypes.ui(mapEntry);  //        @dirk ??
+      mapLocationTypes.ui(mapEntry);  //        @dirk ??
             const $tree = treeRenderer.locationTypes(mapEntry);
 
            // console.log($tree)e

@@ -39,8 +39,26 @@ function create(mapEntry, place) {
     return mapMarker;
 }
 
+/*object to handle old PLaces not in new one includet*/
+function TurnOfOnBuffer(mapEntry) {
+    this.buffer = mapEntry.places.reduce((prev, oldPlace) => {
+        prev[oldPlace.key] = oldPlace.placeInstance;
+        return prev;
+    }, {})
+
+    this.evaluate = function() {
+        for (var i in  this.buffer) {
+            if (this.buffer[i]) {
+                this.buffer[i].setActive(false)
+            }
+        }
+    }
+
+}
+
 const marker = {
-    create
+    create,
+    TurnOfOnBuffer
 };
 
 export default marker;

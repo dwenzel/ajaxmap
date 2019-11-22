@@ -7,18 +7,7 @@ const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
     locationInputSelector: '#locationSearch',
     radialSearchSelectSelector: '#radialSelect',
-    getNewPlaces: (search, mapEntry) => {
 
-        const data = {
-            search,
-            'id': ajaxMap.configData.mapSettings.pageId,
-            'api': 'map',
-            'action': 'listPlaces2',
-            'mapId': mapEntry.id
-        };
-
-        places.loadFromData(mapEntry, data)
-    },
     setUpAutoSuggest: (mapEntry) => {
         const mapId = mapEntry.id,
             map = mapEntry.googleMap,
@@ -73,6 +62,8 @@ class LocationSearch {
         this.radialSelect;
 
         this.$sendButton;
+
+        this.aa = 0;
     }
 
     init() {
@@ -100,7 +91,17 @@ class LocationSearch {
             that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
             that.radialSelect && that.radialSelect.addValToQuery(queryParams);
 
-            _.getNewPlaces(queryParams, that.mapEntry);
+            var action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
+
+            const data = {
+                queryParams,
+                'id': ajaxMap.configData.mapSettings.pageId,
+                'api': 'map',
+                'action': action,//'listPlaces2',
+                'mapId': that.mapEntry.id
+            };
+
+            places.loadFromData(that.mapEntry, data)
         }
     }
 }

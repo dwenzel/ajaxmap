@@ -1,0 +1,39 @@
+{
+  "disableDefaultUi": false,
+  "height": 800,
+  "initialZoom": 7,
+  "locationTypes": [
+    {
+      "description": "",
+      "markerIcon": "fileadmin\/user_upload\/test\/map-2.png",
+      "title": "Vertrauensanw\u00e4ltin",
+      "key": 1
+    },
+    {
+      "description": "",
+      "markerIcon": "fileadmin\/user_upload\/test\/map-2.png",
+      "title": "Vertrauensanwalt",
+      "key": 2
+    },
+    {
+      "description": "",
+      "markerIcon": "fileadmin\/user_upload\/test\/map-1.png",
+      "title": "Bauherrenberaterin",
+      "key": 3
+    },
+    {
+      "description": "",
+      "markerIcon": "fileadmin\/user_upload\/test\/map-1.png",
+      "title": "Bauherrenberater",
+      "key": 4
+    }
+  ],
+  "mapCenter": "52.540849006917,13.375978260576",
+  "mapStyle": "",
+  "regions": [],
+  "staticLayers": [],
+  "title": "Testkarte Berater",
+  "type": 0,
+  "uid": 1,
+  "width": 800
+}

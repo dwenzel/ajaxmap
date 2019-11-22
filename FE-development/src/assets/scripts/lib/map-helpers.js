@@ -6,7 +6,41 @@ import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer'
 
 const helpers = {
-        getLocationType: (mapEntry, typeId) =>
+
+    /**
+     * Searches all children for an attribute in their data property
+     * and returns a unique array of keys for this attribute
+     *
+     * @param children
+     * @param name
+     * @return Array
+     */
+    getKeysByAttribute: function (children, name)
+{
+    var keys = [];
+    $.each(children, function(index, child) {
+        if (child.data.hasOwnProperty(name)) {
+            var attribute = child.data[name];
+            if (attribute !== undefined &&
+                attribute !== null &&
+                attribute.hasOwnProperty('key') && !keys[attribute.key]) {
+                keys.push(attribute.key);
+            } else {
+                if (attribute instanceof Array) {
+                    for (var i = 0, k = attribute.length; i < k; i++) {
+                        if (attribute[i].hasOwnProperty('key') && keys.indexOf(attribute[i].key) < 0) {
+                            keys.push(attribute[i].key);
+                        }
+                    }
+                }
+            }
+        }
+    });
+
+    return keys;
+},
+
+getLocationType: (mapEntry, typeId) =>
             mapEntry.locationTypes.filter(
                 (item) =>item.key === typeId
             )
@@ -85,6 +119,7 @@ const helpers = {
     }
     ;
 
+export const getKeysByAttribute = helpers.getKeysByAttribute;
 export const getLocationType = helpers.getLocationType;
 export const getSelectedKeys = helpers.getSelectedKeys;
 export const getLatLong = helpers.getLatLong;

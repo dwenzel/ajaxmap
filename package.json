@@ -46,6 +46,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@google/markerclusterer": "^1.0.3",
     "fancytree": "0.0.0",
+    "fastdom": "^1.0.9",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery.cookie": "^1.4.1",
