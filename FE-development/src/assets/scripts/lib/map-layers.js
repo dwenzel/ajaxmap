@@ -1,17 +1,17 @@
-const _={
+const _ = {
     getBasePath: () => {
-        if(_.basePath){
+        if (_.basePath) {
             return _.basePath;
         }
 
-        const basePath = window.location.protocol + "//" + window.location.host + "/";
-        const webkitPath = window.location.origin + "/";
+        const basePath = window.location.protocol + '//' + window.location.host + '/';
+        const webkitPath = window.location.origin + '/';
 
         _.basePath = !window.location.origin ? basePath : webkitPath;
 
         return _.basePath;
     },
-}
+};
 
 const layers = {
     update: function(mapEntry, layerIds) {
@@ -64,7 +64,7 @@ const layers = {
     },
 
     buildStatic: function(mapEntry) {
-        const staticLayers = mapEntry.settings.staticLayers
+        const staticLayers = mapEntry.settings.staticLayers;
 
         if (staticLayers) {
             staticLayers.forEach(function(staticLayer) {

@@ -1,5 +1,5 @@
 import $ from 'jquery';
-import search from './ui-suggestion-and-location-search'
+import search from './ui-suggestion-and-location-search';
 
 //radialSearch.init(mapEntry);
 
@@ -23,10 +23,10 @@ const _ = {
     reset: () => {
         _.cache.$filterPlaces.val('');
     }
-}
+};
 
 export default {
     init: _.init,
     initByMapEntry: _.initByMapEntry,
     reset: _.reset
-}
+};

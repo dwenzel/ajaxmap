@@ -1,8 +1,8 @@
-import treeRenderer  from './fancytree-renderer.js'
-import layers from './map-layers'
+import treeRenderer from './fancytree-renderer.js';
+import layers from './map-layers';
 
 function init(mapEntry) {
-const regions= mapEntry.regions;
+    const regions = mapEntry.regions;
 
     if (regions) {
         regions.forEach(function(region) {

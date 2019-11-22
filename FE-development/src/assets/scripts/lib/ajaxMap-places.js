@@ -4,15 +4,16 @@ import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
 
-import ajaxMap from './ajaxMap'
-import placesFilter from './ajaxMap-places-filter'
-import treeRenderer  from './fancytree-renderer'
-import markerInfoWindow from './map-marker-info-window'
-import {getSelectedKeys, getLatLong} from './map-helpers'
+import ajaxMap from './ajaxMap';
+import placesFilter from './ajaxMap-places-filter';
+import treeRenderer from './fancytree-renderer';
+import markerInfoWindow from './map-marker-info-window';
+import {getSelectedKeys, getLatLong} from './map-helpers';
 
-import {fancytreeSelector} from './fancytree-renderer'
-import {ajaxCall} from './utilitys'
-import markers from './map-marker'
+import {fancytreeSelector} from './fancytree-renderer';
+import {ajaxCall} from './utilitys';
+import markers from './map-marker';
+
 class Place {
     constructor(mapEntry, placeData) {
         this.mapEntry = mapEntry;
@@ -36,7 +37,7 @@ class Place {
     }
 
     panToSelf() {
-        this.mapEntry.googleMap.panTo(this.LatLong)
+        this.mapEntry.googleMap.panTo(this.LatLong);
     }
 }
 
@@ -129,27 +130,27 @@ const _ = {
         _.updatePlaces(mapEntry);
     },
     setEvents: (placesTree) => {
-        const resetFilterButtonSelector = "button#btnResetPlacesFilter";
+        const resetFilterButtonSelector = 'button#btnResetPlacesFilter';
 
         $(resetFilterButtonSelector).click(function(e) {
-            $("input[name=filterPlaces]").val('');
-            $("span#matches").text("");
+            $('input[name=filterPlaces]').val('');
+            $('span#matches').text('');
             placesTree.clearFilter();
-        }).attr("disabled", true);
+        }).attr('disabled', true);
 
-        $("input[name=filterPlaces]").keyup(function(e) {
+        $('input[name=filterPlaces]').keyup(function(e) {
             var n,
                 opts = {},
                 match = $(this).val();
 
-            if (e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === "") {
+            if (e && e.which === $.ui.keyCode.ESCAPE || $.trim(match) === '') {
                 $(resetFilterButtonSelector).click();
                 return;
             }
             // Pass a string to perform case insensitive matching
             n = placesTree.filterNodes(match, opts);
-            $(resetFilterButtonSelector).attr("disabled", false);
-            $("span#matches").text(n);
+            $(resetFilterButtonSelector).attr('disabled', false);
+            $('span#matches').text(n);
         }).focus();
     },
 
@@ -159,7 +160,7 @@ const _ = {
                 mapEntry.places = [];
             }
 
-            let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry)
+            let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry);
             mapEntry.places = [];
 
             if (result.length) {
@@ -172,25 +173,24 @@ const _ = {
                         placeInstance = new Place(mapEntry, placeData);
                         placeData.placeInstance = placeInstance;
 
-                        mapEntry.placeInstances[placeData.key] = placeInstance;//this is a register//
+                        mapEntry.placeInstances[placeData.key] = placeInstance; //this is a register//
 
                     } else {
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
-
                     }
 
-                    turnOfOnBuffer.buffer[placeData.key] = false
-                    // turnOfOnBuffer[placeData.key] = false
+                    turnOfOnBuffer.buffer[placeData.key] = false;
+                    // turnOfOnBuffer[placeData.key] = false;
 
                     mapEntry.places[index] = placeData;
                 });
             }
 
             turnOfOnBuffer.evaluate();
-            turnOfOnBuffer=null;
+            turnOfOnBuffer = null;
 
             _.updatePlaces(mapEntry);
-        })
+        });
     },
     init: (mapEntry) => {
 
@@ -206,9 +206,9 @@ const _ = {
         };
 
         _.setEvents(placesTree);
-        _.loadFromData(mapEntry, data)
+        _.loadFromData(mapEntry, data);
     }
-}
+};
 
 const places = {
     init: _.init,
