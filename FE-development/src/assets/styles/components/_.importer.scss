@@ -3,9 +3,12 @@
  */
 @import 'base/components.debug';
 @import 'base/components.form';
+@import 'base/components.buttons';
 
 
 @import 'map-elements/components.ajax-map';
 @import 'map-elements/components.sidebar';
 @import 'map-elements/components.sidebar-trigger';
 @import 'map-elements/components.dyna-tree';
+@import 'map-elements/components.filter';
+@import 'map-elements/components.location-search';

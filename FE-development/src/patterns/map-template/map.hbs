@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <!-- typo 3 font nur zum test -->
-    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap" rel="stylesheet">
     <!--script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script-->
 </head>
 <body>
@@ -16,7 +16,6 @@
         map-module
         height default 100vh
     -->
-
     <div class="am js-ajax-map u-space-b:default ajax-map--sb-is-open" data-height="100vh">
 
         <!-- inline js -->
@@ -67,6 +66,7 @@
                     {{render '@suggest-search-input'}}
                     {{render '@option-filter-select'}}
                     {{render '@option-filter-checkbox'}}
+                    {{render '@option-filter-radio'}}
                     {{render '@radial-search-input'}}
                     {{render '@list-search-input'}}
 
@@ -78,16 +78,17 @@
                 </header>
 
                 <!-- results -->
-                <div class="am__scroll-wrapper">
-                    <div class="am__msg">
-                        Platz für Hinweistexte
+                <div class="am__sb__scroll-wrapper">
+                    <div class="am__sb__scroll-wrapper__inner">
+                        {{render '@no-results-advice'}}
+                        <!-- dynamic list => render js -->
+                        <div id="ajaxMapPlacesTree1" class="am-list dynaTree"></div>
                     </div>
-
-                    <!-- dynamic list => render js -->
-                    <div id="ajaxMapPlacesTree1" class="am-list dynaTree"></div>
                 </div>
-                <footer class="am__sb__header">
-                    Reset filter
+
+                <!-- footer -->
+                <footer class="am__sb__footer">
+                    <button class="am-link" type="reset">Auswahl zurücksetzen</button>
                 </footer>
 
             </div><!-- // c-forn -->

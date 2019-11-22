@@ -1,0 +1,31 @@
+/* ==========================================================================
+   Button Basic Style Mixin
+   ========================================================================== */
+
+@mixin button-basic {
+    background-color: transparent;
+    border: 0;
+    cursor: pointer;
+    display: inline-block;
+    font-family: $button-font-family;
+    font-size: $button-font-size;
+    line-height: $button-line-height;
+    padding: 0 $button-padding;
+    position: relative;
+    text-align: center;
+    text-decoration: none;
+    text-transform: inherit;
+    transition: $button-transition;
+    user-select: none;
+    white-space: nowrap;
+
+    &::-moz-focus-inner {
+        border: 0;
+        padding: 0;
+    }
+
+    &:hover,
+    &:active {
+        outline: none;
+    }
+}

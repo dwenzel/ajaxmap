@@ -4,6 +4,7 @@
     box-shadow: $am-sb-shadow;
     height: 100%;
     left: 0;
+    overflow: hidden;
     position: absolute;
     top: 0;
     transform: translateX(-100%);
@@ -15,7 +16,29 @@
         transition: transform $am-sb-toggle-transition;
     }
 
-    &__filter {
-        background: $am-sb-bg-filter;
+    // reset filter area
+    &__footer {
+        align-items: center;
+        background: app-color('white');
+        box-shadow: $am-sb-footer-shadow;
+        bottom: 0;
+        display: flex;
+        height: 2rem;
+        justify-content: center;
+        position: absolute;
+        width: 100%;
+
+        .am-link {
+            @include reset-button();
+            color: $link-color;
+        }
+    }
+
+    &__scroll-wrapper {
+        border: 1px solid red;
+
+        &__inner {
+            padding: $am-sb-inner-padding;
+        }
     }
 }

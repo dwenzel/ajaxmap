@@ -1,0 +1,20 @@
+// location input
+.am-form__input--location {
+    padding-right: $button-icon-only-size*2 !important;
+}
+
+// navigator.location button
+.am-button--location {
+    right: $button-icon-only-size !important;
+
+    &:after {
+        background: $form-field-border-color;
+        content: '';
+        display: block;
+        height: 70%;
+        position: absolute;
+        right: 0;
+        top: 15%;
+        width: 1px;
+    }
+}

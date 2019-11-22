@@ -1,0 +1,24 @@
+/* ==========================================================================
+   Button Style Mixin
+   ========================================================================== */
+
+@function get-btn-style($style, $attr) {
+    @return map-get(map-get($buttons, $style), $attr);
+}
+
+@mixin button-style($style) {
+    background-color: get-btn-style($style, backgroundColor);
+    border: 2px solid get-btn-style($style, borderColor);
+    color: get-btn-style($style, color);
+    transition: all ease .3s;
+
+    &:active,
+    &:focus,
+    &:hover,
+    &.active,
+    &.current {
+        background-color: get-btn-style($style, hoverBackgroundColor);
+        border-color: get-btn-style($style, hoverBorderColor);
+        color: get-btn-style($style, hoverColor);
+    }
+}

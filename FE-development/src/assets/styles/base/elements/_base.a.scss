@@ -1,6 +1,6 @@
-$link-color: map-get($toolbox-colors, 'black');
+$link-color: map-get($toolbox-colors, 'primary');
 
-a {
+.am-link {
     color: $link-color;
     text-decoration: underline;
 
