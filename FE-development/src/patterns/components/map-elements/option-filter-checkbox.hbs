@@ -1,0 +1,15 @@
+<!-- option filter as checkbox -->
+<div class="am-option-filter">
+    <div class="am-form__group ">
+        <label class="am-form__label " for="optionFilter">
+            {{label}}
+        </label>
+
+        {{#options}}
+            <div class="am-form__tag">
+                <input id="input-radio-{{id}}" type="checkbox" name="optionFilter">
+                <label for="input-radio-{{id}}">{{label}}</label>
+            </div>
+        {{/options}}
+    </div>
+</div>

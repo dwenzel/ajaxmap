@@ -1,0 +1,19 @@
+<div class="am-radial-search">
+    <div class="am-form__group">
+        <label class="am-form__label " for="radialSelect">
+            {{label}}
+        </label>
+
+        <div class="am-form__input-container">
+            <select id="radialSelect1" name="radialSelect1" class="am-form__input">
+                <option value="" disabled="" selected="">Umkreis wählen ...</option>
+                {{#options}}
+                    <option value="{{value}}">{{label}}</option>
+                {{/options}}
+            </select>
+            <div class="am-form__select-arrow" aria-hidden="true">
+                <i class="o-icon-font o-icon-font--am-arrow"></i>
+            </div>
+        </div>
+    </div>
+</div>

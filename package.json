@@ -34,18 +34,23 @@
     "karma-firefox-launcher": "^1.2.0",
     "karma-jasmine": "^2.0.1",
     "karma-phantomjs-launcher": "^1.0.4",
+    "node-sass": "^4.13.0",
+    "sass-loader": "^8.0.0",
     "style-loader": "^1.0.0",
     "svg-inline-loader": "^0.8.0",
     "webpack": "^4.39.2",
-    "webpack-cli": "^3.3.7"
+    "webpack-cli": "^3.3.9"
   },
   "dependencies": {
     "@fortawesome/fontawesome-free": "^5.10.2",
     "@fortawesome/fontawesome-svg-core": "^1.2.22",
     "@google/markerclusterer": "^1.0.3",
+    "fancytree": "0.0.0",
+    "fastdom": "^1.0.9",
     "jquery": "^3.4.1",
     "jquery-ui": "^1.12.1",
     "jquery.cookie": "^1.4.1",
-    "jquery.fancytree": "^2.31.0"
+    "jquery.fancytree": "^2.31.0",
+    "postcss-loader": "^3.0.0"
   }
 }

@@ -1,0 +1,71 @@
+/**
+ * -------------------------------------------------------------------------
+ * Default configuration values.
+ * -------------------------------------------------------------------------
+ */
+
+/**
+ * Breakpoint identifiers and sizes.
+ *
+ * @type {Map}
+ */
+$toolbox-breakpoints: (
+    'sm': 768px,
+    'md': 992px
+);
+
+
+/**
+ * Typography base font-size.
+ *
+ * @type {Integer} (rem, em, px, pt, %)
+ */
+$toolbox-typo-base: 1rem;
+
+/**
+ * Typography ratio.
+ *
+ * @type {Integer}
+ */
+$toolbox-typo-ratio: 1.2;
+
+/**
+ * Typography sizes.
+ *
+ * @type {Map}
+ */
+$toolbox-typo-sizes: (
+    'xxs': (-3, 1.4),
+    'xs': (-2, 1.4),
+    's': (-1, 1.4),
+    'm': (0, 1.4),
+    'l': (1, 1.4),
+    'xl': (2, 1.4),
+    'xxl': (3, 1.4),
+    'xxxl': (4, 1.4)
+);
+
+/**
+ * Color identifiers and values.
+ * colors of typo 3
+ * @type {Map}
+ */
+$toolbox-colors: (
+    // Primary
+    'primary': #F49700,
+    'secondary': #868e96,
+    'sec2': #868e96,
+    // Light
+    'gray': #868e96,
+    'light': #f9f7f7,
+    'white': #fff,
+    'dark': #333,
+    'webblack': #333,
+    'black': #333,
+    // States
+    'success': #75a75a,
+    'warning': #ffc800,
+    'danger': #dc3545,
+    'neutral': #868e96
+);
+

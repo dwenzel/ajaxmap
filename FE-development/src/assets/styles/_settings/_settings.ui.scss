@@ -1,0 +1,8 @@
+/* ==========================================================================
+   User Interface Variables
+   ========================================================================== */
+
+$focus-color: map-get($toolbox-colors, 'black');
+$focus-style: dotted;
+$focus-width: 3px;
+$focus-outline: $focus-width $focus-style $focus-color;

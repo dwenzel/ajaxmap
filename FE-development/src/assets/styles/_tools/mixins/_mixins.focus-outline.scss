@@ -1,0 +1,9 @@
+/* ==========================================================================
+   Set focus outline
+   ========================================================================== */
+
+// required: _settings/_settings.ui.scss
+
+@mixin focus-outline($color) {
+    outline: $focus-width $focus-style $color;
+}

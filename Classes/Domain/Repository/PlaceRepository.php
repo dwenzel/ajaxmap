@@ -25,13 +25,12 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use CPSIT\GeoLocationService\Service\GeoCoder;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
-use TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\Generic\Qom\ConstraintInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryInterface;
-use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
  * Class PlaceRepository
@@ -48,8 +47,8 @@ class PlaceRepository extends AbstractDemandedRepository
      *
      * @param QueryInterface $query A query object
      * @param DemandInterface $demand A demand object
-     * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @return array<ConstraintInterface>
+     * @throws InvalidQueryException
      */
     protected function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand)
     {
