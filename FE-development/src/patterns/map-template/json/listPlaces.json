@@ -40,17 +40,21 @@
 			"zip": "55270"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.939631100000,8.212547700000",
 		"latitude": 49.9396311,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.2125477,
 		"place": "Klein-Winternheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Walter Badusche",
 		"key": 7,
 		"zip": "55270"
 	},
@@ -95,17 +99,21 @@
 			"zip": "50259"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.991303800000,6.796356100000",
 		"latitude": 50.991303799999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.7963560999999997,
 		"place": "Pulheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Elmar Zibis",
 		"key": 9,
 		"zip": "50259"
 	},
@@ -150,17 +158,21 @@
 			"zip": "74321"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.947630700000,9.134653400000",
 		"latitude": 48.947630699999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.1346533999999995,
 		"place": "Bietigheim-Bissingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Jens Anderssohn",
 		"key": 10,
 		"zip": "74321"
 	},
@@ -205,17 +217,21 @@
 			"zip": "57076"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.894874200000,8.027617800000",
 		"latitude": 50.894874199999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.0276177999999998,
 		"place": "Siegen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00f6rg Bausen",
 		"key": 11,
 		"zip": "57076"
 	},
@@ -260,17 +276,21 @@
 			"zip": "74321"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.947630700000,9.134653400000",
 		"latitude": 48.947630699999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.1346533999999995,
 		"place": "Bietigheim-Bissingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bj\u00f6rn Beck",
 		"key": 12,
 		"zip": "74321"
 	},
@@ -315,17 +335,21 @@
 			"zip": "51379"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.066165800000,6.993087700000",
 		"latitude": 51.0661658,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.9930877000000002,
 		"place": "Leverkusen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Benjamin Berding",
 		"key": 13,
 		"zip": "51379"
 	},
@@ -370,17 +394,21 @@
 			"zip": "75173"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.886994500000,8.685229500000",
 		"latitude": 48.8869945,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.6852295000000002,
 		"place": "Pforzheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ulf Biebelheimer",
 		"key": 14,
 		"zip": "75173"
 	},
@@ -425,17 +453,21 @@
 			"zip": "21244"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.326460200000,9.876847600000",
 		"latitude": 53.3264602,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.8768475999999996,
 		"place": "Buchholz in der Nordheide",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Frank H. Parbst",
 		"key": 15,
 		"zip": "21244"
 	},
@@ -480,17 +512,21 @@
 			"zip": "06114"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.505267800000,11.967164700000",
 		"latitude": 51.505267799999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 11.9671647,
 		"place": "Halle (Saale)",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ekkehart Carmesin",
 		"key": 16,
 		"zip": "06114"
 	},
@@ -535,17 +571,21 @@
 			"zip": "02625"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.178886300000,14.433376600000",
 		"latitude": 51.178886300000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanw\u00e4ltin",
 			"key": 1
 		},
 		"longitude": 14.433376600000001,
 		"place": "Bautzen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Silvia Drach",
 		"key": 17,
 		"zip": "02625"
 	},
@@ -590,17 +630,21 @@
 			"zip": "99096"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.964782000000,11.024988700000",
 		"latitude": 50.964782,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 11.0249887,
 		"place": "Erfurt",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Manfred Raber",
 		"key": 18,
 		"zip": "99096"
 	},
@@ -645,17 +689,21 @@
 			"zip": "21614"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.471771400000,9.694541600000",
 		"latitude": 53.471771400000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.6945416000000009,
 		"place": "Buxtehude",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ingo Ebling",
 		"key": 19,
 		"zip": "21614"
 	},
@@ -700,17 +748,21 @@
 			"zip": "93055"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.016401500000,12.121124700000",
 		"latitude": 49.016401500000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 12.121124699999999,
 		"place": "Regensburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Christian Fritz",
 		"key": 20,
 		"zip": "93055"
 	},
@@ -755,17 +807,21 @@
 			"zip": "55294"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.923129300000,8.313451300000",
 		"latitude": 49.923129299999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanw\u00e4ltin",
 			"key": 1
 		},
 		"longitude": 8.3134513000000005,
 		"place": "Bodenheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Manuela Reibold-Rolinger",
 		"key": 21,
 		"zip": "55294"
 	},
@@ -810,17 +866,21 @@
 			"zip": "26121"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.155565900000,8.209581100000",
 		"latitude": 53.155565899999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.2095810999999994,
 		"place": "Oldenburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Hendrik Garms",
 		"key": 22,
 		"zip": "26121"
 	},
@@ -865,17 +925,21 @@
 			"zip": "03044"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.770280500000,14.331000300000",
 		"latitude": 51.770280499999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 14.331000299999999,
 		"place": "Cottbus",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Peter J. G\u00f6pfert",
 		"key": 23,
 		"zip": "03044"
 	},
@@ -920,17 +984,21 @@
 			"zip": "80335"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.148835400000,11.553565500000",
 		"latitude": 48.148835400000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanw\u00e4ltin",
 			"key": 1
 		},
 		"longitude": 11.553565499999999,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gabriele Hein-R\u00f6der",
 		"key": 24,
 		"zip": "80335"
 	},
@@ -975,17 +1043,21 @@
 			"zip": "36160"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.540823300000,9.787601800000",
 		"latitude": 50.5408233,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.7876017999999991,
 		"place": "Dipperz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Mark Henkel",
 		"key": 25,
 		"zip": "36160"
 	},
@@ -1030,17 +1102,21 @@
 			"zip": "50670"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.941986000000,6.944567000000",
 		"latitude": 50.941986,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.9445670000000002,
 		"place": "K\u00f6ln",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Rainer Bauer",
 		"key": 26,
 		"zip": "50670"
 	},
@@ -1085,17 +1161,21 @@
 			"zip": "48143"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.958272100000,7.625949000000",
 		"latitude": 51.958272100000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 7.6259490000000003,
 		"place": "M\u00fcnster",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Renz",
 		"key": 27,
 		"zip": "48143"
 	},
@@ -1140,17 +1220,21 @@
 			"zip": "64380"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.861989500000,8.757192100000",
 		"latitude": 49.8619895,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 8.7571920999999993,
 		"place": "Ro\u00dfdorf",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Angelika Hottes",
 		"key": 28,
 		"zip": "64380"
 	},
@@ -1195,17 +1279,21 @@
 			"zip": "90419"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.461538100000,11.069697600000",
 		"latitude": 49.461538099999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanw\u00e4ltin",
 			"key": 1
 		},
 		"longitude": 11.0696976,
 		"place": "N\u00fcrnberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Petra Hirschmann",
 		"key": 29,
 		"zip": "90419"
 	},
@@ -1250,17 +1338,21 @@
 			"zip": "57290"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.793562600000,8.009869800000",
 		"latitude": 50.793562600000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.0098698000000006,
 		"place": "Neunkirchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stephan Hub",
 		"key": 30,
 		"zip": "57290"
 	},
@@ -1305,17 +1397,21 @@
 			"zip": "66640"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.527955200000,7.170181700000",
 		"latitude": 49.527955200000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.1701816999999997,
 		"place": "Namborn-Hirstein",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ralf Baureis",
 		"key": 31,
 		"zip": "66640"
 	},
@@ -1360,17 +1456,21 @@
 			"zip": "65549"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.381408600000,8.081713900000",
 		"latitude": 50.3814086,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.0817139000000005,
 		"place": "Limburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Georg Klein",
 		"key": 32,
 		"zip": "65549"
 	},
@@ -1415,17 +1515,21 @@
 			"zip": "33102"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.729224400000,8.755927300000",
 		"latitude": 51.7292244,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.7559272999999997,
 		"place": "Paderborn",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Achim Riesenberger",
 		"key": 33,
 		"zip": "33102"
 	},
@@ -1470,17 +1574,21 @@
 			"zip": "64283"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.870129700000,8.653756300000",
 		"latitude": 49.8701297,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.6537562999999995,
 		"place": "Darmstadt",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00fcrgen Ri\u00dfmann",
 		"key": 34,
 		"zip": "64283"
 	},
@@ -1525,17 +1633,21 @@
 			"zip": "10439"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.551700858090,13.413609266281",
 		"latitude": 52.551700858090001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 13.413609266281,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ralf-Peter Rose",
 		"key": 35,
 		"zip": "10439"
 	},
@@ -1580,17 +1692,21 @@
 			"zip": "44623"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.536462700000,7.222093876937",
 		"latitude": 51.536462700000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 7.2220938769369996,
 		"place": "Herne",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Martin Schade",
 		"key": 36,
 		"zip": "44623"
 	},
@@ -1635,17 +1751,21 @@
 			"zip": "79219"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "47.886252600000,7.718622591798",
 		"latitude": 47.886252599999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 7.7186225917979998,
 		"place": "Staufen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Nicolas Schill",
 		"key": 37,
 		"zip": "79219"
 	},
@@ -1690,17 +1810,21 @@
 			"zip": "50668"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.951657000000,6.964367700000",
 		"latitude": 50.951656999999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.9643677000000004,
 		"place": "K\u00f6ln",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Schmidt",
 		"key": 38,
 		"zip": "50668"
 	},
@@ -1745,17 +1869,21 @@
 			"zip": "88662"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "47.786614000000,9.128816000000",
 		"latitude": 47.786614,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.1288160000000005,
 		"place": "\u00dcberlingen-H\u00f6dingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Markus Schnell",
 		"key": 39,
 		"zip": "88662"
 	},
@@ -1800,17 +1928,21 @@
 			"zip": "54290"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.755673350765,6.635425686836",
 		"latitude": 49.755673350765001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.6354256868360002,
 		"place": "Trier",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Helge Schoenewolf",
 		"key": 40,
 		"zip": "54290"
 	},
@@ -1855,17 +1987,21 @@
 			"zip": "38102"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.268415750000,10.542634400000",
 		"latitude": 52.268415750000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 10.542634400000001,
 		"place": "Braunschweig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ronald Wolfgang Scholz",
 		"key": 41,
 		"zip": "38102"
 	},
@@ -1910,17 +2046,21 @@
 			"zip": "52070"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.774227700000,6.106299081382",
 		"latitude": 50.774227699999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.1062990813819997,
 		"place": "Aachen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Adrian Schreven",
 		"key": 42,
 		"zip": "52070"
 	},
@@ -1965,17 +2105,21 @@
 			"zip": "30177"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.398150400000,9.770046200000",
 		"latitude": 52.398150399999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.7700461999999995,
 		"place": "Hannover",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thomas Schulze",
 		"key": 43,
 		"zip": "30177"
 	},
@@ -2020,17 +2164,21 @@
 			"zip": "70184"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.772534800000,9.190154535309",
 		"latitude": 48.772534800000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.1901545353090004,
 		"place": "Stuttgart",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Tim Seidel",
 		"key": 44,
 		"zip": "70184"
 	},
@@ -2075,17 +2223,21 @@
 			"zip": "46539"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.568095400000,6.749858360632",
 		"latitude": 51.568095399999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.7498583606320004,
 		"place": "Dinslaken",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00fcrgen Becker",
 		"key": 45,
 		"zip": "46539"
 	},
@@ -2130,17 +2282,21 @@
 			"zip": "55130"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.979469800000,8.300994632595",
 		"latitude": 49.979469799999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.3009946325949997,
 		"place": "Mainz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Martin Berny",
 		"key": 46,
 		"zip": "55130"
 	},
@@ -2185,17 +2341,21 @@
 			"zip": "92237"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.489140200000,11.770722100000",
 		"latitude": 49.489140200000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.7707221,
 		"place": "Sulzbach-Rosenberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Wilhelm Birzer",
 		"key": 47,
 		"zip": "92237"
 	},
@@ -2240,17 +2400,21 @@
 			"zip": "90419"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.457008900000,11.062996400000",
 		"latitude": 49.457008899999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.062996399999999,
 		"place": "N\u00fcrnberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Wilhelm Birzer",
 		"key": 48,
 		"zip": "90419"
 	},
@@ -2295,17 +2459,21 @@
 			"zip": "21079"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.439023400000,9.999114300000",
 		"latitude": 53.439023400000004,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.9991143000000005,
 		"place": "Hamburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Mathias Blecken",
 		"key": 49,
 		"zip": "21079"
 	},
@@ -2350,17 +2518,21 @@
 			"zip": "39249"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.965284800000,11.889598500000",
 		"latitude": 51.965284799999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.8895985,
 		"place": "Barby\/Elbe",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Otto Bleich",
 		"key": 50,
 		"zip": "39249"
 	},
@@ -2405,17 +2577,21 @@
 			"zip": "49635"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.628878500000,7.986865100000",
 		"latitude": 52.628878499999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.9868651000000002,
 		"place": "Badbergen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Hermann Bockstiegel",
 		"key": 51,
 		"zip": "49635"
 	},
@@ -2460,17 +2636,21 @@
 			"zip": "31675"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.266276100000,9.006451500000",
 		"latitude": 52.266276099999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.0064515000000007,
 		"place": "B\u00fcckeburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Aribert Brystowski",
 		"key": 52,
 		"zip": "31675"
 	},
@@ -2515,17 +2695,21 @@
 			"zip": "40595"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.131648300000,6.898155419367",
 		"latitude": 51.131648300000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.8981554193669998,
 		"place": "D\u00fcsseldorf",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Lorant Czinna",
 		"key": 53,
 		"zip": "40595"
 	},
@@ -2570,17 +2754,21 @@
 			"zip": "24143"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.308715750000,10.137247300000",
 		"latitude": 54.308715749999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 10.1372473,
 		"place": "Kiel",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ralph Dittmann",
 		"key": 54,
 		"zip": "24143"
 	},
@@ -2625,17 +2813,21 @@
 			"zip": "44625"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.522949650000,7.209924556926",
 		"latitude": 51.522949650000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.2099245569260004,
 		"place": "Herne",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Klaus Dobermann",
 		"key": 55,
 		"zip": "44625"
 	},
@@ -2680,17 +2872,21 @@
 			"zip": "82297"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.217299400000,11.016498800000",
 		"latitude": 48.217299400000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.016498800000001,
 		"place": "Steindorf OT Hofhegnenberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Reinhard Elbl",
 		"key": 56,
 		"zip": "82297"
 	},
@@ -2735,17 +2931,21 @@
 			"zip": "67599"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.673336200000,8.235026762595",
 		"latitude": 49.673336200000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.235026762595,
 		"place": "Gundheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Christian Engel",
 		"key": 57,
 		"zip": "67599"
 	},
@@ -2790,17 +2990,21 @@
 			"zip": "40668"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.302927000000,6.678230100000",
 		"latitude": 51.302926999999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.6782301000000004,
 		"place": "Meerbusch",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Evers",
 		"key": 58,
 		"zip": "40668"
 	},
@@ -2845,17 +3049,21 @@
 			"zip": "54290"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.747397250000,6.636119569876",
 		"latitude": 49.747397249999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.6361195698759996,
 		"place": "Trier",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Christian Ewald",
 		"key": 59,
 		"zip": "54290"
 	},
@@ -2900,17 +3108,21 @@
 			"zip": "76356"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.058119400000,8.515542894277",
 		"latitude": 49.058119400000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.5155428942770008,
 		"place": "Weingarten (Baden)",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Marc F\u00f6rderer",
 		"key": 60,
 		"zip": "76356"
 	},
@@ -2955,17 +3167,21 @@
 			"zip": "12683"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.516635900000,13.550230500000",
 		"latitude": 52.516635899999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.5502305,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Armin Fricke",
 		"key": 61,
 		"zip": "12683"
 	},
@@ -3010,17 +3226,21 @@
 			"zip": "12559"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.423560100000,13.679655100000",
 		"latitude": 52.423560100000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.6796551,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00fcrgen Friedrichs",
 		"key": 62,
 		"zip": "12559"
 	},
@@ -3065,17 +3285,21 @@
 			"zip": "12559"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.423560100000,13.679655100000",
 		"latitude": 52.423560100000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 13.6796551,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Margrit Friedrichs",
 		"key": 63,
 		"zip": "12559"
 	},
@@ -3120,17 +3344,21 @@
 			"zip": "01640"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.125003500000,13.580093300000",
 		"latitude": 51.125003499999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanw\u00e4ltin",
 			"key": 1
 		},
 		"longitude": 13.5800933,
 		"place": "Coswig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Irene Seifert",
 		"key": 64,
 		"zip": "01640"
 	},
@@ -3175,17 +3403,21 @@
 			"zip": "34117"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.311220900000,9.487592029546",
 		"latitude": 51.311220900000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.4875920295460006,
 		"place": "Kassel",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stefan Siegner",
 		"key": 65,
 		"zip": "34117"
 	},
@@ -3230,17 +3462,21 @@
 			"zip": "79341"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.192830100000,7.766512500000",
 		"latitude": 48.192830100000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 7.7665125000000002,
 		"place": "Kenzingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Christian Specht",
 		"key": 66,
 		"zip": "79341"
 	},
@@ -3285,17 +3521,21 @@
 			"zip": "23552"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.869370100000,10.685724386643",
 		"latitude": 53.869370099999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 10.685724386643001,
 		"place": "L\u00fcbeck",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Markus Sprank",
 		"key": 67,
 		"zip": "23552"
 	},
@@ -3340,17 +3580,21 @@
 			"zip": "04109"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.338807800000,12.375228200000",
 		"latitude": 51.338807799999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 12.3752282,
 		"place": "Leipzig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Mario van Suntum",
 		"key": 68,
 		"zip": "04109"
 	},
@@ -3395,17 +3639,21 @@
 			"zip": "69123"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.408859900000,8.659806500000",
 		"latitude": 49.408859900000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.6598065000000002,
 		"place": "Heidelberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00f6rg von Albedyll",
 		"key": 69,
 		"zip": "69123"
 	},
@@ -3450,17 +3698,21 @@
 			"zip": "18055"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.085190600000,12.137417200000",
 		"latitude": 54.085190599999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 12.1374172,
 		"place": "Rostock",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Norbert Wendt",
 		"key": 70,
 		"zip": "18055"
 	},
@@ -3505,17 +3757,21 @@
 			"zip": "60329"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.107193050000,8.667986620194",
 		"latitude": 50.107193049999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.6679866201940001,
 		"place": "Frankfurt am Main",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Kent Wilhelmi",
 		"key": 71,
 		"zip": "60329"
 	},
@@ -3560,17 +3816,21 @@
 			"zip": "18057"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.087621400000,12.122345900000",
 		"latitude": 54.087621400000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 12.122345899999999,
 		"place": "Rostock",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dirk Wolter",
 		"key": 72,
 		"zip": "18057"
 	},
@@ -3615,17 +3875,21 @@
 			"zip": "32545"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.201583300000,8.789055100000",
 		"latitude": 52.201583300000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.7890551000000006,
 		"place": "Bad Oeynhausen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stephanie Ziegler",
 		"key": 73,
 		"zip": "32545"
 	},
@@ -3670,17 +3934,21 @@
 			"zip": "03046"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.756135350000,14.334535340745",
 		"latitude": 51.756135350000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 14.334535340744999,
 		"place": "Cottbus",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Frank Garten",
 		"key": 74,
 		"zip": "03046"
 	},
@@ -3725,17 +3993,21 @@
 			"zip": "36160"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.540823350000,9.787601800000",
 		"latitude": 50.540823349999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.7876017999999991,
 		"place": "Dipperz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Guido G\u00e4rtner",
 		"key": 75,
 		"zip": "36160"
 	},
@@ -3780,17 +4052,21 @@
 			"zip": "28857"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.878669400000,8.827673400000",
 		"latitude": 52.8786694,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 8.8276734000000001,
 		"place": "Syke",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bettina G\u00f6decke",
 		"key": 76,
 		"zip": "28857"
 	},
@@ -3835,17 +4111,21 @@
 			"zip": "01705"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.010927200000,13.661175400000",
 		"latitude": 51.010927199999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.661175399999999,
 		"place": "Freital",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ulrich Graf",
 		"key": 77,
 		"zip": "01705"
 	},
@@ -3890,17 +4170,21 @@
 			"zip": "60385"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.127739050000,8.704614257698",
 		"latitude": 50.127739050000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 8.7046142576979992,
 		"place": "Frankfurt am Main",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Monika Grafe",
 		"key": 78,
 		"zip": "60385"
 	},
@@ -3945,17 +4229,21 @@
 			"zip": "38108"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.314433800000,10.545137109528",
 		"latitude": 52.314433800000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 10.545137109528,
 		"place": "Braunschweig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thorsten Guse",
 		"key": 79,
 		"zip": "38108"
 	},
@@ -4000,17 +4288,21 @@
 			"zip": "67685"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.498189300000,7.591733300000",
 		"latitude": 49.4981893,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.5917332999999996,
 		"place": "Schwedelbach",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Habicht",
 		"key": 80,
 		"zip": "67685"
 	},
@@ -4055,17 +4347,21 @@
 			"zip": "81667"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.132081200000,11.600485461013",
 		"latitude": 48.132081200000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 11.600485461012999,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Sabine Healey",
 		"key": 81,
 		"zip": "81667"
 	},
@@ -4110,17 +4406,21 @@
 			"zip": "07548"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.850195150000,12.028086798657",
 		"latitude": 50.850195149999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.028086798657,
 		"place": "Gera",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Rainer Helmrich",
 		"key": 82,
 		"zip": "07548"
 	},
@@ -4165,17 +4465,21 @@
 			"zip": "07743"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.929698400000,11.582164100000",
 		"latitude": 50.929698399999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.5821641,
 		"place": "Jena",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Rainer Helmrich",
 		"key": 83,
 		"zip": "07743"
 	},
@@ -4220,17 +4524,21 @@
 			"zip": "14476"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.459430700000,12.967303100000",
 		"latitude": 52.459430699999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.967303100000001,
 		"place": "Potsdam",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gerhard Heying",
 		"key": 84,
 		"zip": "14476"
 	},
@@ -4275,17 +4583,21 @@
 			"zip": "34121"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.304367550000,9.457016900000",
 		"latitude": 51.304367550000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.4570168999999993,
 		"place": "Kassel",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Michael Holzhauer",
 		"key": 85,
 		"zip": "34121"
 	},
@@ -4330,17 +4642,21 @@
 			"zip": "16341"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.643887800000,13.550508100000",
 		"latitude": 52.643887800000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.5505081,
 		"place": "Panketal",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Raschke",
 		"key": 86,
 		"zip": "16341"
 	},
@@ -4385,17 +4701,21 @@
 			"zip": "06188"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.501160600000,12.129532300000",
 		"latitude": 51.501160599999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.129532299999999,
 		"place": "Landsberg OT Reu\u00dfen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Karl-Heinz Keindorf",
 		"key": 87,
 		"zip": "06188"
 	},
@@ -4440,17 +4760,21 @@
 			"zip": "93055"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.016401500000,12.121124700000",
 		"latitude": 49.016401500000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.121124699999999,
 		"place": "Regensburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stefan Katzlinger",
 		"key": 88,
 		"zip": "93055"
 	},
@@ -4495,17 +4819,21 @@
 			"zip": "60435"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.151146200000,8.680871400000",
 		"latitude": 50.151146199999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.6808713999999991,
 		"place": "Frankfurt",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thomas Kaiser",
 		"key": 89,
 		"zip": "60435"
 	},
@@ -4550,17 +4878,21 @@
 			"zip": "79780"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "47.719907300000,8.428013000000",
 		"latitude": 47.719907300000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.428013,
 		"place": "St\u00fchlingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bruno Jehle",
 		"key": 90,
 		"zip": "79780"
 	},
@@ -4605,17 +4937,21 @@
 			"zip": "50354"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.889355400000,6.906350700000",
 		"latitude": 50.889355399999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.9063507,
 		"place": "H\u00fcrth",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "G\u00fcnter Jarrass",
 		"key": 91,
 		"zip": "50354"
 	},
@@ -4660,17 +4996,21 @@
 			"zip": "30457"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.344060200000,9.688574600000",
 		"latitude": 52.344060200000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.6885746000000008,
 		"place": "Hannover",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Johann Jakobs",
 		"key": 92,
 		"zip": "30457"
 	},
@@ -4715,17 +5055,21 @@
 			"zip": "80538"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.138967100000,11.587445400000",
 		"latitude": 48.138967100000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.5874454,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Holger Issig",
 		"key": 93,
 		"zip": "80538"
 	},
@@ -4770,17 +5114,21 @@
 			"zip": "24808"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.236681100000,9.667399200000",
 		"latitude": 54.236681099999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.6673992000000002,
 		"place": "Jevenstedt",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bernd Kinski",
 		"key": 94,
 		"zip": "24808"
 	},
@@ -4825,17 +5173,21 @@
 			"zip": "06217"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.346868500000,11.996668000000",
 		"latitude": 51.346868499999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.996668,
 		"place": "Merseburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Frank Klappach",
 		"key": 95,
 		"zip": "06217"
 	},
@@ -4880,17 +5232,21 @@
 			"zip": "71229"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.819193600000,9.027505000000",
 		"latitude": 48.819193599999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.0275049999999997,
 		"place": "Leonberg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas K\u00f6hler",
 		"key": 96,
 		"zip": "71229"
 	},
@@ -4935,17 +5291,21 @@
 			"zip": "65604"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.412133500000,8.028799600000",
 		"latitude": 50.412133500000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.0287995999999993,
 		"place": "Elz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Frank Laux",
 		"key": 97,
 		"zip": "65604"
 	},
@@ -4990,17 +5350,21 @@
 			"zip": "14547"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.231347200000,12.928299800000",
 		"latitude": 52.231347200000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.9282998,
 		"place": "Beelitz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bernd Lehwald",
 		"key": 98,
 		"zip": "14547"
 	},
@@ -5045,17 +5409,21 @@
 			"zip": "80339"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.137733300000,11.549348000000",
 		"latitude": 48.137733300000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 11.549348,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00f6rg Kowalsky",
 		"key": 99,
 		"zip": "80339"
 	},
@@ -5100,17 +5468,21 @@
 			"zip": "20146"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.564594700000,9.987495800000",
 		"latitude": 53.564594700000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 9.9874957999999996,
 		"place": "Hamburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Florian Krause-Allenstein",
 		"key": 100,
 		"zip": "20146"
 	},
@@ -5155,17 +5527,21 @@
 			"zip": "50931"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.926512600000,6.915257800000",
 		"latitude": 50.926512600000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.9152578,
 		"place": "K\u00f6ln",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Lothar Lachner",
 		"key": 101,
 		"zip": "50931"
 	},
@@ -5210,17 +5586,21 @@
 			"zip": "08056"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.719905800000,12.493933000000",
 		"latitude": 50.719905799999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 12.493933,
 		"place": "Zwickau",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Tord Leichsenring",
 		"key": 102,
 		"zip": "08056"
 	},
@@ -5265,17 +5645,21 @@
 			"zip": "56648"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.383522000000,7.416197000000",
 		"latitude": 50.383521999999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.4161970000000004,
 		"place": "Saffig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dieter Linden",
 		"key": 103,
 		"zip": "56648"
 	},
@@ -5320,17 +5704,21 @@
 			"zip": "48268"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.102897300000,7.624426400000",
 		"latitude": 52.102897300000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.6244263999999999,
 		"place": "Greven",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Christiano Lopes",
 		"key": 104,
 		"zip": "48268"
 	},
@@ -5375,17 +5763,21 @@
 			"zip": "73257"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.680397200000,9.363071700000",
 		"latitude": 48.680397200000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.3630717000000008,
 		"place": "K\u00f6ngen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dieter Ludwig",
 		"key": 105,
 		"zip": "73257"
 	},
@@ -5430,17 +5822,21 @@
 			"zip": "20253"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.580549400000,9.973216300000",
 		"latitude": 53.580549400000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.9732163000000007,
 		"place": "Hamburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Jens L\u00fchrsen",
 		"key": 106,
 		"zip": "20253"
 	},
@@ -5485,17 +5881,21 @@
 			"zip": "18055"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.088021600000,12.144799200000",
 		"latitude": 54.088021599999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.1447992,
 		"place": "Rostock",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Torsten Matth\u00e4us",
 		"key": 107,
 		"zip": "18055"
 	},
@@ -5540,17 +5940,21 @@
 			"zip": "81475"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.086794900000,11.484615800000",
 		"latitude": 48.086794900000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.4846158,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas May",
 		"key": 108,
 		"zip": "81475"
 	},
@@ -5595,17 +5999,21 @@
 			"zip": "24116"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.322570400000,10.118878100000",
 		"latitude": 54.322570399999996,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 10.1188781,
 		"place": "Kiel",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stefan List",
 		"key": 109,
 		"zip": "24116"
 	},
@@ -5650,17 +6058,21 @@
 			"zip": "51379"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.066165800000,6.993087700000",
 		"latitude": 51.0661658,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 6.9930877000000002,
 		"place": "Leverkusen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Peter Mauel",
 		"key": 110,
 		"zip": "51379"
 	},
@@ -5705,17 +6117,21 @@
 			"zip": "13187"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.570139900000,13.410430400000",
 		"latitude": 52.570139900000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 13.410430399999999,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Tim Mensak",
 		"key": 111,
 		"zip": "13187"
 	},
@@ -5760,17 +6176,21 @@
 			"zip": "12489"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.429113500000,13.521896000000",
 		"latitude": 52.4291135,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 13.521896,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andr\u00e9 M\u00f6nke",
 		"key": 112,
 		"zip": "12489"
 	},
@@ -5815,17 +6235,21 @@
 			"zip": "76137"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.004943700000,8.410904300000",
 		"latitude": 49.004943699999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 8.4109043000000003,
 		"place": "Karlsruhe",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Martin Neumann",
 		"key": 113,
 		"zip": "76137"
 	},
@@ -5870,17 +6294,21 @@
 			"zip": "14469"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.404767900000,13.062585900000",
 		"latitude": 52.404767900000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 13.0625859,
 		"place": "Potsdam",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Wendelin Monz",
 		"key": 114,
 		"zip": "14469"
 	},
@@ -5925,17 +6353,21 @@
 			"zip": "10707"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.501146200000,13.318093000000",
 		"latitude": 52.501146200000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-2.png",
+			"title": "Vertrauensanwalt",
 			"key": 2
 		},
 		"longitude": 13.318092999999999,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Wendelin Monz",
 		"key": 115,
 		"zip": "10707"
 	},
@@ -5980,17 +6412,21 @@
 			"zip": "94474"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.622908100000,13.192187100000",
 		"latitude": 48.622908099999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.1921871,
 		"place": "Vilshofen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Mayer",
 		"key": 116,
 		"zip": "94474"
 	},
@@ -6035,17 +6471,21 @@
 			"zip": "14974"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.317441900000,13.267574000000",
 		"latitude": 52.317441899999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.267574,
 		"place": "Ludwigsfelde",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gerd Miethe",
 		"key": 117,
 		"zip": "14974"
 	},
@@ -6090,17 +6530,21 @@
 			"zip": "5067"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.941985600000,6.944567000000",
 		"latitude": 50.941985600000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.9445670000000002,
 		"place": "K\u00f6ln",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Markus M\u00f6ller",
 		"key": 118,
 		"zip": "5067"
 	},
@@ -6145,17 +6589,21 @@
 			"zip": "10247"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.518624100000,13.464022600000",
 		"latitude": 52.518624099999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.4640226,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Volker Neuert",
 		"key": 119,
 		"zip": "10247"
 	},
@@ -6200,17 +6648,21 @@
 			"zip": "71404"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.842189900000,9.364179100000",
 		"latitude": 48.842189900000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.3641790999999994,
 		"place": "Korb",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Heinz-Joachim Nolte",
 		"key": 120,
 		"zip": "71404"
 	},
@@ -6255,17 +6707,21 @@
 			"zip": "04349"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.380855200000,12.467186400000",
 		"latitude": 51.380855199999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.467186399999999,
 		"place": "Leipzig",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "J\u00f6rg Nowitzki",
 		"key": 121,
 		"zip": "04349"
 	},
@@ -6310,17 +6766,21 @@
 			"zip": "79279"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.062743700000,7.844300500000",
 		"latitude": 48.062743699999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.8443005000000001,
 		"place": "V\u00f6rstetten",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Peter Peltz",
 		"key": 122,
 		"zip": "79279"
 	},
@@ -6365,17 +6825,21 @@
 			"zip": "71723"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.021860550000,9.264521092635",
 		"latitude": 49.02186055,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.2645210926350003,
 		"place": "Gro\u00dfbottwar",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Daniel Rossler",
 		"key": 123,
 		"zip": "71723"
 	},
@@ -6420,17 +6884,21 @@
 			"zip": "88149"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "47.578215400000,9.609445200000",
 		"latitude": 47.578215399999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.6094451999999997,
 		"place": "Nonnenhorn",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Michael Pfeiler",
 		"key": 124,
 		"zip": "88149"
 	},
@@ -6475,17 +6943,21 @@
 			"zip": "58095"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.364514600000,7.497839900000",
 		"latitude": 51.3645146,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.4978398999999998,
 		"place": "Hagen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thorsten Pflanz",
 		"key": 125,
 		"zip": "58095"
 	},
@@ -6530,17 +7002,21 @@
 			"zip": "33014"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.724754549733,9.020253445107",
 		"latitude": 51.724754549732999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.0202534451070004,
 		"place": "Bad Driburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Rainer Pirsig",
 		"key": 126,
 		"zip": "33014"
 	},
@@ -6585,17 +7061,21 @@
 			"zip": "60389"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.129282400000,8.698527500000",
 		"latitude": 50.129282400000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.6985275000000009,
 		"place": "Frankfurt am Main",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Horst Pischel",
 		"key": 127,
 		"zip": "60389"
 	},
@@ -6640,17 +7120,21 @@
 			"zip": "14612"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.556709200000,13.088473900000",
 		"latitude": 52.5567092,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 13.0884739,
 		"place": "Falkensee",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Pamela Preuss",
 		"key": 128,
 		"zip": "14612"
 	},
@@ -6695,17 +7179,21 @@
 			"zip": "10829"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.486182800000,13.366655600000",
 		"latitude": 52.486182800000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.3666556,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bernd Lehwald",
 		"key": 129,
 		"zip": "10829"
 	},
@@ -6750,17 +7238,21 @@
 			"zip": "04936"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.734366859959,13.382675014867",
 		"latitude": 51.734366859959003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.382675014867001,
 		"place": "Schlieben",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gerd Miethe",
 		"key": 130,
 		"zip": "04936"
 	},
@@ -6805,17 +7297,21 @@
 			"zip": "16348"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.760998900000,13.472306900000",
 		"latitude": 52.760998899999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.4723069,
 		"place": "Wandlitz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Daniel R\u00fccker",
 		"key": 131,
 		"zip": "16348"
 	},
@@ -6860,17 +7356,21 @@
 			"zip": "13187"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.568015800000,13.411741600000",
 		"latitude": 52.568015799999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.411741599999999,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dieter R\u00fchle",
 		"key": 132,
 		"zip": "13187"
 	},
@@ -6915,17 +7415,21 @@
 			"zip": "97078"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.814620700000,9.968045500000",
 		"latitude": 49.814620699999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.9680455000000006,
 		"place": "W\u00fcrzburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Helmut Rummel",
 		"key": 133,
 		"zip": "97078"
 	},
@@ -6970,17 +7474,21 @@
 			"zip": "15517"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.353890500000,14.076722700000",
 		"latitude": 52.353890499999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 14.076722699999999,
 		"place": "F\u00fcrstenwalde",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Norbert Schindler",
 		"key": 134,
 		"zip": "15517"
 	},
@@ -7025,17 +7533,21 @@
 			"zip": "26123"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.146089500000,8.216274000000",
 		"latitude": 53.146089500000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.2162740000000003,
 		"place": "Oldenburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Holger Schmidt",
 		"key": 135,
 		"zip": "26123"
 	},
@@ -7080,17 +7592,21 @@
 			"zip": "85435"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.306930050000,11.910061649061",
 		"latitude": 48.306930049999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 11.910061649060999,
 		"place": "Erding",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Andreas Schmitt",
 		"key": 136,
 		"zip": "85435"
 	},
@@ -7135,17 +7651,21 @@
 			"zip": "34369"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.498769100000,9.382583400000",
 		"latitude": 51.498769099999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.3825833999999997,
 		"place": "Hofgeismar",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Peter Schmitt",
 		"key": 137,
 		"zip": "34369"
 	},
@@ -7190,17 +7710,21 @@
 			"zip": "12623"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.507391100000,13.612568100000",
 		"latitude": 52.5073911,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.612568100000001,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Frank Schnaars",
 		"key": 138,
 		"zip": "12623"
 	},
@@ -7245,17 +7769,21 @@
 			"zip": "23552"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.861777000000,10.688454000000",
 		"latitude": 53.861776999999996,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 10.688454,
 		"place": "L\u00fcbeck",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Artur Schneider",
 		"key": 139,
 		"zip": "23552"
 	},
@@ -7300,17 +7828,21 @@
 			"zip": "52428"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.949706600000,6.413329700000",
 		"latitude": 50.949706599999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.4133297000000002,
 		"place": "J\u00fclich",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Peter Scholz",
 		"key": 140,
 		"zip": "52428"
 	},
@@ -7355,17 +7887,21 @@
 			"zip": "09120"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.817473000000,12.917984659185",
 		"latitude": 50.817473,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.917984659185,
 		"place": "Chemnitz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stephan Schwarzbold",
 		"key": 141,
 		"zip": "09120"
 	},
@@ -7410,17 +7946,21 @@
 			"zip": "21244"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.332051800000,9.886893000000",
 		"latitude": 53.332051800000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.8868930000000006,
 		"place": "Buchholz i.d.N.",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Uve Schwencke",
 		"key": 142,
 		"zip": "21244"
 	},
@@ -7465,17 +8005,21 @@
 			"zip": "20253"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.580549400000,9.973216300000",
 		"latitude": 53.580549400000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.9732163000000007,
 		"place": "Hamburg",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Fred Schwendrat",
 		"key": 143,
 		"zip": "20253"
 	},
@@ -7520,17 +8064,21 @@
 			"zip": "75175"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.894493000000,8.715080200000",
 		"latitude": 48.894492999999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.7150801999999992,
 		"place": "Pforzheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Hanns-Peter Simmank",
 		"key": 144,
 		"zip": "75175"
 	},
@@ -7575,17 +8123,21 @@
 			"zip": "13437"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.592141900000,13.324192626432",
 		"latitude": 52.592141900000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.324192626432,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Norman Stark",
 		"key": 145,
 		"zip": "13437"
 	},
@@ -7630,17 +8182,21 @@
 			"zip": "69509"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.608290550000,8.743860069424",
 		"latitude": 49.60829055,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 8.7438600694240005,
 		"place": "M\u00f6rlenbach",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Mico Sundmacher",
 		"key": 146,
 		"zip": "69509"
 	},
@@ -7685,17 +8241,21 @@
 			"zip": "14612"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.575139600000,13.070090400000",
 		"latitude": 52.5751396,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.0700904,
 		"place": "Falkensee",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Reiner Uelze",
 		"key": 147,
 		"zip": "14612"
 	},
@@ -7740,17 +8300,21 @@
 			"zip": "77791"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.409344600000,7.991299705848",
 		"latitude": 48.409344599999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.9912997058480002,
 		"place": "Berghaupten",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Bernd Vetter",
 		"key": 148,
 		"zip": "77791"
 	},
@@ -7795,17 +8359,21 @@
 			"zip": "17248"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "53.383977000000,12.848017500000",
 		"latitude": 53.383977000000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.848017499999999,
 		"place": "Rechlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Albrecht von Kessel",
 		"key": 149,
 		"zip": "17248"
 	},
@@ -7850,17 +8418,21 @@
 			"zip": "12459"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.457425500000,13.533528000000",
 		"latitude": 52.457425499999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.533528,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ludger Weidem\u00fcller",
 		"key": 150,
 		"zip": "12459"
 	},
@@ -7905,17 +8477,21 @@
 			"zip": "93173"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "49.080155500000,12.200980386894",
 		"latitude": 49.080155499999996,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 12.200980386894001,
 		"place": "Wenzenbach",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Josef Weininger",
 		"key": 151,
 		"zip": "93173"
 	},
@@ -7960,17 +8536,21 @@
 			"zip": "14059"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.513376100000,13.291676400000",
 		"latitude": 52.513376100000002,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.2916764,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Stefan C. W\u00fcrzner",
 		"key": 152,
 		"zip": "14059"
 	},
@@ -8015,17 +8595,21 @@
 			"zip": "50259"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "50.991303800000,6.796356100000",
 		"latitude": 50.991303799999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 6.7963560999999997,
 		"place": "Pulheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Elmar Zibis",
 		"key": 153,
 		"zip": "50259"
 	},
@@ -8070,17 +8654,21 @@
 			"zip": "72070"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.521823750000,9.048370143606",
 		"latitude": 48.521823750000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 9.0483701436060002,
 		"place": "T\u00fcbingen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Ute Schlierf",
 		"key": 154,
 		"zip": "72070"
 	},
@@ -8125,17 +8713,21 @@
 			"zip": "80796"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "48.159755300000,11.574667400000",
 		"latitude": 48.1597553,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 11.574667399999999,
 		"place": "M\u00fcnchen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Renate Schulz",
 		"key": 155,
 		"zip": "80796"
 	},
@@ -8180,17 +8772,21 @@
 			"zip": "18190"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.081081550000,12.373689750000",
 		"latitude": 54.08108155,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 12.37368975,
 		"place": "Sanitz",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Katharina Siegmund",
 		"key": 156,
 		"zip": "18190"
 	},
@@ -8235,17 +8831,21 @@
 			"zip": "99091"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.014815000000,10.998498000000",
 		"latitude": 51.014814999999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberaterin",
 			"key": 3
 		},
 		"longitude": 10.998498,
 		"place": "Erfurt",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Evelyn Wernecke",
 		"key": 157,
 		"zip": "99091"
 	},
@@ -8290,17 +8890,21 @@
 			"zip": "44623"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.536462700000,7.222093876937",
 		"latitude": 51.536462700000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.2220938769369996,
 		"place": "Herne",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dirk Rosenkranz",
 		"key": 158,
 		"zip": "44623"
 	},
@@ -8345,17 +8949,21 @@
 			"zip": "45711"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "51.619522850000,7.314157374344",
 		"latitude": 51.619522850000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 7.314157374344,
 		"place": "Datteln",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dirk Rosenkranz Datteln",
 		"key": 159,
 		"zip": "45711"
 	},
@@ -8400,17 +9008,21 @@
 			"zip": "24143"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.308715750000,10.137247300000",
 		"latitude": 54.308715749999998,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 10.1372473,
 		"place": "Kiel",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gerhard Steger",
 		"key": 160,
 		"zip": "24143"
 	},
@@ -8455,17 +9067,21 @@
 			"zip": "24857"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "54.502859900000,9.599457521078",
 		"latitude": 54.502859899999997,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.5994575210779995,
 		"place": "Fahrdorf",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Gerhard Steger Fahrdorf",
 		"key": 161,
 		"zip": "24857"
 	},
@@ -8510,17 +9126,21 @@
 			"zip": "31135"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.154062400000,9.961887400000",
 		"latitude": 52.154062400000001,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.9618874000000002,
 		"place": "Hildesheim",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thomas Weitemeyer-Jan\u00dfen",
 		"key": 162,
 		"zip": "31135"
 	},
@@ -8565,17 +9185,21 @@
 			"zip": "30916"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.441989600000,9.879862000000",
 		"latitude": 52.441989599999999,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 9.8798619999999993,
 		"place": "Isernhagen",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Thomas Weitemeyer-Jan\u00dfen",
 		"key": 163,
 		"zip": "30916"
 	},
@@ -8620,17 +9244,21 @@
 			"zip": "13055"
 		},
 		"categories": [],
+		"content": null,
 		"tooltip": "",
 		"geoCoordinates": "52.534797750000,13.482585400000",
 		"latitude": 52.534797750000003,
 		"locationType": {
+			"tooltip": "",
+			"icon": "fileadmin\/user_upload\/test\/map-1.png",
+			"title": "Bauherrenberater",
 			"key": 4
 		},
 		"longitude": 13.4825854,
 		"place": "Berlin",
 		"placeGroups": [],
 		"regions": [],
-		"title": "",
+		"title": "Dietrich Kabisch",
 		"key": 164,
 		"zip": "13055"
 	}
