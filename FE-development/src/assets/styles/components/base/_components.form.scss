@@ -6,53 +6,7 @@
    ========================================================================== */
 
 // required: _settings/_settings.ui.scss
-// required: _tools/functions/_functions.alignment.scss
 // required: _tools/mixins/_mixins.focus-outline.scss
-// required: _tools/mixins/_mixins.icon-css-arrow.scss
-
-// Fieldset
-$form-fieldset-space-after: 3rem;
-
-// Legend
-$form-legend-color: map-get($toolbox-colors, 'black');
-$form-legend-space-after: 2rem;
-
-// Group
-$form-group-space-after: 1rem;
-
-// Label
-$form-label-color: map-get($toolbox-colors, 'black');
-$form-label-space-after: .5rem;
-
-// Field
-$form-field-bg-color: map-get($toolbox-colors, 'white');
-$form-field-bg-color-focus: map-get($toolbox-colors, 'white');
-$form-field-border-color: rgba(map-get($toolbox-colors, 'black'), .5);
-$form-field-border-color-focus: map-get($toolbox-colors, 'secondary');
-$form-field-border-radius: 0;
-$form-field-box-shadow: 0 0 4px rgba(map-get($toolbox-colors, 'black'), .5);
-$form-field-color: map-get($toolbox-colors, 'black');
-$form-field-color-focus: map-get($toolbox-colors, 'black');
-$form-field-icon-color: map-get($toolbox-colors, 'black');
-$form-field-icon-color-focus: map-get($toolbox-colors, 'secondary');
-$form-field-space-inner-x: .5em;
-$form-field-space-inner-y: .5em;
-$form-field-with-icon-space-inner: 2em;
-
-// Checkmark
-$form-field-check-icon-color: $form-field-border-color-focus;
-$form-field-check-icon-size: 8px; // avoid rem rounding error: keep absolute unit
-$form-field-check-line-height: nth(map-get($toolbox-typo-sizes, 'm'), 2); // get line-height defined in toolbox
-$form-field-check-size: 1rem;
-$form-field-check-space-after: .25rem;
-
-// Placeholder
-$form-placeholder-color: rgba(map-get($toolbox-colors, 'black'), .5);
-$form-placeholder-color-focus: rgba(map-get($toolbox-colors, 'black'), .5);
-
-// Validation Colors
-$form-color-error: map-get($toolbox-colors, 'danger');
-$form-color-valid: map-get($toolbox-colors, 'success');
 
 .am-form {
 
@@ -61,7 +15,9 @@ $form-color-valid: map-get($toolbox-colors, 'success');
     }
 
     &__label {
-        display: inline-block;
+        display: block;
+        font-size: .875rem;
+        font-weight: 700;
     }
 
     &__label,
@@ -76,12 +32,12 @@ $form-color-valid: map-get($toolbox-colors, 'success');
     &__input-container {
         position: relative;
 
-        am-form__input[type='text'] {
+        .am-form__input[type='text'] {
             // avoid text to overcome icon
             padding-right: $form-field-with-icon-space-inner;
         }
 
-        am-form__icon,
+        .am-form__icon,
         .am-button,
         .am-button-icon-only {
             position: absolute;
@@ -96,7 +52,7 @@ $form-color-valid: map-get($toolbox-colors, 'success');
         }
 
         .am-button,
-        .am-button-icon-only {
+        .am-button--icon-only {
             line-height: inherit;
             padding: $form-field-space-inner-y 1em;
             right: 0;
@@ -131,11 +87,20 @@ $form-color-valid: map-get($toolbox-colors, 'success');
     }
 
     &__select-arrow { // select arrow icon
+        color: $form-field-icon-color;
+        height: 100%;
         pointer-events: none;
         position: absolute;
-        right: .5rem;
-        top: 50%;
-        //@include icon-css-arrow(.5rem, rotate(-45deg) translateY(-100%), $form-field-icon-color);
+        right: 0;
+        top: 0;
+        width: $button-icon-only-size;
+
+        .o-icon-font {
+            @include absolute-center(50%, 50%, -50%, -50%);
+            font-size: $button-icon-font-size;
+            height: $button-icon-size;
+            width: $button-icon-size;
+        }
     }
 
     /**
@@ -276,7 +241,7 @@ $form-color-valid: map-get($toolbox-colors, 'success');
    Theme (Colors / Messages / Validation)
    ========================================================================== */
 
-am-form {
+.am-form {
     &__legend {
         color: $form-legend-color;
     }
@@ -297,33 +262,33 @@ am-form {
      */
     &__group {
         &.is-valid {
-            am-form__input,
-            am-form__description {
+            .am-form__input,
+            .am-form__description {
                 color: $form-color-valid;
             }
 
-            am-form__input {
+            .am-form__input {
                 border-color: $form-color-valid;
             }
         }
 
         &.is-error {
-            am-form__input,
-            am-form__description {
+            .am-form__input,
+            .am-form__description {
                 color: $form-color-error;
             }
 
-            am-form__input,
-            am-form__checkfields input + label:before,
-            am-form__checkfields [type='checkbox'] + label:after {
+            .am-form__input,
+            .am-form__checkfields input + label:before,
+            .am-form__checkfields [type='checkbox'] + label:after {
                 border-color: $form-color-error;
             }
 
-            am-form__checkfields input + label {
+            .am-form__checkfields input + label {
                 color: $form-color-error;
             }
 
-            am-form__checkfields [type='radio'] + label:after {
+            .am-form__checkfields [type='radio'] + label:after {
                 background-color: $form-color-error;
             }
         }
@@ -355,9 +320,9 @@ am-form {
      * Input Container
      */
     &__input-container {
-        am-form__input {
+        .am-form__input {
             &:focus {
-                ~ am-form__icon,
+                ~ .am-form__icon,
                 ~ .am-button,
                 ~ .am-button-icon-only {
                     color: $form-field-icon-color-focus;
@@ -368,10 +333,15 @@ am-form {
         /**
          * Icon & Button
          */
-        am-form__icon,
+        .am-form__icon,
         .am-button,
-        .am-button-icon-only {
+        .am-button--icon-only {
             color: $form-field-icon-color;
+
+            &[disabled] {
+                color: $form-field-icon-color-disabled;
+                pointer-events: none;
+            }
         }
     }
 
@@ -416,5 +386,30 @@ am-form {
                 }
             }
         }
+    }
+}
+
+
+.am-form__tag {
+    display: inline-block;
+    margin-right: .2rem;
+    font-size: .875rem;
+
+    input {
+        display: none;
+    }
+
+    input:checked + label {
+        border: 1px solid $form-field-icon-color;
+        background: $form-field-icon-color;
+        color: app-color('white');
+        transition: all .3s ease;
+    }
+
+    label {
+        border: 1px solid $form-field-border-color;
+        border-radius: 2rem;
+        padding: .1rem .5rem;
+        transition: all .3s ease;
     }
 }

@@ -1,3 +1,18 @@
+/*
+ * _______________
+ * |       .-.   |
+ * |      // ``  |
+ * |     //      |
+ * |  == ===-_.-'|
+ * |   //  //    |
+ * |__//_________|
+ *
+ * Copyright (c) ${YEAR} familie-redlich :systeme <systeme@familie-redlich.de>
+ * @link     http://www.familie-redlich.de
+ *
+ *
+ */
+
 /**
  * Created by d.eggermann on 07.11.19.
  */
@@ -18,7 +33,7 @@ const values = [
 module.exports = {
 
     context: {
-        label: 'Filter per checkboxes',
+        label: 'Filter per radio boxes',
         options: labels.map((label, i) => {
             return {
                 label: label,

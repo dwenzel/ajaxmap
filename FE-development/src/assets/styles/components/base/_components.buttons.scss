@@ -1,0 +1,69 @@
+/* ==========================================================================
+   Buttons
+   ========================================================================== */
+
+// required: _tools/mixins/_mixins.button-basic.scss
+// required: _tools/mixins/_mixins.button-style.scss
+
+$buttons: (
+    'main': (
+        backgroundColor: map-get($toolbox-colors, 'primary'),
+        borderColor: map-get($toolbox-colors, 'primary'),
+        color: map-get($toolbox-colors, 'white'),
+        // hover
+        hoverBackgroundColor: darken(map-get($toolbox-colors, 'primary'), 20%),
+        hoverBorderColor: darken(map-get($toolbox-colors, 'primary'), 20%),
+        hoverColor: map-get($toolbox-colors, 'white'),
+    ),
+    'second': (
+        backgroundColor: map-get($toolbox-colors, 'secondary'),
+        borderColor: map-get($toolbox-colors, 'secondary'),
+        color: map-get($toolbox-colors, 'white'),
+        // hover
+        hoverBackgroundColor: darken(map-get($toolbox-colors, 'secondary'), 20%),
+        hoverBorderColor: darken(map-get($toolbox-colors, 'secondary'), 20%),
+        hoverColor: map-get($toolbox-colors, 'white'),
+    ),
+    'ghost': (
+        backgroundColor: transparent,
+        borderColor: map-get($toolbox-colors, 'primary'),
+        color: map-get($toolbox-colors, 'primary'),
+        // hover
+        hoverBackgroundColor: transparent,
+        hoverBorderColor: darken(map-get($toolbox-colors, 'primary'), 20%),
+        hoverColor: darken(map-get($toolbox-colors, 'primary'), 20%)
+    )
+);
+
+.am-button,
+.am-button--icon-only {
+    @include button-basic();
+}
+
+.am-button {
+
+    /**
+     * Modifier - Button Styles
+     */
+    @each $buttonModifier, $null in $buttons {
+        &--#{$buttonModifier} {
+            @include button-style($buttonModifier);
+        }
+    }
+}
+
+/**
+ * Icon only
+ */
+.am-button--icon-only {
+    padding: 0;
+    position: relative;
+    width: $button-icon-only-size;
+
+    .o-icon-font {
+        @include absolute-center(50%, 50%, -50%, -50%);
+        font-size: $button-icon-font-size;
+        height: $button-icon-size;
+        width: $button-icon-size;
+    }
+}

@@ -3,7 +3,7 @@
  */
 import $ from 'jquery';
 
-import ajaxMap from './ajaxMap'
+import ajaxMap from './ajaxMap';
 
 export const ajaxCall = (data) => {
     return new Promise(function(resolve, reject) {
@@ -14,8 +14,8 @@ export const ajaxCall = (data) => {
             data,
             success: resolve,
             error: reject
-        })
-    })
+        });
+    });
 };
 
 export const sort = {
@@ -34,7 +34,7 @@ export const sort = {
             return a > b ? 1 : a < b ? -1 : 0;
         }
     }
-}
+};
 
 export const inserScriptTag = (src) => {
 
@@ -47,8 +47,8 @@ export const inserScriptTag = (src) => {
 
         var entry = document.getElementsByTagName('script')[0];
         entry.parentNode.insertBefore(script, entry);
-    })
-}
+    });
+};
 /**
  * get address for a single place
  * @param placeId
@@ -58,10 +58,10 @@ export const getAddress = (placeId) => {
     const data = {
         'id': ajaxMap.configData.mapSettings.pageId,
         'api': 'map',
-        'action': "getAddress",
+        'action': 'getAddress',
         'placeId': placeId
     };
 
-    return ajaxCall(data)
-}
+    return ajaxCall(data);
+};
 

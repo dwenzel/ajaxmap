@@ -1,9 +1,9 @@
-import ajaxMap from './ajaxMap'
-import places from './ajaxMap-places'
-import layers from './map-layers'
-import locationTypes from './ajaxMap-locationTypes'
-import filter  from './ajaxMap-places-filter'
-import {sort}  from './utilitys'
+import ajaxMap from './ajaxMap';
+import places from './ajaxMap-places';
+import layers from './map-layers';
+import locationTypes from './ajaxMap-locationTypes';
+import filter from './ajaxMap-places-filter';
+import {sort} from './utilitys';
 
 import $ from 'jquery';
 
@@ -17,7 +17,7 @@ export const fancytreeSelector = {
     regions: '#ajaxMapRegionsTree',
     placeGroup: '#ajaxMapPlaceGroupTree',
     places: '#ajaxMapPlacesTree'
-}
+};
 
 /**
  * Renders a fancyTree
@@ -40,11 +40,11 @@ function renderTreeAjax($el, action, mapEntry, treeSettings) {
         },
         source: {
             url: ajaxMap.ajaxServerPath,
-            type: "GET",
-            dataType: "json",
+            type: 'GET',
+            dataType: 'json',
             data: {
                 'id': mapSettings.pageId,
-                'api': "map",
+                'api': 'map',
                 'action': action,
                 'mapId': mapId
             }
@@ -64,7 +64,7 @@ function renderTreeAjax($el, action, mapEntry, treeSettings) {
 
 const _ = {
     $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId)
-}
+};
 
 const renderTree = {
     update: {
@@ -86,7 +86,7 @@ const renderTree = {
     },
     places: (mapEntry, children) => {
         const mapId = mapEntry.id,
-            $el = _.$getTreeEl('places', mapId)
+            $el = _.$getTreeEl('places', mapId);
 
         const placesTreeConfig = mapEntry.settings.placesTree ? mapEntry.settings.placesTree
             : ajaxMap.configData.mapSettings.settings.placesTree;
@@ -110,7 +110,7 @@ const renderTree = {
                 data.node.data.placeInstance.treeNode = data.node;
 
                 if (ajaxMapConfig.renderPlaceTreesItem) {
-                    return ajaxMapConfig.renderPlaceTreesItem(data)
+                    return ajaxMapConfig.renderPlaceTreesItem(data);
                 }
 
                 return null; // null is the default
@@ -124,7 +124,7 @@ const renderTree = {
          alert('dffdffsaf')
 
          var node = data.node,
-         $tdList = $(node.tr).find(">td");
+         $tdList = $(node.tr).find('>td');
          $tdList.eq(1).text(node.key);
          }
          */
@@ -134,10 +134,10 @@ const renderTree = {
 
     category: (mapEntry) => {
         const mapId = mapEntry.id,
-            $el = _.$getTreeEl('category', mapId)
+            $el = _.$getTreeEl('category', mapId);
 
         if (!$el.length) {
-            return
+            return;
         }
 
         renderTreeAjax(
@@ -149,10 +149,10 @@ const renderTree = {
     },
     placeGroup: function(mapEntry) {
         const mapId = mapEntry.id,
-            $el = _.$getTreeEl('placeGroup', mapId)
+            $el = _.$getTreeEl('placeGroup', mapId);
 
         if (!$el.length) {
-            return
+            return;
         }
 
         renderTreeAjax(
@@ -164,10 +164,10 @@ const renderTree = {
     },
     regions: (mapEntry) => {
         const mapId = mapEntry.id,
-            $el = _.$getTreeEl('regions', mapId)
+            $el = _.$getTreeEl('regions', mapId);
 
         if (!$el.length) {
-            return
+            return;
         }
 
         const options = mapEntry.settings.regionTree;

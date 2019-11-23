@@ -1,0 +1,50 @@
+$am-card-border: 1px solid map-get($toolbox-colors, 'light');
+$am-card-border-hover-color: map-get($toolbox-colors, 'primary');
+$am-card-transition: border-color .3s ease;
+$am-card-img-border-radius: 100%;
+
+// am card
+.am-card {
+    display: flex;
+    margin-left: -$am-sb-inner-padding;
+    margin-right: -$am-sb-inner-padding;
+    padding: $am-sb-inner-padding;
+    position: relative;
+
+    // profile or brand image
+    &__img {
+        &.is-rounded {
+            img {
+                border-radius: $am-card-img-border-radius;
+            }
+        }
+    }
+
+    // default paragraph
+    p {
+        margin-bottom: $space/2;
+    }
+
+    // copy
+    &__copy {
+        padding-left: $am-sb-inner-padding;
+    }
+
+    // jump to map
+    &__block-link {
+        border: $am-card-border;
+        color: transparent;
+        font-size: 0;
+        height: 100%;
+        left: 0;
+        position: absolute;
+        top: 0;
+        transition: $am-card-transition;
+        width: 100%;
+
+        &:hover {
+            border-color: $am-card-border-hover-color;
+            transition: $am-card-transition;
+        }
+    }
+}

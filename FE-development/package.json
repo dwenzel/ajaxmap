@@ -84,6 +84,7 @@
 		"publicPath": "/resources/"
 	},
 	"dependencies": {
+		"fastdom": "^1.0.9",
 		"jquery": "^3.4.1",
 		"jquery.fancytree": "^2.33.0",
 		"normalize.css": "^8.0.1"

@@ -1,9 +1,10 @@
 import $ from 'jquery';
 
 import detailView from './ajaxMap-places-detail-view';
-import {getAddress} from './utilitys'
+import {getAddress} from './utilitys';
 
-import markerInfoWindow from './map-marker-info-window'
+import markerInfoWindow from './map-marker-info-window';
+
 const _ = {
     cache: {},
     markup: {
@@ -34,9 +35,9 @@ const _ = {
 
             let content = '';
 
-            content += (place.title) ? '<h4 class="infoWindowTitle">' + place.title + '</h4>' : "";
+            content += (place.title) ? '<h4 class="infoWindowTitle">' + place.title + '</h4>' : '';
             content += (place.icon) ?
-                '<img width="120px" class="infoWindowImage" src="' + place.icon + '"/>' : "";
+                '<img width="120px" class="infoWindowImage" src="' + place.icon + '"/>' : '';
 
             //'<p class="infoWindowDescription">' + place.description + '</p>';
             content += categoryList ? categoryList : '';
@@ -55,15 +56,15 @@ const _ = {
 
             if (place.address) {
 
-                return resolve(markup(place.address))
+                return resolve(markup(place.address));
             }
 
             return getAddress(place.uid).then(function(address) {
                 place.address = address;
 
-                return resolve(markup(address))
-            })
-        })
+                return resolve(markup(address));
+            });
+        });
     },
 
 
@@ -80,7 +81,7 @@ const _ = {
         _.initCache();
     }
 
-}
+};
 
 const infoWindow = {
     /**
@@ -96,18 +97,18 @@ const infoWindow = {
                 /**
                  * @todo make content rendering configurable, add link for overlay with additional info
                  */
-                    // build a list of place's categories
-                const listMarkup = _.markup.categoryList(place.categories)
+                // build a list of place's categories
+                const listMarkup = _.markup.categoryList(place.categories);
 
                 const data = {
                     addressMarkup,
                     listMarkup,
                     place
-                }
+                };
 
                 return resolve(_.markup.content(data));
-            })
-        })
+            });
+        });
     },
     createOnClick: (mapEntry, place) => function() {
         _.checkCache();
@@ -131,18 +132,18 @@ const infoWindow = {
         google.maps.event.addListener(infoWindow, 'domready', function() {
 
             _.cache.$moreDetailView
-            .unbind("click")
-            .bind('click', (function(event) {
-                event.preventDefault();
+                .unbind('click')
+                .bind('click', (function(event) {
+                    event.preventDefault();
 
-                //TODO: refactor without data-attribute
-                detailView.open("infoWindow", -1)
+                    //TODO: refactor without data-attribute
+                    detailView.open('infoWindow', -1);
 
-                event.stopPropagation();
-                return false;
-            }));
+                    event.stopPropagation();
+                    return false;
+                }));
         });
     }
-}
+};
 
 export default infoWindow;
