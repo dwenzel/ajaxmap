@@ -1,6 +1,6 @@
 const _ = {
     BSB_ajaxMapConfigData: () => {
-
+return;
         //hold the api for ajaxmap
         window.ajaxMapConfig = {};
 

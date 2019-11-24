@@ -107,10 +107,11 @@ const renderTree = {
                 children: []
             },
             renderTitle: (event, data) => {
-                data.node.data.placeInstance.treeNode = data.node;
+                const placeInstance = data.node.data.placeInstance;
+                placeInstance.treeNode = data.node;
 
                 if (ajaxMapConfig.renderPlaceTreesItem) {
-                    return ajaxMapConfig.renderPlaceTreesItem(data);
+                    return ajaxMapConfig.renderPlaceTreesItem(placeInstance);
                 }
 
                 return null; // null is the default

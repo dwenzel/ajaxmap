@@ -79,6 +79,8 @@ ajaxMap = {//    TODO:
 
         ajaxMap.configData = configData;
 
+        window.ajaxMapConfig= window.ajaxMapConfig||{};
+
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;
 
