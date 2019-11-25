@@ -79,13 +79,14 @@ class LocationSearch {
         if (this.autoSuggestSearch || this.radialSelect) {
             this.$sendButton = $(_.sendButtonSelector);
             this.$sendButton.show(800);
+
             this.$sendButton.on('click', this.sendDatas(this));
         }
     }
 
     sendDatas() {
         const that = this;
-        return function() {
+        return function(event) {
             let queryParams = {};
 
             that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
@@ -102,6 +103,7 @@ class LocationSearch {
             };
 
             places.loadFromData(that.mapEntry, data);
+            event.preventDefault();
         };
     }
 }

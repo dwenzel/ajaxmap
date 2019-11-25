@@ -14,12 +14,15 @@ const _cache = {
     $map: $('.js-ajax-map'),
     $filterPlaces: $('input[name="filterPlaces"]'),
     $amSidebarTrigger: $('.js-ajax-map-sb-trigger'),
-    $amSidebar: $('.js-ajax-map-sidebar')
+    $amSidebar: $('.js-ajax-map-sidebar'),
+
 };
 
 /**
  * TODO desc DEG
  * @param mapEntry
+ * some events on map are per map , ajax map could have n- submaps
+ * this ist the perMap initaliser
  */
 export function initByMapEntry(mapEntry) {
     search.init(mapEntry);
@@ -31,8 +34,11 @@ export function initByMapEntry(mapEntry) {
 function init() {
 
     // @TODO DEG wozu benötigen wir das?
+    //@eho noch von DWE! ich weiss es nicht-> detail overlay oder so
+    //der unrefactored code ist in ajaxMap-places-detail-view.js gesetzt
     $('body').append('<div id="overlayDetailHelper">');
 
+    //TODO:@eho muss alles  per map sein
     resetFilterPlacesInput();
     updateSidebarLayoutSetup();
 
