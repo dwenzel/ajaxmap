@@ -19,16 +19,15 @@ const mapLocationTypes = {
 
         // set on change function for location types treeSelector
         $(mapLocationTypes.treeSelector + mapId).change(function() {
-            alert('dsf');
+
             places.updatePlaces(mapId);
         });
     },
     init: function(mapEntry) {
 
         if (mapEntry.locationTypes) {
-
-
             mapLocationTypes.ui(mapEntry);  //        @dirk ??
+            /*here is a diff between mapEntry.locationtypes & mapEntry.settings.locationTypeTree */
             const $tree = treeRenderer.locationTypes(mapEntry);
 
             // console.log($tree)e

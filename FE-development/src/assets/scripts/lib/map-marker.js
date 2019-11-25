@@ -1,11 +1,12 @@
 import {getLocationType} from './map-helpers';
 import mapHelpers from './map-helpers';
 import infoWindow from './map-marker-info-window';
-
+import $ from 'jquery';
 function addMarkerClickFunction(mapEntry, place) {
     return function() {
+
         if (/*window.ajaxMapConfig && the error is your friend */window.ajaxMapConfig.onMarkerClick) {
-            window.ajaxMapConfig.onMarkerClick(mapEntry, place);
+            window.ajaxMapConfig.onMarkerClick(mapEntry, place, $);
         }
 
         infoWindow.createOnClick();

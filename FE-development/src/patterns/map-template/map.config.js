@@ -43,7 +43,7 @@ const map = {
             },
             "autosuggest": {
                 "options": {
-                    "componentRestrictions": {"country": 'fr'}
+                    "componentRestrictions": {"country": 'de'}
                 }
             },
             "categoryTree": {

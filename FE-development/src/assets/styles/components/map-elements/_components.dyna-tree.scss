@@ -1,6 +1,5 @@
 .dynaTree {
-//    border: 1px solid red;
-
+    //    border: 1px solid red;
 
     &[id^="ajaxMapPlacesTree"] {
         position: absolute;
@@ -8,5 +7,15 @@
         right: -120%;
         opacity: .6;
 
+       [aria-selected="true"]{
+            border: 10px solid red;
+        }
+
     }
+
+    &[id^="ajaxMapLocationTypesTree"] {
+
+        display: block ;
+    }
+
 }

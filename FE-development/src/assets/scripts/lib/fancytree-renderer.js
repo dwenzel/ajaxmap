@@ -198,7 +198,7 @@ const renderTree = {
     },
     locationTypes: function(mapEntry) {
 
-        var options = mapEntry.settings.locationTypeTree;
+        var options = mapEntry.settings.locationTypeTree//?;
 
         const settings = {
             checkbox: options.checkbox,
@@ -209,13 +209,15 @@ const renderTree = {
             filter: options.filter,
             source: mapEntry.locationTypes,
             select: function(flag, node) {
+                //todo filter here then
 
                 places.update(mapEntry, true);
+
             }
         };
 
         const selector = locationTypes.treeSelector + mapEntry.id;
-        return $(selector).fancytree(settings);
+        $(selector).fancytree(settings);
     }
 };
 
