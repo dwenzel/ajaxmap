@@ -11,6 +11,11 @@
             border: 10px solid red;
         }
 
+        max-height: 100vh;
+        overflow: scroll
+
+    ;
+
     }
 
     &[id^="ajaxMapLocationTypesTree"] {
