@@ -1,0 +1,17 @@
+/* ==========================================================================
+   Absolute Center
+   ========================================================================== */
+
+@mixin absolute-center($left, $top, $x, $y) {
+    left: $left;
+    position: absolute;
+    top: $top;
+    transform: translate($x, $y);
+}
+
+@mixin absolute-center-right($right, $top, $x, $y) {
+    position: absolute;
+    right: $right;
+    top: $top;
+    transform: translate($x, $y);
+}

@@ -1,5 +1,5 @@
-import treeRenderer  from './fancytree-renderer'
-import places from'./ajaxMap-places'
+import treeRenderer from './fancytree-renderer';
+import places from './ajaxMap-places';
 import $ from 'jquery';
 
 const mapLocationTypes = {
@@ -13,28 +13,27 @@ const mapLocationTypes = {
         for (var type in currLocationTypes) {
 
             $('<option/>').val(currLocationTypes[type].key)
-            .text(currLocationTypes[type].title)
-            .appendTo($(mapLocationTypes.treeSelector + mapId));
+                .text(currLocationTypes[type].title)
+                .appendTo($(mapLocationTypes.treeSelector + mapId));
         }
 
         // set on change function for location types treeSelector
         $(mapLocationTypes.treeSelector + mapId).change(function() {
-            alert('dsf')
+
             places.updatePlaces(mapId);
         });
     },
     init: function(mapEntry) {
 
         if (mapEntry.locationTypes) {
-
-
-      mapLocationTypes.ui(mapEntry);  //        @dirk ??
+            mapLocationTypes.ui(mapEntry);  //        @dirk ??
+            /*here is a diff between mapEntry.locationtypes & mapEntry.settings.locationTypeTree */
             const $tree = treeRenderer.locationTypes(mapEntry);
 
-           // console.log($tree)e
-           // $tree.fancytree("option", "checkbox", true);
+            // console.log($tree)e
+            // $tree.fancytree("option", "checkbox", true);
         }
     }
-}
+};
 
 export default mapLocationTypes;

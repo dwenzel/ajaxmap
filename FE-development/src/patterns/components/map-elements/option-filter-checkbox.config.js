@@ -18,7 +18,7 @@ const values = [
 module.exports = {
 
     context: {
-        label: 'Filter name',
+        label: 'Filter per checkboxes',
         options: labels.map((label, i) => {
             return {
                 label: label,

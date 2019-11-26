@@ -39,6 +39,12 @@ module.exports = {
             }
         },
         {
+            name: 'arrow-down',
+            context: {
+                name: 'am-arrow-down'
+            }
+        },
+        {
             name: 'cross',
             context: {
                 name: 'am-cross'

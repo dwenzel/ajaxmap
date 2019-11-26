@@ -1,18 +1,18 @@
 const ajaxProxyPort = require('../../../../_config-proxy-port.json').ajaxProxyPort;
 
-import map  from './ajaxMap-map'
+import map from './ajaxMap-map';
+import mapLayers from './map-layers';
+import regions from './ajaxMap-regions';
+import places from './ajaxMap-places';
 
-import mapLayers  from './map-layers'
-import regions from './ajaxMap-regions'
-import places from './ajaxMap-places'
+import locationTypes from './ajaxMap-locationTypes';
+import fancyTreeRenderer from './fancytree-renderer';
 
-import locationTypes from './ajaxMap-locationTypes'
-import fancyTreeRenderer from './fancytree-renderer'
-
-import {inserScriptTag} from './utilitys'
+import {inserScriptTag} from './utilitys';
 import ui from '../lib/ui';
 
 let ajaxMap;
+
 class AjaxMap {
     constructor(mapEntry) {
         this.mapEntry = mapEntry;
@@ -30,11 +30,12 @@ const _ = {
 
         mapLayers.buildStatic(mapEntry);
 
-        regions.init(mapEntry)
+        regions.init(mapEntry);
 
-        places.init(mapEntry)
+        places.init(mapEntry);
 
-        ui.initByMapEntry(mapEntry)
+        ui.initByMapEntry(mapEntry);
+
 
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
@@ -48,13 +49,13 @@ const _ = {
 
                 map.build(mapEntry).then((response) => {
 
-                    _.initMap(mapEntry)
+                    _.initMap(mapEntry);
                 });
 
                 ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
                 return ajaxMapInstance;
             });
-        })
+        });
     }
 };
 
@@ -67,7 +68,7 @@ ajaxMap = {//    TODO:
 
     ///////////
     ajaxServerPath: //replace #### dont delete this! its for the build process
-    'http://localhost:' + ajaxProxyPort,
+        'http://localhost:' + ajaxProxyPort,
     //end-replace //#### dont delete this! its for the build process
     //////////
 
@@ -78,16 +79,16 @@ ajaxMap = {//    TODO:
 
         ajaxMap.configData = configData;
 
+        window.ajaxMapConfig= window.ajaxMapConfig||{};
+
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;
 
             _.initAllMaps();
 
             ui.init();
-        }, console.error)
+        }, console.error);
     }
 };
 
-export
-default
-ajaxMap;
+export default ajaxMap;

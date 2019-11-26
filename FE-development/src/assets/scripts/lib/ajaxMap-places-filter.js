@@ -1,11 +1,12 @@
-import treeRenderer  from './fancytree-renderer'
-import layers from './map-layers'
+import treeRenderer from './fancytree-renderer';
+import layers from './map-layers';
 import fastdom from 'fastdom';
-import {getKeysByAttribute} from './map-helpers'
+import {getKeysByAttribute} from './map-helpers';
 
-import {getSelectedKeys} from './map-helpers'
-import {fancytreeSelector} from './fancytree-renderer'
+import {getSelectedKeys} from './map-helpers';
+import {fancytreeSelector} from './fancytree-renderer';
 import $ from 'jquery';
+
 /**
  * Updates all filter (trees)
  * Determines for all nodes in all filter trees whether
@@ -28,30 +29,30 @@ const _ = {
             active = 0;
 
 
-            for (var key in  mapEntry.placeInstances) {
-                const placInstance = mapEntry.placeInstances[key],
-                    marker = placInstance.marker;
+        for (var key in  mapEntry.placeInstances) {
+            const placInstance = mapEntry.placeInstances[key],
+                marker = placInstance.marker;
 
-                placeCnt++
+            placeCnt++;
 
-                if (placInstance.updateMarker) {
-                    toUpdate++;
+            if (placInstance.updateMarker) {
+                toUpdate++;
 
-                    if (placInstance.active) {
+                if (placInstance.active) {
 
-                        fastdom.mutate(() => {
-                            marker.setMap(mapEntry.googleMap);
-                        });
+                    fastdom.mutate(() => {
+                        marker.setMap(mapEntry.googleMap);
+                    });
 
-                        active++
-                    } else {
-                        marker.setMap(null)
-                    }
-
-                    placInstance.updateMarker = false;
+                    active++;
+                } else {
+                    marker.setMap(null);
                 }
 
+                placInstance.updateMarker = false;
             }
+
+        }
 
         console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active);
     }
@@ -65,7 +66,7 @@ function update($rootNode, mapEntry) {
 
         try {
             const tree = $(treeSelector).fancytree('getTree');
-            const children = $rootNode.children
+            const children = $rootNode.children;
             const placeKeys = getKeysByAttribute(children, filterName);
 
             filterTree(tree, placeKeys);
@@ -77,8 +78,8 @@ function update($rootNode, mapEntry) {
             }
         } catch (err) {
             //todo filter not initalised eg location typd:88??@dirk--everytime locationTypes
-            console.log('treeSelector---->', treeSelector)
-            console.error(err)
+            console.log('treeSelector---->', treeSelector);
+            console.error(err);
         }
     });
 }
@@ -126,8 +127,8 @@ function showMatchingPlaces(mapEntry) {
     //   clusterer.removeMarkers(mapPlaces.map(item => item.placeInstance.marker));
 
     selectedPlaces = mapPlaces.filter((place) => {
-        const placeInstance = place.placeInstance
-       // console.log('---------------->', place, placeInstance)
+        const placeInstance = place.placeInstance;
+        // console.log('---------------->', place, placeInstance)
         /* if (!mapMarkers[i]) {
          // marker does not exist, create it
          mapMarkers[i] = markers.create(mapEntry, place);
@@ -172,11 +173,11 @@ function showMatchingPlaces(mapEntry) {
             && (hasAnActivePlaceGroup || !selectedPlaceGroupKeys.length)
         ) {
 
-            placeInstance.setActive(true)
+            placeInstance.setActive(true);
             return true;
         }
 
-        placeInstance.setActive(false)
+        placeInstance.setActive(false);
 
         return false;
     });
@@ -221,16 +222,17 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
         const isSelectedPlace =
             selectedPlaceKeys.some(key => place.key === key);
 
-        placeInstance.setActive(isSelectedPlace)
+        placeInstance.setActive(isSelectedPlace);
         mapMarkers[mapMarkers.length] = placeInstance.marker;
 
-    })
+    });
 
     //--> TODO clear markers? :__clusterer.addMarkers(mapMarkers);
 
     _.updateMarkers(mapEntry);
 
 }
+
 const filterPlaces = {
     update,
     showMatchingPlaces,

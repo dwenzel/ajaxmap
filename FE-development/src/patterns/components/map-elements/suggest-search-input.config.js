@@ -4,10 +4,9 @@
 
 
 module.exports = {
-
     context: {
         placeholder:'Geben sie einen Ort ein',
-        label:'',
+        label: 'Ort/PLZ/Adresse',
         minLen:'0',
         maxLen:'12'
     }

@@ -1,0 +1,59 @@
+/*!
+ * _______________
+ * |       .-.   |
+ * |      // ``  |
+ * |     //      |
+ * |  == ===-_.-'|
+ * |   //  //    |
+ * |__//_________|
+ *
+ * Copyright (c) ${YEAR} familie-redlich :systeme <systeme@familie-redlich.de>
+ * @link     http://www.familie-redlich.de
+ *
+ *
+ */
+
+// Fieldset
+$form-fieldset-space-after: 3rem;
+
+// Legend
+$form-legend-color: map-get($toolbox-colors, 'black');
+$form-legend-space-after: 2rem;
+
+// Group
+$form-group-space-after: 1rem;
+
+// Label
+$form-label-color: map-get($toolbox-colors, 'black');
+$form-label-space-after: .5rem;
+
+// Field
+$form-field-bg-color: map-get($toolbox-colors, 'white');
+$form-field-bg-color-focus: map-get($toolbox-colors, 'white');
+$form-field-border-color: map-get($toolbox-colors, 'light3');
+$form-field-border-color-focus: map-get($toolbox-colors, 'secondary');
+$form-field-border-radius: 0;
+$form-field-box-shadow: 0 0 4px rgba(map-get($toolbox-colors, 'black'), .5);
+$form-field-color: map-get($toolbox-colors, 'black');
+$form-field-color-focus: map-get($toolbox-colors, 'black');
+$form-field-icon-color: map-get($toolbox-colors, 'primary');
+$form-field-icon-color-focus: map-get($toolbox-colors, 'secondary');
+$form-field-space-inner-x: .5em;
+$form-field-space-inner-y: .5em;
+$form-field-with-icon-space-inner: 2em;
+
+// Checkmark
+$form-field-check-icon-color: $form-field-border-color-focus;
+$form-field-icon-color-disabled: map_get($toolbox-colors, 'secondary');
+$form-field-check-icon-size: 8px; // avoid rem rounding error: keep absolute unit
+$form-field-check-line-height: nth(map-get($toolbox-typo-sizes, 'm'), 2); // get line-height defined in toolbox
+$form-field-check-size: 1rem;
+$form-field-check-space-after: .25rem;
+
+// Placeholder
+$form-placeholder-color: rgba(map-get($toolbox-colors, 'black'), .5);
+$form-placeholder-color-focus: rgba(map-get($toolbox-colors, 'black'), .5);
+
+// Validation Colors
+$form-color-error: map-get($toolbox-colors, 'danger');
+$form-color-valid: map-get($toolbox-colors, 'success');

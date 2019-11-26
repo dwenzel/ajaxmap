@@ -1,7 +1,7 @@
 import $ from 'jquery';
-import {ajaxCall} from './utilitys'
-import ajaxMap from './ajaxMap'
-import places from './ajaxMap-places'
+import {ajaxCall} from './utilitys';
+import ajaxMap from './ajaxMap';
+import places from './ajaxMap-places';
 
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
@@ -58,7 +58,7 @@ class LocationSearch {
         this.mapId = mapEntry.id;
 
         //the ui Elements
-        this.autoSuggestSearch
+        this.autoSuggestSearch;
         this.radialSelect;
 
         this.$sendButton;
@@ -79,14 +79,15 @@ class LocationSearch {
         if (this.autoSuggestSearch || this.radialSelect) {
             this.$sendButton = $(_.sendButtonSelector);
             this.$sendButton.show(800);
-            this.$sendButton.on('click', this.sendDatas(this))
+
+            this.$sendButton.on('click', this.sendDatas(this));
         }
     }
 
     sendDatas() {
         const that = this;
-        return function() {
-            let queryParams = {}
+        return function(event) {
+            let queryParams = {};
 
             that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
             that.radialSelect && that.radialSelect.addValToQuery(queryParams);
@@ -101,8 +102,9 @@ class LocationSearch {
                 'mapId': that.mapEntry.id
             };
 
-            places.loadFromData(that.mapEntry, data)
-        }
+            places.loadFromData(that.mapEntry, data);
+            event.preventDefault();
+        };
     }
 }
 

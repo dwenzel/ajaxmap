@@ -1,6 +1,14 @@
 const _ = {
     BSB_ajaxMapConfigData: () => {
 
+        return;
+        window.ajaxMapConfig.onMarkerClick = function(mapEntry, place) {
+            const treeNode = place.placeInstance.treeNode//has all domNodes
+
+            console.log(treeNode);
+            //  $('#tablediv').scrollTop($('#' + id).offset().top);
+        }
+
         //hold the api for ajaxmap
         window.ajaxMapConfig = {};
 
