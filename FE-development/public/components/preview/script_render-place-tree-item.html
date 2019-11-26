@@ -1,0 +1,69 @@
+
+
+<!--suppress ALL (Suppresses all IDE warnings, DO NOT INCLUDE IN PRODUCTION!) -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>extension FE-builder</title>
+    <!--link rel="stylesheet" href="http://localhost:2222/resources//css/main.css"-->
+</head>
+<body>
+<script>
+    window.ajaxMapConfig = window.ajaxMapConfig|| {};
+    
+    window.ajaxMapConfig.renderPlaceTreesItem = function(placeInstance) {
+    // console.log(placeInstance);
+ 
+    var placeData=placeInstance.placeData;
+
+    var title=placeData.title || 'no* title';
+    var subline=placeData.content && 'no* subline'
+
+    var text=placeData.text && 'no* tex'
+    var pageUrl=placeData.pageUrl &&'no pageUrl';
+
+
+  // console.log(placeData);
+
+    return `<div class="am-card">
+    <!-- if organisation seo -->
+    <!--script type="application/ld+json">
+    breaks the string?
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Title",
+            "url": "#",
+            "logo": "https://via.placeholder.com//80x80"
+        }
+    </script!-->
+
+    <!-- logo or profile image todo @EHO default image for profile or company-->
+    <div class="am-card__img is-rounded">
+        <img src="https://via.placeholder.com//80x80" alt="">
+    </div>
+    <div class="am-card__copy">
+        <header class="am-card__copy__head">
+            <h3 class="am-card__title">${title}</h3>
+            <p class="am-card__subtitle">${subline}</p>
+        </header>
+        <p>
+            ${text}
+        </p>
+        <footer class="am-card__copy__footer">
+            <a href="#" class="am-link"> ${pageUrl}</a>
+        </footer>
+    </div>
+
+    <a href="#" class="am-card__block-link js-am-jt-marker">Anchor map</a>
+</div>
+`;
+ }</script>
+
+<script src="http://localhost:2222/resources//js/main.js"></script>
+</body>
+</html>
+
