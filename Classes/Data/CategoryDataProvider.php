@@ -34,9 +34,9 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 /**
  * Class CategoryDataProvider
  */
-class CategoryDataProvider implements DataProviderInterface
+class CategoryDataProvider implements DataProviderInterface, MappingAwareInterface
 {
-    protected $mapping = DataProviderInterface::OBJECT_TO_JSON_MAP;
+    use MappingAwareTrait;
 
     /**
      * Category Repository

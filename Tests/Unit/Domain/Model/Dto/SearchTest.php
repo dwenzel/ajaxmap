@@ -5,7 +5,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *  Copyright notice
  *
  *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
- *  			
+ *
  *  All rights reserved
  *
  *  This script is part of the TYPO3 project. The TYPO3 project is
@@ -37,6 +37,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
+
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -44,128 +45,145 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  *
  * @package DWenzel\Ajaxmap\Tests
  */
-class SearchTest extends UnitTestCase {
-	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\Search
-	 */
-	protected $fixture;
+class SearchTest extends UnitTestCase
+{
+    /**
+     * @var \DWenzel\Ajaxmap\Domain\Model\Dto\Search
+     */
+    protected $fixture;
 
-	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
-	}
+    public function setUp()
+    {
+        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
+    }
 
-	public function tearDown() {
-		unset($this->fixture);
-	}
+    public function tearDown()
+    {
+        unset($this->fixture);
+    }
 
-	/**
-	 * @test
-	 */
-	public function getSubjectReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getSubject()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getSubjectReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getSubject()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setSubjectForStringSetsLocationTypes() { 
-		$this->fixture->setSubject('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function setSubjectForStringSetsLocationTypes()
+    {
+        $this->fixture->setSubject('Conceived at T3CON10');
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getSubject()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getFieldsReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getFields()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getSubject()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setFieldsForStringSetsFields() { 
-		$this->fixture->setFields('Conceived at T3CON10');
+    /**
+     * @test
+     */
+    public function getFieldsReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getFields()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getFields()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getLocationReturnsInitialValueForString() {
-		$this->assertNull(
-				$this->fixture->getLocation()
-		);
-	}
+    /**
+     * @test
+     */
+    public function setFieldsForStringSetsFields()
+    {
+        $this->fixture->setFields('Conceived at T3CON10');
 
-	/**
-	 * @test
-	 */
-	public function setLocationForStringSetsCategories() { 
-		$this->fixture->setLocation('Conceived at T3CON10');
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getFields()
+        );
+    }
 
-		$this->assertSame(
-			'Conceived at T3CON10',
-			$this->fixture->getLocation()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getRadiusReturnsInitialValueForInteger() {
-		$this->assertNull(
-				$this->fixture->getRadius()
-		);
-	}
+    /**
+     * @test
+     */
+    public function getLocationReturnsInitialValueForString()
+    {
+        $this->assertSame(
+            '',
+            $this->fixture->getLocation()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setRadiusForIntegerSetsRadius() { 
-		$this->fixture->setRadius(123);
+    /**
+     * @test
+     */
+    public function setLocationForStringSetsCategories()
+    {
+        $this->fixture->setLocation('Conceived at T3CON10');
 
-		$this->assertSame(
-			123,
-			$this->fixture->getRadius()
-		);
-	}
-	
-	/**
-	 * @test
-	 */
-	public function getBoundsReturnsInitialNull() {
-		$this->assertNull(
-				$this->fixture->getBounds()
-		);
-	}
+        $this->assertSame(
+            'Conceived at T3CON10',
+            $this->fixture->getLocation()
+        );
+    }
 
-	/**
-	 * @test
-	 */
-	public function setBoundsForArraySetsBounds() { 
-		$bounds = array(
-			'lat' => 1.5,
-			'lng' => 5.1
-		);
-		$this->fixture->setBounds($bounds);
+    /**
+     * @test
+     */
+    public function getRadiusReturnsInitialValueForInteger()
+    {
+        $this->assertSame(
+            0,
+            $this->fixture->getRadius()
+        );
+    }
 
-		$this->assertSame(
-			$bounds,
-			$this->fixture->getBounds()
-		);
-	}
-	
+    /**
+     * @test
+     */
+    public function setRadiusForIntegerSetsRadius()
+    {
+        $this->fixture->setRadius(123);
+
+        $this->assertSame(
+            123,
+            $this->fixture->getRadius()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function getBoundsReturnsInitialNull()
+    {
+        $this->assertSame(
+            [],
+            $this->fixture->getBounds()
+        );
+    }
+
+    /**
+     * @test
+     */
+    public function setBoundsForArraySetsBounds()
+    {
+        $bounds = array(
+            'lat' => 1.5,
+            'lng' => 5.1
+        );
+        $this->fixture->setBounds($bounds);
+
+        $this->assertSame(
+            $bounds,
+            $this->fixture->getBounds()
+        );
+    }
+
 }
-

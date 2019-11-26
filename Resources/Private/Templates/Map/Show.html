@@ -13,9 +13,38 @@
 		<div id="ajaxMapContainer_Map{map.uid}"></div>
 	</div>
 	<div id="placesTreeWrap">
-		<input name="filterPlaces" placeholder="{f:translate(key: 'placeholder.filterPlaces')}">
-		<button id="btnResetPlacesFilter" title="{f:translate(key: 'label.reset')}">&times;</button>
-		<span id="matches"></span>
+		<f:if condition="{settings.showSearchField}">
+			<div class="searchField field">
+				<label for="searchField-{map.uid}">{f:translate(key: 'label.searchField', default: 'label.searchField')}</label>
+				<input
+						id="searchField-{map.uid}"
+						name="filterPlaces" placeholder="{f:translate(key: 'placeholder.filterPlaces')}" />
+				<button
+						id="btnResetPlacesFilter"
+						title="{f:translate(key: 'label.reset')}">{f:translate(key: 'label.reset')}</button>
+				<span id="matches"></span>
+			</div>
+		</f:if>
+		<f:if condition="{settings.showRadiusSearch}">
+			<div class="radiusSearch field">
+				<label for="radiusSearchLocation-{map.uid}">{f:translate(key: 'label.radiusSearchField', default: 'label.radiusSearchField')}</label>
+				<input id="radiusSearchLocation-{map.uid}"
+					   name="radiusSearchLocation"
+					   placeholder="{f:translate(key: 'placeholder.radiusSearch')}" />
+				<select
+						id="radiusSelect-{map.uid}"
+						name="search[radius]"
+					>
+					<option value="10000">10 km</option>
+					<option value="50000">50 km</option>
+					<option value="100000">100 km</option>
+				</select>
+				<button
+						id="radiusSearchSubmit"
+						title="{f:translate(key: 'label.submit')}">{f:translate(key: 'label.submit', default: 'label.submit')}
+				</button>
+			</div>
+		</f:if>
 		<div id="ajaxMapPlacesTree{map.uid}" class="dynaTree"></div>
 	</div>
 	<div id="ajaxMapRegionsTree{map.uid}" class="dynaTree"></div>

@@ -18,13 +18,17 @@ namespace DWenzel\Ajaxmap\Data;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
+use DWenzel\Ajaxmap\Traits\ObjectManagerTrait;
 
 /**
  * Class ProviderFactory
  */
 class ProviderFactory
 {
+    use ObjectManagerTrait;
+
     const PROVIDER_MAP = [
         SI::ACTION_BUILD_MAP => MapDataProvider::class,
         SI::ACTION_LIST_LOCATION_TYPES => LocationTypeDataProvider::class,
@@ -45,7 +49,7 @@ class ProviderFactory
             $dataProviderClass = static::PROVIDER_MAP[$action];
         }
 
-        return new $dataProviderClass();
+        return $this->objectManager->get($dataProviderClass);
     }
 
 }

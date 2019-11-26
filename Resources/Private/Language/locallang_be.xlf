@@ -8,8 +8,23 @@
 		<trans-unit id="flexforms_general.backPage" xml:space="preserve">
 			<source>Back Page</source>
 		</trans-unit>
+		<trans-unit id="flexforms_general.display" xml:space="preserve">
+			<source>Display</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.sorting" xml:space="preserve">
+			<source>Sorting</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showRadiusSearch" xml:space="preserve">
+			<source>Show Radius Search</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.showSearchField" xml:space="preserve">
+			<source>Show Search Field</source>
+		</trans-unit>
 		<trans-unit id="flexforms_general.placeGroups" xml:space="preserve">
 			<source>Place Groups</source>
+		</trans-unit>
+		<trans-unit id="flexforms_general.locationTypes" xml:space="preserve">
+			<source>Location Types</source>
 		</trans-unit>
 		<trans-unit id="flexforms_general.placeGroupConjunction" xml:space="preserve">
 			<source>Place Group Mode</source>

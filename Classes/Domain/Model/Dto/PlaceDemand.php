@@ -1,4 +1,6 @@
 <?php
+declare(strict_types=1);
+
 namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
 /***************************************************************
@@ -24,6 +26,8 @@ namespace DWenzel\Ajaxmap\Domain\Model\Dto;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
+
 /**
  * Place Demand object which holds all information to get the correct
  * Place records.
@@ -31,118 +35,129 @@ namespace DWenzel\Ajaxmap\Domain\Model\Dto;
  * @package ajaxmap
  */
 class PlaceDemand
-	extends AbstractDemand
-	implements DemandInterface, CategoryAwareDemandInterface {
-	use CategoryAwareDemandTrait;
+    extends AbstractDemand
+    implements DemandInterface, CategoryAwareDemandInterface
+{
+    use CategoryAwareDemandTrait;
 
-	/**
-	* @var string
-	*/
-	protected $locationTypes;
+    /**
+     * @var string
+     */
+    protected $locationTypes = '';
 
-	/**
-	 * @var string
-	 */
-	protected $constraintsConjunction;
+    /**
+     * @var string
+     */
+    protected $constraintsConjunction = SI::CONJUNCTION_AND;
 
-	/**
-	 * @var string
-	 */
-	protected $placeGroups;
+    /**
+     * @var string
+     */
+    protected $placeGroups = '';
 
-	/**
-	 * @var string
-	 */
-	protected $placeGroupConjunction;
+    /**
+     * @var string
+     */
+    protected $placeGroupConjunction = SI::CONJUNCTION_OR;
 
-	/**
-	 * @var int
-	 */
-	protected $map;
+    /**
+     * @var int
+     */
+    protected $map = 0;
 
-	/**
-	 * Get LocationTypes
-	 * @return string
-	 */
-	public function getLocationTypes () {
-	    return $this->locationTypes;
-	}
+    /**
+     * Get LocationTypes
+     * @return string
+     */
+    public function getLocationTypes(): string
+    {
+        return $this->locationTypes;
+    }
 
-	/**
-	 * Set LocationTypes
-	 * @param string $locationTypes A comma separated list of location type uids
-	 */
-	public function setLocationTypes ($locationTypes) {
-	    $this->locationTypes = $locationTypes;
-	}
+    /**
+     * Set LocationTypes
+     * @param string $locationTypes A comma separated list of location type uids
+     */
+    public function setLocationTypes($locationTypes): void
+    {
+        $this->locationTypes = $locationTypes;
+    }
 
-	/**
-	 * Get Constraints Conjunction
-	 * @return string
-	 */
-	public function getConstraintsConjunction () {
-		return $this->constraintsConjunction;
-	}
+    /**
+     * Get Constraints Conjunction
+     * @return string
+     */
+    public function getConstraintsConjunction(): string
+    {
+        return $this->constraintsConjunction;
+    }
 
-	/**
-	 * Set Constraints Conjunction
-	 *
-	 * @param string $conjunction
-	 */
-	public function setConstraintsConjunction ($conjunction) {
-		$this->constraintsConjunction = $conjunction;
-	}
+    /**
+     * Set Constraints Conjunction
+     *
+     * @param string $conjunction
+     */
+    public function setConstraintsConjunction($conjunction): void
+    {
+        $this->constraintsConjunction = strtoupper($conjunction);
+    }
 
-	/**
-	 * Gets the place groups
-	 * @return string
-	 */
-	public function getPlaceGroups () {
-		return $this->placeGroups;
-	}
+    /**
+     * Gets the place groups
+     * @return string
+     */
+    public function getPlaceGroups(): string
+    {
+        return $this->placeGroups;
+    }
 
-	/**
-	 * Sets the place groups
-	 *
-	 * @param string $placeGroups A comma separated list of placeGroups uids
-	 */
-	public function setPlaceGroups($placeGroups) {
-		$this->placeGroups = $placeGroups;
-	}
+    /**
+     * Sets the place groups
+     *
+     * @param string $placeGroups A comma separated list of placeGroups uids
+     */
+    public function setPlaceGroups($placeGroups): void
+    {
+        $this->placeGroups = $placeGroups;
+    }
 
-	/**
-	 * Get PlaceGroup conjunction
-	 * @return string
-	 */
-	public function getPlaceGroupConjunction () {
-		return $this->placeGroupConjunction;
-	}
+    /**
+     * Get PlaceGroup conjunction
+     * @return string
+     */
+    public function getPlaceGroupConjunction(): string
+    {
+        return $this->placeGroupConjunction;
+    }
 
-	/**
-	 * Set PlaceGroup conjunction
-	 *
-	 * @param string $conjunction
-	 */
-	public function setPlaceGroupConjunction ($conjunction) {
-		$this->placeGroupConjunction = $conjunction;
-	}
+    /**
+     * Set PlaceGroup conjunction
+     *
+     * @param string $conjunction
+     */
+    public function setPlaceGroupConjunction($conjunction): void
+    {
+        $this->placeGroupConjunction = $conjunction;
+    }
 
-	/**
-	 * Get Map
-	 * @return int
-	 */
-	public function getMap () {
-		return $this->map;
-	}
+    /**
+     * Get Map
+     * @return int
+     */
+    public function getMap(): int
+    {
+        return $this->map;
+    }
 
-	/**
-	 * Set Map
-	 *
-	 * @param int $map
-	 */
-	public function setMap ($map) {
-		$this->map = $map;
-	}
+    /**
+     * Set Map
+     *
+     * @param int|string $map
+     */
+    public function setMap($map): void
+    {
+        $this->map = (int)$map;
+    }
 }
 
 

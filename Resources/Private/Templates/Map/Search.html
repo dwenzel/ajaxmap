@@ -1,0 +1,57 @@
+<f:layout name="Default"/>
+
+<f:section name="main">
+    <f:if condition="{settings.map.debug}">
+        <f:debug title="settings">{settings}</f:debug>
+        <f:debug title="search">{search}</f:debug>
+    </f:if>
+    <f:flashMessages/>
+    <f:form
+            name="search"
+            action="show"
+            pageUid="{settings.showPage}">
+        <f:if condition="{settings.showSearchField}">
+            <div class="searchField">
+                <label for="tx-ajaxmap-search-subject">{f:translate(key: 'label.searchSubject', default:
+                    'label.searchSubject')}</label>
+                <f:form.textfield
+                        id="tx-ajaxmap-search-subject"
+                        name="search[subject]"
+                        value="{search.subject}"
+                        class="search"
+                        placeholder="{f:translate(key: 'placeholder.searchSubject')}"
+                />
+            </div>
+        </f:if>
+        <f:if condition="{settings.showRadiusSearch}">
+            <div class="radiusSearch">
+                <label for="tx-ajaxmap-search-location">{f:translate(key: 'label.radiusSearchField', default:
+                    'label.radiusSearchField')}</label>
+                <input id="tx-ajaxmap-search-location"
+                       name="search[location]"
+                       placeholder="{f:translate(key: 'placeholder.radiusSearch')}"/>
+                <f:form.select
+                        id="tx-ajaxmap-search-radius"
+                        name="search[radius]"
+                        value="{search.radius}"
+                        options="{settings.search.radius.options}"
+                />
+            </div>
+
+            <button
+                    id="tx-ajaxmap-search-submit"
+                    title="{f:translate(key: 'label.submit')}">{f:translate(key: 'label.submit', default:
+                'label.submit')}
+            </button>
+
+            </div>
+        </f:if>
+
+        <f:form.submit>
+            id="tx-ajaxmap-search-submit"
+            name="submit"
+            value="{f:translate(key: 'button.label.search', default: 'button.label.search')}"
+
+        </f:form.submit>
+    </f:form>
+</f:section>

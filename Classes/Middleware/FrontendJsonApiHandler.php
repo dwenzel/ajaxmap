@@ -12,6 +12,8 @@ use TYPO3\CMS\Core\Http\Dispatcher;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Core\Bootstrap;
+use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
 
 /***************************************************************
  *  Copyright notice
@@ -32,6 +34,8 @@ use TYPO3\CMS\Core\Utility\GeneralUtility;
 
 /**
  * Class FrontendJsonApiHandler
+ *
+ * Middleware for request to the map api
  */
 class FrontendJsonApiHandler implements MiddlewareInterface
 {
@@ -41,19 +45,19 @@ class FrontendJsonApiHandler implements MiddlewareInterface
         if ($api === null) {
             return $handler->handle($request);
         }
+        ob_clean();
         /** @var Response $response */
         $response = GeneralUtility::makeInstance(Response::class);
 
         // for now we dispatch only to this single endpoint
         if ($api === SI::API_PARAMETER_MAP) {
-            $configuration = AjaxController::class . '::' . 'processRequest';
+            $requestConfiguration = AjaxController::class . '::' . 'processRequest';
             /** @var Dispatcher $dispatcher */
             $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
-            $request = $request->withAttribute('target', $configuration);
+            $request = $request->withAttribute('target', $requestConfiguration);
             return $dispatcher->dispatch($request, $response) ?? new NullResponse();
         }
 
         return new NullResponse();
     }
-
 }

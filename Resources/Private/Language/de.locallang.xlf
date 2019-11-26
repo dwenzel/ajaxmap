@@ -1,174 +1,196 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <xliff version="1.0">
-	<file source-language="en" target-language="de" datatype="plaintext" original="messages" date="2015-09-11T08:52:41Z">
-		<header>
-			<generator>LFEditor</generator>
-		</header>
-		<body>
-		<trans-unit id="allLocationsLabel" approved="yes">
-			<source>All Locations</source>
-			<target>Alle Standorte</target>
-		</trans-unit>
-		<trans-unit id="label.reset" approved="yes">
-			<source>Reset Filter</source>
-			<target>Filter zurücksetzen</target>
-		</trans-unit>
-		<trans-unit id="placeholder.filterPlaces" approved="yes">
-			<source>Search Word</source>
-			<target>Suchbegriff</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_address" approved="yes">
-			<source>Address</source>
-			<target>Adresse</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_content" approved="yes">
-			<source>Content</source>
-			<target>Inhalt</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_locationtype" approved="yes">
-			<source>LocationType</source>
-			<target>Typ</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_locationtype.description" approved="yes">
-			<source>description</source>
-			<target>Beschreibung</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_locationtype.title" approved="yes">
-			<source>title</source>
-			<target>Titel</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map" approved="yes">
-			<source>Map</source>
-			<target>Karte</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui" approved="yes">
-			<source>disable default UI</source>
-			<target>Standard Benutzeroberfläche deaktivieren</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.height" approved="yes">
-			<source>height</source>
-			<target>Höhe</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.initial_zoom" approved="yes">
-			<source>initialZoom</source>
-			<target>Anfänglicher Zoom</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.map_center" approved="yes">
-			<source>Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)</source>
-			<target>Zentrum der Karte (Geographische Koordinaten: Breite, Länge - 10.999999,51.777777)</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.map_style" approved="yes">
-			<source>optional Style (json Array)</source>
-			<target>Stil (optional, json Array)</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.placeGroups" approved="yes">
-			<source>Select items for display by place group.</source>
-			<target>Elemente zur Darstellung nach Gruppe auswählen.</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.places" approved="yes">
-			<source>Display selected places as markers.</source>
-			<target>Ausgewählte Orte als Markierungen darstellen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.regions" approved="yes">
-			<source>regions</source>
-			<target>Regionen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.title" approved="yes">
-			<source>title</source>
-			<target>Titel</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.type" approved="yes">
-			<source>type</source>
-			<target>Typ</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_map.width" approved="yes">
-			<source>width</source>
-			<target>Breite</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place" approved="yes">
-			<source>Place</source>
-			<target>Ort</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.address" approved="yes">
-			<source>Add address</source>
-			<target>Adresse auswählen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.content" approved="yes">
-			<source>Add content.</source>
-			<target>Inhalte hinzufügen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.description" approved="yes">
-			<source>description</source>
-			<target>Beschreibung</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.geo_coordinates" approved="yes" xml:space="preserve">
+    <file source-language="en" target-language="de" datatype="plaintext" original="messages"
+          date="2015-09-11T08:52:41Z">
+        <header>
+            <generator>LFEditor</generator>
+        </header>
+        <body>
+            <trans-unit id="allLocationsLabel" approved="yes">
+                <source>All Locations</source>
+                <target>Alle Standorte</target>
+            </trans-unit>
+            <trans-unit id="label.reset" approved="yes">
+                <source>Reset Filter</source>
+                <target>Filter zurücksetzen</target>
+            </trans-unit>
+            <trans-unit id="placeholder.filterPlaces">
+                <source>filter places by name</source>
+                <target>Orte nach Namen filtern</target>
+            </trans-unit>
+
+            <trans-unit id="placeholder.filterPlaces" approved="yes">
+                <source>Search Word</source>
+                <target>Suchbegriff</target>
+            </trans-unit>
+            <trans-unit id="label.searchField">
+                <source>Search</source>
+                <target>Suche</target>
+            </trans-unit>
+            <trans-unit id="label.radiusSearchField">
+                <source>Radius Search</source>
+                <target>Umkreissuche</target>
+            </trans-unit>
+            <trans-unit id="placeholder.radiusSearch">
+                <source>address</source>
+                <target>Adresse eingeben</target>
+            </trans-unit>
+            <trans-unit id="label.submit">
+                <source>submit</source>
+                <target>absenden</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_address" approved="yes">
+                <source>Address</source>
+                <target>Adresse</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_content" approved="yes">
+                <source>Content</source>
+                <target>Inhalt</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_locationtype" approved="yes">
+                <source>LocationType</source>
+                <target>Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_locationtype.description" approved="yes">
+                <source>description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_locationtype.title" approved="yes">
+                <source>title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map" approved="yes">
+                <source>Map</source>
+                <target>Karte</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.disable_default_ui" approved="yes">
+                <source>disable default UI</source>
+                <target>Standard Benutzeroberfläche deaktivieren</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.height" approved="yes">
+                <source>height</source>
+                <target>Höhe</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.initial_zoom" approved="yes">
+                <source>initialZoom</source>
+                <target>Anfänglicher Zoom</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.map_center" approved="yes">
+                <source>Center of Map (Geolocation: latitude, longitude - 10.999999,51.777777)</source>
+                <target>Zentrum der Karte (Geographische Koordinaten: Breite, Länge - 10.999999,51.777777)</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.map_style" approved="yes">
+                <source>optional Style (json Array)</source>
+                <target>Stil (optional, json Array)</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.placeGroups" approved="yes">
+                <source>Select items for display by place group.</source>
+                <target>Elemente zur Darstellung nach Gruppe auswählen.</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.places" approved="yes">
+                <source>Display selected places as markers.</source>
+                <target>Ausgewählte Orte als Markierungen darstellen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.regions" approved="yes">
+                <source>regions</source>
+                <target>Regionen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.title" approved="yes">
+                <source>title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.type" approved="yes">
+                <source>type</source>
+                <target>Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_map.width" approved="yes">
+                <source>width</source>
+                <target>Breite</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place" approved="yes">
+                <source>Place</source>
+                <target>Ort</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.address" approved="yes">
+                <source>Add address</source>
+                <target>Adresse auswählen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.content" approved="yes">
+                <source>Add content.</source>
+                <target>Inhalte hinzufügen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.description" approved="yes">
+                <source>description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.geo_coordinates" approved="yes" xml:space="preserve">
 			<source>Enter  geo coordinates (latitude,longitude - 10.99999,51.8888)</source>
-			<target>Geographische Koordinaten (Breite,Länge - 10.99999,51.8888)</target>
+                <target>Geographische Koordinaten (Breite,Länge - 10.99999,51.8888)</target>
 		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.info" approved="yes">
-			<source>Additional info. Can be shown in info window.</source>
-			<target>Zusätzliche Informationen. Können in einem Info-Fenster angezeigt werden.</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.placeGroups" approved="yes">
-			<source>Place Group</source>
-			<target>Gruppierung (Orte)</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.regions" approved="yes">
-			<source>regions</source>
-			<target>Regionen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.title" approved="yes">
-			<source>Geographic location - defined by its latitude and longitude</source>
-			<target>Geographische Koordinaten - geographische Breite und Länge</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_place.type" approved="yes">
-			<source>type</source>
-			<target>Typ</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_placegroup" approved="yes">
-			<source>Place Group</source>
-			<target>Ortegruppierung</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_placegroup.description" approved="yes">
-			<source>description</source>
-			<target>Beschreibung</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_placegroup.icon" approved="yes">
-			<source>Icon</source>
-			<target>Symbol</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_placegroup.parent" approved="yes">
-			<source>Parent</source>
-			<target>Elternelement</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_placegroup.title" approved="yes">
-			<source>Title</source>
-			<target>Titel</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region" approved="yes">
-			<source>Region</source>
-			<target>Region</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region.clickable" approved="yes">
-			<source>clickable</source>
-			<target>anklickbar</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region.file" approved="yes">
-			<source>Select KML files</source>
-			<target>KML-Dateien auswählen</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region.preserve_viewport" approved="yes">
-			<source>preserveViewport</source>
-			<target>Kartenausschnitt beibehalten</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region.suppress_info_windows" approved="yes">
-			<source>suppressInfoWindows</source>
-			<target>Info-Fenster deaktivieren</target>
-		</trans-unit>
-		<trans-unit id="tx_ajaxmap_domain_model_region.title" approved="yes">
-			<source>title</source>
-			<target>Titel</target>
-		</trans-unit>
-		</body>
-	</file>
+            <trans-unit id="tx_ajaxmap_domain_model_place.info" approved="yes">
+                <source>Additional info. Can be shown in info window.</source>
+                <target>Zusätzliche Informationen. Können in einem Info-Fenster angezeigt werden.</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.placeGroups" approved="yes">
+                <source>Place Group</source>
+                <target>Gruppierung (Orte)</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.regions" approved="yes">
+                <source>regions</source>
+                <target>Regionen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.title" approved="yes">
+                <source>Geographic location - defined by its latitude and longitude</source>
+                <target>Geographische Koordinaten - geographische Breite und Länge</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_place.type" approved="yes">
+                <source>type</source>
+                <target>Typ</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_placegroup" approved="yes">
+                <source>Place Group</source>
+                <target>Ortegruppierung</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_placegroup.description" approved="yes">
+                <source>description</source>
+                <target>Beschreibung</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_placegroup.icon" approved="yes">
+                <source>Icon</source>
+                <target>Symbol</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_placegroup.parent" approved="yes">
+                <source>Parent</source>
+                <target>Elternelement</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_placegroup.title" approved="yes">
+                <source>Title</source>
+                <target>Titel</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region" approved="yes">
+                <source>Region</source>
+                <target>Region</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region.clickable" approved="yes">
+                <source>clickable</source>
+                <target>anklickbar</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region.file" approved="yes">
+                <source>Select KML files</source>
+                <target>KML-Dateien auswählen</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region.preserve_viewport" approved="yes">
+                <source>preserveViewport</source>
+                <target>Kartenausschnitt beibehalten</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region.suppress_info_windows" approved="yes">
+                <source>suppressInfoWindows</source>
+                <target>Info-Fenster deaktivieren</target>
+            </trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_region.title" approved="yes">
+                <source>title</source>
+                <target>Titel</target>
+            </trans-unit>
+        </body>
+    </file>
 </xliff>

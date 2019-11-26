@@ -32,9 +32,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 /**
  * Class PlaceGroupDataProvider
  */
-class PlaceGroupDataProvider implements DataProviderInterface
+class PlaceGroupDataProvider implements DataProviderInterface, MappingAwareInterface
 {
-    protected $mapping = self::OBJECT_TO_JSON_MAP;
+    use MappingAwareTrait;
 
     /**
      * PlaceGroup Repository

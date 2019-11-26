@@ -21,8 +21,12 @@ return [
         'dwenzel/ajaxmap/frontend-json-api' => [
             'target' => \DWenzel\Ajaxmap\Middleware\FrontendJsonApiHandler::class,
             'after' => [
-                'typo3/cms-frontend/prepare-tsfe-rendering',
+                'typo3/cms-frontend/tsfe',
             ],
+            'before' => [
+                'typo3/cms-frontend/content-length-headers',
+                'typo3/cms-frontend/output-compression'
+            ]
         ]
     ]
 ];

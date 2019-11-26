@@ -27,15 +27,18 @@ use TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider;
 interface SettingsInterface
 {
     const EXTENSION_KEY = 'ajaxmap';
+    const EXTENSION_NAME = 'Ajaxmap';
     const VENDOR_NAME = 'DWenzel';
 
     const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
     /**
      * API parameters
      */
+    const API_PARAMETER_ACTION = 'action';
     const API_PARAMETER_MAP = 'map';
-    const API_PARAMETER_PLACE_ID = 'placeId';
     const API_PARAMETER_MAP_ID = 'mapId';
+    const API_PARAMETER_NO_CACHE = 'no_cache';
+    const API_PARAMETER_PLACE_ID = 'placeId';
 
     /**
      * Key for icon registration
@@ -207,5 +210,26 @@ interface SettingsInterface
      * Cache identifiers
      */
     const CACHE_CHILDREN = 'cache_ajaxmap_children';
+    const CACHE_AJAX_DATA = 'cache_ajaxmap_data';
 
+    /**
+     * Settings keys
+     */
+    const LOCATION_TYPES = 'locationTypes';
+    const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
+    const PLACE_GROUPS = 'placeGroups';
+    const ID = 'id';
+    const MAP = 'map';
+    const PAGE_ID = 'pageId';
+    const SEARCH = 'search';
+    const SETTINGS = 'settings';
+    const MAP_SETTINGS_KEY = 'mapSettings';
+    const SUBJECT = 'subject';
+    const FIELDS = 'fields';
+    const LOCATION = 'location';
+    const RADIUS = 'radius';
+    const BOUNDS = 'bounds';
+    const ORDER = 'order';
+    const CONJUNCTION_AND = 'AND';
+    const CONJUNCTION_OR = 'OR';
 }

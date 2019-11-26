@@ -12,7 +12,19 @@
 			<source>Reset Filter</source>
 		</trans-unit>
 		<trans-unit id="placeholder.filterPlaces">
-			<source>Search Word</source>
+			<source>filter places by name</source>
+		</trans-unit>
+		<trans-unit id="label.searchField">
+			<source>Search</source>
+		</trans-unit>
+		<trans-unit id="label.radiusSearchField">
+			<source>Radius Search</source>
+		</trans-unit>
+		<trans-unit id="placeholder.radiusSearch">
+			<source>enter address</source>
+		</trans-unit>
+		<trans-unit id="label.submit">
+			<source>submit</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_address">
 			<source>Address</source>

@@ -30,10 +30,9 @@ use TYPO3\CMS\Extbase\Object\ObjectManagerInterface;
 /**
  * Class LocationTypeDataProvider
  */
-class LocationTypeDataProvider implements DataProviderInterface
+class LocationTypeDataProvider implements DataProviderInterface, MappingAwareInterface
 {
-
-    protected $mapping = self::OBJECT_TO_JSON_MAP;
+    use MappingAwareTrait;
 
     /**
      * @var MapRepository

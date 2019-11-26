@@ -42,7 +42,9 @@ trait ToArrayTrait {
 			}
 			if($hasMapping && array_key_exists($propertyName, $mapping[$className])) {
 				if (isset($mapping[$className][$propertyName]['mapTo'])) {
-					$propertyName = $mapping[$className][$propertyName]['mapTo'];
+                    $propertyName = $mapping[$className][$propertyName]['mapTo'];
+                } elseif (isset($mapping[$className][$propertyName]['replace'])) {
+                    $propertyValue = $this->replacePropertyValueIdentifiers($mapping[$className][$propertyName]['replace'], $properties);
 				} elseif (isset($mapping[$className][$propertyName]['exclude'])){
 					continue;
 				}
@@ -84,4 +86,33 @@ trait ToArrayTrait {
 		}
 		return $result;
 	}
+
+    /**
+     * @param string $propertyValue
+     * @param array $properties
+     * @return mixed
+     */
+    protected function replacePropertyValueIdentifiers(string $propertyValue, array $properties): string
+    {
+        $value = $propertyValue;
+
+        if (strpos($propertyValue, '{') === false) {
+            return $value;
+        }
+
+        preg_match_all('/{([^{}]*)}/', $propertyValue, $matches, PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE);
+        if (empty($matches)) {
+            return $value;
+        }
+
+        for ($i = count($matches[0]) - 1; $i >= 0; $i--) {
+            $identifier = $matches[1][$i][0];
+            $position = $matches[0][$i][1];
+            $length = mb_strlen($matches[0][$i][0]);
+            $replacementValue = (string) ObjectAccess::getPropertyPath($properties, $identifier);
+            $value = substr_replace($value, $replacementValue, $position, $length);
+        }
+
+        return $this->replacePropertyValueIdentifiers($value, $properties);
+    }
 }
