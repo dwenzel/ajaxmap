@@ -1,0 +1,311 @@
+
+
+<!--suppress ALL (Suppresses all IDE warnings, DO NOT INCLUDE IN PRODUCTION!) -->
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>extension FE-builder</title>
+    <!--link rel="stylesheet" href="http://localhost:2222/resources//css/main.css"-->
+</head>
+<body>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- typo 3 font nur zum test -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700&display=swap" rel="stylesheet">
+    <!--script src="https://maps.googleapis.com/maps/api/js" type="text/javascript"></script-->
+</head>
+<body>
+
+
+<div id="c35" class="u-space-b:default">
+
+    <!--
+        map-module
+        height default 100vh
+    -->
+    <div class="am js-ajax-map u-space-b:default ajax-map--sb-is-open" data-height="100vh">
+
+        <!-- inline js -->
+        <script type="text/javascript">
+            var mapStore = null;
+
+            if (!mapStore) {
+                mapStore = [];
+            }
+
+            if (typeof regionStore === "undefined") {
+                var regionStore = [];
+            }
+
+            if (typeof categoryTreeStore === "undefined") {
+                var categoryTreeStore = [];
+            }
+
+            var mapSettings = {"radiusSearch":true,"searchField":true,"keys":{"googleMap":"AIzaSyCjrAYq3VJobLuTeMa_3NsU_NpMwIYCvBA"},"id":"1","infoWindow":"","kmlLayer":"","locationTypes":[],"map":"","marker":[],"placeGroups":"","places":"","regions":"","settings":{"markerClusterer":{"imagePath":"typo3conf/ext/ajaxmap/Resources/Public/Icons/Cluster/m"},"regionTree":{"minExpandLevel":3,"selectMode":3,"icon":false,"checkbox":true,"extensions":["filter","glyph"],"glyph":{"preset":"awesome4","map":{"folder":"fa-folder","folderOpen":"fa-folder-open"}},"filter":{"autoApply":true,"mode":"hide"}},"autosuggest":{"options":{"componentRestrictions":{"country":"de"}}},"categoryTree":{"icon":false,"extensions":["filter","glyph"],"glyph":{"preset":"awesome4","map":{"folder":"fa-folder","folderOpen":"fa-folder-open"}},"filter":{"autoApply":true,"mode":"hide"}},"placeGroupTree":{"checkbox":true,"icon":false,"extensions":["filter","glyph"],"glyph":{"preset":"awesome4","map":{"folder":"fa-folder","folderOpen":"fa-folder-open"}},"filter":{"autoApply":true,"mode":"hide"}},"locationTypeTree":{"checkbox":true,"icon":false,"selectMode":1,"extensions":["filter","glyph"],"glyph":{"preset":"awesome4","map":{"folder":"fa-folder","folderOpen":"fa-folder-open"}},"filter":{"autoApply":true,"mode":"hide"}},"placesTree":{"toggleInfoWindowOnSelect":true,"selectMode":1,"icon":false,"extensions":["filter"],"quicksearch":true,"filter":{"autoApply":true,"mode":"hide"},"updateFilters":{"locationType":{"treeName":"ajaxMapLocationTypesTree"},"categories":{"treeName":"ajaxMapCategoryTree"},"regions":{"treeName":"ajaxMapRegionsTree","updateLayers":true},"placeGroups":{"treeName":"ajaxMapPlaceGroupTree"}}}},"pageId":149};
+
+            mapStore.push(mapSettings);
+            regionStore.push({"id": mapSettings.id});
+            categoryTreeStore.push({"id": mapSettings.id});
+
+            var ajaxMapConfig = window.ajaxMapConfig;
+            window.ajaxMapConfig = ajaxMapConfig ? ajaxMapConfig : {};
+
+        </script>
+
+        <!-- map -->
+        <div class="am__map-wrapper">
+            <div id="ajaxMapContainer_Map1" class="am__map"></div>
+        </div>
+
+
+        <!-- sidebar -->
+        <div id="placesTreeWrap" class="am__sb js-ajax-map-sidebar">
+            <button type="button" class="am__sb__trigger js-ajax-map-sb-trigger"
+                    aria-label="open/close map sidebar">
+                <span hidden>open/close map sidebar</span>
+                <i class="o-icon-font o-icon-font--am-arrow" aria-hidden="true"></i>
+            </button>
+
+            <div class="am-wrapper">
+
+                <form class="am-form" name="txAjaxmapStore"
+                      action="/beraterkarte-2?tx_ajaxmap_map%5Bcontroller%5D=Map&amp;cHash=7a54e36bceaa376d21d6255e28ebb40a"
+                      method="post">
+
+                    <!-- filter -->
+                    <header class="am__sb__filter">
+                        <!-- google location suggest input -->
+<div class="am-location-search">
+    <div class="am-form__group">
+        <label class="am-form__label" for="radialSearch1">
+            Ort/PLZ/Adresse
+        </label>
+        <div class="am-form__input-container">
+            <input id="locationSearch1" class="am-form__input am-form__input--location" name="locationSearch1" placeholder="Geben sie einen Ort ein"
+                   type="text">
+
+            <button class="am-button am-button--icon-only am-button--location js-am-location"
+                    aria-label="Standort ermitteln" title="Standort ermitteln" type="button"
+                    value="Standort ermitteln" title="Standort ermitteln">
+                    <span>Standort ermitteln</span>
+                    <i class="o-icon-font o-icon-font--am-target" aria-hidden="true"></i>
+            </button>
+
+            <button class="am-button am-button--icon-only"
+                    aria-label="Suchen" title="Suchen" type="submit" value="submit" title="Suchen">
+                    <span>Suchen</span>
+                    <i class="o-icon-font o-icon-font--am-search" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+                        <div class="am-option-filter">
+    <div class="am-form__group ">
+        <label class="am-form__label " for="optionFilter">
+            Filter name
+        </label>
+
+        <div class="am-form__input-container">
+            <select id="optionFilter" name="optionFilter" class="am-form__input">
+                <option value="" disabled="" selected="">Option wählen ...</option>
+                    <option value="Option 1">Option 1</option>
+                    <option value="Option 2">Option 2</option>
+                    <option value="Option 3">Option 3</option>
+            </select>
+            <div class="am-form__select-arrow" aria-hidden="true">
+                <i class="o-icon-font o-icon-font--am-arrow-down"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        <!-- option filter as checkbox -->
+<div class="am-option-filter">
+    <div class="am-form__group ">
+        <label class="am-form__label " for="optionFilter">
+            Filter per checkboxes
+        </label>
+
+            <div class="am-form__tag">
+                <input id="input-checkbox-Option 1" type="checkbox" name="optionFilterCheckbox">
+                <label tabindex="0" for="input-checkbox-Option 1">Option 1</label>
+            </div>
+            <div class="am-form__tag">
+                <input id="input-checkbox-Option 2" type="checkbox" name="optionFilterCheckbox">
+                <label tabindex="0" for="input-checkbox-Option 2">Option 2</label>
+            </div>
+            <div class="am-form__tag">
+                <input id="input-checkbox-Option 3" type="checkbox" name="optionFilterCheckbox">
+                <label tabindex="0" for="input-checkbox-Option 3">Option 3</label>
+            </div>
+    </div>
+</div>
+
+                        <!-- option filter as checkbox -->
+<div class="am-option-filter">
+    <div class="am-form__group ">
+        <label class="am-form__label " for="optionFilter">
+            Filter per radio boxes
+        </label>
+
+            <div class="am-form__tag">
+                <input id="input-radio-Option 1" type="radio" name="optionFilterRadio">
+                <label tabindex="0" for="input-radio-Option 1">Option 1</label>
+            </div>
+            <div class="am-form__tag">
+                <input id="input-radio-Option 2" type="radio" name="optionFilterRadio">
+                <label tabindex="0" for="input-radio-Option 2">Option 2</label>
+            </div>
+            <div class="am-form__tag">
+                <input id="input-radio-Option 3" type="radio" name="optionFilterRadio">
+                <label tabindex="0" for="input-radio-Option 3">Option 3</label>
+            </div>
+    </div>
+</div>
+
+                        <div class="am-radial-search">
+    <div class="am-form__group">
+        <label class="am-form__label " for="radialSelect">
+            Umkreissuche
+        </label>
+        <div class="am-form__input-container">
+            <select id="radialSelect1" name="radialSelect1" class="am-form__input">
+                <option value="" disabled="" selected="">Umkreis wählen ...</option>
+                    <option value="-1">Deutschlandweit</option>
+                    <option value="10000">10km</option>
+                    <option value="25000">25km</option>
+                    <option value="50000">50km</option>
+                    <option value="200000">200km</option>
+            </select>
+            <div class="am-form__select-arrow" aria-hidden="true">
+                <i class="o-icon-font o-icon-font--am-arrow-down"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+                        <!-- search in list -->
+<div class="am-form__group">
+    <label class="am-form__label u-accessibility" for="filterPlaces">
+        Suchbegriff eingeben
+    </label>
+    <div class="am-form__input-container">
+        <input id="input-text-1" name="filterPlaces" type="search" placeholder="Suchbegriff eingeben"
+               class="am-form__input">
+        <button id="btnResetPlacesFilter" class="am-button am-button--icon-only am-button--reset"
+                aria-label="Zurücksetzen" type="button" value="reset" title="Filter zurücksetzen" disabled>
+            <span>Filter zurücksetzen</span>
+            <i class="o-icon-font o-icon-font--am-cross" aria-hidden="true"></i>
+        </button>
+    </div>
+</div>
+
+
+                        <!-- TODO Emi styling Treelist -->
+                        <div hidden id="ajaxMapRegionsTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapCategoryTree1" class="dynaTree"></div>
+                        <div hidden id="ajaxMapPlaceGroupTree1" class="dynaTree"></div>
+                    </header>
+
+                    <!-- results -->
+                    <div class="am__sb__scroll-wrapper">
+                        <div class="am__sb__scroll-wrapper__inner">
+                            <div class="am__sb__msg">
+    <p>
+        <strong>Zu der Suchanfrage &quot;XXX&quot; wurde in der Datenbank nichts gefunden.</strong>
+    </p>
+    <p class="am-p-light">
+        Achten Sie bei Ihrer Suche auf die korrekte Schreibweise. Versuchen Sie eine Stadt, ein Bundesland oder eine Postleitzahl hinzuzufügen. Erhöhen Sie den Umkreis um Berater in deiner Umgebung zu finden.
+    </p>
+    <p class="am-p-light">
+        Sollten sie dennoch keinen Berater finden, kontaktieren sie uns über unser Kontaktformular.
+    </p>
+        <button class="am-button am-button--ghost" type="reset">Filterung zurücksetzen</button>
+</div>
+
+
+                            <!-- example card todo EHO put in fancytree render-->
+                            <ul class="am-results__list">
+                                <li class="am-results__list__item">
+                                    <div class="am-card">
+    <!-- if organisation seo -->
+    <script type="application/ld+json">
+        {
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            "name": "Title",
+            "url": "#",
+            "logo": "https://via.placeholder.com//80x80"
+        }
+    </script>
+
+    <!-- logo or profile image todo @EHO default image for profile or company-->
+    <div class="am-card__img is-rounded">
+        <img src="https://via.placeholder.com//80x80" alt="">
+    </div>
+    <div class="am-card__copy">
+        <header class="am-card__copy__head">
+            <h3 class="am-card__title">Title</h3>
+            <p class="am-card__subtitle">Subline</p>
+        </header>
+        <p>
+            Lorem Ipsum dolor
+        </p>
+        <footer class="am-card__copy__footer">
+            <a href="#" class="am-link">Page Url</a>
+        </footer>
+    </div>
+    <a href="#" class="am-card__block-link js-am-jt-marker">Anchor map</a>
+</div>
+
+                                </li>
+                            </ul>
+
+                            <!-- dynamic list => render js -->
+                            <div id="ajaxMapPlacesTree1" class="am-results dynaTree">
+                            </div>
+
+                        </div>
+                    </div>
+
+                    <!-- footer -->
+                    <footer class="am__sb__footer">
+                        <button class="am-link" type="reset">Auswahl zurücksetzen</button>
+                    </footer>
+
+                    <!-- ajax form hidden -->
+
+                    <div>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@extension]" value="Ajaxmap"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@vendor]" value="DWenzel"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@controller]" value="Map"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@action]" value="show"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][arguments]"
+                               value="YTowOnt9f86ca4fd3e3b6aacedcfb2344bc198b4d44cfebb"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__referrer][@request]"
+                               value="a:4:{s:10:&quot;@extension&quot;;s:7:&quot;Ajaxmap&quot;;s:11:&quot;@controller&quot;;s:3:&quot;Map&quot;;s:7:&quot;@action&quot;;s:4:&quot;show&quot;;s:7:&quot;@vendor&quot;;s:7:&quot;DWenzel&quot;;}6beac5590010337ac3931c66cd706544a46cc564"/>
+                        <input type="hidden" name="tx_ajaxmap_map[__trustedProperties]"
+                               value="a:1:{s:14:&quot;txAjaxmapStore&quot;;a:1:{s:5:&quot;mapId&quot;;i:1;}}d2f9d8e7dd4ea12d85c9bb4c7102601b9d8ac873"/>
+                    </div>
+                    <input type="hidden" name="tx_ajaxmap_map[txAjaxmapStore][mapId]" value="1"/></form>
+
+            </div><!-- // c-forn -->
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
+
+<script src="http://localhost:2222/resources//js/main.js"></script>
+</body>
+</html>
+

@@ -4,7 +4,10 @@ const fs = require('fs');
 
 const template = fs.readFileSync(__dirname + '/card.example.template.hbs', 'UTF-8');
 
-const func = `function (){
+
+//--> fields of "card --> https://frs.plan.io/issues/14065
+
+const func = `
     window.ajaxMapConfig = window.ajaxMapConfig|| {};
     
     window.ajaxMapConfig.renderPlaceTreesItem = function(placeInstance) {
@@ -22,11 +25,10 @@ const func = `function (){
   // console.log(placeData);
 
     return \`${template}\`;
- }
-}`;
+ }`;
 
 module.exports = {
     context: {
-        renderPlaceTreesItemFunction: '<script>(' + func + ')()</script>'
+        renderPlaceTreesItemFunction: '<script>' + func + '</script>'
     }
 };

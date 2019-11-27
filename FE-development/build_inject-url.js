@@ -42,8 +42,7 @@ function injextScriptUrl(path, ajaxProxyPort) {
 };
 
 function init() {
-    const script = injextScriptUrl(buildetScriptPath, ajaxProxyPort)
-
+    const script = injextScriptUrl(buildetScriptPath, ajaxProxyPort);
     save(handletScriptPath, script)
 };
 

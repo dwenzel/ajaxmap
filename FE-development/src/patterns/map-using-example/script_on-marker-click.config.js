@@ -1,27 +1,27 @@
-const fs = require('fs');
 
-const onMarkerClickTemplate = function(mapEntry, place, $) {
+const onMarkerClickTemplateFunction = function(mapEntry, place, $) {
+   // place.placeInstance.panToSelf();
+
     const treeNode = place.placeInstance.treeNode//has all domNodes
 
     treeNode.setSelected(true)
 
-    //    var ulEl = treeNode.parent.ul;
+    //  var ulEl = treeNode.parent.ul;
     //  var liEl = treeNode.li;
 
-    treeNode.li.scrollIntoView({
+    treeNode.li.scrollIntoView({// caniuse :78%
         behavior: "smooth",
         block: "end",
         inline: "nearest"
     });
 }.toString();
 
-const onMarkerClick = `function (){
+const onMarkerClick = `
     window.ajaxMapConfig = window.ajaxMapConfig|| {};
-    window.ajaxMapConfig.onMarkerClick=${onMarkerClickTemplate};
-}`;
+    window.ajaxMapConfig.onMarkerClick=${onMarkerClickTemplateFunction};`;
 
 module.exports = {
     context: {
-        onMarkerClick: '<script>(' + onMarkerClick + ')()</script>'
+        onMarkerClick: '<script>' + onMarkerClick + '</script>'
     }
-}
+};
