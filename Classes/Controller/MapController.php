@@ -104,6 +104,7 @@ class MapController extends AbstractController
         if(!empty($search)) {
             $this->mapSettings[SI::SEARCH] = array_merge($this->settings[SI::SEARCH], $search);
         }
+        $this->mapSettings[SI::KEYS] = $this->settings[SI::KEYS];
     }
 
 }
