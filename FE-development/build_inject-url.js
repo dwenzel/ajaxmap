@@ -5,7 +5,7 @@
 const fs = require('fs');
 const ajaxProxyPort = require('./_config-proxy-port.json').ajaxProxyPort;
 const buildetScriptPath = './dist/js/main.js'
-const handletScriptPath = './Resources/Public/Dist/ajaxmap.bundle.js'
+const handletScriptPath = '../Resources/Public/Dist/ajaxmap.bundle.js'
 
 function read(path) {
     return fs.readFileSync(path, 'utf-8')

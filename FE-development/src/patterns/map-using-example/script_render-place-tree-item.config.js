@@ -12,7 +12,7 @@ const func = `
     
     window.ajaxMapConfig.renderPlaceTreesItem = function(placeInstance) {
     // console.log(placeInstance);
- 
+
     var placeData=placeInstance.placeData;
 
     var title=placeData.title || 'no* title';
@@ -22,7 +22,7 @@ const func = `
     var pageUrl=placeData.pageUrl &&'no pageUrl';
 
 
-  // console.log(placeData);
+  // console.log(placeData.locationType.title);
 
     return \`${template}\`;
  }`;

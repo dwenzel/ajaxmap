@@ -5,6 +5,21 @@ import $ from 'jquery';
 
 import ajaxMap from './ajaxMap';
 
+export class ElBuffer {
+    constructor() {
+        this.buffer = {};
+    }
+
+    getEl(selector) {
+        const el = this.buffer[selector];
+
+        return el ? el : function() {
+                this.buffer[selector] = el;
+                return el;
+            };
+    }
+}
+
 export const ajaxCall = (data) => {
     return new Promise(function(resolve, reject) {
         $.ajax({

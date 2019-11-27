@@ -66,8 +66,8 @@ const _ = {
             var tree = $(treeSelector).fancytree('getTree');
 
             tree.clearFilter();
-            tree.visit(function(node) {
 
+            tree.visit(function(node) {
                 node.setSelected(false);
             });
         }
@@ -75,7 +75,7 @@ const _ = {
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
         if (selectedPlaceKeys.length) {
-            //  alert('haskey');
+    alert('haskey');
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
