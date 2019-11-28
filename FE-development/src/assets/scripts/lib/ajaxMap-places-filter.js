@@ -26,10 +26,10 @@ const _ = {
     updateMarkers: (mapEntry) => {
         var placeCnt = 0,
             toUpdate = 0,
-            active = 0;
+            active = 0,
+            off = 0;
 
-
-        for (var key in  mapEntry.placeInstances) {
+        for (var key in mapEntry.placeInstances) {
             const placInstance = mapEntry.placeInstances[key],
                 marker = placInstance.marker;
 
@@ -41,33 +41,34 @@ const _ = {
                 if (placInstance.active) {
 
                     fastdom.mutate(() => {
-                        marker.setMap(mapEntry.googleMap);
+
                     });
 
+                    marker.setMap(mapEntry.googleMap);
                     active++;
                 } else {
+
+                    off++;
                     marker.setMap(null);
                 }
 
                 placInstance.updateMarker = false;
             }
-
         }
 
-        console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active);
+        console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
     }
 };
 
-function update($rootNode, mapEntry) {
+function updateFilter(treeNodes, mapEntry) {
     const filters = mapEntry.settings.placesTree.updateFilters;
 
     $.each(filters, function(filterName, filter) {
         const treeSelector = '#' + filter.treeName + mapEntry.id;
 
         try {
+            const placeKeys = getKeysByAttribute(treeNodes, filterName);
             const tree = $(treeSelector).fancytree('getTree');
-            const children = $rootNode.children;
-            const placeKeys = getKeysByAttribute(children, filterName);
 
             filterTree(tree, placeKeys);
 
@@ -94,9 +95,7 @@ function update($rootNode, mapEntry) {
 function filterTree(tree, keys) {
     const options = {autoExpand: true};
 
-    tree.filterNodes(function(node) {
-        return (keys.indexOf(parseInt(node.key)) != -1);
-    }, options);
+    tree.filterNodes(node => (keys.indexOf(parseInt(node.key)) !== -1), options);
 }
 
 /**
@@ -181,23 +180,10 @@ function showMatchingPlaces(mapEntry) {
 
         return false;
     });
-
-    // console.error('selectedPlaces', selectedPlaces)
-
-    //   clusterer.addMarkers(mapMarkers);
-
-    // update only if mapEntry is already initialized
-    // if (typeof mapEntry.markers !== 'undefined') {
-
-    //   console.log(selectedPlaces)
-    //return;
-
-    //-->    marker.setMap(map);
-
+    console.log('ANZAHL', selectedPlaces.length)
     _.updateMarkers(mapEntry);
+
     treeRenderer.update.places(mapEntry, selectedPlaces);
-    // }
-    //mapEntry.markers = mapMarkers;
 }
 
 /**
@@ -234,7 +220,7 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
 }
 
 const filterPlaces = {
-    update,
+    updateFilter,
     showMatchingPlaces,
     showSelectedPlaces
 };

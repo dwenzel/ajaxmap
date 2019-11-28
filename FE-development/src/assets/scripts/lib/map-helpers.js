@@ -11,32 +11,36 @@ const helpers = {
      * Searches all children for an attribute in their data property
      * and returns a unique array of keys for this attribute
      *
-     * @param children
+     * @param treeNodes
      * @param name
      * @return Array
      */
-    getKeysByAttribute: function(children, name) {
-        var keys = [];
-        $.each(children, function(index, child) {
-            if (child.data.hasOwnProperty(name)) {
-                var attribute = child.data[name];
-                if (attribute !== undefined &&
-                    attribute !== null &&
-                    attribute.hasOwnProperty('key') && !keys[attribute.key]) {
-                    keys.push(attribute.key);
-                } else {
-                    if (attribute instanceof Array) {
-                        for (var i = 0, k = attribute.length; i < k; i++) {
-                            if (attribute[i].hasOwnProperty('key') && keys.indexOf(attribute[i].key) < 0) {
-                                keys.push(attribute[i].key);
-                            }
+    getKeysByAttribute: function(treeNodes, name) {
+        var lookUp = {};
+
+        return treeNodes.filter((node) => {
+            const attribute = node.data[name];
+
+            if (attribute) {
+                if (attribute.hasOwnProperty('key')
+                    && !lookUp[attribute.key]) {
+
+                    return lookUp[attribute.key] = true;
+                }
+
+                return false;
+            } else {
+                console.error('not refactored')
+
+                if (attribute instanceof Array) {
+                    for (var i = 0, k = attribute.length; i < k; i++) {
+                        if (attribute[i].hasOwnProperty('key') && keys.indexOf(attribute[i].key) < 0) {
+                            keys.push(attribute[i].key);
                         }
                     }
                 }
             }
-        });
-
-        return keys;
+        }).map(node => node.data[name].key)
     },
 
     getLocationType: (mapEntry, typeId) =>
@@ -45,6 +49,21 @@ const helpers = {
         )
     ,
     getSelectedKeys: (selector) => {
+        /*        var tree = $(selector).fancytree('getTree'),
+         selectedKeys = [];
+         if (typeof tree.getSelectedNodes === 'function') {
+         var selectedNodes = tree.getSelectedNodes();
+
+         selectedKeys = $.map(selectedNodes, function(node) {
+         console.log(node)
+
+         return parseInt(node.key);
+         });
+         }
+
+
+         return selectedKeys;*/
+
         const tree = $(selector).fancytree('getTree');
 
         return typeof tree.getSelectedNodes === 'function' ?
@@ -66,16 +85,16 @@ const helpers = {
     getMapType: (type) => {
 
         switch (type) {
-        case '2':
-            return google.maps.MapTypeId.SATELLITE;
-        case '3':
-            return google.maps.MapTypeId.HYBRID;
-        case '4':
-            return google.maps.MapTypeId.TERRAIN;
+            case '2':
+                return google.maps.MapTypeId.SATELLITE;
+            case '3':
+                return google.maps.MapTypeId.HYBRID;
+            case '4':
+                return google.maps.MapTypeId.TERRAIN;
 
-        default:
-            // 0 - 'Styled Map' and 1 - 'Road Map' will become ROADMAP
-            return google.maps.MapTypeId.ROADMAP;
+            default:
+                // 0 - 'Styled Map' and 1 - 'Road Map' will become ROADMAP
+                return google.maps.MapTypeId.ROADMAP;
         }
     }
     ,

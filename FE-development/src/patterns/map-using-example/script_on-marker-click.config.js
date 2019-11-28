@@ -9,7 +9,7 @@ const onMarkerClickTemplateFunction = function(mapEntry, place, $) {
     //  var ulEl = treeNode.parent.ul;
     //  var liEl = treeNode.li;
 
-    treeNode.li.scrollIntoView({// caniuse :78%
+    treeNode.li.scrollIntoView({// caniuse :78% /use polyfill : https://github.com/iamdustan/smoothscroll
         behavior: "smooth",
         block: "end",
         inline: "nearest"

@@ -1,2 +1,0 @@
-to start:
-npm start

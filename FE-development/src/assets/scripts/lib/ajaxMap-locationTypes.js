@@ -23,12 +23,42 @@ const mapLocationTypes = {
             places.updatePlaces(mapId);
         });
     },
+    setUpTree: function(mapEntry) {
+
+        var options = mapEntry.settings.locationTypeTree//?;
+
+
+        console.log(options.filter)
+
+delete        options.filter.mode
+
+        const settings = {
+            checkbox: options.checkbox,
+            cookieId: 'fancyTreeLocationTypes' + mapEntry.id,
+            selectMode: options.selectMode,
+            extensions: options.extensions,
+            glyph: options.glyph,
+
+         //   filter: options.filter,
+
+            source: mapEntry.locationTypes,
+            select: function(flag, node) {
+                //todo filter here then
+
+                places.update(mapEntry, true);
+
+            }
+        };
+
+        const selector = mapLocationTypes.treeSelector + mapEntry.id;
+        $(selector).fancytree(settings);
+    },
     init: function(mapEntry) {
 
         if (mapEntry.locationTypes) {
-            mapLocationTypes.ui(mapEntry);  //        @dirk ??
+          //  mapLocationTypes.ui(mapEntry);  //        @dirk ??
             /*here is a diff between mapEntry.locationtypes & mapEntry.settings.locationTypeTree */
-            const $tree = treeRenderer.locationTypes(mapEntry);
+            mapLocationTypes.setUpTree(mapEntry);
 
             // console.log($tree)e
             // $tree.fancytree("option", "checkbox", true);

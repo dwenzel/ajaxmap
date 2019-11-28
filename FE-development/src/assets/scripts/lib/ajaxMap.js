@@ -12,7 +12,7 @@ import {inserScriptTag} from './utilitys';
 import ui from '../lib/ui';
 
 let ajaxMap;
-
+/*
 class AjaxMap {
     constructor(mapEntry) {
         this.mapEntry = mapEntry;
@@ -21,7 +21,7 @@ class AjaxMap {
         mapEntry.layers = [];//88 maybe whle init?
         this.$mapEl = null;
     }
-}
+}*/
 
 const _ = {
     initMap: (mapEntry, locationTypesResonse) => {
@@ -36,7 +36,6 @@ const _ = {
 
         ui.initByMapEntry(mapEntry);
 
-
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
     },
@@ -45,15 +44,14 @@ const _ = {
             const mapStore = ajaxMap.configData.mapStore;
 
             ajaxMap.maps = mapStore.map((mapEntry) => {
-                const ajaxMapInstance = new AjaxMap(mapEntry);
+              //  const ajaxMapInstance = new AjaxMap(mapEntry);
 
-                map.build(mapEntry).then((response) => {
-
-                    _.initMap(mapEntry);
+                map.build(mapEntry).then((mergedMapEntry) => {
+                    _.initMap(mergedMapEntry);
                 });
 
-                ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
-                return ajaxMapInstance;
+              //  ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
+              //  return ajaxMapInstance;
             });
         });
     }

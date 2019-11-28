@@ -69,19 +69,16 @@ const _ = {
 const renderTree = {
     update: {
         places: (mapEntry, children) => {
-            var selector =
-                fancytreeSelector.places + mapEntry.id;
+            const selector = fancytreeSelector.places + mapEntry.id,
+                $placesRootNode = $(selector).fancytree('getRootNode');
 
-            var $rootNode =
-                $(selector).fancytree('getRootNode');
+            $placesRootNode.removeChildren();
 
-            $rootNode.removeChildren();
+            $placesRootNode.addChildren(children);
 
-            $rootNode.addChildren(children);
+            $placesRootNode.sortChildren(sort.aplhabetic.asc, false);
 
-            $rootNode.sortChildren(sort.aplhabetic.asc, false);
-
-            filter.update($rootNode, mapEntry);
+            filter.updateFilter($placesRootNode.children, mapEntry);
         }
     },
     places: (mapEntry, children) => {
@@ -196,29 +193,7 @@ const renderTree = {
             }
         );
     },
-    locationTypes: function(mapEntry) {
 
-        var options = mapEntry.settings.locationTypeTree//?;
-
-        const settings = {
-            checkbox: options.checkbox,
-            cookieId: 'fancyTreeLocationTypes' + mapEntry.id,
-            selectMode: options.selectMode,
-            extensions: options.extensions,
-            glyph: options.glyph,
-            filter: options.filter,
-            source: mapEntry.locationTypes,
-            select: function(flag, node) {
-                //todo filter here then
-
-                places.update(mapEntry, true);
-
-            }
-        };
-
-        const selector = locationTypes.treeSelector + mapEntry.id;
-        $(selector).fancytree(settings);
-    }
 };
 
 export default renderTree;

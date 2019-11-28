@@ -7,8 +7,13 @@ const googleApiKey = require(process.env.HOME + '/config-data/bsb-config').googl
 
 const map = {
     settings: {
-        radiusSearch: true,
+        radiusSearch: true, //10000
         searchField: true,
+        search: {
+            "location": "berlin",
+            "radius": "10000"
+        },
+
         keys: {
             googleMap: googleApiKey
         },
