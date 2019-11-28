@@ -188,7 +188,7 @@
                             <displayCond>
                                 <OR>
                                     <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search;Map->show</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
@@ -204,7 +204,7 @@
                             <displayCond>
                                 <OR>
                                     <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search;Map->show</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
