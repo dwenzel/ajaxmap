@@ -219,6 +219,7 @@ interface SettingsInterface
     const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
     const PLACE_GROUPS = 'placeGroups';
     const ID = 'id';
+    const KEYS = 'keys';
     const MAP = 'map';
     const PAGE_ID = 'pageId';
     const SEARCH = 'search';
