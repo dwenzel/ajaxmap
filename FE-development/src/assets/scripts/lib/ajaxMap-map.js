@@ -18,8 +18,10 @@ const _map = {
     },
     mapToDefaultSettings: (mapEntry, response) => {
 
-        const $el = $(_map.containerSelector + mapEntry.id),
-            googleMap = mapHelpers.createGooglMap(response, $el);
+        const $map = $(_map.containerSelector + mapEntry.id),
+            googleMap = mapHelpers.createGooglMap(response, $map);
+
+        const $sideBar = $map.closest('.am').find('.am__sb');
 
         const infoWindow = mapHelpers.getInfoWindow();
         const markerClusterer = mapHelpers.getMarkerClusterer(googleMap, mapEntry.markerClusterer);
@@ -28,7 +30,9 @@ const _map = {
         const staticLayers = response.staticLayers || [];
         const locationTypes = response.locationTypes || [];
 
-        Object.assign(mapEntry, response, {
+        return Object.assign({}, mapEntry, response, {
+            $map,
+            $sideBar,
             googleMap,
             regions,
             staticLayers,
@@ -38,14 +42,12 @@ const _map = {
         });
     },
     build(mapEntry) {
-        const settings = mapEntry.settings;
-
         return new Promise(function(resolve, reject) {
             _map.getMapData(mapEntry)
-                .then((response) => {
-                    _map.mapToDefaultSettings(mapEntry, response);
-                    return resolve(response);
-                }, reject);
+            .then((response) => {
+
+                return resolve(_map.mapToDefaultSettings(mapEntry, response));
+            }, reject);
         });
     }
 };

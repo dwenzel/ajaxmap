@@ -8,47 +8,66 @@ const _ = {
     locationInputSelector: '#locationSearch',
     radialSearchSelectSelector: '#radialSelect',
 
-    setUpAutoSuggest: (mapEntry) => {
-        const mapId = mapEntry.id,
-            map = mapEntry.googleMap,
-            input = $(_.locationInputSelector + mapId)[0];
+    checkInputVal: (inputVal) => {
+        inputVal = inputVal.trim();
 
-        const configAutosuggest = mapEntry.settings.autosuggest.options;
+        if (inputVal.length) {
+            return true;
+        }
 
-        const options = Object.assign({}, {
-            types: ['(cities)']
-        }, configAutosuggest);
-
-        const autocomplete = new google.maps.places.Autocomplete(input, options);
-        autocomplete.bindTo('bounds', map);
-
-        return autocomplete;
+        return false
     }
 };
 
 class RadialSelect {
     constructor(mapEntry) {
-        this.$selectEl = $(_.radialSearchSelectSelector + mapEntry.mapId);
+        this.$select = mapEntry.$sideBar.find('.am-radial-search select');
     }
 
-    addValToQuery(queryParams) {
-        let selectetVal = this.$selectEl.val();
+    addValToQuery(search) {
+        let selectetVal = this.$select.val();
 
-        if (selectetVal === -1) {
+        if (!selectetVal) {
             return;
         }
 
-        queryParams.radius = selectetVal;
+        search.radius = selectetVal;
     }
 }
 
 class AutoSuggestSearch {
     constructor(mapEntry) {
-        this.autoSuggest = _.setUpAutoSuggest(mapEntry);
+        this.mapEntry = mapEntry;
+        this.$input = mapEntry.$sideBar.find('.am-location-search input');
+
+        this.autoSuggest = this.setUpAutoSuggest();
     }
 
-    addValToQuery(queryParams) {
-        queryParams.location = this.autoSuggest.getPlace();
+    setUpAutoSuggest() {
+        const configAutosuggest = this.mapEntry.settings.autosuggest.options;
+
+        const options = Object.assign(
+            {}, {
+                types: ['(cities)']
+            }, configAutosuggest
+        );
+
+        const autocomplete = new google.maps.places.Autocomplete(this.$input[0], options);
+        autocomplete.bindTo('bounds', this.mapEntry.googleMap);
+
+        return autocomplete;
+    }
+
+    addValToQuery(search) {
+        const placeData = this.autoSuggest.getPlace();
+
+        const inputVal = _.checkInputVal(this.$input.val());
+
+        if (!placeData || !inputVal) {
+            return;
+        }
+
+        search.location = placeData;
     }
 }
 
@@ -57,53 +76,78 @@ class LocationSearch {
         this.mapEntry = mapEntry;
         this.mapId = mapEntry.id;
 
+        this.oldSearchData = {};
+
         //the ui Elements
         this.autoSuggestSearch;
         this.radialSelect;
 
         this.$sendButton;
 
-        this.aa = 0;
+        this.aa = 0;//debug
     }
 
     init() {
-        if (this.mapEntry.searchField) {
-            this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry);
-
+        /*  if (this.mapEntry.searchField) {
+         this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry);
+         }*/
+        if (!this.mapEntry.radiusSearch) {
+            return
         }
 
-        if (this.mapEntry.textSearch) {
-            this.radialSelect = new RadialSelect();
-        }
+        this.radialSelect = new RadialSelect(this.mapEntry);
+        this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry);
 
-        if (this.autoSuggestSearch || this.radialSelect) {
-            this.$sendButton = $(_.sendButtonSelector);
-            this.$sendButton.show(800);
+        this.$sendButton = $(_.sendButtonSelector);
+        this.$sendButton.on('click', this.sendDatas());
 
-            this.$sendButton.on('click', this.sendDatas(this));
-        }
+        /*
+         if (this.autoSuggestSearch || this.radialSelect) {
+         this.$sendButton = $(_.sendButtonSelector);
+         this.$sendButton.on('click', this.sendDatas(this));
+         }*/
     }
 
     sendDatas() {
         const that = this;
         return function(event) {
-            let queryParams = {};
+            event.preventDefault();
 
-            that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
-            that.radialSelect && that.radialSelect.addValToQuery(queryParams);
+            /* queryParams.search={
+             raduis,
+             location
+             }*/
+
+            //  that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
+            //    that.radialSelect && that.radialSelect.addValToQuery(queryParams);
+
+            let search = {};
+            that.radialSelect.addValToQuery(search)
+            that.autoSuggestSearch.addValToQuery(search);
+
+            if (JSON.stringify(that.oldSearchData) === JSON.stringify(search)) {
+                return;
+            }
+
+            /*  if (!Object.keys(search).length) {
+             alert('nothing selected');
+             return;
+             }*/
+
+//            console.log('#++#+#+#+#+#+', search)
 
             var action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
 
             const data = {
-                queryParams,
+                search: JSON.stringify(search),
                 'id': ajaxMap.configData.mapSettings.pageId,
                 'api': 'map',
                 'action': action,//'listPlaces2',
                 'mapId': that.mapEntry.id
             };
 
+            that.oldSearchData = search;
             places.loadFromData(that.mapEntry, data);
-            event.preventDefault();
         };
     }
 }

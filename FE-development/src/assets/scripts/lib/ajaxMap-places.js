@@ -75,7 +75,7 @@ const _ = {
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
 
         if (selectedPlaceKeys.length) {
-    alert('haskey');
+
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
 
