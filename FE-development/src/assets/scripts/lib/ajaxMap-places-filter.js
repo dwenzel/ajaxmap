@@ -1,6 +1,6 @@
 import treeRenderer from './fancytree-renderer';
 import layers from './map-layers';
-import fastdom from 'fastdom';
+//import fastdom from 'fastdom';
 import {getKeysByAttribute} from './map-helpers';
 
 import {getSelectedKeys} from './map-helpers';
@@ -40,10 +40,10 @@ const _ = {
 
                 if (placInstance.active) {
 
-                    fastdom.mutate(() => {
+                    /*   fastdom.mutate(() => {
 
-                    });
-
+                     });
+                     */
                     marker.setMap(mapEntry.googleMap);
                     active++;
                 } else {

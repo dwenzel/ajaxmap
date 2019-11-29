@@ -205,6 +205,8 @@ const _ = {
             'mapId': mapEntry.id
         };
 
+        mapEntry.search && (data.search = mapEntry.search)
+      
         _.setEvents(placesTree);
         _.loadFromData(mapEntry, data);
     }

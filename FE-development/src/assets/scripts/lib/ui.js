@@ -1,9 +1,6 @@
 import $ from 'jquery';
-import search from './ui-suggestion-and-location-search';
+import search from './ui-search';
 import {trapFocus} from './ajax-map-trap-focus';
-
-
-//radialSearch.init(mapEntry);
 
 const _sel = {
     radialSearch: '.am-radial-search',

@@ -20,8 +20,13 @@ const _ = {
 };
 
 class RadialSelect {
-    constructor(mapEntry) {
+    constructor(mapEntry, radius) {
         this.$select = mapEntry.$sideBar.find('.am-radial-search select');
+
+        if (radius) {
+            const $findEl = this.$select.find('[value="' + radius + '"]');
+            $findEl.attr("selected", true);
+        }
     }
 
     addValToQuery(search) {
@@ -36,11 +41,14 @@ class RadialSelect {
 }
 
 class AutoSuggestSearch {
-    constructor(mapEntry) {
+    constructor(mapEntry, location) {
         this.mapEntry = mapEntry;
         this.$input = mapEntry.$sideBar.find('.am-location-search input');
 
         this.autoSuggest = this.setUpAutoSuggest();
+
+        location && this.$input.attr('value', location)
+
     }
 
     setUpAutoSuggest() {
@@ -73,6 +81,7 @@ class AutoSuggestSearch {
 
 class LocationSearch {
     constructor(mapEntry) {
+
         this.mapEntry = mapEntry;
         this.mapId = mapEntry.id;
 
@@ -88,44 +97,35 @@ class LocationSearch {
     }
 
     init() {
-        /*  if (this.mapEntry.searchField) {
-         this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry);
-         }*/
-        if (!this.mapEntry.radiusSearch) {
-            return
-        }
-
-        this.radialSelect = new RadialSelect(this.mapEntry);
-        this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry);
 
         this.$sendButton = $(_.sendButtonSelector);
         this.$sendButton.on('click', this.sendDatas());
 
-        /*
-         if (this.autoSuggestSearch || this.radialSelect) {
-         this.$sendButton = $(_.sendButtonSelector);
-         this.$sendButton.on('click', this.sendDatas(this));
-         }*/
+        if (this.mapEntry.searchField) {
+            const search = this.mapEntry.search;
+            const radius = search.radius;
+            const location = search.location;
+
+            radius && (this.radialSelect = new RadialSelect(this.mapEntry, search.radius));
+            location && (this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, search.location));
+
+        }
     }
 
     sendDatas() {
         const that = this;
+
         return function(event) {
             event.preventDefault();
 
-            /* queryParams.search={
-             raduis,
-             location
-             }*/
-
-            //  that.autoSuggestSearch && that.autoSuggestSearch.addValToQuery(queryParams);
-            //    that.radialSelect && that.radialSelect.addValToQuery(queryParams);
-
             let search = {};
-            that.radialSelect.addValToQuery(search)
+            that.radialSelect.addValToQuery(search);
             that.autoSuggestSearch.addValToQuery(search);
 
-            if (JSON.stringify(that.oldSearchData) === JSON.stringify(search)) {
+            search = JSON.stringify(search);
+
+            if (that.oldSearchData === search) {
+                alert(that.oldSearchData === search)
                 return;
             }
 
@@ -134,19 +134,19 @@ class LocationSearch {
              return;
              }*/
 
-//            console.log('#++#+#+#+#+#+', search)
+            //            console.log('#++#+#+#+#+#+', search)
 
             var action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
 
             const data = {
-                search: JSON.stringify(search),
+                search,
                 'id': ajaxMap.configData.mapSettings.pageId,
                 'api': 'map',
                 'action': action,//'listPlaces2',
                 'mapId': that.mapEntry.id
             };
 
-            that.oldSearchData = search;
+            that.oldSearchData = data.search;
             places.loadFromData(that.mapEntry, data);
         };
     }
@@ -154,6 +154,9 @@ class LocationSearch {
 
 export default {
     init: (mapEntry) => {
+
+        console.log(mapEntry)
+
         new LocationSearch(mapEntry).init();
     }
 };
