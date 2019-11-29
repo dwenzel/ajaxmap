@@ -63,7 +63,15 @@ function renderTreeAjax($el, action, mapEntry, treeSettings) {
 }
 
 const _ = {
-    $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId)
+    $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId),
+    sort: ($placesRootNode) => {
+        const defaultSortFkt = sort.aplhabetic.asc;
+        const customSortFkt = window.ajaxMapConfig.placeSortFunction;
+
+        const sortFunction = customSortFkt ? customSortFkt : defaultSortFkt;
+alert(sortFunction)
+        $placesRootNode.sortChildren(sortFunction, false);
+    }
 };
 
 const renderTree = {
@@ -75,8 +83,7 @@ const renderTree = {
             $placesRootNode.removeChildren();
 
             $placesRootNode.addChildren(children);
-
-            $placesRootNode.sortChildren(sort.aplhabetic.asc, false);
+            _.sort($placesRootNode);
 
             filter.updateFilter($placesRootNode.children, mapEntry);
         }
