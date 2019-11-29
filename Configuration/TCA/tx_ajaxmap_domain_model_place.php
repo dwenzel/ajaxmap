@@ -317,6 +317,7 @@ return [
                 'type' => 'group',
                 'internal_type' => 'db',
                 'allowed' => 'tt_address',
+                'foreign_table' => 'tt_address',
                 'fieldControl' => [
                     'editPopup' => [
                         'disabled' => false,

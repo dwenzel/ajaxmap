@@ -17,14 +17,5 @@ plugin.tx_ajaxmap {
             // provide API key for Google Maps
             googleMap =
         }
-        search {
-            radius {
-                options {
-                    10km = 100000
-                    50km = 500000
-                }
-            }
-        }
-
     }
 }
