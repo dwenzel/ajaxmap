@@ -1,14 +1,30 @@
 plugin.tx_ajaxmap {
-	view {
-		# cat=plugin.tx_ajaxmap/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:ajaxmap/Resources/Private/Templates/
-		# cat=plugin.tx_ajaxmap/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:ajaxmap/Resources/Private/Partials/
-		# cat=plugin.tx_ajaxmap/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:ajaxmap/Resources/Private/Layouts/
-	}
-	persistence {
-		# cat=plugin.tx_ajaxmap//a; type=string; label=Default storage PID
-		storagePid = 
-	}
+    view {
+        # cat=plugin.tx_ajaxmap/file; type=string; label=Path to template root (FE)
+        templateRootPath = EXT:ajaxmap/Resources/Private/Templates/
+        # cat=plugin.tx_ajaxmap/file; type=string; label=Path to template partials (FE)
+        partialRootPath = EXT:ajaxmap/Resources/Private/Partials/
+        # cat=plugin.tx_ajaxmap/file; type=string; label=Path to template layouts (FE)
+        layoutRootPath = EXT:ajaxmap/Resources/Private/Layouts/
+    }
+
+    persistence {
+        # cat=plugin.tx_ajaxmap//a; type=string; label=Default storage PID
+        storagePid =
+    }
+    settings {
+        keys {
+            // provide API key for Google Maps
+            googleMap =
+        }
+        search {
+            radius {
+                options {
+                    10km = 100000
+                    50km = 500000
+                }
+            }
+        }
+
+    }
 }
