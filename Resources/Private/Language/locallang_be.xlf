@@ -59,6 +59,9 @@
 		<trans-unit id="flexforms_general.detailPage" xml:space="preserve">
 			<source>Detail Page</source>
 		</trans-unit>
+		<trans-unit id="flexforms_general.showPage" xml:space="preserve">
+			<source>Map Page</source>
+		</trans-unit>
 		<trans-unit id="flexforms_general.entryDate" xml:space="preserve">
 			<source>Entry Date</source>
 		</trans-unit>
