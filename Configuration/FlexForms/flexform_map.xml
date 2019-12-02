@@ -188,7 +188,7 @@
                             <displayCond>
                                 <OR>
                                     <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search;Map->show</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
@@ -204,7 +204,7 @@
                             <displayCond>
                                 <OR>
                                     <numIndex index="0">FIELD:sDEF.switchableControllerActions:=:Map->show</numIndex>
-                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search</numIndex>
+                                    <numIndex index="1">FIELD:sDEF.switchableControllerActions:=:Map->search;Map->show</numIndex>
                                 </OR>
                             </displayCond>
                             <config>
@@ -216,5 +216,33 @@
                 </el>
             </ROOT>
         </display>
+        <!-- SHEET PAGES -->
+        <pages>
+            <ROOT>
+                <TCEforms>
+                    <sheetTitle>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.pages</sheetTitle>
+                </TCEforms>
+                <type>array</type>
+                <el>
+                    <settings.showPid>
+                        <TCEforms>
+                            <label>LLL:EXT:ajaxmap/Resources/Private/Language/locallang_be.xlf:flexforms_general.showPage</label>
+                            <config>
+                                <type>group</type>
+                                <internal_type>db</internal_type>
+                                <allowed>pages</allowed>
+                                <minitems>0</minitems>
+                                <maxitems>1</maxitems>
+                                <wizards>
+                                    <suggest>
+                                        <type>suggest</type>
+                                    </suggest>
+                                </wizards>
+                            </config>
+                        </TCEforms>
+                    </settings.showPid>
+                </el>
+            </ROOT>
+        </pages>
     </sheets>
 </T3DataStructure>

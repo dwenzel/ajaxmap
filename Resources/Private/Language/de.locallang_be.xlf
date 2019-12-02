@@ -78,6 +78,10 @@
                 <source>Detail Page</source>
                 <target>Seite für Detailansicht</target>
             </trans-unit>
+            <trans-unit id="flexforms_general.showPage" xml:space="preserve">
+			    <source>Map Page</source>
+                <target>Seite mit Kartenansicht</target>
+            </trans-unit>
             <trans-unit id="flexforms_general.height" approved="yes" xml:space="preserve">
                 <source>Height</source>
                 <target>Höhe</target>
