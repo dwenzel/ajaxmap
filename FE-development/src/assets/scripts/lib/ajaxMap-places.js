@@ -192,22 +192,32 @@ const _ = {
             _.updatePlaces(mapEntry);
         });
     },
-    init: (mapEntry) => {
-
-        mapEntry.placeInstances = {};
-
-        const placesTree = treeRenderer.places(mapEntry, []);
-
-        const data = {
+    defaultAjaxData: (mapEntry) => {
+        return {
             'id': ajaxMap.configData.mapSettings.pageId,
             'api': 'map',
             'action': 'listPlaces',
             'mapId': mapEntry.id
-        };
+        }
+    },
+    fitDatas: (mapEntry, defaultAjaxData) => {
+        return mapEntry.search ?
+            Object.assign({}, defaultAjaxData, mapEntry.search) : defaultAjaxData;
+    },
+    init: (mapEntry) => {
+        //look up for not loading twice markers
+        mapEntry.placeInstances = {};
 
-        mapEntry.search && (data.search = mapEntry.search)
-      
+        /*set default data for ajax call*/
+        let defaultAjaxData = _.defaultAjaxData(mapEntry);
+        mapEntry.defaultAjaxData = defaultAjaxData;
+
+        /* create tree*/
+        const placesTree = treeRenderer.places(mapEntry, []);
         _.setEvents(placesTree);
+
+        /* send Datas*/
+        const data = _.fitDatas(mapEntry, defaultAjaxData);
         _.loadFromData(mapEntry, data);
     }
 };

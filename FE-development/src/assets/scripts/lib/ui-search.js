@@ -67,8 +67,8 @@ class AutoSuggestSearch {
     }
 
     addValToQuery(search) {
-        const placeData = this.autoSuggest.getPlace();
-
+        const placeData = this.$input.val();//this.autoSuggest.getPlace();
+        //alert(this.$input.val())
         const inputVal = _.checkInputVal(this.$input.val());
 
         if (!placeData || !inputVal) {
@@ -97,7 +97,6 @@ class LocationSearch {
     }
 
     init() {
-
         this.$sendButton = $(_.sendButtonSelector);
         this.$sendButton.on('click', this.sendDatas());
 
@@ -108,7 +107,6 @@ class LocationSearch {
 
             radius && (this.radialSelect = new RadialSelect(this.mapEntry, search.radius));
             location && (this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, search.location));
-
         }
     }
 
@@ -125,26 +123,15 @@ class LocationSearch {
             search = JSON.stringify(search);
 
             if (that.oldSearchData === search) {
-                alert(that.oldSearchData === search)
                 return;
             }
 
-            /*  if (!Object.keys(search).length) {
-             alert('nothing selected');
-             return;
-             }*/
+            const data = that.mapEntry.defaultAjaxData;
+            data.search = search;
 
-            //            console.log('#++#+#+#+#+#+', search)
-
-            var action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
-
-            const data = {
-                search,
-                'id': ajaxMap.configData.mapSettings.pageId,
-                'api': 'map',
-                'action': action,//'listPlaces2',
-                'mapId': that.mapEntry.id
-            };
+            /*debug simulate ajax map listplaces
+            data.action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
+             */
 
             that.oldSearchData = data.search;
             places.loadFromData(that.mapEntry, data);
@@ -154,9 +141,6 @@ class LocationSearch {
 
 export default {
     init: (mapEntry) => {
-
-        console.log(mapEntry)
-
         new LocationSearch(mapEntry).init();
     }
 };
