@@ -20,15 +20,16 @@ plugin.tx_ajaxmap.settings {
 
     search {
         fields = title,description,address.name
-        radius {
-            options {
-                10000 = 10 km
-                50000 = 50 km
-                100000 = 100 km
-                250000 = 250 km
-            }
-        }
+        radius = {$plugin.tx_ajaxmap.settings.search.radius}
+    }
 
+    filterOptions {
+        radius {
+            10000 = 10 km
+            50000 = 50 km
+            100000 = 100 km
+            250000 = 250 km
+        }
     }
 
     # exclude or map fields to other keys for json responses
