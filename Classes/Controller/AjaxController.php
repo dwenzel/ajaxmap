@@ -51,7 +51,8 @@ class AjaxController
         SI::API_PARAMETER_ACTION,
         SI::API_PARAMETER_MAP_ID,
         SI::API_PARAMETER_NO_CACHE,
-        SI::ID
+        SI::ID,
+        SI::SEARCH,
     ];
 
     /**
