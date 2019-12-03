@@ -36,6 +36,7 @@ const _ = {
 
         ui.initByMapEntry(mapEntry);
 
+
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
     },

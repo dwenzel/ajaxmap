@@ -5,7 +5,7 @@ import $ from 'jquery';
 
 import ajaxMap from './ajaxMap';
 
-export class ElBuffer {
+export class ElBuffer {//not in use
     constructor() {
         this.buffer = {};
     }

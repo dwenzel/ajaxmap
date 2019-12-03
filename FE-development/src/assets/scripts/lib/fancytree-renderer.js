@@ -10,7 +10,7 @@ import $ from 'jquery';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.edit';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.glyph';
 import 'jquery.fancytree/dist/modules/jquery.fancytree.filter';
-
+import fastdom from 'fastdom';
 export const fancytreeSelector = {
     locationType: '#ajaxMapLocationTypesTree',
     category: '#ajaxMapCategoryTree',
@@ -63,7 +63,15 @@ function renderTreeAjax($el, action, mapEntry, treeSettings) {
 }
 
 const _ = {
-    $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId)
+    $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId),
+    sort: ($placesRootNode) => {
+        const defaultSortFkt = sort.aplhabetic.asc;
+        const customSortFkt = window.ajaxMapConfig.placeSortFunction;
+
+        const sortFunction = customSortFkt ? customSortFkt : defaultSortFkt;
+
+        $placesRootNode.sortChildren(sortFunction, false);
+    }
 };
 
 const renderTree = {
@@ -76,9 +84,11 @@ const renderTree = {
 
             $placesRootNode.addChildren(children);
 
-            $placesRootNode.sortChildren(sort.aplhabetic.asc, false);
-
+            //console.time('***********************')
+            _.sort($placesRootNode);
             filter.updateFilter($placesRootNode.children, mapEntry);
+            //  console.timeEnd('***********************');
+
         }
     },
     places: (mapEntry, children) => {
