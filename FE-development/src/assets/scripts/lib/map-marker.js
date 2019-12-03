@@ -26,7 +26,7 @@ function create(mapEntry, place) {
 
     if (currType) {
         const locationTyp = getLocationType(mapEntry, currType);
-        mapMarker.setIcon(locationTyp.markerIcon);
+        mapMarker.setIcon(locationTyp.marker);
     }
 
     mapMarker.mapNumber = mapEntry.id;
