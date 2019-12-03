@@ -17,5 +17,9 @@ plugin.tx_ajaxmap {
             // provide API key for Google Maps
             googleMap =
         }
+        search {
+            # cat=plugin.tx_ajaxmap//b; type=int+; label=Default radius in meters
+            radius = 50000
+        }
     }
 }
