@@ -46,7 +46,7 @@ const helpers = {
     getLocationType: (mapEntry, typeId) =>
         mapEntry.locationTypes.filter(
             (item) => item.key === typeId
-        )
+        )[0]
     ,
     getSelectedKeys: (selector) => {
         /*        var tree = $(selector).fancytree('getTree'),
