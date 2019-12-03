@@ -202,7 +202,7 @@ const _ = {
     },
     fitDatas: (mapEntry, defaultAjaxData) => {
         return mapEntry.search ?
-            Object.assign({}, defaultAjaxData, mapEntry.search) : defaultAjaxData;
+            Object.assign({}, defaultAjaxData,{search: mapEntry.search}) : defaultAjaxData;
     },
     init: (mapEntry) => {
         //look up for not loading twice markers

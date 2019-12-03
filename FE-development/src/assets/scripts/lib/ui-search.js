@@ -54,6 +54,8 @@ class AutoSuggestSearch {
     setUpAutoSuggest() {
         const configAutosuggest = this.mapEntry.settings.autosuggest.options;
 
+
+
         const options = Object.assign(
             {}, {
                 types: ['(cities)']
