@@ -139,8 +139,6 @@ class LocationSearch {
             _this.radialSelect.addValToQuery(search);
             _this.autoSuggestSearch.addValToQuery(search);
 
-            search = JSON.stringify(search);
-
             if (_this.oldSearchData === search) {
                 return;
             }
