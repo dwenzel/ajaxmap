@@ -21,13 +21,15 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Core\Http\NormalizedParams;
+use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\File as CoreFile;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\File as ExtbaseFile;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
+use TYPO3\CMS\Extbase\Service\ImageService;
 
 /**
  * FileObjectResolverTrait
@@ -88,42 +90,32 @@ trait FileObjectResolverTrait
      */
     protected function resolveFileObject($fileObject, bool $absoluteUrl = true): ?string
     {
-        if (!$this->canBeResolvedAsFileObject($fileObject)) {
+        if (!$this->canBeResolvedAsFileObject($fileObject) || ($fileObject = $this->unpackFileObject($fileObject)) === null) {
             return null;
         }
 
-        if ($fileObject instanceof LazyLoadingProxy) {
-            $fileObject->_loadRealInstance();
-        }
-        if ($fileObject instanceof ExtbaseFileReference) {
-            $fileObject = $fileObject->getOriginalResource()->getOriginalFile();
-        } else if ($fileObject instanceof CoreFileReference) {
-            $fileObject->getOriginalFile();
-        } else if ($fileObject instanceof ExtbaseFile) {
-            $fileObject->getOriginalResource();
-        } else {
-            return null;
-        }
-
-        // Get public URL
-        $publicUrl = $fileObject->getPublicUrl();
-
-        // Use absolute URLs if defined
-        if ($absoluteUrl && ($request = $this->getRequest())) {
-            /** @var NormalizedParams $normalizedParams */
-            $normalizedParams = $request->getAttribute('normalizedParams');
-            $host = $normalizedParams->getRequestHost();
-            $publicUrl = $host . '/' . ltrim($publicUrl, '/');
-        }
-
-        return $publicUrl;
+        $imageService = GeneralUtility::makeInstance(ObjectManager::class)->get(ImageService::class);
+        return $imageService->getImageUri($fileObject, $absoluteUrl);
     }
 
     /**
-     * @return ServerRequestInterface
+     * @param $fileObject
+     * @return CoreFile|null
      */
-    protected function getRequest(): ?ServerRequestInterface
+    protected function unpackFileObject($fileObject): ?File
     {
-        return $GLOBALS['TYPO3_REQUEST'] ?? null;
+        if ($fileObject instanceof LazyLoadingProxy) {
+            $fileObject->_loadRealInstance();
+        }
+
+        if ($fileObject instanceof ExtbaseFileReference) {
+            return $fileObject->getOriginalResource()->getOriginalFile();
+        } else if ($fileObject instanceof CoreFileReference) {
+            return $fileObject->getOriginalFile();
+        } else if ($fileObject instanceof ExtbaseFile) {
+            return $fileObject->getOriginalResource();
+        }
+
+        return null;
     }
 }
