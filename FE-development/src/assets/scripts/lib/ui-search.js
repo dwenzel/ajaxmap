@@ -46,7 +46,9 @@ class AutoSuggestSearch {
         this.$input = mapEntry.$sideBar.find('.am-location-search input');
 
         this.autoSuggest = this.setUpAutoSuggest();
-
+        // Set the data fields to return when the user selects a place.
+        this.autoSuggest.setFields(
+            ['address_components', 'geometry', 'icon', 'name']);
         location && this.$input.attr('value', location)
 
     }
@@ -57,8 +59,9 @@ class AutoSuggestSearch {
 
 
         const options = Object.assign(
-            {}, {
-                types: ['(cities)']
+            {}, {"country": 'de'},{
+
+                //types: ['(cities)']
             }, configAutosuggest
         );
 
