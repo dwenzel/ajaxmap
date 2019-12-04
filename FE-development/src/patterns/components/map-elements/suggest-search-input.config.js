@@ -8,6 +8,8 @@ module.exports = {
         placeholder:'Geben sie einen Ort ein',
         label: 'Ort/PLZ/Adresse',
         minLen:'0',
-        maxLen:'12'
+        maxLen:'12',
+        locationCTA: false,
+        searchCTA: false
     }
 };
