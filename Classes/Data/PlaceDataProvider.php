@@ -46,7 +46,8 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
         SI::SUBJECT,
         SI::FIELDS,
         SI::LOCATION,
-        SI::BOUNDS
+        SI::BOUNDS,
+        SI::REGION,
     ];
 
     protected $mapping = [

@@ -66,6 +66,18 @@ class PlaceDemand
     protected $map = 0;
 
     /**
+     * {@inheritDoc}
+     */
+    public function getGeoLocation(array $additionalParameters = [])
+    {
+        if (!empty($this->search->getRegion())) {
+            $additionalParameters['region'] = $this->search->getRegion();
+        }
+
+        return parent::getGeoLocation($additionalParameters);
+    }
+
+    /**
      * Get LocationTypes
      * @return string
      */

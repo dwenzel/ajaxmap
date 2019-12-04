@@ -195,7 +195,7 @@ class AbstractDemand implements DemandInterface, OrderAwareDemandInterface, Sear
     /**
      * Returns the orderings
      *
-     * @return string
+     * @return array
      */
     public function getOrderings()
     {
@@ -206,7 +206,6 @@ class AbstractDemand implements DemandInterface, OrderAwareDemandInterface, Sear
      * Sets the orderings
      *
      * @param array $orderings
-     * @return array
      */
     public function setOrderings(array $orderings)
     {
@@ -237,15 +236,17 @@ class AbstractDemand implements DemandInterface, OrderAwareDemandInterface, Sear
     /**
      * Get geo location
      *
+     * @param array $additionalParameters
      * @return array
      */
-    public function getGeoLocation()
+    public function getGeoLocation(array $additionalParameters = [])
     {
         if ($this->geoLocation === null &&
             $this->search instanceof Search
-            && !empty($this->search->getLocation())) {
+            && !empty($this->search->getLocation())
+        ) {
             $geoCoder = new GeoCoder();
-            $this->geoLocation = $geoCoder->getLocation($this->search->getLocation());
+            $this->geoLocation = $geoCoder->getLocation($this->search->getLocation(), $additionalParameters);
         }
 
         return $this->geoLocation;
