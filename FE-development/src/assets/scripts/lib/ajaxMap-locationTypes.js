@@ -30,7 +30,7 @@ const mapLocationTypes = {
 
         console.log(options.filter)
 
-delete        options.filter.mode
+        delete options.filter.mode
 
         const settings = {
             checkbox: options.checkbox,
@@ -39,7 +39,7 @@ delete        options.filter.mode
             extensions: options.extensions,
             glyph: options.glyph,
 
-         //   filter: options.filter,
+            //   filter: options.filter,
 
             source: mapEntry.locationTypes,
             select: function(flag, node) {
@@ -56,7 +56,7 @@ delete        options.filter.mode
     init: function(mapEntry) {
 
         if (mapEntry.locationTypes) {
-          //  mapLocationTypes.ui(mapEntry);  //        @dirk ??
+            //  mapLocationTypes.ui(mapEntry);  //        @dirk ??
             /*here is a diff between mapEntry.locationtypes & mapEntry.settings.locationTypeTree */
             mapLocationTypes.setUpTree(mapEntry);
 

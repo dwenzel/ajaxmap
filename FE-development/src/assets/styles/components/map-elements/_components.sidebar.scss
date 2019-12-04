@@ -34,33 +34,25 @@
     }
 
     &__msg {
-        padding: $am-sb-inner-padding  0;
+        padding: $am-sb-inner-padding 0;
     }
 
     &__scroll-wrapper {
-        overflow: hidden;
+        overflow-y: scroll;
 
-        &.show-scrollbar {
-            overflow-y: scroll;
-
-            /* width */
-            &::-webkit-scrollbar {
-                width: 5px;
-            }
-
-            /* Track */
-            &::-webkit-scrollbar-track {
-                background: app-color('light');
-            }
-
-            /* Handle */
-            &::-webkit-scrollbar-thumb {
-                background: app-color('primary');
-            }
+        /* width */
+        &::-webkit-scrollbar {
+            width: 5px;
         }
 
-        &__inner {
-            padding: 0 $am-sb-inner-padding $am-sb-inner-padding;
+        /* Track */
+        &::-webkit-scrollbar-track {
+            background: app-color('light');
+        }
+
+        /* Handle */
+        &::-webkit-scrollbar-thumb {
+            background: app-color('primary');
         }
     }
 }
