@@ -54,15 +54,13 @@ class AutoSuggestSearch {
     }
 
     setUpAutoSuggest() {
-        const configAutosuggest = this.mapEntry.settings.autosuggest.options;
+        const configAutosuggest = this.mapEntry.settings
+            && this.mapEntry.settings.autosuggest
+            && this.mapEntry.settings.autosuggest.options;
 
-
-
-        const options = Object.assign(
-            {}, {"country": 'de'},{
-
-                //types: ['(cities)']
-            }, configAutosuggest
+        const options = Object.assign({},
+            {componentRestrictions: {country: "de"}},
+            configAutosuggest || {}
         );
 
         const autocomplete = new google.maps.places.Autocomplete(this.$input[0], options);
@@ -105,13 +103,13 @@ class LocationSearch {
         this.$sendButton = $(_.sendButtonSelector);
         this.$sendButton.on('click', this.sendDatas());
 
-        if (this.mapEntry.searchField) {
+        if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
-            const radius = search.radius;
-            const location = search.location;
+            const radius = search && search.radius;
+            const location = search && search.location;
 
-            radius && (this.radialSelect = new RadialSelect(this.mapEntry, search.radius));
-            location && (this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, search.location));
+            this.radialSelect = new RadialSelect(this.mapEntry, radius);
+            this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, location);
         }
     }
 
@@ -135,7 +133,7 @@ class LocationSearch {
             data.search = search;
 
             /*debug simulate ajax map listplaces
-            data.action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
+             data.action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
              */
 
             that.oldSearchData = data.search;

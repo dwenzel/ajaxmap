@@ -172,7 +172,6 @@ const renderTree = {
         );
     },
     regions: (mapEntry) => {
-        //        return;
 
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('regions', mapId);
