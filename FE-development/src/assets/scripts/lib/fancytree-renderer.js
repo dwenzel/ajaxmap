@@ -118,6 +118,8 @@ const renderTree = {
                 placeInstance.treeNode = data.node;
 
                 if (ajaxMapConfig.renderPlaceTreesItem) {
+
+                    console.log(placeInstance)
                     return ajaxMapConfig.renderPlaceTreesItem(placeInstance);
                 }
 
