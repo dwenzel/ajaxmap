@@ -7,7 +7,7 @@
     &__map-wrapper {
         height: 100%;
         padding-left: 0;
-        transition: padding-left  $am-sb-toggle-transition;
+        transition: padding-left $am-sb-toggle-transition;
 
         .ajax-map--sb-is-open & {
             padding-left: $am-sb-width;
@@ -18,5 +18,42 @@
     &__map {
         height: 100% !important;
         width: 100% !important;
+    }
+}
+
+.gmnoprint > div {
+    background: none !important;
+    box-shadow: none !important;
+}
+
+
+.gm-control-active:not(.gm-fullscreen-control) {
+    background: map_get($toolbox-colors, 'primary') !important;
+    border-radius: 100%;
+
+    img {
+        display: none !important;
+    }
+
+    &:before {
+        background: map_get($toolbox-colors, 'white');
+        content: '';
+        display: block;
+        height: 4px;
+        width: 20px;
+        @include absolute-center(50%, 50%, -50%, -50%);
+    }
+
+    &:first-child {
+        margin-bottom: .2rem !important;
+
+        &:after {
+            background: map_get($toolbox-colors, 'white');
+            content: '';
+            display: block;
+            height: 20px;
+            width: 4px;
+            @include absolute-center(50%, 50%, -50%, -50%);
+        }
     }
 }

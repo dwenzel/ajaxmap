@@ -1,7 +1,9 @@
 .am-results {
     .fancytree-container {
-        padding: 0 1rem;
         border: none;
+        padding: 0 1rem;
+        position: relative;
+        z-index: 0;
 
         li + li {
             margin-top: -1px;
@@ -14,9 +16,5 @@
 
     .fancytree-expander {
         display: none;
-    }
-
-    [aria-selected="true"] .am-card__block-link {
-        border: 1px solid app-color('primary');
     }
 }

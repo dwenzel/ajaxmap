@@ -42,17 +42,17 @@
 
         /* width */
         &::-webkit-scrollbar {
-            width: 5px;
+            width: 6px;
         }
 
         /* Track */
         &::-webkit-scrollbar-track {
-            background: app-color('light');
+            background: map-get($toolbox-colors, 'gray');
         }
 
         /* Handle */
         &::-webkit-scrollbar-thumb {
-            background: app-color('primary');
+            background: map-get($toolbox-colors, 'dark');
         }
     }
 }
