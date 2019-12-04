@@ -44,9 +44,8 @@ class RadialSelect {
     onSelectRadius() {
         const _this = this;
 
-        this.$select.change(function() {
-            _this.sendData();
-        });
+        // this.$select.one('keyup', _this.sendData);
+        this.$select.change(_this.sendData)
     }
 }
 
@@ -66,11 +65,9 @@ class AutoSuggestSearch {
     }
 
     onSelectPlace() {
-        const _this = this;
 
-        this.autoSuggest.addListener('place_changed', function() {
-            _this.sendDatas();
-        });
+        this.autoSuggest.addListener('place_changed',this.sendDatas);
+        // _this.$select.one('keyup', _this.sendDatas);
     }
 
     setUpAutoSuggest() {
