@@ -29,7 +29,7 @@ export const fancytreeSelector = {
  * @param settings Optional settings
  */
 function renderTreeAjax($el, action, mapEntry, treeSettings) {
-    const mapId = mapEntry.mapId;
+    const mapId = mapEntry.id;
 
     var localSettings = {
         checkbox: true,
@@ -118,6 +118,8 @@ const renderTree = {
                 placeInstance.treeNode = data.node;
 
                 if (ajaxMapConfig.renderPlaceTreesItem) {
+
+                    console.log(placeInstance)
                     return ajaxMapConfig.renderPlaceTreesItem(placeInstance);
                 }
 

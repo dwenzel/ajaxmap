@@ -1,18 +1,23 @@
-$am-card-border: 1px solid map-get($toolbox-colors, 'light');
-$am-card-border-hover-color: map-get($toolbox-colors, 'primary');
+$am-card-border: 1px solid map-get($toolbox-colors, 'gray');
+$am-card-border-active-bg: map-get($toolbox-colors, 'sec2');
 $am-card-transition: border-color .3s ease;
 $am-card-img-border-radius: 100%;
+$am-card-img-size: 80px;
 
 // am card
 .am-card {
     display: flex;
     margin-left: -$am-sb-inner-padding;
     margin-right: -$am-sb-inner-padding;
+    overflow: hidden;
     padding: $am-sb-inner-padding;
     position: relative;
 
     // profile or brand image
     &__img {
+        height: $am-card-img-size;
+        width: $am-card-img-size;
+
         &.is-rounded {
             img {
                 border-radius: $am-card-img-border-radius;
@@ -20,15 +25,35 @@ $am-card-img-border-radius: 100%;
         }
     }
 
-    // default paragraph
-    p {
-        margin-bottom: $space/2;
-    }
-
     // copy
     &__copy {
         padding-left: $am-sb-inner-padding;
+
+        &__head {
+            margin-bottom: .5rem;
+        }
     }
+
+    &__info {
+        position: relative;
+        margin-bottom: .5rem;
+        font-style: normal;
+
+        &--w-icon {
+            padding-left: 1rem;
+
+            .o-icon-font {
+                left: 0;
+                position: absolute;
+                top: 3px;
+            }
+        }
+    }
+
+    &__title {
+        margin-bottom: 0 !important;
+    }
+
 
     // jump to map
     &__block-link {
@@ -41,10 +66,20 @@ $am-card-img-border-radius: 100%;
         top: 0;
         transition: $am-card-transition;
         width: 100%;
-
-        &:hover {
-            border-color: $am-card-border-hover-color;
-            transition: $am-card-transition;
-        }
+        z-index: 0;
     }
+
+    &__detail-link {
+        z-index: 2;
+    }
+}
+
+
+[aria-selected="true"] .am-card {
+    background: $am-card-border-active-bg;
+}
+
+
+.is-outlined {
+    border: $am-card-border;
 }
