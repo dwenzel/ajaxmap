@@ -1,6 +1,7 @@
 <?php
 namespace DWenzel\Ajaxmap\Domain\Model;
 
+use DWenzel\Ajaxmap\Domain\Model\Dto\MappingAwareInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
@@ -45,7 +46,9 @@ trait ToArrayTrait {
                     $propertyName = $mapping[$className][$propertyName]['mapTo'];
                 } elseif (isset($mapping[$className][$propertyName]['replace'])) {
                     $propertyValue = $this->replacePropertyValueIdentifiers($mapping[$className][$propertyName]['replace'], $properties);
-				} elseif (isset($mapping[$className][$propertyName]['exclude'])){
+                } elseif ($this instanceof MappingAwareInterface && $this->canPropertyBeMapped($propertyName, $mapping[$className][$propertyName])) {
+                    $propertyValue = $this->mapProperty($propertyName, $mapping[$className][$propertyName]);
+				} elseif (isset($mapping[$className][$propertyName]['exclude'])) {
 					continue;
 				}
 
