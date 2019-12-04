@@ -5,21 +5,27 @@
             {{label}}
         </label>
         <div class="am-form__input-container">
-            <input id="locationSearch1" class="am-form__input am-form__input--location" name="locationSearch1" placeholder="{{placeholder}}"
+            <input id="locationSearch1" class="am-form__input am-form__input--location" name="locationSearch1"
+                   placeholder="{{placeholder}}"
                    type="text">
 
-            <button class="am-button am-button--icon-only am-button--location js-am-location"
-                    aria-label="Standort ermitteln" title="Standort ermitteln" type="button"
-                    value="Standort ermitteln" title="Standort ermitteln">
+            {{#if locationCTA}}
+                <button class="am-button am-button--icon-only am-button--location js-am-location"
+                        aria-label="Standort ermitteln" title="Standort ermitteln" type="button"
+                        value="Standort ermitteln" title="Standort ermitteln">
                     <span>Standort ermitteln</span>
                     <i class="o-icon-font o-icon-font--am-target" aria-hidden="true"></i>
-            </button>
-
-            <button class="am-button am-button--icon-only"
-                    aria-label="Suchen" title="Suchen" type="submit" value="submit" title="Suchen">
+                </button>
+            {{/if}}
+            {{#if searchCTA}}
+                <button class="am-button am-button--icon-only"
+                        aria-label="Suchen" title="Suchen" type="submit" value="submit" title="Suchen">
                     <span>Suchen</span>
                     <i class="o-icon-font o-icon-font--am-search" aria-hidden="true"></i>
-            </button>
+                </button>
+            {{else}}
+                <i class="o-icon-font o-icon-font--am-search" aria-hidden="true"></i>
+            {{/if}}
         </div>
     </div>
 </div>

@@ -1,6 +1,14 @@
 // location input
 .am-form__input--location {
     padding-right: $button-icon-only-size*2 !important;
+
+    + .o-icon-font--am-search {
+        color: app-color('light');
+        font-size: 1.2rem;
+        height: 19px;
+        width: 19px;
+        @include absolute-center-right(1rem, 50%,.5rem, -50%);
+    }
 }
 
 // navigator.location button
