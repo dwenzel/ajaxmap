@@ -30,7 +30,7 @@ $boot = function () {
             'Map' => 'show,search',
         ],
         [
-            'Map' => 'search'
+            'Map' => 'show,search'
         ]
     );
 };
