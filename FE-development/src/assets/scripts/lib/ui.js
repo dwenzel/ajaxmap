@@ -12,11 +12,11 @@ const _cache = {
     $filterPlaces: $('input[name="filterPlaces"]'),
     $amSidebarTrigger: $('.js-ajax-map-sb-trigger'),
     $amSidebar: $('.js-ajax-map-sidebar'),
-
+    $amResultList: $('.am-results__list'),
+    $generateDropdowns: $('.js-am-generate-dropdown')
 };
 
 /**
- * TODO desc DEG
  * @param mapEntry
  * some events on map are per map , ajax map could have n- submaps
  * this ist the perMap initaliser
@@ -41,6 +41,20 @@ function init() {
 
     // eventhandlers on map
     _bind();
+
+    // TODO @DEG mach mal schöner :-) ich haätte gerne ein event wenn die daten gerendert worden sind
+    // diese lösung ist gerade quick and dirty
+    if (_cache.$generateDropdowns) {
+        var stateCheck = setInterval(function() {
+            if (document.readyState === 'complete') {
+                clearInterval(stateCheck);
+                _cache.$generateDropdowns.each(function(i, el) {
+                    _initGenerateDropdown(el);
+                });
+            }
+        }, 100);
+
+    }
 }
 
 
@@ -59,8 +73,8 @@ function _bind() {
     _cache.$amSidebarTrigger.on('click', _toggleSidebar);
 
     $(document).on('keyup', function(ev) {
-        if(ev.keyCode === 27 || ev.which === 27) {
-            if(_cache.$amSidebar.find(document.activeElement)) {
+        if (ev.keyCode === 27 || ev.which === 27) {
+            if (_cache.$amSidebar.find(document.activeElement)) {
                 amCloseSidebar();
                 _cache.$amSidebarTrigger.focus();
             }
@@ -93,21 +107,63 @@ function updateSidebarLayoutSetup() {
         sbFooterHeight = _cache.$amSidebar.find('.am__sb__footer').outerHeight(),
         sbScrollWrapperHeight;
 
+
     sbScrollWrapperHeight = mapHeight - sbFilterHeight - sbFooterHeight;
 
-    if(sbScrollWrapperHeight < 200) {
-        _cache.$amSidebar.addClass('scroll-it');
-    } else {
-        _cache.$amSidebar.removeClass('scroll-it');
-        sbScrollWrapper.css('height', sbScrollWrapperHeight);
+    console.log(mapHeight, sbFilterHeight, sbFooterHeight);
 
-        if(sbScrollWrapperInner.outerHeight() > sbScrollWrapperHeight) {
-            $(sbScrollWrapper).addClass('show-scrollbar');
-        } else {
-            $(sbScrollWrapper).removeClass('show-scrollbar');
-        }
-    }
+    sbScrollWrapper.css('height', sbScrollWrapperHeight);
 }
+
+/**
+ * generate native select options
+ * trigger selecetion on fancytree list
+ * @param dropdown (jso)
+ * @private
+ */
+function _initGenerateDropdown(dropdown) {
+    let referenceList = $(dropdown).attr('data-list'),
+        select = $(dropdown).find('select'),
+        $list = $('#' + referenceList),
+        listItems = $list.find('li');
+
+    // build option in select
+    if ($list) {
+        listItems.each(function(i, item) {
+            let title = $(item).find('.fancytree-title').text(),
+                option = '<option>' + title + '</option>';
+
+            // append option to select
+            $(select).append(option);
+        });
+    }
+
+    // if selection change trigger on fancytree list
+    $(select).on('change', function() {
+        // -1 because of invaid option "choose option"
+        let selIndex = $(this)[0].selectedIndex - 1;
+
+        if (selIndex >= 0) {
+            $(listItems[selIndex]).find('.fancytree-checkbox').trigger('click');
+        } else {
+            _resetFancyTreeList($list)
+        }
+    });
+}
+
+/**
+ * reset fancy tree filter option
+ * @param $list (jQuery Object)
+ * @private
+ */
+function _resetFancyTreeList($list) {
+    let activeItems = $list.find('[aria-selected="true"]');
+
+    activeItems.each(function(i, item) {
+        $(item).find('.fancytree-checkbox').trigger('click');
+    });
+}
+
 
 /**
  * open sidebar

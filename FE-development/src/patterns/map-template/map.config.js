@@ -127,6 +127,12 @@ const map = {
 module.exports = {
 
     context: {
-        map: JSON.stringify(map.settings)
+        map: JSON.stringify(map.settings),
+        generatedSelect: {
+            label: 'Beratungsart',
+            all: 'Alle Beratungsarten',
+            jsId: 'js-am-generate-dropdown',
+            referenceList: 'ajaxMapLocationTypesTree1'
+        }
     }
 };

@@ -50,7 +50,7 @@ $toolbox-typo-sizes: (
  * colors of typo 3
  * @type {Map}
  */
-$toolbox-colors: (
+/*$toolbox-colors: (
     // Primary
     'primary': #F49700,
     'secondary': #868e96,
@@ -71,3 +71,28 @@ $toolbox-colors: (
     'neutral': #868e96
 );
 
+/**
+ * Color identifiers and values.
+ * colors of BSB
+ * @type {Map}
+ */
+$toolbox-colors: (
+    // Primary
+    'primary': #a51719,
+    'secondary': #3e6b81,
+    'sec2': #868e96,
+    // Light
+    'gray': #868e96,
+    'light': #eae1e0,
+    'light2': #fbf6f5,
+    'light3': #5f514f,
+    'white': #fff,
+    'dark': #20292e,
+    'webblack': #20292e,
+    'black': #333,
+    // States
+    'success': #75a75a,
+    'warning': #ffc800,
+    'danger': #dc3545,
+    'neutral': #868e96
+);

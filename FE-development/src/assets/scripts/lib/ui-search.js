@@ -20,8 +20,10 @@ const _ = {
 };
 
 class RadialSelect {
-    constructor(mapEntry, radius) {
+    constructor(mapEntry, radius, sendData) {
         this.$select = mapEntry.$sideBar.find('.am-radial-search select');
+        this.sendData = sendData;
+        this.onSelectRadius();
 
         if (radius) {
             const $findEl = this.$select.find('[value="' + radius + '"]');
@@ -38,28 +40,47 @@ class RadialSelect {
 
         search.radius = selectetVal;
     }
+
+    onSelectRadius() {
+        const _this = this;
+
+        this.$select.change(function() {
+            _this.sendData();
+        });
+    }
 }
 
 class AutoSuggestSearch {
-    constructor(mapEntry, location) {
+    constructor(mapEntry, location, sendDatas) {
         this.mapEntry = mapEntry;
         this.$input = mapEntry.$sideBar.find('.am-location-search input');
 
         this.autoSuggest = this.setUpAutoSuggest();
-
+        // Set the data fields to return when the user selects a place.
+        this.autoSuggest.setFields(
+            ['address_components', 'name']);
         location && this.$input.attr('value', location)
+        this.onSelectPlace();
 
+        this.sendDatas = sendDatas;
+    }
+
+    onSelectPlace() {
+        const _this = this;
+
+        this.autoSuggest.addListener('place_changed', function() {
+            _this.sendDatas();
+        });
     }
 
     setUpAutoSuggest() {
-        const configAutosuggest = this.mapEntry.settings.autosuggest.options;
+        const configAutosuggest = this.mapEntry.settings
+            && this.mapEntry.settings.autosuggest
+            && this.mapEntry.settings.autosuggest.options;
 
-
-
-        const options = Object.assign(
-            {}, {
-                types: ['(cities)']
-            }, configAutosuggest
+        const options = Object.assign({},
+            {componentRestrictions: {country: "de"}},
+            configAutosuggest || {}
         );
 
         const autocomplete = new google.maps.places.Autocomplete(this.$input[0], options);
@@ -93,50 +114,49 @@ class LocationSearch {
         this.autoSuggestSearch;
         this.radialSelect;
 
-        this.$sendButton;
-
         this.aa = 0;//debug
+
     }
 
     init() {
         this.$sendButton = $(_.sendButtonSelector);
+
         this.$sendButton.on('click', this.sendDatas());
 
-        if (this.mapEntry.searchField) {
+        if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
-            const radius = search.radius;
-            const location = search.location;
+            const radius = search && search.radius;
+            const location = search && search.location;
 
-            radius && (this.radialSelect = new RadialSelect(this.mapEntry, search.radius));
-            location && (this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, search.location));
+            const sendData = this.sendDatas();
+            this.radialSelect = new RadialSelect(this.mapEntry, radius, sendData);
+            this.autoSuggestSearch = new AutoSuggestSearch(this.mapEntry, location, sendData);
         }
     }
 
     sendDatas() {
-        const that = this;
+        const _this = this;
 
-        return function(event) {
-            event.preventDefault();
-
+        return function() {
             let search = {};
-            that.radialSelect.addValToQuery(search);
-            that.autoSuggestSearch.addValToQuery(search);
+            _this.radialSelect.addValToQuery(search);
+            _this.autoSuggestSearch.addValToQuery(search);
 
             search = JSON.stringify(search);
 
-            if (that.oldSearchData === search) {
+            if (_this.oldSearchData === search) {
                 return;
             }
 
-            const data = that.mapEntry.defaultAjaxData;
+            const data = _this.mapEntry.defaultAjaxData;
             data.search = search;
 
             /*debug simulate ajax map listplaces
-            data.action = that.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
+             data.action = _this.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
              */
 
-            that.oldSearchData = data.search;
-            places.loadFromData(that.mapEntry, data);
+            _this.oldSearchData = data.search;
+            places.loadFromData(_this.mapEntry, data);
         };
     }
 }

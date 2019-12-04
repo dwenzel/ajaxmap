@@ -1,0 +1,22 @@
+.am-results {
+    .fancytree-container {
+        padding: 0 1rem;
+        border: none;
+
+        li + li {
+            margin-top: -1px;
+        }
+    }
+
+    .fancytree-node {
+        margin: 0;
+    }
+
+    .fancytree-expander {
+        display: none;
+    }
+
+    [aria-selected="true"] .am-card__block-link {
+        border: 1px solid app-color('primary');
+    }
+}

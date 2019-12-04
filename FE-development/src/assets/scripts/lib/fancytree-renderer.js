@@ -29,7 +29,7 @@ export const fancytreeSelector = {
  * @param settings Optional settings
  */
 function renderTreeAjax($el, action, mapEntry, treeSettings) {
-    const mapId = mapEntry.mapId;
+    const mapId = mapEntry.id;
 
     var localSettings = {
         checkbox: true,
@@ -156,6 +156,7 @@ const renderTree = {
         );
     },
     placeGroup: function(mapEntry) {
+
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('placeGroup', mapId);
 
@@ -171,6 +172,7 @@ const renderTree = {
         );
     },
     regions: (mapEntry) => {
+
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('regions', mapId);
 
