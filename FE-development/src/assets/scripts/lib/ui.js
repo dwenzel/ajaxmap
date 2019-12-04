@@ -74,6 +74,8 @@ function _bind() {
             }
         }
     });
+
+    $(window).on('resize', updateSidebarLayoutSetup);
 }
 
 /**
@@ -95,7 +97,6 @@ function _toggleSidebar() {
  */
 function updateSidebarLayoutSetup() {
     let sbScrollWrapper = _cache.$amSidebar.find('.am__sb__scroll-wrapper'),
-        sbScrollWrapperInner = _cache.$amSidebar.find('.am__sb__scroll-wrapper__inner'),
         mapHeight = _cache.$map.outerHeight(),
         sbFilterHeight = _cache.$amSidebar.find('.am__sb__filter').outerHeight(),
         sbFooterHeight = _cache.$amSidebar.find('.am__sb__footer').outerHeight(),
@@ -103,9 +104,6 @@ function updateSidebarLayoutSetup() {
 
 
     sbScrollWrapperHeight = mapHeight - sbFilterHeight - sbFooterHeight;
-
-    console.log(mapHeight, sbFilterHeight, sbFooterHeight);
-
     sbScrollWrapper.css('height', sbScrollWrapperHeight);
 }
 
