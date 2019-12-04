@@ -156,6 +156,7 @@ const renderTree = {
         );
     },
     placeGroup: function(mapEntry) {
+
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('placeGroup', mapId);
 
@@ -171,6 +172,8 @@ const renderTree = {
         );
     },
     regions: (mapEntry) => {
+        //        return;
+
         const mapId = mapEntry.id,
             $el = _.$getTreeEl('regions', mapId);
 
