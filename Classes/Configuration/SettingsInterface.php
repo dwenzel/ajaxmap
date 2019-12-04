@@ -230,6 +230,7 @@ interface SettingsInterface
     const LOCATION = 'location';
     const RADIUS = 'radius';
     const BOUNDS = 'bounds';
+    const REGION = 'region';
     const ORDER = 'order';
     const CONJUNCTION_AND = 'AND';
     const CONJUNCTION_OR = 'OR';

@@ -32,6 +32,13 @@ trait LocationAwareTrait
     protected $bounds = [];
 
     /**
+     * Two-letter regional code
+     *
+     * @var string
+     */
+    protected $region = '';
+
+    /**
      * Get location
      *
      * @return string A string describing a location
@@ -92,5 +99,21 @@ trait LocationAwareTrait
     public function setBounds($bounds): void
     {
         $this->bounds = $bounds;
+    }
+
+    /**
+     * @return string
+     */
+    public function getRegion(): string
+    {
+        return $this->region;
+    }
+
+    /**
+     * @param string $region
+     */
+    public function setRegion(string $region): void
+    {
+        $this->region = $region;
     }
 }
