@@ -1,25 +1,27 @@
 config.tx_extbase {
-	persistence {
-		classes {
-			DWenzel\Ajaxmap\Domain\Model\Content {
-				mapping {
-					tableName = tt_content
-					columns {
-						altText.mapOnProperty = altText
-						titleText.mapOnProperty = titleText
-					}
-				}
-			}
-			DWenzel\Ajaxmap\Domain\Model\Address {
-				mapping {
-					tableName = tt_address
-				}
-			}
-			DWenzel\Ajaxmap\Domain\Model\Category {
-				mapping {
-					tableName = sys_category
-				}
-			}
-		}
-	}
+    persistence {
+        classes {
+            DWenzel\Ajaxmap\Domain\Model\Content {
+                mapping {
+                    tableName = tt_content
+                    columns {
+                        altText.mapOnProperty = altText
+                        titleText.mapOnProperty = titleText
+                    }
+                }
+            }
+
+            DWenzel\Ajaxmap\Domain\Model\Address {
+                mapping {
+                    tableName = tt_address
+                }
+            }
+
+            DWenzel\Ajaxmap\Domain\Model\Category {
+                mapping {
+                    tableName = sys_category
+                }
+            }
+        }
+    }
 }
