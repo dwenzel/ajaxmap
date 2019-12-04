@@ -2,6 +2,16 @@
 .am__sb__filter {
     background: $am-sb-bg-filter;
     padding: $am-sb-inner-padding;
+
+    &__row {
+        display: flex;
+        justify-content: space-between;
+
+        .am-option-filter,
+        .am-radial-search {
+            width: 140px;
+        }
+    }
 }
 
 

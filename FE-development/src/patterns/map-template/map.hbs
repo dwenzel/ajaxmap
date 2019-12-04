@@ -68,12 +68,10 @@
                     <!-- filter -->
                     <header class="am__sb__filter">
                         {{render '@suggest-search-input'}}
-                        {{render '@option-filter-select'}}
-                        {{render '@option-filter-checkbox'}}
-                        {{render '@option-filter-radio'}}
-                        {{render '@radial-search-input'}}
-                        {{render '@list-search-input'}}
-
+                        <div class="am__sb__filter__row">
+                            {{render '@option-filter-select-placeholder' generatedSelect merge=true }}
+                            {{render '@radial-search-input'}}
+                        </div>
                         <!-- TODO Emi styling Treelist -->
                         <div hidden id="ajaxMapRegionsTree1" class="dynaTree"></div>
                         <div hidden id="ajaxMapLocationTypesTree1" class="dynaTree"></div>
@@ -84,19 +82,9 @@
                     <!-- results -->
                     <div class="am__sb__scroll-wrapper">
                         <div class="am__sb__scroll-wrapper__inner">
-                            {{render '@no-results-advice'}}
-
-                            <!-- example card todo EHO put in fancytree render-->
-                            <ul class="am-results__list">
-                                <li class="am-results__list__item">
-                                    {{render '@card'}}
-                                </li>
-                            </ul>
-
                             <!-- dynamic list => render js -->
                             <div id="ajaxMapPlacesTree1" class="am-results dynaTree">
                             </div>
-
                         </div>
                     </div>
 
