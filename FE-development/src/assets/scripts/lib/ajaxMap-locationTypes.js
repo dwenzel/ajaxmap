@@ -46,7 +46,10 @@ const mapLocationTypes = {
                 //todo filter here then
 
                 places.update(mapEntry, true);
-
+            },
+            init: () => {
+                let $el = $(this.treeSelector + mapEntry.id);
+                $el.trigger('renderLocationType');
             }
         };
 

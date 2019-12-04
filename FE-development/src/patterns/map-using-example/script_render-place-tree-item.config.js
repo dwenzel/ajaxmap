@@ -14,7 +14,7 @@ const func = `
     // console.log(placeInstance);
 
     var placeData=placeInstance.placeData;
-console.log(placeData)
+//console.log(placeData)
     var title=placeData.title || 'no* title';
     var subline=placeData.content && 'no* subline'
 
