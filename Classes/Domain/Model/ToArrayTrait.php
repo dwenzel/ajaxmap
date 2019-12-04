@@ -1,15 +1,20 @@
 <?php
 namespace DWenzel\Ajaxmap\Domain\Model;
 
+use DWenzel\Ajaxmap\Domain\Model\Dto\MappingAwareInterface;
 use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
+
 /**
  * Class ToArrayTrait
  *
  * @package DWenzel\Ajaxmap\Domain\Model
  */
-trait ToArrayTrait {
+trait ToArrayTrait
+{
+    use FileObjectResolverTrait;
+
 	/**
 	 * Return the object as array
 	 *
@@ -45,7 +50,9 @@ trait ToArrayTrait {
                     $propertyName = $mapping[$className][$propertyName]['mapTo'];
                 } elseif (isset($mapping[$className][$propertyName]['replace'])) {
                     $propertyValue = $this->replacePropertyValueIdentifiers($mapping[$className][$propertyName]['replace'], $properties);
-				} elseif (isset($mapping[$className][$propertyName]['exclude'])){
+                } elseif ($this instanceof MappingAwareInterface && $this->canPropertyBeMapped($propertyName, $mapping[$className][$propertyName])) {
+                    $propertyValue = $this->mapProperty($propertyName, $mapping[$className][$propertyName]);
+				} elseif (isset($mapping[$className][$propertyName]['exclude'])) {
 					continue;
 				}
 
@@ -77,13 +84,16 @@ trait ToArrayTrait {
 			foreach($objectArray as $object) {
 				if(method_exists($object, 'toArray')) {
 					$children[] = $object->toArray($treeDepth, $mapping);
-				} 			}
+				} else {
+                    $children[] = $this->resolveFileObject($object) ?? $object;
+                }
+			}
 			$result = $children;
 		} elseif (is_object($value) AND method_exists($value, 'toArray')){
 			$result = $value->toArray($treeDepth, $mapping);
 		} else {
-			$result = $value;
-		}
+            $result = $this->resolveFileObject($value) ?? $value;
+        }
 		return $result;
 	}
 
