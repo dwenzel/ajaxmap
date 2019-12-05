@@ -11,18 +11,10 @@ const func = `
     window.ajaxMapConfig = window.ajaxMapConfig|| {};
     
     window.ajaxMapConfig.renderPlaceTreesItem = function(placeInstance) {
+   
     // console.log(placeInstance);
 
     var placeData=placeInstance.placeData;
-//console.log(placeData)
-    var title=placeData.title || 'no* title';
-    var subline=placeData.content && 'no* subline'
-
-    var text=placeData.text && 'no* tex'
-    var pageUrl=placeData.pageUrl &&'no pageUrl';
-
-
-  // console.log(placeData.locationType.title);
 
     return \`${template}\`;
  }`;
