@@ -59,21 +59,16 @@ const _ = {
      mapEntry.placeInstances[item.key].active = true;
      })
      },*/
+
     updatePlaces: (mapEntry, clearSelected) => {
         var treeSelector = fancytreeSelector.places + mapEntry.id;
 
         if (clearSelected) {
-            var tree = $(treeSelector).fancytree('getTree');
-
-            tree.clearFilter();
-
-            tree.visit(function(node) {
-                node.setSelected(false);
-            });
+            const tree = $(treeSelector).fancytree('getTree');
+            treeRenderer.clearSelected(tree);
         }
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
-
         if (selectedPlaceKeys.length) {
 
             //from select a place in list /category? /pllacegroup
@@ -202,7 +197,7 @@ const _ = {
     },
     fitDatas: (mapEntry, defaultAjaxData) => {
         return mapEntry.search ?
-            Object.assign({}, defaultAjaxData,{search: mapEntry.search}) : defaultAjaxData;
+            Object.assign({}, defaultAjaxData, {search: mapEntry.search}) : defaultAjaxData;
     },
     init: (mapEntry) => {
         //look up for not loading twice markers
@@ -213,13 +208,15 @@ const _ = {
         mapEntry.defaultAjaxData = defaultAjaxData;
 
         /* create tree*/
-        const placesTree = treeRenderer.places(mapEntry, []);
+        const placesTree = mapEntry.placesTree = treeRenderer.places(mapEntry, []);
+
         _.setEvents(placesTree);
 
         /* send Datas*/
         const data = _.fitDatas(mapEntry, defaultAjaxData);
         _.loadFromData(mapEntry, data);
-    }
+    },
+    placesTree: null
 };
 
 const places = {

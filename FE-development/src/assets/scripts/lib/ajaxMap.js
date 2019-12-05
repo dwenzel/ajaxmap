@@ -12,16 +12,6 @@ import {inserScriptTag} from './utilitys';
 import ui from '../lib/ui';
 
 let ajaxMap;
-/*
-class AjaxMap {
-    constructor(mapEntry) {
-        this.mapEntry = mapEntry;
-
-        mapEntry.instance = this;
-        mapEntry.layers = [];//88 maybe whle init?
-        this.$mapEl = null;
-    }
-}*/
 
 const _ = {
     initMap: (mapEntry, locationTypesResonse) => {

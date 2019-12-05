@@ -1,7 +1,6 @@
 import $ from 'jquery';
-import {ajaxCall} from './utilitys';
-import ajaxMap from './ajaxMap';
 import places from './ajaxMap-places';
+import treeRenderer from './fancytree-renderer'
 
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
@@ -121,7 +120,7 @@ class LocationSearch {
         this.$sendButton.on('click', this.sendDatas());
 
         const $form = this.mapEntry.$sideBar.find('.am-form'),
-            _this=this;
+            _this = this;
 
         $form.on('keypress', function(e) {
             if (e.which == 13) {
@@ -143,7 +142,7 @@ class LocationSearch {
     }
 
     sendDatas() {
-        const _this = this;
+        const _this = this
 
         return function() {
             let search = {};
@@ -161,9 +160,7 @@ class LocationSearch {
             /*debug simulate ajax map listplaces
              data.action = _this.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
              */
-
-            //  console.log('data', JSON.stringify(data))
-
+            treeRenderer.clearSelected(_this.mapEntry.placesTree);
             _this.oldSearchData = data.search;
             places.loadFromData(_this.mapEntry, data);
         };
