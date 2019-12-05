@@ -37,7 +37,7 @@ return [
 	'types' => [
 		'1' => ['showitem' =>
 			'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,
-			type,title,width,height,map_center,
+			type,--palette--;;controls,title,width,height,map_center,
 
 			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.appearance,
 				initial_zoom,map_style,disable_default_ui,
@@ -53,6 +53,9 @@ return [
 	],
 	'palettes' => [
 		'1' => ['showitem' => ''],
+        'controls' => [
+            'showitem' => 'hide_type_control, hide_fullscreen_control, hide_street_view_control',
+        ],
 	],
 	'columns' => [
 		'sys_language_uid' => [
@@ -160,6 +163,60 @@ return [
 				'eval' => ''
 			],
 		],
+        'hide_type_control' => [
+            'exclude' => true,
+            'label' => $languageFile . 'tx_ajaxmap_domain_model_map.hide_type_control',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'hide_fullscreen_control' => [
+            'exclude' => true,
+            'label' => $languageFile . 'tx_ajaxmap_domain_model_map.hide_fullscreen_control',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
+        'hide_street_view_control' => [
+            'exclude' => true,
+            'label' => $languageFile . 'tx_ajaxmap_domain_model_map.hide_street_view_control',
+            'config' => [
+                'type' => 'check',
+                'renderType' => 'checkboxToggle',
+                'items' => [
+                    [
+                        0 => '',
+                        1 => '',
+                        'invertStateDisplay' => true,
+                    ],
+                ],
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ],
+            ],
+        ],
 		'width' => [
 			'exclude' => 0,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.width',

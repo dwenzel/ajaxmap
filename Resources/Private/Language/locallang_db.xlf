@@ -86,6 +86,15 @@
 		<trans-unit id="tx_ajaxmap_domain_model_map.type" xml:space="preserve">
 			<source>Type</source>
 		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.hide_type_control" xml:space="preserve">
+			<source>Enable type controls</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.hide_fullscreen_control" xml:space="preserve">
+			<source>Enable fullscreen controls</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.hide_street_view_control" xml:space="preserve">
+			<source>Enable street view controls</source>
+		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_map.width" xml:space="preserve">
 			<source>Width</source>
 		</trans-unit>

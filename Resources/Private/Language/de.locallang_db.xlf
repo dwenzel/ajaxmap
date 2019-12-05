@@ -5,10 +5,22 @@
 			<generator>LFEditor</generator>
 		</header>
 		<body>
-		<trans-unit id="tx_ajaxmap_domain_model_region.regions" approved="yes" xml:space="preserve">
-			<source>Sub Regions</source>
-			<target>Unterregionen</target>
-		</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_region.regions" approved="yes" xml:space="preserve">
+				<source>Sub Regions</source>
+				<target>Unterregionen</target>
+			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_map.hide_type_control" xml:space="preserve">
+				<source>Enable type controls</source>
+				<target>Steuerung für Darstellungstyp anzeigen</target>
+			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_map.hide_fullscreen_control" xml:space="preserve">
+				<source>Enable fullscreen controls</source>
+				<target>Steuerung für Vollbild anzeigen</target>
+			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_map.hide_street_view_control" xml:space="preserve">
+				<source>Enable street view controls</source>
+				<target>Steuerung für Street View anzeigen</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>
