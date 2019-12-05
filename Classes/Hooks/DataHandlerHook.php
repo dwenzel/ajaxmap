@@ -52,7 +52,9 @@ class DataHandlerHook
      */
     public function clearCustomCachesOnRecordSave(array $params, DataHandler &$pObj): void
     {
-        if (!StringUtility::beginsWith($params['table'], 'tx_ajaxmap')) {
+        $tableName = (string) $params['table'];
+
+        if (!StringUtility::beginsWith($tableName, 'tx_ajaxmap')) {
             return;
         }
 
