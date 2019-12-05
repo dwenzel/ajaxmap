@@ -10,6 +10,9 @@ defined('TYPO3_MODE') or die();
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_AJAX_DATA] = [];
     }
 
+    $GLOBALS['TYPO3_CONF_VARS']['SC_OPTIONS']['t3lib/class.t3lib_tcemain.php']['clearCachePostProc'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::EXTENSION_KEY]
+        = \DWenzel\Ajaxmap\Hooks\DataHandlerHook::class . '->clearCustomCachesOnRecordSave';
+
     // Include global JavaScript
     $settings = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Configuration\ExtensionConfiguration::class)->get($extensionKey);
     if ($settings['includeJavaScript'] ?? false) {
