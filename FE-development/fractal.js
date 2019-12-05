@@ -33,7 +33,7 @@ fractal.components.set('label', 'Patterns');
  */
 
 const local = process.env.APP_ENV === 'development' ? 'http://localhost:' + _fractalServerPort : '';
-const ajaxPath = process.env.APP_ENV === 'development' ? 'http://localhost:' + ajaxProxyPort + '/' : 'index.php';
+const ajaxPath = process.env.APP_ENV === 'development' ? 'http://localhost:' + ajaxProxyPort + '/' : '/index.php';
 
 fractal.components.set('default.context', Object.assign(dataGlobal, {
     publicPath: local + packageJSON.project.publicPath,

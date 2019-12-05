@@ -35,7 +35,7 @@ function injextScriptUrl(path, ajaxProxyPort) {
     console.log(matches[1]);
 
 
-    const withReplace = "'index.php',";//ajax-url
+    const withReplace = "'/index.php',";//ajax-url
     const toReplace = matches[1];// "'http://localhost:' + ajaxProxyPort'";//http://localhost:' + ajaxProxyPort;
 
     return script.split(toReplace).join(withReplace);
