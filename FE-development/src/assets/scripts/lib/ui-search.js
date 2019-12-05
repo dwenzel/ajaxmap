@@ -45,6 +45,7 @@ class RadialSelect {
         const _this = this;
 
         // this.$select.one('keyup', _this.sendData);
+
         this.$select.change(_this.sendData)
     }
 }
@@ -66,7 +67,9 @@ class AutoSuggestSearch {
 
     onSelectPlace() {
 
-        this.autoSuggest.addListener('place_changed',this.sendDatas);
+        this.autoSuggest.addListener('place_changed', () => {
+                        this.sendDatas()
+        });
         // _this.$select.one('keyup', _this.sendDatas);
     }
 
@@ -136,6 +139,7 @@ class LocationSearch {
 
         return function() {
             let search = {};
+
             _this.radialSelect.addValToQuery(search);
             _this.autoSuggestSearch.addValToQuery(search);
 
@@ -149,6 +153,8 @@ class LocationSearch {
             /*debug simulate ajax map listplaces
              data.action = _this.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
              */
+
+          //  console.log('data', JSON.stringify(data))
 
             _this.oldSearchData = data.search;
             places.loadFromData(_this.mapEntry, data);
