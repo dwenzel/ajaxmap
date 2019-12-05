@@ -59,6 +59,21 @@ class Map extends AbstractEntity
     protected $type;
 
     /**
+     * @var bool
+     */
+    protected $hideTypeControl = false;
+
+    /**
+     * @var bool
+     */
+    protected $hideFullscreenControl = false;
+
+    /**
+     * @var bool
+     */
+    protected $hideStreetViewControl = false;
+
+    /**
      * width
      *
      * @var integer
@@ -227,7 +242,6 @@ class Map extends AbstractEntity
      * Sets the height
      *
      * @param integer $height
-     * @return integer height
      */
     public function setHeight($height)
     {
@@ -342,6 +356,60 @@ class Map extends AbstractEntity
     }
 
     /**
+     * @return bool
+     */
+    public function isHideTypeControl(): bool
+    {
+        return $this->hideTypeControl;
+    }
+
+    /**
+     * @param bool $hideTypeControl
+     * @return self
+     */
+    public function setHideTypeControl(bool $hideTypeControl): self
+    {
+        $this->hideTypeControl = $hideTypeControl;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideFullscreenControl(): bool
+    {
+        return $this->hideFullscreenControl;
+    }
+
+    /**
+     * @param bool $hideFullscreenControl
+     * @return self
+     */
+    public function setHideFullscreenControl(bool $hideFullscreenControl): self
+    {
+        $this->hideFullscreenControl = $hideFullscreenControl;
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isHideStreetViewControl(): bool
+    {
+        return $this->hideStreetViewControl;
+    }
+
+    /**
+     * @param bool $hideStreetViewControl
+     * @return self
+     */
+    public function setHideStreetViewControl(bool $hideStreetViewControl): self
+    {
+        $this->hideStreetViewControl = $hideStreetViewControl;
+        return $this;
+    }
+
+    /**
      * Returns the mapStyle
      *
      * @return string $mapStyle
@@ -407,7 +475,6 @@ class Map extends AbstractEntity
      * Sets the disableDefaultUi
      *
      * @param boolean $disableDefaultUi
-     * @return boolean disableDefaultUi
      */
     public function setDisableDefaultUi($disableDefaultUi)
     {
@@ -428,7 +495,6 @@ class Map extends AbstractEntity
      * Sets the mapCenter
      *
      * @param string $mapCenter
-     * @return string mapCenter
      */
     public function setMapCenter($mapCenter)
     {
@@ -478,10 +544,10 @@ class Map extends AbstractEntity
     /**
      * Adds a LocationType
      *
-     * @param \DWenzel\Ajaxmap\Domain\Model\LocationType $locationType
+     * @param LocationType $locationType
      * @return void
      */
-    public function addLocationType(\DWenzel\Ajaxmap\Domain\Model\LocationType $locationType)
+    public function addLocationType(LocationType $locationType)
     {
         $this->locationTypes->attach($locationType);
     }
@@ -489,10 +555,10 @@ class Map extends AbstractEntity
     /**
      * Removes a LocationType
      *
-     * @param \DWenzel\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove The LocationType to be removed
+     * @param LocationType $locationTypeToRemove The LocationType to be removed
      * @return void
      */
-    public function removeLocationType(\DWenzel\Ajaxmap\Domain\Model\LocationType $locationTypeToRemove)
+    public function removeLocationType(LocationType $locationTypeToRemove)
     {
         $this->locationTypes->detach($locationTypeToRemove);
     }

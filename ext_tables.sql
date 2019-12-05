@@ -104,6 +104,9 @@ CREATE TABLE tx_ajaxmap_domain_model_map (
 
 	title varchar(255) DEFAULT '' NOT NULL,
 	type int(11) DEFAULT '0' NOT NULL,
+	hide_type_control tinyint DEFAULT '0' NOT NULL,
+	hide_fullscreen_control tinyint DEFAULT '0' NOT NULL,
+	hide_street_view_control tinyint DEFAULT '0' NOT NULL,
 	width int(11) DEFAULT '0' NOT NULL,
 	height int(11) DEFAULT '0' NOT NULL,
 	map_center varchar(255) DEFAULT '' NOT NULL,
