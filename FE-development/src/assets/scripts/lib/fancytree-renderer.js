@@ -119,7 +119,7 @@ const renderTree = {
 
                 if (ajaxMapConfig.renderPlaceTreesItem) {
 
-                    console.log(placeInstance)
+                    //console.log(placeInstance);
                     return ajaxMapConfig.renderPlaceTreesItem(placeInstance);
                 }
 
