@@ -129,6 +129,9 @@ const helpers = {
                 zoom: response.initialZoom,
                 center: mapCenter,
                 mapTypeId: mapType,
+                mapTypeControl: !response.hideTypeControl,
+                fullscreenControl: !response.hideFullscreenControl,
+                streetViewControl: !response.hideStreetViewControl,
                 styles: mapStyle,
                 disableDefaultUI: response.disableDefaultUI
             });
