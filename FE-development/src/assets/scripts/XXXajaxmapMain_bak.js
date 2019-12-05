@@ -264,7 +264,7 @@ var ajaxMap = {};
     function initMap(mapEntry) {
         //get map data
         $.ajax({
-            url: "index.php",
+            url: "/index.php",
             type: "GET",
             data: {
                 'id': mapSettings.pageId,
@@ -411,11 +411,10 @@ var ajaxMap = {};
                 updatePlaces(mapNumber, true);
             },
             source: {
-                url: "index.php",
+                url: "/",
                 type: "GET",
                 dataType: "json",
                 data: {
-                    'id': mapSettings.pageId,
                     'api': "map",
                     'action': action,
                     'mapId': mapId
@@ -705,10 +704,9 @@ var ajaxMap = {};
      */
     function initPlaces(mapEntry) {
         $.ajax({
-            url: "index.php",
+            url: "/",
             type: "GET",
             data: {
-                'id': mapSettings.pageId,
                 'api': "map",
                 'action': "listPlaces",
                 'mapId': mapEntry.id
@@ -735,10 +733,9 @@ var ajaxMap = {};
     function getAddress(placeId) {
         var address = {};
         $.ajax({
-            url: "index.php",
+            url: "/",
             type: "GET",
             data: {
-                'id': mapSettings.pageId,
                 'api': "map",
                 'action': "getAddress",
                 'placeId': placeId
