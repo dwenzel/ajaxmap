@@ -39,7 +39,7 @@ const customMapFunctions = {
             <span>${placeData.address.address}</span><br>
             <span>${placeData.address.zip} ${placeData.address.city}</span>
         </address>
-        <a href="${placeData.address.profileLink}" class="am-card__detail-link c-link u-icon u-icon:left u-icon--triangle-right">
+        <a href="${placeData.address.profileLink}" target='_blank' class="am-card__detail-link c-link u-icon u-icon:left u-icon--triangle-right">
             zum Profil
         </a>
     </div>
