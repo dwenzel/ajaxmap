@@ -43,9 +43,6 @@ class RadialSelect {
 
     onSelectRadius() {
         const _this = this;
-
-        // this.$select.one('keyup', _this.sendData);
-
         this.$select.change(_this.sendData)
     }
 }
@@ -68,8 +65,9 @@ class AutoSuggestSearch {
     onSelectPlace() {
 
         this.autoSuggest.addListener('place_changed', () => {
-                        this.sendDatas()
+            this.sendDatas()
         });
+
         // _this.$select.one('keyup', _this.sendDatas);
     }
 
@@ -120,8 +118,18 @@ class LocationSearch {
 
     init() {
         this.$sendButton = $(_.sendButtonSelector);
-
         this.$sendButton.on('click', this.sendDatas());
+
+        const $form = this.mapEntry.$sideBar.find('.am-form'),
+            _this=this;
+
+        $form.on('keypress', function(e) {
+            if (e.which == 13) {
+
+                _this.sendDatas()
+                e.preventDefault();
+            }
+        });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
@@ -154,7 +162,7 @@ class LocationSearch {
              data.action = _this.aa++ % 2 === 0 ? 'listPlaces2' : 'listPlaces';
              */
 
-          //  console.log('data', JSON.stringify(data))
+            //  console.log('data', JSON.stringify(data))
 
             _this.oldSearchData = data.search;
             places.loadFromData(_this.mapEntry, data);
