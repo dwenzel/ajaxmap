@@ -2,7 +2,7 @@ import $ from 'jquery';
 
 const customMapFunctions = {
     onMarkerClick: function(mapEntry, place) {
-alert('sdfsdf')
+
         const treeNode = place.placeInstance.treeNode;//has all domNodes
         treeNode.setSelected(true);
 
