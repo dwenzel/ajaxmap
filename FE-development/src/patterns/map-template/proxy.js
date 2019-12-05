@@ -41,6 +41,8 @@ const proxy = {
                 next();
             }
 
+            //https://stg.typo3.bsb.321.works/beratung/bsb-beratungsnetz/index.php
+
             console.log('-->', params)
             res.json(readJson(params.action))
         })

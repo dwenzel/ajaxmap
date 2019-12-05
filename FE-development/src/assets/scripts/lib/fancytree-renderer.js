@@ -207,7 +207,13 @@ const renderTree = {
             }
         );
     },
+    clearSelected: (tree) => {
+        tree.clearFilter();
 
+        tree.visit(function(node) {
+            node.setSelected(false);
+        });
+    }
 };
 
 export default renderTree;
