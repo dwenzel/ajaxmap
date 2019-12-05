@@ -44,6 +44,10 @@ class RadialSelect {
         const _this = this;
         this.$select.change(_this.sendData)
     }
+
+    reset() {
+      this.$select.find(':selected').removeAttr('selected')
+    }
 }
 
 class AutoSuggestSearch {
@@ -97,6 +101,10 @@ class AutoSuggestSearch {
 
         search.location = placeData;
     }
+
+    reset() {
+        this.autoSuggest.set('place', null);
+    }
 }
 
 class LocationSearch {
@@ -120,15 +128,24 @@ class LocationSearch {
         this.$sendButton.on('click', this.sendDatas());
 
         const $form = this.mapEntry.$sideBar.find('.am-form'),
+            $resetButton = this.mapEntry.$sideBar.find('.am-link'),
             _this = this;
 
         $form.on('keypress', function(e) {
             if (e.which == 13) {
-
-                _this.sendDatas()
+                _this.sendDatas();
                 e.preventDefault();
             }
         });
+
+        $resetButton.on('click', () => {
+            const data = _this.mapEntry.defaultAjaxData;
+            places.loadFromData(_this.mapEntry, data);
+            _this.autoSuggestSearch.reset();//todo
+            _this.radialSelect.reset();
+            ;
+
+        })
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
@@ -142,7 +159,7 @@ class LocationSearch {
     }
 
     sendDatas() {
-        const _this = this
+        const _this = this;
 
         return function() {
             let search = {};
