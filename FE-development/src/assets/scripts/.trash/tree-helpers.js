@@ -30,7 +30,7 @@ export function renderTreeAjax ({select, action, mapId, settings}) {
             ajaxMap.updatePlaces(mapNumber, true);
         },
         source: {
-            url: "index.php",
+            url: "/index.php",
             type: "GET",
             dataType: "json",
             data: {
