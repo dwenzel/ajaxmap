@@ -83,8 +83,9 @@ const _ = {
         const marker = placeInstance.marker;
 
         if(mapEntry.activeIcon){
+
             marker.setNormal();
-            mapEntry.activeIcon=null;
+
         }
 
 
@@ -102,6 +103,7 @@ const _ = {
 
                 data.node.setSelected(true);
                 marker.setActive();
+
 
 
                 /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {

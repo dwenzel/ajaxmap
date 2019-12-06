@@ -33,10 +33,12 @@ function create(mapEntry, place) {
         };
 
         mapMarker.setActive = function() {
+            mapEntry.activeIcon=true;
             mapMarker.setIcon(mapMarker.icons.iconActive);
         };
 
         mapMarker.setNormal = function() {
+            mapEntry.activeIcon = false;
             mapMarker.setIcon(mapMarker.icons.icon);
         };
 
