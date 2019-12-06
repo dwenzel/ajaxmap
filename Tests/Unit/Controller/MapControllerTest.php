@@ -106,10 +106,11 @@ class MapControllerTest extends UnitTestCase
         $mockMap = $this->getMockBuilder(Map::class)
             ->getMock();
         $search = [];
-        $settings = ['map' => '1', 'search' => $search];
+        $settings = ['map' => '1', 'search' => $search, 'keys' => ['googleMap' => 'dummy']];
         $expectedMapSettings = SI::MAP_SETTINGS;
         $expectedMapSettings['id'] = $settings['map'];
         $expectedMapSettings['pageId'] = $pageId;
+        $expectedMapSettings['keys'] = $settings['keys'];
 
         $this->inject(
             $this->subject,

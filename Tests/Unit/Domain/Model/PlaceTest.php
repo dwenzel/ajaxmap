@@ -402,9 +402,9 @@ class PlaceTest extends UnitTestCase
         $result = [
             'address' => null,
             'categories' => [],
-            'content' => null,
             'content' => [],
             'description' => null,
+            'distance' => 0.0,
             'geoCoordinates' => null,
             'info' => null,
             'latitude' => 0.0,
