@@ -21,6 +21,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use CPSIT\GeoLocationService\Domain\Model\GeoCodableInterface;
 use CPSIT\GeoLocationService\Service\GeoCoder;
 use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
 use DWenzel\Ajaxmap\Domain\Model\TreeItemInterface;
@@ -210,12 +211,7 @@ abstract class AbstractDemandedRepository
     {
         $objectUids = [];
         foreach ($queryResult as $object) {
-            $currDist = $this->geoCoder->distance(
-                $geoLocation['lat'],
-                $geoLocation['lng'],
-                $object->getLatitude(),
-                $object->getLongitude()
-            );
+            $currDist = $this->calculateDistance($geoLocation, $object);
             if ($currDist <= $distance) {
                 $objectUids[] = $object->getUid();
             }
@@ -321,6 +317,22 @@ abstract class AbstractDemandedRepository
         $result = $query->execute();
 
         return $result->count();
+    }
+
+    /**
+     * @param array $geoLocation
+     * @param GeoCodableInterface $object
+     * @return float
+     */
+    public function calculateDistance(array $geoLocation, GeoCodableInterface $object): float
+    {
+        $distance = $this->geoCoder->distance(
+            $geoLocation['lat'],
+            $geoLocation['lng'],
+            $object->getLatitude(),
+            $object->getLongitude()
+        );
+        return $distance;
     }
 }
 
