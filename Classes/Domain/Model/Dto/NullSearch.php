@@ -57,4 +57,12 @@ final class NullSearch extends Search
     {
         return '';
     }
+
+    /**
+     * @return string
+     */
+    public function getRegion(): string
+    {
+        return '';
+    }
 }
