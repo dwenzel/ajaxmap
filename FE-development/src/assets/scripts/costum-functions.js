@@ -44,7 +44,7 @@ const customMapFunctions = {
         </a>
     </div>
 
-    <a href="${placeData.address.profileLink}" class="am-card__block-link js-am-jt-marker">Anchor map</a>
+    <!--a href="${placeData.address.profileLink}" class="am-card__block-link js-am-jt-marker">Anchor map</a-->
 </div>
 `;
     }

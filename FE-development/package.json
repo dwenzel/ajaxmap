@@ -7,11 +7,8 @@
 		"start": "cross-env APP_ENV=development npm-run-all webpack:build -p webpack:watch:nolint fractal:watch",
 		"start:nolint": "cross-env APP_ENV=development npm-run-all webpack:build -p webpack:watch:nolint fractal:watch",
 		"build": "cross-env APP_ENV=build npm-run-all webpack:build build:index-url",
-
 		"build:index-url": "node build_inject-url.js",
-
 		"deploy": "cross-env APP_ENV=production npm-run-all webpack:build build:index-url",
-
 		"test": "npm-run-all test:lint:js test:lint:css",
 		"webpack:clear": "del-cli dist/*",
 		"webpack:build": "webpack --config webpack.config.js",
@@ -62,6 +59,7 @@
 		"iconfont-webpack-plugin": "^3.1.0",
 		"map-helper": "^1.3.3",
 		"mini-css-extract-plugin": "^0.4.5",
+		"nodemon-webpack-plugin": "^4.2.1",
 		"npm-run-all": "^4.1.5",
 		"postcss-discard-comments": "^4.0.2",
 		"postcss-loader": "^3.0.0",

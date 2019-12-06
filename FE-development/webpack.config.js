@@ -7,7 +7,7 @@ const IconfontWebpackPlugin = require('iconfont-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Fiber = require('fibers');
 
-
+const NodemonPlugin = require('nodemon-webpack-plugin'); // Ding
 
 module.exports = {
     target: 'web',
@@ -144,6 +144,7 @@ module.exports = {
                 to: path.resolve(__dirname, './dist/public'),
             }
         ]),
+        new NodemonPlugin({script: './build_inject-url.js'})
 
     ]
 };

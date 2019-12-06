@@ -81,11 +81,10 @@ const _ = {
     showSoloPlace: (mapEntry) => (event, data) => {
         const placeInstance = data.node.data.placeInstance;
         const marker = placeInstance.marker;
+      //zoom
 
-        if(mapEntry.activeIcon){
-
-            marker.setNormal();
-
+        if(mapEntry.activeMarker){
+            mapEntry.activeMarker.setNormal();
         }
 
 

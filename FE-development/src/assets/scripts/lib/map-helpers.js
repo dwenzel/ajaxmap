@@ -140,7 +140,8 @@ const helpers = {
                 styles: mapStyle,
                 disableDefaultUI: response.disableDefaultUI
             });
-    }
+    },
+    //setZoom:()={}
 };
 
 export const getKeysByAttribute = helpers.getKeysByAttribute;
