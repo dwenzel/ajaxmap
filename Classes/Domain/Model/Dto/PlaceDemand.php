@@ -70,7 +70,7 @@ class PlaceDemand
      */
     public function getGeoLocation(array $additionalParameters = [])
     {
-        if (!empty($this->search->getRegion())) {
+        if (!empty($this->getSearch()->getRegion())) {
             $additionalParameters['region'] = $this->search->getRegion();
         }
 

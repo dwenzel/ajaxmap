@@ -208,6 +208,7 @@ CREATE TABLE tx_ajaxmap_domain_model_locationtype (
 	title varchar(255) DEFAULT '' NOT NULL,
 	description text NOT NULL,
 	icon text NOT NULL,
+	icon_active text NOT NULL,
 
 	tstamp int(11) unsigned DEFAULT '0' NOT NULL,
 	crdate int(11) unsigned DEFAULT '0' NOT NULL,

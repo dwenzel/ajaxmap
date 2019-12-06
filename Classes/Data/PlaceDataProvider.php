@@ -7,6 +7,7 @@ use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
 use DWenzel\Ajaxmap\Domain\Factory\Dto\PlaceDemandFactory;
 use DWenzel\Ajaxmap\Domain\Model\Category;
 use DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand;
+use DWenzel\Ajaxmap\Domain\Model\Dto\NullSearch;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
@@ -162,9 +163,14 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
 
         /** @var AbstractDemand $demand */
         $demand = $this->placeDemandFactory->fromSettings($settings);
+        $geoLocation = $demand->getGeoLocation();
 
         // Return empty result if no valid search parameters are given
-        if (!$demand->getSearch()->isForceResult() && $demand->getSearch()->isEmpty()) {
+        if (
+            !$demand->getSearch() instanceof NullSearch &&
+            !$demand->getSearch()->isForceResult() &&
+            ($demand->getSearch()->isEmpty() || !$geoLocation)
+        ) {
             return $data;
         }
 
@@ -176,7 +182,6 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             false
         );
         /** @var Place $place */
-        $geoLocation = $demand->getGeoLocation();
         foreach ($places as $place) {
             if (is_array($geoLocation)) {
                 $distance = $this->placeRepository->calculateDistance($geoLocation, $place);

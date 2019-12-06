@@ -28,10 +28,10 @@ return [
             'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_LOCATION_TYPE
         ]
     ], 'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon, icon_active',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, description,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, icon_active, description,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -144,6 +144,17 @@ return [
                 'size' => 1,
                 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
                 'disallowed' => '',
+            ],
+        ],
+        'icon_active' => [
+            'exclude' => true,
+            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xlf:tx_ajaxmap_domain_model_locationtype.icon_active',
+            'config' => [
+                'type' => 'group',
+                'internal_type' => 'file_reference',
+                'show_thumbs' => true,
+                'size' => 1,
+                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
             ],
         ],
     ],
