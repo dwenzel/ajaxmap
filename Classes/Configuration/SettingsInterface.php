@@ -121,7 +121,7 @@ interface SettingsInterface
                 'minExpandLevel' => 3,
                 // 1=> single, 2=> multi, 3=> multi hierarchical
                 'selectMode' => 3,
-                'icons' => false,
+                'icon' => false,
                 'checkbox' => true,
                 'extensions' => ['filter', 'glyph'],
                 'glyph' => [
@@ -137,7 +137,7 @@ interface SettingsInterface
                 ]
             ],
             'categoryTree' => [
-                'icons' => false,
+                'icon' => false,
                 'extensions' => ['filter', 'glyph'],
                 'glyph' => [
                     'preset' => 'awesome4',
@@ -153,7 +153,7 @@ interface SettingsInterface
             ],
             'placeGroupTree' => [
                 'checkbox' => true,
-                'icons' => false,
+                'icon' => false,
                 'extensions' => ['filter', 'glyph'],
                 'glyph' => [
                     'preset' => 'awesome4',
@@ -169,7 +169,7 @@ interface SettingsInterface
             ],
             'locationTypeTree' => [
                 'checkbox' => true,
-                'icons' => false,
+                'icon' => false,
                 'selectMode' => 1,
                 'extensions' => ['filter', 'glyph'],
                 'glyph' => [
