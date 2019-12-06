@@ -79,7 +79,16 @@ const _ = {
         }
     },
     showSoloPlace: (mapEntry) => (event, data) => {
-        //  var mapMarkers = mapEntry.markers || [],
+        const placeInstance = data.node.data.placeInstance;
+        const marker = placeInstance.marker;
+
+        if(mapEntry.activeIcon){
+            marker.setNormal();
+            mapEntry.activeIcon=null;
+        }
+
+
+        var mapMarkers = mapEntry.markers || [];
         const infoWindow = mapEntry.infoWindow;
 
         /*
@@ -90,7 +99,10 @@ const _ = {
 
         if (true) {
             if (!data.node.selected) {
+
                 data.node.setSelected(true);
+                marker.setActive();
+
 
                 /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 
@@ -101,7 +113,7 @@ const _ = {
 
                  // if (marker.place.key === data.node.key) {
                  const placeInstance = data.node.data.placeInstance;
-                 const marker = placeInstance.placeData.marker;
+                 const marker = placeInstance.marker;
 
                  markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
                  .then(content => {

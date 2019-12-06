@@ -18,16 +18,30 @@ function create(mapEntry, place) {
         currType = place.locationType && place.locationType.key,
         currLatlng = mapHelpers.getLatLong(place.geoCoordinates);
 
-    var mapMarker = new google.maps.Marker({
-        position: currLatlng,
-        map: map,
-        title: place.title
-    });
-
     if (currType) {
+        var mapMarker = new google.maps.Marker({
+            position: currLatlng,
+            map: map,
+            title: place.title
+        });
+
         const locationTyp = getLocationType(mapEntry, currType);
-       mapMarker.setIcon(locationTyp.icon);
-       console.log('locationTyp.icon', locationTyp.icon)
+
+        mapMarker.icons = {
+            icon: locationTyp.icon,
+            iconActive: locationTyp.iconActive
+        };
+
+        mapMarker.setActive = function() {
+            mapMarker.setIcon(mapMarker.icons.iconActive);
+        };
+
+        mapMarker.setNormal = function() {
+            mapMarker.setIcon(mapMarker.icons.icon);
+        };
+
+
+        mapMarker.setNormal();
     }
 
     mapMarker.mapNumber = mapEntry.id;
