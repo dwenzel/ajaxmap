@@ -134,21 +134,20 @@ class LocationType extends AbstractEntity
     }
 
     /**
-     * @return string
+     * @return string|null
      */
-    public function getIconActive(): string
+    public function getIconActive(): ?string
     {
         return $this->iconActive;
     }
 
     /**
-     * @param string $iconActive
+     * @param string|null $iconActive
      * @return self
      */
-    public function setIconActive(string $iconActive): self
+    public function setIconActive(?string $iconActive): self
     {
         $this->iconActive = $iconActive;
         return $this;
     }
 }
-

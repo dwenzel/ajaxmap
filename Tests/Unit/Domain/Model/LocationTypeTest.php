@@ -134,6 +134,7 @@ class LocationTypeTest extends UnitTestCase
         $result = array(
             'description' => null,
             'icon' => null,
+            'iconActive' => null,
             'pid' => null,
             'title' => null,
             'uid' => null,
