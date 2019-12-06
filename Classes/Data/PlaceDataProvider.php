@@ -170,8 +170,11 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
         );
         /** @var Place $place */
         foreach ($places as $place) {
-            $distance = $this->placeRepository->calculateDistance($demand->getGeoLocation(), $place);
-            $place->setDistance($distance);
+            $geoLocation = $demand->getGeoLocation();
+            if (is_array($geoLocation)) {
+                $distance = $this->placeRepository->calculateDistance($geoLocation, $place);
+                $place->setDistance($distance);
+            }
             $data[] = $place->toArray(2, $this->mapping);
         }
         return $data;
