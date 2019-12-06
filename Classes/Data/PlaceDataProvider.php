@@ -49,6 +49,7 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
         SI::LOCATION,
         SI::BOUNDS,
         SI::REGION,
+        SI::FORCE_RESULT,
     ];
 
     protected $mapping = [
@@ -161,6 +162,12 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
 
         /** @var AbstractDemand $demand */
         $demand = $this->placeDemandFactory->fromSettings($settings);
+
+        // Return empty result if no valid search parameters are given
+        if (!$demand->getSearch()->isForceResult() && $demand->getSearch()->isEmpty()) {
+            return $data;
+        }
+
         /** @var QueryResult $places */
         $places = $this->placeRepository->findDemanded(
             $demand,
@@ -169,8 +176,8 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             false
         );
         /** @var Place $place */
+        $geoLocation = $demand->getGeoLocation();
         foreach ($places as $place) {
-            $geoLocation = $demand->getGeoLocation();
             if (is_array($geoLocation)) {
                 $distance = $this->placeRepository->calculateDistance($geoLocation, $place);
                 $place->setDistance($distance);

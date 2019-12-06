@@ -48,6 +48,9 @@ class SearchFactory
         if (!empty($settings[SI::REGION])) {
             $search->setRegion($settings[SI::REGION]);
         }
+        if (!empty($settings[SI::FORCE_RESULT])) {
+            $search->setForceResult((bool) $settings[SI::FORCE_RESULT]);
+        }
         if (!empty($settings[SI::BOUNDS]) && is_array($settings[SI::BOUNDS])) {
             $search->setRadius((int)$settings[SI::BOUNDS]);
         }

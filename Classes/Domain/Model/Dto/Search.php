@@ -2,6 +2,8 @@
 
 namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 
+use DWenzel\Ajaxmap\DomainObject\NullableInterface;
+
 /***************************************************************
  *  Copyright notice
  *  (c) 2013 Dirk Wenzel <wenzel@webfox01.de>
@@ -23,7 +25,7 @@ namespace DWenzel\Ajaxmap\Domain\Model\Dto;
 /**
  * Search object for searching text in fields
  */
-class Search implements LocationAwareInterface
+class Search implements LocationAwareInterface, NullableInterface
 {
     use LocationAwareTrait;
     /**
@@ -39,6 +41,11 @@ class Search implements LocationAwareInterface
      * @var string
      */
     protected $fields = '';
+
+    /**
+     * @var bool
+     */
+    protected $forceResult = false;
 
     /**
      * Get the subject
@@ -80,6 +87,44 @@ class Search implements LocationAwareInterface
     public function setFields(string $fields): void
     {
         $this->fields = $fields;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isForceResult(): bool
+    {
+        return $this->forceResult;
+    }
+
+    /**
+     * @param bool $forceResult
+     * @return self
+     */
+    public function setForceResult(bool $forceResult): self
+    {
+        $this->forceResult = $forceResult;
+        return $this;
+    }
+
+    /**
+     * Check whether the current object is empty.
+     *
+     * @param bool $strict `true` whether to strictly check if object is empty, `false` otherwise (default)
+     * @return bool `true` if the object is empty, `false` otherwise
+     */
+    public function isEmpty(bool $strict = false): bool
+    {
+        if ($strict) {
+            $result = empty($this->getRadius()) && empty($this->getBounds());
+        } else {
+            $result = false;
+        }
+
+        return $result
+            && empty($this->getLocation())
+            && empty($this->getSubject())
+            && empty($this->getRegion());
     }
 }
 
