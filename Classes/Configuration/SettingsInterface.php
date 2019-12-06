@@ -231,6 +231,7 @@ interface SettingsInterface
     const RADIUS = 'radius';
     const BOUNDS = 'bounds';
     const REGION = 'region';
+    const FORCE_RESULT = 'forceResult';
     const ORDER = 'order';
     const CONJUNCTION_AND = 'AND';
     const CONJUNCTION_OR = 'OR';
