@@ -21,6 +21,10 @@
 				<source>Enable street view controls</source>
 				<target>Steuerung für Street View anzeigen</target>
 			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon_active" xml:space="preserve">
+				<source>Icon (active state)</source>
+				<target>Icon (aktiver Zustand)</target>
+			</trans-unit>
 		</body>
 	</file>
 </xliff>

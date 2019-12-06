@@ -41,6 +41,9 @@
 		<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon" xml:space="preserve">
 			<source>Icon</source>
 		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon_active" xml:space="preserve">
+			<source>Icon (active state)</source>
+		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_locationtype.title" xml:space="preserve">
 			<source>Title</source>
 		</trans-unit>
