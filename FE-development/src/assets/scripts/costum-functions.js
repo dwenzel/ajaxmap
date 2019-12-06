@@ -13,8 +13,8 @@ const customMapFunctions = {
         });
     },
     placeSortFunction: function(a, b) {
-        a = parseInt(a.data.address.zip);
-        b = parseInt(b.data.address.zip);
+        a = a.data.distance;
+        b = b.data.distance;
         return a > b ? 1 : a < b ? -1 : 0;
     },
 
