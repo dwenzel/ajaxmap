@@ -70,6 +70,11 @@ class Place extends AbstractEntity
      */
 	protected $longitude = 0.0;
 
+    /**
+     * @var float Distance
+     */
+	protected $distance = 0.0;
+
 	/**
 	 * description
 	 *
@@ -370,7 +375,6 @@ class Place extends AbstractEntity
 	 * Sets the geoCoordinates
 	 *
 	 * @param string $geoCoordinates
-	 * @return string geoCoordinates
 	 */
 	public function setGeoCoordinates($geoCoordinates) {
 		$this->geoCoordinates = $geoCoordinates;
@@ -422,6 +426,24 @@ class Place extends AbstractEntity
     public function setLongitude($longitude): void
     {
         $this->longitude = (float)$longitude;
+    }
+
+    /**
+     * @return float
+     */
+    public function getDistance(): float
+    {
+        return $this->distance;
+    }
+
+    /**
+     * @param float $distance
+     * @return self
+     */
+    public function setDistance(float $distance): self
+    {
+        $this->distance = $distance;
+        return $this;
     }
 
     public function getPlace()

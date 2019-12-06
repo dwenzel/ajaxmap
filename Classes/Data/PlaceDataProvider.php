@@ -6,6 +6,7 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
 use DWenzel\Ajaxmap\Domain\Factory\Dto\PlaceDemandFactory;
 use DWenzel\Ajaxmap\Domain\Model\Category;
+use DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
@@ -158,6 +159,7 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             $this->getSettingsFromMap($map),
             $queryParameter);
 
+        /** @var AbstractDemand $demand */
         $demand = $this->placeDemandFactory->fromSettings($settings);
         /** @var QueryResult $places */
         $places = $this->placeRepository->findDemanded(
@@ -168,6 +170,8 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
         );
         /** @var Place $place */
         foreach ($places as $place) {
+            $distance = $this->placeRepository->calculateDistance($demand->getGeoLocation(), $place);
+            $place->setDistance($distance);
             $data[] = $place->toArray(2, $this->mapping);
         }
         return $data;
