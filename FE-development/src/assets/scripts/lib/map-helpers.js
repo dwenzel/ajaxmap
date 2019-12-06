@@ -123,9 +123,14 @@ const helpers = {
 
         let mapCenter = helpers.getLatLong(response.mapCenter);
 
+        //        alert(response.initialZoom)
+        //        todo:response.initialZoom is set to 7?!!
+        response.initialZoom = 13;
+
         //build map
         return new google.maps.Map(
             $el[0], {
+
                 zoom: response.initialZoom,
                 center: mapCenter,
                 mapTypeId: mapType,
