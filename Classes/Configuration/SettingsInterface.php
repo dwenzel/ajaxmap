@@ -187,7 +187,7 @@ interface SettingsInterface
             'placesTree' => [
                 'toggleInfoWindowOnSelect' => true,
                 'selectMode' => 1,
-                'icons' => false,
+                'icon' => false,
                 'extensions' => ['filter'],
                 'quicksearch' => true,
                 'filter' => [
