@@ -15,7 +15,6 @@ const _ = {
 
 const layers = {
     update: function(mapEntry, layerIds) {
-
         var existingLayers = mapEntry.layers;
 
         if (typeof (existingLayers) !== 'undefined') {
