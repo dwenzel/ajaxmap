@@ -8,7 +8,6 @@ const CopyPlugin = require('copy-webpack-plugin');
 const Fiber = require('fibers');
 
 
-
 module.exports = {
     target: 'web',
     mode: (process.env.APP_ENV === 'production') ? 'production' : 'development',
@@ -144,6 +143,7 @@ module.exports = {
                 to: path.resolve(__dirname, './dist/public'),
             }
         ]),
+
 
     ]
 };

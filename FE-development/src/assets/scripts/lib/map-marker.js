@@ -2,13 +2,13 @@ import {getLocationType} from './map-helpers';
 import mapHelpers from './map-helpers';
 import infoWindow from './map-marker-info-window';
 import $ from 'jquery';
-function addMarkerClickFunction(mapEntry, place) {
+function addMarkerClickFunction(mapEntry, place, marker) {
     return function() {
 
         if (/*window.ajaxMapConfig && the error is your friend */window.ajaxMapConfig.onMarkerClick) {
-            window.ajaxMapConfig.onMarkerClick(mapEntry, place, $);
+            window.ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
-
+        marker.setActive();
         infoWindow.createOnClick();
     };
 }
@@ -33,15 +33,14 @@ function create(mapEntry, place) {
         };
 
         mapMarker.setActive = function() {
-            mapEntry.activeIcon=true;
+            mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
         };
 
         mapMarker.setNormal = function() {
-            mapEntry.activeIcon = false;
+            mapEntry.activeMarker = null;
             mapMarker.setIcon(mapMarker.icons.icon);
         };
-
 
         mapMarker.setNormal();
     }
@@ -50,7 +49,7 @@ function create(mapEntry, place) {
     mapMarker.place = place;
 
     // add click function
-    const clickFunction = addMarkerClickFunction(mapEntry, place);
+    const clickFunction = addMarkerClickFunction(mapEntry, place, mapMarker);
 
     google.maps.event.addListener(mapMarker, 'click', clickFunction);
 

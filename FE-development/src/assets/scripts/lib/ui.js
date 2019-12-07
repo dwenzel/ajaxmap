@@ -96,6 +96,7 @@ function _toggleSidebar() {
  * @private
  */
 function updateSidebarLayoutSetup() {
+
     let sbScrollWrapper = _cache.$amSidebar.find('.am__sb__scroll-wrapper'),
         mapHeight = _cache.$map.outerHeight(),
         sbFilterHeight = _cache.$amSidebar.find('.am__sb__filter').outerHeight(),

@@ -115,6 +115,17 @@ const helpers = {
 
         return new MarkerClusterer(map, [], markerClusterer);
     },
+    fitBounds: (mapEntry, places) => {
+        var bounds = new google.maps.LatLngBounds();
+
+        places.forEach((place) => {
+            var locationLatLng =
+                new google.maps.LatLng(place.marker.position.lat(), place.marker.position.lng());
+            bounds.extend(locationLatLng);
+        });
+
+        mapEntry.googleMap.fitBounds(bounds);
+    },
     createGooglMap: (response, $el) => {
 
         helpers.setDimension($el, response);
@@ -133,6 +144,7 @@ const helpers = {
 
                 zoom: response.initialZoom,
                 center: mapCenter,
+
                 mapTypeId: mapType,
                 mapTypeControl: !response.hideTypeControl,
                 fullscreenControl: !response.hideFullscreenControl,
@@ -140,12 +152,13 @@ const helpers = {
                 styles: mapStyle,
                 disableDefaultUI: response.disableDefaultUI
             });
-    }
+    },
+    //setZoom:()={}
 };
 
 export const getKeysByAttribute = helpers.getKeysByAttribute;
 export const getLocationType = helpers.getLocationType;
 export const getSelectedKeys = helpers.getSelectedKeys;
 export const getLatLong = helpers.getLatLong;
-
+export const fitBounds = helpers.fitBounds;
 export default helpers;
