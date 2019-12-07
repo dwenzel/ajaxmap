@@ -8,6 +8,8 @@ function addMarkerClickFunction(mapEntry, place, marker) {
         if (/*window.ajaxMapConfig && the error is your friend */window.ajaxMapConfig.onMarkerClick) {
             window.ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
+
+        mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
         marker.setActive();
         infoWindow.createOnClick();
     };
@@ -35,11 +37,14 @@ function create(mapEntry, place) {
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
+          console.log('setActive')
         };
 
         mapMarker.setNormal = function() {
             mapEntry.activeMarker = null;
             mapMarker.setIcon(mapMarker.icons.icon);
+
+            console.log('++++++++++','setNormal')
         };
 
         mapMarker.setNormal();

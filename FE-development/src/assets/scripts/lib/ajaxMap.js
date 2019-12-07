@@ -26,7 +26,6 @@ const _ = {
 
         ui.initByMapEntry(mapEntry);
 
-
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
     },
@@ -35,14 +34,14 @@ const _ = {
             const mapStore = ajaxMap.configData.mapStore;
 
             ajaxMap.maps = mapStore.map((mapEntry) => {
-              //  const ajaxMapInstance = new AjaxMap(mapEntry);
+                //  const ajaxMapInstance = new AjaxMap(mapEntry);
 
                 map.build(mapEntry).then((mergedMapEntry) => {
                     _.initMap(mergedMapEntry);
                 });
 
-              //  ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
-              //  return ajaxMapInstance;
+                //  ajaxMap.lookUp[mapEntry.id] = ajaxMapInstance;
+                //  return ajaxMapInstance;
             });
         });
     }
@@ -57,7 +56,7 @@ ajaxMap = {//    TODO:
 
     ///////////
     ajaxServerPath: //replace #### dont delete this! its for the build process
-        'http://localhost:' + ajaxProxyPort,
+    'http://localhost:' + ajaxProxyPort,
     //end-replace //#### dont delete this! its for the build process
     //////////
 
@@ -68,7 +67,7 @@ ajaxMap = {//    TODO:
 
         ajaxMap.configData = configData;
 
-        window.ajaxMapConfig= window.ajaxMapConfig||{};
+        window.ajaxMapConfig = window.ajaxMapConfig || {};
 
         inserScriptTag(url).then(() => {
             ajaxMap.configData = configData;

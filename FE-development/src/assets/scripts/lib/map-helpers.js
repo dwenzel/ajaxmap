@@ -137,7 +137,8 @@ const helpers = {
         //        alert(response.initialZoom)
         //        todo:response.initialZoom is set to 7?!!
         response.initialZoom = 13;
-
+//        response.hideTypeControl=true;//!true,  how they are set ?!!
+// streetViewControl:?
         //build map
         return new google.maps.Map(
             $el[0], {
@@ -147,10 +148,15 @@ const helpers = {
 
                 mapTypeId: mapType,
                 mapTypeControl: !response.hideTypeControl,
+                mapTypeControlOptions: {
+                  //  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                    position: google.maps.ControlPosition.TOP_RIGHT
+                },
                 fullscreenControl: !response.hideFullscreenControl,
                 streetViewControl: !response.hideStreetViewControl,
                 styles: mapStyle,
-                disableDefaultUI: response.disableDefaultUI
+                disableDefaultUI: response.disableDefaultUI,
+//                mapTypeId: google.maps.MapTypeId.HYBRID
             });
     },
     //setZoom:()={}
