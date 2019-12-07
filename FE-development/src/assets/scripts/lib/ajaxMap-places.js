@@ -81,12 +81,12 @@ const _ = {
     showSoloPlace: (mapEntry) => (event, data) => {
         const placeInstance = data.node.data.placeInstance;
         const marker = placeInstance.marker;
-      //zoom
+        //zoom
 
-        if(mapEntry.activeMarker){
+        mapEntry.googleMap.setZoom(18);
+        if (mapEntry.activeMarker) {
             mapEntry.activeMarker.setNormal();
         }
-
 
         var mapMarkers = mapEntry.markers || [];
         const infoWindow = mapEntry.infoWindow;
@@ -102,8 +102,6 @@ const _ = {
 
                 data.node.setSelected(true);
                 marker.setActive();
-
-
 
                 /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 

@@ -5,6 +5,7 @@
 import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer';
 
+
 const helpers = {
 
     /**
@@ -133,6 +134,7 @@ const helpers = {
 
                 zoom: response.initialZoom,
                 center: mapCenter,
+
                 mapTypeId: mapType,
                 mapTypeControl: !response.hideTypeControl,
                 fullscreenControl: !response.hideFullscreenControl,

@@ -2,6 +2,8 @@ const merge = require('webpack-merge');
 const StyleLintPlugin = require('stylelint-webpack-plugin');
 const webpackConfig = require('./webpack.config');
 
+const NodemonPlugin = require('nodemon-webpack-plugin'); // Ding
+
 module.exports = merge(webpackConfig, {
     module: {
         rules: [
@@ -20,6 +22,7 @@ module.exports = merge(webpackConfig, {
         ]
     },
     plugins: [
-        new StyleLintPlugin()
+        new StyleLintPlugin(),
+        new NodemonPlugin({script: './build_inject-url.js'})
     ]
 });
