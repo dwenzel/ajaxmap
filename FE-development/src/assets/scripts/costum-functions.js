@@ -13,8 +13,9 @@ const customMapFunctions = {
         });
     },
     placeSortFunction: function(a, b) {
-        a = a.data.distance;
-        b = b.data.distance;
+        a = a.data.distanceToCenter;
+        b = b.data.distanceToCenter;
+
         return a > b ? 1 : a < b ? -1 : 0;
     },
 

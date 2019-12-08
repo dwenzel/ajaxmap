@@ -9,11 +9,13 @@ function addMarkerClickFunction(mapEntry, place, marker) {
             window.ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
 
-
-        place.placeInstance.panToSelf();
-        mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
         marker.setActive();
+
+        /** for debug info win
+        mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
         infoWindow.createOnClick();
+
+         **/
     };
 }
 
@@ -39,14 +41,14 @@ function create(mapEntry, place) {
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
-         // console.log('setActive')
+            // console.log('setActive')
         };
 
         mapMarker.setNormal = function() {
             mapEntry.activeMarker = null;
             mapMarker.setIcon(mapMarker.icons.icon);
 
-           // console.log('++++++++++','setNormal')
+            // console.log('++++++++++','setNormal')
         };
 
         mapMarker.setNormal();
@@ -57,8 +59,12 @@ function create(mapEntry, place) {
 
     // add click function
     const clickFunction = addMarkerClickFunction(mapEntry, place, mapMarker);
-
     google.maps.event.addListener(mapMarker, 'click', clickFunction);
+
+    // add dbl-click
+    google.maps.event.addListener(marker, 'dblclick', function(e) {
+        window.open(place.placeData.address.profileLink, '_blank');
+    });
 
     return mapMarker;
 }

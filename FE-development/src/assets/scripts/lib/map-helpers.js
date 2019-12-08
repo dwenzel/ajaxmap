@@ -4,7 +4,6 @@
 
 import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer';
-
 const helpers = {
 
     /**
@@ -42,7 +41,6 @@ const helpers = {
             }
         }).map(node => node.data[name].key)
     },
-
     getLocationType: (mapEntry, typeId) =>
         mapEntry.locationTypes.filter(
             (item) => item.key === typeId
@@ -115,6 +113,18 @@ const helpers = {
 
         return new MarkerClusterer(map, [], markerClusterer);
     },
+
+    //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
+    //calculates distance between two points in km's
+    calcDistance: (bounds, places) => {
+        const pBoundsCenter = bounds.getCenter();
+
+        places.forEach((p) => {
+            const distInKm = (google.maps.geometry.spherical.computeDistanceBetween(pBoundsCenter, p.LatLong) / 1000).toFixed(2);
+            p.placeData.distanceToCenter = distInKm;
+        });
+
+    },
     fitBounds: (mapEntry, places) => {
         var bounds = new google.maps.LatLngBounds();
 
@@ -125,6 +135,7 @@ const helpers = {
         });
 
         mapEntry.googleMap.fitBounds(bounds);
+        return bounds;
     },
     createGooglMap: (response, $el) => {
 
@@ -137,8 +148,8 @@ const helpers = {
         //        alert(response.initialZoom)
         //        todo:response.initialZoom is set to 7?!!
         response.initialZoom = 13;
-//        response.hideTypeControl=true;//!true,  how they are set ?!!
-// streetViewControl:?
+        //        response.hideTypeControl=true;//!true,  how they are set ?!!
+        // streetViewControl:?
         //build map
         return new google.maps.Map(
             $el[0], {
@@ -149,14 +160,14 @@ const helpers = {
                 mapTypeId: mapType,
                 mapTypeControl: !response.hideTypeControl,
                 mapTypeControlOptions: {
-                  //  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
+                    //  style: google.maps.MapTypeControlStyle.DROPDOWN_MENU,
                     position: google.maps.ControlPosition.TOP_RIGHT
                 },
                 fullscreenControl: !response.hideFullscreenControl,
                 streetViewControl: !response.hideStreetViewControl,
                 styles: mapStyle,
                 disableDefaultUI: response.disableDefaultUI,
-//                mapTypeId: google.maps.MapTypeId.HYBRID
+                //                mapTypeId: google.maps.MapTypeId.HYBRID
             });
     },
     //setZoom:()={}
@@ -167,4 +178,6 @@ export const getLocationType = helpers.getLocationType;
 export const getSelectedKeys = helpers.getSelectedKeys;
 export const getLatLong = helpers.getLatLong;
 export const fitBounds = helpers.fitBounds;
+export const calcDistance = helpers.calcDistance;
+
 export default helpers;

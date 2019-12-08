@@ -83,7 +83,8 @@ const _ = {
         const marker = placeInstance.marker;
         //zoom
 
-        mapEntry.googleMap.setZoom(18);
+    //placeInstance.panToSelf();
+//        mapEntry.googleMap.setZoom(12);//18??
         if (mapEntry.activeMarker) {
             mapEntry.activeMarker.setNormal();
         }
@@ -199,6 +200,9 @@ const _ = {
             turnOfOnBuffer = null;
 
             _.updatePlaces(mapEntry);
+        }, (err) => {
+            mapEntry.$map[0].dataset.loading = null;
+            console.error(err);
         });
     },
     defaultAjaxData: (mapEntry) => {
