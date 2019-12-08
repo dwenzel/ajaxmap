@@ -9,6 +9,8 @@ function addMarkerClickFunction(mapEntry, place, marker) {
             window.ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
 
+
+        place.placeInstance.panToSelf();
         mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
         marker.setActive();
         infoWindow.createOnClick();
@@ -37,14 +39,14 @@ function create(mapEntry, place) {
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
-          console.log('setActive')
+         // console.log('setActive')
         };
 
         mapMarker.setNormal = function() {
             mapEntry.activeMarker = null;
             mapMarker.setIcon(mapMarker.icons.icon);
 
-            console.log('++++++++++','setNormal')
+           // console.log('++++++++++','setNormal')
         };
 
         mapMarker.setNormal();

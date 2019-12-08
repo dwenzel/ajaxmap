@@ -161,6 +161,8 @@ const _ = {
     },
 
     loadFromData: (mapEntry, data) => {
+        mapEntry.$map[0].dataset.loading = 'loading';
+
         ajaxCall(data).then(function(result) {
             if (!mapEntry.places) {
                 mapEntry.places = [];
@@ -189,6 +191,7 @@ const _ = {
                     // turnOfOnBuffer[placeData.key] = false;
 
                     mapEntry.places[index] = placeData;
+                    mapEntry.$map[0].dataset.loading = null;
                 });
             }
 
