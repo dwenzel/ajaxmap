@@ -24825,8 +24825,8 @@ jquery__WEBPACK_IMPORTED_MODULE_0___default()(document).ready(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH/FE-development/src/assets/scripts/main.js */"./src/assets/scripts/main.js");
-module.exports = __webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH/FE-development/src/assets/styles/main.scss */"./src/assets/styles/main.scss");
+__webpack_require__(/*! /Users/e.haeussler/Sites/bsb/bsb-bundle/app/web/typo3conf/ext/ajaxmap/FE-development/src/assets/scripts/main.js */"./src/assets/scripts/main.js");
+module.exports = __webpack_require__(/*! /Users/e.haeussler/Sites/bsb/bsb-bundle/app/web/typo3conf/ext/ajaxmap/FE-development/src/assets/styles/main.scss */"./src/assets/styles/main.scss");
 
 
 /***/ })
