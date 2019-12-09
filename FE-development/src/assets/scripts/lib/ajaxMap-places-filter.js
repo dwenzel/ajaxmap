@@ -56,7 +56,7 @@ const _ = {
             }
         }
 
-        console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
+      //  console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
     }
 };
 

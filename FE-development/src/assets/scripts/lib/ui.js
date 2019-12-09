@@ -118,11 +118,10 @@ function updateSidebarLayoutSetup() {
     let sbScrollWrapper = _cache.$amSidebar.find('.am__sb__scroll-wrapper'),
         mapHeight = _cache.$map.outerHeight(),
         sbFilterHeight = _cache.$amSidebar.find('.am__sb__filter').outerHeight(),
-        sbFooterHeight = _cache.$amSidebar.find('.am__sb__footer').outerHeight(),
         sbScrollWrapperHeight;
 
 
-    sbScrollWrapperHeight = mapHeight - sbFilterHeight - sbFooterHeight;
+    sbScrollWrapperHeight = mapHeight - sbFilterHeight;
     sbScrollWrapper.css('height', sbScrollWrapperHeight);
 }
 

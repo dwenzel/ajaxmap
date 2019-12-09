@@ -1,6 +1,7 @@
 import treeRenderer from './fancytree-renderer';
 import places from './ajaxMap-places';
 import $ from 'jquery';
+import {sort} from './utilitys';
 
 const mapLocationTypes = {
     treeSelector: '#ajaxMapLocationTypesTree',
@@ -13,8 +14,8 @@ const mapLocationTypes = {
         for (var type in currLocationTypes) {
 
             $('<option/>').val(currLocationTypes[type].key)
-                .text(currLocationTypes[type].title)
-                .appendTo($(mapLocationTypes.treeSelector + mapId));
+            .text(currLocationTypes[type].title)
+            .appendTo($(mapLocationTypes.treeSelector + mapId));
         }
 
         // set on change function for location types treeSelector
@@ -27,9 +28,7 @@ const mapLocationTypes = {
 
         var options = mapEntry.settings.locationTypeTree//?;
 
-
-        console.log(options.filter)
-
+        //??
         delete options.filter.mode
 
         const settings = {
@@ -49,6 +48,9 @@ const mapLocationTypes = {
             },
             init: () => {
                 let $el = $(this.treeSelector + mapEntry.id);
+                const selector = mapLocationTypes.treeSelector + mapEntry.id;
+
+                $el.fancytree('getRootNode').sortChildren(sort.aplhabetic.asc, false);
                 $el.trigger('renderLocationType');
             }
         };
