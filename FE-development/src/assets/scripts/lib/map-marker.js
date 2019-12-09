@@ -5,8 +5,7 @@ import $ from 'jquery';
 
 function addMarkerClickFunction(mapEntry, place, marker) {
     return function() {
-        mapEntry.activeMarker.setNormal();
-
+        setActiveMarkerToNormal(mapEntry);
         if (/*window.ajaxMapConfig && the error is your friend */window.ajaxMapConfig.onMarkerClick) {
             window.ajaxMapConfig.onMarkerClick(mapEntry, place);
         }
@@ -14,8 +13,8 @@ function addMarkerClickFunction(mapEntry, place, marker) {
         marker.setActive();
 
         /** for debug info win
-        mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
-        infoWindow.createOnClick();
+         mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
+         infoWindow.createOnClick();
 
          **/
     };
@@ -87,9 +86,16 @@ function TurnOfOnBuffer(mapEntry) {
     };
 }
 
+function setActiveMarkerToNormal(mapEntry) {
+    if (mapEntry.activeMarker) {
+        mapEntry.activeMarker.setNormal();
+    }
+}
+
 const marker = {
     create,
-    TurnOfOnBuffer
+    TurnOfOnBuffer,
+    setActiveMarkerToNormal
 };
 
 export default marker;

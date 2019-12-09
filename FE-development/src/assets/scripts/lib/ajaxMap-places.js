@@ -86,12 +86,13 @@ const _ = {
     //placeInstance.panToSelf();
 //      mapEntry.googleMap.setZoom(12);//18??
 
-        if (mapEntry.activeMarker) {
-            mapEntry.activeMarker.setNormal();
-        }
+        markers.setActiveMarkerToNormal(mapEntry);
+        data.node.setActive(false);
+        data.node.data.placeInstance.panToSelf();
 
         var mapMarkers = mapEntry.markers || [];
         const infoWindow = mapEntry.infoWindow;
+
 
         /*
          _.disableAllPlaces(mapEntry);
@@ -104,6 +105,7 @@ const _ = {
 
                 data.node.setSelected(true);
                 marker.setActive();
+                return;
 
                 /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 
@@ -131,9 +133,6 @@ const _ = {
                 // infoWindow.close();
             }
         }
-
-        data.node.setActive(false);
-        data.node.data.placeInstance.panToSelf();
 
         _.updatePlaces(mapEntry);
     },
