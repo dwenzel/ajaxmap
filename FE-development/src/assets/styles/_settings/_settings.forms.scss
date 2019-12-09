@@ -1,18 +1,3 @@
-/*!
- * _______________
- * |       .-.   |
- * |      // ``  |
- * |     //      |
- * |  == ===-_.-'|
- * |   //  //    |
- * |__//_________|
- *
- * Copyright (c) ${YEAR} familie-redlich :systeme <systeme@familie-redlich.de>
- * @link     http://www.familie-redlich.de
- *
- *
- */
-
 // Fieldset
 $form-fieldset-space-after: 3rem;
 
@@ -21,11 +6,11 @@ $form-legend-color: map-get($toolbox-colors, 'black');
 $form-legend-space-after: 2rem;
 
 // Group
-$form-group-space-after: 1rem;
+$form-group-space-after: .5rem;
 
 // Label
 $form-label-color: map-get($toolbox-colors, 'black');
-$form-label-space-after: .2rem;
+$form-label-space-after: .1rem;
 
 // Field
 $form-field-bg-color: map-get($toolbox-colors, 'white');
