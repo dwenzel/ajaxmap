@@ -158,7 +158,7 @@ function _initGenerateDropdown(dropdown) {
             if (selIndex >= 0) {
                 $(listItems[selIndex]).find('.fancytree-checkbox').trigger('click');
             } else {
-                _resetFancyTreeList($list)
+                _resetFancyTreeList($list);
             }
         });
     });
