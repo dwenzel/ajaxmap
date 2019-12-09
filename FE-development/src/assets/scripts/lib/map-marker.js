@@ -3,8 +3,11 @@ import mapHelpers from './map-helpers';
 import infoWindow from './map-marker-info-window';
 import $ from 'jquery';
 
+let _zIndexCnt = 0;
+
 function addMarkerClickFunction(mapEntry, place, marker) {
     return function() {
+
         setActiveMarkerToNormal(mapEntry);
         if (/*window.ajaxMapConfig && the error is your friend */window.ajaxMapConfig.onMarkerClick) {
             window.ajaxMapConfig.onMarkerClick(mapEntry, place);
@@ -18,6 +21,10 @@ function addMarkerClickFunction(mapEntry, place, marker) {
 
          **/
     };
+}
+
+function iterateZindex(marker) {
+    marker.setZIndex(google.maps.Marker.MAX_ZINDEX + _zIndexCnt++);
 }
 
 function create(mapEntry, place) {
@@ -42,6 +49,7 @@ function create(mapEntry, place) {
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
+            iterateZindex(mapMarker);
             // console.log('setActive')
         };
 
@@ -95,7 +103,8 @@ function setActiveMarkerToNormal(mapEntry) {
 const marker = {
     create,
     TurnOfOnBuffer,
-    setActiveMarkerToNormal
+    setActiveMarkerToNormal,
+    iterateZindex
 };
 
 export default marker;
