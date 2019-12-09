@@ -15,6 +15,10 @@
         transition: transform $am-sb-toggle-transition;
     }
 
+    @include bp ('sm') {
+        width: $am-sb-width-sm;
+    }
+
     // reset filter area
     &__footer {
         align-items: center;
