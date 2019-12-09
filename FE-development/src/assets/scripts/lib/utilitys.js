@@ -23,12 +23,12 @@ export class ElBuffer {//not in use
 export const ajaxCall = (data) => {
     return new Promise(function(resolve, reject) {
         $.ajax({
-            dataType: 'json',
-            type: 'GET',
-            url: ajaxMap.ajaxServerPath,
             data,
+            dataType: 'json',
+            error: reject,
             success: resolve,
-            error: reject
+            type: 'GET',
+            url: ajaxMap.ajaxServerPath
         });
     });
 };

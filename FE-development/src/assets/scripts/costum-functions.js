@@ -8,7 +8,7 @@ const customMapFunctions = {
 
         treeNode.li.scrollIntoView({// caniuse :78% /use polyfill : https://github.com/iamdustan/smoothscroll
             behavior: 'smooth',
-            block: 'end',
+            block: 'start',
             inline: 'nearest'
         });
     },
