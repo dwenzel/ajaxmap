@@ -1,3 +1,7 @@
+.am__map[data-loading="loading"] {
+    filter: brightness(50%);
+}
+
 .am {
     font-family: 'Source Sans Pro', sans-serif;
     height: 100vh;
@@ -25,7 +29,6 @@
     background: none !important;
     box-shadow: none !important;
 }
-
 
 .gm-control-active:not(.gm-fullscreen-control) {
     background: map_get($toolbox-colors, 'primary') !important;

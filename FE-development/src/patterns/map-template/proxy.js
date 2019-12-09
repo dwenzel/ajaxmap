@@ -9,7 +9,7 @@ const path = require('path'),
 
 const app = express();
 
-app.use(express.static(__dirname+'/../../../../dist/public'))
+app.use(express.static(__dirname + '/../../../../dist/public'))
 
 app.use(function(req, res, next) {
     res.header("Access-Control-Allow-Origin", "*");
@@ -22,7 +22,7 @@ function readJson(name) {
 
     return JSON.parse(jsonStr);
 }
-
+const proxyUrl = 'https://stg.typo3.bsb.321.works/beratung/bsb-beratungsnetz/index.php';
 const proxy = {
 
     started: false,
@@ -34,10 +34,20 @@ const proxy = {
         proxy.started = true;
         const port = proxyPort;
 
-        app.get('/', function(req, res,next) {
+        app.get('/XXX' , function(req, res) {
+            let params = req.query;
+            var i = req.url.indexOf('?');
+            var query = req.url.substr(i + 1);
+
+
+            console.log('-->', query)
+            request.get(proxyUrl+'?'+ query).pipe(res);
+        })
+
+        app.get('/', function(req, res, next) {
             let params = req.query;
 
-            if(!params){
+            if (!params) {
                 next();
             }
 
@@ -48,7 +58,7 @@ const proxy = {
         })
 
         app.listen(port, function() {
-                console.log('******proxy: ','http://localhost:' + proxyPort + ' ******')
+                console.log('******proxy: ', 'http://localhost:' + proxyPort + ' ******')
             }
         );
     }

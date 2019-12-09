@@ -7,7 +7,6 @@ const IconfontWebpackPlugin = require('iconfont-webpack-plugin');
 const CopyPlugin = require('copy-webpack-plugin');
 const Fiber = require('fibers');
 
-
 module.exports = {
     target: 'web',
     mode: (process.env.APP_ENV === 'production') ? 'production' : 'development',
@@ -140,7 +139,7 @@ module.exports = {
         new CopyPlugin([
             {
                 from: path.resolve(__dirname, './src/public'),
-                to: path.resolve(__dirname, './dist/public'),
+                to: path.resolve(__dirname, './dist/'+ packageJSON.project.publicPath),
             }
         ]),
 

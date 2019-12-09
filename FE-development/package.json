@@ -82,7 +82,7 @@
 	},
 	"project": {
 		"title": "extension FE-builder",
-		"publicPath": "/resources/"
+		"publicPath": "/resources"
 	},
 	"dependencies": {
 		"fastdom": "^1.0.9",
