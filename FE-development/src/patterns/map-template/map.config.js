@@ -130,6 +130,7 @@ module.exports = {
         map: JSON.stringify(map.settings),
         generatedSelect: {
             label: 'Beratungsart',
+            name: 'consultantOptions1',
             all: 'Alle Beratungsarten',
             jsId: 'js-am-generate-dropdown',
             referenceList: 'ajaxMapLocationTypesTree1'

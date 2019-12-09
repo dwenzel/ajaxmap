@@ -14,7 +14,8 @@ const _cache = {
     $amSidebar: $('.js-ajax-map-sidebar'),
     $amResultList: $('.am-results__list'),
     $amFilter: $('.am__sb__filter'),
-    $generateDropdowns: $('.js-am-generate-dropdown')
+    $generateDropdowns: $('.js-am-generate-dropdown'),
+    $amFilterReset: $('.js-ajax-map button[type="reset"]')
 };
 
 /**
@@ -31,13 +32,12 @@ export function initByMapEntry(mapEntry) {
  */
 function init() {
 
-    // @TODO DEG wozu benötigen wir das?
-    //@eho noch von DWE! ich weiss es nicht-> detail overlay oder so
-    //der unrefactored code ist in ajaxMap-places-detail-view.js gesetzt
-    $('body').append('<div id="overlayDetailHelper">');
+    $('body').append('<div id="overlayDetailHelper">'); // @TODO DWE please explain this usage?
 
-    //TODO:@eho muss alles  per map sein
+    // reset field places
     resetFilterPlacesInput();
+
+    // update sidebar layout
     updateSidebarLayoutSetup();
 
     // eventhandlers on map
@@ -59,6 +59,20 @@ function resetFilterPlacesInput() {
     _cache.$filterPlaces.val('');
 }
 
+function _resetFilter(e) {
+    e.preventDefault();
+
+    var $reset = $(e.target),
+        form = $reset.closest('form'),
+        fieldLocation = $(form).find('#locationSearch1'),
+        fieldConsultant = $(form).find('#consultantOptions1'),
+        fieldRadialSearch = $(form).find('#radialSelect1');
+
+    $(fieldLocation).val('');
+    $(fieldConsultant).prop('selectedIndex', 0);
+    $(fieldRadialSearch).prop('selectedIndex', 3);
+}
+
 /**
  * eventhandler on map
  * @private
@@ -75,6 +89,10 @@ function _bind() {
         }
     });
 
+    // reset filter event
+    _cache.$amFilterReset.on('click', _resetFilter);
+
+    // resize window update sidebar layout
     $(window).on('resize', updateSidebarLayoutSetup);
 }
 
@@ -140,7 +158,7 @@ function _initGenerateDropdown(dropdown) {
             if (selIndex >= 0) {
                 $(listItems[selIndex]).find('.fancytree-checkbox').trigger('click');
             } else {
-                _resetFancyTreeList($list)
+                _resetFancyTreeList($list);
             }
         });
     });
