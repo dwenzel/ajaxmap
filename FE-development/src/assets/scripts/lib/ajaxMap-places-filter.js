@@ -182,7 +182,7 @@ function showMatchingPlaces(mapEntry) {
 
         return false;
     });
-    console.log('ANZAHL', selectedPlaces.length)
+    //console.log('ANZAHL', selectedPlaces.length)
     _.updateMarkers(mapEntry);
     const bounds = fitBounds(mapEntry, visiblePlaces);
     calcDistance(bounds, visiblePlaces);
