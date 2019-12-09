@@ -2,6 +2,11 @@
 .am__sb__filter {
     background: $am-sb-bg-filter;
     padding: $am-sb-inner-padding;
+
+    .am-link {
+        @include reset-button();
+        color: $link-color;
+    }
 }
 
 
