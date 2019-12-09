@@ -159,11 +159,26 @@ const _ = {
     },
 
     loadFromData: (mapEntry, data) => {
-        mapEntry.$map[0].dataset.loading = 'loading';
-        mapEntry.$map[0].classList.remove('error');
+        var mapWrapper = mapEntry.$map.closest('.js-ajax-map'),
+            ifSpinner = $(mapWrapper).find('.am-loading').length,
+            resultWrapper = $(mapWrapper).find('.am__sb__scroll-wrapper'),
+            spinner = '<div class="am-loader">' +
+                '<div class="am-loader__spinner"></div>' +
+                '<span>Daten werden geladen</span>' +
+                '</div>';
+
+        // if map has any spinner in markup, add spinner
+        if (!ifSpinner) {
+            $(resultWrapper).append(spinner);
+        }
+
+        // set loading
+        $(mapWrapper).addClass('am-loading');
+        mapEntry.$map[0].dataset.loading = 'am-loading';
+        mapEntry.$map[0].classList.remove('am-error');
 
         ajaxCall(data).then(function(result) {
-          //  console.log('result', result)
+            //  console.log('result', result)
 
             if (!mapEntry.places) {
                 mapEntry.places = [];
@@ -193,6 +208,7 @@ const _ = {
 
                     mapEntry.places[index] = placeData;
                     mapEntry.$map[0].dataset.loading = null;
+                    $(mapWrapper).removeClass('am-loading');
                 });
             }
 
@@ -201,9 +217,10 @@ const _ = {
 
             _.updatePlaces(mapEntry);
         }, (err) => {
-            mapEntry.$map[0].dataset.loading = null;
+            mapEntry.$map[0].dataset.loading = '';
+            $(mapWrapper).removeClass('am-loading');
             console.error(err);
-            mapEntry.$map[0].classList.add('error');
+            mapEntry.$map[0].classList.add('am-error');
         });
     },
     defaultAjaxData: (mapEntry) => {

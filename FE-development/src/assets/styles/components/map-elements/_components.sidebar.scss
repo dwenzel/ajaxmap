@@ -24,7 +24,9 @@
     }
 
     &__scroll-wrapper {
-        overflow-y: scroll;
+        //overflow-y: scroll;
+        overflow: hidden;
+        position: relative;
 
         /* width */
         &::-webkit-scrollbar {
