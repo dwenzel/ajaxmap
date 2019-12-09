@@ -111,7 +111,7 @@ trait ToArrayTrait
         }
 
         preg_match_all('/{([^{}]*)}/', $propertyValue, $matches, PREG_PATTERN_ORDER | PREG_OFFSET_CAPTURE);
-        if (empty($matches)) {
+        if (empty($matches[0])) {
             return $value;
         }
 
