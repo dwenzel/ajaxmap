@@ -84,7 +84,8 @@ const _ = {
         //zoom
 
     //placeInstance.panToSelf();
-//        mapEntry.googleMap.setZoom(12);//18??
+//      mapEntry.googleMap.setZoom(12);//18??
+
         if (mapEntry.activeMarker) {
             mapEntry.activeMarker.setNormal();
         }
