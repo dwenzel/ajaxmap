@@ -83,8 +83,8 @@ const _ = {
         const marker = placeInstance.marker;
         //zoom
 
-    //placeInstance.panToSelf();
-//      mapEntry.googleMap.setZoom(12);//18??
+        //placeInstance.panToSelf();
+        //      mapEntry.googleMap.setZoom(12);//18??
 
         markers.setActiveMarkerToNormal(mapEntry);
         data.node.setActive(false);
@@ -93,45 +93,42 @@ const _ = {
         var mapMarkers = mapEntry.markers || [];
         const infoWindow = mapEntry.infoWindow;
 
-
         /*
          _.disableAllPlaces(mapEntry);
          data.node.data.placeInstance.active=true;
          when klicking on a place :: ehan already clicked toggle state
          */
 
-        if (true) {
-            if (!data.node.selected) {
+        if (!data.node.selected) {
 
-                data.node.setSelected(true);
-                marker.setActive();
-                return;
+            data.node.setSelected(true);
+            marker.setActive();
+            markers.iterateZindex(marker);
+            return;
 
-                /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
+            /* TODO: if (mapEntry.settings.placesTree.toggleInfoWindowOnSelect) {
 
 
-                 //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
+             //  for (var i = 0, j = mapMarkers.length; i < j; i++) {
 
-                 //    var marker = mapMarkers[i];
+             //    var marker = mapMarkers[i];
 
-                 // if (marker.place.key === data.node.key) {
-                 const placeInstance = data.node.data.placeInstance;
-                 const marker = placeInstance.marker;
+             // if (marker.place.key === data.node.key) {
+             const placeInstance = data.node.data.placeInstance;
+             const marker = placeInstance.marker;
 
-                 markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
-                 .then(content => {
+             markerInfoWindow.getInfoWindowContent(placeInstance.placeData)
+             .then(content => {
 
-                 infoWindow.setContent(content);
-                 infoWindow.open(mapEntry.map, marker);
-                 });
-                 //}
-                 //}
-                 }*/
-            } else {
-
-                data.node.setSelected(false);
-                // infoWindow.close();
-            }
+             infoWindow.setContent(content);
+             infoWindow.open(mapEntry.map, marker);
+             });
+             //}
+             //}
+             }*/
+        } else {
+            data.node.setSelected(false);
+            // infoWindow.close();
         }
 
         _.updatePlaces(mapEntry);
