@@ -41,6 +41,13 @@ class DataHandlerHook
      */
     protected $cacheManager;
 
+    /**
+     * @var array Additional table names whose cache should be flushed
+     */
+    protected $tablesToFlushCaches = [
+        'tt_address',
+    ];
+
     public function __construct(CacheManager $cacheManager = null)
     {
         $this->cacheManager = $cacheManager ?? GeneralUtility::makeInstance(CacheManager::class);
@@ -54,7 +61,7 @@ class DataHandlerHook
     {
         $tableName = (string) $params['table'];
 
-        if (!StringUtility::beginsWith($tableName, 'tx_ajaxmap')) {
+        if (!StringUtility::beginsWith($tableName, 'tx_ajaxmap') && !in_array($tableName, $this->tablesToFlushCaches)) {
             return;
         }
 
