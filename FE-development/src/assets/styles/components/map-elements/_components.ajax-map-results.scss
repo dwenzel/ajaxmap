@@ -1,8 +1,12 @@
 .am-results {
     .fancytree-container {
         border: none;
+        hyphens: auto;
+        overflow-wrap: break-word;
         padding: 0 1rem;
         position: relative;
+        white-space: normal;
+        word-wrap: break-word; // required by IE 11 // supports it as a legacy alias for the proper "overflow-wrap" syntax
         z-index: 0;
 
         li + li {

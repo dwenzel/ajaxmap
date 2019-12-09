@@ -6,6 +6,7 @@ $am-card-img-size: 80px;
 
 // am card
 .am-card {
+    border-bottom: $am-card-border;
     display: flex;
     margin-left: -$am-sb-inner-padding;
     margin-right: -$am-sb-inner-padding;
@@ -28,6 +29,7 @@ $am-card-img-size: 80px;
     // copy
     &__copy {
         padding-left: $am-sb-inner-padding;
+        width: calc(100% - #{$am-card-img-size});
 
         &__head {
             margin-bottom: .5rem;

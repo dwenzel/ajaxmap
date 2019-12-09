@@ -9,6 +9,7 @@ $am-sb-inner-padding: 1rem;
 $am-sb-shadow: 0 0 2rem rgba(map_get($toolbox-colors, 'webblack'), .5);
 $am-sb-toggle-transition: .3s ease;
 $am-sb-width: 320px;
+$am-sb-width-sm: 360px;
 
 // sidebar filter
 $am-sb-bg-filter: map_get($toolbox-colors, 'light');
