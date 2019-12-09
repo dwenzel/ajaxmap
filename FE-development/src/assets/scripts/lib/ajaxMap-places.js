@@ -84,7 +84,7 @@ const _ = {
         //zoom
 
         //placeInstance.panToSelf();
-        //      mapEntry.googleMap.setZoom(12);//18??
+        //        mapEntry.googleMap.setZoom(13);//18??
 
         markers.setActiveMarkerToNormal(mapEntry);
         data.node.setActive(false);
@@ -160,8 +160,11 @@ const _ = {
 
     loadFromData: (mapEntry, data) => {
         mapEntry.$map[0].dataset.loading = 'loading';
+        mapEntry.$map[0].classList.remove('error');
 
         ajaxCall(data).then(function(result) {
+          //  console.log('result', result)
+
             if (!mapEntry.places) {
                 mapEntry.places = [];
             }
@@ -200,6 +203,7 @@ const _ = {
         }, (err) => {
             mapEntry.$map[0].dataset.loading = null;
             console.error(err);
+            mapEntry.$map[0].classList.add('error');
         });
     },
     defaultAjaxData: (mapEntry) => {

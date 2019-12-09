@@ -34,7 +34,7 @@ const proxy = {
         proxy.started = true;
         const port = proxyPort;
 
-        app.get('/XXX' , function(req, res) {
+        app.get('/' , function(req, res) {
             let params = req.query;
             var i = req.url.indexOf('?');
             var query = req.url.substr(i + 1);
@@ -44,7 +44,7 @@ const proxy = {
             request.get(proxyUrl+'?'+ query).pipe(res);
         })
 
-        app.get('/', function(req, res, next) {
+        app.get('/XXX', function(req, res, next) {
             let params = req.query;
 
             if (!params) {
@@ -52,6 +52,7 @@ const proxy = {
             }
 
             //https://stg.typo3.bsb.321.works/beratung/bsb-beratungsnetz/index.php
+           //return  res.status(400).json({error: 'message'})
 
             console.log('-->', params)
             res.json(readJson(params.action))
