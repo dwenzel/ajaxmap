@@ -70,7 +70,7 @@ function _resetFilter(e) {
 
     $(fieldLocation).val('');
     $(fieldConsultant).prop('selectedIndex', 0);
-    $(fieldRadialSearch).prop('selectedIndex', 3);
+    $(fieldRadialSearch).prop('selectedIndex', 2);
 }
 
 /**

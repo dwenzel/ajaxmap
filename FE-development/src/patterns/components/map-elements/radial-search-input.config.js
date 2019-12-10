@@ -4,12 +4,11 @@
 
 
 const labels = [
-    'Deutschlandweit',
     '10km',
     '25km',
     '50km',
     '200km',
-
+    'Deutschlandweit'
 ]
 
 const values = [
