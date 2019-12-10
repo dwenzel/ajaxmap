@@ -42,6 +42,17 @@ class Place {
 }
 
 const _ = {
+    err:{
+        noPlaces:(mapEntry, len)=>{
+            if (len=== 1) {
+                mapEntry.$mainWrapper.addClass('am-error');
+            } else {
+                mapEntry.$mainWrapper.removeClass('am-error');
+            }
+
+        }
+
+    },
     /*enableAllPlaces: (mapEntry) => {
      for (var i in mapEntry.placeInstances) {
      mapEntry.placeInstances[i].active = true;
@@ -171,25 +182,25 @@ const _ = {
         mapEntry.spinner.activate()
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
-        mapEntry.search = data;
-delete data.center;
-  console.log('data-->', data.search,data)
+        mapEntry.search = Object.assign({}, data);
+
+        //delete data.center;
+
         ajaxCall(data).then(function(result) {
 
             //  console.log('result', result)
 
-            if (!mapEntry.places) {
-                mapEntry.places = [];
-            }
+            /*  if (!mapEntry.places) {
+             mapEntry.places = [];
+             }*/
 
-            let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry);
             mapEntry.places = [];
+            let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry);
+
 
             if (result.length) {
 
-
                 result.forEach((placeData, index) => {
-
 
                     if (_.isCenterInfo(mapEntry, placeData)) {
 
@@ -216,20 +227,21 @@ delete data.center;
                     }
 
                     turnOfOnBuffer.buffer[placeData.key] = false;
-
                     mapEntry.places[index] = placeData;
-                    mapEntry.$map[0].dataset.loading = null;
-                    mapEntry.spinner.disable();
                 });
             }
 
+            mapEntry.$map[0].dataset.loading = null;
+            mapEntry.spinner.disable();
+
+            //err handling
+            _.err['noPlaces'](mapEntry, result.length);
+
             turnOfOnBuffer.evaluate();
             turnOfOnBuffer = null;
-
             _.updatePlaces(mapEntry);
         }, (err) => {
             console.error(err);
-         //   console.log('########', err);
 
             mapEntry.$map[0].dataset.loading = '';
             mapEntry.spinner.disable();

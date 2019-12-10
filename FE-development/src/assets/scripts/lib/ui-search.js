@@ -25,7 +25,6 @@ class RadialSelect {
         this.onSelectRadius();
 
         if (radius) {
-            console.log(radius)
 
             const $findEl = this.$select.find('[value="' + radius + '"]');
             $findEl.attr("selected", true);
@@ -172,9 +171,6 @@ class LocationSearch {
             if (_this.oldSearchData === search) {
                 return;
             }
-
-
-            console.log('!!!!', search)
 
             const data = _this.mapEntry.defaultAjaxData;
             data.search = search;

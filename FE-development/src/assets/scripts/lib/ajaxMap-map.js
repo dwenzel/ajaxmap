@@ -21,7 +21,8 @@ const _map = {
         const $map = $(_map.containerSelector + mapEntry.id),
             googleMap = mapHelpers.createGooglMap(response, $map);
 
-        const $sideBar = $map.closest('.am').find('.am__sb');
+      const  $mainWrapper = $map.closest('.am');
+        const $sideBar = $mainWrapper.find('.am__sb');
 
         const infoWindow = mapHelpers.getInfoWindow();
         const markerClusterer = mapHelpers.getMarkerClusterer(googleMap, mapEntry.markerClusterer);
@@ -31,6 +32,7 @@ const _map = {
         const locationTypes = response.locationTypes || [];
 
         return Object.assign({}, mapEntry, response, {
+            $mainWrapper,
             $map,
             $sideBar,
             googleMap,
