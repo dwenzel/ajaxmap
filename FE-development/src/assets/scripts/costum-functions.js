@@ -13,8 +13,8 @@ const customMapFunctions = {
         });
     },
     placeSortFunction: function(a, b) {
-        a = a.data.distanceToCenter;
-        b = b.data.distanceToCenter;
+        a = a.data.distance;
+        b = b.data.distance;
 
         return a > b ? 1 : a < b ? -1 : 0;
     },

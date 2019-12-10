@@ -2,7 +2,7 @@ import treeRenderer from './fancytree-renderer';
 import layers from './map-layers';
 //import fastdom from 'fastdom';
 import {getKeysByAttribute} from './map-helpers';
-import {fitBounds, calcDistance} from './map-helpers';
+import {fitBounds} from './map-helpers';
 import {getSelectedKeys} from './map-helpers';
 import {fancytreeSelector} from './fancytree-renderer';
 import $ from 'jquery';
@@ -185,7 +185,6 @@ function showMatchingPlaces(mapEntry) {
     //console.log('ANZAHL', selectedPlaces.length)
     _.updateMarkers(mapEntry);
     const bounds = fitBounds(mapEntry, visiblePlaces);
-    calcDistance(bounds, visiblePlaces);
 
     treeRenderer.update.places(mapEntry, selectedPlaces);
 }
