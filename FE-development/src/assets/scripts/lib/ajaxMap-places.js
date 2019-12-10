@@ -229,7 +229,7 @@ const _ = {
             _.updatePlaces(mapEntry);
         }, (err) => {
             mapEntry.$map[0].dataset.loading = '';
-            $(mapWrapper).removeClass('am-loading');
+            mapEntry.spinner.disable();
             console.error(err);
             mapEntry.$map[0].classList.add('am-error');
         });
