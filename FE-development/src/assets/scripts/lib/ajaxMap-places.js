@@ -42,9 +42,9 @@ class Place {
 }
 
 const _ = {
-    err:{
-        noPlaces:(mapEntry, len)=>{
-            if (len=== 1) {
+    err: {
+        noPlaces: (mapEntry, len) => {
+            if (len === 1) {
                 mapEntry.$mainWrapper.addClass('am-error');
             } else {
                 mapEntry.$mainWrapper.removeClass('am-error');
@@ -190,13 +190,9 @@ const _ = {
 
             //  console.log('result', result)
 
-            /*  if (!mapEntry.places) {
-             mapEntry.places = [];
-             }*/
 
-            mapEntry.places = [];
             let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry);
-
+            mapEntry.places = [];
 
             if (result.length) {
 

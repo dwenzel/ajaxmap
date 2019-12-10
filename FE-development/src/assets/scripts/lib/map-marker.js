@@ -80,9 +80,12 @@ function create(mapEntry, place) {
     return mapMarker;
 }
 
-/*object to handle old PLaces not in new one includet*/
+/*object to handle the marker-visibility of old places.
+thr updates maker iterate over all registered places, so tht this with setActive to false,
+will just nullify the icon but not have to rebuild
+ */
 function TurnOfOnBuffer(mapEntry) {
-    this.buffer = mapEntry.places.reduce((prev, oldPlace) => {
+    this.buffer = (mapEntry.places||[]).reduce((prev, oldPlace) => {
         prev[oldPlace.key] = oldPlace.placeInstance;
         return prev;
     }, {});

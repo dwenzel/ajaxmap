@@ -27,7 +27,7 @@ class RadialSelect {
         if (radius) {
 
             const $findEl = this.$select.find('[value="' + radius + '"]');
-            $findEl.attr("selected", true);
+            $findEl.attr('selected', true);
         }
     }
 
@@ -93,7 +93,6 @@ class AutoSuggestSearch {
 
     addValToQuery(search) {
         const placeData = this.$input.val();//this.autoSuggest.getPlace();
-        //alert(this.$input.val())
         const inputVal = _.checkInputVal(this.$input.val());
 
         if (!placeData || !inputVal) {
@@ -122,6 +121,8 @@ class LocationSearch {
 
         this.aa = 0;//debug
 
+
+        mapEntry.radialSelect= this.radialSelect;
     }
 
     init() {
@@ -134,6 +135,9 @@ class LocationSearch {
 
         $form.on('keypress', function(e) {
             if (e.which == 13) {
+                const f=$(e.target).is(":focus")
+
+console.log(e)
                 _this.sendDatas();
                 e.preventDefault();
             }
