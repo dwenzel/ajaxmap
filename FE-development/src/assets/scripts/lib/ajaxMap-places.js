@@ -157,7 +157,7 @@ const _ = {
         }).focus();
     },
     isCenterInfo: (mapEntry, placeData) => {
-        if (placeData.key === '_center') {
+        if (placeData.key === '_center' && placeData.lat && placeData.lng) {
             //copy
             //  mapEntry.search.center = Object.assign({}, placeData);
             return true;
@@ -172,7 +172,7 @@ const _ = {
         mapEntry.spinner.activate()
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
-        mapEntry.search.center = null;
+        mapEntry.search = data;
 
         ajaxCall(data).then(function(result) {
             //  console.log('result', result)
@@ -190,9 +190,10 @@ const _ = {
                     if (_.isCenterInfo(mapEntry, placeData)) {
                         //data.radius
                         //delete result[index];
-                        mapEntry.search = data;
-                        mapEntry.search.center = data;
-                        return
+                        mapEntry.search.center =
+                            new google.maps.LatLng(placeData.lat, placeData.lng);
+
+                        return;
                     }
 
                     mapEntry.places[index] = placeData;
