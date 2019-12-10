@@ -110,11 +110,48 @@ const helpers = {
         });
     },
     getMarkerClusterer: (map, markerClusterer) => {
-
         return new MarkerClusterer(map, [], markerClusterer);
+    },    //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
+    //calculates distance between two points in km's
+    calcDistance: (bounds, places) => {
+        const pBoundsCenter = bounds.getCenter();
+
+        places.forEach((p) => {
+            const distInKm = (google.maps.geometry.spherical.computeDistanceBetween(pBoundsCenter, p.LatLong) / 1000).toFixed(2);
+            p.placeData.distanceToCenter = distInKm;
+        });
+
+    },
+    addBoundsFromSearchRadius: (search) => {
+        const bounds = new google.maps.LatLngBounds();
+
+        if (!search.center) {
+            return bounds
+        }
+
+        const center = search.center;
+        const meters = search.radius || 25000;
+
+        console.log(center, meters)
+
+        //https://developers.google.com/maps/documentation/javascript/reference/geometry
+        //  var spherical = google.maps.geometry.spherical;
+
+        var n = google.maps.geometry.spherical.computeOffset(center, meters, 0);
+        var o = google.maps.geometry.spherical.computeOffset(center, meters, 90);
+        var s = google.maps.geometry.spherical.computeOffset(center, meters, 180);
+        var w = google.maps.geometry.spherical.computeOffset(center, meters, -90);
+
+        var LeftTop = new google.maps.LatLng(n, w);
+        bounds.extend(LeftTop);
+
+        var bottomRight = new google.maps.LatLng(s, o);
+        bounds.extend(bottomRight);
+
+        return bounds;
     },
     fitBounds: (mapEntry, places) => {
-        var bounds = new google.maps.LatLngBounds();
+        var bounds = helpers.addBoundsFromSearchRadius(mapEntry.search);
 
         places.forEach((place) => {
             var locationLatLng =
@@ -157,8 +194,7 @@ const helpers = {
                 disableDefaultUI: response.disableDefaultUI,
                 //                mapTypeId: google.maps.MapTypeId.HYBRID
             });
-    },
-    //setZoom:()={}
+    }
 };
 
 export const getKeysByAttribute = helpers.getKeysByAttribute;

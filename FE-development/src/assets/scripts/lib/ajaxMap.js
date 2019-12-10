@@ -22,9 +22,9 @@ const _ = {
 
         regions.init(mapEntry);
 
-        places.init(mapEntry);
-
         ui.initByMapEntry(mapEntry);
+
+        places.init(mapEntry);
 
         fancyTreeRenderer.category(mapEntry);
         fancyTreeRenderer.placeGroup(mapEntry);
