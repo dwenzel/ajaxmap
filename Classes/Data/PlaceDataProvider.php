@@ -190,6 +190,7 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             $data[] = $place->toArray(2, $this->mapping);
         }
 
+        // @todo Find better method to provide current geo location
         $data[] = [
             'key' => '_center',
             'lat' => $geoLocation['lat'],
