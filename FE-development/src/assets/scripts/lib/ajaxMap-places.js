@@ -229,7 +229,7 @@ delete data.center;
             _.updatePlaces(mapEntry);
         }, (err) => {
             console.error(err);
-            console.log('########', err);
+         //   console.log('########', err);
 
             mapEntry.$map[0].dataset.loading = '';
             mapEntry.spinner.disable();
