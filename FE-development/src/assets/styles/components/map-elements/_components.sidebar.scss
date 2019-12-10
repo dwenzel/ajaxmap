@@ -25,6 +25,12 @@
     }
 
     &__msg {
+        display:none;
+
+        .am-error &{
+            display: block;
+        }
+
         border-bottom: 1px solid map_get($toolbox-colors, 'gray');
         padding: $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding*3;
 
