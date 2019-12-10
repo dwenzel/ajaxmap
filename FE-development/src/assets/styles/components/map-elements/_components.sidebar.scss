@@ -26,13 +26,11 @@
 
     &__msg {
         display:none;
+        padding: $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding*3;
 
-        .am-error &{
+        .am-error & {
             display: block;
         }
-
-        border-bottom: 1px solid map_get($toolbox-colors, 'gray');
-        padding: $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding*3;
 
         &::before {
             content: 'i';
@@ -62,7 +60,7 @@
         position: relative;
 
         .am-loading & {
-            overflow: hidden;
+            overflow: hidden !important;
         }
 
         /* width */

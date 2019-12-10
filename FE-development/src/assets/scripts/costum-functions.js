@@ -3,14 +3,12 @@ import $ from 'jquery';
 const customMapFunctions = {
     onMarkerClick: function(mapEntry, place) {
 
-        const treeNode = place.placeInstance.treeNode;//has all domNodes
-        treeNode.setSelected(true);
+        const treeNode = place.placeInstance.treeNode; // has all domNodes
+        let topPosition = $(treeNode.li).position().top,
+            listWrapper = $(treeNode.li).closest('.am__sb__scroll-wrapper');
 
-        treeNode.li.scrollIntoView({// caniuse :78% /use polyfill : https://github.com/iamdustan/smoothscroll
-            behavior: 'smooth',
-            block: 'start',
-            inline: 'nearest'
-        });
+        treeNode.setSelected(true);
+        $(listWrapper).animate({scrollTop: topPosition}, 600);
     },
     placeSortFunction: function(a, b) {
         let valA = a.data.distance;
