@@ -110,8 +110,25 @@ const helpers = {
         });
     },
     getMarkerClusterer: (map, markerClusterer) => {
-
         return new MarkerClusterer(map, [], markerClusterer);
+    },
+    setBoundsInMeter: (mapEntry, centerFromSearchLatLong, meters) => {
+        const pBoundsCenter = bounds.getCenter();
+        //https://developers.google.com/maps/documentation/javascript/reference/geometry
+        //  var spherical = google.maps.geometry.spherical;
+
+        var n = google.maps.geometry.spherical.computeOffset(pBoundsCenter, meters, 0);
+        var o = google.maps.geometry.spherical.computeOffset(pBoundsCenter, meters, 90);
+        var s = google.maps.geometry.spherical.computeOffset(pBoundsCenter, meters, 180);
+        var w = google.maps.geometry.spherical.computeOffset(pBoundsCenter, meters, -90);
+
+        var LeftTop = new google.maps.LatLng(n, w);
+        bounds.extend(LeftTop);
+
+        var bottomRight = new google.maps.LatLng(s, o);
+        bounds.extend(bottomRight);
+
+        mapEntry.googleMap.fitBounds(bounds);
     },
 
     //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
