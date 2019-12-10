@@ -70,7 +70,7 @@ function _resetFilter(e) {
 
     $(fieldLocation).val('');
     $(fieldConsultant).prop('selectedIndex', 0);
-    $(fieldRadialSearch).prop('selectedIndex', 3);
+    $(fieldRadialSearch).prop('selectedIndex', 2);
 }
 
 /**
@@ -181,7 +181,7 @@ function _resetFancyTreeList($list) {
  * open sidebar
  * => not private, perhabs we use it in another functions
  */
-function amOpenSidebar() {
+export function amOpenSidebar() {
     _cache.$map.addClass(_sel.sbIsOpen);
     trapFocus(_cache.$amSidebar[0]);
 }

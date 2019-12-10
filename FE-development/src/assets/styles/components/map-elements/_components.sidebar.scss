@@ -1,21 +1,26 @@
 // sidebar
 .am__sb {
     background: $am-sb-bg;
-    box-shadow: $am-sb-shadow;
     height: 100%;
     left: 0;
     position: absolute;
     top: 0;
-    transform: translateX(-100%);
     transition: transform $am-sb-toggle-transition;
-    width: $am-sb-width;
+    width: 100%;
 
-    .ajax-map--sb-is-open & {
-        transform: translateX(0);
-        transition: transform $am-sb-toggle-transition;
+
+    @include bp (xs) {
+        box-shadow: $am-sb-shadow;
+        transform: translateX(-100%);
+        width: $am-sb-width;
+
+        .ajax-map--sb-is-open & {
+            transform: translateX(0);
+            transition: transform $am-sb-toggle-transition;
+        }
     }
 
-    @include bp ('sm') {
+    @include bp (sm) {
         width: $am-sb-width-sm;
     }
 

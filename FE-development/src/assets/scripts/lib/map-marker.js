@@ -2,6 +2,7 @@ import {getLocationType} from './map-helpers';
 import mapHelpers from './map-helpers';
 import infoWindow from './map-marker-info-window';
 import $ from 'jquery';
+import {amOpenSidebar} from './ui';
 
 let _zIndexCnt = 0;
 
@@ -14,6 +15,7 @@ function addMarkerClickFunction(mapEntry, place, marker) {
         }
 
         marker.setActive();
+        amOpenSidebar();
 
         /** for debug info win
          mapEntry.activeMarker && mapEntry.activeMarker.setNormal();
