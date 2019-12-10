@@ -15,8 +15,8 @@ const customMapFunctions = {
         let valB = b.data.distance;
 
         if (!valA && !valB) {
-            valA = a.data.placeInstance.placeData.title;
-            valB = b.data.placeInstance.placeData.title;
+            valA = a.data.address.lastName;
+            valB = b.data.address.lastName;
         }
 
         return valA > valB ? 1 : valA < valB ? -1 : 0;
