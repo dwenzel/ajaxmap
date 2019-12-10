@@ -73,7 +73,6 @@ const _ = {
 
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
-
         } else {
             placesFilter.showMatchingPlaces(mapEntry);
         }
@@ -157,25 +156,23 @@ const _ = {
             $('span#matches').text(n);
         }).focus();
     },
-
-    loadFromData: (mapEntry, data) => {
-        var mapWrapper = mapEntry.$map.closest('.js-ajax-map'),
-            ifSpinner = $(mapWrapper).find('.am-loading').length,
-            resultWrapper = $(mapWrapper).find('.am__sb__scroll-wrapper'),
-            spinner = '<div class="am-loader">' +
-                '<div class="am-loader__spinner"></div>' +
-                '<span>Daten werden geladen</span>' +
-                '</div>';
-
-        // if map has any spinner in markup, add spinner
-        if (!ifSpinner) {
-            $(resultWrapper).append(spinner);
+    isCenterInfo: (mapEntry, placeData) => {
+        if (placeData.key === '_center') {
+            //copy
+            //  mapEntry.search.center = Object.assign({}, placeData);
+            return true;
         }
 
+        return false;
+    },
+
+    loadFromData: (mapEntry, data) => {
+
         // set loading
-        $(mapWrapper).addClass('am-loading');
+        mapEntry.spinner.activate()
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
+        mapEntry.search.center = null;
 
         ajaxCall(data).then(function(result) {
             //  console.log('result', result)
@@ -189,6 +186,15 @@ const _ = {
 
             if (result.length) {
                 result.forEach((placeData, index) => {
+
+                    if (_.isCenterInfo(mapEntry, placeData)) {
+                        //data.radius
+                        //delete result[index];
+                        mapEntry.search = data;
+                        mapEntry.search.center = data;
+                        return
+                    }
+
                     mapEntry.places[index] = placeData;
 
                     // store places
@@ -203,12 +209,12 @@ const _ = {
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
                     }
 
-                    turnOfOnBuffer.buffer[placeData.key] = false;
-                    // turnOfOnBuffer[placeData.key] = false;
+                    turnOfOnBuffer.buffer[placeData.key] = false
 
                     mapEntry.places[index] = placeData;
                     mapEntry.$map[0].dataset.loading = null;
-                    $(mapWrapper).removeClass('am-loading');
+
+                    mapEntry.spinner.disable();
                 });
             }
 

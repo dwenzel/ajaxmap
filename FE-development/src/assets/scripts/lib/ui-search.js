@@ -46,7 +46,7 @@ class RadialSelect {
     }
 
     reset() {
-      this.$select.find(':selected').removeAttr('selected')
+        this.$select.find(':selected').removeAttr('selected')
     }
 }
 
@@ -184,8 +184,34 @@ class LocationSearch {
     }
 }
 
+class Spinner {
+    constructor(mapEntry) {
+        this.$mapWrapper = mapEntry.$map.closest('.js-ajax-map');
+
+        const $resultWrapper = this.$mapWrapper.find('.am__sb__scroll-wrapper');
+        const $spinner = $('<div class="am-loader">' +
+            '<div class="am-loader__spinner"></div>' +
+            '<span>Daten werden geladen</span>' +
+            '</div>');
+
+        $resultWrapper.append($spinner);
+    }
+
+    activate() {
+        this.$mapWrapper.addClass('am-loading');
+    }
+
+    disable() {
+        this.$mapWrapper.removeClass('am-loading');
+    }
+
+}
+
 export default {
     init: (mapEntry) => {
         new LocationSearch(mapEntry).init();
+        mapEntry.spinner = new Spinner(mapEntry);
     }
 };
+
+

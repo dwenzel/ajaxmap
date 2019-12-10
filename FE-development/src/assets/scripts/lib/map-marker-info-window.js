@@ -138,7 +138,7 @@ const infoWindow = {
 
                     //TODO: refactor without data-attribute
                     detailView.open('infoWindow', -1);
-
+alert('wrwerwerwerw map-marker-info-window')
                     event.stopPropagation();
                     return false;
                 }));

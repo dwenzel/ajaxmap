@@ -56,7 +56,7 @@ const _ = {
             }
         }
 
-      //  console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
+        //  console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
     }
 };
 
@@ -183,8 +183,13 @@ function showMatchingPlaces(mapEntry) {
         return false;
     });
     //console.log('ANZAHL', selectedPlaces.length)
+
     _.updateMarkers(mapEntry);
-    const bounds = fitBounds(mapEntry, visiblePlaces);
+
+
+
+
+    fitBounds(mapEntry, visiblePlaces);
 
     treeRenderer.update.places(mapEntry, selectedPlaces);
 }

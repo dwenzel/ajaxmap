@@ -24,9 +24,12 @@
     }
 
     &__scroll-wrapper {
-        //overflow-y: scroll;
-        overflow: hidden;
+        overflow-y: scroll;
         position: relative;
+
+        .am-loading & {
+            overflow: hidden;
+        }
 
         /* width */
         &::-webkit-scrollbar {
