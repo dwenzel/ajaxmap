@@ -21,9 +21,10 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  * along with this program. If not, see <https://www.gnu.org/licenses/>.
  */
 
-use TYPO3\CMS\Core\Resource\File;
 use TYPO3\CMS\Core\Resource\File as CoreFile;
+use TYPO3\CMS\Core\Resource\FileInterface;
 use TYPO3\CMS\Core\Resource\FileReference as CoreFileReference;
+use TYPO3\CMS\Core\Resource\ProcessedFile;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Domain\Model\File as ExtbaseFile;
 use TYPO3\CMS\Extbase\Domain\Model\FileReference as ExtbaseFileReference;
@@ -48,6 +49,7 @@ trait FileObjectResolverTrait
         CoreFileReference::class,
         ExtbaseFile::class,
         CoreFile::class,
+        ProcessedFile::class,
     ];
 
     /**
@@ -100,9 +102,9 @@ trait FileObjectResolverTrait
 
     /**
      * @param $fileObject
-     * @return CoreFile|null
+     * @return FileInterface|null
      */
-    protected function unpackFileObject($fileObject): ?File
+    protected function unpackFileObject($fileObject): ?FileInterface
     {
         if ($fileObject instanceof LazyLoadingProxy) {
             $fileObject->_loadRealInstance();
@@ -110,10 +112,10 @@ trait FileObjectResolverTrait
 
         if ($fileObject instanceof ExtbaseFileReference) {
             return $fileObject->getOriginalResource()->getOriginalFile();
-        } else if ($fileObject instanceof CoreFileReference) {
-            return $fileObject->getOriginalFile();
         } else if ($fileObject instanceof ExtbaseFile) {
             return $fileObject->getOriginalResource();
+        } else if ($fileObject instanceof CoreFileReference || $fileObject instanceof ProcessedFile) {
+            return $fileObject;
         }
 
         return null;
