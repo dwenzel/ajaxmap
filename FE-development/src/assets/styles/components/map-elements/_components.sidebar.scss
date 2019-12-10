@@ -27,7 +27,7 @@
     &__msg {
         display:none;
 
-        .am-error &{
+        .am-error & {
             display: block;
         }
 

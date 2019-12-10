@@ -1,7 +1,7 @@
 import $ from 'jquery';
 
 const customMapFunctions = {
-    onMarkerClick: function(mapEntry, place) {
+    /*onMarkerClick: function(mapEntry, place) {
 
         const treeNode = place.placeInstance.treeNode;//has all domNodes
         treeNode.setSelected(true);
@@ -11,6 +11,13 @@ const customMapFunctions = {
             block: 'start',
             inline: 'nearest'
         });
+    },*/
+    onMarkerClick: function(mapEntry, place) {
+
+        const treeNode = place.placeInstance.treeNode;//has all domNodes
+        treeNode.setSelected(true);
+
+        console.log('treeNode.setSelected(true)', treeNode.setSelected(true));
     },
     placeSortFunction: function(a, b) {
         a = a.data.distance;
