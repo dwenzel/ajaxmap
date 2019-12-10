@@ -5,7 +5,7 @@ const customMapFunctions = {
 
         const treeNode = place.placeInstance.treeNode; // has all domNodes
         let topPosition = $(treeNode.li).position().top,
-            listWrapper = $(treeNode.li).closest('.am__sb__scroll-wrapper');
+            listWrapper = $(treeNode.li).closest('.am__sb__scroll-wrapper__inner');
 
         treeNode.setSelected(true);
         $(listWrapper).animate({scrollTop: topPosition}, 600);
