@@ -19,30 +19,14 @@
         width: $am-sb-width-sm;
     }
 
-    // reset filter area
-    &__footer {
-        align-items: center;
-        background: app-color('white');
-        bottom: 0;
-        box-shadow: $am-sb-footer-shadow;
-        display: flex;
-        height: $am-sb-footer-height;
-        justify-content: center;
-        position: absolute;
-        width: 100%;
-
-        .am-link {
-            @include reset-button();
-            color: $link-color;
-        }
-    }
-
     &__msg {
         padding: $am-sb-inner-padding 0;
     }
 
     &__scroll-wrapper {
-        overflow-y: scroll;
+        //overflow-y: scroll;
+        overflow: hidden;
+        position: relative;
 
         /* width */
         &::-webkit-scrollbar {
