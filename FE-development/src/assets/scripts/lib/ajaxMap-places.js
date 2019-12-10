@@ -70,7 +70,6 @@ const _ = {
 
         var selectedPlaceKeys = getSelectedKeys(treeSelector);
         if (selectedPlaceKeys.length) {
-
             //from select a place in list /category? /pllacegroup
             placesFilter.showSelectedPlaces(mapEntry, selectedPlaceKeys);
         } else {
@@ -173,8 +172,10 @@ const _ = {
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
         mapEntry.search = data;
-
+delete data.center;
+  console.log('data-->', data.search,data)
         ajaxCall(data).then(function(result) {
+
             //  console.log('result', result)
 
             if (!mapEntry.places) {
@@ -185,16 +186,16 @@ const _ = {
             mapEntry.places = [];
 
             if (result.length) {
+
+
                 result.forEach((placeData, index) => {
 
+
                     if (_.isCenterInfo(mapEntry, placeData)) {
-                        //data.radius
-                        //delete result[index];
 
                         if (placeData.lat && placeData.lng) {
                             mapEntry.search.center =
                                 new google.maps.LatLng(placeData.lat, placeData.lng);
-
                         }
 
                         return;
@@ -214,11 +215,10 @@ const _ = {
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
                     }
 
-                    turnOfOnBuffer.buffer[placeData.key] = false
+                    turnOfOnBuffer.buffer[placeData.key] = false;
 
                     mapEntry.places[index] = placeData;
                     mapEntry.$map[0].dataset.loading = null;
-
                     mapEntry.spinner.disable();
                 });
             }
@@ -228,9 +228,11 @@ const _ = {
 
             _.updatePlaces(mapEntry);
         }, (err) => {
-            mapEntry.$map[0].dataset.loading = '';
-            $(mapWrapper).removeClass('am-loading');
             console.error(err);
+            console.log('########', err);
+
+            mapEntry.$map[0].dataset.loading = '';
+            mapEntry.spinner.disable();
             mapEntry.$map[0].classList.add('am-error');
         });
     },
