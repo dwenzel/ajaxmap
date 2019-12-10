@@ -5,13 +5,18 @@
     box-shadow: $am-trigger-shadow;
     color: app-color('white');
     cursor: pointer;
+    display: none;
     height: $am-trigger-size;
     position: absolute;
     right: 0;
     top: $am-trigger-offset-top;
     transform: translateX(100%);
     width: $am-trigger-size;
-    
+
+    @include bp(xs) {
+        display: block;
+    }
+
     // arrow
     .o-icon-font {
         display: block;
