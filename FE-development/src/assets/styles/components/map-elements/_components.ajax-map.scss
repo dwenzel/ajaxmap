@@ -7,18 +7,28 @@
 }
 
 .am {
-    height: 100vh;
+    height: 90vh;
     overflow: hidden;
     position: relative;
+    border-bottom: 1px solid app-color('gray');
+
+    @include bp(md) {
+        height: 80vh;
+    }
 
     &__map-wrapper {
+        display: none;
         height: 100%;
         padding-left: 0;
         transition: padding-left $am-sb-toggle-transition;
 
-        .ajax-map--sb-is-open & {
-            padding-left: $am-sb-width;
-            transition: padding-left $am-sb-toggle-transition;
+        @include bp(xs) {
+            display: block;
+
+            .ajax-map--sb-is-open & {
+                padding-left: $am-sb-width;
+                transition: padding-left $am-sb-toggle-transition;
+            }
         }
     }
 
