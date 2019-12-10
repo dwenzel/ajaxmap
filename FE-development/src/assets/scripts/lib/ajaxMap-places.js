@@ -157,7 +157,7 @@ const _ = {
         }).focus();
     },
     isCenterInfo: (mapEntry, placeData) => {
-        if (placeData.key === '_center' && placeData.lat && placeData.lng) {
+        if (placeData.key === '_center') {
             //copy
             //  mapEntry.search.center = Object.assign({}, placeData);
             return true;
@@ -190,8 +190,12 @@ const _ = {
                     if (_.isCenterInfo(mapEntry, placeData)) {
                         //data.radius
                         //delete result[index];
-                        mapEntry.search.center =
-                            new google.maps.LatLng(placeData.lat, placeData.lng);
+
+                        if (placeData.lat && placeData.lng) {
+                            mapEntry.search.center =
+                                new google.maps.LatLng(placeData.lat, placeData.lng);
+
+                        }
 
                         return;
                     }
