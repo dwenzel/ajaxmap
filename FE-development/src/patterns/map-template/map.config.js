@@ -137,7 +137,7 @@ module.exports = {
         },
         errMsg: {
             msg: 'Zu Ihrer Suchanfrage wurden keine Berater gefunden.',
-            copy: 'Nachfolgend erhalten sie alle Berater, die in einem erweiterten Umkreis liegen.',
+            copy: 'Versuchen Sie es mit einer anderen Stadt, PLZ oder vergrößern Sie den Umkreis.',
             copy2: false,
             resetFilter: false
         }
