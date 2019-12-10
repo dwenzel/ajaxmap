@@ -163,7 +163,7 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
 
         /** @var AbstractDemand $demand */
         $demand = $this->placeDemandFactory->fromSettings($settings);
-        $geoLocation = $demand->getGeoLocation();
+        $geoLocation = $demand->getGeoLocation() ?? [];
 
         // Return empty result if no valid search parameters are given
         if (
@@ -189,6 +189,13 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             }
             $data[] = $place->toArray(2, $this->mapping);
         }
+
+        $data[] = [
+            'key' => '_center',
+            'lat' => $geoLocation['lat'],
+            'lng' => $geoLocation['lng'],
+        ];
+
         return $data;
     }
 
