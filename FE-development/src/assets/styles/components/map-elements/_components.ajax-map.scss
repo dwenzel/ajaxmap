@@ -3,14 +3,10 @@
 }
 
 .am {
-    height: 90vh;
+    height: 100vh;
     overflow: hidden;
     position: relative;
     border-bottom: 1px solid app-color('gray');
-
-    @include bp(md) {
-        height: 80vh;
-    }
 
     &__map-wrapper {
         display: none;
