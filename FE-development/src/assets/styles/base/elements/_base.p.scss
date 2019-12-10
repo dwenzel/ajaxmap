@@ -3,5 +3,5 @@ p {
 }
 
 .am-p-light {
-    color: app-color('secondary');
+    color: map_get($toolbox-colors, 'dark');
 }

@@ -85,6 +85,8 @@
                     <!-- results -->
                     <div class="am__sb__scroll-wrapper">
                         <div class="am__sb__scroll-wrapper__inner">
+                            <!-- error -->
+                            {{render '@no-results-advice' errMsg merge=true}}
                             <!-- dynamic list => render js -->
                             <div id="ajaxMapPlacesTree1" class="am-results dynaTree">
                             </div>

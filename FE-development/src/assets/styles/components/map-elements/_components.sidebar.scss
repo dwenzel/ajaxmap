@@ -25,7 +25,30 @@
     }
 
     &__msg {
-        padding: $am-sb-inner-padding 0;
+        border-bottom: 1px solid map_get($toolbox-colors, 'gray');
+        padding: $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding $am-sb-inner-padding*3;
+
+        &::before {
+            content: 'i';
+            border: 1px solid map_get($toolbox-colors, 'primary');
+            border-radius: 100%;
+            color: map_get($toolbox-colors, 'primary');
+            display: block;
+            height: 1.3rem;
+            left: $am-sb-inner-padding;
+            line-height: 1.35;
+            position: absolute;
+            text-align: center;
+            width: 1.3rem;
+        }
+
+        &__title {
+            margin-bottom: .5rem;
+        }
+
+        p:last-child {
+            margin-bottom: 0;
+        }
     }
 
     &__scroll-wrapper {

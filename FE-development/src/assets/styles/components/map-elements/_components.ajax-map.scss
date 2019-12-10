@@ -1,7 +1,3 @@
-.am__map[data-loading="loading"] {
-    filter: brightness(50%);
-}
-
 .am__map.error {
     //    filter: hue-rotate(90deg);
 }
@@ -35,6 +31,10 @@
     &__map {
         height: 100% !important;
         width: 100% !important;
+
+        &[data-loading="loading"] {
+            filter: brightness(50%);
+        }
     }
 }
 
