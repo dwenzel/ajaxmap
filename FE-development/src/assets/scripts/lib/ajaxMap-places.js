@@ -172,7 +172,7 @@ const _ = {
         mapEntry.spinner.activate()
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
-        mapEntry.search.center = null;
+        mapEntry.search = data;
 
         ajaxCall(data).then(function(result) {
             //  console.log('result', result)
@@ -190,9 +190,14 @@ const _ = {
                     if (_.isCenterInfo(mapEntry, placeData)) {
                         //data.radius
                         //delete result[index];
-                        mapEntry.search = data;
-                        mapEntry.search.center = data;
-                        return
+
+                        if (placeData.lat && placeData.lng) {
+                            mapEntry.search.center =
+                                new google.maps.LatLng(placeData.lat, placeData.lng);
+
+                        }
+
+                        return;
                     }
 
                     mapEntry.places[index] = placeData;
@@ -224,7 +229,7 @@ const _ = {
             _.updatePlaces(mapEntry);
         }, (err) => {
             mapEntry.$map[0].dataset.loading = '';
-            $(mapWrapper).removeClass('am-loading');
+            mapEntry.spinner.disable();
             console.error(err);
             mapEntry.$map[0].classList.add('am-error');
         });

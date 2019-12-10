@@ -130,9 +130,9 @@ const helpers = {
         }
 
         const center = search.center;
-        const meters = search.radius || 25000;
+        const meters = search.radius ||25000;
 
-        console.log(center, meters)
+       // console.log(center)
 
         //https://developers.google.com/maps/documentation/javascript/reference/geometry
         //  var spherical = google.maps.geometry.spherical;
@@ -142,11 +142,15 @@ const helpers = {
         var s = google.maps.geometry.spherical.computeOffset(center, meters, 180);
         var w = google.maps.geometry.spherical.computeOffset(center, meters, -90);
 
-        var LeftTop = new google.maps.LatLng(n, w);
-        bounds.extend(LeftTop);
+        //    console.log(n,w)
+        //  var LeftTop = new google.maps.LatLng(n, w);
+        bounds.extend(n);
+        bounds.extend(o);
+        bounds.extend(s);
+        bounds.extend(w);
 
-        var bottomRight = new google.maps.LatLng(s, o);
-        bounds.extend(bottomRight);
+        //      var bottomRight = new google.maps.LatLng(s, o);
+        //        bounds.extend(bottomRight);
 
         return bounds;
     },

@@ -10,8 +10,8 @@ const map = {
 
         searchField: true,
         search: {
-            // "location": "berlin",
-            // "radius": "10000"
+        "location": "berlin",
+            "radius": "25000"
         },
 
         keys: {
@@ -134,12 +134,6 @@ module.exports = {
             all: 'Alle Beratungsarten',
             jsId: 'js-am-generate-dropdown',
             referenceList: 'ajaxMapLocationTypesTree1'
-        },
-        errMsg: {
-            msg: 'Zu Ihrer Suchanfrage wurden keine Berater/Beraterinnen gefunden.',
-            copy: 'Nachfolgend erhalten Sie alle Berater, die in einem erweiterten Umkreis liegen.',
-            copy2: false,
-            resetFilter: false
         }
     }
 };
