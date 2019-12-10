@@ -12,7 +12,7 @@ const labels = [
 ]
 
 const values = [
-    '',//important
+    //'',//important
     '10000',
     '25000',
     '50000',
