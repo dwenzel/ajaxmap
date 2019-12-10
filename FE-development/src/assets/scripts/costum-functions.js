@@ -20,10 +20,15 @@ const customMapFunctions = {
         console.log('treeNode.setSelected(true)', treeNode.setSelected(true));
     },
     placeSortFunction: function(a, b) {
-        a = a.data.distance;
-        b = b.data.distance;
+        let valA = a.data.distance;
+        let valB = b.data.distance;
 
-        return a > b ? 1 : a < b ? -1 : 0;
+        if (!valA && !valB) {
+            valA = a.data.placeInstance.placeData.title;
+            valB = b.data.placeInstance.placeData.title;
+        }
+
+        return valA > valB ? 1 : valA < valB ? -1 : 0;
     },
 
     renderPlaceTreesItemFunction: function(placeInstance) {
