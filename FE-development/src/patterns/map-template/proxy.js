@@ -34,7 +34,7 @@ const proxy = {
         proxy.started = true;
         const port = proxyPort;
 
-        app.get('/', function(req, res) {
+        app.get('/XXX', function(req, res) {
             let params = req.query;
             var i = req.url.indexOf('?');
             var query = req.url.substr(i + 1);
@@ -43,7 +43,7 @@ const proxy = {
             request.get(proxyUrl + '?' + query).pipe(res);
         });
 
-        app.get('/XXX', function(req, res, next) {
+        app.get('/', function(req, res, next) {
             let params = req.query;
 
             if (!params) {
