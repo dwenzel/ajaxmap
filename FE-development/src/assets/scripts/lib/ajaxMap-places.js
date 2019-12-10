@@ -223,7 +223,9 @@ const _ = {
                         mapEntry.placeInstances[placeData.key] = placeInstance; //this is a register//
 
                     } else {
+                        let distance = placeData.distance;
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
+                        placeData.distance = distance;
                     }
 
                     turnOfOnBuffer.buffer[placeData.key] = false;
