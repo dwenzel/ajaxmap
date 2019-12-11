@@ -72,6 +72,9 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
+
+            console.log('newPlace:', newPlace)
+
             if (!newPlace) {
                 return;
             }
@@ -152,13 +155,17 @@ class LocationSearch {
         });
 
         $resetButton.on('click', () => {
-            const data = _this.mapEntry.defaultAjaxData;
-            //--> places.loadFromData(_this.mapEntry, data);
+            console.log('##### reset')
+
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
-
             markers.setActiveMarkerToNormal(_this.mapEntry);
 
+            const data = _this.mapEntry.defaultAjaxData;
+
+            console.log(data)
+
+            places.loadFromData(_this.mapEntry, data);
         });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
@@ -185,7 +192,7 @@ class LocationSearch {
                 return;
             }
 
-            const data = _this.mapEntry.defaultAjaxData;
+            const data =Object.assign({}, _this.mapEntry.defaultAjaxData);
             data.search = search;
 
             /*debug simulate ajax map listplaces
