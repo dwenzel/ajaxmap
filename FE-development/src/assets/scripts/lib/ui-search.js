@@ -72,8 +72,9 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
-
-            //console.log('newPlace:', newPlace);
+            let isMessage = $(this.$input)
+                        .closest('.am-form__group')
+                        .find('.am-form__description');
 
             if (!newPlace) {
                 return;
@@ -81,6 +82,11 @@ class AutoSuggestSearch {
 
             if (Object.keys(newPlace).length <= 1) {
                 return;
+            }
+
+            // remove massage if user choose place onselect
+            if(isMessage) {
+                $(isMessage).remove();
             }
 
             this.sendDatas();
@@ -146,12 +152,49 @@ class LocationSearch {
             $resetButton = this.mapEntry.$sideBar.find('.am-link'),
             _this = this;
 
+        // if user keypress enter
         $form.on('keypress', function(e) {
-
-            if (e.which == 13) {
+            if (e.which == 13 || e.key == 13) {
                 e.preventDefault();
-            }
 
+                let inputWrapper = $(e.target).closest('.am-form__group'),
+                    isMessage = inputWrapper.find('.am-form__description'),
+                    msg = '<span id="locationSearch1-description" class="am-form__description">Treffen Sie eine Auswahl.</span>',
+                    offsetTop;
+
+                // if error message remove
+                if(isMessage) {
+                    isMessage.remove();
+                }
+
+                // add new msg
+                $(msg).insertAfter(inputWrapper.find('label'));
+
+                // get new top postion places container suggest
+                offsetTop = $(e.target).outerHeight() + $(e.target).offset().top;
+
+                // show places container suggest
+                if ($('.pac-container').find('.pac-item').length > 1) {
+                    $('.pac-container').css({
+                        'display': 'block',
+                        'top': offsetTop + 'px'
+                    });
+                }
+
+                /* // set the first item in value => another version
+                var firstItem = $('.pac-item').first(),
+                firstItemContent = $(firstItem).find('> span'),
+                firstValues = [];
+
+                firstItemContent.each(function(i, el) {
+                    if ($(el).text().length) {
+                        firstValues.push($(el).text());
+                    }
+                });
+
+                $(e.target).val(firstValues.join(','));
+                */
+            }
         });
 
         $resetButton.on('click', (e) => {
@@ -181,6 +224,8 @@ class LocationSearch {
     sendDatas() {
         const _this = this;
 
+        console.log('ich sende');
+
         return function() {
             let search = {};
             // alert()
@@ -191,7 +236,7 @@ class LocationSearch {
                 return;
             }
 
-            const data =Object.assign({}, _this.mapEntry.defaultAjaxData);
+            const data = Object.assign({}, _this.mapEntry.defaultAjaxData);
             data.search = search;
 
             /*debug simulate ajax map listplaces
