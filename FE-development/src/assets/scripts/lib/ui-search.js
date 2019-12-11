@@ -155,17 +155,14 @@ class LocationSearch {
         });
 
         $resetButton.on('click', () => {
-            console.log('##### reset')
+            const data = _this.mapEntry.defaultAjaxData;
+            places.loadFromData(_this.mapEntry, data);
 
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
+
             markers.setActiveMarkerToNormal(_this.mapEntry);
-
-            const data = _this.mapEntry.defaultAjaxData;
-
-            console.log(data)
-
-            places.loadFromData(_this.mapEntry, data);
+            treeRenderer.clearSelected(_this.mapEntry.placesTree);
         });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
