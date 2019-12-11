@@ -41,6 +41,13 @@ export const sort = {
             return a > b ? 1 : a < b ? -1 : 0;
         }
     },
+    aplhabeticLastName: {
+        asc: (a, b) => {
+            a = a.data.address.lastName;
+            b = b.data.address.lastName;
+            return a > b ? 1 : a < b ? -1 : 0;
+        }
+    },
     nummeric: {
         asc: (a, b) => {
             //Todo Postleitzahl

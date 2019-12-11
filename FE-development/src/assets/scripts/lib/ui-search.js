@@ -2,7 +2,6 @@ import $ from 'jquery';
 import places from './ajaxMap-places';
 import treeRenderer from './fancytree-renderer'
 
-
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
     locationInputSelector: '#locationSearch',
@@ -142,7 +141,6 @@ class LocationSearch {
 
         $form.on('keypress', function(e) {
 
-            
             if (e.which == 13) {
                 e.preventDefault();
             }
@@ -154,9 +152,7 @@ class LocationSearch {
             places.loadFromData(_this.mapEntry, data);
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
-            ;
-
-        })
+        });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
@@ -174,7 +170,7 @@ class LocationSearch {
 
         return function() {
             let search = {};
-           // alert()
+            // alert()
             _this.radialSelect.addValToQuery(search);
             _this.autoSuggestSearch.addValToQuery(search);
 

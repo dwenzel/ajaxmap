@@ -190,7 +190,6 @@ const _ = {
 
             //  console.log('result', result)
 
-
             let turnOfOnBuffer = new markers.TurnOfOnBuffer(mapEntry);
             mapEntry.places = [];
 
@@ -208,8 +207,6 @@ const _ = {
                         return;
                     }
 
-                    mapEntry.places[index] = placeData;
-
                     // store places
                     let placeInstance;
                     if (!mapEntry.placeInstances[placeData.key]) {
@@ -223,6 +220,8 @@ const _ = {
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
                         placeData.distance = distance;
                     }
+
+//                    mapEntry.places[index] = placeData;
 
                     turnOfOnBuffer.buffer[placeData.key] = false;
                     mapEntry.places[index] = placeData;

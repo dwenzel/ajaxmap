@@ -175,7 +175,6 @@ function showMatchingPlaces(mapEntry) {
         }
 
         placeInstance.setActive(false);
-
         return false;
     });
 

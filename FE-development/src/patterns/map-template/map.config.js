@@ -10,8 +10,8 @@ const map = {
 
         searchField: true,
         search: {
-            "location": "berlin",
-            "radius": ""
+            //"location": "berlin",
+            //"radius": ""
         },
 
         keys: {
