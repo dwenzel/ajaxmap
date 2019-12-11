@@ -59,6 +59,11 @@
         }
     }
 
+    &__description {
+        color: map_get($toolbox-colors, 'danger');
+        font-size: .8rem;
+    }
+
     /**
      * Input
      */
