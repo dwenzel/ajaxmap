@@ -154,12 +154,13 @@ class LocationSearch {
 
         });
 
-        $resetButton.on('click', () => {
+        $resetButton.on('click', (e) => {
+            e.preventDefault();
+
             const data = _this.mapEntry.defaultAjaxData;
             places.loadFromData(_this.mapEntry, data);
 
-            _this.autoSuggestSearch.reset();//todo
-            _this.radialSelect.reset();
+            _this.autoSuggestSearch.reset();
 
             markers.setActiveMarkerToNormal(_this.mapEntry);
             treeRenderer.clearSelected(_this.mapEntry.placesTree);

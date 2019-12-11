@@ -51,7 +51,6 @@ function init() {
     }
 }
 
-
 /**
  * reset filterPlacesInput
  */
@@ -60,8 +59,6 @@ function resetFilterPlacesInput() {
 }
 
 function _resetFilter(e) {
-    e.preventDefault();
-
     var $reset = $(e.target),
         form = $reset.closest('form'),
         fieldLocation = $(form).find('#locationSearch1'),
@@ -90,7 +87,10 @@ function _bind() {
     });
 
     // reset filter event
-    _cache.$amFilterReset.on('click', _resetFilter);
+    _cache.$amFilterReset.on('click', function(e) {
+        e.preventDefault();
+        _resetFilter(e);
+    });
 
     // resize window update sidebar layout
     $(window).on('resize', updateSidebarLayoutSetup);
