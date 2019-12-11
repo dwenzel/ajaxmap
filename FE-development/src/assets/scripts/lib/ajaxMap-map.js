@@ -19,7 +19,7 @@ const _map = {
     mapToDefaultSettings: (mapEntry, response) => {
 
         const $map = $(_map.containerSelector + mapEntry.id),
-            googleMap = mapHelpers.createGooglMap(response, $map);
+            googleMap = mapHelpers.createGooglMap(mapEntry,response, $map);
 
         const $mainWrapper = $map.closest('.am');
         const $sideBar = $mainWrapper.find('.am__sb');

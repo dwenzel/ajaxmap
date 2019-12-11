@@ -123,40 +123,31 @@ const helpers = {
         });
 
     },
-    addBoundsFromSearchRadius: (search) => {
-        const bounds = new google.maps.LatLngBounds();
+    addBoundsFromSearchRadius: (mapEntry) => {
+        const bounds = new google.maps.LatLngBounds(),
+            search= mapEntry.search;
 
-        if (!search.center) {
-            return bounds;
-        }
+        const center = search.center || helpers.getLatLong(mapEntry.mapRespnseCenter);
 
-        const center = search.center;
         const meters = search.radius || 25000;
 
-        // console.log(center)
-
-        //https://developers.google.com/maps/documentation/javascript/reference/geometry
-        //  var spherical = google.maps.geometry.spherical;
 
         var n = google.maps.geometry.spherical.computeOffset(center, meters, 0);
         var o = google.maps.geometry.spherical.computeOffset(center, meters, 90);
         var s = google.maps.geometry.spherical.computeOffset(center, meters, 180);
         var w = google.maps.geometry.spherical.computeOffset(center, meters, -90);
 
-        //    console.log(n,w)
-        //  var LeftTop = new google.maps.LatLng(n, w);
+
         bounds.extend(n);
         bounds.extend(o);
         bounds.extend(s);
         bounds.extend(w);
 
-        //      var bottomRight = new google.maps.LatLng(s, o);
-        //        bounds.extend(bottomRight);
 
         return bounds;
     },
     fitBounds: (mapEntry, places) => {
-        var bounds = helpers.addBoundsFromSearchRadius(mapEntry.search);
+        var bounds = helpers.addBoundsFromSearchRadius(mapEntry);
 
         places.forEach((place) => {
             var locationLatLng =
@@ -164,16 +155,23 @@ const helpers = {
             bounds.extend(locationLatLng);
         });
 
+        const hasPlaces = places.length;
+        if(!hasPlaces){
+            bounds
+        }
+
         mapEntry.googleMap.fitBounds(bounds);
         return bounds;
     },
-    createGooglMap: (response, $el) => {
+    createGooglMap: (mapEntry,response, $el) => {
 
         helpers.setDimension($el, response);
         const mapType = helpers.getMapType(response.type);
         const mapStyle = helpers.getMapStyle(response.type);
 
         let mapCenter = helpers.getLatLong(response.mapCenter);
+
+     mapEntry.mapRespnseCenter= response.mapCenter ;
 
         //        alert(response.initialZoom)
         //        todo:response.initialZoom is set to 7?!!
