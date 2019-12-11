@@ -40,10 +40,6 @@ const _ = {
 
                 if (placInstance.active) {
 
-                    /*   fastdom.mutate(() => {
-
-                     });
-                     */
                     marker.setMap(mapEntry.googleMap);
                     active++;
                 } else {
@@ -56,7 +52,7 @@ const _ = {
             }
         }
 
-        //  console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
+        console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
     }
 };
 
@@ -179,15 +175,12 @@ function showMatchingPlaces(mapEntry) {
         }
 
         placeInstance.setActive(false);
-
         return false;
     });
-    //console.log('ANZAHL', selectedPlaces.length)
+
+    console.log('ANZAHL', selectedPlaces.length)
 
     _.updateMarkers(mapEntry);
-
-
-
 
     fitBounds(mapEntry, visiblePlaces);
 

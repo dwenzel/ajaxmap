@@ -64,11 +64,13 @@ function renderTreeAjax($el, action, mapEntry, treeSettings) {
 
 const _ = {
     $getTreeEl: (id, mapId) => $(fancytreeSelector[id] + mapId),
-    sort: ($placesRootNode) => {
-        const defaultSortFkt = sort.aplhabetic.asc;
+    sort: (mapEntry, $placesRootNode) => {
+        const defaultSortFkt = sort.aplhabeticLastName.asc;
         const customSortFkt = window.ajaxMapConfig.placeSortFunction;
+        const radialVal = parseFloat(mapEntry.$sideBar.find('.am-radial-search select').val());
 
-        const sortFunction = customSortFkt ? customSortFkt : defaultSortFkt;
+        /*bad magic --TODO make avaible outside, change sort by a field*/
+        let sortFunction = (customSortFkt && radialVal) ? customSortFkt : defaultSortFkt;
 
         $placesRootNode.sortChildren(sortFunction, false);
     }
@@ -85,7 +87,10 @@ const renderTree = {
             $placesRootNode.addChildren(children);
 
             //console.time('***********************')
-            _.sort($placesRootNode);
+            if (mapEntry) {
+                _.sort(mapEntry,$placesRootNode);
+            }
+
             filter.updateFilter($placesRootNode.children, mapEntry);
             //  console.timeEnd('***********************');
 

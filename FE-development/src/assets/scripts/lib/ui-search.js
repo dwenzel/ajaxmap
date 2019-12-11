@@ -27,7 +27,7 @@ class RadialSelect {
         if (radius) {
 
             const $findEl = this.$select.find('[value="' + radius + '"]');
-            $findEl.attr("selected", true);
+            $findEl.attr('selected', true);
         }
     }
 
@@ -47,7 +47,7 @@ class RadialSelect {
     }
 
     reset() {
-        this.$select.find(':selected').removeAttr('selected')
+        this.$select.val('0');
     }
 }
 
@@ -67,8 +67,18 @@ class AutoSuggestSearch {
     }
 
     onSelectPlace() {
+        let _this = this;
 
         this.autoSuggest.addListener('place_changed', () => {
+            const newPlace = _this.autoSuggest.getPlace();
+            if (!newPlace) {
+                return;
+            }
+
+            if (Object.keys(newPlace).length <= 1) {
+                return;
+            }
+
             this.sendDatas()
         });
 
@@ -93,7 +103,6 @@ class AutoSuggestSearch {
 
     addValToQuery(search) {
         const placeData = this.$input.val();//this.autoSuggest.getPlace();
-        //alert(this.$input.val())
         const inputVal = _.checkInputVal(this.$input.val());
 
         if (!placeData || !inputVal) {
@@ -122,6 +131,7 @@ class LocationSearch {
 
         this.aa = 0;//debug
 
+        mapEntry.radialSelect = this.radialSelect;
     }
 
     init() {
@@ -133,20 +143,20 @@ class LocationSearch {
             _this = this;
 
         $form.on('keypress', function(e) {
+
             if (e.which == 13) {
-                _this.sendDatas();
                 e.preventDefault();
             }
+
         });
 
         $resetButton.on('click', () => {
             const data = _this.mapEntry.defaultAjaxData;
-            places.loadFromData(_this.mapEntry, data);
+            //--> places.loadFromData(_this.mapEntry, data);
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
-            ;
 
-        })
+        });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
@@ -164,7 +174,7 @@ class LocationSearch {
 
         return function() {
             let search = {};
-
+            // alert()
             _this.radialSelect.addValToQuery(search);
             _this.autoSuggestSearch.addValToQuery(search);
 
