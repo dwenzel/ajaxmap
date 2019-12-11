@@ -236,6 +236,7 @@ const _ = {
 
             turnOfOnBuffer.evaluate();
             turnOfOnBuffer = null;
+
             _.updatePlaces(mapEntry);
         }, (err) => {
             console.error(err);

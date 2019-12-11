@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import places from './ajaxMap-places';
 import treeRenderer from './fancytree-renderer'
+import markers from './map-marker'
 
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
@@ -155,6 +156,8 @@ class LocationSearch {
             //--> places.loadFromData(_this.mapEntry, data);
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
+
+            markers.setActiveMarkerToNormal(_this.mapEntry);
 
         });
 
