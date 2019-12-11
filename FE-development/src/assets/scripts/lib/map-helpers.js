@@ -4,6 +4,7 @@
 
 import $ from 'jquery';
 import MarkerClusterer from '@google/markerclusterer';
+
 const helpers = {
 
     /**
@@ -29,7 +30,7 @@ const helpers = {
 
                 return false;
             } else {
-                console.error('not refactored')
+                console.error('not refactored');
 
                 if (attribute instanceof Array) {
                     for (var i = 0, k = attribute.length; i < k; i++) {
@@ -39,7 +40,7 @@ const helpers = {
                     }
                 }
             }
-        }).map(node => node.data[name].key)
+        }).map(node => node.data[name].key);
     },
     getLocationType: (mapEntry, typeId) =>
         mapEntry.locationTypes.filter(
@@ -126,13 +127,13 @@ const helpers = {
         const bounds = new google.maps.LatLngBounds();
 
         if (!search.center) {
-            return bounds
+            return bounds;
         }
 
         const center = search.center;
-        const meters = search.radius ||25000;
+        const meters = search.radius || 25000;
 
-       // console.log(center)
+        // console.log(center)
 
         //https://developers.google.com/maps/documentation/javascript/reference/geometry
         //  var spherical = google.maps.geometry.spherical;

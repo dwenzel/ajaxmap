@@ -42,6 +42,11 @@ class Place {
 }
 
 const _ = {
+    fixLastName: (name) => {
+        let nameArr = name.trim();
+        nameArr = nameArr.split(' ');
+        return nameArr[nameArr.length - 1];
+    },
     err: {
         noPlaces: (mapEntry, len) => {
             if (len === 1) {
@@ -211,6 +216,7 @@ const _ = {
                     let placeInstance;
                     if (!mapEntry.placeInstances[placeData.key]) {
                         placeInstance = new Place(mapEntry, placeData);
+                        placeData.fixedLastName = _.fixLastName(placeData.title)//data.address.lastName
                         placeData.placeInstance = placeInstance;
 
                         mapEntry.placeInstances[placeData.key] = placeInstance; //this is a register//
@@ -220,8 +226,6 @@ const _ = {
                         placeData = mapEntry.placeInstances[placeData.key].placeData;
                         placeData.distance = distance;
                     }
-
-//                    mapEntry.places[index] = placeData;
 
                     turnOfOnBuffer.buffer[placeData.key] = false;
                     mapEntry.places[index] = placeData;
@@ -233,9 +237,9 @@ const _ = {
 
             // set list to top 0
             $(mapEntry.$map[0])
-                .closest('.am')
-                .find('.am__sb__scroll-wrapper__inner')
-                .animate({scrollTop: 0}, 0);
+            .closest('.am')
+            .find('.am__sb__scroll-wrapper__inner')
+            .animate({scrollTop: 0}, 0);
 
             //err handling
             _.err['noPlaces'](mapEntry, result.length);
@@ -245,7 +249,7 @@ const _ = {
 
             _.updatePlaces(mapEntry);
         }, (err) => {
-            console.error(err);
+            // console.error(err);
 
             mapEntry.$map[0].dataset.loading = '';
             mapEntry.spinner.disable();
@@ -258,7 +262,7 @@ const _ = {
             'api': 'map',
             'action': 'listPlaces',
             'mapId': mapEntry.id
-        }
+        };
     },
     fitDatas: (mapEntry, defaultAjaxData) => {
         return mapEntry.search ?

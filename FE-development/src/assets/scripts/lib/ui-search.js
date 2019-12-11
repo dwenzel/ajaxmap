@@ -1,7 +1,7 @@
 import $ from 'jquery';
 import places from './ajaxMap-places';
-import treeRenderer from './fancytree-renderer'
-import markers from './map-marker'
+import treeRenderer from './fancytree-renderer';
+import markers from './map-marker';
 
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
@@ -15,7 +15,7 @@ const _ = {
             return true;
         }
 
-        return false
+        return false;
     }
 };
 
@@ -44,7 +44,7 @@ class RadialSelect {
 
     onSelectRadius() {
         const _this = this;
-        this.$select.change(_this.sendData)
+        this.$select.change(_this.sendData);
     }
 
     reset() {
@@ -61,7 +61,7 @@ class AutoSuggestSearch {
         // Set the data fields to return when the user selects a place.
         this.autoSuggest.setFields(
             ['address_components', 'name']);
-        location && this.$input.attr('value', location)
+        location && this.$input.attr('value', location);
         this.onSelectPlace();
 
         this.sendDatas = sendDatas;
@@ -73,7 +73,7 @@ class AutoSuggestSearch {
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
 
-            console.log('newPlace:', newPlace)
+            //console.log('newPlace:', newPlace);
 
             if (!newPlace) {
                 return;
@@ -83,7 +83,7 @@ class AutoSuggestSearch {
                 return;
             }
 
-            this.sendDatas()
+            this.sendDatas();
         });
 
         // _this.$select.one('keyup', _this.sendDatas);
@@ -95,7 +95,7 @@ class AutoSuggestSearch {
             && this.mapEntry.settings.autosuggest.options;
 
         const options = Object.assign({},
-            {componentRestrictions: {country: "de"}},
+            {componentRestrictions: {country: 'de'}},
             configAutosuggest || {}
         );
 
@@ -106,7 +106,7 @@ class AutoSuggestSearch {
     }
 
     addValToQuery(search) {
-        const placeData = this.$input.val();//this.autoSuggest.getPlace();
+        const placeData = this.$input.val(); //this.autoSuggest.getPlace();
         const inputVal = _.checkInputVal(this.$input.val());
 
         if (!placeData || !inputVal) {
@@ -166,6 +166,7 @@ class LocationSearch {
             treeRenderer.clearSelected(_this.mapEntry.placesTree);
         });
 
+        // TODO DEG this.mapEntry.searchField || true <= this is not a nice condition
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
             const search = this.mapEntry.search;
             const radius = search && search.radius;

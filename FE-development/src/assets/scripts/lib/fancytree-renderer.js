@@ -71,7 +71,10 @@ const _ = {
 
         /*bad magic --TODO make avaible outside, change sort by a field*/
         let sortFunction = (customSortFkt && radialVal) ? customSortFkt : defaultSortFkt;
-
+        if (!mapEntry.afterInit) {
+            mapEntry.afterInit = true;
+            sortFunction = defaultSortFkt;
+        }
         $placesRootNode.sortChildren(sortFunction, false);
     }
 };
@@ -88,7 +91,7 @@ const renderTree = {
 
             //console.time('***********************')
             if (mapEntry) {
-                _.sort(mapEntry,$placesRootNode);
+                _.sort(mapEntry, $placesRootNode);
             }
 
             filter.updateFilter($placesRootNode.children, mapEntry);

@@ -14,9 +14,9 @@ export class ElBuffer {//not in use
         const el = this.buffer[selector];
 
         return el ? el : function() {
-                this.buffer[selector] = el;
-                return el;
-            };
+            this.buffer[selector] = el;
+            return el;
+        };
     }
 }
 
@@ -43,8 +43,8 @@ export const sort = {
     },
     aplhabeticLastName: {
         asc: (a, b) => {
-            a = a.data.address.lastName;
-            b = b.data.address.lastName;
+            a = a.data.fixedLastName;
+            b = b.data.fixedLastName;;
             return a > b ? 1 : a < b ? -1 : 0;
         }
     },

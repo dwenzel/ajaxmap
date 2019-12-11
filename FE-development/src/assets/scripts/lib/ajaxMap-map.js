@@ -21,7 +21,7 @@ const _map = {
         const $map = $(_map.containerSelector + mapEntry.id),
             googleMap = mapHelpers.createGooglMap(response, $map);
 
-      const  $mainWrapper = $map.closest('.am');
+        const $mainWrapper = $map.closest('.am');
         const $sideBar = $mainWrapper.find('.am__sb');
 
         const infoWindow = mapHelpers.getInfoWindow();
@@ -46,10 +46,10 @@ const _map = {
     build(mapEntry) {
         return new Promise(function(resolve, reject) {
             _map.getMapData(mapEntry)
-            .then((response) => {
+                .then((response) => {
 
-                return resolve(_map.mapToDefaultSettings(mapEntry, response));
-            }, reject);
+                    return resolve(_map.mapToDefaultSettings(mapEntry, response));
+                }, reject);
         });
     }
 };
