@@ -47,7 +47,7 @@ class RadialSelect {
     }
 
     reset() {
-        this.$select.find(':selected').removeAttr('selected')
+        this.$select.val('0');
     }
 }
 
@@ -71,6 +71,9 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
+            if (!newPlace) {
+                return;
+            }
 
             if (Object.keys(newPlace).length <= 1) {
                 return;
@@ -149,9 +152,10 @@ class LocationSearch {
 
         $resetButton.on('click', () => {
             const data = _this.mapEntry.defaultAjaxData;
-            places.loadFromData(_this.mapEntry, data);
+            //--> places.loadFromData(_this.mapEntry, data);
             _this.autoSuggestSearch.reset();//todo
             _this.radialSelect.reset();
+
         });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
