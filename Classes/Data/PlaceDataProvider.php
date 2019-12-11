@@ -7,7 +7,6 @@ use DWenzel\Ajaxmap\Controller\MissingRequestArgumentException;
 use DWenzel\Ajaxmap\Domain\Factory\Dto\PlaceDemandFactory;
 use DWenzel\Ajaxmap\Domain\Model\Category;
 use DWenzel\Ajaxmap\Domain\Model\Dto\AbstractDemand;
-use DWenzel\Ajaxmap\Domain\Model\Dto\NullSearch;
 use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Model\Place;
@@ -172,29 +171,23 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
             'lng' => $geoLocation['lng'],
         ];
 
-        // Return empty result if no valid search parameters are given
-        if (
-            !$demand->getSearch() instanceof NullSearch &&
-            !$demand->getSearch()->isForceResult() &&
-            ($demand->getSearch()->isEmpty() || !$geoLocation)
-        ) {
-            return $data;
-        }
-
-        /** @var QueryResult $places */
-        $places = $this->placeRepository->findDemanded(
-            $demand,
-            true,
-            null,
-            false
-        );
-        /** @var Place $place */
-        foreach ($places as $place) {
-            if (!empty($geoLocation)) {
-                $distance = $this->placeRepository->calculateDistance($geoLocation, $place);
-                $place->setDistance($distance);
+        if ($geoLocation || (!$geoLocation && ($demand->getSearch()->isEmpty() || $demand->getSearch()->isForceResult())))
+        {
+            /** @var QueryResult $places */
+            $places = $this->placeRepository->findDemanded(
+                $demand,
+                true,
+                null,
+                false
+            );
+            /** @var Place $place */
+            foreach ($places as $place) {
+                if (!empty($geoLocation)) {
+                    $distance = $this->placeRepository->calculateDistance($geoLocation, $place);
+                    $place->setDistance($distance);
+                }
+                $data[] = $place->toArray(2, $this->mapping);
             }
-            $data[] = $place->toArray(2, $this->mapping);
         }
 
         return $data;
