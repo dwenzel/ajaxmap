@@ -14,9 +14,9 @@ export class ElBuffer {//not in use
         const el = this.buffer[selector];
 
         return el ? el : function() {
-                this.buffer[selector] = el;
-                return el;
-            };
+            this.buffer[selector] = el;
+            return el;
+        };
     }
 }
 

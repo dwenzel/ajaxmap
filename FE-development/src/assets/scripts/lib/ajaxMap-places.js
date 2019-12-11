@@ -245,7 +245,7 @@ const _ = {
 
             _.updatePlaces(mapEntry);
         }, (err) => {
-            console.error(err);
+            // console.error(err);
 
             mapEntry.$map[0].dataset.loading = '';
             mapEntry.spinner.disable();
@@ -258,7 +258,7 @@ const _ = {
             'api': 'map',
             'action': 'listPlaces',
             'mapId': mapEntry.id
-        }
+        };
     },
     fitDatas: (mapEntry, defaultAjaxData) => {
         return mapEntry.search ?

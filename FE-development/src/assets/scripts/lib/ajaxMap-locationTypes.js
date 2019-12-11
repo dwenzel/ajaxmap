@@ -14,8 +14,8 @@ const mapLocationTypes = {
         for (var type in currLocationTypes) {
 
             $('<option/>').val(currLocationTypes[type].key)
-            .text(currLocationTypes[type].title)
-            .appendTo($(mapLocationTypes.treeSelector + mapId));
+                    .text(currLocationTypes[type].title)
+                    .appendTo($(mapLocationTypes.treeSelector + mapId));
         }
 
         // set on change function for location types treeSelector
@@ -26,10 +26,10 @@ const mapLocationTypes = {
     },
     setUpTree: function(mapEntry) {
 
-        var options = mapEntry.settings.locationTypeTree//?;
+        var options = mapEntry.settings.locationTypeTree; //?
 
         //??
-        delete options.filter.mode
+        delete options.filter.mode;
 
         const settings = {
             checkbox: options.checkbox,

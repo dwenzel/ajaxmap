@@ -52,7 +52,7 @@ const _ = {
             }
         }
 
-        console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
+        //console.log('placeCnt', placeCnt, 'toUpdate', toUpdate, 'active', active, 'off', off);
     }
 };
 
@@ -75,8 +75,8 @@ function updateFilter(treeNodes, mapEntry) {
             }
         } catch (err) {
             //todo filter not initalised eg location typd:88??@dirk--everytime locationTypes
-            console.log('treeSelector---->', treeSelector);
-            console.error(err);
+            //console.log('treeSelector---->', treeSelector);
+            //console.error(err);
         }
     });
 }
@@ -178,7 +178,7 @@ function showMatchingPlaces(mapEntry) {
         return false;
     });
 
-    console.log('ANZAHL', selectedPlaces.length)
+    //console.log('ANZAHL', selectedPlaces.length);
 
     _.updateMarkers(mapEntry);
 

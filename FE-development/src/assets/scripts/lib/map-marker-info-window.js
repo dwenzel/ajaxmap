@@ -97,7 +97,7 @@ const infoWindow = {
                 /**
                  * @todo make content rendering configurable, add link for overlay with additional info
                  */
-                // build a list of place's categories
+                    // build a list of place's categories
                 const listMarkup = _.markup.categoryList(place.categories);
 
                 const data = {
@@ -138,7 +138,8 @@ const infoWindow = {
 
                     //TODO: refactor without data-attribute
                     detailView.open('infoWindow', -1);
-alert('wrwerwerwerw map-marker-info-window')
+                    // TODO DEG please set another message or delete it
+                    // alert('wrwerwerwerw map-marker-info-window');
                     event.stopPropagation();
                     return false;
                 }));
