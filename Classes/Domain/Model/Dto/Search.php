@@ -118,7 +118,7 @@ class Search implements LocationAwareInterface, NullableInterface
         if ($strict) {
             $result = empty($this->getRadius()) && empty($this->getBounds());
         } else {
-            $result = false;
+            $result = true;
         }
 
         return $result
