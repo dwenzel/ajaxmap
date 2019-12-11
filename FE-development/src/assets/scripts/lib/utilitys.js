@@ -43,8 +43,8 @@ export const sort = {
     },
     aplhabeticLastName: {
         asc: (a, b) => {
-            a = a.data.address.lastName;
-            b = b.data.address.lastName;
+            a = a.data.fixedLastName;
+            b = b.data.fixedLastName;;
             return a > b ? 1 : a < b ? -1 : 0;
         }
     },
