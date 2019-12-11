@@ -182,6 +182,7 @@ function showMatchingPlaces(mapEntry) {
 
     _.updateMarkers(mapEntry);
 
+
     fitBounds(mapEntry, visiblePlaces);
 
     treeRenderer.update.places(mapEntry, selectedPlaces);
