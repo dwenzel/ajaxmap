@@ -1,6 +1,7 @@
 import $ from 'jquery';
 import places from './ajaxMap-places';
 import treeRenderer from './fancytree-renderer'
+import markers from './map-marker'
 
 const _ = {
     sendButtonSelector: '.am-location-search button[type="submit"]',
@@ -71,6 +72,9 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
+
+            console.log('newPlace:', newPlace)
+
             if (!newPlace) {
                 return;
             }
@@ -150,12 +154,16 @@ class LocationSearch {
 
         });
 
-        $resetButton.on('click', () => {
-            const data = _this.mapEntry.defaultAjaxData;
-            //--> places.loadFromData(_this.mapEntry, data);
-            _this.autoSuggestSearch.reset();//todo
-            _this.radialSelect.reset();
+        $resetButton.on('click', (e) => {
+            e.preventDefault();
 
+            const data = _this.mapEntry.defaultAjaxData;
+            places.loadFromData(_this.mapEntry, data);
+
+            _this.autoSuggestSearch.reset();
+
+            markers.setActiveMarkerToNormal(_this.mapEntry);
+            treeRenderer.clearSelected(_this.mapEntry.placesTree);
         });
 
         if (this.mapEntry.searchField || true/*turn of map settings schow or hide search*/) {
@@ -182,7 +190,7 @@ class LocationSearch {
                 return;
             }
 
-            const data = _this.mapEntry.defaultAjaxData;
+            const data =Object.assign({}, _this.mapEntry.defaultAjaxData);
             data.search = search;
 
             /*debug simulate ajax map listplaces
