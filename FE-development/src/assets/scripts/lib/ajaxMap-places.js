@@ -179,7 +179,7 @@ const _ = {
     loadFromData: (mapEntry, data) => {
 
         // set loading
-        mapEntry.spinner.activate()
+        mapEntry.spinner.activate();
         mapEntry.$map[0].dataset.loading = 'am-loading';
         mapEntry.$map[0].classList.remove('am-error');
         mapEntry.search = Object.assign({}, data);
@@ -230,6 +230,12 @@ const _ = {
 
             mapEntry.$map[0].dataset.loading = null;
             mapEntry.spinner.disable();
+
+            // set list to top 0
+            $(mapEntry.$map[0])
+                .closest('.am')
+                .find('.am__sb__scroll-wrapper__inner')
+                .animate({scrollTop: 0}, 0);
 
             //err handling
             _.err['noPlaces'](mapEntry, result.length);
