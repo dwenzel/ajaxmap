@@ -147,7 +147,7 @@ const helpers = {
         return bounds;
     },
     fitBounds: (mapEntry, places) => {
-        var bounds = helpers.addBoundsFromSearchRadius(mapEntry);
+        const bounds = new google.maps.LatLngBounds();
 
         places.forEach((place) => {
             var locationLatLng =
@@ -161,6 +161,7 @@ const helpers = {
         }
 
         mapEntry.googleMap.fitBounds(bounds);
+        mapEntry.googleMap.panToBounds(bounds);
         return bounds;
     },
     createGooglMap: (mapEntry,response, $el) => {
@@ -183,6 +184,8 @@ const helpers = {
             $el[0], {
 
                 zoom: response.initialZoom,
+                maxZoom: response.maxZoom ? response.maxZoom : null,
+                minZoom: response.minZoom ? response.minZoom : null,
                 center: mapCenter,
 
                 mapTypeId: mapType,
