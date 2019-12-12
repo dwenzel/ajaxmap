@@ -116,15 +116,14 @@ class Search implements LocationAwareInterface, NullableInterface
     public function isEmpty(bool $strict = false): bool
     {
         if ($strict) {
-            $result = empty($this->getRadius()) && empty($this->getBounds());
+            $result = empty($this->getRadius()) && empty($this->getBounds()) && empty($this->getRegion());
         } else {
             $result = true;
         }
 
         return $result
             && empty($this->getLocation())
-            && empty($this->getSubject())
-            && empty($this->getRegion());
+            && empty($this->getSubject());
     }
 }
 
