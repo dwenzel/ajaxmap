@@ -31,7 +31,7 @@ return [
     ],
 	'interface' => [
 		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,
-		title,type,width,height,map_center,initial_zoom, map_style, disable_default_ui,
+		title,type,width,height,map_center,initial_zoom, min_zoom, max_zoom, map_style, disable_default_ui,
 		place_groups,regions,static_layers,location_types,categories',
 	],
 	'types' => [
@@ -40,7 +40,7 @@ return [
 			type,--palette--;;controls,title,width,height,map_center,
 
 			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.appearance,
-				initial_zoom,map_style,disable_default_ui,
+			    --palette--;;zoomLevels,map_style,disable_default_ui,
 
 			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.markers,
 				place_groups,location_types,categories,
@@ -55,6 +55,10 @@ return [
 		'1' => ['showitem' => ''],
         'controls' => [
             'showitem' => 'hide_type_control, hide_fullscreen_control, hide_street_view_control',
+        ],
+        'zoomLevels' => [
+            'label' => $languageFile . 'tx_ajaxmap_domain_model_map.zoomLevels',
+            'showitem' => 'initial_zoom, min_zoom, max_zoom',
         ],
 	],
 	'columns' => [
@@ -251,6 +255,28 @@ return [
 				'type' => 'input',
 				'size' => 4,
 				'eval' => 'int,required'
+			],
+		],
+		'min_zoom' => [
+			'exclude' => true,
+			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.min_zoom',
+			'config' => [
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int,null',
+                'default' => null,
+                'mode' => 'useOrOverridePlaceholder',
+			],
+		],
+		'max_zoom' => [
+			'exclude' => true,
+			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.max_zoom',
+			'config' => [
+				'type' => 'input',
+				'size' => 4,
+				'eval' => 'int,null',
+                'default' => null,
+                'mode' => 'useOrOverridePlaceholder',
 			],
 		],
 		'map_style' => [

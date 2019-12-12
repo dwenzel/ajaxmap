@@ -53,6 +53,9 @@
 		<trans-unit id="tx_ajaxmap_domain_model_map.appearance" xml:space="preserve">
 			<source>Appearance</source>
 		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.zoomLevels" xml:space="preserve">
+			<source>Zoom levels</source>
+		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_map.placeGroups" xml:space="preserve">
 			<source>Place Groups</source>
 		</trans-unit>
@@ -64,6 +67,12 @@
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_map.initial_zoom" xml:space="preserve">
 			<source>Initial Zoom</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.min_zoom" xml:space="preserve">
+			<source>Minimum Zoom</source>
+		</trans-unit>
+		<trans-unit id="tx_ajaxmap_domain_model_map.max_zoom" xml:space="preserve">
+			<source>Maximum Zoom</source>
 		</trans-unit>
 		<trans-unit id="tx_ajaxmap_domain_model_map.location_types" xml:space="preserve">
 			<source>Location Types</source>

@@ -106,6 +106,16 @@ class Map extends AbstractEntity
     protected $initialZoom;
 
     /**
+     * @var int|null Minimum zoom
+     */
+    protected $minZoom;
+
+    /**
+     * @var int|null Maximum zoom
+     */
+    protected $maxZoom;
+
+    /**
      * optional Style (json Array)
      *
      * @var string
@@ -449,6 +459,42 @@ class Map extends AbstractEntity
     public function setInitialZoom($initialZoom)
     {
         $this->initialZoom = $initialZoom;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMinZoom(): ?int
+    {
+        return $this->minZoom;
+    }
+
+    /**
+     * @param int|null $minZoom
+     * @return self
+     */
+    public function setMinZoom(?int $minZoom): self
+    {
+        $this->minZoom = $minZoom;
+        return $this;
+    }
+
+    /**
+     * @return int|null
+     */
+    public function getMaxZoom(): ?int
+    {
+        return $this->maxZoom;
+    }
+
+    /**
+     * @param int|null $maxZoom
+     * @return self
+     */
+    public function setMaxZoom(?int $maxZoom): self
+    {
+        $this->maxZoom = $maxZoom;
+        return $this;
     }
 
     /**
