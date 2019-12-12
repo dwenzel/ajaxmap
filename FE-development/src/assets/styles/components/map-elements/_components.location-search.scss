@@ -1,6 +1,6 @@
 // location input
 .am-form__input--location {
-    padding-right: $button-icon-only-size*2 !important;
+    padding-right: $button-icon-only-size !important;
 
     + .o-icon-font--am-search {
         color: app-color('light3');
