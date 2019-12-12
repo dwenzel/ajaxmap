@@ -111,6 +111,8 @@ CREATE TABLE tx_ajaxmap_domain_model_map (
 	height int(11) DEFAULT '0' NOT NULL,
 	map_center varchar(255) DEFAULT '' NOT NULL,
 	initial_zoom int(11) DEFAULT '0' NOT NULL,
+	min_zoom int(11),
+	max_zoom int(11),
 	map_style text NOT NULL,
 	disable_default_ui tinyint(1) unsigned DEFAULT '0' NOT NULL,
 	place_groups int(11) unsigned DEFAULT '0' NOT NULL,

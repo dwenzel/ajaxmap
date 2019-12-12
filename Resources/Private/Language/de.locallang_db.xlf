@@ -9,6 +9,11 @@
 				<source>Sub Regions</source>
 				<target>Unterregionen</target>
 			</trans-unit>
+
+			<trans-unit id="tx_ajaxmap_domain_model_map.zoomLevels" xml:space="preserve">
+				<source>Zoom levels</source>
+				<target>Zoomstufen</target>
+			</trans-unit>
 			<trans-unit id="tx_ajaxmap_domain_model_map.hide_type_control" xml:space="preserve">
 				<source>Enable type controls</source>
 				<target>Steuerung für Darstellungstyp anzeigen</target>
@@ -21,6 +26,15 @@
 				<source>Enable street view controls</source>
 				<target>Steuerung für Street View anzeigen</target>
 			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_map.min_zoom" xml:space="preserve">
+				<source>Minimum Zoom</source>
+				<target>Kleinste Zoomstufe</target>
+			</trans-unit>
+			<trans-unit id="tx_ajaxmap_domain_model_map.max_zoom" xml:space="preserve">
+				<source>Maximum Zoom</source>
+				<target>Größte Zoomstufe</target>
+			</trans-unit>
+
 			<trans-unit id="tx_ajaxmap_domain_model_locationtype.icon_active" xml:space="preserve">
 				<source>Icon (active state)</source>
 				<target>Icon (aktiver Zustand)</target>
