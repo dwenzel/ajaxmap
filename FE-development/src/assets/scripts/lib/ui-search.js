@@ -235,6 +235,7 @@ class LocationSearch {
             e.preventDefault();
 
             const data = _this.mapEntry.defaultAjaxData;
+            _this.mapEntry.afterInit = false;
             places.loadFromData(_this.mapEntry, data);
 
             _this.autoSuggestSearch.reset();
