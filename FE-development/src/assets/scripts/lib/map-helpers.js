@@ -3,7 +3,7 @@
  */
 
 import $ from 'jquery';
-import MarkerClusterer from '@google/markerclusterer';
+//import MarkerClusterer from '@google/markerclusterer';
 
 const helpers = {
 
@@ -110,10 +110,10 @@ const helpers = {
             maxWidth: 370
         });
     },
-    getMarkerClusterer: (map, markerClusterer) => {
+   /* getMarkerClusterer: (map, markerClusterer) => {
         return new MarkerClusterer(map, [], markerClusterer);
     },    //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
-    //calculates distance between two points in km's
+    //calculates distance between two points in km's*/
     calcDistance: (bounds, places) => {
         const pBoundsCenter = bounds.getCenter();
 

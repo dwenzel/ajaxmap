@@ -104,8 +104,7 @@ function showMatchingPlaces(mapEntry) {
 
     var mapId = mapEntry.id,
         mapPlaces = mapEntry.places,
-        selectedPlaces,
-        clusterer = mapEntry.markerClusterer;
+        selectedPlaces;//, // clusterer = mapEntry.markerClusterer;
 
     let selectedLocationTypeKeys = getSelectedKeys(fancytreeSelector.locationType + mapId),
         selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category + mapId),
@@ -197,8 +196,7 @@ function showMatchingPlaces(mapEntry) {
  */
 function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
 
-    var mapPlaces = mapEntry.places,
-        clusterer = mapEntry.markerClusterer;
+    var mapPlaces = mapEntry.places;//,     clusterer = mapEntry.markerClusterer;
 
     //  clusterer.clearMarkers();
 

@@ -25,7 +25,7 @@ const _map = {
         const $sideBar = $mainWrapper.find('.am__sb');
 
         const infoWindow = mapHelpers.getInfoWindow();
-        const markerClusterer = mapHelpers.getMarkerClusterer(googleMap, mapEntry.markerClusterer);
+       // const markerClusterer = mapHelpers.getMarkerClusterer(googleMap, mapEntry.markerClusterer);
 
         const regions = response.regions || [];
         const staticLayers = response.staticLayers || [];
@@ -38,7 +38,7 @@ const _map = {
             googleMap,
             regions,
             staticLayers,
-            markerClusterer,
+         //   markerClusterer,
             infoWindow,
             locationTypes
         });
