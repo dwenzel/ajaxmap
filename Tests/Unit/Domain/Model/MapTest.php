@@ -428,6 +428,8 @@ class MapTest extends UnitTestCase {
 			'locationTypes' => array(),
 			'mapCenter' => NULL,
 			'mapStyle' => NULL,
+			'maxZoom' => null,
+			'minZoom' => null,
 			'pid' => NULL,
 			'placeGroups' => array(),
 			'regions' => array(),
