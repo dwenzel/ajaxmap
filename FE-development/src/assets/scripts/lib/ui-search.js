@@ -72,11 +72,47 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
-            let isMessage = $(this.$input)
-                        .closest('.am-form__group')
-                        .find('.am-form__description');
+            let $input = _this.$input,
+                isMessage = $(this.$input)
+                    .closest('.am-form__group')
+                    .find('.am-form__description');
 
-            if (!newPlace) {
+            if (typeof newPlace.address_components === "undefined") {
+                let firstItem = document.querySelectorAll('.pac-item')[0],
+                    firstItemContent,
+                    firstValues;
+
+                // if first item
+                if (firstItem) {
+                    // delete error message
+                    deletePlacesAutoSuggestError($input);
+
+                    firstItemContent = firstItem.children,
+                        firstValues = [];
+
+                    // get values
+                    for (var i = 0, len = firstItemContent.length; i < len; i++) {
+                        if (firstItemContent[i].innerText) {
+                            firstValues.push(firstItemContent[i].innerText);
+                        }
+                    }
+
+                    // set value and submit form
+                    $input.val(firstValues.join(', '));
+                    this.sendDatas();
+                } else {
+                    // if any item show error message
+                    showPlacesAutoSuggestError($input);
+                }
+            } else {
+                // delete error message
+                deletePlacesAutoSuggestError($input);
+
+                // is all fine, submit form
+                this.sendDatas();
+            }
+
+            /*if (!newPlace) {
                 return;
             }
 
@@ -84,15 +120,58 @@ class AutoSuggestSearch {
                 return;
             }
 
-            // remove massage if user choose place onselect
-            if(isMessage) {
-                $(isMessage).remove();
-            }
+            this.sendDatas();*/
 
-            this.sendDatas();
+            /**
+             * build and show error message
+             */
+            function showPlacesAutoSuggestError($input) {
+                let $msg,
+                    $inputGroup = $input.closest('.am-form__group');
+
+                // delete error message
+                deletePlacesAutoSuggestError($input);
+
+                $msg = $('<span>Für Ihre Eingabe wurde nichts gefunden.</span>');
+                $msg.addClass('am-form__description');
+                $msg.addClass('u-typo:s');
+                $msg.attr('id', 'input-text-consultant-stopper-description');
+
+                $inputGroup.addClass('is-error');
+                $inputGroup.append($msg);
+            }
         });
 
-        // _this.$select.one('keyup', _this.sendDatas);
+        // importent deactivate native supmit per enter
+        _this.$input.on('keypress', function(e) {
+            if (e.which == 13 || e.key == 13) {
+                e.preventDefault();
+            }
+        });
+
+        // delete error message
+        // if places autosuggest has children,
+        // or value is empty
+        _this.$input.on('keyup', function(e) {
+            if (e.target.value === '' || document.querySelectorAll('.pac-item').length > 0) {
+                deletePlacesAutoSuggestError(_this.$input);
+            }
+        });
+
+        /**
+         * delete error message
+         */
+        function deletePlacesAutoSuggestError($input) {
+            let $inputGroup = $input.closest('.am-form__group'),
+                isMessage = $inputGroup.find('.am-form__description');
+
+            $inputGroup.removeClass('is-error');
+
+            // remove massage if user choose place onselect
+            if (isMessage) {
+                isMessage.remove();
+            }
+        }
     }
 
     setUpAutoSuggest() {
@@ -151,51 +230,6 @@ class LocationSearch {
         const $form = this.mapEntry.$sideBar.find('.am-form'),
             $resetButton = this.mapEntry.$sideBar.find('.am-link'),
             _this = this;
-
-        // if user keypress enter
-        $form.on('keypress', function(e) {
-            if (e.which == 13 || e.key == 13) {
-                e.preventDefault();
-
-                let inputWrapper = $(e.target).closest('.am-form__group'),
-                    isMessage = inputWrapper.find('.am-form__description'),
-                    msg = '<span id="locationSearch1-description" class="am-form__description">Treffen Sie eine Auswahl.</span>',
-                    offsetTop;
-
-                // if error message remove
-                if(isMessage) {
-                    isMessage.remove();
-                }
-
-                // add new msg
-                $(msg).insertAfter(inputWrapper.find('label'));
-
-                // get new top postion places container suggest
-                offsetTop = $(e.target).outerHeight() + $(e.target).offset().top;
-
-                // show places container suggest
-                if ($('.pac-container').find('.pac-item').length > 1) {
-                    $('.pac-container').css({
-                        'display': 'block',
-                        'top': offsetTop + 'px'
-                    });
-                }
-
-                /* // set the first item in value => another version
-                var firstItem = $('.pac-item').first(),
-                firstItemContent = $(firstItem).find('> span'),
-                firstValues = [];
-
-                firstItemContent.each(function(i, el) {
-                    if ($(el).text().length) {
-                        firstValues.push($(el).text());
-                    }
-                });
-
-                $(e.target).val(firstValues.join(','));
-                */
-            }
-        });
 
         $resetButton.on('click', (e) => {
             e.preventDefault();
