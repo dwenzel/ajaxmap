@@ -77,7 +77,7 @@ class AutoSuggestSearch {
                     .closest('.am-form__group')
                     .find('.am-form__description');
 
-            if (typeof newPlace.address_components === 'undefined') {
+            if (newPlace && typeof newPlace.address_components === 'undefined') {
                 let firstItem = document.querySelectorAll('.pac-item')[0],
                     firstItemContent,
                     firstValues;
@@ -111,16 +111,6 @@ class AutoSuggestSearch {
                 // is all fine, submit form
                 this.sendDatas();
             }
-
-            /*if (!newPlace) {
-                return;
-            }
-
-            if (Object.keys(newPlace).length <= 1) {
-                return;
-            }
-
-            this.sendDatas();*/
 
             /**
              * build and show error message
