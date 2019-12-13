@@ -1,12 +1,13 @@
 <?php
-if (!defined('TYPO3_MODE')) {
-    die ('Access denied.');
-}
-$cll = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+defined('TYPO3_MODE') or die();
+
+$ll = 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:';
+$llc = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+$tableName = 'tx_ajaxmap_domain_model_locationtype';
 
 return [
     'ctrl' => [
-        'title' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_locationtype',
+        'title' => $ll . $tableName,
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
@@ -25,51 +26,74 @@ return [
             'endtime' => 'endtime',
         ],
         'typeicon_classes' => [
-            'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_LOCATION_TYPE
-        ]
-    ], 'interface' => [
+            'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_LOCATION_TYPE,
+        ],
+    ],
+    'interface' => [
         'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon, icon_active',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, icon_active, description,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+        '1' => [
+            'showitem' => '
+                    title, description,
+                    --palette--;;icons,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:language,
+                    sys_language_uid, l10n_parent, l10n_diffsource,
+                --div--;LLL:EXT:core/Resources/Private/Language/Form/locallang_tabs.xlf:access,
+                    hidden,
+                    --palette--;;access
+            ',
+        ],
     ],
     'palettes' => [
-        '1' => ['showitem' => ''],
+        'icons' => [
+            'showitem' => 'icon, icon_active',
+        ],
+        'access' => [
+            'showitem' => 'starttime, endtime',
+        ],
     ],
     'columns' => [
         'sys_language_uid' => [
-            'exclude' => 1,
-            'label' => $cll . 'LGL.language',
+            'exclude' => true,
+            'label' => $llc . 'LGL.language',
             'config' => [
                 'type' => 'select',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
+                'renderType' => 'selectSingle',
+                'special' => 'languages',
                 'items' => [
-                    [$cll . 'LGL.allLanguages', -1],
-                    [$cll . 'LGL.default_value', 0]
+                    [
+                        $llc . 'LGL.allLanguages',
+                        -1,
+                        'flags-multiple',
+                    ],
                 ],
+                'default' => 0,
             ],
         ],
         'l10n_parent' => [
+            'exclude' => true,
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
-            'label' => $cll . 'LGL.l18n_parent',
+            'label' => $llc . 'LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
                     ['', 0],
                 ],
-                'foreign_table' => 'tx_ajaxmap_domain_model_locationtype',
-                'foreign_table_where' => 'AND tx_ajaxmap_domain_model_locationtype.pid=###CURRENT_PID### AND tx_ajaxmap_domain_model_locationtype.sys_language_uid IN (-1,0)',
+                'foreign_table' => $tableName,
+                'foreign_table_where' => 'AND ' . $tableName . '.pid=###CURRENT_PID### AND ' . $tableName . '.sys_language_uid IN (-1,0)',
+                'default' => 0,
             ],
         ],
         'l10n_diffsource' => [
             'config' => [
                 'type' => 'passthrough',
+                'default' => '',
             ],
         ],
         't3ver_label' => [
-            'label' => $cll . 'LGL.versionLabel',
+            'label' => $llc . 'LGL.versionLabel',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
@@ -77,16 +101,16 @@ return [
             ]
         ],
         'hidden' => [
-            'exclude' => 1,
-            'label' => $cll . 'LGL.hidden',
+            'exclude' => true,
+            'label' => $llc . 'LGL.hidden',
             'config' => [
                 'type' => 'check',
             ],
         ],
         'starttime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'mergeIfNotBlank',
-            'label' => $cll . 'LGL.starttime',
+            'label' => $llc . 'LGL.starttime',
             'config' => [
                 'type' => 'input',
                 'size' => 13,
@@ -95,14 +119,14 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
         'endtime' => [
-            'exclude' => 1,
+            'exclude' => true,
             'l10n_mode' => 'mergeIfNotBlank',
-            'label' => $cll . 'LGL.endtime',
+            'label' => $llc . 'LGL.endtime',
             'config' => [
                 'type' => 'input',
                 'size' => 13,
@@ -111,44 +135,43 @@ return [
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
-                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                    'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y')),
                 ],
             ],
         ],
         'title' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_locationtype.title',
+            'exclude' => true,
+            'label' => $ll . $tableName . '.title',
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim,required',
             ],
         ],
         'description' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_locationtype.description',
+            'exclude' => true,
+            'label' => $ll . $tableName . '.description',
             'config' => [
                 'type' => 'text',
                 'cols' => 40,
                 'rows' => 15,
-                'eval' => 'trim'
+                'eval' => 'trim',
             ],
         ],
         'icon' => [
-            'exclude' => 0,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_locationtype.icon',
+            'exclude' => true,
+            'label' => $ll . $tableName . '.icon',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'file_reference',
                 'show_thumbs' => 1,
                 'size' => 1,
                 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                'disallowed' => '',
             ],
         ],
         'icon_active' => [
             'exclude' => true,
-            'label' => 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xlf:tx_ajaxmap_domain_model_locationtype.icon_active',
+            'label' => $ll . $tableName . '.icon_active',
             'config' => [
                 'type' => 'group',
                 'internal_type' => 'file_reference',

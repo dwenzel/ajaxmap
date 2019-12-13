@@ -310,6 +310,12 @@ return [
                 ],
             ]
         ],
+        'geo_coordinates' => [
+            'exclude' => false,
+            'config' => [
+                'type' => 'passthrough',
+            ],
+        ],
         'address' => [
             'exclude' => 0,
             'label' => $ll . 'tx_ajaxmap_domain_model_place.address',
