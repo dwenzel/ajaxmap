@@ -77,7 +77,7 @@ class AutoSuggestSearch {
                     .closest('.am-form__group')
                     .find('.am-form__description');
 
-            if (typeof newPlace.address_components === "undefined") {
+            if (typeof newPlace.address_components === 'undefined') {
                 let firstItem = document.querySelectorAll('.pac-item')[0],
                     firstItemContent,
                     firstValues;
@@ -257,8 +257,6 @@ class LocationSearch {
 
     sendDatas() {
         const _this = this;
-
-        console.log('ich sende');
 
         return function() {
             let search = {};

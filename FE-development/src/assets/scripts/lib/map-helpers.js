@@ -110,10 +110,10 @@ const helpers = {
             maxWidth: 370
         });
     },
-   /* getMarkerClusterer: (map, markerClusterer) => {
-        return new MarkerClusterer(map, [], markerClusterer);
-    },    //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
-    //calculates distance between two points in km's*/
+    /* getMarkerClusterer: (map, markerClusterer) => {
+         return new MarkerClusterer(map, [], markerClusterer);
+     },    //https://stackoverflow.com/questions/7997627/google-maps-how-to-get-the-distance-between-two-point-in-metre/7997732#7997732
+     //calculates distance between two points in km's*/
     calcDistance: (bounds, places) => {
         const pBoundsCenter = bounds.getCenter();
 
@@ -125,7 +125,7 @@ const helpers = {
     },
     addBoundsFromSearchRadius: (mapEntry) => {
         const bounds = new google.maps.LatLngBounds(),
-            search= mapEntry.search;
+            search = mapEntry.search;
 
         const center = search.center || helpers.getLatLong(mapEntry.mapRespnseCenter);
 
@@ -156,15 +156,15 @@ const helpers = {
         });
 
         const hasPlaces = places.length;
-        if(!hasPlaces){
-            bounds
+        if (!hasPlaces) {
+            bounds;
         }
 
         mapEntry.googleMap.fitBounds(bounds);
         mapEntry.googleMap.panToBounds(bounds);
         return bounds;
     },
-    createGooglMap: (mapEntry,response, $el) => {
+    createGooglMap: (mapEntry, response, $el) => {
 
         helpers.setDimension($el, response);
         const mapType = helpers.getMapType(response.type);
@@ -172,7 +172,7 @@ const helpers = {
 
         let mapCenter = helpers.getLatLong(response.mapCenter);
 
-     mapEntry.mapRespnseCenter= response.mapCenter ;
+        mapEntry.mapRespnseCenter = response.mapCenter;
 
         //        alert(response.initialZoom)
         //        todo:response.initialZoom is set to 7?!!

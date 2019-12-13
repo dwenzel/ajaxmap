@@ -216,7 +216,7 @@ const _ = {
                     let placeInstance;
                     if (!mapEntry.placeInstances[placeData.key]) {
                         placeInstance = new Place(mapEntry, placeData);
-                        placeData.fixedLastName = _.fixLastName(placeData.title)//data.address.lastName
+                        placeData.fixedLastName = _.fixLastName(placeData.title); //data.address.lastName
                         placeData.placeInstance = placeInstance;
 
                         mapEntry.placeInstances[placeData.key] = placeInstance; //this is a register//
@@ -237,9 +237,9 @@ const _ = {
 
             // set list to top 0
             $(mapEntry.$map[0])
-            .closest('.am')
-            .find('.am__sb__scroll-wrapper__inner')
-            .animate({scrollTop: 0}, 0);
+                .closest('.am')
+                .find('.am__sb__scroll-wrapper__inner')
+                .animate({scrollTop: 0}, 0);
 
             //err handling
             _.err['noPlaces'](mapEntry, result.length);

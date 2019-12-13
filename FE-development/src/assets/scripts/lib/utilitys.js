@@ -44,7 +44,7 @@ export const sort = {
     aplhabeticLastName: {
         asc: (a, b) => {
             a = a.data.fixedLastName;
-            b = b.data.fixedLastName;;
+            b = b.data.fixedLastName;
             return a > b ? 1 : a < b ? -1 : 0;
         }
     },
