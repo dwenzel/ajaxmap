@@ -14,8 +14,8 @@ const mapLocationTypes = {
         for (var type in currLocationTypes) {
 
             $('<option/>').val(currLocationTypes[type].key)
-                    .text(currLocationTypes[type].title)
-                    .appendTo($(mapLocationTypes.treeSelector + mapId));
+                .text(currLocationTypes[type].title)
+                .appendTo($(mapLocationTypes.treeSelector + mapId));
         }
 
         // set on change function for location types treeSelector
