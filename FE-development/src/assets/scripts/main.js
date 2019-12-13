@@ -1,3 +1,5 @@
+import '@babel/polyfill'
+
 import $ from 'jquery';
 import ajaxMap from './lib/ajaxMap';
 

@@ -14,6 +14,7 @@ module.exports = {
 
     entry: {
         main: [
+            '@babel/polyfill',
             path.resolve(__dirname, './src/assets/scripts/main.js'),
             path.resolve(__dirname, './src/assets/styles/main.scss')
         ],
