@@ -72,10 +72,11 @@ class AutoSuggestSearch {
 
         this.autoSuggest.addListener('place_changed', () => {
             const newPlace = _this.autoSuggest.getPlace();
-            let $input = _this.$input,
-                isMessage = $(this.$input)
-                    .closest('.am-form__group')
-                    .find('.am-form__description');
+            let $input = _this.$input;
+
+            if(!newPlace) {
+                return;
+            }
 
             if (newPlace && typeof newPlace.address_components === 'undefined') {
                 let firstItem = document.querySelectorAll('.pac-item')[0],
