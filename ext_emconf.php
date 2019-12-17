@@ -10,32 +10,23 @@
  * writing. "version" and "dependencies" must not be touched!
  ***************************************************************/
 
-$EM_CONF[$_EXTKEY] = array (
-	'title' => 'Ajax Map',
-	'description' => 'Versatile map extension. Map data are requested dynamically via ajax.',
-	'category' => 'plugin',
-	'author' => 'Dirk Wenzel',
-	'author_email' => 'wenzel@cps-it.de',
-	'author_company' => 'Agentur Webfox Berlin, CPS-IT Berlin',
-	'state' => 'stable',
-	'uploadfolder' => 1,
-	'createDirs' => '',
-	'clearCacheOnLoad' => true,
-	'version' => '2.0.0',
-	'constraints' =>
-	array (
-		'depends' =>
-		array (
-			'typo3' => '9.5.0-0.0.0',
-			'tt_address' => '2.3.4-0.0.0',
-			'geo_location_service' => '0.2.0-0.0.0',
-		),
-		'conflicts' =>
-		array (
-		),
-		'suggests' =>
-		array (
-		),
-	)
-);
-
+$EM_CONF[$_EXTKEY] = [
+    'title' => 'Ajax Map',
+    'description' => 'Versatile map extension. Map data are requested dynamically via ajax.',
+    'category' => 'plugin',
+    'author' => 'Dirk Wenzel',
+    'author_email' => 'wenzel@cps-it.de',
+    'author_company' => 'Agentur Webfox Berlin, CPS-IT Berlin',
+    'state' => 'stable',
+    'uploadfolder' => true,
+    'createDirs' => '',
+    'clearCacheOnLoad' => true,
+    'version' => '2.0.0',
+    'constraints' => [
+        'depends' => [
+            'typo3' => '9.5.0-9.5.99',
+            'tt_address' => '2.3.4-0.0.0',
+            'geo_location_service' => '0.2.0-0.3.99',
+        ],
+    ],
+];
