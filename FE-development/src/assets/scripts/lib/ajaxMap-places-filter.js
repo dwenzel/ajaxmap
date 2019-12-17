@@ -178,6 +178,9 @@ function showMatchingPlaces(mapEntry) {
 
     _.updateMarkers(mapEntry);
 
+    // render tree
+    treeRenderer.update.places(mapEntry, selectedPlaces);
+
     // if results (visiblePlaces and mapEntry.places === 0) return
     if (visiblePlaces && mapEntry.places.length === 0) {
         return;
@@ -191,9 +194,6 @@ function showMatchingPlaces(mapEntry) {
         // if visiblePlaces === 0 add error
         mapEntry.$mainWrapper.addClass('am-error');
     }
-
-    // render tree
-    treeRenderer.update.places(mapEntry, selectedPlaces);
 }
 
 /**
