@@ -181,8 +181,12 @@ function showMatchingPlaces(mapEntry) {
 
     _.updateMarkers(mapEntry);
 
+    console.log('mapEntry.places.length', mapEntry.places.length);
 
-    fitBounds(mapEntry, visiblePlaces);
+    // if results (places) fit markers in view
+    if(mapEntry.places.length !== 0) {
+        fitBounds(mapEntry, visiblePlaces);
+    }
 
     treeRenderer.update.places(mapEntry, selectedPlaces);
 }
