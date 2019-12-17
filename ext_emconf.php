@@ -28,7 +28,7 @@ $EM_CONF[$_EXTKEY] = array (
 		array (
 			'typo3' => '9.5.0-0.0.0',
 			'tt_address' => '2.3.4-0.0.0',
-			'geo_location_service' => '0.2.0-0.0.0',
+			'geo_location_service' => '0.2.0-0.3.99',
 		),
 		'conflicts' =>
 		array (
