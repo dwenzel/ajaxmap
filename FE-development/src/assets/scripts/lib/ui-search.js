@@ -74,7 +74,7 @@ class AutoSuggestSearch {
             const newPlace = _this.autoSuggest.getPlace();
             let $input = _this.$input;
 
-            if(!newPlace) {
+            if (!newPlace) {
                 return;
             }
 

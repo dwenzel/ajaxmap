@@ -1,18 +1,3 @@
-/*
- * _______________
- * |       .-.   |
- * |      // ``  |
- * |     //      |
- * |  == ===-_.-'|
- * |   //  //    |
- * |__//_________|
- *
- * Copyright (c) ${YEAR} familie-redlich :systeme <systeme@familie-redlich.de>
- * @link     http://www.familie-redlich.de
- *
- *
- */
-
 /**
  * Created by d.eggermann on 07.11.19.
  */

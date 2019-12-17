@@ -16,7 +16,14 @@ const values = [
     '10000',
     '25000',
     '50000',
-    '200000',
+    '200000'
+]
+
+const selected = [
+    false,
+    true,
+    false,
+    false
 ]
 
 module.exports = {
@@ -29,7 +36,8 @@ module.exports = {
         options: labels.map((label, i) => {
             return {
                 label: label,
-                value: values[i]
+                value: values[i],
+                selected: selected[i]
             }
         })
     }

@@ -110,7 +110,6 @@ function showMatchingPlaces(mapEntry) {
         selectedCategoryKeys = getSelectedKeys(fancytreeSelector.category + mapId),
         selectedRegionKeys = getSelectedKeys(fancytreeSelector.regions + mapId),
         selectedPlaceGroupKeys = getSelectedKeys(fancytreeSelector.placeGroup + mapId),
-
         selectedLocationType = 0;
 
     // get selected location type. This should be one or none
@@ -177,13 +176,23 @@ function showMatchingPlaces(mapEntry) {
         return false;
     });
 
-    //console.log('ANZAHL', selectedPlaces.length);
-
     _.updateMarkers(mapEntry);
 
+    // if results (visiblePlaces and mapEntry.places === 0) return
+    if (visiblePlaces && mapEntry.places.length === 0) {
+        return;
+    }
 
-    fitBounds(mapEntry, visiblePlaces);
+    // if visiblePlaces > 0 fitBounds, delete error
+    if (visiblePlaces.length !== 0) {
+        mapEntry.$mainWrapper.removeClass('am-error');
+        fitBounds(mapEntry, visiblePlaces);
+    } else {
+        // if visiblePlaces === 0 add error
+        mapEntry.$mainWrapper.addClass('am-error');
+    }
 
+    // render tree
     treeRenderer.update.places(mapEntry, selectedPlaces);
 }
 
@@ -210,7 +219,6 @@ function showSelectedPlaces(mapEntry, selectedPlaceKeys) {
 
         placeInstance.setActive(isSelectedPlace);
         mapMarkers[mapMarkers.length] = placeInstance.marker;
-
     });
 
     //--> TODO clear markers? :__clusterer.addMarkers(mapMarkers);

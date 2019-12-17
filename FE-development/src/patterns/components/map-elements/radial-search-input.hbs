@@ -7,7 +7,7 @@
             <select id="radialSelect1" name="radialSelect1" class="am-form__input">
                 <option value="" disabled="" selected="">Umkreis wählen ...</option>
                 {{#options}}
-                    <option value="{{value}}">{{label}}</option>
+                    <option value="{{value}}" {{#if selected}}selected{{/if}}>{{label}}</option>
                 {{/options}}
             </select>
             <div class="am-form__select-arrow" aria-hidden="true">
