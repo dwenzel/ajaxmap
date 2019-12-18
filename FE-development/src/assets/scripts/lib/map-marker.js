@@ -42,24 +42,29 @@ function create(mapEntry, place) {
         });
 
         const locationTyp = getLocationType(mapEntry, currType);
+        let icon = {
+                url: locationTyp.icon,
+                scaledSize: new google.maps.Size(50, 50),
+            },
+            iconActive = {
+                url: locationTyp.iconActive,
+                scaledSize: new google.maps.Size(50, 50),
+            };
 
         mapMarker.icons = {
-            icon: locationTyp.icon,
-            iconActive: locationTyp.iconActive
+            icon: icon,
+            iconActive: iconActive
         };
 
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
             mapMarker.setIcon(mapMarker.icons.iconActive);
             iterateZindex(mapMarker);
-            // console.log('setActive')
         };
 
         mapMarker.setNormal = function() {
             mapEntry.activeMarker = null;
             mapMarker.setIcon(mapMarker.icons.icon);
-
-            // console.log('++++++++++','setNormal')
         };
 
         mapMarker.setNormal();
@@ -85,7 +90,7 @@ thr updates maker iterate over all registered places, so tht this with setActive
 will just nullify the icon but not have to rebuild
  */
 function TurnOfOnBuffer(mapEntry) {
-    this.buffer = (mapEntry.places||[]).reduce((prev, oldPlace) => {
+    this.buffer = (mapEntry.places || []).reduce((prev, oldPlace) => {
         prev[oldPlace.key] = oldPlace.placeInstance;
         return prev;
     }, {});
