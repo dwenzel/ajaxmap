@@ -44,11 +44,11 @@ function create(mapEntry, place) {
         const locationTyp = getLocationType(mapEntry, currType);
         let icon = {
                 url: locationTyp.icon,
-                scaledSize: new google.maps.Size(50, 50),
+                scaledSize: new google.maps.Size(32, 32),
             },
             iconActive = {
                 url: locationTyp.iconActive,
-                scaledSize: new google.maps.Size(50, 50),
+                scaledSize: new google.maps.Size(32, 32),
             };
 
         mapMarker.icons = {
