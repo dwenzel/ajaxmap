@@ -34,16 +34,16 @@ const proxy = {
         proxy.started = true;
         const port = proxyPort;
 
-        app.get('/', function(req, res) {
+        app.get('/XX', function(req, res) {
             let params = req.query;
             var i = req.url.indexOf('?');
             var query = req.url.substr(i + 1);
 
-            console.log('-->', query)
+            console.log('-->', query);
             request.get(proxyUrl + '?' + query).pipe(res);
         });
 
-        app.get('/XX', function(req, res, next) {
+        app.get('/', function(req, res, next) {
             let params = req.query;
 
             if (!params) {
@@ -55,7 +55,7 @@ const proxy = {
 
             console.log('-->', params);
             res.json(readJson(params.action));
-        })
+        });
 
         app.listen(port, function() {
                 console.log('******proxy: ', 'http://localhost:' + proxyPort + ' ******')
