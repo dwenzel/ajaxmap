@@ -1,39 +1,34 @@
 {
-	"disableDefaultUi": false,
-	"height": 800,
-	"initialZoom": 7,
-	"locationTypes": [
-		{
-			"description": "",
-			"markerIcon": "fileadmin\/user_upload\/test\/map-2.png",
-			"title": "Vertrauensanw\u00e4ltin",
-			"key": 1
-		},
-		{
-			"description": "",
-			"markerIcon": "fileadmin\/user_upload\/test\/map-2.png",
-			"title": "Vertrauensanwalt",
-			"key": 2
-		},
-		{
-			"description": "",
-			"markerIcon": "fileadmin\/user_upload\/test\/map-1.png",
-			"title": "Bauherrenberaterin",
-			"key": 3
-		},
-		{
-			"description": "",
-			"markerIcon": "fileadmin\/user_upload\/test\/map-1.png",
-			"title": "Bauherrenberater",
-			"key": 4
-		}
-	],
-	"mapCenter": "52.540849006917,13.375978260576",
-	"mapStyle": "",
-	"regions": [],
-	"staticLayers": [],
-	"title": "Testkarte Berater",
-	"type": 0,
-	"uid": 1,
-	"width": 800
+    "disableDefaultUi": false,
+    "height": 800,
+    "hideFullscreenControl": true,
+    "hideStreetViewControl": true,
+    "hideTypeControl": true,
+    "initialZoom": 7,
+    "locationTypes": [
+        {
+            "description": "",
+            "icon": "https:\/\/www.bsb-ev.de\/fileadmin\/Icons\/karte_anwalt.svg",
+            "iconActive": "https:\/\/www.bsb-ev.de\/fileadmin\/Icons\/karte_anwalt_act.svg",
+            "title": "Vertrauensanwalt",
+            "key": 2
+        },
+        {
+            "description": "",
+            "icon": "https:\/\/www.bsb-ev.de\/fileadmin\/Icons\/karte_berater.svg",
+            "iconActive": "https:\/\/www.bsb-ev.de\/fileadmin\/Icons\/karte_berater_act.svg",
+            "title": "Bauherrenberater",
+            "key": 4
+        }
+    ],
+    "mapCenter": "52.540849006917,13.375978260576",
+    "mapStyle": "",
+    "maxZoom": 16,
+    "minZoom": null,
+    "regions": [],
+    "staticLayers": [],
+    "title": "Beraterkarte",
+    "type": 0,
+    "uid": 1,
+    "width": 800
 }

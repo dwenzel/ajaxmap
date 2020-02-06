@@ -146,8 +146,8 @@ _.BSB_ajaxMapConfigData();
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH/FE-development/src/assets-bsb-map/scripts/bsb-map.js */"./src/assets-bsb-map/scripts/bsb-map.js");
-module.exports = __webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH/FE-development/src/assets-bsb-map/styles/bsb-map.scss */"./src/assets-bsb-map/styles/bsb-map.scss");
+__webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH2/FE-development/src/assets-bsb-map/scripts/bsb-map.js */"./src/assets-bsb-map/scripts/bsb-map.js");
+module.exports = __webpack_require__(/*! /Users/e.horvath/Development/AjaxMapSSH2/FE-development/src/assets-bsb-map/styles/bsb-map.scss */"./src/assets-bsb-map/styles/bsb-map.scss");
 
 
 /***/ })

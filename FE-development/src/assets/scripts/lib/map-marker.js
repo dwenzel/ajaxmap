@@ -58,6 +58,7 @@ function create(mapEntry, place) {
 
         mapMarker.setActive = function() {
             mapEntry.activeMarker = mapMarker;
+            console.log('mapMarker', mapMarker);
             mapMarker.setIcon(mapMarker.icons.iconActive);
             iterateZindex(mapMarker);
         };
