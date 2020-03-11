@@ -1,0 +1,35 @@
+{
+  "googleMap" : {
+    "iconMyPlace" : "map_marker_grau.svg",
+    "zoomButtonColor" : "#a61a19"
+  },
+  "sideBar" : {
+    "sideBarHeader" : {
+      "headerBackgroundColor" : "#eae1e0",
+      "closeButtonClass" : "button-close-bsb",
+      "googleInputFieldLabelText" : "PLZ/Ort",
+      "googleInputFieldClass" : "form-input-bsb",
+      "googleInputFieldSearchImage" : "am-search.svg",
+      "buttonResetColor" : "#a51719",
+      "select_1" : {
+        "enable" : false,
+        "header_height" : 184,
+        "labelText" : "BSB Select Beispiel",
+        "selectClass" : "select-bsb",
+        "selectImageArrow" : "am-arrow-down.svg",
+        "options" : [
+          { "value": "Alle", "text": "Alle", "selected" : "selected" },
+          { "value": "value1", "text": "Text1", "selected" : "" },
+          { "value": "value2", "text": "Text2", "selected" : "" },
+          { "value": "value3", "text": "Text3", "selected" : "" }
+        ]
+      }
+    },
+    "sideBarList" : {
+      "card" : {
+        "component" : "bsb"
+      }
+    }
+  }
+
+}
