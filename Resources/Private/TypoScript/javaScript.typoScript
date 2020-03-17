@@ -12,6 +12,7 @@ page.includeJSFooter {
 */
 }
 
+[page["uid"] == {$plugin.tx_ajaxmap.settings.showPid}]
 page {
 	includeCSS {
 		map = EXT:ajaxmap/Resources/Public/Dist/styles.css
@@ -27,3 +28,4 @@ page {
 		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/main-es5.js" nomodule defer></script>
 	)
 }
+[global]
