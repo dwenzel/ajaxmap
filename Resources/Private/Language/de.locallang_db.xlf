@@ -39,6 +39,10 @@
 				<source>Icon (active state)</source>
 				<target>Icon (aktiver Zustand)</target>
 			</trans-unit>
+            <trans-unit id="tx_ajaxmap_domain_model_locationtype.list_color_active" xml:space="preserve">
+                <source>List (active state)</source>
+                <target>Liste (aktive Farbe)</target>
+            </trans-unit>
 		</body>
 	</file>
 </xliff>

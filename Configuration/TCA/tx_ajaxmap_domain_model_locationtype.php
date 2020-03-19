@@ -28,10 +28,10 @@ return [
             'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_LOCATION_TYPE
         ]
     ], 'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon, icon_active',
+        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, icon, icon_active, list_color_active',
     ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, icon_active, description,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title, icon, icon_active, list_color_active, description,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -155,6 +155,15 @@ return [
                 'show_thumbs' => true,
                 'size' => 1,
                 'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
+            ],
+        ],
+        'list_color_active' => [
+            'exclude' => 1,
+            'label' =>  'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xlf:tx_ajaxmap_domain_model_locationtype.list_color_active',
+            'config' => [
+                'type' => 'input',
+                'renderType' => 'colorpicker',
+                'size' => 10,
             ],
         ],
     ],

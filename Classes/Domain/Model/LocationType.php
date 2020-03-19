@@ -70,6 +70,11 @@ class LocationType extends AbstractEntity
     protected $iconActive;
 
     /**
+     * @var string
+     */
+    protected $listColorActive;
+
+    /**
      * Returns the title
      *
      * @return string $title
@@ -148,6 +153,24 @@ class LocationType extends AbstractEntity
     public function setIconActive(?string $iconActive): self
     {
         $this->iconActive = $iconActive;
+        return $this;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function getListColorActive(): ?string
+    {
+        return $this->listColorActive;
+    }
+
+    /**
+     * @param string|null $listColorActive
+     * @return self
+     */
+    public function setListColorActive(?string $listColorActive): self
+    {
+        $this->listColorActive = $listColorActive;
         return $this;
     }
 }
