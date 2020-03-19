@@ -113,6 +113,7 @@ interface SettingsInterface
         'infoWindow' => '',
         'places' => '',
         'marker' => [],
+        'applicationAssetPath' => '/typo3conf/ext/ajaxmap/Resources/Public/Dist/assets/',
         'settings' => [
             'markerClusterer' => [
                 'imagePath' => self::RESOURCES_PATH . 'Public/Icons/Cluster/m'
