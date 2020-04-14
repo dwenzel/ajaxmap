@@ -27,6 +27,7 @@ use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
+use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
@@ -66,14 +67,15 @@ class AjaxController
 
     /**
      * @param ServerRequestInterface $request
-     * @param ResponseInterface $response
      * @return ResponseInterface
      * @throws NoSuchCacheException
      */
-    public function processRequest(ServerRequestInterface $request, ResponseInterface $response): ResponseInterface
+    public function processRequest(ServerRequestInterface $request): ResponseInterface
     {
         $this->initializeLanguage();
         $this->initializeFramework();
+        /** @var Response $response */
+        $response = GeneralUtility::makeInstance(Response::class);
 
         $queryParams = $this->purgeParameters($request);
 
