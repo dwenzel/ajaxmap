@@ -23,6 +23,10 @@ namespace DWenzel\Ajaxmap\Controller;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
+use TYPO3\CMS\Core\Utility\GeneralUtility;
+use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
+use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
+use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class MapController
@@ -105,7 +109,25 @@ class MapController extends AbstractController
             $this->mapSettings[SI::SEARCH] = array_merge($this->settings[SI::SEARCH], $search);
         }
         $this->mapSettings[SI::KEYS] = $this->settings[SI::KEYS];
+        $this->mapSettings = array_replace_recursive($this->mapSettings, $this->getMapSettingTypoScriptOverrides());
     }
 
+    /**
+     * @return array
+     */
+    protected function getMapSettingTypoScriptOverrides(): array
+    {
+        /** @var ObjectManager $objMgr */
+        $objMgr = GeneralUtility::makeInstance(ObjectManager::class);
+        /** @var ConfigurationManager $configManager */
+        $configManager = $objMgr->get(ConfigurationManager::class);
+        try {
+            $config = $configManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
+        }  catch (InvalidConfigurationTypeException $e) {
+            return [];
+        }
+
+        return GeneralUtility::removeDotsFromTS($config['plugin.']['tx_ajaxmap.']['settings.']['mapsettings.']??[]);
+    }
 }
 
