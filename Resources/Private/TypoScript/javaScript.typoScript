@@ -9,8 +9,9 @@ page {
 		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/runtime-es2015.js" type="module" crossorigin></script>
 		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/polyfills-es2015.js" type="module" crossorigin></script>
 		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/main-es2015.js" type="module" crossorigin></script>
-		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/polyfills-es5.js" nomodule defer crossorigin></script>
-		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/main-es5.js" nomodule defer crossorigin></script>
+        <script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/runtime-es5.js" nomodule defer crossorigin data-cookieconsent="ignore"></script>
+		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/polyfills-es5.js" nomodule defer crossorigin data-cookieconsent="ignore"></script>
+		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/main-es5.js" nomodule defer crossorigin data-cookieconsent="ignore"></script>
 	)
 }
 [global]
