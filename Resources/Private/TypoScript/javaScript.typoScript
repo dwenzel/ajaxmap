@@ -1,15 +1,13 @@
-[page["uid"] == {$plugin.tx_ajaxmap.settings.showPid}]
 page {
-	includeCSS {
-		map = EXT:ajaxmap/Resources/Public/Dist/styles.css
-	}
+    includeCSS {
+        map = EXT:ajaxmap/Resources/Public/Dist/styles.css
+    }
 
-	footerData.999 = TEXT
-	footerData.999.value (
+    footerData.999 = TEXT
+    footerData.999.value (
 		<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/runtime.js" defer></script>
       	<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/polyfills-es5.js" nomodule defer></script>
       	<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/polyfills.js" defer></script>
       	<script src="typo3conf/ext/ajaxmap/Resources/Public/Dist/main.js" defer></script>
-	)
+    )
 }
-[global]
