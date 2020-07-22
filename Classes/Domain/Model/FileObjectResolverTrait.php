@@ -96,6 +96,7 @@ trait FileObjectResolverTrait
             return null;
         }
 
+        /** @var ImageService $imageService */
         $imageService = GeneralUtility::makeInstance(ObjectManager::class)->get(ImageService::class);
         return $imageService->getImageUri($fileObject, $absoluteUrl);
     }
@@ -114,7 +115,7 @@ trait FileObjectResolverTrait
             return $fileObject->getOriginalResource()->getOriginalFile();
         } else if ($fileObject instanceof ExtbaseFile) {
             return $fileObject->getOriginalResource();
-        } else if ($fileObject instanceof CoreFileReference || $fileObject instanceof ProcessedFile) {
+        } else if ($fileObject instanceof CoreFileReference || $fileObject instanceof ProcessedFile || $fileObject instanceof CoreFile) {
             return $fileObject;
         }
 
