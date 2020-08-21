@@ -127,7 +127,7 @@ class MapController extends AbstractController
             return [];
         }
 
-        return GeneralUtility::removeDotsFromTS($config['plugin.']['tx_ajaxmap.']['settings.']['mapsettings.']??[]);
+        return GeneralUtility::removeDotsFromTS($config['plugin.']['tx_ajaxmap.']['settings.']??[]);
     }
 }
 
