@@ -113,96 +113,7 @@ interface SettingsInterface
         'infoWindow' => '',
         'places' => '',
         'marker' => [],
-        'applicationAssetPath' => '/typo3conf/ext/ajaxmap/Resources/Public/Dist/assets/',
-        'settings' => [
-            'markerClusterer' => [
-                'imagePath' => self::RESOURCES_PATH . 'Public/Icons/Cluster/m'
-            ],
-            'regionTree' => [
-                'minExpandLevel' => 3,
-                // 1=> single, 2=> multi, 3=> multi hierarchical
-                'selectMode' => 3,
-                'icon' => false,
-                'checkbox' => true,
-                'extensions' => ['filter', 'glyph'],
-                'glyph' => [
-                    'preset' => 'awesome4',
-                    'map' => [
-                        'folder' => 'fa-folder',
-                        'folderOpen' => 'fa-folder-open'
-                    ]
-                ],
-                'filter' => [
-                    'autoApply' => true,
-                    'mode' => 'hide'
-                ]
-            ],
-            'categoryTree' => [
-                'icon' => false,
-                'extensions' => ['filter', 'glyph'],
-                'glyph' => [
-                    'preset' => 'awesome4',
-                    'map' => [
-                        'folder' => 'fa-folder',
-                        'folderOpen' => 'fa-folder-open'
-                    ]
-                ],
-                'filter' => [
-                    'autoApply' => true,
-                    'mode' => 'hide'
-                ]
-            ],
-            'placeGroupTree' => [
-                'checkbox' => true,
-                'icon' => false,
-                'extensions' => ['filter', 'glyph'],
-                'glyph' => [
-                    'preset' => 'awesome4',
-                    'map' => [
-                        'folder' => 'fa-folder',
-                        'folderOpen' => 'fa-folder-open'
-                    ]
-                ],
-                'filter' => [
-                    'autoApply' => true,
-                    'mode' => 'hide'
-                ]
-            ],
-            'locationTypeTree' => [
-                'checkbox' => true,
-                'icon' => false,
-                'selectMode' => 1,
-                'extensions' => ['filter', 'glyph'],
-                'glyph' => [
-                    'preset' => 'awesome4',
-                    'map' => [
-                        'folder' => 'fa-folder',
-                        'folderOpen' => 'fa-folder-open'
-                    ]
-                ],
-                'filter' => [
-                    'autoApply' => true,
-                    'mode' => 'hide'
-                ]
-            ],
-            'placesTree' => [
-                'toggleInfoWindowOnSelect' => true,
-                'selectMode' => 1,
-                'icon' => false,
-                'extensions' => ['filter'],
-                'quicksearch' => true,
-                'filter' => [
-                    'autoApply' => true,
-                    'mode' => 'hide'
-                ],
-                'updateFilters' => [
-                    'locationType' => ['treeName' => 'ajaxMapLocationTypesTree'],
-                    'categories' => ['treeName' => 'ajaxMapCategoryTree'],
-                    'regions' => ['treeName' => 'ajaxMapRegionsTree', 'updateLayers' => true],
-                    'placeGroups' => ['treeName' => 'ajaxMapPlaceGroupTree']
-                ]
-            ]
-        ]
+        'applicationAssetPath' => '/typo3conf/ext/ajaxmap/Resources/Public/Dist/assets/'
     ];
 
     const SEPARATOR_GEO_COORDINATES = ',';
@@ -218,6 +129,7 @@ interface SettingsInterface
      */
     const LOCATION_TYPES = 'locationTypes';
     const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
+    const DATA = 'data';
     const PLACE_GROUPS = 'placeGroups';
     const ID = 'id';
     const KEYS = 'keys';
