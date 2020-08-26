@@ -75,7 +75,8 @@ class MapController extends AbstractController
                 SI::MAP => $map,
                 SI::MAP_SETTINGS_KEY => \json_encode($this->mapSettings),
                 SI::SETTINGS => $this->settings,
-                SI::SEARCH => $search
+                SI::SEARCH => $search,
+                SI::DATA => $this->configurationManager->getContentObject()->data
             )
         );
     }
