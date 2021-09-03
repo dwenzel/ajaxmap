@@ -47,5 +47,12 @@
     "jquery-ui": "^1.12.1",
     "jquery.cookie": "^1.4.1",
     "jquery.fancytree": "^2.31.0"
+  },
+  "extra": {
+    "typo3/cms": {
+      "extension-key": "ajaxmap",
+      "cms-package-dir": "{$vendor-dir}/typo3/cms",
+      "web-dir": ".Build/Web"
+    }
   }
 }
