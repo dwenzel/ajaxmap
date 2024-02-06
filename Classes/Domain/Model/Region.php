@@ -24,6 +24,7 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use TYPO3\CMS\Extbase\DomainObject\AbstractEntity;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
@@ -75,19 +76,19 @@ class Region extends AbstractEntity
 	 */
 	protected $preserveViewport = false;
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
-	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-	 */
-	protected $regions;
+    /**
+    * @var ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
+    * @Lazy
+    */
+    protected $regions;
 
-	/**
-	 * Main Place
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Place
-	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-	 */
-	protected $mainPlace;
+    /**
+    * Main Place
+    *
+    * @var Place
+    * @Lazy
+    */
+    protected $mainPlace;
 
 	/**
 	 * __construct
@@ -104,7 +105,7 @@ class Region extends AbstractEntity
 	 * @return void
 	 */
 	protected function initStorageObjects() {
-		$this->regions = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Persistence\\ObjectStorage');
+		$this->regions = GeneralUtility::makeInstance(ObjectStorage::class);
 	}
 
 	/**
@@ -239,50 +240,49 @@ class Region extends AbstractEntity
 		$this->regions->detach($regionToRemove);
 	}
 
-	/**
-	 * Returns the regions
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
-	 */
-	public function getRegions() {
+    /**
+    * Returns the regions
+    *
+    * @return ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
+    */
+    public function getRegions() {
 		return $this->regions;
 	}
 
-	/**
-	 * Sets the regions
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
-	 * @return void
-	 */
-	public function setRegions(ObjectStorage $regions) {
+    /**
+    * Sets the regions
+    *
+    * @param ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region> $regions
+    * @return void
+    */
+    public function setRegions(ObjectStorage $regions) {
 		$this->regions = $regions;
 	}
 
-	/**
-	 * Adds a Region
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Region $region
-	 * @return void
-	 */
-	public function addRegion(Region $region) {
+    /**
+    * Adds a Region
+    *
+    * @return void
+    */
+    public function addRegion(Region $region) {
 		$this->regions->attach($region);
 	}
 
-	/**
-	 * Gets the main place
-	 *
-	 * @return \DWenzel\Ajaxmap\Domain\Model\Place
-	 */
-	public function getMainPlace() {
+    /**
+    * Gets the main place
+    *
+    * @return Place
+    */
+    public function getMainPlace() {
 		return $this->mainPlace;
 	}
 
-	/**
-	 * Sets the main place
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Place $place
-	 */
-	public function setMainPlace($place) {
+    /**
+    * Sets the main place
+    *
+    * @param Place $place
+    */
+    public function setMainPlace($place) {
 		$this->mainPlace = $place;
 	}
 }

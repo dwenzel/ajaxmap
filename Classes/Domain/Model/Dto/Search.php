@@ -60,7 +60,6 @@ class Search implements LocationAwareInterface, NullableInterface
     /**
      * Set subject
      *
-     * @param string $subject
      * @return void
      */
     public function setSubject(string $subject): void
@@ -98,7 +97,6 @@ class Search implements LocationAwareInterface, NullableInterface
     }
 
     /**
-     * @param bool $forceResult
      * @return self
      */
     public function setForceResult(bool $forceResult): self

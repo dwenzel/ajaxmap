@@ -147,7 +147,6 @@ class LocationType extends AbstractEntity
     }
 
     /**
-     * @param string|null $iconActive
      * @return self
      */
     public function setIconActive(?string $iconActive): self
@@ -165,7 +164,6 @@ class LocationType extends AbstractEntity
     }
 
     /**
-     * @param string|null $listColorActive
      * @return self
      */
     public function setListColorActive(?string $listColorActive): self

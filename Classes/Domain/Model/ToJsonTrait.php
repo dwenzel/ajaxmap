@@ -22,6 +22,6 @@ trait ToJsonTrait {
 	 * @return string
 	 */
 	public function toJson() {
-		return json_encode($this->toArray());
+		return json_encode($this->toArray(), JSON_THROW_ON_ERROR);
 	}
 }

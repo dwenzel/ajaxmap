@@ -14,7 +14,8 @@ namespace DWenzel\Ajaxmap\Service;
  *
  * The TYPO3 project - inspiring people to share!
  */
-
+use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
+use TYPO3\CMS\Core\TimeTracker\TimeTracker;
 use Doctrine\DBAL\Connection;
 use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
@@ -42,7 +43,7 @@ class ChildrenService
 
     /**
      * ChildrenService constructor.
-     * @throws \TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException
+     * @throws NoSuchCacheException
      */
     public function __construct()
     {
@@ -118,14 +119,15 @@ class ChildrenService
         );
         $res = $queryBuilder->select('uid')
             ->from($tableName)
-            ->where($queryBuilder->expr()->in(
-                'parent', $idParameter)
-            )->execute();
+            ->where(
+                $queryBuilder->expr()->in('parent', $idParameter)
+            )
+            ->executeQuery();
 
         while ($row = $res->fetch()) {
             $counter++;
             if ($counter > 10000) {
-                $GLOBALS['TT']->setTSlogMessage('EXT:ajaxmap: one or more recursive objects where found');
+                GeneralUtility::makeInstance(TimeTracker::class)->setTSlogMessage('EXT:ajaxmap: one or more recursive objects where found');
                 return implode(',', $result);
             }
             $children = $this->getChildrenRecursive($tableName, $row['uid'], $counter, $additionalWhere);

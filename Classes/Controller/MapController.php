@@ -20,6 +20,9 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Psr\Http\Message\ResponseInterface;
+use TYPO3\CMS\Frontend\Page\CacheHashCalculator;
+use TYPO3\CMS\Core\Utility\HttpUtility;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
@@ -37,7 +40,7 @@ class MapController extends AbstractController
     /**
      * mapRepository
      *
-     * @var \DWenzel\Ajaxmap\Domain\Repository\MapRepository
+     * @var MapRepository
      */
     protected $mapRepository;
 
@@ -46,7 +49,6 @@ class MapController extends AbstractController
     /**
      * injectMapRepository
      *
-     * @param \DWenzel\Ajaxmap\Domain\Repository\MapRepository $mapRepository
      * @return void
      */
     public function injectMapRepository(MapRepository $mapRepository)
@@ -57,11 +59,9 @@ class MapController extends AbstractController
     /**
      * action show
      *
-     * @param \DWenzel\Ajaxmap\Domain\Model\Map $map
-     * @param array $search
      * @return void
      */
-    public function showAction(Map $map = null, array $search = [])
+    public function showAction(Map $map = null, array $search = []): ResponseInterface
     {
         if ($map === null) {
             /** @var Map $map */
@@ -71,21 +71,21 @@ class MapController extends AbstractController
         }
         $this->getMapSettings($search);
         $this->view->assignMultiple(
-            array(
+            [
                 SI::MAP => $map,
-                SI::MAP_SETTINGS_KEY => \json_encode($this->mapSettings),
+                SI::MAP_SETTINGS_KEY => \json_encode($this->mapSettings, JSON_THROW_ON_ERROR),
                 SI::SETTINGS => $this->settings,
                 SI::SEARCH => $search,
                 SI::DATA => $this->configurationManager->getContentObject()->data
-            )
+            ]
         );
+        return $this->htmlResponse();
     }
 
     /**
      * Display a search form
-     * @param array $search
      */
-    public function searchAction(array $search = [])
+    public function searchAction(array $search = []): ResponseInterface
     {
         $this->view->assignMultiple(
             [
@@ -93,11 +93,9 @@ class MapController extends AbstractController
                 SI::SEARCH => $search
             ]
         );
+        return $this->htmlResponse();
     }
 
-    /**
-     * @param array $search
-     */
     protected function getMapSettings(array $search = []): void
     {
         $this->mapSettings[SI::ID] = $this->settings[SI::MAP];
@@ -124,7 +122,7 @@ class MapController extends AbstractController
         $configManager = $objMgr->get(ConfigurationManager::class);
         try {
             $config = $configManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
-        }  catch (InvalidConfigurationTypeException $e) {
+        }  catch (InvalidConfigurationTypeException) {
             return [];
         }
 

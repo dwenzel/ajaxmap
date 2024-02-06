@@ -2,8 +2,6 @@
 
 namespace DWenzel\Ajaxmap\Controller;
 
-use Exception;
-
 /***************************************************************
  *  Copyright notice
  *
@@ -20,6 +18,8 @@ use Exception;
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use Exception;
 
 /**
  * Class MissingRequestArgumentException

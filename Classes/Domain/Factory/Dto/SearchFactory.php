@@ -27,7 +27,6 @@ class SearchFactory
     /**
      * Builds a search object from settings
      *
-     * @param array $settings
      * @return Search
      */
     public function fromSettings(array $settings): Search

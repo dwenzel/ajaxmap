@@ -29,7 +29,7 @@ class ProviderFactory
 {
     use ObjectManagerTrait;
 
-    const PROVIDER_MAP = [
+    final public const PROVIDER_MAP = [
         SI::ACTION_BUILD_MAP => MapDataProvider::class,
         SI::ACTION_LIST_LOCATION_TYPES => LocationTypeDataProvider::class,
         SI::ACTION_LIST_PLACES => PlaceDataProvider::class,
@@ -39,7 +39,6 @@ class ProviderFactory
     ];
 
     /**
-     * @param string $action
      * @return DataProviderInterface
      */
     public function get(string $action): DataProviderInterface

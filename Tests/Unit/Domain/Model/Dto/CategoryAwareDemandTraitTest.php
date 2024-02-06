@@ -10,9 +10,9 @@ use DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait;
 class CategoryAwareDemandTraitTest extends UnitTestCase {
 
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Dto\CategoryAwareDemandTrait
-	 */
-	protected $subject;
+  * @var CategoryAwareDemandTrait
+  */
+ protected $subject;
 
 	public function setUp() {
 		$this->subject = $this->getMockForTrait(

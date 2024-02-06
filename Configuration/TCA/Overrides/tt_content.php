@@ -6,7 +6,7 @@ $configure = function () {
     $extensionKey = \DWenzel\Ajaxmap\Configuration\SettingsInterface::EXTENSION_KEY;
 
     \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        $vendor . '.' . $extensionKey,
+        'Ajaxmap',
         'Map',
         'Map'
     );

@@ -24,7 +24,6 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Region.
  *
@@ -37,16 +36,17 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
+use DWenzel\Ajaxmap\Domain\Model\Region;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 class RegionTest extends UnitTestCase {
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Region
-	 */
-	protected $fixture;
+  * @var Region
+  */
+ protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Region();
+		$this->fixture = new Region();
 	}
 
 	/**

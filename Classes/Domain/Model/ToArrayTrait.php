@@ -32,7 +32,7 @@ trait ToArrayTrait
 		}
 		$treeDepth = $treeDepth - 1;
 		$properties = ObjectAccess::getGettableProperties($this);
-		$result = array();
+		$result = [];
 		foreach($properties as $propertyName=>$propertyValue) {
 			$maxDept = $treeDepth;
 
@@ -41,7 +41,7 @@ trait ToArrayTrait
 			}
 
 			$hasMapping = false;
-			$className = get_class($this);
+			$className = $this::class;
 			if((bool)$mapping) {
 				$hasMapping = isset($mapping[$className]);
 			}
@@ -66,21 +66,20 @@ trait ToArrayTrait
 		return $result;
 	}
 
-	/**
-	 * Convert a property value to an array
-	 *
-	 * @param mixed $value
-	 * @param int $treeDepth
-	 * @param null $mapping
-	 * @return mixed
-	 * @internal param mixed $value Value of the property
-	 * @internal param int $treeDepth maximum tree depth, default 100
-	 * @var array $mapping An array with mapping rules
-	 */
-	protected function convertValueToArray($value, $treeDepth = 100, $mapping = NULL) {
+    /**
+     * Convert a property value to an array
+     *
+     * @param int $treeDepth
+     * @param null $mapping
+     * @return mixed
+     * @internal param mixed $value Value of the property
+     * @internal param int $treeDepth maximum tree depth, default 100
+     * @var array $mapping An array with mapping rules
+     */
+    protected function convertValueToArray(mixed $value, $treeDepth = 100, $mapping = NULL) {
 		if($value instanceof ObjectStorage) {
 			$objectArray = $value->toArray();
-			$children = array();
+			$children = [];
 			foreach($objectArray as $object) {
 				if(method_exists($object, 'toArray')) {
 					$children[] = $object->toArray($treeDepth, $mapping);
@@ -98,15 +97,13 @@ trait ToArrayTrait
 	}
 
     /**
-     * @param string $propertyValue
-     * @param array $properties
      * @return mixed
      */
     protected function replacePropertyValueIdentifiers(string $propertyValue, array $properties): string
     {
         $value = $propertyValue;
 
-        if (strpos($propertyValue, '{') === false) {
+        if (!str_contains($propertyValue, '{')) {
             return $value;
         }
 

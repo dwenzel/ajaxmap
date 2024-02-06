@@ -24,7 +24,6 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\LocationType.
  *
@@ -37,7 +36,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -48,13 +47,13 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class LocationTypeTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\Ajaxmap\Domain\Model\LocationType
+     * @var LocationType
      */
     protected $fixture;
 
     public function setUp()
     {
-        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
+        $this->fixture = new LocationType();
     }
 
     /**
@@ -131,14 +130,14 @@ class LocationTypeTest extends UnitTestCase
      */
     public function toArrayReturnsInitialValueForArray()
     {
-        $result = array(
+        $result = [
             'description' => null,
             'icon' => null,
             'iconActive' => null,
             'pid' => null,
             'title' => null,
-            'uid' => null,
-        );
+            'uid' => null
+        ];
         $this->assertSame(
             $this->fixture->toArray(),
             $result

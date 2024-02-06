@@ -74,7 +74,7 @@ trait FileObjectResolverTrait
             }
 
             // Compare lazy parent class name against valid file object class names
-            list($lazyParentClass) = explode(':', $object->_getTypeAndUidString(), 2);
+            [$lazyParentClass] = explode(':', $object->_getTypeAndUidString(), 2);
             if ($this->canBeResolvedAsFileObject($lazyParentClass)) {
                 return true;
             }
@@ -86,11 +86,9 @@ trait FileObjectResolverTrait
     /**
      * Resolve valid file object to its public URL for serialization.
      *
-     * @param mixed $fileObject
-     * @param bool $absoluteUrl
      * @return string|null
      */
-    protected function resolveFileObject($fileObject, bool $absoluteUrl = true): ?string
+    protected function resolveFileObject(mixed $fileObject, bool $absoluteUrl = true): ?string
     {
         if (!$this->canBeResolvedAsFileObject($fileObject) || ($fileObject = $this->unpackFileObject($fileObject)) === null) {
             return null;

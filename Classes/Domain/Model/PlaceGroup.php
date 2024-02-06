@@ -135,12 +135,11 @@ class PlaceGroup extends AbstractEntity
 	}
 
 	/**
-	 * Sets the parent
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\PlaceGroup $placeGroup
-	 * @return void
-	 */
-	public function setParent(PlaceGroup $placeGroup) {
+  * Sets the parent
+  *
+  * @return void
+  */
+ public function setParent(PlaceGroup $placeGroup) {
 		$this->parent = $placeGroup;
 	}
 }

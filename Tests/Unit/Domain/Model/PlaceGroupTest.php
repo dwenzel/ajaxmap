@@ -42,12 +42,12 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class PlaceGroupTest extends UnitTestCase {
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\PlaceGroup
-	 */
-	protected $fixture;
+  * @var PlaceGroup
+  */
+ protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
+		$this->fixture = new PlaceGroup();
 	}
 
 	/**
@@ -126,7 +126,7 @@ class PlaceGroupTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setParentForPlaceGroupSetsParent() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
+		$placeGroup = new PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 
 		$this->assertSame(
@@ -139,14 +139,14 @@ class PlaceGroupTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsInitialValue() {
-		$result = array(
-			'description' => null,
-			'icon' => null,
-			'parent' => null,
-			'pid' => null,
-			'title' => null,
-			'uid' => null
-		);
+		$result = [
+            'description' => null,
+            'icon' => null,
+            'parent' => null,
+            'pid' => null,
+            'title' => null,
+            'uid' => null
+        ];
 		$this->assertSame(
 			$this->fixture->toArray(),
 			$result
@@ -157,29 +157,28 @@ class PlaceGroupTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
+		$placeGroup = new PlaceGroup();
 		$this->fixture->setParent($placeGroup);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setIcon('bar');
 		$this->fixture->setPid(1);
 		$this->fixture->setTitle('foobar');
 		$this->fixture->_setProperty('uid', 2);
-		$result = array(
-						'description' => 'foo',
-						'icon' => 'bar',
-						'parent' => array(
-							'description' => null,
-							'icon' => null,
-							'parent' => null,
-							'pid' => null,
-							'title' => null,
-							'uid' => null
-						),
-						'pid' => 1,
-						'title' => 'foobar',
-						'uid' => 2
-
-		);
+		$result = [
+            'description' => 'foo',
+            'icon' => 'bar',
+            'parent' => [
+                'description' => null,
+                'icon' => null,
+                'parent' => null,
+                'pid' => null,
+                'title' => null,
+                'uid' => null
+            ],
+            'pid' => 1,
+            'title' => 'foobar',
+            'uid' => 2
+        ];
 		$this->assertEquals(
 			$result,
 			$this->fixture->toArray()

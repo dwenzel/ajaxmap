@@ -3,23 +3,22 @@
 namespace DWenzel\Ajaxmap\Tests;
 
 	/***************************************************************
-	 *  Copyright notice
-	 *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
-	 *  All rights reserved
-	 *  This script is part of the TYPO3 project. The TYPO3 project is
-	 *  free software; you can redistribute it and/or modify
-	 *  it under the terms of the GNU General Public License as published by
-	 *  the Free Software Foundation; either version 2 of the License, or
-	 *  (at your option) any later version.
-	 *  The GNU General Public License can be found at
-	 *  http://www.gnu.org/copyleft/gpl.html.
-	 *  This script is distributed in the hope that it will be useful,
-	 *  but WITHOUT ANY WARRANTY; without even the implied warranty of
-	 *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-	 *  GNU General Public License for more details.
-	 *  This copyright notice MUST APPEAR in all copies of the script!
-	 ***************************************************************/
-
+ *  Copyright notice
+ *  (c) 2012 Dirk Wenzel <wenzel@webfox01.de>
+ *  All rights reserved
+ *  This script is part of the TYPO3 project. The TYPO3 project is
+ *  free software; you can redistribute it and/or modify
+ *  it under the terms of the GNU General Public License as published by
+ *  the Free Software Foundation; either version 2 of the License, or
+ *  (at your option) any later version.
+ *  The GNU General Public License can be found at
+ *  http://www.gnu.org/copyleft/gpl.html.
+ *  This script is distributed in the hope that it will be useful,
+ *  but WITHOUT ANY WARRANTY; without even the implied warranty of
+ *  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ *  GNU General Public License for more details.
+ *  This copyright notice MUST APPEAR in all copies of the script!
+ ***************************************************************/
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Map.
  *
@@ -30,6 +29,10 @@ namespace DWenzel\Ajaxmap\Tests;
  * @subpackage Ajax Map
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
+use DWenzel\Ajaxmap\Domain\Model\Map;
+use DWenzel\Ajaxmap\Domain\Model\PlaceGroup;
+use DWenzel\Ajaxmap\Domain\Model\Region;
+use DWenzel\Ajaxmap\Domain\Model\LocationType;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
@@ -43,12 +46,12 @@ use DWenzel\Ajaxmap\DomainObject\CategorizableInterface;
 class MapTest extends UnitTestCase {
 
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Map
-	 */
-	protected $fixture;
+  * @var Map
+  */
+ protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Map();
+		$this->fixture = new Map();
 	}
 
 	/**
@@ -243,7 +246,7 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getPlaceGroupsReturnsInitialValueForObjectStorageContainingPlaceGroups() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getPlaceGroups()
@@ -254,8 +257,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setPlaceGroupsForObjectStorageContainingCategorySetsPlaceGroups() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$placeGroup = new PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($placeGroup);
 		$this->fixture->setPlaceGroups($objectStorageHoldingExactlyOnePlaceGroup);
 
@@ -269,8 +272,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addPlaceGroupToObjectStorageHoldingPlaceGroups() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$objectStorageHoldingExactlyOnePlaceGroup = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$placeGroup = new PlaceGroup();
+		$objectStorageHoldingExactlyOnePlaceGroup = new ObjectStorage();
 		$objectStorageHoldingExactlyOnePlaceGroup->attach($placeGroup);
 		$this->fixture->addPlaceGroup($placeGroup);
 
@@ -284,8 +287,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removePlaceGroupFromObjectStorageHoldingPlaceGroups() {
-		$placeGroup = new \DWenzel\Ajaxmap\Domain\Model\PlaceGroup();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$placeGroup = new PlaceGroup();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($placeGroup);
 		$localObjectStorage->detach($placeGroup);
 		$this->fixture->addPlaceGroup($placeGroup);
@@ -301,7 +304,7 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getRegionsReturnsInitialValueForObjectStorageContainingRegion() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getRegions()
@@ -312,8 +315,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setRegionsForObjectStorageContainingRegionSetsRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegions = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
 		$this->fixture->setRegions($objectStorageHoldingExactlyOneRegions);
 
@@ -327,8 +330,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addRegionToObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegion = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegion->attach($region);
 		$this->fixture->addRegion($region);
 
@@ -342,8 +345,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeRegionFromObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($region);
 		$localObjectStorage->detach($region);
 		$this->fixture->addRegion($region);
@@ -359,7 +362,7 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getLocationTypesReturnsInitialValueForObjectStorageContainingLocationType() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getLocationTypes()
@@ -370,8 +373,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setLocationTypesForObjectStorageContainingLocationTypeSetsLocationTypes() {
-		$locationType = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
-		$objectStorageHoldingExactlyOneLocationTypes = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$locationType = new LocationType();
+		$objectStorageHoldingExactlyOneLocationTypes = new ObjectStorage();
 		$objectStorageHoldingExactlyOneLocationTypes->attach($locationType);
 		$this->fixture->setLocationTypes($objectStorageHoldingExactlyOneLocationTypes);
 
@@ -385,8 +388,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addLocationTypeToObjectStorageHoldingLocationTypes() {
-		$locationType = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
-		$objectStorageHoldingExactlyOneLocationType = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$locationType = new LocationType();
+		$objectStorageHoldingExactlyOneLocationType = new ObjectStorage();
 		$objectStorageHoldingExactlyOneLocationType->attach($locationType);
 		$this->fixture->addLocationType($locationType);
 
@@ -400,8 +403,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeLocationTypeFromObjectStorageHoldingLocationTypes() {
-		$locationType = new \DWenzel\Ajaxmap\Domain\Model\LocationType();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$locationType = new LocationType();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($locationType);
 		$localObjectStorage->detach($locationType);
 		$this->fixture->addLocationType($locationType);
@@ -417,28 +420,28 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsInitialValueForArray() {
-		$result = array(
-			'categories' => array(),
-			'disableDefaultUi' => false,
-			'height' => NULL,
-			'hideFullscreenControl' => false,
-			'hideStreetViewControl' => false,
-			'hideTypeControl' => false,
-			'initialZoom' => NULL,
-			'locationTypes' => array(),
-			'mapCenter' => NULL,
-			'mapStyle' => NULL,
-			'maxZoom' => null,
-			'minZoom' => null,
-			'pid' => NULL,
-			'placeGroups' => array(),
-			'regions' => array(),
-			'staticLayers' => array(),
-			'title' => NULL,
-			'type' => NULL,
-			'uid' => NULL,
-			'width' => NULL,
-		);
+        $result = [
+            'categories' => [],
+            'disableDefaultUi' => false,
+            'height' => NULL,
+            'hideFullscreenControl' => false,
+            'hideStreetViewControl' => false,
+            'hideTypeControl' => false,
+            'initialZoom' => NULL,
+            'locationTypes' => [],
+            'mapCenter' => NULL,
+            'mapStyle' => NULL,
+            'maxZoom' => null,
+            'minZoom' => null,
+            'pid' => NULL,
+            'placeGroups' => [],
+            'regions' => [],
+            'staticLayers' => [],
+            'title' => NULL,
+            'type' => NULL,
+            'uid' => NULL,
+            'width' => NULL
+        ];
 
 		$this->assertSame(
 			$this->fixture->toArray(),
@@ -480,7 +483,7 @@ class MapTest extends UnitTestCase {
 	public function constructorInitializesPlaceGroupsWithStorageObject() {
 		$this->fixture->__construct();
 		$this->assertInstanceOf(
-			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			ObjectStorage::class,
 			$this->fixture->getPlaceGroups()
 		);
 	}
@@ -492,7 +495,7 @@ class MapTest extends UnitTestCase {
 	public function constructorInitializesRegionsWithStorageObject() {
 		$this->fixture->__construct();
 		$this->assertInstanceOf(
-			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			ObjectStorage::class,
 			$this->fixture->getRegions()
 		);
 	}
@@ -504,7 +507,7 @@ class MapTest extends UnitTestCase {
 	public function constructorInitializesLocationTypesWithStorageObject() {
 		$this->fixture->__construct();
 		$this->assertInstanceOf(
-			'TYPO3\CMS\Extbase\Persistence\ObjectStorage',
+			ObjectStorage::class,
 			$this->fixture->getLocationTypes()
 		);
 	}
@@ -535,7 +538,7 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function getStaticLayersReturnsInitialValueForObjectStorageContainingRegion() {
-		$newObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$newObjectStorage = new ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
 			$this->fixture->getStaticLayers()
@@ -546,8 +549,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function setStaticLayersForObjectStorageContainingRegionSetsStaticLayers() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegions = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegions = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegions->attach($region);
 		$this->fixture->setStaticLayers($objectStorageHoldingExactlyOneRegions);
 
@@ -561,8 +564,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function addStaticLayerToObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$objectStorageHoldingExactlyOneRegion = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$objectStorageHoldingExactlyOneRegion = new ObjectStorage();
 		$objectStorageHoldingExactlyOneRegion->attach($region);
 		$this->fixture->addStaticLayer($region);
 
@@ -576,8 +579,8 @@ class MapTest extends UnitTestCase {
 	 * @test
 	 */
 	public function removeStaticLayerFromObjectStorageHoldingRegions() {
-		$region = new \DWenzel\Ajaxmap\Domain\Model\Region();
-		$localObjectStorage = new \TYPO3\CMS\Extbase\Persistence\ObjectStorage();
+		$region = new Region();
+		$localObjectStorage = new ObjectStorage();
 		$localObjectStorage->attach($region);
 		$localObjectStorage->detach($region);
 		$this->fixture->addStaticLayer($region);

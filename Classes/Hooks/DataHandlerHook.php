@@ -53,15 +53,11 @@ class DataHandlerHook
         $this->cacheManager = $cacheManager ?? GeneralUtility::makeInstance(CacheManager::class);
     }
 
-    /**
-     * @param array $params
-     * @param DataHandler $pObj
-     */
     public function clearCustomCachesOnRecordSave(array $params, DataHandler &$pObj): void
     {
         $tableName = (string) $params['table'];
 
-        if (!StringUtility::beginsWith($tableName, 'tx_ajaxmap') && !in_array($tableName, $this->tablesToFlushCaches)) {
+        if (!\str_starts_with($tableName, 'tx_ajaxmap') && !in_array($tableName, $this->tablesToFlushCaches)) {
             return;
         }
 
@@ -70,14 +66,13 @@ class DataHandlerHook
     }
 
     /**
-     * @param string $cacheIdentifier
      * @return bool
      */
     protected function flushCache(string $cacheIdentifier): bool
     {
         try {
             $this->cacheManager->getCache($cacheIdentifier)->flush();
-        } catch (NoSuchCacheException $e) {
+        } catch (NoSuchCacheException) {
             return false;
         }
 

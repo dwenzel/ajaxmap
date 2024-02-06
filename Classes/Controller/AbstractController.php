@@ -26,6 +26,7 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use TYPO3\CMS\Fluid\View\TemplateView;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
@@ -37,18 +38,16 @@ use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
  */
 class AbstractController extends ActionController
 {
-
     /**
      * Sets the view
      *
      * This method should only be used for unit testing purposes.
-     * @param \TYPO3\CMS\Fluid\View\TemplateView $view The new view
+     * @param TemplateView $view The new view
      * @return void
      */
     public function setView($view)
     {
         $this->view = $view;
     }
-
 }
 

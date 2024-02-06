@@ -50,7 +50,7 @@ use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 class TreeUtilityTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\Ajaxmap\Utility\TreeUtility
+     * @var TreeUtility
      */
     protected $subject;
 
@@ -58,7 +58,7 @@ class TreeUtilityTest extends UnitTestCase
     {
         $this->subject = $this->getAccessibleMock(
             TreeUtility::class,
-            array('dummy'), array(), '', false
+            ['dummy'], [], '', false
         );
     }
 
@@ -73,13 +73,11 @@ class TreeUtilityTest extends UnitTestCase
      */
     public function convertObjectLeafToArrayInitiallyReturnsEmptyArray()
     {
-        $mockObjectLeaf = array(
-            'foo' => 'bar'
-        );
+        $mockObjectLeaf = ['foo' => 'bar'];
 
         $this->assertSame(
-            array(),
-            $this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
+            [],
+            $this->subject->_call('convertObjectLeafToArray', [$mockObjectLeaf])
         );
     }
 
@@ -89,13 +87,11 @@ class TreeUtilityTest extends UnitTestCase
      */
     public function convertObjectLeafToArrayConvertsReturnsEmptyArrayIfItemIsNotSerializable()
     {
-        $mockObjectLeaf = array(
-            'item' => 'bar'
-        );
+        $mockObjectLeaf = ['item' => 'bar'];
 
         $this->assertSame(
-            array(),
-            $this->subject->_call('convertObjectLeafToArray', array($mockObjectLeaf))
+            [],
+            $this->subject->_call('convertObjectLeafToArray', [$mockObjectLeaf])
         );
     }
 
@@ -107,10 +103,8 @@ class TreeUtilityTest extends UnitTestCase
     {
         $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
             ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
-        $mockObjectLeaf = array(
-            'item' => $mockSerializable
-        );
-        $expectedArray = array('foo' => 'bar');
+        $mockObjectLeaf = ['item' => $mockSerializable];
+        $expectedArray = ['foo' => 'bar'];
         $mockSerializable->expects($this->once())
             ->method('toArray')
             ->with(10, NULL)
@@ -129,16 +123,9 @@ class TreeUtilityTest extends UnitTestCase
     {
         $mockSerializable = $this->getMockBuilder(SerializableInterface::class)
             ->setMethods(['toArray', 'toJson'])->getMockForAbstractClass();
-        $mockObjectLeaf = array(
-            'item' => $mockSerializable
-        );
-        $convertedArray = array(
-            'foo' => 'bar',
-            'keyToRemove' => 'baz'
-        );
-        $expectedArray = array(
-            'foo' => 'bar'
-        );
+        $mockObjectLeaf = ['item' => $mockSerializable];
+        $convertedArray = ['foo' => 'bar', 'keyToRemove' => 'baz'];
+        $expectedArray = ['foo' => 'bar'];
         $mockSerializable->expects($this->once())
             ->method('toArray')
             ->with(10, NULL)
@@ -155,9 +142,7 @@ class TreeUtilityTest extends UnitTestCase
      */
     public function convertObjectBranchToArrayReturnsInitiallyFalse()
     {
-        $mockObjectLeaf = array(
-            'foo' => 'bar'
-        );
+        $mockObjectLeaf = ['foo' => 'bar'];
         $this->assertFalse(
             $this->subject->convertObjectBranchToArray($mockObjectLeaf)
         );
@@ -268,9 +253,9 @@ class TreeUtilityTest extends UnitTestCase
 
         $queryResult->expects($this->once())
             ->method('toArray')
-            ->will($this->returnValue(array()));
+            ->will($this->returnValue([]));
         $this->assertEquals(
-            array(),
+            [],
             $this->subject->buildObjectTree($queryResult)
         );
     }
@@ -286,16 +271,16 @@ class TreeUtilityTest extends UnitTestCase
         $mockObject = $this->getMockBuilder(TreeItemInterface::class)
             ->getMockForAbstractClass();
         $uid = 6;
-        $expectedTree = array(
-            $uid => array(
+        $expectedTree = [
+            $uid => [
                 'item' => $mockObject,
                 'parent' => NULL
-            )
-        );
+            ]
+        ];
 
         $queryResult->expects($this->once())
             ->method('toArray')
-            ->will($this->returnValue(array($mockObject)));
+            ->will($this->returnValue([$mockObject]));
         $mockObject->expects($this->once())
             ->method('getUid')
             ->will($this->returnValue($uid));
@@ -319,22 +304,22 @@ class TreeUtilityTest extends UnitTestCase
         $mockParent = clone($mockObject);
         $uid = 6;
         $parentId = 99;
-        $expectedTree = array(
-            $parentId => array(
-                'children' => array(
-                    $uid => array(
+        $expectedTree = [
+            $parentId => [
+                'children' => [
+                    $uid => [
                         'item' => $mockObject,
                         'parent' => $parentId
-                    )
-                ),
+                    ]
+                ],
                 'item' => $mockParent,
                 'parent' => NULL
-            )
-        );
+            ]
+        ];
 
         $queryResult->expects($this->once())
             ->method('toArray')
-            ->will($this->returnValue(array($mockObject, $mockParent)));
+            ->will($this->returnValue([$mockObject, $mockParent]));
         $mockObject->expects($this->once())
             ->method('getUid')
             ->will($this->returnValue($uid));

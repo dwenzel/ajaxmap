@@ -33,7 +33,6 @@ trait PlaceDemandFactoryTrait
 
     /**
      * Injects a PlaceDemandFactory
-     * @param PlaceDemandFactory $placeDemandFactory
      */
     public function injectPlaceDemandFactory(PlaceDemandFactory $placeDemandFactory) {
         $this->placeDemandFactory = $placeDemandFactory;

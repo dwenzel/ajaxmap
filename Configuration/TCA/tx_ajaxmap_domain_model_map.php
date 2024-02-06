@@ -1,9 +1,9 @@
 <?php
-if (!defined ('TYPO3_MODE')) {
+if (!defined ('TYPO3')) {
 	die ('Access denied.');
 }
 $languageFile = 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:';
-$cll = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+$cll = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:';
 
 return [
     'ctrl' => [
@@ -11,10 +11,7 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -29,26 +26,9 @@ return [
             'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_MAP
         ]
     ],
-	'interface' => [
-		'showRecordFieldList' => 'sys_language_uid,l10n_parent,l10n_diffsource,hidden,
-		title,type,width,height,map_center,initial_zoom, min_zoom, max_zoom, map_style, disable_default_ui,
-		place_groups,regions,static_layers,location_types,categories',
-	],
 	'types' => [
 		'1' => ['showitem' =>
-			'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1,
-			type,--palette--;;controls,title,width,height,map_center,
-
-			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.appearance,
-			    --palette--;;zoomLevels,map_style,disable_default_ui,
-
-			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.markers,
-				place_groups,location_types,categories,
-			--div--;' . $languageFile . 'tx_ajaxmap_domain_model_map.overlays,
-				regions,static_layers,
-
-			--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,
-				starttime,endtime'
+			'sys_language_uid,--palette--,l10n_parent,l10n_diffsource,hidden,--palette--;;1,type,--palette--;;controls,title,width,height,map_center,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_map.appearance,--palette--;;zoomLevels,map_style,disable_default_ui,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_map.markers,place_groups,location_types,categories,--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_map.overlays,regions,static_layers,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime,endtime'
 		],
 	],
 	'palettes' => [
@@ -65,24 +45,16 @@ return [
 		'sys_language_uid' => [
 			'exclude' => 1,
 			'label' => $cll . 'LGL.language',
-			'config' => [
-				'type' => 'select',
-				'foreign_table' => 'sys_language',
-				'foreign_table_where' => 'ORDER BY sys_language.title',
-				'items' => [
-					[$cll . 'LGL.allLanguages', -1],
-					[$cll . 'LGL.default_value', 0]
-				],
-			],
+			'config' => ['type' => 'language'],
 		],
 		'l10n_parent' => [
 			'displayCond' => 'FIELD:sys_language_uid:>:0',
-			'exclude' => 1,
 			'label' => $cll . 'LGL.l18n_parent',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => [
-					['', 0],
+					['label' => '', 'value' => 0],
 				],
 				'foreign_table' => 'tx_ajaxmap_domain_model_map',
 				'foreign_table_where' => 'AND tx_ajaxmap_domain_model_map.pid=###CURRENT_PID### AND tx_ajaxmap_domain_model_map.sys_language_uid IN (-1,0)',
@@ -110,34 +82,36 @@ return [
 		],
 		'starttime' => [
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => $cll . 'LGL.starttime',
 			'config' => [
-				'type' => 'input',
+				'type' => 'datetime',
 				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				],
+                'renderType' => 'inputDateTime',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ]
 			],
 		],
 		'endtime' => [
 			'exclude' => 1,
-			'l10n_mode' => 'mergeIfNotBlank',
 			'label' => $cll . 'LGL.endtime',
 			'config' => [
-				'type' => 'input',
+				'type' => 'datetime',
 				'size' => 13,
-				'max' => 20,
-				'eval' => 'datetime',
 				'checkbox' => 0,
 				'default' => 0,
 				'range' => [
 					'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
 				],
+                'renderType' => 'inputDateTime',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true,
+                ]
 			],
 		],
 		'title' => [
@@ -146,7 +120,8 @@ return [
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim',
+                'required' => true
 			],
 		],
 		'type' => [
@@ -154,13 +129,14 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.type',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectSingle',
 				'items' => [
-					['', 0],
-					['Styled Map', 0],
-					['Road Map', 1],
-					['Satellite', 2],
-					['Hybrid', 3],
-					['Terrain', 4]
+					['label' => '', 'value' => 0],
+					['label' => 'Styled Map', 'value' => 0],
+					['label' => 'Road Map', 'value' => 1],
+					['label' => 'Satellite', 'value' => 2],
+					['label' => 'Hybrid', 'value' => 3],
+					['label' => 'Terrain', 'value' => 4]
 				],
 				'size' => 1,
 				'maxitems' => 1,
@@ -175,8 +151,7 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
                         'invertStateDisplay' => true,
                     ],
                 ],
@@ -193,8 +168,7 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
                         'invertStateDisplay' => true,
                     ],
                 ],
@@ -211,8 +185,7 @@ return [
                 'renderType' => 'checkboxToggle',
                 'items' => [
                     [
-                        0 => '',
-                        1 => '',
+                        'label' => '',
                         'invertStateDisplay' => true,
                     ],
                 ],
@@ -225,18 +198,18 @@ return [
 			'exclude' => 0,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.width',
 			'config' => [
-				'type' => 'input',
+				'type' => 'number',
 				'size' => 4,
-				'eval' => 'int,required'
+				'required' => true
 			],
 		],
 		'height' => [
 			'exclude' => 0,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.height',
 			'config' => [
-				'type' => 'input',
+				'type' => 'number',
 				'size' => 4,
-				'eval' => 'int,required'
+				'required' => true
 			],
 		],
 		'map_center' => [
@@ -245,38 +218,41 @@ return [
 			'config' => [
 				'type' => 'input',
 				'size' => 30,
-				'eval' => 'trim,required'
+				'eval' => 'trim',
+                'required' => true
 			],
 		],
 		'initial_zoom' => [
 			'exclude' => 0,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.initial_zoom',
 			'config' => [
-				'type' => 'input',
+				'type' => 'number',
 				'size' => 4,
-				'eval' => 'int,required'
+				'required' => true
 			],
 		],
 		'min_zoom' => [
 			'exclude' => true,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.min_zoom',
 			'config' => [
-				'type' => 'input',
+				'type' => 'number',
 				'size' => 4,
-				'eval' => 'int,null',
                 'default' => null,
                 'mode' => 'useOrOverridePlaceholder',
+                'nullable' => true,
+                'nullable' => true,
 			],
 		],
 		'max_zoom' => [
 			'exclude' => true,
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.max_zoom',
 			'config' => [
-				'type' => 'input',
+				'type' => 'number',
 				'size' => 4,
-				'eval' => 'int,null',
                 'default' => null,
                 'mode' => 'useOrOverridePlaceholder',
+                'nullable' => true,
+                'nullable' => true,
 			],
 		],
 		'map_style' => [
@@ -302,6 +278,7 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.placeGroups',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectTree',
 				'foreign_table' => 'tx_ajaxmap_domain_model_placegroup',
 				'MM' => 'tx_ajaxmap_map_placegroup_mm',
 				'renderMode' => 'tree',
@@ -314,32 +291,26 @@ return [
 					'parentField' => 'parent'
 				],
 				'size' => 10,
-				'autoSizeMax' => 30,
+				'size' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => [
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => [
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						],
-					'add' => [
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => [
-							'table' => 'tx_ajaxmap_domain_model_placegroup',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							],
-						'script' => 'wizard_add.php',
-					],
-				],
+				'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Edit'
+                        ]
+                    ],
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
+                            'table' => 'tx_ajaxmap_domain_model_placegroup',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ]
+                    ]
+                ],
 			],
 		],
 		'regions' => [
@@ -347,38 +318,30 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.regions',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'MM' => 'tx_ajaxmap_map_region_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => [
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => [
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						],
-					'add' => [
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => [
-							'table' => 'tx_ajaxmap_domain_model_region',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							],
-						'script' => 'wizard_add.php',
-					],
-                    'suggest' => [    
-                        'type' => 'suggest',
+				'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Edit'
+                        ]
                     ],
-				],
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
+                            'table' => 'tx_ajaxmap_domain_model_region',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ]
+                    ]
+                ],
 			],
 		],
 		'static_layers' => [
@@ -386,38 +349,30 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.static_layers',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_ajaxmap_domain_model_region',
 				'MM' => 'tx_ajaxmap_map_static_layer_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => [
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => [
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						],
-					'add' => [
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => [
-							'table' => 'tx_ajaxmap_domain_model_region',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							],
-						'script' => 'wizard_add.php',
-					],
-                    'suggest' => [    
-                        'type' => 'suggest',
+				'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Edit'
+                        ]
                     ],
-				],
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
+                            'table' => 'tx_ajaxmap_domain_model_region',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ]
+                    ]
+                ],
 			],
 		],
 		'categories' => [
@@ -425,6 +380,7 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.categories',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectTree',
 				'foreign_table' => 'sys_category',
 				'foreign_table_where' => ' AND sys_category.sys_language_uid IN (-1,0) ORDER BY sys_category.sorting ASC',
 				'MM' => 'sys_category_record_mm',
@@ -438,7 +394,7 @@ return [
 					'parentField' => 'parent'
 				],
 				'size' => 10,
-				'autoSizeMax' => 30,
+				'size' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
 			],
@@ -448,38 +404,30 @@ return [
 			'label' => $languageFile . 'tx_ajaxmap_domain_model_map.location_types',
 			'config' => [
 				'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
 				'foreign_table' => 'tx_ajaxmap_domain_model_locationtype',
 				'MM' => 'tx_ajaxmap_map_locationtype_mm',
 				'size' => 10,
 				'autoSizeMax' => 30,
 				'maxitems' => 9999,
 				'multiple' => 0,
-				'wizards' => [
-					'_PADDING' => 1,
-					'_VERTICAL' => 1,
-					'edit' => [
-						'type' => 'popup',
-						'title' => 'Edit',
-						'script' => 'wizard_edit.php',
-						'icon' => 'edit2.gif',
-						'popup_onlyOpenIfSelected' => 1,
-						'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
-						],
-					'add' => [
-						'type' => 'script',
-						'title' => 'Create new',
-						'icon' => 'add.gif',
-						'params' => [
-							'table' => 'tx_ajaxmap_domain_model_locationtype',
-							'pid' => '###CURRENT_PID###',
-							'setValue' => 'prepend'
-							],
-						'script' => 'wizard_add.php',
-					],
-                    'suggest' => [    
-                        'type' => 'suggest',
+				'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Edit'
+                        ]
                     ],
-				],
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
+                            'table' => 'tx_ajaxmap_domain_model_locationtype',
+                            'pid' => '###CURRENT_PID###',
+                            'setValue' => 'prepend'
+                        ]
+                    ]
+                ],
 			],
 		],
 	],

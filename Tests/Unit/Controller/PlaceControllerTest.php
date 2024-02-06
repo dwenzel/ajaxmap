@@ -59,12 +59,12 @@ class PlaceControllerTest extends UnitTestCase
 {
 
     /**
-     * @var \DWenzel\Ajaxmap\Controller\PlaceController
+     * @var PlaceController
      */
     protected $subject;
 
     /**
-     * @var \DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand
+     * @var PlaceDemand
      */
     protected $mockDemand;
 
@@ -156,7 +156,7 @@ class PlaceControllerTest extends UnitTestCase
      */
     public function showActionAssignsVariables()
     {
-        $settings = array('foo' => 'bar');
+        $settings = ['foo' => 'bar'];
         $mockPlace = $this->getMockBuilder(Place::class)
             ->getMock();
         $this->inject(
@@ -167,10 +167,7 @@ class PlaceControllerTest extends UnitTestCase
         $this->view->expects($this->once())
             ->method('assignMultiple')
             ->with(
-                array(
-                    'place' => $mockPlace,
-                    'settings' => $settings
-                )
+                ['place' => $mockPlace, 'settings' => $settings]
             );
         $this->subject->showAction($mockPlace);
     }

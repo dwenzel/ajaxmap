@@ -24,7 +24,6 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Dto\PlaceDemand.
  *
@@ -37,7 +36,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-
+use DWenzel\Ajaxmap\Domain\Model\Dto\Search;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -48,13 +47,13 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class SearchTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\Ajaxmap\Domain\Model\Dto\Search
+     * @var Search
      */
     protected $fixture;
 
     public function setUp()
     {
-        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Dto\Search();
+        $this->fixture = new Search();
     }
 
     public function tearDown()
@@ -174,10 +173,7 @@ class SearchTest extends UnitTestCase
      */
     public function setBoundsForArraySetsBounds()
     {
-        $bounds = array(
-            'lat' => 1.5,
-            'lng' => 5.1
-        );
+        $bounds = ['lat' => 1.5, 'lng' => 5.1];
         $this->fixture->setBounds($bounds);
 
         $this->assertSame(

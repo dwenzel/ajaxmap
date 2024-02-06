@@ -38,9 +38,6 @@ class PlaceDemandFactory extends AbstractDemandFactory implements DemandFactoryI
      */
     protected $searchFactory;
 
-    /**
-     * @param SearchFactory $searchFactory
-     */
     public function injectSearchFactory(SearchFactory $searchFactory) {
         $this->searchFactory = $searchFactory;
     }

@@ -54,9 +54,6 @@ abstract class AbstractDemandedRepository
      */
     protected $geoCoder;
 
-    /**
-     * @param ChildrenService $childrenService
-     */
     public function injectChildrenService(ChildrenService $childrenService)
     {
         $this->childrenService = $childrenService;
@@ -73,7 +70,6 @@ abstract class AbstractDemandedRepository
     /**
      * Returns the objects of this repository matching the demand.
      *
-     * @param DemandInterface $demand
      * @param boolean $respectEnableFields
      * @param array $enableFieldsToIgnore
      * @param bool $respectStoragePage
@@ -100,7 +96,6 @@ abstract class AbstractDemandedRepository
     /**
      * Generates a query from a given demand
      *
-     * @param DemandInterface $demand
      * @param bool $respectEnableFields
      * @param array $enableFieldsToIgnore
      * @param $respectStoragePage
@@ -174,7 +169,7 @@ abstract class AbstractDemandedRepository
      */
     protected function createOrderingsFromDemand(DemandInterface $demand)
     {
-        $orderings = array();
+        $orderings = [];
 
         if ($demand->getOrderings()) {
             $orderList = GeneralUtility::trimExplode(',', $demand->getOrderings(), true);
@@ -182,10 +177,10 @@ abstract class AbstractDemandedRepository
             if (!empty($orderList)) {
                 // go through every order statement
                 foreach ($orderList as $orderItem) {
-                    list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, true);
+                    [$orderField, $ascDesc] = GeneralUtility::trimExplode('|', $orderItem, true);
                     // count == 1 means that no direction is given
                     if ($ascDesc) {
-                        $orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+                        $orderings[$orderField] = ((strtolower((string) $ascDesc) == 'desc') ?
                             QueryInterface::ORDER_DESCENDING :
                             QueryInterface::ORDER_ASCENDING);
                     } else {
@@ -248,7 +243,7 @@ abstract class AbstractDemandedRepository
             $query->getQuerySettings()->setRespectStoragePage(false);
         }
         $query->matching($query->in('uid', $uids));
-        $query->setOrderings(array($sortField => $sortOrder));
+        $query->setOrderings([$sortField => $sortOrder]);
 
         return $query->execute();
     }
@@ -301,7 +296,6 @@ abstract class AbstractDemandedRepository
     /**
      * Returns the total number objects of this repository matching the demand.
      *
-     * @param DemandInterface $demand
      * @return int
      */
     public function countDemanded(DemandInterface $demand)
@@ -320,7 +314,6 @@ abstract class AbstractDemandedRepository
     }
 
     /**
-     * @param array $geoLocation
      * @param GeoCodableInterface $object
      * @return float
      */

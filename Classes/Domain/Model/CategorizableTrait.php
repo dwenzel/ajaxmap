@@ -1,6 +1,7 @@
 <?php
 namespace DWenzel\Ajaxmap\Domain\Model;
 
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
 use DWenzel\Ajaxmap\Domain\Model\Category;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 
@@ -30,46 +31,47 @@ use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
  ***************************************************************/
 trait CategorizableTrait {
 
-	/**
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category>
-	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-	 */
-	protected $categories;
+    /**
+    * @var ObjectStorage<Category>
+    * @Lazy
+    */
+    protected $categories;
 
-	/**
-	 * Adds a Category
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category
-	 * @return void
-	 */
-	public function addCategory(Category $category) {
+    /**
+    * Adds a Category
+    *
+    * @return void
+    */
+    public function addCategory(Category $category) {
 		$this->categories->attach($category);
 	}
-	/**
-	 * Removes a Category
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $categoryToRemove The Category to be removed
-	 * @return void
-	 */
-	public function removeCategory(Category $categoryToRemove) {
+
+    /**
+    * Removes a Category
+    *
+    * @param Category $categoryToRemove The Category to be removed
+    * @return void
+    */
+    public function removeCategory(Category $categoryToRemove) {
 		$this->categories->detach($categoryToRemove);
 	}
-	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> $categories
-	 */
-	public function getCategories() {
-		return $this->categories;
-	}
 
-	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> $categories
-	 * @return void
-	 */
-	public function setCategories(ObjectStorage $categories) {
-		$this->categories = $categories;
-	}
+    /**
+    * Returns the categories
+    *
+    * @return ObjectStorage<Category> $categories
+    */
+    public function getCategories() {
+    return $this->categories;
+    }
+
+    /**
+    * Sets the categories
+    *
+    * @param ObjectStorage<Category> $categories
+    * @return void
+    */
+    public function setCategories(ObjectStorage $categories) {
+        $this->categories = $categories;
+    }
 }

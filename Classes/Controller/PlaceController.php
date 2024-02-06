@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\Ajaxmap\Controller;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -25,6 +26,7 @@ namespace DWenzel\Ajaxmap\Controller;
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
+use Psr\Http\Message\ResponseInterface;
 use DWenzel\Ajaxmap\Domain\Model\Place;
 use DWenzel\Ajaxmap\Domain\Repository\PlaceRepository;
 use DWenzel\Ajaxmap\Traits\PlaceDemandFactoryTrait;
@@ -56,23 +58,23 @@ class PlaceController extends AbstractController
      * @return void
      * @throws InvalidQueryException
      */
-    public function listAction($overwriteDemand = null)
+    public function listAction($overwriteDemand = null): ResponseInterface
     {
         $demand = $this->getPlaceDemandFactory()->fromSettings($this->settings);
         $places = $this->placeRepository->findDemanded($demand);
         $this->view->assignMultiple(
-            array(
+            [
                 'places' => $places,
                 'settings' => $this->settings,
                 'overwriteDemand' => $overwriteDemand
-            )
+            ]
         );
+        return $this->htmlResponse();
     }
 
     /**
      * Inject place repository
      *
-     * @param PlaceRepository $placeRepository
      * @return void
      */
     public function injectPlaceRepository(PlaceRepository $placeRepository)
@@ -83,17 +85,17 @@ class PlaceController extends AbstractController
     /**
      * action show
      *
-     * @param Place $place
      * @return void
      */
-    public function showAction(Place $place)
+    public function showAction(Place $place): ResponseInterface
     {
         $this->view->assignMultiple(
-            array(
+            [
                 'place' => $place,
                 'settings' => $this->settings
-            )
+            ]
         );
+        return $this->htmlResponse();
     }
 
     /**
@@ -103,20 +105,21 @@ class PlaceController extends AbstractController
      * @param bool $json Whether to return json string
      * @return string
      */
-    public function ajaxShowAction($placeId, $json = false)
+    public function ajaxShowAction($placeId, $json = false): ResponseInterface
     {
         $result = '';
 
         if ($place = $this->placeRepository->findByUid($placeId)) {
             if ($json) {
-                $result = json_encode($place->toArray(10, $this->settings['mapping']));
+                $result = json_encode(
+                    $place->toArray(10, $this->settings['mapping']), JSON_THROW_ON_ERROR
+                );
             } else {
                 $this->view->assign('place', $place);
                 $result = $this->view->render();
             }
         }
-        return $result;
+        return $this->htmlResponse($result);
     }
-
 }
 

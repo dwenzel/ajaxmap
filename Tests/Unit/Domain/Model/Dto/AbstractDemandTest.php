@@ -240,10 +240,7 @@ class AbstractDemandTest extends UnitTestCase
      */
     public function setGeoLocationForArraySetsGeoLocation()
     {
-        $geoLocation = array(
-            'lat' => 1.23,
-            'lng' => 4.56
-        );
+        $geoLocation = ['lat' => 1.23, 'lng' => 4.56];
         $this->subject->setGeoLocation($geoLocation);
 
         $this->assertSame(

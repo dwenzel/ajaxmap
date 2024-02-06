@@ -55,7 +55,7 @@ class FrontendJsonApiHandler implements MiddlewareInterface
             /** @var Dispatcher $dispatcher */
             $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
             $request = $request->withAttribute('target', $requestConfiguration);
-            return $dispatcher->dispatch($request, $response) ?? new NullResponse();
+            return $dispatcher->dispatch($request) ?? new NullResponse();
         }
 
         return new NullResponse();

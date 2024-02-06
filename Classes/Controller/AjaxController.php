@@ -40,7 +40,7 @@ class AjaxController
 {
     use ObjectManagerTrait;
 
-    const PLUGIN_CONFIGURATION = [
+    final public const PLUGIN_CONFIGURATION = [
         'extensionName' => SI::EXTENSION_NAME,
         'pluginName' => 'Map',
         'vendorName' => SI::VENDOR_NAME,
@@ -48,7 +48,7 @@ class AjaxController
         'action' => 'show'
     ];
 
-    const VALID_PARAMETERS = [
+    final public const VALID_PARAMETERS = [
         SI::API_PARAMETER_ACTION,
         SI::API_PARAMETER_MAP_ID,
         SI::API_PARAMETER_NO_CACHE,
@@ -66,7 +66,6 @@ class AjaxController
 
 
     /**
-     * @param ServerRequestInterface $request
      * @return ResponseInterface
      * @throws NoSuchCacheException
      */
@@ -80,13 +79,13 @@ class AjaxController
         $queryParams = $this->purgeParameters($request);
 
         array_multisort($queryParams);
-        $cacheIdentifier = md5(json_encode($queryParams));
+        $cacheIdentifier = md5(json_encode($queryParams, JSON_THROW_ON_ERROR));
 
         /** @var FrontendInterface $dataCache */
         $dataCache = GeneralUtility::makeInstance(CacheManager::class)->getCache(SI::CACHE_AJAX_DATA);
 
         if (($data = $dataCache->get($cacheIdentifier)) === false) {
-            $action = isset($queryParams[SI::API_PARAMETER_ACTION]) ? $queryParams[SI::API_PARAMETER_ACTION] : '';
+            $action = $queryParams[SI::API_PARAMETER_ACTION] ?? '';
 
             $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
             $providerFactory = $objectManager->get(ProviderFactory::class);
@@ -138,12 +137,11 @@ class AjaxController
     }
 
     /**
-     * @param ResponseInterface $response
      * @return void
      */
     protected function prepareResponse(ResponseInterface &$response): void
     {
         $response = $response->withHeader('Content-Type', 'application/json; charset=utf-8');
-        $response->getBody()->write(json_encode($this->responseArray));
+        $response->getBody()->write(json_encode($this->responseArray, JSON_THROW_ON_ERROR));
     }
 }

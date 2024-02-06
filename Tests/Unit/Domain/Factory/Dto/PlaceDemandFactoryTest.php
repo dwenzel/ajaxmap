@@ -85,9 +85,8 @@ class PlaceDemandFactoryTest extends UnitTestCase
      * @dataProvider settablePropertiesDataProvider
      * @param string $propertyName
      * @param string|int $settingsValue
-     * @param mixed $expectedValue
      */
-    public function testFromSettingsSetsSettableProperties($propertyName, $settingsValue, $expectedValue)
+    public function testFromSettingsSetsSettableProperties($propertyName, $settingsValue, mixed $expectedValue)
     {
         $settings = [
             $propertyName => $settingsValue

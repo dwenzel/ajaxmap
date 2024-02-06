@@ -33,21 +33,20 @@ class TreeUtility
     /**
      * Builds a tree of objects.
      *
-     * @param QueryResultInterface $objects
      * @return array
      */
     public function buildObjectTree(QueryResultInterface $objects)
     {
-        $tree = array();
+        $tree = [];
         $objects = $objects->toArray();
 
-        $flatObjects = array();
+        $flatObjects = [];
         /** @var TreeItemInterface $object */
         foreach ($objects as $object) {
-            $flatObjects[$object->getUid()] = array(
+            $flatObjects[$object->getUid()] = [
                 'item' => $object,
                 'parent' => ($object->getParent()) ? $object->getParent()->getUid() : NULL
-            );
+            ];
         }
         // If leaves are selected without its parents selected, those are shown as parent
         foreach ($flatObjects as $id => &$flatObject) {
@@ -72,7 +71,7 @@ class TreeUtility
      */
     public function convertObjectTreeToArray($objectTree, $keysToRemove = NULL, $mapping = NULL)
     {
-        $treeArray = array();
+        $treeArray = [];
         foreach ($objectTree as $objectTreeItem) {
             if ($treeArrayItem = $this->convertObjectBranchToArray($objectTreeItem, $keysToRemove, $mapping)) {
                 $treeArray[] = $treeArrayItem;
@@ -95,7 +94,7 @@ class TreeUtility
             if (isset($objectTreeItem['children'])
                 AND is_array($objectTreeItem['children'])
             ) {
-                $children = array();
+                $children = [];
                 foreach ($objectTreeItem['children'] as $child) {
                     $mappedChild = $this->convertObjectBranchToArray($child, $keysToRemove, $mapping);
                     $children[] = $mappedChild;
@@ -116,7 +115,7 @@ class TreeUtility
      */
     protected function convertObjectLeafToArray($objectLeaf, $keysToRemove = NULL, $mapping = NULL)
     {
-        $arrayItem = array();
+        $arrayItem = [];
         if (isset($objectLeaf['item']) AND
             $objectLeaf['item'] instanceof SerializableInterface
         ) {

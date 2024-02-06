@@ -24,7 +24,7 @@ namespace DWenzel\Ajaxmap\Domain\Repository;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
 use CPSIT\GeoLocationService\Service\GeoCoder;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Domain\Model\Dto\DemandInterface;
@@ -49,7 +49,7 @@ class PlaceRepository extends AbstractDemandedRepository
      * @param QueryInterface $query A query object
      * @param DemandInterface $demand A demand object
      * @return \array<\TYPO3\CMS\Extbase\Persistence\Generic\Qom\Constraint>
-     * @throws \TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException
+     * @throws InvalidQueryException
      */
     protected function createConstraintsFromDemand(QueryInterface $query, DemandInterface $demand)
     {
@@ -72,20 +72,16 @@ class PlaceRepository extends AbstractDemandedRepository
         // Location type constraints
         if ($demand->getLocationTypes()) {
             $locationTypes = GeneralUtility::intExplode(',', $demand->getLocationTypes());
-            $locationTypeConstraints = array();
+            $locationTypeConstraints = [];
             foreach ($locationTypes as $locationType) {
                 $locationTypeConstraints[] = $query->equals('locationType', $locationType);
             }
 
             if (count($locationTypeConstraints)) {
-                switch ($constraintsConjunction) {
-                    case SI::CONJUNCTION_OR:
-                        $constraints[] = $query->logicalOr($locationTypeConstraints);
-                        break;
-                    case SI::CONJUNCTION_AND:
-                    default:
-                        $constraints[] = $query->logicalAnd($locationTypeConstraints);
-                }
+                $constraints[] = match ($constraintsConjunction) {
+                    SI::CONJUNCTION_OR => $query->logicalOr($locationTypeConstraints),
+                    default => $query->logicalAnd($locationTypeConstraints),
+                };
             }
         }
 
@@ -98,8 +94,8 @@ class PlaceRepository extends AbstractDemandedRepository
             if (!empty($subject)) {
                 // search text in specified search fields
                 $searchFields = GeneralUtility::trimExplode(',', $search->getFields(), true);
-                if (count($searchFields) === 0) {
-                    throw new \UnexpectedValueException('No search fields given', 1382608407);
+                if ((is_countable($searchFields) ? count($searchFields) : 0) === 0) {
+                    throw new \UnexpectedValueException('No search fields given', 1_382_608_407);
                 }
                 foreach ($searchFields as $field) {
                     $searchConstraints[] = $query->like($field, '%' . $subject . '%');
@@ -123,7 +119,7 @@ class PlaceRepository extends AbstractDemandedRepository
      */
     protected function createOrderingsFromDemand(DemandInterface $demand)
     {
-        $orderings = array();
+        $orderings = [];
 
         //@todo validate order (orderAllowed) use getOrderings instead or extend AbstractDemandedRepository
         if ($demand->getOrder()) {
@@ -132,10 +128,10 @@ class PlaceRepository extends AbstractDemandedRepository
             if (!empty($orderList)) {
                 // go through every order statement
                 foreach ($orderList as $orderItem) {
-                    list($orderField, $ascDesc) = GeneralUtility::trimExplode('|', $orderItem, true);
+                    [$orderField, $ascDesc] = GeneralUtility::trimExplode('|', $orderItem, true);
                     // count == 1 means that no direction is given
                     if ($ascDesc) {
-                        $orderings[$orderField] = ((strtolower($ascDesc) == 'desc') ?
+                        $orderings[$orderField] = ((strtolower((string) $ascDesc) == 'desc') ?
                             QueryInterface::ORDER_DESCENDING :
                             QueryInterface::ORDER_ASCENDING);
                     } else {

@@ -1,9 +1,9 @@
 <?php
-if (!defined('TYPO3_MODE')) {
+if (!defined('TYPO3')) {
     die ('Access denied.');
 }
 
-$cll = 'LLL:EXT:lang/Resources/Private/Language/locallang_general.xlf:';
+$cll = 'LLL:EXT:core/Resources/Private/Language/locallang_general.xlf:';
 $ll = 'LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:';
 
 return [
@@ -12,10 +12,7 @@ return [
         'label' => 'title',
         'tstamp' => 'tstamp',
         'crdate' => 'crdate',
-        'cruser_id' => 'cruser_id',
-        'dividers2tabs' => true,
-        'versioningWS' => 2,
-        'versioning_followPages' => true,
+        'versioningWS' => true,
         'origUid' => 't3_origuid',
         'languageField' => 'sys_language_uid',
         'transOrigPointerField' => 'l10n_parent',
@@ -30,11 +27,8 @@ return [
             'default' => \DWenzel\Ajaxmap\Configuration\SettingsInterface::ICON_IDENTIFIER_PLACE
         ]
     ],
-    'interface' => [
-        'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title,latitude,longitude,icon,description, info, place_groups, location_type, regions, content, address',
-    ],
     'types' => [
-        '1' => ['showitem' => 'sys_language_uid;;;;1-1-1, l10n_parent, l10n_diffsource, hidden;;1, title,latitude,longitude,icon, description, info, categories, place_groups, location_type, regions, content, address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime, endtime'],
+        '1' => ['showitem' => 'sys_language_uid,--palette--,l10n_parent,l10n_diffsource,hidden,--palette--;;1,title,latitude,longitude,icon,description,info,categories,place_groups,location_type,regions,content,address,--div--;LLL:EXT:cms/locallang_ttc.xml:tabs.access,starttime,endtime'],
     ],
     'palettes' => [
         '1' => ['showitem' => ''],
@@ -43,24 +37,16 @@ return [
         'sys_language_uid' => [
             'exclude' => 1,
             'label' => $cll . 'LGL.language',
-            'config' => [
-                'type' => 'select',
-                'foreign_table' => 'sys_language',
-                'foreign_table_where' => 'ORDER BY sys_language.title',
-                'items' => [
-                    [$cll . 'LGL.allLanguages', -1],
-                    [$cll . 'LGL.default_value', 0]
-                ],
-            ],
+            'config' => ['type' => 'language'],
         ],
         'l10n_parent' => [
             'displayCond' => 'FIELD:sys_language_uid:>:0',
-            'exclude' => 1,
             'label' => $cll . 'LGL.l18n_parent',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'items' => [
-                    ['', 0],
+                    ['label' => '', 'value' => 0],
                 ],
                 'foreign_table' => 'tx_ajaxmap_domain_model_place',
                 'foreign_table_where' => 'AND tx_ajaxmap_domain_model_place.pid=###CURRENT_PID### AND tx_ajaxmap_domain_model_place.sys_language_uid IN (-1,0)',
@@ -88,33 +74,35 @@ return [
         ],
         'starttime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => $cll . 'LGL.starttime',
             'config' => [
-                'type' => 'input',
+                'type' => 'datetime',
                 'size' => 13,
-                'max' => 20,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
                 ],
+                'renderType' => 'inputDateTime',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
+                ],
             ],
         ],
         'endtime' => [
             'exclude' => 1,
-            'l10n_mode' => 'mergeIfNotBlank',
             'label' => $cll . 'LGL.endtime',
             'config' => [
-                'type' => 'input',
+                'type' => 'datetime',
                 'size' => 13,
-                'max' => 20,
-                'eval' => 'datetime',
                 'checkbox' => 0,
                 'default' => 0,
                 'range' => [
                     'lower' => mktime(0, 0, 0, date('m'), date('d'), date('Y'))
+                ],
+                'renderType' => 'inputDateTime',
+                'behaviour' => [
+                    'allowLanguageSynchronization' => true
                 ],
             ],
         ],
@@ -124,7 +112,8 @@ return [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
-                'eval' => 'trim,required'
+                'eval' => 'trim',
+                'required' => true
             ],
         ],
         'description' => [
@@ -145,24 +134,24 @@ return [
                 'cols' => 40,
                 'rows' => 15,
                 'eval' => 'trim',
-                'wizards' => [
-                    'RTE' => [
-                        'icon' => 'wizard_rte2.gif',
-                        'notNewRecords' => 1,
-                        'RTEonly' => 1,
-                        'script' => 'wizard_rte.php',
-                        'title' => 'LLL:EXT:cms/locallang_ttc.xml:bodytext.W.RTE',
-                        'type' => 'script'
+                'enableRichtext' => true,
+                'richtextConfiguration' => 'default',
+                'fieldControl' => [
+                    'fullScreenRichtext' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'LLL:EXT:cms/locallang_ttc.xml:bodytext.W.RTE'
+                        ]
                     ]
                 ]
             ],
-            'defaultExtras' => 'richtext[]',
         ],
         'place_groups' => [
             'exclude' => 0,
             'label' => $ll . 'tx_ajaxmap_domain_model_place.placeGroups',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectTree',
                 'foreign_table' => 'tx_ajaxmap_domain_model_placegroup',
                 'MM' => 'tx_ajaxmap_place_placegroup_mm',
                 'renderMode' => 'tree',
@@ -175,31 +164,25 @@ return [
                     'parentField' => 'parent',
                 ],
                 'size' => 10,
-                'autoSizeMax' => 30,
+                'size' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
-                'wizards' => [
-                    '_PADDING' => 1,
-                    '_VERTICAL' => 1,
-                    'edit' => [
-                        'type' => 'popup',
-                        'title' => 'Edit',
-                        'script' => 'wizard_edit.php',
-                        'icon' => 'edit2.gif',
-                        'popup_onlyOpenIfSelected' => 1,
-                        'JSopenParams' => 'height=350,width=580,status=0,menubar=0,scrollbars=1',
+                'fieldControl' => [
+                    'editPopup' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Edit'
+                        ]
                     ],
-                    'add' => [
-                        'type' => 'script',
-                        'title' => 'Create new',
-                        'icon' => 'add.gif',
-                        'params' => [
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
                             'table' => 'tx_ajaxmap_domain_model_placegroup',
                             'pid' => '###CURRENT_PID###',
                             'setValue' => 'prepend'
-                        ],
-                        'script' => 'wizard_add.php',
-                    ],
+                        ]
+                    ]
                 ],
             ],
         ],
@@ -208,6 +191,7 @@ return [
             'label' => $ll . 'tx_ajaxmap_domain_model_place.location_type',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectSingle',
                 'foreign_table' => 'tx_ajaxmap_domain_model_locationtype',
                 'minitems' => 0,
                 'maxitems' => 1,
@@ -216,43 +200,30 @@ return [
         'icon' => [
             'exclude' => 0,
             'label' => $ll . 'tx_ajaxmap_domain_model_place.icon',
-            'config' => [
-                'type' => 'group',
-                'internal_type' => 'file_reference',
-                'show_thumbs' => 1,
-                'size' => 1,
-                'allowed' => $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext'],
-                'disallowed' => '',
-            ],
+            'config' => \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::getFileFieldTCAConfig('icon', [], $GLOBALS['TYPO3_CONF_VARS']['GFX']['imagefile_ext']),
         ],
         'regions' => [
             'exclude' => 0,
             'label' => $ll . 'tx_ajaxmap_domain_model_place.regions',
             'config' => [
                 'type' => 'select',
+                'renderType' => 'selectMultipleSideBySide',
                 'foreign_table' => 'tx_ajaxmap_domain_model_region',
                 'MM' => 'tx_ajaxmap_place_region_mm',
                 'size' => 10,
                 'autoSizeMax' => 30,
                 'maxitems' => 9999,
                 'multiple' => 0,
-                'wizards' => [
-                    '_PADDING' => 1,
-                    '_VERTICAL' => 1,
-                    'add' => [
-                        'type' => 'script',
-                        'title' => 'Create new',
-                        'icon' => 'add.gif',
-                        'params' => [
+                'fieldControl' => [
+                    'addRecord' => [
+                        'disabled' => false,
+                        'options' => [
+                            'title' => 'Create new',
                             'table' => 'tx_ajaxmap_domain_model_region',
                             'pid' => '###CURRENT_PID###',
                             'setValue' => 'prepend'
-                        ],
-                        'script' => 'wizard_add.php',
-                    ],
-                    'suggest' => [
-                        'type' => 'suggest',
-                    ],
+                        ]
+                    ]
                 ],
             ],
         ],
@@ -286,11 +257,12 @@ return [
             'label' => $ll . 'latitude',
             'config' => [
                 'type' => 'input',
-                'eval' => 'null,' . \FriendsOfTYPO3\TtAddress\Evaluation\LatitudeEvaluation::class,
+                'eval' => 'FriendsOfTYPO3\TtAddress\Evaluation\LatitudeEvaluation',
                 'default' => null,
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
+                'nullable' => true,
             ]
         ],
         'longitude' => [
@@ -298,7 +270,7 @@ return [
             'label' => $ll . 'longitude',
             'config' => [
                 'type' => 'input',
-                'eval' => 'null,' . \FriendsOfTYPO3\TtAddress\Evaluation\LongitudeEvaluation::class,
+                'eval' => 'FriendsOfTYPO3\TtAddress\Evaluation\LongitudeEvaluation',
                 'default' => null,
                 'fieldControl' => [
                     'locationMap' => [
@@ -308,6 +280,7 @@ return [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
+                'nullable' => true,
             ]
         ],
         'address' => [
@@ -315,7 +288,6 @@ return [
             'label' => $ll . 'tx_ajaxmap_domain_model_place.address',
             'config' => [
                 'type' => 'group',
-                'internal_type' => 'db',
                 'allowed' => 'tt_address',
                 'foreign_table' => 'tt_address',
                 'fieldControl' => [

@@ -29,9 +29,6 @@ trait MappingAwareTrait
      */
     protected $mapping = DataProviderInterface::OBJECT_TO_JSON_MAP;
 
-    /**
-     * @param array $mapping
-     */
     public function setMapping(array $mapping)
     {
         $this->mapping = $mapping;

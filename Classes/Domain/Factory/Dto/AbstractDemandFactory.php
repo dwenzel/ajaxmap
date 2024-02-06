@@ -80,7 +80,6 @@ abstract class AbstractDemandFactory
      * and must be set by concrete factory
      *
      * @param $demand
-     * @param array $settings
      */
     public function applySettings($demand, array $settings)
     {

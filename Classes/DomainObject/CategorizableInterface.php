@@ -12,30 +12,30 @@ use DWenzel\Ajaxmap\Domain\Model\Category;
  */
 interface CategorizableInterface {
 	/**
-	 * Adds a Category
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category
-	 */
-	public function addCategory(Category $category);
+  * Adds a Category
+  *
+  * @param Category $category
+  */
+ public function addCategory(Category $category);
 
 	/**
-	 * Removes a Category
-	 *
-	 * @param \DWenzel\Ajaxmap\Domain\Model\Category $category The Category to be removed
-	 */
-	public function removeCategory(Category $category);
+  * Removes a Category
+  *
+  * @param Category $category The Category to be removed
+  */
+ public function removeCategory(Category $category);
 
 	/**
-	 * Returns the categories
-	 *
-	 * @return \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category> categories
-	 */
-	public function getCategories();
+  * Returns the categories
+  *
+  * @return ObjectStorage<Category> categories
+  */
+ public function getCategories();
 
 	/**
-	 * Sets the categories
-	 *
-	 * @param \TYPO3\CMS\Extbase\Persistence\ObjectStorage $categories
-	 */
-	public function setCategories(ObjectStorage $categories);
+  * Sets the categories
+  *
+  * @param ObjectStorage $categories
+  */
+ public function setCategories(ObjectStorage $categories);
 }

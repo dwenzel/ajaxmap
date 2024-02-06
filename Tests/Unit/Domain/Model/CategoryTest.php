@@ -24,6 +24,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use TYPO3\CMS\Extbase\Utility\DebuggerUtility;
 use DWenzel\Ajaxmap\Domain\Model\Category;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
@@ -43,12 +44,12 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
  */
 class CategoryTest extends UnitTestCase {
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Category
-	 */
-	protected $fixture;
+  * @var Category
+  */
+ protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Category();
+		$this->fixture = new Category();
 	}
 
 	/**
@@ -66,7 +67,7 @@ class CategoryTest extends UnitTestCase {
 	 * @covers ::setParent
 	 */
 	public function setParentForObjectSetsParent() {
-		$parentCategory = new \DWenzel\Ajaxmap\Domain\Model\Category();
+		$parentCategory = new Category();
 		$this->fixture->setParent($parentCategory);
 
 		$this->assertSame(
@@ -81,12 +82,12 @@ class CategoryTest extends UnitTestCase {
 	 */
 	public function getParentLoadsRealInstanceForLazyLoadingProxy() {
 		$fixture = $this->getAccessibleMock(
-			'DWenzel\\Ajaxmap\\Domain\\Model\\Category',
-			array('dummy'), array(), '', false
+			Category::class,
+			['dummy'], [], '', false
 		);
 		$mockParent = $this->getAccessibleMock(
-			'TYPO3\\CMS\\Extbase\\Persistence\\Generic\\LazyLoadingProxy',
-			array('_loadRealInstance'), array(), '', false
+			LazyLoadingProxy::class,
+			['_loadRealInstance'], [], '', false
 		);
 		$fixture->_set('parent', $mockParent);
 		$mockParent->expects($this->once())->method('_loadRealInstance');
@@ -97,13 +98,13 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsInitialValue() {
-		$result = array(
-			'description' => '',
-			'parent' => null,
-			'pid' => null,
-			'title' => '',
-			'uid' => null
-		);
+		$result = [
+            'description' => '',
+            'parent' => null,
+            'pid' => null,
+            'title' => '',
+            'uid' => null
+        ];
 		$this->assertSame(
 			$result,
 			$this->fixture->toArray()
@@ -114,26 +115,25 @@ class CategoryTest extends UnitTestCase {
 	 * @test
 	 */
 	public function toArrayReturnsArrayWithCorrectValues() {
-		$parentCategory = new \DWenzel\Ajaxmap\Domain\Model\Category();
+		$parentCategory = new Category();
 		$this->fixture->setParent($parentCategory);
 		$this->fixture->setDescription('foo');
 		$this->fixture->setPid(1);
 		$this->fixture->setTitle('foobar');
 		$this->fixture->_setProperty('uid', 2);
-		$result = array(
-						'description' => 'foo',
-						'parent' => array(
-							'description' => '',
-							'parent' => null,
-							'pid' => null,
-							'title' => null,
-							'uid' => null
-						),
-						'pid' => 1,
-						'title' => 'foobar',
-						'uid' => 2
-
-		);
+		$result = [
+            'description' => 'foo',
+            'parent' => [
+                'description' => '',
+                'parent' => null,
+                'pid' => null,
+                'title' => null,
+                'uid' => null
+            ],
+            'pid' => 1,
+            'title' => 'foobar',
+            'uid' => 2
+        ];
 		$this->assertEquals(
 			$result,
 			$this->fixture->toArray()

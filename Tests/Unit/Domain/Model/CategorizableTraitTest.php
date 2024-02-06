@@ -33,9 +33,9 @@ use DWenzel\Ajaxmap\Domain\Model\CategorizableTrait;
 class CategorizableTraitTest extends UnitTestCase {
 
 	/**
-	 * @var \DWenzel\Ajaxmap\Domain\Model\CategorizableTrait
-	 */
-	protected $subject;
+  * @var CategorizableTrait
+  */
+ protected $subject;
 
 	public function setUp() {
 		$this->subject = $this->getMockForTrait(

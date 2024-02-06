@@ -1,6 +1,7 @@
 <?php
 
 namespace DWenzel\Ajaxmap\Domain\Model;
+
 /***************************************************************
  *  Copyright notice
  *
@@ -24,8 +25,12 @@ namespace DWenzel\Ajaxmap\Domain\Model;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
+
+use TYPO3\CMS\Extbase\Annotation\ORM\Lazy;
+use TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy;
 use DWenzel\Ajaxmap\DomainObject\SerializableInterface;
 use TYPO3\CMS\Extbase\Domain\Model\Category as ExtbaseCategory;
+
 /**
  * Category
  *
@@ -33,16 +38,17 @@ use TYPO3\CMS\Extbase\Domain\Model\Category as ExtbaseCategory;
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Category extends ExtbaseCategory
- implements TreeItemInterface, SerializableInterface {
-	use ToArrayTrait, ToJsonTrait;
-	/**
-	 * Parent
-	 *
-	 * @var \DWenzel\Ajaxmap\Domain\Model\Category|null
-	 *  @TYPO3\CMS\Extbase\Annotation\ORM\Lazy
-	 */
-	protected $parent = null;
+class Category extends ExtbaseCategory implements TreeItemInterface, SerializableInterface {
+
+    use ToArrayTrait, ToJsonTrait;
+
+    /**
+    * Parent
+    *
+    * @var \DWenzel\Ajaxmap\Domain\Model\Category|null
+    * @Lazy
+    */
+    protected $parent = null;
 
 	/**
 	 * Gets the parent
@@ -50,7 +56,7 @@ class Category extends ExtbaseCategory
 	 * @return Category
 	 */
 	public function getParent() {
-		if ($this->parent instanceof \TYPO3\CMS\Extbase\Persistence\Generic\LazyLoadingProxy) {
+		if ($this->parent instanceof LazyLoadingProxy) {
 			$this->parent->_loadRealInstance();
 		}
 		return $this->parent;

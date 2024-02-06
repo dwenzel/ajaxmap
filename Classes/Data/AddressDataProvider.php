@@ -62,7 +62,7 @@ class AddressDataProvider implements DataProviderInterface, MappingAwareInterfac
     {
         if (!isset($queryParameter['placeId'])) {
             throw  new MissingRequestArgumentException(
-                'Request argument placeId missing', 1557508026
+                'Request argument placeId missing', 1_557_508_026
             );
         }
         $data = [];

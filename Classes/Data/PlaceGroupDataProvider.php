@@ -89,7 +89,7 @@ class PlaceGroupDataProvider implements DataProviderInterface, MappingAwareInter
     {
         if (!isset($queryParameter['mapId'])) {
             throw  new MissingRequestArgumentException(
-                'Request argument mapId missing', 1557505647
+                'Request argument mapId missing', 1_557_505_647
             );
         }
         $mapId = (int)$queryParameter['mapId'];
@@ -100,7 +100,7 @@ class PlaceGroupDataProvider implements DataProviderInterface, MappingAwareInter
         if ($map && $map->getPlaceGroups()) {
             $placeGroupObjArray = $map->getPlaceGroups()->toArray();
             if ((bool)$placeGroupObjArray) {
-                $rootIds = array();
+                $rootIds = [];
                 foreach ($placeGroupObjArray as $placeGroup) {
                     /** @var PlaceGroup $placeGroup */
                     $rootIds[] = $placeGroup->getUid();

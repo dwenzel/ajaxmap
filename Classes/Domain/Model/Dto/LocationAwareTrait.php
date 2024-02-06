@@ -109,9 +109,6 @@ trait LocationAwareTrait
         return $this->region;
     }
 
-    /**
-     * @param string $region
-     */
     public function setRegion(string $region): void
     {
         $this->region = $region;

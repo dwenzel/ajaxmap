@@ -63,7 +63,7 @@ class MapDataProvider implements DataProviderInterface, MappingAwareInterface
         $data = [];
         if (!isset($queryParameter['mapId'])) {
             throw  new MissingRequestArgumentException(
-                'Request argument mapId missing', 1557505647
+                'Request argument mapId missing', 1_557_505_647
             );
         }
         $mapId = (int)$queryParameter['mapId'];

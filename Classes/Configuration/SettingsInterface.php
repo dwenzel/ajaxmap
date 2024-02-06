@@ -26,50 +26,50 @@ use TYPO3\CMS\Core\Imaging\IconProvider\FontawesomeIconProvider;
  */
 interface SettingsInterface
 {
-    const EXTENSION_KEY = 'ajaxmap';
-    const EXTENSION_NAME = 'Ajaxmap';
-    const VENDOR_NAME = 'DWenzel';
+    public const EXTENSION_KEY = 'ajaxmap';
+    public const EXTENSION_NAME = 'Ajaxmap';
+    public const VENDOR_NAME = 'DWenzel';
 
-    const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
+    public const RESOURCES_PATH = 'typo3conf/ext/ajaxmap/Resources/';
     /**
      * API parameters
      */
-    const API_PARAMETER_ACTION = 'action';
-    const API_PARAMETER_MAP = 'map';
-    const API_PARAMETER_MAP_ID = 'mapId';
-    const API_PARAMETER_NO_CACHE = 'no_cache';
-    const API_PARAMETER_PLACE_ID = 'placeId';
+    public const API_PARAMETER_ACTION = 'action';
+    public const API_PARAMETER_MAP = 'map';
+    public const API_PARAMETER_MAP_ID = 'mapId';
+    public const API_PARAMETER_NO_CACHE = 'no_cache';
+    public const API_PARAMETER_PLACE_ID = 'placeId';
 
     /**
      * Key for icon registration
      */
-    const ICON_NAME_KEY = 'name';
-    const ICON_PROVIDER_CLASS_KEY = 'iconProviderClass';
-    const ICON_OPTIONS_KEY = 'options';
+    public const ICON_NAME_KEY = 'name';
+    public const ICON_PROVIDER_CLASS_KEY = 'iconProviderClass';
+    public const ICON_OPTIONS_KEY = 'options';
 
     /**
      * icon identifiers
      */
-    const ICON_IDENTIFIER_LOCATION_TYPE = 'ajaxmap-location-type';
-    const ICON_IDENTIFIER_MAP = 'ajaxmap-map';
-    const ICON_IDENTIFIER_PLACE = 'ajaxmap-place';
-    const ICON_IDENTIFIER_PLACEGROUP = 'ajaxmap-place-group';
-    const ICON_IDENTIFIER_REGION = 'ajaxmap-region';
+    public const ICON_IDENTIFIER_LOCATION_TYPE = 'ajaxmap-location-type';
+    public const ICON_IDENTIFIER_MAP = 'ajaxmap-map';
+    public const ICON_IDENTIFIER_PLACE = 'ajaxmap-place';
+    public const ICON_IDENTIFIER_PLACEGROUP = 'ajaxmap-place-group';
+    public const ICON_IDENTIFIER_REGION = 'ajaxmap-region';
 
     /**
      * ajax action identifiers
      */
-    const ACTION_BUILD_MAP = 'buildMap';
-    const ACTION_GET_ADDRESS = 'getAddress';
-    const ACTION_LIST_CATEGORIES = 'listCategories';
-    const ACTION_LIST_LOCATION_TYPES = 'listLocationTypes';
-    const ACTION_LIST_PLACES = 'listPlaces';
-    const ACTION_LIST_PLACE_GROUPS = 'listPlaceGroups';
+    public const ACTION_BUILD_MAP = 'buildMap';
+    public const ACTION_GET_ADDRESS = 'getAddress';
+    public const ACTION_LIST_CATEGORIES = 'listCategories';
+    public const ACTION_LIST_LOCATION_TYPES = 'listLocationTypes';
+    public const ACTION_LIST_PLACES = 'listPlaces';
+    public const ACTION_LIST_PLACE_GROUPS = 'listPlaceGroups';
 
     /**
      * Icons to register via API
      */
-    const ICONS_TO_REGISTER = [
+    public const ICONS_TO_REGISTER = [
         self::ICON_IDENTIFIER_LOCATION_TYPE => [
             self::ICON_PROVIDER_CLASS_KEY => FontawesomeIconProvider::class,
             self::ICON_OPTIONS_KEY => [
@@ -103,7 +103,7 @@ interface SettingsInterface
         ],
     ];
 
-    const MAP_SETTINGS = [
+    public const MAP_SETTINGS = [
         'id' => null,
         'map' => '',
         'regions' => '',
@@ -116,36 +116,36 @@ interface SettingsInterface
         'applicationAssetPath' => '/typo3conf/ext/ajaxmap/Resources/Public/Dist/assets/'
     ];
 
-    const SEPARATOR_GEO_COORDINATES = ',';
+    public const SEPARATOR_GEO_COORDINATES = ',';
 
     /**
      * Cache identifiers
      */
-    const CACHE_CHILDREN = 'cache_ajaxmap_children';
-    const CACHE_AJAX_DATA = 'cache_ajaxmap_data';
+    public const CACHE_CHILDREN = 'cache_ajaxmap_children';
+    public const CACHE_AJAX_DATA = 'cache_ajaxmap_data';
 
     /**
      * Settings keys
      */
-    const LOCATION_TYPES = 'locationTypes';
-    const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
-    const DATA = 'data';
-    const PLACE_GROUPS = 'placeGroups';
-    const ID = 'id';
-    const KEYS = 'keys';
-    const MAP = 'map';
-    const PAGE_ID = 'pageId';
-    const SEARCH = 'search';
-    const SETTINGS = 'settings';
-    const MAP_SETTINGS_KEY = 'mapSettings';
-    const SUBJECT = 'subject';
-    const FIELDS = 'fields';
-    const LOCATION = 'location';
-    const RADIUS = 'radius';
-    const BOUNDS = 'bounds';
-    const REGION = 'region';
-    const FORCE_RESULT = 'forceResult';
-    const ORDER = 'order';
-    const CONJUNCTION_AND = 'AND';
-    const CONJUNCTION_OR = 'OR';
+    public const LOCATION_TYPES = 'locationTypes';
+    public const CONSTRAINTS_CONJUNCTION = 'constraintsConjunction';
+    public const DATA = 'data';
+    public const PLACE_GROUPS = 'placeGroups';
+    public const ID = 'id';
+    public const KEYS = 'keys';
+    public const MAP = 'map';
+    public const PAGE_ID = 'pageId';
+    public const SEARCH = 'search';
+    public const SETTINGS = 'settings';
+    public const MAP_SETTINGS_KEY = 'mapSettings';
+    public const SUBJECT = 'subject';
+    public const FIELDS = 'fields';
+    public const LOCATION = 'location';
+    public const RADIUS = 'radius';
+    public const BOUNDS = 'bounds';
+    public const REGION = 'region';
+    public const FORCE_RESULT = 'forceResult';
+    public const ORDER = 'order';
+    public const CONJUNCTION_AND = 'AND';
+    public const CONJUNCTION_OR = 'OR';
 }

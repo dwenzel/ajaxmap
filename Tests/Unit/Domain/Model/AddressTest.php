@@ -25,7 +25,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+use DWenzel\Ajaxmap\Domain\Model\Address;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 use TYPO3\CMS\Extbase\Persistence\ObjectStorage;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
@@ -38,13 +38,13 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 class AddressTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\Ajaxmap\Domain\Model\Address
+     * @var Address
      */
     protected $subject;
 
     public function setUp()
     {
-        $this->subject = new \DWenzel\Ajaxmap\Domain\Model\Address();
+        $this->subject = new Address();
     }
 
     public function tearDown()

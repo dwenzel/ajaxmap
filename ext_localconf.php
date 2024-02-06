@@ -1,5 +1,5 @@
 <?php
-defined('TYPO3_MODE') or die();
+defined('TYPO3') or die();
 
 (function ($extensionKey) {
     // Add cache configurations
@@ -23,14 +23,14 @@ defined('TYPO3_MODE') or die();
 
     // Configure plugins
     TYPO3\CMS\Extbase\Utility\ExtensionUtility::configurePlugin(
-        'DWenzel.' . $extensionKey,
+        'Ajaxmap',
         'Map',
         [
-            'Place' => 'show,ajaxShow',
-            'Map' => 'show,search',
+            \DWenzel\Ajaxmap\Controller\PlaceController::class => 'show,ajaxShow',
+            \DWenzel\Ajaxmap\Controller\MapController::class => 'show,search',
         ],
         [
-            'Map' => 'show,search'
+            \DWenzel\Ajaxmap\Controller\MapController::class => 'show,search'
         ]
     );
 })('ajaxmap');

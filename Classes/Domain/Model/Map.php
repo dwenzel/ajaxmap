@@ -131,46 +131,46 @@ class Map extends AbstractEntity
     protected $disableDefaultUi = false;
 
 	/**
-	 * Select items for display by category.
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Category>
-	 */
-	protected $categories;
+  * Select items for display by category.
+  *
+  * @var ObjectStorage<Category>
+  */
+ protected $categories;
 
 	/**
-	 * Select items for display by placeGroups.
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\PlaceGroup>
-	 */
-	protected $placeGroups;
+  * Select items for display by placeGroups.
+  *
+  * @var ObjectStorage<PlaceGroup>
+  */
+ protected $placeGroups;
 
 	/**
-	 * regions
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
-	 */
-	protected $regions;
+  * regions
+  *
+  * @var ObjectStorage<Region>
+  */
+ protected $regions;
 
 	/**
-	 * Static layers
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Region>
-	 */
-	protected $staticLayers;
+  * Static layers
+  *
+  * @var ObjectStorage<Region>
+  */
+ protected $staticLayers;
 
 	/**
-	 * Display selected places as markers.
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\Place>
-	 */
-	protected $places;
+  * Display selected places as markers.
+  *
+  * @var ObjectStorage<Place>
+  */
+ protected $places;
 
 	/**
-	 * Selected places by location type.
-	 *
-	 * @var \TYPO3\CMS\Extbase\Persistence\ObjectStorage<\DWenzel\Ajaxmap\Domain\Model\LocationType>
-	 */
-	protected $locationTypes;
+  * Selected places by location type.
+  *
+  * @var ObjectStorage<LocationType>
+  */
+ protected $locationTypes;
 
     /**
      * __construct
@@ -261,7 +261,6 @@ class Map extends AbstractEntity
     /**
      * Adds a Region
      *
-     * @param Region $region
      * @return void
      */
     public function addRegion(Region $region)
@@ -293,7 +292,6 @@ class Map extends AbstractEntity
     /**
      * Sets the regions
      *
-     * @param ObjectStorage $regions
      * @return void
      */
     public function setRegions(ObjectStorage $regions)
@@ -304,7 +302,6 @@ class Map extends AbstractEntity
     /**
      * Adds a Static Layer
      *
-     * @param Region $staticLayer
      * @return void
      */
     public function addStaticLayer(Region $staticLayer)
@@ -336,7 +333,6 @@ class Map extends AbstractEntity
     /**
      * Sets the staticLayers
      *
-     * @param ObjectStorage $staticLayers
      * @return void
      */
     public function setStaticLayers(ObjectStorage $staticLayers)
@@ -374,7 +370,6 @@ class Map extends AbstractEntity
     }
 
     /**
-     * @param bool $hideTypeControl
      * @return self
      */
     public function setHideTypeControl(bool $hideTypeControl): self
@@ -392,7 +387,6 @@ class Map extends AbstractEntity
     }
 
     /**
-     * @param bool $hideFullscreenControl
      * @return self
      */
     public function setHideFullscreenControl(bool $hideFullscreenControl): self
@@ -410,7 +404,6 @@ class Map extends AbstractEntity
     }
 
     /**
-     * @param bool $hideStreetViewControl
      * @return self
      */
     public function setHideStreetViewControl(bool $hideStreetViewControl): self
@@ -470,7 +463,6 @@ class Map extends AbstractEntity
     }
 
     /**
-     * @param int|null $minZoom
      * @return self
      */
     public function setMinZoom(?int $minZoom): self
@@ -488,7 +480,6 @@ class Map extends AbstractEntity
     }
 
     /**
-     * @param int|null $maxZoom
      * @return self
      */
     public function setMaxZoom(?int $maxZoom): self
@@ -549,8 +540,6 @@ class Map extends AbstractEntity
 
     /**
      * Adds a PlaceGroup
-     *
-     * @param PlaceGroup $placeGroup
      */
     public function addPlaceGroup(PlaceGroup $placeGroup)
     {
@@ -579,8 +568,6 @@ class Map extends AbstractEntity
 
     /**
      * Sets the placeGroups
-     *
-     * @param ObjectStorage $placeGroups
      */
     public function setPlaceGroups(ObjectStorage $placeGroups)
     {
@@ -590,7 +577,6 @@ class Map extends AbstractEntity
     /**
      * Adds a LocationType
      *
-     * @param LocationType $locationType
      * @return void
      */
     public function addLocationType(LocationType $locationType)
@@ -622,7 +608,6 @@ class Map extends AbstractEntity
     /**
      * Sets the locationTypes
      *
-     * @param ObjectStorage $locationTypes
      * @return void
      */
     public function setLocationTypes(ObjectStorage $locationTypes)

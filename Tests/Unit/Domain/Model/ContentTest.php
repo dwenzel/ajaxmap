@@ -24,7 +24,6 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  *  This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
 /**
  * Test case for class DWenzel\Ajaxmap\Domain\Model\Content.
  *
@@ -37,7 +36,7 @@ namespace DWenzel\Ajaxmap\Tests;
  *
  * @author Dirk Wenzel <wenzel@webfox01.de>
  */
-
+use DWenzel\Ajaxmap\Domain\Model\Content;
 use Nimut\TestingFramework\TestCase\UnitTestCase;
 
 /**
@@ -48,13 +47,13 @@ use Nimut\TestingFramework\TestCase\UnitTestCase;
 class ContentTest extends UnitTestCase
 {
     /**
-     * @var \DWenzel\Ajaxmap\Domain\Model\Content
+     * @var Content
      */
     protected $fixture;
 
     public function setUp()
     {
-        $this->fixture = new \DWenzel\Ajaxmap\Domain\Model\Content();
+        $this->fixture = new Content();
     }
 
     public function tearDown()

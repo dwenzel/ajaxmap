@@ -42,7 +42,7 @@ use TYPO3\CMS\Extbase\Persistence\Generic\QueryResult;
  */
 class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
 {
-    const ALLOWED_SEARCH_PARAMS = [
+    final public const ALLOWED_SEARCH_PARAMS = [
         SI::RADIUS,
         SI::SUBJECT,
         SI::FIELDS,
@@ -145,7 +145,7 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
     {
         if (!isset($queryParameter['mapId'])) {
             throw  new MissingRequestArgumentException(
-                'Request argument mapId missing', 1557505647
+                'Request argument mapId missing', 1_557_505_647
             );
         }
         $mapId = (int)$queryParameter['mapId'];
@@ -196,7 +196,6 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
     /**
      * Override settings with allowed query parameters
      *
-     * @param array $settings
      * @param $queryParameter
      * @return array
      */
@@ -219,7 +218,6 @@ class PlaceDataProvider implements DataProviderInterface, MappingAwareInterface
     }
 
     /**
-     * @param Map $map
      * @return array
      */
     protected function getSettingsFromMap(Map $map): array
