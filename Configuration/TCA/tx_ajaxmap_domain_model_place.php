@@ -306,5 +306,10 @@ return [
                 'maxitems' => 1,
             ],
         ],
+        'categories' => [
+            'config' => [
+                'type' => 'category'
+            ]
+        ],
     ],
 ];
