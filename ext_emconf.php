@@ -18,14 +18,11 @@ $EM_CONF[$_EXTKEY] = [
     'author_email' => 'wenzel@cps-it.de',
     'author_company' => 'Agentur Webfox Berlin, CPS-IT Berlin',
     'state' => 'stable',
-    'uploadfolder' => true,
-    'createDirs' => '',
-    'clearCacheOnLoad' => true,
     'version' => '2.0.0',
     'constraints' => [
         'depends' => [
-            'typo3' => '9.5.0-9.5.99',
-            'tt_address' => '2.3.4-0.0.0',
+            'typo3' => '12.4.0-12.4.99',
+            'tt_address' => '8.0.0-8.0.99',
             'geo_location_service' => '0.2.0-0.3.99',
         ],
     ],
