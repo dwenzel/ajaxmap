@@ -99,7 +99,14 @@ class MapController extends AbstractController
     protected function getMapSettings(array $search = []): void
     {
         $this->mapSettings[SI::ID] = $this->settings[SI::MAP];
-        $this->mapSettings[SI::PAGE_ID] = $GLOBALS['TSFE']->id;
+        $relevantParametersForCachingFromPageArguments = [];
+        $pageArguments = $GLOBALS['REQUEST']->getAttribute('routing');
+        $queryParams = $pageArguments->getDynamicArguments();
+        if (!empty($queryParams) && ($pageArguments->getArguments()['cHash'] ?? false)) {
+            $queryParams['id'] = $pageArguments->getPageId();
+            $relevantParametersForCachingFromPageArguments = GeneralUtility::makeInstance(CacheHashCalculator::class)->getRelevantParameters(HttpUtility::buildQueryString($queryParams));
+        }
+        $this->mapSettings[SI::PAGE_ID] = $relevantParametersForCachingFromPageArguments;
         if (empty($this->settings[SI::SEARCH])) {
             $this->settings[SI::SEARCH] = [];
         }
