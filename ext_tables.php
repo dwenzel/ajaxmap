@@ -43,20 +43,20 @@ $configure = function () {
     $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= ',--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_address,';
     $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= '';
 
-    /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
-    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
-        \TYPO3\CMS\Core\Imaging\IconRegistry::class
-    );
-
-    foreach (SI::ICONS_TO_REGISTER as $identifier => $config) {
-        $iconRegistry->registerIcon(
-            $identifier,
-            // provider
-            $config[SI::ICON_PROVIDER_CLASS_KEY],
-            // options
-            $config[SI::ICON_OPTIONS_KEY]
-        );
-    }
+//    /** @var \TYPO3\CMS\Core\Imaging\IconRegistry $iconRegistry */
+//    $iconRegistry = \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(
+//        \TYPO3\CMS\Core\Imaging\IconRegistry::class
+//    );
+//
+//    foreach (SI::ICONS_TO_REGISTER as $identifier => $config) {
+//        $iconRegistry->registerIcon(
+//            $identifier,
+//            // provider
+//            $config[SI::ICON_PROVIDER_CLASS_KEY],
+//            // options
+//            $config[SI::ICON_OPTIONS_KEY]
+//        );
+//    }
 };
 
 $configure();
