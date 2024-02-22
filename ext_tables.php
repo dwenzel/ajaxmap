@@ -7,13 +7,7 @@ use \DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 $configure = function () {
     $extensionKey = 'ajaxmap';
     $extensionPath = \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::extPath($extensionKey);
-
-    \TYPO3\CMS\Extbase\Utility\ExtensionUtility::registerPlugin(
-        $extensionKey,
-        'Map',
-        'Map'
-    );
-
+    
     $pluginSignature = str_replace('_', '', $extensionKey) . '_' . 'map';
     $GLOBALS['TCA']['tt_content']['types']['list']['subtypes_addlist'][$pluginSignature] = 'pi_flexform';
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addPiFlexFormValue($pluginSignature, 'FILE:EXT:' . $extensionKey . '/Configuration/FlexForms/flexform_map.xml');

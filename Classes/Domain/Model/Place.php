@@ -336,7 +336,7 @@ class Place extends AbstractEntity
   *
   * @return Address $address
   */
- public function getAddress() {
+ public function getAddress(): string {
 		return $this->address;
 	}
 
@@ -345,7 +345,7 @@ class Place extends AbstractEntity
   *
   * @return void
   */
- public function setAddress(Address $address) {
+ public function setAddress(Address $address): string {
 		$this->address = $address;
 	}
 
@@ -439,7 +439,7 @@ class Place extends AbstractEntity
         return $this;
     }
 
-    public function getPlace()
+    public function getPlace(): string
     {
         if ($this->address instanceof Address)
         {
@@ -449,7 +449,7 @@ class Place extends AbstractEntity
         return '';
     }
 
-    public function getZip()
+    public function getZip(): string
     {
         if ($this->address instanceof Address) {
             return $this->address->getZip();

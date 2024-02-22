@@ -56,7 +56,7 @@ class Address extends BaseAddress
      * Wrapper method
      * required by GeoCodableInterface
      */
-    public function getPlace()
+    public function getPlace(): string
     {
         return $this->getCity();
     }
