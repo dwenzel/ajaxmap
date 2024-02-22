@@ -15,7 +15,7 @@
  * GNU General Public License for more details.
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
-
+/*
 return [
     'frontend' => [
         'dwenzel/ajaxmap/frontend-json-api' => [
@@ -30,3 +30,4 @@ return [
         ]
     ]
 ];
+*/
