@@ -103,8 +103,8 @@ abstract class AbstractDemandedRepository
      */
     protected function generateQuery(
         DemandInterface $demand,
-        $respectEnableFields = true,
-        $enableFieldsToIgnore = null,
+        $respectEnableFields,
+        $enableFieldsToIgnore,
         $respectStoragePage
     )
     {
