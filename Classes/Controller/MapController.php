@@ -96,17 +96,13 @@ class MapController extends AbstractController
         return $this->htmlResponse();
     }
 
+    /**
+     * @param array $search
+     */
     protected function getMapSettings(array $search = []): void
     {
         $this->mapSettings[SI::ID] = $this->settings[SI::MAP];
-        $relevantParametersForCachingFromPageArguments = [];
-        $pageArguments = $GLOBALS['REQUEST']->getAttribute('routing');
-        $queryParams = $pageArguments->getDynamicArguments();
-        if (!empty($queryParams) && ($pageArguments->getArguments()['cHash'] ?? false)) {
-            $queryParams['id'] = $pageArguments->getPageId();
-            $relevantParametersForCachingFromPageArguments = GeneralUtility::makeInstance(CacheHashCalculator::class)->getRelevantParameters(HttpUtility::buildQueryString($queryParams));
-        }
-        $this->mapSettings[SI::PAGE_ID] = $relevantParametersForCachingFromPageArguments;
+        $this->mapSettings[SI::PAGE_ID] = $GLOBALS['TSFE']->id;
         if (empty($this->settings[SI::SEARCH])) {
             $this->settings[SI::SEARCH] = [];
         }
@@ -123,10 +119,8 @@ class MapController extends AbstractController
      */
     protected function getMapSettingTypoScriptOverrides(): array
     {
-        /** @var ObjectManager $objMgr */
-        $objMgr = GeneralUtility::makeInstance(ObjectManager::class);
-        /** @var ConfigurationManager $configManager */
-        $configManager = $objMgr->get(ConfigurationManager::class);
+        $configManager = GeneralUtility::makeInstance('TYPO3\\CMS\\Extbase\\Configuration\\ConfigurationManager');
+        
         try {
             $config = $configManager->getConfiguration(ConfigurationManager::CONFIGURATION_TYPE_FULL_TYPOSCRIPT);
         }  catch (InvalidConfigurationTypeException) {

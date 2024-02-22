@@ -4,11 +4,12 @@ namespace DWenzel\Ajaxmap\Middleware;
 
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Controller\AjaxController;
+use Psr\EventDispatcher\EventDispatcherInterface;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use Psr\Http\Server\MiddlewareInterface;
 use Psr\Http\Server\RequestHandlerInterface;
-use TYPO3\CMS\Core\Http\Dispatcher;
+use TYPO3\CMS\Core\Http\DispatcherInterface;
 use TYPO3\CMS\Core\Http\NullResponse;
 use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
@@ -39,6 +40,16 @@ use TYPO3\CMS\Frontend\Controller\TypoScriptFrontendController;
  */
 class FrontendJsonApiHandler implements MiddlewareInterface
 {
+    protected $dispatcher;
+
+    /**
+     * @param DispatcherInterface $dispatcher
+     */
+    public function __construct(DispatcherInterface $dispatcher)
+    {
+        $this->dispatcher = $dispatcher;
+    }
+
     public function process(ServerRequestInterface $request, RequestHandlerInterface $handler): ResponseInterface
     {
         $api = $request->getParsedBody()['api'] ?? $request->getQueryParams()['api'] ?? null;
@@ -52,10 +63,8 @@ class FrontendJsonApiHandler implements MiddlewareInterface
         // for now we dispatch only to this single endpoint
         if ($api === SI::API_PARAMETER_MAP) {
             $requestConfiguration = AjaxController::class . '::' . 'processRequest';
-            /** @var Dispatcher $dispatcher */
-            $dispatcher = GeneralUtility::makeInstance(Dispatcher::class);
             $request = $request->withAttribute('target', $requestConfiguration);
-            return $dispatcher->dispatch($request) ?? new NullResponse();
+            return $this->dispatcher->dispatch($request) ?? new NullResponse();
         }
 
         return new NullResponse();

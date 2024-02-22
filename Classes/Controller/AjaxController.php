@@ -21,7 +21,6 @@ namespace DWenzel\Ajaxmap\Controller;
 
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use DWenzel\Ajaxmap\Data\ProviderFactory;
-use DWenzel\Ajaxmap\Traits\ObjectManagerTrait;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
 use TYPO3\CMS\Core\Cache\CacheManager;
@@ -31,14 +30,13 @@ use TYPO3\CMS\Core\Http\Response;
 use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
+use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
 
 /**
  * Class AjaxController
  */
 class AjaxController
 {
-    use ObjectManagerTrait;
 
     final public const PLUGIN_CONFIGURATION = [
         'extensionName' => SI::EXTENSION_NAME,
@@ -72,7 +70,7 @@ class AjaxController
     public function processRequest(ServerRequestInterface $request): ResponseInterface
     {
         $this->initializeLanguage();
-        $this->initializeFramework();
+        $this->initializeFramework($request);
         /** @var Response $response */
         $response = GeneralUtility::makeInstance(Response::class);
 
@@ -87,8 +85,7 @@ class AjaxController
         if (($data = $dataCache->get($cacheIdentifier)) === false) {
             $action = $queryParams[SI::API_PARAMETER_ACTION] ?? '';
 
-            $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-            $providerFactory = $objectManager->get(ProviderFactory::class);
+            $providerFactory = GeneralUtility::makeInstance('DWenzel\\Ajaxmap\\Data\\ProviderFactory');
             $dataProvider = $providerFactory->get($action);
 
             $data = $dataProvider->get($queryParams);
@@ -111,7 +108,7 @@ class AjaxController
         }
     }
 
-    protected function initializeFramework(): void
+    protected function initializeFramework($request): void
     {
         /** @var Bootstrap $bootstrap */
         $bootstrap = GeneralUtility::makeInstance(Bootstrap::class);
@@ -120,7 +117,7 @@ class AjaxController
          * this ensures proper configuration even though we do not use
          * this plugin
          */
-        $bootstrap->initialize(static::PLUGIN_CONFIGURATION);
+        $bootstrap->initialize(static::PLUGIN_CONFIGURATION, $request);
     }
 
     protected function purgeParameters(ServerRequestInterface $request): array

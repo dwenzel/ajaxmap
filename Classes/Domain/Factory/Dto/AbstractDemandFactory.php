@@ -19,7 +19,6 @@ namespace DWenzel\Ajaxmap\Domain\Factory\Dto;
  * This copyright notice MUST APPEAR in all copies of the script!
  ***************************************************************/
 
-use DWenzel\Ajaxmap\Traits\ObjectManagerTrait;
 use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
 
 /**
@@ -30,7 +29,7 @@ use TYPO3\CMS\Extbase\Reflection\ObjectAccess;
  */
 abstract class AbstractDemandFactory
 {
-    use MapPropertyTrait, SkipPropertyTrait, ObjectManagerTrait;
+    use MapPropertyTrait, SkipPropertyTrait;
 
     /**
      * Properties which should be mapped when settings

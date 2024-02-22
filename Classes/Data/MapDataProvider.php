@@ -45,9 +45,7 @@ class MapDataProvider implements DataProviderInterface, MappingAwareInterface
      */
     public function __construct(MapRepository $mapRepository = null, array $mapping = null)
     {
-        /** @var ObjectManagerInterface objectManager */
-        $objectManager = GeneralUtility::makeInstance(ObjectManager::class);
-        $this->mapRepository = $mapRepository ?: $objectManager->get(MapRepository::class);
+        $this->mapRepository = $mapRepository ?: GeneralUtility::makeInstance('DWenzel\\Ajaxmap\\Domain\\Repository\\MapRepository');
         if (null !== $mapping) {
             $this->mapping = $mapping;
         }
