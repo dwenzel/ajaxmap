@@ -121,8 +121,8 @@ interface SettingsInterface
     /**
      * Cache identifiers
      */
-    public const CACHE_CHILDREN = 'cache_ajaxmap_children';
-    public const CACHE_AJAX_DATA = 'cache_ajaxmap_data';
+    public const CACHE_CHILDREN = 'ajaxmap_children';
+    public const CACHE_AJAX_DATA = 'ajaxmap_data';
 
     /**
      * Settings keys

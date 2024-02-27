@@ -3,10 +3,10 @@ defined('TYPO3') or die();
 
 (function ($extensionKey) {
     // Add cache configurations
-    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_CHILDREN])) {
+    if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_CHILDREN])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_CHILDREN] = [];
     }
-    if (!is_array($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_AJAX_DATA])) {
+    if (!isset($GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_AJAX_DATA])) {
         $GLOBALS['TYPO3_CONF_VARS']['SYS']['caching']['cacheConfigurations'][\DWenzel\Ajaxmap\Configuration\SettingsInterface::CACHE_AJAX_DATA] = [];
     }
 
