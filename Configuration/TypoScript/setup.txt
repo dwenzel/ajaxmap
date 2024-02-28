@@ -136,6 +136,6 @@ ajaxMapPage {
     10 < tt_content.list.20.ajaxmap_map
 }
 
-[request.getQueryParams()['api'] === "map"]
+[traverse(request.getQueryParams(), 'api') === "map"]
     plugin.tx_ajaxmap.persistence.classes =< config.tx_extbase.persistence.classes
 [end]
