@@ -27,11 +27,10 @@ use TYPO3\CMS\Core\Cache\CacheManager;
 use TYPO3\CMS\Core\Cache\Exception\NoSuchCacheException;
 use TYPO3\CMS\Core\Cache\Frontend\FrontendInterface;
 use TYPO3\CMS\Core\Http\Response;
-use TYPO3\CMS\Core\Localization\LanguageService;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Core\Bootstrap;
 use TYPO3\CMS\Extbase\Mvc\Controller\ActionController;
-
+use TYPO3\CMS\Core\Localization\LanguageServiceFactory;
 /**
  * Class AjaxController
  */
@@ -103,8 +102,8 @@ class AjaxController
     protected function initializeLanguage(): void
     {
         if (!isset($GLOBALS['LANG']) || !is_object($GLOBALS['LANG'])) {
-            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageService::class);
-            $GLOBALS['LANG']->init('default');
+            $GLOBALS['LANG'] = GeneralUtility::makeInstance(LanguageServiceFactory::class);
+            $GLOBALS['LANG']->create('default');
         }
     }
 
