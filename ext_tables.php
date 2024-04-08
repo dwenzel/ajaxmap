@@ -31,9 +31,9 @@ $configure = function () {
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::addLLrefForTCAdescr('tx_ajaxmap_domain_model_locationtype', 'EXT:ajaxmap/Resources/Private/Language/locallang_csh_tx_ajaxmap_domain_model_locationtype.xml');
     \TYPO3\CMS\Core\Utility\ExtensionManagementUtility::allowTableOnStandardPages('tx_ajaxmap_domain_model_locationtype');
 
-    $GLOBALS['TCA']['tt_address']['columns'][$GLOBALS['TCA']['tt_address']['ctrl']['type']]['config']['items'][] = ['LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tt_address.tx_extbase_type.Tx_Ajaxmap_Address', 'Tx_Ajaxmap_Address'];
+//    $GLOBALS['TCA']['tt_address']['columns'][$GLOBALS['TCA']['tt_address']['ctrl']['type']]['config']['items'][] = ['LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tt_address.tx_extbase_type.Tx_Ajaxmap_Address', 'Tx_Ajaxmap_Address'];
 
-    $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] = $GLOBALS['TCA']['tt_address']['types']['1']['showitem'];
+    $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] = $GLOBALS['TCA']['tt_address']['types']['0']['showitem'];
     $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= ',--div--;LLL:EXT:ajaxmap/Resources/Private/Language/locallang_db.xml:tx_ajaxmap_domain_model_address,';
     $GLOBALS['TCA']['tt_address']['types']['Tx_Ajaxmap_Address']['showitem'] .= '';
 
