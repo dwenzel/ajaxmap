@@ -55,14 +55,16 @@ class DataHandlerHook
 
     public function clearCustomCachesOnRecordSave(array $params, DataHandler &$pObj): void
     {
-        $tableName = (string) $params['table'];
+        if(array_key_exists('table', $params)) {
+            $tableName = (string) $params['table'];
 
-        if (!\str_starts_with($tableName, 'tx_ajaxmap') && !in_array($tableName, $this->tablesToFlushCaches)) {
-            return;
+            if (!\str_starts_with($tableName, 'tx_ajaxmap') && !in_array($tableName, $this->tablesToFlushCaches)) {
+                return;
+            }
+
+            $this->flushCache(SI::CACHE_CHILDREN);
+            $this->flushCache(SI::CACHE_AJAX_DATA);
         }
-
-        $this->flushCache(SI::CACHE_CHILDREN);
-        $this->flushCache(SI::CACHE_AJAX_DATA);
     }
 
     /**
