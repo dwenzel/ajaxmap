@@ -99,16 +99,15 @@ class MapController extends AbstractController
      */
     protected function getMapSettings(array $search = []): void
     {
-        $this->mapSettings[SI::ID] = $this->settings[SI::MAP];
-        $this->mapSettings[SI::PAGE_ID] = $GLOBALS['TSFE']->id;
+        $this->mapSettings[SI::ID] = $this->settings[SI::MAP] ?? null;
+        $this->mapSettings[SI::PAGE_ID] = $GLOBALS['TSFE']->id ?? null;
         if (empty($this->settings[SI::SEARCH])) {
             $this->settings[SI::SEARCH] = [];
         }
-
         if(!empty($search)) {
             $this->mapSettings[SI::SEARCH] = array_merge($this->settings[SI::SEARCH], $search);
         }
-        $this->mapSettings[SI::KEYS] = $this->settings[SI::KEYS];
+        $this->mapSettings[SI::KEYS] = $this->settings[SI::KEYS] ?? null;
         $this->mapSettings = array_replace_recursive($this->mapSettings, $this->getMapSettingTypoScriptOverrides());
     }
 
