@@ -21,8 +21,6 @@ namespace DWenzel\Ajaxmap\Controller;
  ***************************************************************/
 
 use Psr\Http\Message\ResponseInterface;
-use TYPO3\CMS\Frontend\Page\CacheHashCalculator;
-use TYPO3\CMS\Core\Utility\HttpUtility;
 use DWenzel\Ajaxmap\Domain\Model\Map;
 use DWenzel\Ajaxmap\Domain\Repository\MapRepository;
 use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
