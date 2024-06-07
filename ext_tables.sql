@@ -58,7 +58,7 @@ CREATE TABLE tx_ajaxmap_domain_model_place (
 	place_groups int(11) unsigned DEFAULT '0' NOT NULL,
 	location_type int(11) unsigned DEFAULT '0',
 	regions int(11) unsigned DEFAULT '0' NOT NULL,
-	icon text DEFAULT '' NOT NULL,
+	icon text NOT NULL,
 	content text,
 	address text,
 	latitude decimal(14,12) default NULL,
