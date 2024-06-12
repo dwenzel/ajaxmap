@@ -27,7 +27,6 @@ use DWenzel\Ajaxmap\Configuration\SettingsInterface as SI;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManager;
 use TYPO3\CMS\Extbase\Configuration\Exception\InvalidConfigurationTypeException;
-use TYPO3\CMS\Extbase\Object\ObjectManager;
 
 /**
  * Class MapController
@@ -61,7 +60,7 @@ class MapController extends AbstractController
      */
     public function showAction(Map $map = null, array $search = []): ResponseInterface
     {
-        if ($map === null) {
+        if ($map === null && isset($this->settings[SI::MAP])) {
             /** @var Map $map */
             $map = $this->mapRepository->findByUid(
                 $this->settings[SI::MAP]
